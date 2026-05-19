@@ -120,17 +120,31 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const active = useActiveSection(NAV_SECTIONS);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      <nav
+        className={`sticky top-0 z-50 transition-all duration-300 border-b ${
+          scrolled
+            ? "bg-background/70 backdrop-blur-xl border-border/80 shadow-[0_1px_0_0_rgba(255,255,255,0.04)]"
+            : "bg-background border-transparent"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <span className="font-mono text-xs font-medium px-2 py-1 border border-accent text-accent tracking-tighter uppercase">
-              Status: Ready
-            </span>
             <span className="font-extrabold tracking-tighter text-xl uppercase">
               GROW_
+            </span>
+            <span className="font-mono text-[10px] font-medium px-2 py-1 border border-accent/40 bg-accent/10 text-accent tracking-tight rounded-sm flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              Score: 85
             </span>
           </div>
           <div className="flex items-center gap-8">
@@ -160,6 +174,7 @@ function Index() {
           </div>
         </div>
       </nav>
+
 
       <main>
       {/* Hero */}

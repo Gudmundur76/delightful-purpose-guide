@@ -60,6 +60,12 @@ function Index() {
                   {id === "archive" ? "Archive" : id === "services" ? "Services" : "Process"}
                 </a>
               ))}
+              <Link
+                to="/blog"
+                className="transition-colors hover:text-foreground"
+              >
+                Journal
+              </Link>
             </div>
             <a
               href="#cta"

@@ -18,9 +18,13 @@ import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
+import { Route as ApiPublicV1IndexRouteImport } from './routes/api/public/v1/index'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
+import { Route as ApiPublicV1PostsRouteImport } from './routes/api/public/v1/posts'
+import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/leads'
+import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 
 const UnsubscribeRoute = UnsubscribeRouteImport.update({
   id: '/unsubscribe',
@@ -67,6 +71,11 @@ const ApiPublicLeadsRoute = ApiPublicLeadsRouteImport.update({
   path: '/api/public/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicV1IndexRoute = ApiPublicV1IndexRouteImport.update({
+  id: '/api/public/v1/',
+  path: '/api/public/v1/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailTransactionalSendRoute =
   LovableEmailTransactionalSendRouteImport.update({
     id: '/lovable/email/transactional/send',
@@ -85,6 +94,21 @@ const LovableEmailQueueProcessRoute =
     path: '/lovable/email/queue/process',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicV1PostsRoute = ApiPublicV1PostsRouteImport.update({
+  id: '/api/public/v1/posts',
+  path: '/api/public/v1/posts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1LeadsRoute = ApiPublicV1LeadsRouteImport.update({
+  id: '/api/public/v1/leads',
+  path: '/api/public/v1/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1PostsSlugRoute = ApiPublicV1PostsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ApiPublicV1PostsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,9 +120,13 @@ export interface FileRoutesByFullPath {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
+  '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
+  '/api/public/v1/': typeof ApiPublicV1IndexRoute
+  '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -110,9 +138,13 @@ export interface FileRoutesByTo {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
+  '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
+  '/api/public/v1': typeof ApiPublicV1IndexRoute
+  '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,9 +157,13 @@ export interface FileRoutesById {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
+  '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
+  '/api/public/v1/': typeof ApiPublicV1IndexRoute
+  '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,9 +177,13 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/api/public/leads'
     | '/lovable/email/suppression'
+    | '/api/public/v1/leads'
+    | '/api/public/v1/posts'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
+    | '/api/public/v1/'
+    | '/api/public/v1/posts/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,9 +195,13 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/api/public/leads'
     | '/lovable/email/suppression'
+    | '/api/public/v1/leads'
+    | '/api/public/v1/posts'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
+    | '/api/public/v1'
+    | '/api/public/v1/posts/$slug'
   id:
     | '__root__'
     | '/'
@@ -169,9 +213,13 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/api/public/leads'
     | '/lovable/email/suppression'
+    | '/api/public/v1/leads'
+    | '/api/public/v1/posts'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
+    | '/api/public/v1/'
+    | '/api/public/v1/posts/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -182,9 +230,12 @@ export interface RootRouteChildren {
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicV1LeadsRoute: typeof ApiPublicV1LeadsRoute
+  ApiPublicV1PostsRoute: typeof ApiPublicV1PostsRouteWithChildren
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
   LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
+  ApiPublicV1IndexRoute: typeof ApiPublicV1IndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -252,6 +303,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/': {
+      id: '/api/public/v1/'
+      path: '/api/public/v1'
+      fullPath: '/api/public/v1/'
+      preLoaderRoute: typeof ApiPublicV1IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/transactional/send': {
       id: '/lovable/email/transactional/send'
       path: '/lovable/email/transactional/send'
@@ -273,6 +331,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/posts': {
+      id: '/api/public/v1/posts'
+      path: '/api/public/v1/posts'
+      fullPath: '/api/public/v1/posts'
+      preLoaderRoute: typeof ApiPublicV1PostsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/leads': {
+      id: '/api/public/v1/leads'
+      path: '/api/public/v1/leads'
+      fullPath: '/api/public/v1/leads'
+      preLoaderRoute: typeof ApiPublicV1LeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/posts/$slug': {
+      id: '/api/public/v1/posts/$slug'
+      path: '/$slug'
+      fullPath: '/api/public/v1/posts/$slug'
+      preLoaderRoute: typeof ApiPublicV1PostsSlugRouteImport
+      parentRoute: typeof ApiPublicV1PostsRoute
+    }
   }
 }
 
@@ -288,6 +367,17 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface ApiPublicV1PostsRouteChildren {
+  ApiPublicV1PostsSlugRoute: typeof ApiPublicV1PostsSlugRoute
+}
+
+const ApiPublicV1PostsRouteChildren: ApiPublicV1PostsRouteChildren = {
+  ApiPublicV1PostsSlugRoute: ApiPublicV1PostsSlugRoute,
+}
+
+const ApiPublicV1PostsRouteWithChildren =
+  ApiPublicV1PostsRoute._addFileChildren(ApiPublicV1PostsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRouteWithChildren,
@@ -296,20 +386,13 @@ const rootRouteChildren: RootRouteChildren = {
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicV1LeadsRoute: ApiPublicV1LeadsRoute,
+  ApiPublicV1PostsRoute: ApiPublicV1PostsRouteWithChildren,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
   LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
+  ApiPublicV1IndexRoute: ApiPublicV1IndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -130,6 +130,7 @@ function Index() {
         </div>
       </nav>
 
+      <main>
       {/* Hero */}
       <section className="relative border-b border-border overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">

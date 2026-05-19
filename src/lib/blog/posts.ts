@@ -26,7 +26,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     slug: "saas-website-design-conversion-essentials",
-    title: "SaaS Website Design: The 7 Sections That Actually Convert",
+    title: "SaaS Website Design: 7 Sections That Convert",
     description:
       "A pragmatic anatomy of a high-converting SaaS website — what each section should do, what to cut, and the conversion benchmarks to beat.",
     publishedAt: "2026-05-08",

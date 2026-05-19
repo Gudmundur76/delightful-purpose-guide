@@ -395,12 +395,42 @@ function Index() {
               <LeadForm />
             </div>
           </div>
-          <div className="mt-24 pt-8 border-t border-border flex justify-between font-mono text-[10px] text-muted-foreground uppercase">
+          <div className="mt-24 pt-8 border-t border-border grid grid-cols-2 md:grid-cols-4 gap-10">
+            <div>
+              <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Studio</h5>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="#services" className="hover:text-foreground transition-colors">Services</a></li>
+                <li><a href="#process" className="hover:text-foreground transition-colors">Process</a></li>
+                <li><a href="#archive" className="hover:text-foreground transition-colors">Archive</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Resources</h5>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link to="/blog" className="hover:text-foreground transition-colors">Journal</Link></li>
+                <li><a href="/llms.txt" className="hover:text-foreground transition-colors">llms.txt</a></li>
+                <li><a href="/api/public/v1/docs" className="hover:text-foreground transition-colors">API Docs</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Contact</h5>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="mailto:hello@grow.contact" className="hover:text-foreground transition-colors">hello@grow.contact</a></li>
+                <li><a href="#cta" className="hover:text-foreground transition-colors">Start a Brief</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Readiness</h5>
+              <pre className="font-mono text-[11px] leading-relaxed bg-card border border-border rounded-md p-3 text-emerald-400 overflow-x-auto">
+<span className="text-muted-foreground">user@grow:~$</span> curl /api/readiness
+{`{"status":"agent-ready","score":85}`}<span className="inline-block w-2 h-3 bg-emerald-400 ml-1 align-middle animate-[blink_1s_steps(2,start)_infinite]" />
+              </pre>
+            </div>
+          </div>
+          <div className="mt-12 pt-6 border-t border-border flex justify-between font-mono text-[10px] text-muted-foreground uppercase">
             <span>&copy; 2026 GROW STUDIO</span>
             <span>Powering 48H Innovation</span>
           </div>
-        </div>
-      </footer>
-    </div>
+
   );
 }

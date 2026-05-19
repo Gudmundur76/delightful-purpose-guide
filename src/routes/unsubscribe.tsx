@@ -72,7 +72,12 @@ function UnsubscribePage() {
         <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent mb-4">
           // GROW_ // Unsubscribe
         </p>
-        {status === "loading" && <p className="text-sm text-muted-foreground">Validating token…</p>}
+        {status === "loading" && (
+          <>
+            <h1 className="text-2xl font-extrabold uppercase tracking-tighter mb-3">Unsubscribe</h1>
+            <p className="text-sm text-muted-foreground">Validating token…</p>
+          </>
+        )}
         {status === "ready" && (
           <>
             <h1 className="text-2xl font-extrabold uppercase tracking-tighter mb-4">
@@ -89,7 +94,12 @@ function UnsubscribePage() {
             </button>
           </>
         )}
-        {status === "submitting" && <p className="text-sm">Processing…</p>}
+        {status === "submitting" && (
+          <>
+            <h1 className="text-2xl font-extrabold uppercase tracking-tighter mb-3">Unsubscribe</h1>
+            <p className="text-sm">Processing…</p>
+          </>
+        )}
         {status === "done" && (
           <>
             <h1 className="text-2xl font-extrabold uppercase tracking-tighter mb-3">Unsubscribed.</h1>

@@ -125,6 +125,11 @@ function Index() {
 
       {/* Process */}
       <section id="process" className="scroll-mt-20 border-b border-border bg-card/50">
+        <div className="max-w-7xl mx-auto px-6 pt-16">
+          <h2 className="text-4xl font-extrabold tracking-tighter uppercase">
+            The Process
+          </h2>
+        </div>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-border">
           {[
             { n: "01", t: "The Brief", d: "Submit your assets and requirements. No long meetings, just clear documentation." },
@@ -195,6 +200,9 @@ function Index() {
       {/* Pricing */}
       <section id="services" className="scroll-mt-20 bg-foreground text-background py-24">
         <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl font-extrabold tracking-tighter uppercase mb-12">
+            Pricing
+          </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {

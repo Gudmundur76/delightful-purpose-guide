@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import fluxImg from "@/assets/portfolio-flux.jpg";
-import architexImg from "@/assets/portfolio-architex.jpg";
+import nimbusImg from "@/assets/portfolio-nimbus.jpg";
+import vectorImg from "@/assets/portfolio-vector.jpg";
 import { LeadForm } from "@/components/LeadForm";
 import { useActiveSection } from "@/hooks/use-active-section";
 
@@ -243,8 +243,8 @@ function Index() {
         <div className="grid md:grid-cols-2 gap-px bg-border border border-border">
           <div className="bg-background p-4">
             <img
-              src={fluxImg}
-              alt="Flux Capital fintech dashboard"
+              src={nimbusImg}
+              alt="Nimbus Agents — agent orchestration platform marketing site"
               width={1280}
               height={960}
               loading="lazy"
@@ -252,17 +252,17 @@ function Index() {
             />
             <div className="mt-4 flex justify-between items-center">
               <span className="font-bold uppercase tracking-tighter">
-                Flux Capital Branding
+                Nimbus Agents — Orchestration Platform
               </span>
               <span className="text-[10px] font-mono text-muted-foreground">
-                LANDING PAGE // 48H
+                DEVTOOL HUB // 48H
               </span>
             </div>
           </div>
           <div className="bg-background p-4">
             <img
-              src={architexImg}
-              alt="Architex Studio portfolio site"
+              src={vectorImg}
+              alt="Vector Eval — LLM evaluation platform marketing site"
               width={1280}
               height={960}
               loading="lazy"
@@ -270,7 +270,7 @@ function Index() {
             />
             <div className="mt-4 flex justify-between items-center">
               <span className="font-bold uppercase tracking-tighter">
-                Architex Studio
+                Vector Eval — LLM Eval Suite
               </span>
               <span className="text-[10px] font-mono text-muted-foreground">
                 MARKETING SITE // 48H

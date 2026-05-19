@@ -7,13 +7,13 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "RapidEngine — Custom websites shipped in 48 hours" },
+      { title: "Grow — Custom websites shipped in 48 hours" },
       {
         name: "description",
         content:
-          "Productized web design agency powered by Lovable. Fixed-price custom websites and web apps delivered in 48 hours.",
+          "Grow is a productized web design agency powered by Lovable. Fixed-price custom websites and web apps delivered in 48 hours.",
       },
-      { property: "og:title", content: "RapidEngine — Sites shipped in 48h" },
+      { property: "og:title", content: "Grow — Sites shipped in 48h" },
       {
         property: "og:description",
         content:
@@ -42,7 +42,7 @@ function Index() {
               Status: Ready
             </span>
             <span className="font-extrabold tracking-tighter text-xl uppercase">
-              RapidEngine_
+              Grow_
             </span>
           </div>
           <div className="flex items-center gap-8">
@@ -294,7 +294,7 @@ function Index() {
             </div>
           </div>
           <div className="mt-24 pt-8 border-t border-border flex justify-between font-mono text-[10px] text-muted-foreground uppercase">
-            <span>&copy; 2026 RAPIDENGINE STUDIO</span>
+            <span>&copy; 2026 GROW STUDIO</span>
             <span>Powering 48H Innovation</span>
           </div>
         </div>

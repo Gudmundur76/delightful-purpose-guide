@@ -139,7 +139,7 @@ const spec = {
   },
 } as const;
 
-export const Route = createFileRoute("/api/public/v1/openapi/json")({
+export const Route = createFileRoute("/api/public/v1/openapi.json")({
   server: {
     handlers: {
       OPTIONS: async () => optionsResponse(),

@@ -19,7 +19,15 @@ export const Route = createFileRoute("/blog")({
       },
       { property: "og:url", content: "https://grow.contact/blog" },
     ],
-    links: [{ rel: "canonical", href: "https://grow.contact/blog" }],
+    links: [
+      { rel: "canonical", href: "https://grow.contact/blog" },
+      {
+        rel: "alternate",
+        type: "application/rss+xml",
+        title: "Grow — Journal",
+        href: "https://grow.contact/blog/rss.xml",
+      },
+    ],
   }),
 });
 
@@ -37,12 +45,21 @@ function BlogIndex() {
               GROW_
             </span>
           </Link>
-          <Link
-            to="/"
-            className="bg-foreground text-background text-xs font-bold px-4 py-2 uppercase tracking-tighter hover:bg-accent hover:text-accent-foreground transition-all"
-          >
-            ← Home
-          </Link>
+          <div className="flex items-center gap-3">
+            <a
+              href="/blog/rss.xml"
+              className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors px-2 py-1 border border-border"
+              title="Subscribe via RSS"
+            >
+              RSS
+            </a>
+            <Link
+              to="/"
+              className="bg-foreground text-background text-xs font-bold px-4 py-2 uppercase tracking-tighter hover:bg-accent hover:text-accent-foreground transition-all"
+            >
+              ← Home
+            </Link>
+          </div>
         </div>
       </nav>
 

@@ -116,7 +116,7 @@ function Index() {
       </section>
 
       {/* Process */}
-      <section id="process" className="border-b border-border bg-card/50">
+      <section id="process" className="scroll-mt-20 border-b border-border bg-card/50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-border">
           {[
             { n: "01", t: "The Brief", d: "Submit your assets and requirements. No long meetings, just clear documentation." },
@@ -137,7 +137,7 @@ function Index() {
       </section>
 
       {/* Portfolio */}
-      <section id="archive" className="max-w-7xl mx-auto px-6 py-24">
+      <section id="archive" className="scroll-mt-20 max-w-7xl mx-auto px-6 py-24">
         <div className="flex justify-between items-end mb-12">
           <h2 className="text-4xl font-extrabold tracking-tighter uppercase">
             Recent Outputs
@@ -185,7 +185,7 @@ function Index() {
       </section>
 
       {/* Pricing */}
-      <section id="services" className="bg-foreground text-background py-24">
+      <section id="services" className="scroll-mt-20 bg-foreground text-background py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -243,7 +243,7 @@ function Index() {
       </section>
 
       {/* FAQ + CTA */}
-      <footer id="cta" className="border-t border-border py-24">
+      <footer id="cta" className="scroll-mt-20 border-t border-border py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-24">
             <div>

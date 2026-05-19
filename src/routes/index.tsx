@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import fluxImg from "@/assets/portfolio-flux.jpg";
 import architexImg from "@/assets/portfolio-architex.jpg";
+import { LeadForm } from "@/components/LeadForm";
 
 export const Route = createFileRoute("/")({
   component: Index,

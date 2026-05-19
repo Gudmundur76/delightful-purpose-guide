@@ -95,3 +95,7 @@ html {
   scroll-behavior: smooth;
 }
 
+
+@keyframes blink {
+  to { visibility: hidden; }
+}

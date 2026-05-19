@@ -6,6 +6,49 @@ import { useActiveSection } from "@/hooks/use-active-section";
 
 const NAV_SECTIONS = ["services", "process", "archive"];
 
+const FAQS: { q: string; a: string }[] = [
+  {
+    q: "How is 48 hours possible?",
+    a: "We use a proprietary workflow powered by Lovable. We don't waste time on endless revisions; we build it right the first time using battle-tested technical frameworks.",
+  },
+  {
+    q: "How much does it cost, and what's included?",
+    a: "Fixed price per tier — no hourly surprises. Each build includes design, custom code, on-page SEO, responsive layouts, and deployment. Copy and stock imagery are on you; we can recommend writers if you need one.",
+  },
+  {
+    q: "What do you need from me to hit the 48-hour window?",
+    a: "Brand assets (logo, fonts if any), final copy, and any reference sites — handed over at kickoff. The clock starts when we have everything. Slow content is the #1 reason projects slip.",
+  },
+  {
+    q: "What if I need changes?",
+    a: "Every build includes one 4-hour revision block after delivery to polish the details and ensure perfection. Larger scope changes are quoted as a separate mini-engagement.",
+  },
+  {
+    q: "Do I own the code?",
+    a: "Yes. Full GitHub repository handover. The site is yours to host, modify, and extend — no lock-in, no proprietary CMS.",
+  },
+  {
+    q: "Do you handle hosting and post-launch fixes?",
+    a: "We deploy to your hosting of choice (Vercel, Netlify, Cloudflare) and fix any genuine bugs free for 14 days after launch. Ongoing maintenance is available as a monthly retainer if you want it.",
+  },
+  {
+    q: "Can I see live examples or talk to a past client?",
+    a: "Yes — see the Archive section above for live sites. On request we'll connect you with a recent founder for a short reference call before you commit.",
+  },
+  {
+    q: "Will the site actually convert?",
+    a: "We design around a single primary action per page and ship with analytics wired up so you can measure it. Conversion depends on offer and traffic too, but the site won't be the bottleneck.",
+  },
+  {
+    q: "Do I need a marketing site, a landing page, or a web app?",
+    a: "If you're testing a single offer, start with a landing page. If you're raising or hiring, a full marketing site. If users log in and do work, that's a web app — we build all three; tell us the goal and we'll recommend the smallest thing that works.",
+  },
+  {
+    q: "What if I'm not happy with the result?",
+    a: "If the first delivery misses the brief, we rework it on us until it matches what we agreed at kickoff. If it still isn't right after that, you pay only for time spent and walk away with whatever's been built.",
+  },
+];
+
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({

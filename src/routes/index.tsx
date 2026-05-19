@@ -35,6 +35,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const active = useActiveSection(NAV_SECTIONS);
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
@@ -50,15 +51,15 @@ function Index() {
           </div>
           <div className="flex items-center gap-8">
             <div className="hidden md:flex gap-6 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-              <a href="#services" className="hover:text-foreground transition-colors">
-                Services
-              </a>
-              <a href="#process" className="hover:text-foreground transition-colors">
-                Process
-              </a>
-              <a href="#archive" className="hover:text-foreground transition-colors">
-                Archive
-              </a>
+              {NAV_SECTIONS.map((id) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  className={`transition-colors hover:text-foreground ${active === id ? "text-foreground" : ""}`}
+                >
+                  {id === "archive" ? "Archive" : id === "services" ? "Services" : "Process"}
+                </a>
+              ))}
             </div>
             <a
               href="#cta"

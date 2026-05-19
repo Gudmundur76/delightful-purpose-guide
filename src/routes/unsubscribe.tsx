@@ -94,7 +94,12 @@ function UnsubscribePage() {
             </button>
           </>
         )}
-        {status === "submitting" && <p className="text-sm">Processing…</p>}
+        {status === "submitting" && (
+          <>
+            <h1 className="text-2xl font-extrabold uppercase tracking-tighter mb-3">Unsubscribe</h1>
+            <p className="text-sm">Processing…</p>
+          </>
+        )}
         {status === "done" && (
           <>
             <h1 className="text-2xl font-extrabold uppercase tracking-tighter mb-3">Unsubscribed.</h1>

@@ -183,8 +183,9 @@ function Index() {
             </div>
             <div className="md:col-span-4 animate-in [animation-delay:150ms]">
               <p className="text-muted-foreground text-sm leading-relaxed mb-8 max-w-sm">
-                Custom-coded, high-performance websites delivered with mechanical
-                precision. Powered by Lovable, engineered by specialists.
+                Marketing sites for AI/ML startups, agent platforms, and developer tools.
+                Structured for humans, parseable by LLMs, indexable by every crawler that
+                matters in 2026.
               </p>
               <a
                 href="#cta"

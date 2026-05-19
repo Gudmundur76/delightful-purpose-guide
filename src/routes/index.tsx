@@ -48,8 +48,8 @@ const FAQS: { q: string; a: string }[] = [
     a: "We design around a single primary action per page and ship with analytics wired up so you can measure it. Conversion depends on offer and traffic too, but the site won't be the bottleneck.",
   },
   {
-    q: "Do I need a marketing site, a landing page, or a web app?",
-    a: "If you're testing a single offer, start with a landing page. If you're raising or hiring, a full marketing site. If users log in and do work, that's a web app — we build all three; tell us the goal and we'll recommend the smallest thing that works.",
+    q: "Do I need a launch page, a marketing site, or a devtool hub?",
+    a: "Launching a model or waitlist? Start with a Launch Page. Raising or selling to enterprise? Marketing Site. Shipping an SDK, API, or MCP server with docs and dashboards? Devtool Hub. Tell us the goal and we'll recommend the smallest thing that works.",
   },
   {
     q: "What if I'm not happy with the result?",

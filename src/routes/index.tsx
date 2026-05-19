@@ -53,17 +53,17 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Grow — Custom websites shipped in 48 hours" },
+      { title: "Grow — Agent-Native Websites for AI startups & devtools" },
       {
         name: "description",
         content:
-          "Grow is a productized web design agency powered by Lovable. Fixed-price custom websites and web apps delivered in 48 hours.",
+          "Grow ships agent-native marketing sites for AI/ML startups, agent platforms, and developer tools. Custom-coded, LLM-readable, live in 48 hours — fixed price.",
       },
-      { property: "og:title", content: "Grow — Custom websites shipped in 48 hours" },
+      { property: "og:title", content: "Grow — Agent-Native Websites for AI startups & devtools" },
       {
         property: "og:description",
         content:
-          "Custom-coded, high-performance websites delivered with mechanical precision. Fixed price, 48-hour turnaround.",
+          "Marketing sites built for the agent era: structured data, llms.txt, MCP-ready docs. For AI/ML startups, agent platforms, and devtools. 48 hours, fixed price.",
       },
       { property: "og:url", content: "https://grow.contact/" },
     ],

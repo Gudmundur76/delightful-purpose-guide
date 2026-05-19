@@ -280,11 +280,11 @@ function Index() {
             <div className="bg-accent p-12 flex flex-col gap-8">
               <div>
                 <h2 className="text-4xl font-extrabold tracking-tighter uppercase text-accent-foreground leading-none">
-                  READY TO
+                  Ready to
                   <br />
-                  SHIP YOUR
+                  ship your
                   <br />
-                  VISION?
+                  vision?
                 </h2>
                 <p className="font-mono text-[10px] text-accent-foreground/70 uppercase tracking-widest mt-4">
                   Next available slot: Today, 14:00 UTC

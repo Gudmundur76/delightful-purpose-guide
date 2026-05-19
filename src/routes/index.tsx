@@ -16,11 +16,11 @@ export const Route = createFileRoute("/")({
         content:
           "Grow is a productized web design agency powered by Lovable. Fixed-price custom websites and web apps delivered in 48 hours.",
       },
-      { property: "og:title", content: "Grow — Sites shipped in 48h" },
+      { property: "og:title", content: "Grow — Custom websites shipped in 48 hours" },
       {
         property: "og:description",
         content:
-          "Custom-coded, high-performance websites delivered with mechanical precision.",
+          "Custom-coded, high-performance websites delivered with mechanical precision. Fixed price, 48-hour turnaround.",
       },
       { property: "og:url", content: "https://grow.contact/" },
     ],
@@ -31,6 +31,57 @@ export const Route = createFileRoute("/")({
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=JetBrains+Mono:wght@400;500&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              name: "Grow",
+              url: "https://grow.contact/",
+              description:
+                "Productized web design agency. Custom-coded websites shipped in 48 hours.",
+            },
+            {
+              "@type": "WebSite",
+              name: "Grow",
+              url: "https://grow.contact/",
+            },
+            {
+              "@type": "FAQPage",
+              mainEntity: [
+                {
+                  "@type": "Question",
+                  name: "How is 48 hours possible?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "We use a proprietary workflow powered by Lovable. We don't waste time on endless revisions; we build it right the first time using battle-tested technical frameworks.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What if I need changes?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Every build includes one 4-hour revision block after delivery to polish the details and ensure perfection.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Do I own the code?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Yes. Full GitHub repository handover. The site is yours to host, modify, and extend.",
+                  },
+                },
+              ],
+            },
+          ],
+        }),
       },
     ],
   }),
@@ -79,6 +130,7 @@ function Index() {
         </div>
       </nav>
 
+      <main>
       {/* Hero */}
       <section className="relative border-b border-border overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
@@ -257,6 +309,7 @@ function Index() {
           </div>
         </div>
       </section>
+      </main>
 
       {/* FAQ + CTA */}
       <footer id="cta" className="scroll-mt-20 border-t border-border py-24">

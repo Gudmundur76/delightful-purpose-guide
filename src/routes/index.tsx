@@ -22,8 +22,10 @@ export const Route = createFileRoute("/")({
         content:
           "Custom-coded, high-performance websites delivered with mechanical precision.",
       },
+      { property: "og:url", content: "https://grow.contact/" },
     ],
     links: [
+      { rel: "canonical", href: "https://grow.contact/" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       {

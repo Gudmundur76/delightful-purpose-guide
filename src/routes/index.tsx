@@ -2,6 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import fluxImg from "@/assets/portfolio-flux.jpg";
 import architexImg from "@/assets/portfolio-architex.jpg";
 import { LeadForm } from "@/components/LeadForm";
+import { useActiveSection } from "@/hooks/use-active-section";
+
+const NAV_SECTIONS = ["services", "process", "archive"];
 
 export const Route = createFileRoute("/")({
   component: Index,

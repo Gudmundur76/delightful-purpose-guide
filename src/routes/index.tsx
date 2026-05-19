@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import fluxImg from "@/assets/portfolio-flux.jpg";
 import architexImg from "@/assets/portfolio-architex.jpg";
 import { LeadForm } from "@/components/LeadForm";
@@ -60,6 +60,12 @@ function Index() {
                   {id === "archive" ? "Archive" : id === "services" ? "Services" : "Process"}
                 </a>
               ))}
+              <Link
+                to="/blog"
+                className="transition-colors hover:text-foreground"
+              >
+                Journal
+              </Link>
             </div>
             <a
               href="#cta"

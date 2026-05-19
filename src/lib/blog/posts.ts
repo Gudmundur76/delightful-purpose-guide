@@ -36,7 +36,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     slug: "landing-page-design-service-vs-diy-builder",
-    title: "Landing Page Design Service vs DIY Builder: When to Switch",
+    title: "Landing Page Service vs DIY Builder: When to Switch",
     description:
       "Webflow, Framer, and Squarespace are great — until they aren't. A clear-eyed look at when DIY page builders stop scaling and a landing page design service pays for itself.",
     publishedAt: "2026-05-03",

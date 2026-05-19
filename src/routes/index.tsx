@@ -309,6 +309,7 @@ function Index() {
           </div>
         </div>
       </section>
+      </main>
 
       {/* FAQ + CTA */}
       <footer id="cta" className="scroll-mt-20 border-t border-border py-24">

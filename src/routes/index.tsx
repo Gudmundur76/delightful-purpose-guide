@@ -56,6 +56,9 @@ function Index() {
               <a href="#archive" className="hover:text-foreground transition-colors">
                 Archive
               </a>
+              <a href="#acquire" className="hover:text-foreground transition-colors text-accent">
+                Acquire
+              </a>
             </div>
             <a
               href="#cta"

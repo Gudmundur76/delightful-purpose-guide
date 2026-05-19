@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import nimbusImg from "@/assets/portfolio-nimbus.jpg";
 import vectorImg from "@/assets/portfolio-vector.jpg";
 import { LeadForm } from "@/components/LeadForm";
@@ -119,17 +120,31 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const active = useActiveSection(NAV_SECTIONS);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      <nav
+        className={`sticky top-0 z-50 transition-all duration-300 border-b ${
+          scrolled
+            ? "bg-background/70 backdrop-blur-xl border-border/80 shadow-[0_1px_0_0_rgba(255,255,255,0.04)]"
+            : "bg-background border-transparent"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <span className="font-mono text-xs font-medium px-2 py-1 border border-accent text-accent tracking-tighter uppercase">
-              Status: Ready
-            </span>
             <span className="font-extrabold tracking-tighter text-xl uppercase">
               GROW_
+            </span>
+            <span className="font-mono text-[10px] font-medium px-2 py-1 border border-accent/40 bg-accent/10 text-accent tracking-tight rounded-sm flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              Score: 85
             </span>
           </div>
           <div className="flex items-center gap-8">
@@ -159,6 +174,7 @@ function Index() {
           </div>
         </div>
       </nav>
+
 
       <main>
       {/* Hero */}
@@ -379,7 +395,39 @@ function Index() {
               <LeadForm />
             </div>
           </div>
-          <div className="mt-24 pt-8 border-t border-border flex justify-between font-mono text-[10px] text-muted-foreground uppercase">
+          <div className="mt-24 pt-8 border-t border-border grid grid-cols-2 md:grid-cols-4 gap-10">
+            <div>
+              <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Studio</h5>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="#services" className="hover:text-foreground transition-colors">Services</a></li>
+                <li><a href="#process" className="hover:text-foreground transition-colors">Process</a></li>
+                <li><a href="#archive" className="hover:text-foreground transition-colors">Archive</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Resources</h5>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link to="/blog" className="hover:text-foreground transition-colors">Journal</Link></li>
+                <li><a href="/llms.txt" className="hover:text-foreground transition-colors">llms.txt</a></li>
+                <li><a href="/api/public/v1/docs" className="hover:text-foreground transition-colors">API Docs</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Contact</h5>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="mailto:hello@grow.contact" className="hover:text-foreground transition-colors">hello@grow.contact</a></li>
+                <li><a href="#cta" className="hover:text-foreground transition-colors">Start a Brief</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Readiness</h5>
+              <pre className="font-mono text-[11px] leading-relaxed bg-card border border-border rounded-md p-3 text-emerald-400 overflow-x-auto">
+<span className="text-muted-foreground">user@grow:~$</span> curl /api/readiness
+{`{"status":"agent-ready","score":85}`}<span className="inline-block w-2 h-3 bg-emerald-400 ml-1 align-middle animate-[blink_1s_steps(2,start)_infinite]" />
+              </pre>
+            </div>
+          </div>
+          <div className="mt-12 pt-6 border-t border-border flex justify-between font-mono text-[10px] text-muted-foreground uppercase">
             <span>&copy; 2026 GROW STUDIO</span>
             <span>Powering 48H Innovation</span>
           </div>

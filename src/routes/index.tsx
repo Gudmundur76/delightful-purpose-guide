@@ -8,6 +8,14 @@ const NAV_SECTIONS = ["services", "process", "archive"];
 
 const FAQS: { q: string; a: string }[] = [
   {
+    q: "What does \"agent-native\" actually mean?",
+    a: "Every page ships with semantic HTML, JSON-LD (Organization, Product, FAQ, BreadcrumbList), an llms.txt at the root, OpenGraph + Twitter cards, and a clean sitemap. The result: ChatGPT, Perplexity, Claude, and Google AI Overviews can read, cite, and link to your product without guessing.",
+  },
+  {
+    q: "Who is this actually for?",
+    a: "AI/ML startups (model APIs, infra, eval tools), agent platforms (orchestration, browser agents, voice), and developer tools (SDKs, CLIs, MCP servers). If your buyer is a technical founder or platform engineer, you're in the right place.",
+  },
+  {
     q: "How is 48 hours possible?",
     a: "We use a proprietary workflow powered by Lovable. We don't waste time on endless revisions; we build it right the first time using battle-tested technical frameworks.",
   },
@@ -40,8 +48,8 @@ const FAQS: { q: string; a: string }[] = [
     a: "We design around a single primary action per page and ship with analytics wired up so you can measure it. Conversion depends on offer and traffic too, but the site won't be the bottleneck.",
   },
   {
-    q: "Do I need a marketing site, a landing page, or a web app?",
-    a: "If you're testing a single offer, start with a landing page. If you're raising or hiring, a full marketing site. If users log in and do work, that's a web app — we build all three; tell us the goal and we'll recommend the smallest thing that works.",
+    q: "Do I need a launch page, a marketing site, or a devtool hub?",
+    a: "Launching a model or waitlist? Start with a Launch Page. Raising or selling to enterprise? Marketing Site. Shipping an SDK, API, or MCP server with docs and dashboards? Devtool Hub. Tell us the goal and we'll recommend the smallest thing that works.",
   },
   {
     q: "What if I'm not happy with the result?",
@@ -53,17 +61,17 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Grow — Custom websites shipped in 48 hours" },
+      { title: "Grow — Agent-Native Websites for AI startups & devtools" },
       {
         name: "description",
         content:
-          "Grow is a productized web design agency powered by Lovable. Fixed-price custom websites and web apps delivered in 48 hours.",
+          "Grow ships agent-native marketing sites for AI/ML startups, agent platforms, and developer tools. Custom-coded, LLM-readable, live in 48 hours — fixed price.",
       },
-      { property: "og:title", content: "Grow — Custom websites shipped in 48 hours" },
+      { property: "og:title", content: "Grow — Agent-Native Websites for AI startups & devtools" },
       {
         property: "og:description",
         content:
-          "Custom-coded, high-performance websites delivered with mechanical precision. Fixed price, 48-hour turnaround.",
+          "Marketing sites built for the agent era: structured data, llms.txt, MCP-ready docs. For AI/ML startups, agent platforms, and devtools. 48 hours, fixed price.",
       },
       { property: "og:url", content: "https://grow.contact/" },
     ],
@@ -159,12 +167,12 @@ function Index() {
           <div className="grid md:grid-cols-12 gap-12 items-end">
             <div className="md:col-span-8 animate-in">
               <p className="font-mono text-accent text-xs mb-6 uppercase tracking-[0.2em]">
-                // Zero-to-Live in 48 Hours
+                // Agent-Native Websites · Live in 48 Hours
               </p>
               <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter text-balance leading-[0.9] mb-8">
-                WE BUILD <span className="text-muted-foreground">FAST.</span>
+                BUILT FOR <span className="text-muted-foreground">HUMANS.</span>
                 <br />
-                YOU SCALE <span className="italic">NOW.</span>
+                READ BY <span className="italic">AGENTS.</span>
               </h1>
               <div className="flex flex-wrap gap-4">
                 <div className="px-6 py-4 bg-card border border-border flex flex-col gap-1">
@@ -183,8 +191,9 @@ function Index() {
             </div>
             <div className="md:col-span-4 animate-in [animation-delay:150ms]">
               <p className="text-muted-foreground text-sm leading-relaxed mb-8 max-w-sm">
-                Custom-coded, high-performance websites delivered with mechanical
-                precision. Powered by Lovable, engineered by specialists.
+                Marketing sites for AI/ML startups, agent platforms, and developer tools.
+                Structured for humans, parseable by LLMs, indexable by every crawler that
+                matters in 2026.
               </p>
               <a
                 href="#cta"
@@ -206,9 +215,9 @@ function Index() {
         </div>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-border">
           {[
-            { n: "01", t: "The Brief", d: "Submit your assets and requirements. No long meetings, just clear documentation." },
-            { n: "02", t: "The Build", d: "Our engineers sprint for 48 hours. Real-time preview link provided within 12h." },
-            { n: "03", t: "The Launch", d: "Final QA, SEO audit, and domain handover. Your site is live and lightning fast." },
+            { n: "01", t: "The Brief", d: "Send your positioning, docs, and API surface. We turn it into a structured site map and content schema in hours, not weeks." },
+            { n: "02", t: "The Build", d: "48-hour sprint: custom code, semantic HTML, JSON-LD, llms.txt, OpenGraph, sitemap. Preview link within 12h." },
+            { n: "03", t: "The Launch", d: "Lighthouse audit, agent-readability check (ChatGPT, Perplexity, Claude), domain handover. Live and citeable." },
           ].map((s, i) => (
             <div
               key={s.n}
@@ -281,28 +290,28 @@ function Index() {
             {[
               {
                 tier: "Tier 01",
-                name: "One-Pager",
-                desc: "Perfect for product launches and simple portfolios.",
+                name: "Launch Page",
+                desc: "Single-page site for an AI product launch, waitlist, or YC demo day.",
                 price: "$2,400",
-                features: ["+ 48hr Delivery", "+ Mobile Responsive", "+ Basic SEO"],
+                features: ["+ 48hr Delivery", "+ llms.txt + JSON-LD", "+ Agent-readability audit"],
                 accent: false,
                 label: "Tier 01",
               },
               {
                 tier: "Tier 02 // Most Popular",
-                name: "Full Site",
-                desc: "Up to 5 pages of bespoke design and high-speed engineering.",
+                name: "Marketing Site",
+                desc: "Up to 5 pages for AI/ML startups and agent platforms — home, product, pricing, docs intro, about.",
                 price: "$4,800",
-                features: ["+ CMS Integration", "+ Custom Animations", "+ Priority Support"],
+                features: ["+ MDX content layer", "+ Structured docs schema", "+ Priority support"],
                 accent: true,
                 label: "Tier 02 // Most Popular",
               },
               {
                 tier: "Tier 03",
-                name: "Web App",
-                desc: "Complex functionality, API integrations, and user auth.",
+                name: "Devtool Hub",
+                desc: "Marketing site + API reference + MCP-ready docs for developer tools and agent SDKs.",
                 price: "$8,500+",
-                features: ["+ Backend Logic", "+ Database Setup", "+ 72hr Delivery"],
+                features: ["+ API reference layer", "+ MCP/OpenAPI surface", "+ Auth & dashboard scaffold"],
                 accent: false,
                 label: "Tier 03",
               },

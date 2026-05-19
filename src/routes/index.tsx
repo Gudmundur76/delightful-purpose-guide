@@ -207,9 +207,9 @@ function Index() {
         </div>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-border">
           {[
-            { n: "01", t: "The Brief", d: "Submit your assets and requirements. No long meetings, just clear documentation." },
-            { n: "02", t: "The Build", d: "Our engineers sprint for 48 hours. Real-time preview link provided within 12h." },
-            { n: "03", t: "The Launch", d: "Final QA, SEO audit, and domain handover. Your site is live and lightning fast." },
+            { n: "01", t: "The Brief", d: "Send your positioning, docs, and API surface. We turn it into a structured site map and content schema in hours, not weeks." },
+            { n: "02", t: "The Build", d: "48-hour sprint: custom code, semantic HTML, JSON-LD, llms.txt, OpenGraph, sitemap. Preview link within 12h." },
+            { n: "03", t: "The Launch", d: "Lighthouse audit, agent-readability check (ChatGPT, Perplexity, Claude), domain handover. Live and citeable." },
           ].map((s, i) => (
             <div
               key={s.n}

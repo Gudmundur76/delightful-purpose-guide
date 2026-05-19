@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import fluxImg from "@/assets/portfolio-flux.jpg";
 import architexImg from "@/assets/portfolio-architex.jpg";
+import growImg from "@/assets/portfolio-grow.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -10,7 +11,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Productized web design agency powered by Lovable. Fixed-price custom websites and web apps delivered in 48 hours.",
+          "Productized web design agency powered by Lovable. Fixed-price custom websites in 48 hours, plus ready-to-launch businesses for acquisition.",
       },
       { property: "og:title", content: "RapidEngine — Sites shipped in 48h" },
       {
@@ -54,6 +55,9 @@ function Index() {
               </a>
               <a href="#archive" className="hover:text-foreground transition-colors">
                 Archive
+              </a>
+              <a href="#acquire" className="hover:text-foreground transition-colors text-accent">
+                Acquire
               </a>
             </div>
             <a
@@ -139,7 +143,7 @@ function Index() {
           </h2>
           <span className="font-mono text-xs text-muted-foreground">V.03/26 Portfolio</span>
         </div>
-        <div className="grid md:grid-cols-2 gap-px bg-border border border-border">
+        <div className="grid md:grid-cols-3 gap-px bg-border border border-border">
           <div className="bg-background p-4">
             <img
               src={fluxImg}
@@ -151,10 +155,10 @@ function Index() {
             />
             <div className="mt-4 flex justify-between items-center">
               <span className="font-bold uppercase tracking-tighter">
-                Flux Capital Branding
+                Flux Capital
               </span>
               <span className="text-[10px] font-mono text-muted-foreground">
-                LANDING PAGE // 48H
+                LANDING // 48H
               </span>
             </div>
           </div>
@@ -172,8 +176,122 @@ function Index() {
                 Architex Studio
               </span>
               <span className="text-[10px] font-mono text-muted-foreground">
-                MARKETING SITE // 48H
+                MARKETING // 48H
               </span>
+            </div>
+          </div>
+          <div className="bg-background p-4">
+            <img
+              src={growImg}
+              alt="Grow.contact AI talent acquisition platform"
+              width={1280}
+              height={960}
+              loading="lazy"
+              className="w-full aspect-[4/3] object-cover bg-card"
+            />
+            <div className="mt-4 flex justify-between items-center">
+              <span className="font-bold uppercase tracking-tighter">
+                Grow.contact
+              </span>
+              <span className="text-[10px] font-mono text-accent">
+                AI SAAS // FOR SALE
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Acquire — Businesses For Sale */}
+      <section id="acquire" className="border-t border-border bg-card/30">
+        <div className="max-w-7xl mx-auto px-6 py-24">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-16 pb-8 border-b border-border">
+            <div>
+              <p className="font-mono text-accent text-xs mb-4 uppercase tracking-[0.2em]">
+                // For Acquisition — Turnkey Businesses
+              </p>
+              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tighter uppercase leading-[0.95]">
+                Ready-to-launch
+                <br />
+                <span className="text-muted-foreground">businesses, for sale.</span>
+              </h2>
+            </div>
+            <p className="max-w-sm text-sm text-muted-foreground leading-relaxed">
+              Operational web products built on Lovable. Full code handover, brand,
+              and infrastructure. Skip 12 months of zero-to-one.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-12 gap-8 border border-border bg-background">
+            <div className="md:col-span-7 border-b md:border-b-0 md:border-r border-border">
+              <img
+                src={growImg}
+                alt="Grow.contact AI talent acquisition platform"
+                width={1280}
+                height={960}
+                loading="lazy"
+                className="w-full aspect-[4/3] object-cover bg-card"
+              />
+            </div>
+            <div className="md:col-span-5 p-8 md:p-10 flex flex-col">
+              <div className="flex items-center justify-between mb-6">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                  Listing 01 / Featured
+                </span>
+                <span className="font-mono text-[10px] font-medium px-2 py-1 border border-accent text-accent tracking-tighter uppercase">
+                  ● Accepting Offers
+                </span>
+              </div>
+
+              <h3 className="text-3xl md:text-4xl font-extrabold tracking-tighter uppercase leading-none">
+                Grow.contact
+              </h3>
+              <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+                The most powerful AI ever deployed in talent acquisition.
+                One platform covering sourcing, async screening, live interview
+                copilot, and offer prediction.
+              </p>
+
+              <dl className="mt-8 grid grid-cols-2 gap-px bg-border border border-border">
+                {[
+                  { k: "Category", v: "AI SaaS / HR Tech" },
+                  { k: "Stage", v: "Live Beta" },
+                  { k: "Stack", v: "Built on Lovable" },
+                  { k: "Handover", v: "Full code + brand" },
+                ].map((m) => (
+                  <div key={m.k} className="bg-background p-4">
+                    <dt className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                      {m.k}
+                    </dt>
+                    <dd className="mt-2 text-sm font-bold tracking-tighter">
+                      {m.v}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+
+              <ul className="mt-6 space-y-2 font-mono text-[11px] uppercase tracking-tighter text-muted-foreground">
+                <li>+ 3× Faster time-to-hire</li>
+                <li>+ 94% Screening accuracy</li>
+                <li>+ 60% Recruiter cost saved</li>
+                <li>+ 12mo Retention predicted</li>
+              </ul>
+
+              <div className="mt-auto pt-8 space-y-3">
+                <a
+                  href="mailto:acquire@rapidengine.studio?subject=Acquisition%20Memo%20Request%20%E2%80%94%20Grow.contact"
+                  className="block text-center w-full py-4 bg-accent text-accent-foreground font-bold uppercase tracking-tighter hover:opacity-90 transition-opacity"
+                >
+                  Request Acquisition Memo
+                </a>
+                <a
+                  href="https://grow.contact"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-center w-full py-3 border border-border font-mono text-[11px] uppercase tracking-widest text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
+                >
+                  Visit grow.contact →
+                </a>
+              </div>
             </div>
           </div>
         </div>

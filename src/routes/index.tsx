@@ -42,7 +42,7 @@ function Index() {
               Status: Ready
             </span>
             <span className="font-extrabold tracking-tighter text-xl uppercase">
-              Grow_
+              GROW_
             </span>
           </div>
           <div className="flex items-center gap-8">

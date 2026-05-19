@@ -200,6 +200,9 @@ function Index() {
       {/* Pricing */}
       <section id="services" className="scroll-mt-20 bg-foreground text-background py-24">
         <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl font-extrabold tracking-tighter uppercase mb-12">
+            Pricing
+          </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {

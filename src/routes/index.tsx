@@ -10,8 +10,7 @@ export const Route = createFileRoute("/")({
       { title: "RapidEngine — Custom websites shipped in 48 hours" },
       {
         name: "description",
-        content:
-          "Productized web design agency powered by Lovable. Fixed-price custom websites and web apps delivered in 48 hours.",
+          "Productized web design agency powered by Lovable. Fixed-price custom websites in 48 hours, plus ready-to-launch businesses for acquisition.",
       },
       { property: "og:title", content: "RapidEngine — Sites shipped in 48h" },
       {

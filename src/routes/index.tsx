@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import fluxImg from "@/assets/portfolio-flux.jpg";
 import architexImg from "@/assets/portfolio-architex.jpg";
+import { LeadForm } from "@/components/LeadForm";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -276,22 +277,20 @@ function Index() {
                 </div>
               </div>
             </div>
-            <div className="bg-accent p-12 flex flex-col justify-between">
-              <h2 className="text-4xl font-extrabold tracking-tighter uppercase text-accent-foreground leading-none">
-                Ready to
-                <br />
-                ship your
-                <br />
-                vision?
-              </h2>
-              <div className="mt-12 space-y-4">
-                <button className="w-full py-4 bg-background text-foreground font-bold uppercase tracking-tighter hover:bg-card transition-colors">
-                  Start Project Brief
-                </button>
-                <p className="font-mono text-[10px] text-accent-foreground/70 uppercase text-center tracking-widest">
+            <div className="bg-accent p-12 flex flex-col gap-8">
+              <div>
+                <h2 className="text-4xl font-extrabold tracking-tighter uppercase text-accent-foreground leading-none">
+                  Ready to
+                  <br />
+                  ship your
+                  <br />
+                  vision?
+                </h2>
+                <p className="font-mono text-[10px] text-accent-foreground/70 uppercase tracking-widest mt-4">
                   Next available slot: Today, 14:00 UTC
                 </p>
               </div>
+              <LeadForm />
             </div>
           </div>
           <div className="mt-24 pt-8 border-t border-border flex justify-between font-mono text-[10px] text-muted-foreground uppercase">

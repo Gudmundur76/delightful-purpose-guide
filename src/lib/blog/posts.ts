@@ -16,7 +16,7 @@ export interface BlogPost {
 export const POSTS: BlogPost[] = [
   {
     slug: "startup-web-design-agency-what-to-look-for",
-    title: "How to Pick a Startup Web Design Agency (Without Burning 6 Weeks)",
+    title: "How to Pick a Startup Web Design Agency",
     description:
       "A founder's checklist for hiring a startup web design agency: scope, pricing model, turnaround, and the 5 red flags that signal a 6-week project becoming a 6-month one.",
     publishedAt: "2026-05-12",

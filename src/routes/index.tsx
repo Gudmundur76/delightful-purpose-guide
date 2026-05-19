@@ -159,12 +159,12 @@ function Index() {
           <div className="grid md:grid-cols-12 gap-12 items-end">
             <div className="md:col-span-8 animate-in">
               <p className="font-mono text-accent text-xs mb-6 uppercase tracking-[0.2em]">
-                // Zero-to-Live in 48 Hours
+                // Agent-Native Websites · Live in 48 Hours
               </p>
               <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter text-balance leading-[0.9] mb-8">
-                WE BUILD <span className="text-muted-foreground">FAST.</span>
+                BUILT FOR <span className="text-muted-foreground">HUMANS.</span>
                 <br />
-                YOU SCALE <span className="italic">NOW.</span>
+                READ BY <span className="italic">AGENTS.</span>
               </h1>
               <div className="flex flex-wrap gap-4">
                 <div className="px-6 py-4 bg-card border border-border flex flex-col gap-1">

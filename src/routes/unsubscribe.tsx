@@ -7,6 +7,17 @@ const searchSchema = z.object({ token: z.string().optional() });
 export const Route = createFileRoute("/unsubscribe")({
   validateSearch: searchSchema,
   component: UnsubscribePage,
+  head: () => ({
+    meta: [
+      { title: "Unsubscribe — Grow" },
+      { name: "description", content: "Unsubscribe from Grow emails. Confirm to stop receiving transactional updates from the Grow web design service." },
+      { name: "robots", content: "noindex" },
+      { property: "og:title", content: "Unsubscribe — Grow" },
+      { property: "og:description", content: "Unsubscribe from Grow emails." },
+      { property: "og:url", content: "https://grow.contact/unsubscribe" },
+    ],
+    links: [{ rel: "canonical", href: "https://grow.contact/unsubscribe" }],
+  }),
 });
 
 type Status = "loading" | "ready" | "already" | "invalid" | "submitting" | "done" | "error";

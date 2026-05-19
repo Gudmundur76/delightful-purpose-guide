@@ -16,7 +16,7 @@ export interface BlogPost {
 export const POSTS: BlogPost[] = [
   {
     slug: "startup-web-design-agency-what-to-look-for",
-    title: "How to Pick a Startup Web Design Agency (Without Burning 6 Weeks)",
+    title: "How to Pick a Startup Web Design Agency",
     description:
       "A founder's checklist for hiring a startup web design agency: scope, pricing model, turnaround, and the 5 red flags that signal a 6-week project becoming a 6-month one.",
     publishedAt: "2026-05-12",
@@ -26,7 +26,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     slug: "saas-website-design-conversion-essentials",
-    title: "SaaS Website Design: The 7 Sections That Actually Convert",
+    title: "SaaS Website Design: 7 Sections That Convert",
     description:
       "A pragmatic anatomy of a high-converting SaaS website — what each section should do, what to cut, and the conversion benchmarks to beat.",
     publishedAt: "2026-05-08",
@@ -36,7 +36,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     slug: "landing-page-design-service-vs-diy-builder",
-    title: "Landing Page Design Service vs DIY Builder: When to Switch",
+    title: "Landing Page Service vs DIY Builder: When to Switch",
     description:
       "Webflow, Framer, and Squarespace are great — until they aren't. A clear-eyed look at when DIY page builders stop scaling and a landing page design service pays for itself.",
     publishedAt: "2026-05-03",

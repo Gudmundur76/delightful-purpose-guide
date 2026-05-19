@@ -341,35 +341,17 @@ function Index() {
               <h4 className="font-mono text-xs uppercase text-accent mb-8">
                 // Frequently Asked Questions
               </h4>
-              <div className="space-y-12">
-                <div>
-                  <p className="font-bold uppercase tracking-tighter text-lg">
-                    How is 48 hours possible?
-                  </p>
-                  <p className="text-muted-foreground text-sm mt-2 leading-relaxed">
-                    We use a proprietary workflow powered by Lovable. We don't waste
-                    time on endless revisions; we build it right the first time using
-                    battle-tested technical frameworks.
-                  </p>
-                </div>
-                <div>
-                  <p className="font-bold uppercase tracking-tighter text-lg">
-                    What if I need changes?
-                  </p>
-                  <p className="text-muted-foreground text-sm mt-2 leading-relaxed">
-                    Every build includes one 4-hour revision block after delivery to
-                    polish the details and ensure perfection.
-                  </p>
-                </div>
-                <div>
-                  <p className="font-bold uppercase tracking-tighter text-lg">
-                    Do I own the code?
-                  </p>
-                  <p className="text-muted-foreground text-sm mt-2 leading-relaxed">
-                    Yes. Full GitHub repository handover. The site is yours to host,
-                    modify, and extend.
-                  </p>
-                </div>
+              <div className="space-y-10">
+                {FAQS.map((f) => (
+                  <div key={f.q}>
+                    <p className="font-bold uppercase tracking-tighter text-lg">
+                      {f.q}
+                    </p>
+                    <p className="text-muted-foreground text-sm mt-2 leading-relaxed">
+                      {f.a}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
             <div className="bg-accent p-12 flex flex-col gap-8">

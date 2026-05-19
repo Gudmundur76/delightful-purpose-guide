@@ -96,32 +96,11 @@ export const Route = createFileRoute("/")({
             },
             {
               "@type": "FAQPage",
-              mainEntity: [
-                {
-                  "@type": "Question",
-                  name: "How is 48 hours possible?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "We use a proprietary workflow powered by Lovable. We don't waste time on endless revisions; we build it right the first time using battle-tested technical frameworks.",
-                  },
-                },
-                {
-                  "@type": "Question",
-                  name: "What if I need changes?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "Every build includes one 4-hour revision block after delivery to polish the details and ensure perfection.",
-                  },
-                },
-                {
-                  "@type": "Question",
-                  name: "Do I own the code?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "Yes. Full GitHub repository handover. The site is yours to host, modify, and extend.",
-                  },
-                },
-              ],
+              mainEntity: FAQS.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
             },
           ],
         }),

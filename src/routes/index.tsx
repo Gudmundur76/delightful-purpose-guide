@@ -431,6 +431,8 @@ function Index() {
             <span>&copy; 2026 GROW STUDIO</span>
             <span>Powering 48H Innovation</span>
           </div>
-
+        </div>
+      </footer>
+    </div>
   );
 }

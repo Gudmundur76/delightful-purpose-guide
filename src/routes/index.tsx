@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import nimbusImg from "@/assets/portfolio-nimbus.jpg";
 import vectorImg from "@/assets/portfolio-vector.jpg";
 import { LeadForm } from "@/components/LeadForm";
+import { TechSpecs } from "@/components/TechSpecs";
 import { useActiveSection } from "@/hooks/use-active-section";
 
 const NAV_SECTIONS = ["services", "process", "archive"];
@@ -356,7 +357,11 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* Technical Specifications */}
+      <TechSpecs />
       </main>
+
 
       {/* FAQ + CTA */}
       <footer id="cta" className="scroll-mt-20 border-t border-border py-24">

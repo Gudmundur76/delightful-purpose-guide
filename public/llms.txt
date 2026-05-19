@@ -1,13 +1,19 @@
 # Grow
 
-> Productized web design agency. Custom-coded, high-performance websites and web apps shipped in 48 hours, fixed price.
+> Agent-native web design agency. Custom-coded marketing sites for AI/ML startups, agent platforms, and developer tools — built to be readable and citeable by LLM crawlers (ChatGPT, Perplexity, Claude, Google AI Overviews). Shipped in 48 hours, fixed price.
 
-Grow builds bespoke marketing sites, landing pages, and lightweight web apps for founders and operators. Every project is fixed-scope, fixed-price, with a written launch date.
+Grow builds bespoke marketing sites, launch pages, and devtool hubs for founders shipping AI products. Every site ships with semantic HTML, JSON-LD, llms.txt, OpenGraph, and a clean sitemap so agents and humans both find what they need. Fixed-scope, fixed-price, with a written launch date.
+
+## Who it's for
+
+- AI/ML startups (model APIs, infra, eval tools, fine-tuning)
+- Agent platforms (orchestration, browser agents, voice agents)
+- Developer tools (SDKs, CLIs, MCP servers, API products)
 
 ## Pages
 
-- [Home](/): Service overview, process, pricing tiers, FAQ, and intake form.
-- [Journal](/blog): Field notes on shipping custom websites — startup web design, SaaS landing pages, and when DIY builders stop scaling.
+- [Home](/): Positioning, process, pricing tiers (Launch Page, Marketing Site, Devtool Hub), FAQ, intake form.
+- [Journal](/blog): Field notes on shipping agent-native websites and high-converting AI product sites.
 
 ## Journal posts
 

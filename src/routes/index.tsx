@@ -2,6 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import fluxImg from "@/assets/portfolio-flux.jpg";
 import architexImg from "@/assets/portfolio-architex.jpg";
 import { LeadForm } from "@/components/LeadForm";
+import { useActiveSection } from "@/hooks/use-active-section";
+
+const NAV_SECTIONS = ["services", "process", "archive"];
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -32,6 +35,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const active = useActiveSection(NAV_SECTIONS);
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
@@ -47,15 +51,15 @@ function Index() {
           </div>
           <div className="flex items-center gap-8">
             <div className="hidden md:flex gap-6 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-              <a href="#services" className="hover:text-foreground transition-colors">
-                Services
-              </a>
-              <a href="#process" className="hover:text-foreground transition-colors">
-                Process
-              </a>
-              <a href="#archive" className="hover:text-foreground transition-colors">
-                Archive
-              </a>
+              {NAV_SECTIONS.map((id) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  className={`transition-colors hover:text-foreground ${active === id ? "text-foreground" : ""}`}
+                >
+                  {id === "archive" ? "Archive" : id === "services" ? "Services" : "Process"}
+                </a>
+              ))}
             </div>
             <a
               href="#cta"
@@ -112,7 +116,7 @@ function Index() {
       </section>
 
       {/* Process */}
-      <section id="process" className="border-b border-border bg-card/50">
+      <section id="process" className="scroll-mt-20 border-b border-border bg-card/50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-border">
           {[
             { n: "01", t: "The Brief", d: "Submit your assets and requirements. No long meetings, just clear documentation." },
@@ -133,7 +137,7 @@ function Index() {
       </section>
 
       {/* Portfolio */}
-      <section id="archive" className="max-w-7xl mx-auto px-6 py-24">
+      <section id="archive" className="scroll-mt-20 max-w-7xl mx-auto px-6 py-24">
         <div className="flex justify-between items-end mb-12">
           <h2 className="text-4xl font-extrabold tracking-tighter uppercase">
             Recent Outputs
@@ -181,7 +185,7 @@ function Index() {
       </section>
 
       {/* Pricing */}
-      <section id="services" className="bg-foreground text-background py-24">
+      <section id="services" className="scroll-mt-20 bg-foreground text-background py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -239,7 +243,7 @@ function Index() {
       </section>
 
       {/* FAQ + CTA */}
-      <footer id="cta" className="border-t border-border py-24">
+      <footer id="cta" className="scroll-mt-20 border-t border-border py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-24">
             <div>

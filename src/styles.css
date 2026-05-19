@@ -89,3 +89,8 @@
 .animate-in {
   animation: slideUp 600ms var(--ease-out-expo) both;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+

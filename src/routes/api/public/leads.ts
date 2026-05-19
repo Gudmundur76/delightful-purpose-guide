@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { sendTransactionalEmailInternal } from "@/lib/email/send-internal";
 
 const LeadSchema = z.object({
   name: z.string().trim().min(1).max(100),
@@ -31,7 +32,11 @@ export const Route = createFileRoute("/api/public/leads")({
             );
           }
 
-          const { error } = await supabaseAdmin.from("leads").insert(parsed.data);
+          const { data: inserted, error } = await supabaseAdmin
+            .from("leads")
+            .insert(parsed.data)
+            .select("id")
+            .single();
           if (error) {
             console.error("Lead insert failed:", error);
             return new Response(
@@ -39,6 +44,31 @@ export const Route = createFileRoute("/api/public/leads")({
               { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } },
             );
           }
+
+          // Fire emails — failures must not break the user-facing 200.
+          const leadId = inserted?.id ?? crypto.randomUUID();
+          const data = parsed.data;
+          const emailData = {
+            name: data.name,
+            email: data.email,
+            budgetTier: data.budget_tier,
+            message: data.message,
+          };
+
+          // Run both in parallel; swallow errors.
+          await Promise.allSettled([
+            sendTransactionalEmailInternal({
+              templateName: "lead-confirmation",
+              recipientEmail: data.email,
+              idempotencyKey: `lead-confirm-${leadId}`,
+              templateData: emailData,
+            }).catch((e) => console.error("lead-confirmation send failed", e)),
+            sendTransactionalEmailInternal({
+              templateName: "lead-notification",
+              idempotencyKey: `lead-notify-${leadId}`,
+              templateData: emailData,
+            }).catch((e) => console.error("lead-notification send failed", e)),
+          ]);
 
           return new Response(JSON.stringify({ success: true }), {
             status: 200,

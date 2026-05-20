@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+
 
 type Stat = { label: string; value: number; suffix?: string; prefix?: string };
 const STATS: Stat[] = [
@@ -48,42 +48,17 @@ const CASES: Case[] = [
   },
 ];
 
-function useCountUp(target: number, run: boolean, duration = 1400) {
-  const [n, setN] = useState(0);
-  useEffect(() => {
-    if (!run) return;
-    setN(0);
-    const start = performance.now();
-    let raf = 0;
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setN(Math.round(target * eased));
-      if (p < 1) raf = requestAnimationFrame(tick);
-      else setN(target);
-    };
-    raf = requestAnimationFrame(tick);
-    // Safety fallback so values never stay at 0
-    const fallback = setTimeout(() => setN(target), duration + 400);
-    return () => {
-      cancelAnimationFrame(raf);
-      clearTimeout(fallback);
-    };
-  }, [target, run, duration]);
-  return n;
-}
 
-function Counter({ stat, run }: { stat: Stat; run: boolean }) {
-  const n = useCountUp(stat.value, run);
+function Counter({ stat }: { stat: Stat }) {
   return (
     <div className="border border-border p-6 bg-card">
-      <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-3">
-        // {stat.label}
-      </div>
-      <div className="text-4xl md:text-5xl font-extrabold tracking-tighter tabular-nums">
-        {stat.prefix ?? ""}
-        {Math.round(n)}
-        <span className="text-accent">{stat.suffix ?? ""}</span>
+      <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+        // {stat.label}{" "}
+        <span className="text-foreground font-extrabold tracking-tighter text-base sm:text-lg">
+          {stat.prefix ?? ""}
+          {stat.value}
+          <span className="text-accent">{stat.suffix ?? ""}</span>
+        </span>
       </div>
     </div>
   );
@@ -154,52 +129,8 @@ function CaseCard({ c }: { c: Case }) {
 }
 
 export function CaseStudies() {
-  const ref = useRef<HTMLElement | null>(null);
-  const [run, setRun] = useState(false);
-  useEffect(() => {
-    if (run) return;
-    const el = ref.current;
-    if (!el) return;
-
-    const check = () => {
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      if (rect.top < vh * 0.9 && rect.bottom > 0) {
-        setRun(true);
-        return true;
-      }
-      return false;
-    };
-
-    if (check()) return;
-
-    let observer: IntersectionObserver | null = null;
-    if (typeof IntersectionObserver !== "undefined") {
-      observer = new IntersectionObserver(
-        (entries) => {
-          if (entries.some((e) => e.isIntersecting)) {
-            setRun(true);
-            observer?.disconnect();
-          }
-        },
-        { rootMargin: "0px 0px -10% 0px" },
-      );
-      observer.observe(el);
-    }
-
-    const onScroll = () => {
-      if (check()) window.removeEventListener("scroll", onScroll);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      observer?.disconnect();
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [run]);
   return (
     <section
-      ref={ref}
       id="case-studies"
       className="scroll-mt-20 border-t border-border"
     >
@@ -214,7 +145,7 @@ export function CaseStudies() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border mb-12">
           {STATS.map((s) => (
-            <Counter key={s.label} stat={s} run={run} />
+            <Counter key={s.label} stat={s} />
           ))}
         </div>
         <div className="grid md:grid-cols-3 gap-6">

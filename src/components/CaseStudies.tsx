@@ -162,26 +162,20 @@ export function CaseStudies() {
     if (!ref.current) return;
     const el = ref.current;
 
-    // IntersectionObserver for scroll-trigger
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) if (e.isIntersecting) setRun(true);
-      },
-      { threshold: 0, rootMargin: "0px 0px -5% 0px" },
-    );
-    io.observe(el);
-
-    // Fallback: if element is already in viewport on mount
-    const checkVisible = () => {
+    const triggerIfVisible = () => {
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight || document.documentElement.clientHeight;
       if (rect.top < vh && rect.bottom > 0) {
         setRun(true);
+        window.removeEventListener("scroll", triggerIfVisible, { passive: true } as EventListenerOptions);
       }
     };
-    requestAnimationFrame(checkVisible);
 
-    return () => io.disconnect();
+    window.addEventListener("scroll", triggerIfVisible, { passive: true });
+    // Check immediately in case already visible
+    requestAnimationFrame(triggerIfVisible);
+
+    return () => window.removeEventListener("scroll", triggerIfVisible, { passive: true } as EventListenerOptions);
   }, []);
   return (
     <section

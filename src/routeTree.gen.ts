@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WorkRouteImport } from './routes/work'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ProcessRouteImport } from './routes/process'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as LlmsRouteImport } from './routes/llms'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckRouteImport } from './routes/check'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
@@ -34,6 +40,11 @@ import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/lea
 import { Route as ApiPublicV1DocsRouteImport } from './routes/api/public/v1/docs'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 
+const WorkRoute = WorkRouteImport.update({
+  id: '/work',
+  path: '/work',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UnsubscribeRoute = UnsubscribeRouteImport.update({
   id: '/unsubscribe',
   path: '/unsubscribe',
@@ -49,9 +60,34 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProcessRoute = ProcessRouteImport.update({
+  id: '/process',
+  path: '/process',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LlmsRoute = LlmsRouteImport.update({
   id: '/llms',
   path: '/llms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckRoute = CheckRouteImport.update({
@@ -165,10 +201,16 @@ export interface FileRoutesByFullPath {
   '/api-docs': typeof ApiDocsRoute
   '/blog': typeof BlogRouteWithChildren
   '/check': typeof CheckRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/llms': typeof LlmsRoute
+  '/pricing': typeof PricingRoute
+  '/process': typeof ProcessRoute
+  '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/work': typeof WorkRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
@@ -191,10 +233,16 @@ export interface FileRoutesByTo {
   '/api-docs': typeof ApiDocsRoute
   '/blog': typeof BlogRouteWithChildren
   '/check': typeof CheckRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/llms': typeof LlmsRoute
+  '/pricing': typeof PricingRoute
+  '/process': typeof ProcessRoute
+  '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/work': typeof WorkRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
@@ -218,10 +266,16 @@ export interface FileRoutesById {
   '/api-docs': typeof ApiDocsRoute
   '/blog': typeof BlogRouteWithChildren
   '/check': typeof CheckRoute
+  '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/llms': typeof LlmsRoute
+  '/pricing': typeof PricingRoute
+  '/process': typeof ProcessRoute
+  '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/work': typeof WorkRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
@@ -246,10 +300,16 @@ export interface FileRouteTypes {
     | '/api-docs'
     | '/blog'
     | '/check'
+    | '/contact'
+    | '/faq'
     | '/llms'
+    | '/pricing'
+    | '/process'
+    | '/services'
     | '/sitemap.xml'
     | '/status'
     | '/unsubscribe'
+    | '/work'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
@@ -272,10 +332,16 @@ export interface FileRouteTypes {
     | '/api-docs'
     | '/blog'
     | '/check'
+    | '/contact'
+    | '/faq'
     | '/llms'
+    | '/pricing'
+    | '/process'
+    | '/services'
     | '/sitemap.xml'
     | '/status'
     | '/unsubscribe'
+    | '/work'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
@@ -298,10 +364,16 @@ export interface FileRouteTypes {
     | '/api-docs'
     | '/blog'
     | '/check'
+    | '/contact'
+    | '/faq'
     | '/llms'
+    | '/pricing'
+    | '/process'
+    | '/services'
     | '/sitemap.xml'
     | '/status'
     | '/unsubscribe'
+    | '/work'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
@@ -325,10 +397,16 @@ export interface RootRouteChildren {
   ApiDocsRoute: typeof ApiDocsRoute
   BlogRoute: typeof BlogRouteWithChildren
   CheckRoute: typeof CheckRoute
+  ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRoute
   LlmsRoute: typeof LlmsRoute
+  PricingRoute: typeof PricingRoute
+  ProcessRoute: typeof ProcessRoute
+  ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StatusRoute: typeof StatusRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
+  WorkRoute: typeof WorkRoute
   BadgeChar123idChar125DotsvgRoute: typeof BadgeChar123idChar125DotsvgRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   VerifyIdRoute: typeof VerifyIdRoute
@@ -346,6 +424,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/work': {
+      id: '/work'
+      path: '/work'
+      fullPath: '/work'
+      preLoaderRoute: typeof WorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/unsubscribe': {
       id: '/unsubscribe'
       path: '/unsubscribe'
@@ -367,11 +452,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/process': {
+      id: '/process'
+      path: '/process'
+      fullPath: '/process'
+      preLoaderRoute: typeof ProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/llms': {
       id: '/llms'
       path: '/llms'
       fullPath: '/llms'
       preLoaderRoute: typeof LlmsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/check': {
@@ -545,10 +665,16 @@ const rootRouteChildren: RootRouteChildren = {
   ApiDocsRoute: ApiDocsRoute,
   BlogRoute: BlogRouteWithChildren,
   CheckRoute: CheckRoute,
+  ContactRoute: ContactRoute,
+  FaqRoute: FaqRoute,
   LlmsRoute: LlmsRoute,
+  PricingRoute: PricingRoute,
+  ProcessRoute: ProcessRoute,
+  ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StatusRoute: StatusRoute,
   UnsubscribeRoute: UnsubscribeRoute,
+  WorkRoute: WorkRoute,
   BadgeChar123idChar125DotsvgRoute: BadgeChar123idChar125DotsvgRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   VerifyIdRoute: VerifyIdRoute,
@@ -566,13 +692,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

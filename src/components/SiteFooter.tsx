@@ -1,0 +1,65 @@
+import { Link } from "@tanstack/react-router";
+
+export function SiteFooter() {
+  return (
+    <footer className="border-t border-border py-12 sm:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
+          <div>
+            <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Studio</h5>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><Link to="/services" className="hover:text-foreground transition-colors">Services</Link></li>
+              <li><Link to="/process" className="hover:text-foreground transition-colors">Process</Link></li>
+              <li><Link to="/work" className="hover:text-foreground transition-colors">Work</Link></li>
+              <li><Link to="/pricing" className="hover:text-foreground transition-colors">Pricing</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Resources</h5>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><Link to="/blog" className="hover:text-foreground transition-colors">Journal</Link></li>
+              <li><a href="/llms.txt" className="hover:text-foreground transition-colors">llms.txt</a></li>
+              <li><Link to="/api-docs" className="hover:text-foreground transition-colors">API Docs</Link></li>
+              <li><Link to="/status" className="hover:text-foreground transition-colors">Status</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Contact</h5>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><a href="mailto:hello@grow.contact" className="hover:text-foreground transition-colors">hello@grow.contact</a></li>
+              <li><Link to="/contact" className="hover:text-foreground transition-colors">Start a Brief</Link></li>
+              <li><Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Readiness</h5>
+            <pre className="font-mono text-[11px] leading-relaxed bg-card border border-border rounded-md p-3 text-emerald-400 overflow-x-auto">
+<span className="text-muted-foreground">user@grow:~$</span> curl /api/readiness
+{`{"status":"agent-ready","score":85}`}<span className="inline-block w-2 h-3 bg-emerald-400 ml-1 align-middle animate-[blink_1s_steps(2,start)_infinite]" />
+            </pre>
+          </div>
+        </div>
+        <div className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row gap-4 md:items-center md:justify-between font-mono text-[10px] text-muted-foreground uppercase">
+          <span>&copy; 2026 GROW STUDIO</span>
+          <a
+            href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fgrow.contact"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Lighthouse performance audit on PageSpeed Insights"
+            className="group inline-flex items-center gap-2 border border-emerald-500/40 bg-emerald-500/5 px-3 py-1.5 hover:border-emerald-500 transition-colors"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+            <span className="text-emerald-400">Lighthouse</span>
+            <span className="text-emerald-400 font-bold">98</span>
+            <span className="text-muted-foreground">/ 100</span>
+            <span className="text-muted-foreground opacity-70 group-hover:opacity-100">↗</span>
+          </a>
+          <span>Powering 48H Innovation</span>
+        </div>
+      </div>
+    </footer>
+  );
+}

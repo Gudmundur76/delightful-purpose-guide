@@ -3,6 +3,23 @@ import { useEffect } from "react";
 import { ReadabilityScore } from "@/components/ReadabilityScore";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { CompareSection } from "@/components/CompareSection";
+import { CaseStudies } from "@/components/CaseStudies";
+import { ProcessTimeline } from "@/components/ProcessTimeline";
+import { Services } from "@/components/Services";
+import { TechSpecs } from "@/components/TechSpecs";
+import { SmartContactForm } from "@/components/SmartContactForm";
+
+const FAQS: { q: string; a: string }[] = [
+  { q: "What does \"agent-native\" actually mean?", a: "Every page ships with semantic HTML, JSON-LD (Organization, Product, FAQ, BreadcrumbList), an llms.txt at the root, OpenGraph + Twitter cards, and a clean sitemap. The result: ChatGPT, Perplexity, Claude, and Google AI Overviews can read, cite, and link to your product without guessing." },
+  { q: "Who is this actually for?", a: "AI/ML startups (model APIs, infra, eval tools), agent platforms (orchestration, browser agents, voice), and developer tools (SDKs, CLIs, MCP servers). If your buyer is a technical founder or platform engineer, you're in the right place." },
+  { q: "How is 48 hours possible?", a: "We use a proprietary workflow powered by Lovable. We don't waste time on endless revisions; we build it right the first time using battle-tested technical frameworks." },
+  { q: "How much does it cost, and what's included?", a: "Fixed price per tier — no hourly surprises. Each build includes design, custom code, on-page SEO, responsive layouts, and deployment. Copy and stock imagery are on you; we can recommend writers if you need one." },
+  { q: "What do you need from me to hit the 48-hour window?", a: "Brand assets (logo, fonts if any), final copy, and any reference sites — handed over at kickoff. The clock starts when we have everything. Slow content is the #1 reason projects slip." },
+  { q: "What if I need changes?", a: "Every build includes one 4-hour revision block after delivery to polish the details and ensure perfection. Larger scope changes are quoted as a separate mini-engagement." },
+  { q: "Do I own the code?", a: "Yes. Full GitHub repository handover. The site is yours to host, modify, and extend — no lock-in, no proprietary CMS." },
+  { q: "Do you handle hosting and post-launch fixes?", a: "We deploy to your hosting of choice (Vercel, Netlify, Cloudflare) and fix any genuine bugs free for 14 days after launch. Ongoing maintenance is available as a monthly retainer if you want it." },
+];
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -133,6 +150,46 @@ function Index() {
                 <p className="font-mono text-[10px] text-muted-foreground mt-6 group-hover:text-foreground transition-colors">Read more →</p>
               </Link>
             ))}
+          </div>
+        </section>
+
+        <CompareSection />
+        <CaseStudies />
+        <ProcessTimeline />
+        <Services />
+        <TechSpecs />
+
+        {/* FAQ */}
+        <section className="border-t border-border">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+            <div className="mb-10">
+              <p className="font-mono text-accent text-xs mb-3 uppercase tracking-[0.2em]">// Questions</p>
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">FAQ</h2>
+            </div>
+            <div className="space-y-8 sm:space-y-10">
+              {FAQS.map((f) => (
+                <div key={f.q}>
+                  <p className="font-bold uppercase tracking-tighter text-base sm:text-lg">{f.q}</p>
+                  <p className="text-muted-foreground text-sm mt-2 leading-relaxed">{f.a}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-10 text-center">
+              <Link to="/faq" className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">
+                See all FAQ →
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" className="border-t border-border bg-card/30">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+            <div className="mb-10">
+              <p className="font-mono text-accent text-xs mb-3 uppercase tracking-[0.2em]">// Start a brief</p>
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">Get in touch</h2>
+            </div>
+            <SmartContactForm />
           </div>
         </section>
       </main>

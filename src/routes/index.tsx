@@ -312,17 +312,17 @@ function Index() {
 
 
       {/* FAQ + CTA */}
-      <footer id="cta" className="scroll-mt-20 border-t border-border py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-24">
+      <footer id="cta" className="scroll-mt-20 border-t border-border py-16 sm:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-24">
             <div>
-              <h4 className="font-mono text-xs uppercase text-accent mb-8">
+              <h4 className="font-mono text-xs uppercase text-accent mb-6 sm:mb-8">
                 // Frequently Asked Questions
               </h4>
-              <div className="space-y-10">
+              <div className="space-y-8 sm:space-y-10">
                 {FAQS.map((f) => (
                   <div key={f.q}>
-                    <p className="font-bold uppercase tracking-tighter text-lg">
+                    <p className="font-bold uppercase tracking-tighter text-base sm:text-lg">
                       {f.q}
                     </p>
                     <p className="text-muted-foreground text-sm mt-2 leading-relaxed">
@@ -332,9 +332,9 @@ function Index() {
                 ))}
               </div>
             </div>
-            <div className="bg-accent p-12 flex flex-col gap-8">
+            <div className="bg-accent p-6 sm:p-8 md:p-12 flex flex-col gap-6 sm:gap-8">
               <div>
-                <h2 className="text-4xl font-extrabold tracking-tighter uppercase text-accent-foreground leading-none">
+                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tighter uppercase text-accent-foreground leading-none">
                   Ready to
                   <br />
                   ship your
@@ -348,7 +348,7 @@ function Index() {
               <SmartContactForm />
             </div>
           </div>
-          <div className="mt-24 pt-8 border-t border-border grid grid-cols-2 md:grid-cols-4 gap-10">
+          <div className="mt-16 sm:mt-24 pt-8 border-t border-border grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
             <div>
               <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Studio</h5>
               <ul className="space-y-2 text-sm text-muted-foreground">

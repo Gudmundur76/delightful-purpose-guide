@@ -5,7 +5,7 @@ import vectorImg from "@/assets/portfolio-vector.jpg";
 import { CaseStudies } from "@/components/CaseStudies";
 import { CompareSection } from "@/components/CompareSection";
 import { Guarantees } from "@/components/Guarantees";
-import { LeadForm } from "@/components/LeadForm";
+import { SmartContactForm } from "@/components/SmartContactForm";
 import { PricingTable } from "@/components/PricingTable";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { ReadabilityScore } from "@/components/ReadabilityScore";

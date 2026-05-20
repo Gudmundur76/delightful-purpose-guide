@@ -85,29 +85,7 @@ function Counter({ stat, run }: { stat: Stat; run: boolean }) {
   );
 }
 
-function CaseCard({ c, run }: { c: Case; run: boolean }) {
-  const [before, setBefore] = useState(0);
-  const [after, setAfter] = useState(0);
-
-  useEffect(() => {
-    if (!run) return;
-    const duration = 1400;
-    const steps = 60;
-    const tickMs = duration / steps;
-    let step = 0;
-
-    const id = setInterval(() => {
-      step++;
-      const p = Math.min(1, step / steps);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setBefore(Math.round(c.before * eased));
-      setAfter(Math.round(c.after * eased));
-      if (p >= 1) clearInterval(id);
-    }, tickMs);
-
-    return () => clearInterval(id);
-  }, [run, c.before, c.after]);
-
+function CaseCard({ c }: { c: Case }) {
   return (
     <article className="border border-border bg-card hover:border-accent/60 transition-colors group">
       <header className="px-5 py-4 border-b border-border flex items-center justify-between">
@@ -127,7 +105,7 @@ function CaseCard({ c, run }: { c: Case; run: boolean }) {
             Before
           </p>
           <p className="text-3xl font-extrabold tracking-tighter tabular-nums text-muted-foreground">
-            {c.display(before)}
+            {c.before}
           </p>
           <div className="mt-4 h-16 flex items-end gap-1">
             {Array.from({ length: 8 }).map((_, i) => (
@@ -144,7 +122,7 @@ function CaseCard({ c, run }: { c: Case; run: boolean }) {
             After
           </p>
           <p className="text-3xl font-extrabold tracking-tighter tabular-nums text-accent">
-            {c.display(after)}
+            {c.after}
           </p>
           <div className="mt-4 h-16 flex items-end gap-1">
             {Array.from({ length: 8 }).map((_, i) => (

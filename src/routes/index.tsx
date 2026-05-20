@@ -345,7 +345,7 @@ function Index() {
                   Next available slot: Today, 14:00 UTC
                 </p>
               </div>
-              <LeadForm />
+              <SmartContactForm />
             </div>
           </div>
           <div className="mt-24 pt-8 border-t border-border grid grid-cols-2 md:grid-cols-4 gap-10">

@@ -62,7 +62,7 @@ export function CompareSection() {
             label="Agent-Native Site"
             sub="grow.contact baseline"
             tone="accent"
-            values={METRICS.map((m) => ({ label: m.label, value: shown ? m.ours : 0 }))}
+            values={METRICS.map((m) => ({ label: m.label, value: m.ours }))}
           />
         </div>
 

@@ -18,7 +18,7 @@ export const POSTS: BlogPost[] = [
     slug: "startup-web-design-agency-what-to-look-for",
     title: "How to Pick a Startup Web Design Agency",
     description:
-      "A founder's checklist for hiring a startup web design agency: scope, pricing model, turnaround, and the 5 red flags that signal a 6-week project becoming a 6-month one.",
+      "A founder's checklist for hiring a startup web design agency: scope, pricing, turnaround, and 5 red flags that signal scope creep.",
     publishedAt: "2026-05-12",
     readingMinutes: 6,
     tags: ["startup web design agency", "hiring", "founders"],
@@ -38,7 +38,7 @@ export const POSTS: BlogPost[] = [
     slug: "landing-page-design-service-vs-diy-builder",
     title: "Landing Page Service vs DIY Builder: When to Switch",
     description:
-      "Webflow, Framer, and Squarespace are great — until they aren't. A clear-eyed look at when DIY page builders stop scaling and a landing page design service pays for itself.",
+      "Webflow, Framer, and Squarespace are great — until they aren't. When DIY builders stop scaling and a landing page service pays for itself.",
     publishedAt: "2026-05-03",
     readingMinutes: 5,
     tags: ["landing page design service", "webflow", "framer", "diy"],

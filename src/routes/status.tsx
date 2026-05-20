@@ -227,7 +227,7 @@ function StatusPage() {
             OpenAPI 3.1 spec with interactive Swagger UI.
           </p>
           <a
-            href="/api/public/v1/docs"
+            href="/api-docs"
             className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-5 py-3 uppercase tracking-tighter text-xs hover:bg-foreground hover:text-background transition-colors"
           >
             View API Docs

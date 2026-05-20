@@ -131,29 +131,6 @@ function Index() {
           </div>
         </section>
 
-        {/* Quick nav cards */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
-            {[
-              { to: "/services" as const, label: "Services", desc: "Three productized tiers." },
-              { to: "/process" as const, label: "Process", desc: "48-hour workflow." },
-              { to: "/work" as const, label: "Work", desc: "Case studies & archive." },
-              { to: "/pricing" as const, label: "Pricing", desc: "Fixed, transparent." },
-            ].map((c) => (
-              <Link
-                key={c.to}
-                to={c.to}
-                className="group bg-background p-6 sm:p-8 hover:bg-card transition-colors"
-              >
-                <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">// {c.label}</p>
-                <p className="font-extrabold uppercase tracking-tighter text-xl">{c.desc}</p>
-                <p className="font-mono text-[10px] text-muted-foreground mt-6 group-hover:text-foreground transition-colors">Read more →</p>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <CompareSection />
         <CaseStudies />
         <ProcessTimeline />
         <Services />

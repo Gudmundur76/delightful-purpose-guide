@@ -121,7 +121,7 @@ export function PricingTable() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-border">
-                <th className="py-4 pr-6 align-bottom">
+                <th className="py-4 pr-3 sm:pr-6 align-bottom">
                   <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                     // Compare
                   </span>
@@ -129,7 +129,7 @@ export function PricingTable() {
                 {TIERS.map((tier, i) => (
                   <th
                     key={tier.name}
-                    className={`py-4 px-6 align-bottom min-w-[200px] transition-colors duration-200 ${
+                    className={`py-4 px-3 sm:px-6 align-bottom min-w-[140px] sm:min-w-[200px] transition-colors duration-200 ${
                       tier.recommended
                         ? "border-x border-accent/40 bg-accent/5"
                         : hoveredCol === i
@@ -163,13 +163,13 @@ export function PricingTable() {
             <tbody>
               {/* Pages row */}
               <tr className="border-b border-border/60">
-                <td className="py-3 pr-6 font-mono text-xs text-muted-foreground uppercase tracking-wider">
+                <td className="py-3 pr-3 sm:pr-6 font-mono text-xs text-muted-foreground uppercase tracking-wider">
                   Pages
                 </td>
                 {TIERS.map((tier, i) => (
                   <td
                     key={tier.name}
-                    className={`py-3 px-6 font-mono text-sm ${
+                    className={`py-3 px-3 sm:px-6 font-mono text-sm ${
                       tier.recommended
                         ? "border-x border-accent/40 bg-accent/[0.03]"
                         : hoveredCol === i
@@ -185,13 +185,13 @@ export function PricingTable() {
               </tr>
               {/* Delivery row */}
               <tr className="border-b border-border/60">
-                <td className="py-3 pr-6 font-mono text-xs text-muted-foreground uppercase tracking-wider">
+                <td className="py-3 pr-3 sm:pr-6 font-mono text-xs text-muted-foreground uppercase tracking-wider">
                   Delivery
                 </td>
                 {TIERS.map((tier, i) => (
                   <td
                     key={tier.name}
-                    className={`py-3 px-6 font-mono text-sm ${
+                    className={`py-3 px-3 sm:px-6 font-mono text-sm ${
                       tier.recommended
                         ? "border-x border-accent/40 bg-accent/[0.03]"
                         : hoveredCol === i
@@ -208,7 +208,7 @@ export function PricingTable() {
               {/* Feature rows */}
               {FEATURES.map((feature) => (
                 <tr key={feature.key} className="border-b border-border/40">
-                  <td className="py-3 pr-6 font-mono text-xs text-muted-foreground uppercase tracking-wider">
+                  <td className="py-3 pr-3 sm:pr-6 font-mono text-xs text-muted-foreground uppercase tracking-wider">
                     {feature.label}
                   </td>
                   {TIERS.map((tier, i) => {
@@ -216,7 +216,7 @@ export function PricingTable() {
                     return (
                       <td
                         key={tier.name}
-                        className={`py-3 px-6 ${
+                        className={`py-3 px-3 sm:px-6 ${
                           tier.recommended
                             ? "border-x border-accent/40 bg-accent/[0.03]"
                             : hoveredCol === i
@@ -238,11 +238,11 @@ export function PricingTable() {
               ))}
               {/* CTA row */}
               <tr>
-                <td className="py-6 pr-6" />
+                <td className="py-6 pr-3 sm:pr-6" />
                 {TIERS.map((tier, i) => (
                   <td
                     key={tier.name}
-                    className={`py-6 px-6 ${
+                    className={`py-6 px-3 sm:px-6 ${
                       tier.recommended
                         ? "border-x border-b border-accent/40 bg-accent/[0.03] rounded-b-lg"
                         : hoveredCol === i

@@ -302,66 +302,7 @@ function Index() {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section id="services" className="scroll-mt-20 bg-foreground text-background py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl font-extrabold tracking-tighter uppercase mb-12">
-            Pricing
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                tier: "Tier 01",
-                name: "Launch Page",
-                desc: "Single-page site for an AI product launch, waitlist, or YC demo day.",
-                price: "$2,400",
-                features: ["+ 48hr Delivery", "+ llms.txt + JSON-LD", "+ Agent-readability audit"],
-                accent: false,
-                label: "Tier 01",
-              },
-              {
-                tier: "Tier 02 // Most Popular",
-                name: "Marketing Site",
-                desc: "Up to 5 pages for AI/ML startups and agent platforms — home, product, pricing, docs intro, about.",
-                price: "$4,800",
-                features: ["+ MDX content layer", "+ Structured docs schema", "+ Priority support"],
-                accent: true,
-                label: "Tier 02 // Most Popular",
-              },
-              {
-                tier: "Tier 03",
-                name: "Devtool Hub",
-                desc: "Marketing site + API reference + MCP-ready docs for developer tools and agent SDKs.",
-                price: "$8,500+",
-                features: ["+ API reference layer", "+ MCP/OpenAPI surface", "+ Auth & dashboard scaffold"],
-                accent: false,
-                label: "Tier 03",
-              },
-            ].map((p) => (
-              <div
-                key={p.name}
-                className={`border-l-2 pl-8 ${p.accent ? "border-accent" : "border-background/20"}`}
-              >
-                <p
-                  className={`font-mono text-[10px] uppercase mb-2 ${p.accent ? "text-accent" : "opacity-60"}`}
-                >
-                  {p.label}
-                </p>
-                <h3 className="text-3xl font-extrabold uppercase tracking-tighter">
-                  {p.name}
-                </h3>
-                <p className="text-sm mt-4 opacity-80 h-12">{p.desc}</p>
-                <p className="text-4xl font-bold tracking-tighter mt-8">{p.price}</p>
-                <ul className="mt-8 space-y-2 text-xs font-mono uppercase tracking-tighter">
-                  {p.features.map((f) => (
-                    <li key={f}>{f}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PricingTable />
 
       {/* Technical Specifications */}
       <TechSpecs />

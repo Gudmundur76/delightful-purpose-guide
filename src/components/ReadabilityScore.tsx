@@ -58,7 +58,7 @@ export function ReadabilityScore() {
             <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
               Score
             </span>
-            <span className="font-mono text-5xl font-bold tracking-tighter tabular-nums text-foreground transition-all duration-700 ease-out">
+            <span className="font-mono text-5xl font-bold tracking-tighter tabular-nums text-foreground">
               {score}
             </span>
             <span className="font-mono text-[10px] text-muted-foreground">/ 100</span>

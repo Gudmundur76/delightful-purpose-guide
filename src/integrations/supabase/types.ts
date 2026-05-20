@@ -128,6 +128,84 @@ export type Database = {
         }
         Relationships: []
       }
+      orders: {
+        Row: {
+          capture_payload: Json | null
+          captured_at: string | null
+          created_at: string
+          currency: string
+          customer_email: string | null
+          id: string
+          items: Json
+          paypal_order_id: string | null
+          status: string
+          subtotal_cents: number
+          total_cents: number
+        }
+        Insert: {
+          capture_payload?: Json | null
+          captured_at?: string | null
+          created_at?: string
+          currency: string
+          customer_email?: string | null
+          id?: string
+          items: Json
+          paypal_order_id?: string | null
+          status?: string
+          subtotal_cents: number
+          total_cents: number
+        }
+        Update: {
+          capture_payload?: Json | null
+          captured_at?: string | null
+          created_at?: string
+          currency?: string
+          customer_email?: string | null
+          id?: string
+          items?: Json
+          paypal_order_id?: string | null
+          status?: string
+          subtotal_cents?: number
+          total_cents?: number
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          active: boolean
+          created_at: string
+          currency: string
+          description: string | null
+          id: string
+          image_url: string | null
+          name: string
+          price_cents: number
+          slug: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          currency?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+          price_cents: number
+          slug: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          currency?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          price_cents?: number
+          slug?: string
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string

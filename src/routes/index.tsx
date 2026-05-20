@@ -231,6 +231,10 @@ function Index() {
       {/* Compare */}
       <CompareSection />
 
+      {/* Case Studies */}
+      <CaseStudies />
+
+
       {/* Process */}
       <ProcessTimeline />
 

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import nimbusImg from "@/assets/portfolio-nimbus.jpg";
 import vectorImg from "@/assets/portfolio-vector.jpg";
 import { LeadForm } from "@/components/LeadForm";
+import { PricingTable } from "@/components/PricingTable";
 import { ReadabilityScore } from "@/components/ReadabilityScore";
 import { Services } from "@/components/Services";
 import { TechSpecs } from "@/components/TechSpecs";

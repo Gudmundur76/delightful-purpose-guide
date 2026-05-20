@@ -162,20 +162,27 @@ export function CaseStudies() {
     if (!ref.current) return;
     const el = ref.current;
 
-    const triggerIfVisible = () => {
+    const checkVisible = () => {
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight || document.documentElement.clientHeight;
-      if (rect.top < vh && rect.bottom > 0) {
-        setRun(true);
-        window.removeEventListener("scroll", triggerIfVisible, { passive: true } as EventListenerOptions);
-      }
+      return rect.top < vh && rect.bottom > 0;
     };
 
-    window.addEventListener("scroll", triggerIfVisible, { passive: true });
-    // Check immediately in case already visible
-    requestAnimationFrame(triggerIfVisible);
+    if (checkVisible()) {
+      setRun(true);
+      return;
+    }
 
-    return () => window.removeEventListener("scroll", triggerIfVisible, { passive: true } as EventListenerOptions);
+    let checks = 0;
+    const id = setInterval(() => {
+      checks++;
+      if (checkVisible() || checks > 30) {
+        if (checkVisible()) setRun(true);
+        clearInterval(id);
+      }
+    }, 200);
+
+    return () => clearInterval(id);
   }, []);
   return (
     <section

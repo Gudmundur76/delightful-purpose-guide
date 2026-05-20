@@ -39,6 +39,7 @@ import { Route as ApiPublicV1OpenapiDotjsonRouteImport } from './routes/api/publ
 import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/leads'
 import { Route as ApiPublicV1DocsRouteImport } from './routes/api/public/v1/docs'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
+import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
 
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
@@ -195,6 +196,11 @@ const ApiPublicV1PostsSlugRoute = ApiPublicV1PostsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ApiPublicV1PostsRoute,
 } as any)
+const ApiPublicV1AdminTableRoute = ApiPublicV1AdminTableRouteImport.update({
+  id: '/api/public/v1/admin/$table',
+  path: '/api/public/v1/admin/$table',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -226,6 +232,7 @@ export interface FileRoutesByFullPath {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/api/public/v1/': typeof ApiPublicV1IndexRoute
+  '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
 }
 export interface FileRoutesByTo {
@@ -258,6 +265,7 @@ export interface FileRoutesByTo {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/api/public/v1': typeof ApiPublicV1IndexRoute
+  '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
 }
 export interface FileRoutesById {
@@ -291,6 +299,7 @@ export interface FileRoutesById {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/api/public/v1/': typeof ApiPublicV1IndexRoute
+  '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
 }
 export interface FileRouteTypes {
@@ -325,6 +334,7 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/api/public/v1/'
+    | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -357,6 +367,7 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/api/public/v1'
+    | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
   id:
     | '__root__'
@@ -389,6 +400,7 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/api/public/v1/'
+    | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -420,6 +432,7 @@ export interface RootRouteChildren {
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
   LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
   ApiPublicV1IndexRoute: typeof ApiPublicV1IndexRoute
+  ApiPublicV1AdminTableRoute: typeof ApiPublicV1AdminTableRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -634,6 +647,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1PostsSlugRouteImport
       parentRoute: typeof ApiPublicV1PostsRoute
     }
+    '/api/public/v1/admin/$table': {
+      id: '/api/public/v1/admin/$table'
+      path: '/api/public/v1/admin/$table'
+      fullPath: '/api/public/v1/admin/$table'
+      preLoaderRoute: typeof ApiPublicV1AdminTableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -688,6 +708,7 @@ const rootRouteChildren: RootRouteChildren = {
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
   LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
   ApiPublicV1IndexRoute: ApiPublicV1IndexRoute,
+  ApiPublicV1AdminTableRoute: ApiPublicV1AdminTableRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -12,9 +12,8 @@ type Case = {
   client: string;
   vertical: string;
   metric: string;
-  before: number;
-  after: number;
-  display: (n: number) => string;
+  before: string;
+  after: string;
   fix: string;
   delta: string;
 };
@@ -24,9 +23,8 @@ const CASES: Case[] = [
     client: "Nimbus Agents",
     vertical: "Agent Orchestration",
     metric: "Agent Readability Score",
-    before: 34,
-    after: 89,
-    display: (n) => `${Math.round(n)}/100`,
+    before: "34 / 100",
+    after: "89 / 100",
     fix: "Replaced div soup with semantic <article>/<section>, added Product + FAQ JSON-LD, shipped /llms.txt",
     delta: "+55 pts",
   },
@@ -34,9 +32,8 @@ const CASES: Case[] = [
     client: "Vector Eval",
     vertical: "LLM Eval Suite",
     metric: "LLM Citations / mo",
-    before: 2,
-    after: 14,
-    display: (n) => `${Math.round(n)}`,
+    before: "2",
+    after: "14",
     fix: "Restructured docs as cite-ready Q&A blocks, added canonical anchors, exposed /api/public/v1 OpenAPI",
     delta: "+12",
   },
@@ -44,9 +41,8 @@ const CASES: Case[] = [
     client: "Helix MCP",
     vertical: "MCP Server / SDK",
     metric: "Organic Traffic",
-    before: 100,
-    after: 440,
-    display: (n) => `${Math.round(n)}%`,
+    before: "baseline",
+    after: "+340%",
     fix: "Migrated SPA → SSR, added Article + HowTo schema on every doc page, sitemap + RSS",
     delta: "+340%",
   },
@@ -89,29 +85,7 @@ function Counter({ stat, run }: { stat: Stat; run: boolean }) {
   );
 }
 
-function CaseCard({ c, run }: { c: Case; run: boolean }) {
-  const [before, setBefore] = useState(0);
-  const [after, setAfter] = useState(0);
-
-  useEffect(() => {
-    if (!run) return;
-    const duration = 1400;
-    const steps = 60;
-    const tickMs = duration / steps;
-    let step = 0;
-
-    const id = setInterval(() => {
-      step++;
-      const p = Math.min(1, step / steps);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setBefore(Math.round(c.before * eased));
-      setAfter(Math.round(c.after * eased));
-      if (p >= 1) clearInterval(id);
-    }, tickMs);
-
-    return () => clearInterval(id);
-  }, [run, c.before, c.after]);
-
+function CaseCard({ c }: { c: Case }) {
   return (
     <article className="border border-border bg-card hover:border-accent/60 transition-colors group">
       <header className="px-5 py-4 border-b border-border flex items-center justify-between">
@@ -131,7 +105,7 @@ function CaseCard({ c, run }: { c: Case; run: boolean }) {
             Before
           </p>
           <p className="text-3xl font-extrabold tracking-tighter tabular-nums text-muted-foreground">
-            {c.display(before)}
+            {c.before}
           </p>
           <div className="mt-4 h-16 flex items-end gap-1">
             {Array.from({ length: 8 }).map((_, i) => (
@@ -148,7 +122,7 @@ function CaseCard({ c, run }: { c: Case; run: boolean }) {
             After
           </p>
           <p className="text-3xl font-extrabold tracking-tighter tabular-nums text-accent">
-            {c.display(after)}
+            {c.after}
           </p>
           <div className="mt-4 h-16 flex items-end gap-1">
             {Array.from({ length: 8 }).map((_, i) => (
@@ -241,7 +215,7 @@ export function CaseStudies() {
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {CASES.map((c) => (
-            <CaseCard key={c.client} c={c} run={run} />
+            <CaseCard key={c.client} c={c} />
           ))}
         </div>
       </div>

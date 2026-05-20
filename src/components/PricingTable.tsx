@@ -106,13 +106,13 @@ export function PricingTable() {
   const tierFeatures = [starterFeatures, growthFeatures];
 
   return (
-    <section className="scroll-mt-20 border-b border-border bg-background py-24">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="mb-12">
+    <section className="scroll-mt-20 border-b border-border bg-background py-16 sm:py-24">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="mb-8 sm:mb-12">
           <p className="font-mono text-xs uppercase text-accent mb-3 tracking-widest">
             // Pricing
           </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tighter uppercase">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tighter uppercase">
             Fixed Price. No Surprises.
           </h2>
         </div>

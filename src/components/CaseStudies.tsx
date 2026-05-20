@@ -129,52 +129,8 @@ function CaseCard({ c }: { c: Case }) {
 }
 
 export function CaseStudies() {
-  const ref = useRef<HTMLElement | null>(null);
-  const [run, setRun] = useState(false);
-  useEffect(() => {
-    if (run) return;
-    const el = ref.current;
-    if (!el) return;
-
-    const check = () => {
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      if (rect.top < vh * 0.9 && rect.bottom > 0) {
-        setRun(true);
-        return true;
-      }
-      return false;
-    };
-
-    if (check()) return;
-
-    let observer: IntersectionObserver | null = null;
-    if (typeof IntersectionObserver !== "undefined") {
-      observer = new IntersectionObserver(
-        (entries) => {
-          if (entries.some((e) => e.isIntersecting)) {
-            setRun(true);
-            observer?.disconnect();
-          }
-        },
-        { rootMargin: "0px 0px -10% 0px" },
-      );
-      observer.observe(el);
-    }
-
-    const onScroll = () => {
-      if (check()) window.removeEventListener("scroll", onScroll);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      observer?.disconnect();
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [run]);
   return (
     <section
-      ref={ref}
       id="case-studies"
       className="scroll-mt-20 border-t border-border"
     >

@@ -362,7 +362,7 @@ function Index() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><Link to="/blog" className="hover:text-foreground transition-colors">Journal</Link></li>
                 <li><a href="/llms.txt" className="hover:text-foreground transition-colors">llms.txt</a></li>
-                <li><a href="/api/public/v1/docs" className="hover:text-foreground transition-colors">API Docs</a></li>
+                <li><Link to="/api-docs" className="hover:text-foreground transition-colors">API Docs</Link></li>
                 <li><Link to="/status" className="hover:text-foreground transition-colors">Status</Link></li>
               </ul>
             </div>

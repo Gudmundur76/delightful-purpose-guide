@@ -16,20 +16,20 @@ export function ReadabilityScore() {
   const [score, setScore] = useState(0);
 
   useEffect(() => {
-    let frame = 0;
-    const start = performance.now();
     const duration = 1400;
-    const tick = () => {
-      const t = performance.now();
-      const p = Math.min(1, (t - start) / duration);
+    const steps = 60;
+    const tickMs = duration / steps;
+    let step = 0;
+
+    const id = setInterval(() => {
+      step++;
+      const p = Math.min(1, step / steps);
       const eased = 1 - Math.pow(1 - p, 3);
       setScore(Math.round(eased * TARGET));
-      if (p < 1) {
-        frame = requestAnimationFrame(tick);
-      }
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
+      if (p >= 1) clearInterval(id);
+    }, tickMs);
+
+    return () => clearInterval(id);
   }, []);
 
   const offset = CIRC - (score / 100) * CIRC;

@@ -5,7 +5,7 @@ import vectorImg from "@/assets/portfolio-vector.jpg";
 import { CaseStudies } from "@/components/CaseStudies";
 import { CompareSection } from "@/components/CompareSection";
 import { Guarantees } from "@/components/Guarantees";
-import { LeadForm } from "@/components/LeadForm";
+import { SmartContactForm } from "@/components/SmartContactForm";
 import { PricingTable } from "@/components/PricingTable";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { ReadabilityScore } from "@/components/ReadabilityScore";
@@ -345,7 +345,7 @@ function Index() {
                   Next available slot: Today, 14:00 UTC
                 </p>
               </div>
-              <LeadForm />
+              <SmartContactForm />
             </div>
           </div>
           <div className="mt-24 pt-8 border-t border-border grid grid-cols-2 md:grid-cols-4 gap-10">

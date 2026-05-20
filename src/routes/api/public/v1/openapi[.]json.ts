@@ -136,6 +136,37 @@ const spec = {
         },
       },
     },
+    "/admin/{table}": {
+      parameters: [
+        { name: "table", in: "path", required: true, schema: { type: "string", enum: ["leads", "email_send_log", "email_send_state", "email_unsubscribe_tokens", "suppressed_emails"] } },
+      ],
+      get: {
+        summary: "List rows from a whitelisted table (PostgREST-style filters)",
+        description: "Filters: col=eq.value, neq, gt, gte, lt, lte, like, ilike, is.null, in.(a,b,c). Reserved: select, limit, offset, order=col.desc",
+        parameters: [
+          { name: "select", in: "query", schema: { type: "string", default: "*" } },
+          { name: "limit", in: "query", schema: { type: "integer", minimum: 1, maximum: 1000, default: 100 } },
+          { name: "offset", in: "query", schema: { type: "integer", minimum: 0, default: 0 } },
+          { name: "order", in: "query", schema: { type: "string", example: "created_at.desc" } },
+        ],
+        responses: { "200": { description: "OK" }, "401": { description: "Unauthorized" }, "403": { description: "Table not allowed" } },
+      },
+      post: {
+        summary: "Insert one or many rows",
+        requestBody: { required: true, content: { "application/json": { schema: { oneOf: [{ type: "object" }, { type: "array", items: { type: "object" } }] } } } },
+        responses: { "201": { description: "Created" }, "400": { description: "Invalid" }, "401": { description: "Unauthorized" }, "403": { description: "Table not allowed" } },
+      },
+      patch: {
+        summary: "Update rows matching a filter",
+        requestBody: { required: true, content: { "application/json": { schema: { type: "object", required: ["match", "values"], properties: { match: { type: "object" }, values: { type: "object" } } } } } },
+        responses: { "200": { description: "OK" }, "400": { description: "Invalid" }, "401": { description: "Unauthorized" }, "403": { description: "Table not allowed" } },
+      },
+      delete: {
+        summary: "Delete rows matching a filter",
+        requestBody: { required: true, content: { "application/json": { schema: { type: "object", required: ["match"], properties: { match: { type: "object" } } } } } },
+        responses: { "200": { description: "OK" }, "400": { description: "Invalid" }, "401": { description: "Unauthorized" }, "403": { description: "Table not allowed" } },
+      },
+    },
   },
 } as const;
 

@@ -52,19 +52,23 @@ function useCountUp(target: number, run: boolean, duration = 1400) {
   const [n, setN] = useState(0);
   useEffect(() => {
     if (!run) return;
-    const steps = 60;
-    const tickMs = duration / steps;
-    let step = 0;
-
-    const id = setInterval(() => {
-      step++;
-      const p = Math.min(1, step / steps);
+    setN(0);
+    const start = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / duration);
       const eased = 1 - Math.pow(1 - p, 3);
       setN(Math.round(target * eased));
-      if (p >= 1) clearInterval(id);
-    }, tickMs);
-
-    return () => clearInterval(id);
+      if (p < 1) raf = requestAnimationFrame(tick);
+      else setN(target);
+    };
+    raf = requestAnimationFrame(tick);
+    // Safety fallback so values never stay at 0
+    const fallback = setTimeout(() => setN(target), duration + 400);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(fallback);
+    };
   }, [target, run, duration]);
   return n;
 }

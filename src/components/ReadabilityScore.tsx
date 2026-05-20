@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+
 const METRICS = [
   { label: "Semantic HTML", value: 92 },
   { label: "JSON-LD Schema", value: 88 },
@@ -13,13 +14,7 @@ const RADIUS = 88;
 const CIRC = 2 * Math.PI * RADIUS;
 
 export function ReadabilityScore() {
-  const [score, setScore] = useState(0);
-
-  useEffect(() => {
-    const id = setTimeout(() => setScore(TARGET), 200);
-    return () => clearTimeout(id);
-  }, []);
-
+  const score = TARGET;
   const offset = CIRC - (score / 100) * CIRC;
 
   return (
@@ -64,7 +59,7 @@ export function ReadabilityScore() {
             <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
               Score
             </span>
-            <span className="font-mono text-5xl font-bold tracking-tighter tabular-nums text-foreground transition-all duration-700 ease-out">
+            <span className="font-mono text-5xl font-bold tracking-tighter tabular-nums text-foreground">
               {score}
             </span>
             <span className="font-mono text-[10px] text-muted-foreground">/ 100</span>

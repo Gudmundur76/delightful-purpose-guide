@@ -226,6 +226,9 @@ function Index() {
         </div>
       </section>
 
+      {/* Compare */}
+      <CompareSection />
+
       {/* Process */}
       <ProcessTimeline />
 

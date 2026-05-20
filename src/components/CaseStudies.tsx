@@ -215,7 +215,7 @@ export function CaseStudies() {
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {CASES.map((c) => (
-            <CaseCard key={c.client} c={c} run={run} />
+            <CaseCard key={c.client} c={c} />
           ))}
         </div>
       </div>

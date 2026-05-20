@@ -73,17 +73,16 @@ function useCountUp(target: number, run: boolean, duration = 1400) {
   return n;
 }
 
-function Counter({ stat, run }: { stat: Stat; run: boolean }) {
-  const n = useCountUp(stat.value, run);
+function Counter({ stat }: { stat: Stat }) {
   return (
     <div className="border border-border p-6 bg-card">
-      <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-3">
-        // {stat.label}
-      </div>
-      <div className="text-4xl md:text-5xl font-extrabold tracking-tighter tabular-nums">
-        {stat.prefix ?? ""}
-        {Math.round(n)}
-        <span className="text-accent">{stat.suffix ?? ""}</span>
+      <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+        // {stat.label}{" "}
+        <span className="text-foreground font-extrabold tracking-tighter text-base sm:text-lg">
+          {stat.prefix ?? ""}
+          {stat.value}
+          <span className="text-accent">{stat.suffix ?? ""}</span>
+        </span>
       </div>
     </div>
   );

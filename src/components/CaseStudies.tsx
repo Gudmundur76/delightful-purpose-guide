@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+
 
 type Stat = { label: string; value: number; suffix?: string; prefix?: string };
 const STATS: Stat[] = [

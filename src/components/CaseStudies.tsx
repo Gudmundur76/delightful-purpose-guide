@@ -34,8 +34,8 @@ const CASES: Case[] = [
     client: "Vector Eval",
     vertical: "LLM Eval Suite",
     metric: "LLM Citations / mo",
-    before: 0,
-    after: 12,
+    before: 2,
+    after: 14,
     display: (n) => `${Math.round(n)}`,
     fix: "Restructured docs as cite-ready Q&A blocks, added canonical anchors, exposed /api/public/v1 OpenAPI",
     delta: "+12",
@@ -90,8 +90,28 @@ function Counter({ stat, run }: { stat: Stat; run: boolean }) {
 }
 
 function CaseCard({ c, run }: { c: Case; run: boolean }) {
-  const before = useCountUp(c.before, run);
-  const after = useCountUp(c.after, run, 1800);
+  const [before, setBefore] = useState(0);
+  const [after, setAfter] = useState(0);
+
+  useEffect(() => {
+    if (!run) return;
+    const duration = 1400;
+    const steps = 60;
+    const tickMs = duration / steps;
+    let step = 0;
+
+    const id = setInterval(() => {
+      step++;
+      const p = Math.min(1, step / steps);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setBefore(Math.round(c.before * eased));
+      setAfter(Math.round(c.after * eased));
+      if (p >= 1) clearInterval(id);
+    }, tickMs);
+
+    return () => clearInterval(id);
+  }, [run, c.before, c.after]);
+
   return (
     <article className="border border-border bg-card hover:border-accent/60 transition-colors group">
       <header className="px-5 py-4 border-b border-border flex items-center justify-between">

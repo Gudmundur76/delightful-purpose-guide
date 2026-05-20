@@ -159,21 +159,9 @@ export function CaseStudies() {
   const ref = useRef<HTMLElement | null>(null);
   const [run, setRun] = useState(false);
   useEffect(() => {
-    if (!ref.current) return;
-    const el = ref.current;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) if (e.isIntersecting) setRun(true);
-      },
-      { threshold: 0, rootMargin: "0px 0px -10% 0px" },
-    );
-    io.observe(el);
-    // Fallback: if already visible on mount, trigger after a tick
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      setTimeout(() => setRun(true), 100);
-    }
-    return () => io.disconnect();
+    // Start animation after a short delay to ensure visibility
+    const timer = setTimeout(() => setRun(true), 300);
+    return () => clearTimeout(timer);
   }, []);
   return (
     <section

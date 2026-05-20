@@ -56,16 +56,19 @@ function useCountUp(target: number, run: boolean, duration = 1400) {
   const [n, setN] = useState(0);
   useEffect(() => {
     if (!run) return;
-    let raf = 0;
-    const start = performance.now();
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - start) / duration);
+    const steps = 60;
+    const tickMs = duration / steps;
+    let step = 0;
+
+    const id = setInterval(() => {
+      step++;
+      const p = Math.min(1, step / steps);
       const eased = 1 - Math.pow(1 - p, 3);
-      setN(target * eased);
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+      setN(Math.round(target * eased));
+      if (p >= 1) clearInterval(id);
+    }, tickMs);
+
+    return () => clearInterval(id);
   }, [target, run, duration]);
   return n;
 }
@@ -157,14 +160,29 @@ export function CaseStudies() {
   const [run, setRun] = useState(false);
   useEffect(() => {
     if (!ref.current) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) if (e.isIntersecting) setRun(true);
-      },
-      { threshold: 0.2 },
-    );
-    io.observe(ref.current);
-    return () => io.disconnect();
+    const el = ref.current;
+
+    const checkVisible = () => {
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      return rect.top < vh && rect.bottom > 0;
+    };
+
+    if (checkVisible()) {
+      setRun(true);
+      return;
+    }
+
+    let checks = 0;
+    const id = setInterval(() => {
+      checks++;
+      if (checkVisible() || checks > 30) {
+        if (checkVisible()) setRun(true);
+        clearInterval(id);
+      }
+    }, 200);
+
+    return () => clearInterval(id);
   }, []);
   return (
     <section

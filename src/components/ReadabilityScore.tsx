@@ -13,13 +13,7 @@ const RADIUS = 88;
 const CIRC = 2 * Math.PI * RADIUS;
 
 export function ReadabilityScore() {
-  const [score, setScore] = useState(0);
-
-  useEffect(() => {
-    const id = setTimeout(() => setScore(TARGET), 200);
-    return () => clearTimeout(id);
-  }, []);
-
+  const score = TARGET;
   const offset = CIRC - (score / 100) * CIRC;
 
   return (

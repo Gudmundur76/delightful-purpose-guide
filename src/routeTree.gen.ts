@@ -19,7 +19,7 @@ import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
-import { Route as BadgeIdDotsvgRouteImport } from './routes/badge.$id[.]svg'
+import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicV1IndexRouteImport } from './routes/api/public/v1/index'
@@ -82,11 +82,12 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
-const BadgeIdDotsvgRoute = BadgeIdDotsvgRouteImport.update({
-  id: '/badge/$id.svg',
-  path: '/badge/$id.svg',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const BadgeChar123idChar125DotsvgRoute =
+  BadgeChar123idChar125DotsvgRouteImport.update({
+    id: '/badge/{$id}.svg',
+    path: '/badge/{$id}.svg',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
@@ -154,7 +155,7 @@ export interface FileRoutesByFullPath {
   '/llms': typeof LlmsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
-  '/badge/$id.svg': typeof BadgeIdDotsvgRoute
+  '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -178,7 +179,7 @@ export interface FileRoutesByTo {
   '/llms': typeof LlmsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
-  '/badge/$id.svg': typeof BadgeIdDotsvgRoute
+  '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -203,7 +204,7 @@ export interface FileRoutesById {
   '/llms': typeof LlmsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/unsubscribe': typeof UnsubscribeRoute
-  '/badge/$id.svg': typeof BadgeIdDotsvgRoute
+  '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -229,7 +230,7 @@ export interface FileRouteTypes {
     | '/llms'
     | '/sitemap.xml'
     | '/unsubscribe'
-    | '/badge/$id.svg'
+    | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/email/unsubscribe'
@@ -253,7 +254,7 @@ export interface FileRouteTypes {
     | '/llms'
     | '/sitemap.xml'
     | '/unsubscribe'
-    | '/badge/$id.svg'
+    | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/email/unsubscribe'
@@ -277,7 +278,7 @@ export interface FileRouteTypes {
     | '/llms'
     | '/sitemap.xml'
     | '/unsubscribe'
-    | '/badge/$id.svg'
+    | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/email/unsubscribe'
@@ -302,7 +303,7 @@ export interface RootRouteChildren {
   LlmsRoute: typeof LlmsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
-  BadgeIdDotsvgRoute: typeof BadgeIdDotsvgRoute
+  BadgeChar123idChar125DotsvgRoute: typeof BadgeChar123idChar125DotsvgRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   VerifyIdRoute: typeof VerifyIdRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
@@ -389,11 +390,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
-    '/badge/$id.svg': {
-      id: '/badge/$id.svg'
-      path: '/badge/$id.svg'
-      fullPath: '/badge/$id.svg'
-      preLoaderRoute: typeof BadgeIdDotsvgRouteImport
+    '/badge/{$id}.svg': {
+      id: '/badge/{$id}.svg'
+      path: '/badge/{$id}.svg'
+      fullPath: '/badge/{$id}.svg'
+      preLoaderRoute: typeof BadgeChar123idChar125DotsvgRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/suppression': {
@@ -506,7 +507,7 @@ const rootRouteChildren: RootRouteChildren = {
   LlmsRoute: LlmsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   UnsubscribeRoute: UnsubscribeRoute,
-  BadgeIdDotsvgRoute: BadgeIdDotsvgRoute,
+  BadgeChar123idChar125DotsvgRoute: BadgeChar123idChar125DotsvgRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   VerifyIdRoute: VerifyIdRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,

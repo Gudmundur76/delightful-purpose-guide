@@ -37,7 +37,7 @@ function svg(score: number, domain: string) {
 </svg>`;
 }
 
-export const Route = createFileRoute("/badge/$id.svg")({
+export const Route = createFileRoute("/badge/{$id}.svg")({
   server: {
     handlers: {
       GET: async ({ params }) => {

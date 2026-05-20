@@ -135,6 +135,16 @@ function Index() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  useEffect(() => {
+    console.log(
+      "%c⚡ Agent-native. Score: 85/100",
+      "color:#22d3ee;font-family:monospace;font-weight:bold;font-size:13px",
+    );
+    console.log(
+      "%c  > npm install agent-native",
+      "color:#64748b;font-family:monospace;font-size:11px",
+    );
+  }, []);
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+
 const METRICS = [
   { label: "Semantic HTML", value: 92 },
   { label: "JSON-LD Schema", value: 88 },

@@ -363,6 +363,7 @@ function Index() {
                 <li><Link to="/blog" className="hover:text-foreground transition-colors">Journal</Link></li>
                 <li><a href="/llms.txt" className="hover:text-foreground transition-colors">llms.txt</a></li>
                 <li><a href="/api/public/v1/docs" className="hover:text-foreground transition-colors">API Docs</a></li>
+                <li><Link to="/status" className="hover:text-foreground transition-colors">Status</Link></li>
               </ul>
             </div>
             <div>

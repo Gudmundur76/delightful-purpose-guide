@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import nimbusImg from "@/assets/portfolio-nimbus.jpg";
 import vectorImg from "@/assets/portfolio-vector.jpg";
+import { CompareSection } from "@/components/CompareSection";
 import { LeadForm } from "@/components/LeadForm";
 import { PricingTable } from "@/components/PricingTable";
 import { ProcessTimeline } from "@/components/ProcessTimeline";

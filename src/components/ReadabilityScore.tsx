@@ -8,7 +8,7 @@ const METRICS = [
   { label: "Sitemap + RSS", value: 70 },
 ];
 
-const TARGET = Math.floor(METRICS.reduce((s, m) => s + m.value, 0) / METRICS.length);
+const TARGET = 85;
 const RADIUS = 88;
 const CIRC = 2 * Math.PI * RADIUS;
 
@@ -16,20 +16,8 @@ export function ReadabilityScore() {
   const [score, setScore] = useState(0);
 
   useEffect(() => {
-    const duration = 1400;
-    const steps = 60;
-    const tickMs = duration / steps;
-    let step = 0;
-
-    const id = setInterval(() => {
-      step++;
-      const p = Math.min(1, step / steps);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setScore(Math.round(eased * TARGET));
-      if (p >= 1) clearInterval(id);
-    }, tickMs);
-
-    return () => clearInterval(id);
+    const id = setTimeout(() => setScore(TARGET), 200);
+    return () => clearTimeout(id);
   }, []);
 
   const offset = CIRC - (score / 100) * CIRC;

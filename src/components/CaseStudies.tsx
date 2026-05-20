@@ -159,9 +159,29 @@ export function CaseStudies() {
   const ref = useRef<HTMLElement | null>(null);
   const [run, setRun] = useState(false);
   useEffect(() => {
-    // Start animation after a short delay to ensure visibility
-    const timer = setTimeout(() => setRun(true), 300);
-    return () => clearTimeout(timer);
+    if (!ref.current) return;
+    const el = ref.current;
+
+    // IntersectionObserver for scroll-trigger
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) setRun(true);
+      },
+      { threshold: 0, rootMargin: "0px 0px -5% 0px" },
+    );
+    io.observe(el);
+
+    // Fallback: if element is already in viewport on mount
+    const checkVisible = () => {
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      if (rect.top < vh && rect.bottom > 0) {
+        setRun(true);
+      }
+    };
+    requestAnimationFrame(checkVisible);
+
+    return () => io.disconnect();
   }, []);
   return (
     <section

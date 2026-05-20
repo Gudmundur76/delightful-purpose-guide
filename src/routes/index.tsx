@@ -4,6 +4,7 @@ import nimbusImg from "@/assets/portfolio-nimbus.jpg";
 import vectorImg from "@/assets/portfolio-vector.jpg";
 import { LeadForm } from "@/components/LeadForm";
 import { ReadabilityScore } from "@/components/ReadabilityScore";
+import { Services } from "@/components/Services";
 import { TechSpecs } from "@/components/TechSpecs";
 import { useActiveSection } from "@/hooks/use-active-section";
 
@@ -248,6 +249,9 @@ function Index() {
           ))}
         </div>
       </section>
+
+      {/* Services */}
+      <Services />
 
       {/* Portfolio */}
       <section id="archive" className="scroll-mt-20 max-w-7xl mx-auto px-6 py-24">

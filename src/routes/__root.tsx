@@ -155,6 +155,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Grow",
+          url: "https://grow.contact",
+          description: "Agent-native marketing sites for AI/ML startups, agent platforms, and developer tools. 48 hours, fixed price.",
+          sameAs: ["https://grow.contact"],
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,

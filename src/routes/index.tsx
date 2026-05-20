@@ -182,43 +182,42 @@ function Index() {
       {/* Hero */}
       <section className="relative border-b border-border overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-          <div className="grid md:grid-cols-12 gap-12 items-end">
-            <div className="md:col-span-8 animate-in">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-7 animate-in">
               <p className="font-mono text-accent text-xs mb-6 uppercase tracking-[0.2em]">
-                // Agent-Native Websites · Live in 48 Hours
+                // Agent-Native Website Agency
               </p>
-              <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter text-balance leading-[0.9] mb-8">
-                BUILT FOR <span className="text-muted-foreground">HUMANS.</span>
+              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-balance leading-[0.95] mb-8">
+                Built for <span className="text-muted-foreground">Humans.</span>
                 <br />
-                READ BY <span className="italic">AGENTS.</span>
+                Parsed by <span className="italic text-accent">Agents.</span>
               </h1>
-              <div className="flex flex-wrap gap-4">
-                <div className="px-6 py-4 bg-card border border-border flex flex-col gap-1">
-                  <span className="font-mono text-[10px] text-muted-foreground uppercase">
-                    Fixed Rate
+              <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-xl">
+                We build marketing sites engineered to be cited by ChatGPT,
+                Perplexity, Claude, and Google AI Overviews — not just ranked by
+                Google. Structured data, llms.txt, and semantic HTML, shipped in
+                48 hours.
+              </p>
+              <div className="flex flex-wrap gap-4 items-center">
+                <a
+                  href="#cta"
+                  className="group inline-flex items-center gap-3 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors"
+                >
+                  Check Your Site's Score
+                  <span className="font-mono text-[10px] opacity-70 group-hover:translate-x-1 transition-transform">
+                    →
                   </span>
-                  <span className="text-2xl font-bold tracking-tighter">$2,400.00</span>
-                </div>
-                <div className="px-6 py-4 bg-card border border-border flex flex-col gap-1">
-                  <span className="font-mono text-[10px] text-muted-foreground uppercase">
-                    Delivery Window
-                  </span>
-                  <span className="text-2xl font-bold tracking-tighter">48:00:00</span>
-                </div>
+                </a>
+                <a
+                  href="#archive"
+                  className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors px-2"
+                >
+                  View Recent Outputs
+                </a>
               </div>
             </div>
-            <div className="md:col-span-4 animate-in [animation-delay:150ms]">
-              <p className="text-muted-foreground text-sm leading-relaxed mb-8 max-w-sm">
-                Marketing sites for AI/ML startups, agent platforms, and developer tools.
-                Structured for humans, parseable by LLMs, indexable by every crawler that
-                matters in 2026.
-              </p>
-              <a
-                href="#cta"
-                className="block text-center w-full py-4 border-2 border-foreground font-bold uppercase tracking-tighter hover:bg-foreground hover:text-background transition-colors"
-              >
-                Book Intro Call (15m)
-              </a>
+            <div className="lg:col-span-5 animate-in [animation-delay:150ms]">
+              <ReadabilityScore />
             </div>
           </div>
         </div>

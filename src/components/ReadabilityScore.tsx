@@ -56,7 +56,7 @@ export function ReadabilityScore() {
               strokeLinecap="round"
               strokeDasharray={CIRC}
               strokeDashoffset={offset}
-              className="text-accent transition-[stroke-dashoffset] duration-100 ease-out"
+              className="text-accent transition-[stroke-dashoffset] duration-700 ease-out"
               style={{ filter: "drop-shadow(0 0 8px rgb(34 211 238 / 0.4))" }}
             />
           </svg>

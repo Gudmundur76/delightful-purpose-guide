@@ -102,21 +102,21 @@ export function TechSpecs() {
   const [tab, setTab] = useState<TabKey>("html");
 
   return (
-    <section className="border-t border-border py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+    <section className="border-t border-border py-16 sm:py-24 bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 sm:mb-10">
           <div>
             <h4 className="font-mono text-xs uppercase text-accent mb-3">
               // Technical Specifications
             </h4>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tighter uppercase">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tighter uppercase">
               Inspect the output
             </h2>
             <p className="text-muted-foreground text-sm mt-3 max-w-xl">
               Every Grow site ships structured for humans and parseable by LLMs. Here's what actually goes on the wire.
             </p>
           </div>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground break-all">
             GET /api/public/v1/specs · 200 OK
           </span>
         </div>

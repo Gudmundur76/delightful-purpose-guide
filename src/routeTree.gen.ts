@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
+import { Route as StatusRouteImport } from './routes/status'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LlmsRouteImport } from './routes/llms'
 import { Route as CheckRouteImport } from './routes/check'
@@ -35,6 +36,11 @@ import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1
 const UnsubscribeRoute = UnsubscribeRouteImport.update({
   id: '/unsubscribe',
   path: '/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatusRoute = StatusRouteImport.update({
+  id: '/status',
+  path: '/status',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -154,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/check': typeof CheckRoute
   '/llms': typeof LlmsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/status': typeof StatusRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -178,6 +185,7 @@ export interface FileRoutesByTo {
   '/check': typeof CheckRoute
   '/llms': typeof LlmsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/status': typeof StatusRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -203,6 +211,7 @@ export interface FileRoutesById {
   '/check': typeof CheckRoute
   '/llms': typeof LlmsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/status': typeof StatusRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -229,6 +238,7 @@ export interface FileRouteTypes {
     | '/check'
     | '/llms'
     | '/sitemap.xml'
+    | '/status'
     | '/unsubscribe'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
@@ -253,6 +263,7 @@ export interface FileRouteTypes {
     | '/check'
     | '/llms'
     | '/sitemap.xml'
+    | '/status'
     | '/unsubscribe'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
@@ -277,6 +288,7 @@ export interface FileRouteTypes {
     | '/check'
     | '/llms'
     | '/sitemap.xml'
+    | '/status'
     | '/unsubscribe'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
@@ -302,6 +314,7 @@ export interface RootRouteChildren {
   CheckRoute: typeof CheckRoute
   LlmsRoute: typeof LlmsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StatusRoute: typeof StatusRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   BadgeChar123idChar125DotsvgRoute: typeof BadgeChar123idChar125DotsvgRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
@@ -325,6 +338,13 @@ declare module '@tanstack/react-router' {
       path: '/unsubscribe'
       fullPath: '/unsubscribe'
       preLoaderRoute: typeof UnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/status': {
+      id: '/status'
+      path: '/status'
+      fullPath: '/status'
+      preLoaderRoute: typeof StatusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -506,6 +526,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckRoute: CheckRoute,
   LlmsRoute: LlmsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StatusRoute: StatusRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   BadgeChar123idChar125DotsvgRoute: BadgeChar123idChar125DotsvgRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,

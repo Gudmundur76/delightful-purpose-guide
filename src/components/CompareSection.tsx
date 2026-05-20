@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 const METRICS = [
-  { key: "semantic", label: "Semantic HTML", yours: 42, ours: 98 },
-  { key: "jsonld", label: "JSON-LD Coverage", yours: 18, ours: 95 },
+  { key: "semantic", label: "Semantic HTML", yours: 42, ours: 92 },
+  { key: "jsonld", label: "JSON-LD Coverage", yours: 18, ours: 88 },
   { key: "llms", label: "llms.txt", yours: 0, ours: 100 },
-  { key: "citability", label: "Citability", yours: 51, ours: 92 },
-  { key: "speed", label: "Speed (LCP)", yours: 64, ours: 97 },
+  { key: "citability", label: "Citability", yours: 51, ours: 78 },
+  { key: "speed", label: "Speed (LCP)", yours: 64, ours: 70 },
 ];
 
 export function CompareSection() {

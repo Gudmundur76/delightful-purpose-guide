@@ -152,6 +152,46 @@ function Index() {
             ))}
           </div>
         </section>
+
+        <CompareSection />
+        <CaseStudies />
+        <ProcessTimeline />
+        <Services />
+        <TechSpecs />
+
+        {/* FAQ */}
+        <section className="border-t border-border">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+            <div className="mb-10">
+              <p className="font-mono text-accent text-xs mb-3 uppercase tracking-[0.2em]">// Questions</p>
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">FAQ</h2>
+            </div>
+            <div className="space-y-8 sm:space-y-10">
+              {FAQS.map((f) => (
+                <div key={f.q}>
+                  <p className="font-bold uppercase tracking-tighter text-base sm:text-lg">{f.q}</p>
+                  <p className="text-muted-foreground text-sm mt-2 leading-relaxed">{f.a}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-10 text-center">
+              <Link to="/faq" className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">
+                See all FAQ →
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" className="border-t border-border bg-card/30">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+            <div className="mb-10">
+              <p className="font-mono text-accent text-xs mb-3 uppercase tracking-[0.2em]">// Start a brief</p>
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">Get in touch</h2>
+            </div>
+            <SmartContactForm />
+          </div>
+        </section>
       </main>
       <SiteFooter />
     </div>

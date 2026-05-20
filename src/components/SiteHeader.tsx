@@ -2,14 +2,14 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
-const NAV = [
+const NAV: ReadonlyArray<{ to: string; label: string; exact?: boolean }> = [
   { to: "/", label: "Home", exact: true },
   { to: "/services", label: "Services" },
   { to: "/process", label: "Process" },
   { to: "/work", label: "Work" },
   { to: "/pricing", label: "Pricing" },
   { to: "/blog", label: "Journal" },
-] as const;
+];
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);

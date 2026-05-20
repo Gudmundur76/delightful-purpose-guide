@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import nimbusImg from "@/assets/portfolio-nimbus.jpg";
 import vectorImg from "@/assets/portfolio-vector.jpg";
 import { LeadForm } from "@/components/LeadForm";
+import { ReadabilityScore } from "@/components/ReadabilityScore";
 import { TechSpecs } from "@/components/TechSpecs";
 import { useActiveSection } from "@/hooks/use-active-section";
 

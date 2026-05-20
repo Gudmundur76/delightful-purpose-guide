@@ -117,7 +117,7 @@ export function SmartContactForm() {
         {["URL", "Context", "Scope", "Contact", "Result"].map((label, i) => (
           <div
             key={label}
-            className={`flex-1 px-3 py-3 font-mono text-[10px] uppercase tracking-widest border-r border-border last:border-r-0 ${
+            className={`flex-1 min-w-0 px-2 sm:px-3 py-3 font-mono text-[9px] sm:text-[10px] uppercase tracking-widest border-r border-border last:border-r-0 truncate ${
               i === step ? "bg-accent text-accent-foreground" : i < step ? "text-foreground" : "text-muted-foreground"
             }`}
           >

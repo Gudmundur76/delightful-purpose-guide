@@ -91,7 +91,7 @@ function CodeBlock({ code, lang }: { code: string; lang: string }) {
           {lang}
         </span>
       </div>
-      <pre className="font-mono text-[12px] leading-relaxed p-5 overflow-x-auto text-foreground/90">
+      <pre className="font-mono text-[11px] sm:text-[12px] leading-relaxed p-3 sm:p-5 overflow-x-auto text-foreground/90">
         <code>{code}</code>
       </pre>
     </div>

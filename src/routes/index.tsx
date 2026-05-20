@@ -227,30 +227,7 @@ function Index() {
       </section>
 
       {/* Process */}
-      <section id="process" className="scroll-mt-20 border-b border-border bg-card/50">
-        <div className="max-w-7xl mx-auto px-6 pt-16">
-          <h2 className="text-4xl font-extrabold tracking-tighter uppercase">
-            The Process
-          </h2>
-        </div>
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-border">
-          {[
-            { n: "01", t: "The Brief", d: "Send your positioning, docs, and API surface. We turn it into a structured site map and content schema in hours, not weeks." },
-            { n: "02", t: "The Build", d: "48-hour sprint: custom code, semantic HTML, JSON-LD, llms.txt, OpenGraph, sitemap. Preview link within 12h." },
-            { n: "03", t: "The Launch", d: "Lighthouse audit, agent-readability check (ChatGPT, Perplexity, Claude), domain handover. Live and citeable." },
-          ].map((s, i) => (
-            <div
-              key={s.n}
-              className="flex-1 p-10 animate-in"
-              style={{ animationDelay: `${200 + i * 100}ms` }}
-            >
-              <span className="font-mono text-accent text-xs">{s.n}</span>
-              <h3 className="text-xl font-bold mt-4 uppercase tracking-tighter">{s.t}</h3>
-              <p className="text-muted-foreground text-sm mt-2 leading-relaxed">{s.d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <ProcessTimeline />
 
       {/* Services */}
       <Services />

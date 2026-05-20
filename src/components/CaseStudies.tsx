@@ -189,7 +189,7 @@ export function CaseStudies() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border mb-12">
           {STATS.map((s) => (
-            <Counter key={s.label} stat={s} run={run} />
+            <Counter key={s.label} stat={s} />
           ))}
         </div>
         <div className="grid md:grid-cols-3 gap-6">

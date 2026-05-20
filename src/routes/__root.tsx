@@ -7,30 +7,94 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
 import appCss from "../styles.css?url";
 
+
 function NotFoundComponent() {
+  const [path, setPath] = useState("/this-page");
+  const [hovered, setHovered] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setPath(window.location.pathname || "/this-page");
+      // Easter egg console log
+      console.log(
+        "%c⚡ Agent-native. Score: 85/100",
+        "color:#22d3ee;font-family:monospace;font-weight:bold;font-size:13px",
+      );
+      console.log(
+        "%c  curl /this-page → 404. Try: npm install agent-native",
+        "color:#64748b;font-family:monospace;font-size:11px",
+      );
+    }
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
+    <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-4 py-16">
+      <div className="w-full max-w-2xl border border-border bg-card shadow-2xl">
+        {/* Terminal chrome */}
+        <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-muted/30">
+          <div className="flex items-center gap-1.5">
+            <span className="w-3 h-3 rounded-full bg-red-500/80" />
+            <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
+            <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+          </div>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            grow@agent-shell ~ %
+          </span>
+          <span className="font-mono text-[10px] text-muted-foreground">404</span>
+        </div>
+
+        {/* Terminal body */}
+        <pre className="p-6 font-mono text-[13px] leading-relaxed overflow-x-auto whitespace-pre-wrap">
+<span className="text-muted-foreground">user@grow:~$ </span><span className="text-foreground">curl https://grow.contact{path}</span>
+{"\n"}<span className="text-red-400">curl: (22) The requested URL returned error: 404 Not Found</span>
+{"\n"}
+{"\n"}<span className="text-muted-foreground">user@grow:~$ </span><span className="text-foreground">echo $?</span>
+{"\n"}<span className="text-yellow-400">404</span>
+{"\n"}
+{"\n"}<span className="text-muted-foreground">user@grow:~$ </span><span className="text-foreground">cat ./error.log</span>
+{"\n"}<span className="text-red-400">[ERROR] Page not found.</span>
+{"\n"}<span className="text-muted-foreground">[INFO]  This path was never indexed by humans or agents.</span>
+{"\n"}<span className="text-muted-foreground">[INFO]  Exit code: </span><span className="text-red-400">404</span>
+{"\n"}
+{"\n"}<span className="text-muted-foreground">user@grow:~$ </span><span className="text-accent">_</span><span className="inline-block w-2 h-3.5 bg-accent ml-0.5 align-middle animate-[blink_1s_steps(2,start)_infinite]" />
+        </pre>
+
+        {/* CTA row */}
+        <div className="px-6 py-5 border-t border-border flex flex-wrap items-center justify-between gap-4">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            // hover the button — it knows the cure
+          </p>
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            onFocus={() => setHovered(true)}
+            onBlur={() => setHovered(false)}
+            className="group relative inline-flex items-center gap-3 bg-accent text-accent-foreground font-bold px-5 py-3 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors"
           >
-            Go home
+            <span>cd /</span>
+            <span className="font-mono text-[10px] opacity-70 group-hover:translate-x-1 transition-transform">
+              →
+            </span>
+            {hovered && (
+              <span
+                role="tooltip"
+                className="pointer-events-none absolute -top-10 right-0 bg-background border border-accent/60 text-accent px-3 py-1.5 font-mono text-[11px] whitespace-nowrap shadow-lg"
+              >
+                <span className="text-muted-foreground">&gt; </span>
+                npm install agent-native
+              </span>
+            )}
           </Link>
         </div>
       </div>
     </div>
   );
 }
+
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);

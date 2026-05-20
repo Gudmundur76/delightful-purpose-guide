@@ -8,7 +8,7 @@ const METRICS = [
   { label: "Sitemap + RSS", value: 70 },
 ];
 
-const TARGET = Math.round(METRICS.reduce((s, m) => s + m.value, 0) / METRICS.length);
+const TARGET = Math.floor(METRICS.reduce((s, m) => s + m.value, 0) / METRICS.length);
 const RADIUS = 88;
 const CIRC = 2 * Math.PI * RADIUS;
 

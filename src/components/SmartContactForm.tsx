@@ -101,6 +101,8 @@ export function SmartContactForm() {
         const j = await res.json().catch(() => ({}));
         throw new Error(j?.error ?? "Submission failed");
       }
+      const j = (await res.json().catch(() => ({}))) as { id?: string };
+      if (j?.id) setLeadId(j.id);
       setStatus("analyzing");
       setStep(4);
       // simulated analysis pause

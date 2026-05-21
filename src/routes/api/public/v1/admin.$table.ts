@@ -12,7 +12,7 @@
 
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
-import { jsonResponse, optionsResponse, requireApiKey } from "@/lib/api/auth";
+import { jsonResponse, optionsResponse, requireAdminApiKey } from "@/lib/api/auth";
 
 // Whitelist of tables KimiClaw may touch. Add new tables here as the schema grows.
 const ALLOWED_TABLES = new Set<string>([

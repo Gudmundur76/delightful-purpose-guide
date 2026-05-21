@@ -103,28 +103,49 @@ export type Database = {
       }
       leads: {
         Row: {
+          auto_replied_at: string | null
+          auto_reply_body: string | null
+          auto_reply_subject: string | null
           budget_tier: string
           created_at: string
           email: string
           id: string
           message: string
           name: string
+          qualification_reasoning: string | null
+          qualification_score: number | null
+          qualification_suggested_tier: string | null
+          qualification_tier: string | null
         }
         Insert: {
+          auto_replied_at?: string | null
+          auto_reply_body?: string | null
+          auto_reply_subject?: string | null
           budget_tier: string
           created_at?: string
           email: string
           id?: string
           message: string
           name: string
+          qualification_reasoning?: string | null
+          qualification_score?: number | null
+          qualification_suggested_tier?: string | null
+          qualification_tier?: string | null
         }
         Update: {
+          auto_replied_at?: string | null
+          auto_reply_body?: string | null
+          auto_reply_subject?: string | null
           budget_tier?: string
           created_at?: string
           email?: string
           id?: string
           message?: string
           name?: string
+          qualification_reasoning?: string | null
+          qualification_score?: number | null
+          qualification_suggested_tier?: string | null
+          qualification_tier?: string | null
         }
         Relationships: []
       }

@@ -71,6 +71,8 @@ type Props = {
   tier: TierKey;
   tierName: string;
   priceDisplay: string;
+  /** Optional lead UUID — forwarded to PayPal so the payment links back to the brief. */
+  leadId?: string;
 };
 
 export function TierCheckoutDialog({
@@ -79,6 +81,7 @@ export function TierCheckoutDialog({
   tier,
   tierName,
   priceDisplay,
+  leadId,
 }: Props) {
   const createOrderFn = useServerFn(createTierOrder);
   const captureFn = useServerFn(captureTierOrder);

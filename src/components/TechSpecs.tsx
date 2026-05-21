@@ -217,26 +217,43 @@ export function TechSpecs() {
             {tab === "agent" && <CodeBlock code={AGENT_CODE} lang="text" />}
             {tab === "performance" && (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {PERF_METRICS.map((m) => (
-                  <div
-                    key={m.label}
-                    className="rounded-md border border-border bg-card/40 p-5"
-                  >
-                    <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                      {m.label}
-                    </p>
-                    <p className="font-mono text-3xl text-foreground mt-2 tabular-nums">
-                      {m.value}
-                      <span className="text-base text-muted-foreground ml-0.5">
-                        {m.unit}
-                      </span>
-                    </p>
-                    <p className="font-mono text-[10px] uppercase text-accent mt-1 flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                      good
-                    </p>
-                  </div>
-                ))}
+                {PERF_KEYS.map((m) => {
+                  const value = stats?.metrics[m.key] ?? 0;
+                  const good = value >= 80;
+                  const warn = value >= 60 && value < 80;
+                  return (
+                    <div
+                      key={m.key}
+                      className="rounded-md border border-border bg-card/40 p-5"
+                    >
+                      <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                        {m.label}
+                      </p>
+                      <p className="font-mono text-3xl text-foreground mt-2 tabular-nums">
+                        {stats ? value : "—"}
+                        <span className="text-base text-muted-foreground ml-0.5">/100</span>
+                      </p>
+                      <p
+                        className={`font-mono text-[10px] uppercase mt-1 flex items-center gap-1 ${
+                          good ? "text-accent" : warn ? "text-amber-400" : "text-muted-foreground"
+                        }`}
+                      >
+                        <span
+                          className={`w-1.5 h-1.5 rounded-full ${
+                            good ? "bg-accent" : warn ? "bg-amber-400" : "bg-muted-foreground"
+                          }`}
+                        />
+                        {stats && stats.totalScans > 0
+                          ? good
+                            ? "good"
+                            : warn
+                              ? "okay"
+                              : "needs work"
+                          : "no data"}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>

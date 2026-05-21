@@ -51,10 +51,13 @@ import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/l
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as ApiPublicWidgetEmbedDotjsRouteImport } from './routes/api/public/widget/embed[.]js'
+import { Route as ApiPublicWidgetBadgeDotsvgRouteImport } from './routes/api/public/widget/badge[.]svg'
 import { Route as ApiPublicV1PostsRouteImport } from './routes/api/public/v1/posts'
 import { Route as ApiPublicV1OpenapiDotjsonRouteImport } from './routes/api/public/v1/openapi[.]json'
 import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/leads'
 import { Route as ApiPublicV1DocsRouteImport } from './routes/api/public/v1/docs'
+import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
 
@@ -272,6 +275,18 @@ const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   path: '/lovable/email/auth/preview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicWidgetEmbedDotjsRoute =
+  ApiPublicWidgetEmbedDotjsRouteImport.update({
+    id: '/api/public/widget/embed.js',
+    path: '/api/public/widget/embed.js',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicWidgetBadgeDotsvgRoute =
+  ApiPublicWidgetBadgeDotsvgRouteImport.update({
+    id: '/api/public/widget/badge.svg',
+    path: '/api/public/widget/badge.svg',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicV1PostsRoute = ApiPublicV1PostsRouteImport.update({
   id: '/api/public/v1/posts',
   path: '/api/public/v1/posts',
@@ -293,6 +308,12 @@ const ApiPublicV1DocsRoute = ApiPublicV1DocsRouteImport.update({
   path: '/api/public/v1/docs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHooksRescanLeaderboardRoute =
+  ApiPublicHooksRescanLeaderboardRouteImport.update({
+    id: '/api/public/hooks/rescan-leaderboard',
+    path: '/api/public/hooks/rescan-leaderboard',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicV1PostsSlugRoute = ApiPublicV1PostsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -341,10 +362,13 @@ export interface FileRoutesByFullPath {
   '/vs/$competitor': typeof VsCompetitorRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
+  '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
+  '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -391,10 +415,13 @@ export interface FileRoutesByTo {
   '/vs/$competitor': typeof VsCompetitorRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
+  '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
+  '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -442,10 +469,13 @@ export interface FileRoutesById {
   '/vs/$competitor': typeof VsCompetitorRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
+  '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
+  '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -494,10 +524,13 @@ export interface FileRouteTypes {
     | '/vs/$competitor'
     | '/api/public/leads'
     | '/lovable/email/suppression'
+    | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
+    | '/api/public/widget/badge.svg'
+    | '/api/public/widget/embed.js'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -544,10 +577,13 @@ export interface FileRouteTypes {
     | '/vs/$competitor'
     | '/api/public/leads'
     | '/lovable/email/suppression'
+    | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
+    | '/api/public/widget/badge.svg'
+    | '/api/public/widget/embed.js'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -594,10 +630,13 @@ export interface FileRouteTypes {
     | '/vs/$competitor'
     | '/api/public/leads'
     | '/lovable/email/suppression'
+    | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
+    | '/api/public/widget/badge.svg'
+    | '/api/public/widget/embed.js'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -639,10 +678,13 @@ export interface RootRouteChildren {
   VerifyIdRoute: typeof VerifyIdRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
   ApiPublicV1DocsRoute: typeof ApiPublicV1DocsRoute
   ApiPublicV1LeadsRoute: typeof ApiPublicV1LeadsRoute
   ApiPublicV1OpenapiDotjsonRoute: typeof ApiPublicV1OpenapiDotjsonRoute
   ApiPublicV1PostsRoute: typeof ApiPublicV1PostsRouteWithChildren
+  ApiPublicWidgetBadgeDotsvgRoute: typeof ApiPublicWidgetBadgeDotsvgRoute
+  ApiPublicWidgetEmbedDotjsRoute: typeof ApiPublicWidgetEmbedDotjsRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -948,6 +990,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/widget/embed.js': {
+      id: '/api/public/widget/embed.js'
+      path: '/api/public/widget/embed.js'
+      fullPath: '/api/public/widget/embed.js'
+      preLoaderRoute: typeof ApiPublicWidgetEmbedDotjsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/widget/badge.svg': {
+      id: '/api/public/widget/badge.svg'
+      path: '/api/public/widget/badge.svg'
+      fullPath: '/api/public/widget/badge.svg'
+      preLoaderRoute: typeof ApiPublicWidgetBadgeDotsvgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/posts': {
       id: '/api/public/v1/posts'
       path: '/api/public/v1/posts'
@@ -974,6 +1030,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/v1/docs'
       fullPath: '/api/public/v1/docs'
       preLoaderRoute: typeof ApiPublicV1DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/rescan-leaderboard': {
+      id: '/api/public/hooks/rescan-leaderboard'
+      path: '/api/public/hooks/rescan-leaderboard'
+      fullPath: '/api/public/hooks/rescan-leaderboard'
+      preLoaderRoute: typeof ApiPublicHooksRescanLeaderboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/v1/posts/$slug': {
@@ -1089,10 +1152,13 @@ const rootRouteChildren: RootRouteChildren = {
   VerifyIdRoute: VerifyIdRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
   ApiPublicV1DocsRoute: ApiPublicV1DocsRoute,
   ApiPublicV1LeadsRoute: ApiPublicV1LeadsRoute,
   ApiPublicV1OpenapiDotjsonRoute: ApiPublicV1OpenapiDotjsonRoute,
   ApiPublicV1PostsRoute: ApiPublicV1PostsRouteWithChildren,
+  ApiPublicWidgetBadgeDotsvgRoute: ApiPublicWidgetBadgeDotsvgRoute,
+  ApiPublicWidgetEmbedDotjsRoute: ApiPublicWidgetEmbedDotjsRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,

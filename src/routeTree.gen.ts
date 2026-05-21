@@ -22,6 +22,7 @@ import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PlaybookRouteImport } from './routes/playbook'
+import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LlmsRouteImport } from './routes/llms'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
@@ -120,6 +121,11 @@ const PricingRoute = PricingRouteImport.update({
 const PlaybookRoute = PlaybookRouteImport.update({
   id: '/playbook',
   path: '/playbook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OutreachRoute = OutreachRouteImport.update({
+  id: '/outreach',
+  path: '/outreach',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -311,6 +317,7 @@ export interface FileRoutesByFullPath {
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
+  '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
@@ -360,6 +367,7 @@ export interface FileRoutesByTo {
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
+  '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
@@ -410,6 +418,7 @@ export interface FileRoutesById {
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
+  '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
@@ -461,6 +470,7 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/llms'
     | '/login'
+    | '/outreach'
     | '/playbook'
     | '/pricing'
     | '/privacy'
@@ -510,6 +520,7 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/llms'
     | '/login'
+    | '/outreach'
     | '/playbook'
     | '/pricing'
     | '/privacy'
@@ -559,6 +570,7 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/llms'
     | '/login'
+    | '/outreach'
     | '/playbook'
     | '/pricing'
     | '/privacy'
@@ -609,6 +621,7 @@ export interface RootRouteChildren {
   LeaderboardRoute: typeof LeaderboardRoute
   LlmsRoute: typeof LlmsRoute
   LoginRoute: typeof LoginRoute
+  OutreachRoute: typeof OutreachRoute
   PlaybookRoute: typeof PlaybookRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -730,6 +743,13 @@ declare module '@tanstack/react-router' {
       path: '/playbook'
       fullPath: '/playbook'
       preLoaderRoute: typeof PlaybookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/outreach': {
+      id: '/outreach'
+      path: '/outreach'
+      fullPath: '/outreach'
+      preLoaderRoute: typeof OutreachRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -1051,6 +1071,7 @@ const rootRouteChildren: RootRouteChildren = {
   LeaderboardRoute: LeaderboardRoute,
   LlmsRoute: LlmsRoute,
   LoginRoute: LoginRoute,
+  OutreachRoute: OutreachRoute,
   PlaybookRoute: PlaybookRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,

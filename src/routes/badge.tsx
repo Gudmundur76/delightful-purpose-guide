@@ -172,6 +172,13 @@ function BadgePage() {
                 copied={copied === "md"}
               />
               <Snippet
+                title="Script tag (one-liner)"
+                description="Auto-detects the current domain. Drop the script anywhere, add the div where you want the badge."
+                code={snippets.script}
+                onCopy={() => copy("script", snippets.script)}
+                copied={copied === "script"}
+              />
+              <Snippet
                 title="React / JSX"
                 description="For Next.js, TanStack, Remix, or any React app."
                 code={snippets.react}

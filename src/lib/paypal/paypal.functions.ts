@@ -111,11 +111,11 @@ export const createPaypalOrder = createServerFn({ method: "POST" })
             reference_id: orderRow.id,
             amount: {
               currency_code: currency,
-              value: formatAmount(totalCents),
+              value: formatPayPalAmount(totalCents),
               breakdown: {
                 item_total: {
                   currency_code: currency,
-                  value: formatAmount(subtotalCents),
+                  value: formatPayPalAmount(subtotalCents),
                 },
               },
             },
@@ -124,7 +124,7 @@ export const createPaypalOrder = createServerFn({ method: "POST" })
               quantity: String(l.qty),
               unit_amount: {
                 currency_code: currency,
-                value: formatAmount(l.product.price_cents),
+                value: formatPayPalAmount(l.product.price_cents),
               },
             })),
           },

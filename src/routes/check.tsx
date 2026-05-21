@@ -311,16 +311,25 @@ function ReportGate({ url, score }: { url: string; score: number }) {
 
   const reportHref = `/check/report?u=${encodeURIComponent(url)}&s=${score}&e=${encodeURIComponent(email.trim())}`;
 
+  const headline =
+    score < 60
+      ? `Your site scored ${score}/100. Get the full gap analysis.`
+      : score < 80
+        ? `${score}/100 — solid, with quick wins. Get the full breakdown.`
+        : `Strong ${score}/100. Get the printable, share-ready report.`;
+  const sub =
+    score < 60
+      ? "Every failing signal, the exact fix, and a prioritized 2-week plan to reach 90+."
+      : "Every finding, every fix, weighted scores, methodology — formatted for handoff to your team.";
+
   return (
     <div className="rounded-xl border border-border bg-card p-8">
       <div className="flex items-start gap-3 mb-4">
         <FileText className="w-5 h-5 text-accent shrink-0 mt-1" />
         <div>
           <div className="font-mono text-xs text-accent mb-1">FULL PDF REPORT</div>
-          <h3 className="text-xl font-semibold">Get the printable, share-ready version</h3>
-          <p className="text-sm text-muted-foreground mt-1">
-            Every finding, every fix, weighted scores, methodology — formatted for handoff to your team.
-          </p>
+          <h3 className="text-xl font-semibold">{headline}</h3>
+          <p className="text-sm text-muted-foreground mt-1">{sub}</p>
         </div>
       </div>
 

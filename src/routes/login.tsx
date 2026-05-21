@@ -9,7 +9,9 @@ export const Route = createFileRoute("/login")({
     meta: [
       { title: "Sign In — GROW_" },
       { name: "description", content: "Sign in to your account." },
+      { name: "robots", content: "noindex, nofollow" },
     ],
+    links: [{ rel: "canonical", href: "https://grow.contact/login" }],
   }),
 });
 

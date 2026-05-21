@@ -31,10 +31,10 @@ import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckRouteImport } from './routes/check'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
@@ -171,11 +171,6 @@ const CheckRoute = CheckRouteImport.update({
   path: '/check',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BadgeRoute = BadgeRouteImport.update({
   id: '/badge',
   path: '/badge',
@@ -189,6 +184,11 @@ const ApiDocsRoute = ApiDocsRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VsCompetitorRoute = VsCompetitorRouteImport.update({
@@ -217,14 +217,14 @@ const CheckReportRoute = CheckReportRouteImport.update({
   getParentRoute: () => CheckRoute,
 } as any)
 const BlogRssDotxmlRoute = BlogRssDotxmlRouteImport.update({
-  id: '/rss.xml',
-  path: '/rss.xml',
-  getParentRoute: () => BlogRoute,
+  id: '/blog/rss.xml',
+  path: '/blog/rss.xml',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BadgeChar123idChar125DotsvgRoute =
   BadgeChar123idChar125DotsvgRouteImport.update({
@@ -329,7 +329,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api-docs': typeof ApiDocsRoute
   '/badge': typeof BadgeRouteWithChildren
-  '/blog': typeof BlogRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
@@ -360,6 +359,7 @@ export interface FileRoutesByFullPath {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
+  '/blog/': typeof BlogIndexRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -382,7 +382,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api-docs': typeof ApiDocsRoute
   '/badge': typeof BadgeRouteWithChildren
-  '/blog': typeof BlogRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
@@ -413,6 +412,7 @@ export interface FileRoutesByTo {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
+  '/blog': typeof BlogIndexRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -436,7 +436,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/api-docs': typeof ApiDocsRoute
   '/badge': typeof BadgeRouteWithChildren
-  '/blog': typeof BlogRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
@@ -467,6 +466,7 @@ export interface FileRoutesById {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
+  '/blog/': typeof BlogIndexRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -491,7 +491,6 @@ export interface FileRouteTypes {
     | '/'
     | '/api-docs'
     | '/badge'
-    | '/blog'
     | '/check'
     | '/checkout'
     | '/contact'
@@ -522,6 +521,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/verify/$id'
     | '/vs/$competitor'
+    | '/blog/'
     | '/api/public/leads'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
@@ -544,7 +544,6 @@ export interface FileRouteTypes {
     | '/'
     | '/api-docs'
     | '/badge'
-    | '/blog'
     | '/check'
     | '/checkout'
     | '/contact'
@@ -575,6 +574,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/verify/$id'
     | '/vs/$competitor'
+    | '/blog'
     | '/api/public/leads'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
@@ -597,7 +597,6 @@ export interface FileRouteTypes {
     | '/'
     | '/api-docs'
     | '/badge'
-    | '/blog'
     | '/check'
     | '/checkout'
     | '/contact'
@@ -628,6 +627,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/verify/$id'
     | '/vs/$competitor'
+    | '/blog/'
     | '/api/public/leads'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
@@ -651,7 +651,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiDocsRoute: typeof ApiDocsRoute
   BadgeRoute: typeof BadgeRouteWithChildren
-  BlogRoute: typeof BlogRouteWithChildren
   CheckRoute: typeof CheckRouteWithChildren
   CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactRoute: typeof ContactRoute
@@ -674,8 +673,11 @@ export interface RootRouteChildren {
   UnsubscribeRoute: typeof UnsubscribeRoute
   VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   VerifyIdRoute: typeof VerifyIdRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
@@ -850,13 +852,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/badge': {
       id: '/badge'
       path: '/badge'
@@ -876,6 +871,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/vs/$competitor': {
@@ -915,17 +917,17 @@ declare module '@tanstack/react-router' {
     }
     '/blog/rss.xml': {
       id: '/blog/rss.xml'
-      path: '/rss.xml'
+      path: '/blog/rss.xml'
       fullPath: '/blog/rss.xml'
       preLoaderRoute: typeof BlogRssDotxmlRouteImport
-      parentRoute: typeof BlogRoute
+      parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
       id: '/blog/$slug'
-      path: '/$slug'
+      path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
+      parentRoute: typeof rootRouteImport
     }
     '/badge/{$id}.svg': {
       id: '/badge/{$id}.svg'
@@ -1066,18 +1068,6 @@ const BadgeRouteChildren: BadgeRouteChildren = {
 
 const BadgeRouteWithChildren = BadgeRoute._addFileChildren(BadgeRouteChildren)
 
-interface BlogRouteChildren {
-  BlogSlugRoute: typeof BlogSlugRoute
-  BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
-}
-
-const BlogRouteChildren: BlogRouteChildren = {
-  BlogSlugRoute: BlogSlugRoute,
-  BlogRssDotxmlRoute: BlogRssDotxmlRoute,
-}
-
-const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
-
 interface CheckRouteChildren {
   CheckReportRoute: typeof CheckReportRoute
 }
@@ -1125,7 +1115,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiDocsRoute: ApiDocsRoute,
   BadgeRoute: BadgeRouteWithChildren,
-  BlogRoute: BlogRouteWithChildren,
   CheckRoute: CheckRouteWithChildren,
   CheckoutRoute: CheckoutRouteWithChildren,
   ContactRoute: ContactRoute,
@@ -1148,8 +1137,11 @@ const rootRouteChildren: RootRouteChildren = {
   UnsubscribeRoute: UnsubscribeRoute,
   VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  BlogRssDotxmlRoute: BlogRssDotxmlRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   VerifyIdRoute: VerifyIdRoute,
+  BlogIndexRoute: BlogIndexRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
@@ -1170,13 +1162,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

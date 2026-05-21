@@ -16,6 +16,7 @@ export const Route = createFileRoute("/check")({
       { property: "og:description", content: "Score any URL for LLM readability. Free." },
       { property: "og:url", content: "https://grow.contact/check" },
     ],
+    links: [{ rel: "canonical", href: "https://grow.contact/check" }],
   }),
   component: CheckPage,
 });

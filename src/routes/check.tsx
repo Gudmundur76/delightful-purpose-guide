@@ -346,3 +346,95 @@ function MetricCard({ metric, open, onToggle }: { metric: Metric; open: boolean;
     </div>
   );
 }
+
+function ReportGate({ url, score }: { url: string; score: number }) {
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState<"idle" | "saving" | "ready" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setError("Enter a valid email address.");
+      setState("error");
+      return;
+    }
+    setState("saving");
+    setError(null);
+    try {
+      const { error: dbError } = await supabase.from("report_requests").insert({
+        email: trimmed,
+        url,
+        score,
+        source: "check",
+      });
+      if (dbError) throw dbError;
+      setState("ready");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setState("error");
+    }
+  };
+
+  const reportHref = `/check/report?u=${encodeURIComponent(url)}&s=${score}&e=${encodeURIComponent(email.trim())}`;
+
+  return (
+    <div className="rounded-xl border border-border bg-card p-8">
+      <div className="flex items-start gap-3 mb-4">
+        <FileText className="w-5 h-5 text-accent shrink-0 mt-1" />
+        <div>
+          <div className="font-mono text-xs text-accent mb-1">FULL PDF REPORT</div>
+          <h3 className="text-xl font-semibold">Get the printable, share-ready version</h3>
+          <p className="text-sm text-muted-foreground mt-1">
+            Every finding, every fix, weighted scores, methodology — formatted for handoff to your team.
+          </p>
+        </div>
+      </div>
+
+      {state !== "ready" ? (
+        <form onSubmit={submit} className="flex flex-col sm:flex-row gap-3 mt-6">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@company.com"
+            disabled={state === "saving"}
+            className="flex-1 rounded-md border border-border bg-background px-4 py-3 font-mono text-sm outline-none focus:border-accent transition-colors disabled:opacity-50"
+            required
+          />
+          <button
+            type="submit"
+            disabled={state === "saving"}
+            className="inline-flex items-center justify-center gap-2 rounded-md bg-foreground text-background font-mono text-sm px-6 py-3 hover:opacity-90 transition disabled:opacity-40"
+          >
+            {state === "saving" ? <><Loader2 className="w-4 h-4 animate-spin" /> sending</> : "Get the PDF →"}
+          </button>
+        </form>
+      ) : (
+        <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-3 rounded-md border border-accent/40 bg-accent/10 p-4">
+          <Check className="w-5 h-5 text-accent shrink-0" />
+          <div className="flex-1 text-sm">
+            Report ready. Open it below, then use <span className="font-mono">Save as PDF</span>.
+          </div>
+          <a
+            href={reportHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-md bg-accent text-accent-foreground font-mono text-sm px-5 py-3 hover:opacity-90 transition whitespace-nowrap"
+          >
+            Open report →
+          </a>
+        </div>
+      )}
+
+      {state === "error" && error && (
+        <div className="mt-3 text-xs font-mono text-red-500">{error}</div>
+      )}
+
+      <p className="mt-4 text-[11px] font-mono text-muted-foreground">
+        No spam. One follow-up email max. Unsubscribe in a click.
+      </p>
+    </div>
+  );
+}

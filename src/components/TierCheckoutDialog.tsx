@@ -113,7 +113,7 @@ export function TierCheckoutDialog({
         async function onApprove(data: { orderID: string }) {
           setSubmitting(true);
           try {
-            await captureFn({ data: { orderId: data.orderID, tier } });
+            await captureFn({ data: { orderId: data.orderID } });
             setStatus("success");
             setSubmitting(false);
           } catch (e) {
@@ -314,7 +314,13 @@ export function TierCheckoutDialog({
                       {submitting ? "Processing…" : `Pay ${priceDisplay}`}
                     </button>
                     <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center">
-                      Card data handled by PayPal — never stored on this site
+                      PCI-DSS handled by PayPal — card data never touches this site
+                    </p>
+                    <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
+                      By paying you agree to our{" "}
+                      <a href="/terms" className="underline hover:text-foreground">Terms</a>,{" "}
+                      <a href="/refund" className="underline hover:text-foreground">Refund Policy</a> and{" "}
+                      <a href="/privacy" className="underline hover:text-foreground">Privacy Policy</a>. A receipt is emailed on capture.
                     </p>
                   </div>
                 </>

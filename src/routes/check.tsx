@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { sendReportFollowup } from "@/lib/check/report-followup.functions";
 import { scanUrl, type ScanMetric, type ScanResult } from "@/lib/check/scan.functions";
+import { RecentScans } from "@/components/RecentScans";
 
 export const Route = createFileRoute("/check")({
   head: () => ({
@@ -191,6 +192,10 @@ function CheckPage() {
             </div>
           </div>
         )}
+
+        <div className="mt-16">
+          <RecentScans />
+        </div>
       </main>
     </div>
   );

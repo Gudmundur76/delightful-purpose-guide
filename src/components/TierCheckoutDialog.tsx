@@ -205,7 +205,7 @@ export function TierCheckoutDialog({
     return () => {
       cancelled = true;
     };
-  }, [open, tier, createOrderFn, captureFn, getConfig]);
+  }, [open, tier, leadId, createOrderFn, captureFn, getConfig]);
 
   // Reset on close so dialog can re-init for a different tier
   useEffect(() => {

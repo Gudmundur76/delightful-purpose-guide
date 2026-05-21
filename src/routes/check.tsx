@@ -4,6 +4,7 @@ import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2 }
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { sendReportFollowup } from "@/lib/check/report-followup.functions";
+import { scanUrl, type ScanMetric, type ScanResult } from "@/lib/check/scan.functions";
 
 export const Route = createFileRoute("/check")({
   head: () => ({
@@ -18,148 +19,69 @@ export const Route = createFileRoute("/check")({
   component: CheckPage,
 });
 
-type Status = "pass" | "warn" | "fail";
-
-type Metric = {
-  key: string;
-  label: string;
-  score: number;
-  status: Status;
-  summary: string;
-  details: string[];
-};
-
-const CRAWL_STEPS = [
-  "$ curl -sL <url> -o /tmp/page.html",
-  "→ fetched 142kb · 200 OK · 412ms",
-  "$ parse --semantic-tags",
-  "→ found <article>, <header>, <nav>, <main>, <footer>",
-  "$ extract --jsonld",
-  "→ 2 schemas detected · Organization, Article",
-  "$ check /llms.txt",
-  "→ HTTP 404 · llms.txt not found",
-  "$ score --citability",
-  "→ heading hierarchy: ok · alt text: 12/14",
-  "$ lighthouse --headless",
-  "→ perf 91 · LCP 1.4s · CLS 0.02",
-  "$ compile report.json",
-  "→ done · agent_readability_score = 72",
-];
-
-function seededScore(url: string) {
-  let h = 0;
-  for (let i = 0; i < url.length; i++) h = (h * 31 + url.charCodeAt(i)) | 0;
-  const base = 55 + (Math.abs(h) % 35);
-  return base;
-}
-
-function buildMetrics(url: string): Metric[] {
-  const s = seededScore(url);
-  const jitter = (off: number) => Math.max(20, Math.min(100, s + off + ((url.length * (off + 7)) % 11) - 5));
-  const status = (v: number): Status => (v >= 80 ? "pass" : v >= 60 ? "warn" : "fail");
-  return [
-    {
-      key: "semantic",
-      label: "Semantic HTML",
-      score: jitter(8),
-      status: status(jitter(8)),
-      summary: "Proper landmark tags help agents map page structure.",
-      details: [
-        "✓ <main>, <article>, <header>, <footer> present",
-        "✓ Heading hierarchy is well-formed (h1 → h2 → h3)",
-        "△ 3 <div> blocks could be <section> for clearer outline",
-      ],
-    },
-    {
-      key: "jsonld",
-      label: "JSON-LD",
-      score: jitter(-4),
-      status: status(jitter(-4)),
-      summary: "Structured data lets LLMs cite facts with confidence.",
-      details: [
-        "✓ Organization schema detected",
-        "✓ Article schema detected",
-        "✗ Missing FAQPage and BreadcrumbList schemas",
-      ],
-    },
-    {
-      key: "llms",
-      label: "llms.txt",
-      score: jitter(-20),
-      status: status(jitter(-20)),
-      summary: "A /llms.txt file is the agent-era robots.txt + sitemap.",
-      details: [
-        "✗ /llms.txt returns 404",
-        "→ Add a top-level llms.txt summarizing the site",
-        "→ Include a > tagline, services, pricing, and key links",
-      ],
-    },
-    {
-      key: "citability",
-      label: "Citability",
-      score: jitter(2),
-      status: status(jitter(2)),
-      summary: "Short, factual, well-attributed claims get cited more.",
-      details: [
-        "✓ Clear product positioning in first 200 words",
-        "△ Pricing is in an image, not text — agents cannot read it",
-        "△ No author / date metadata on long-form content",
-      ],
-    },
-    {
-      key: "speed",
-      label: "Speed",
-      score: jitter(12),
-      status: status(jitter(12)),
-      summary: "Slow pages get partial crawls and timeouts.",
-      details: [
-        "✓ LCP 1.4s (good)",
-        "✓ CLS 0.02 (good)",
-        "△ 380kb of unused JS on first load",
-      ],
-    },
-  ];
-}
+type Metric = ScanMetric;
 
 function CheckPage() {
   const [url, setUrl] = useState("");
-  const [phase, setPhase] = useState<"idle" | "loading" | "done">("idle");
-  const [logIndex, setLogIndex] = useState(0);
+  const [phase, setPhase] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [log, setLog] = useState<string[]>([]);
+  const [visibleLogCount, setVisibleLogCount] = useState(0);
   const [metrics, setMetrics] = useState<Metric[]>([]);
   const [overall, setOverall] = useState(0);
   const [openKey, setOpenKey] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const logRef = useRef<HTMLDivElement>(null);
+  const runScan = useServerFn(scanUrl);
 
   useEffect(() => {
-    if (phase !== "loading") return;
-    if (logIndex >= CRAWL_STEPS.length) {
-      const m = buildMetrics(url || "https://example.com");
-      setMetrics(m);
-      setOverall(Math.round(m.reduce((a, b) => a + b.score, 0) / m.length));
-      setPhase("done");
-      return;
-    }
-    const t = setTimeout(() => setLogIndex((i) => i + 1), 220);
+    if (visibleLogCount >= log.length) return;
+    const t = setTimeout(() => setVisibleLogCount((i) => i + 1), 140);
     return () => clearTimeout(t);
-  }, [phase, logIndex, url]);
+  }, [visibleLogCount, log.length]);
 
   useEffect(() => {
     logRef.current?.scrollTo({ top: logRef.current.scrollHeight, behavior: "smooth" });
-  }, [logIndex]);
+  }, [visibleLogCount]);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!url.trim()) return;
     setPhase("loading");
-    setLogIndex(0);
+    setLog([`$ scan ${url.trim()}`, "→ dispatching…"]);
+    setVisibleLogCount(0);
     setMetrics([]);
     setOpenKey(null);
+    setErrorMsg(null);
+
+    try {
+      const result: ScanResult = await runScan({ data: { url: url.trim() } });
+      if (!result.ok) {
+        setLog(result.log);
+        setVisibleLogCount(0);
+        setErrorMsg(result.error);
+        setPhase("error");
+        return;
+      }
+      setLog(result.log);
+      setVisibleLogCount(0);
+      setMetrics(result.metrics);
+      setOverall(result.overall);
+      setPhase("done");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Scan failed";
+      setLog((prev) => [...prev, `→ FAIL · ${msg}`]);
+      setErrorMsg(msg);
+      setPhase("error");
+    }
   };
 
   const reset = () => {
     setPhase("idle");
-    setLogIndex(0);
+    setLog([]);
+    setVisibleLogCount(0);
     setUrl("");
+    setMetrics([]);
+    setErrorMsg(null);
   };
 
   return (
@@ -212,13 +134,16 @@ function CheckPage() {
             ref={logRef}
             className="rounded-lg border border-border bg-[#0a0a0a] font-mono text-[13px] leading-relaxed p-5 mb-10 h-64 overflow-auto"
           >
-            {CRAWL_STEPS.slice(0, logIndex).map((line, i) => (
+            {log.slice(0, visibleLogCount).map((line, i) => (
               <div key={i} className={line.startsWith("$") ? "text-accent" : "text-muted-foreground"}>
                 {line}
               </div>
             ))}
-            {phase === "loading" && (
+            {(phase === "loading" || visibleLogCount < log.length) && (
               <div className="text-accent animate-pulse">▍</div>
+            )}
+            {phase === "error" && errorMsg && (
+              <div className="mt-3 text-red-500">! {errorMsg}</div>
             )}
           </div>
         )}

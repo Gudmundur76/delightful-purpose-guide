@@ -21,6 +21,7 @@ import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PlaybookRouteImport } from './routes/playbook'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LlmsRouteImport } from './routes/llms'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
@@ -114,6 +115,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlaybookRoute = PlaybookRouteImport.update({
+  id: '/playbook',
+  path: '/playbook',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -305,6 +311,7 @@ export interface FileRoutesByFullPath {
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
+  '/playbook': typeof PlaybookRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
@@ -353,6 +360,7 @@ export interface FileRoutesByTo {
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
+  '/playbook': typeof PlaybookRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
@@ -402,6 +410,7 @@ export interface FileRoutesById {
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
+  '/playbook': typeof PlaybookRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
@@ -452,6 +461,7 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/llms'
     | '/login'
+    | '/playbook'
     | '/pricing'
     | '/privacy'
     | '/process'
@@ -500,6 +510,7 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/llms'
     | '/login'
+    | '/playbook'
     | '/pricing'
     | '/privacy'
     | '/process'
@@ -548,6 +559,7 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/llms'
     | '/login'
+    | '/playbook'
     | '/pricing'
     | '/privacy'
     | '/process'
@@ -597,6 +609,7 @@ export interface RootRouteChildren {
   LeaderboardRoute: typeof LeaderboardRoute
   LlmsRoute: typeof LlmsRoute
   LoginRoute: typeof LoginRoute
+  PlaybookRoute: typeof PlaybookRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   ProcessRoute: typeof ProcessRoute
@@ -710,6 +723,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/playbook': {
+      id: '/playbook'
+      path: '/playbook'
+      fullPath: '/playbook'
+      preLoaderRoute: typeof PlaybookRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -1031,6 +1051,7 @@ const rootRouteChildren: RootRouteChildren = {
   LeaderboardRoute: LeaderboardRoute,
   LlmsRoute: LlmsRoute,
   LoginRoute: LoginRoute,
+  PlaybookRoute: PlaybookRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   ProcessRoute: ProcessRoute,
@@ -1062,13 +1083,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -53,6 +53,8 @@ import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/em
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as ApiPublicWidgetEmbedDotjsRouteImport } from './routes/api/public/widget/embed[.]js'
 import { Route as ApiPublicWidgetBadgeDotsvgRouteImport } from './routes/api/public/widget/badge[.]svg'
+import { Route as ApiPublicV1SpecsRouteImport } from './routes/api/public/v1/specs'
+import { Route as ApiPublicV1ReadinessRouteImport } from './routes/api/public/v1/readiness'
 import { Route as ApiPublicV1PostsRouteImport } from './routes/api/public/v1/posts'
 import { Route as ApiPublicV1OpenapiDotjsonRouteImport } from './routes/api/public/v1/openapi[.]json'
 import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/leads'
@@ -287,6 +289,16 @@ const ApiPublicWidgetBadgeDotsvgRoute =
     path: '/api/public/widget/badge.svg',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicV1SpecsRoute = ApiPublicV1SpecsRouteImport.update({
+  id: '/api/public/v1/specs',
+  path: '/api/public/v1/specs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1ReadinessRoute = ApiPublicV1ReadinessRouteImport.update({
+  id: '/api/public/v1/readiness',
+  path: '/api/public/v1/readiness',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicV1PostsRoute = ApiPublicV1PostsRouteImport.update({
   id: '/api/public/v1/posts',
   path: '/api/public/v1/posts',
@@ -367,6 +379,8 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
+  '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -420,6 +434,8 @@ export interface FileRoutesByTo {
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
+  '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -474,6 +490,8 @@ export interface FileRoutesById {
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
+  '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -529,6 +547,8 @@ export interface FileRouteTypes {
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
+    | '/api/public/v1/readiness'
+    | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/lovable/email/auth/preview'
@@ -582,6 +602,8 @@ export interface FileRouteTypes {
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
+    | '/api/public/v1/readiness'
+    | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/lovable/email/auth/preview'
@@ -635,6 +657,8 @@ export interface FileRouteTypes {
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
+    | '/api/public/v1/readiness'
+    | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/lovable/email/auth/preview'
@@ -685,6 +709,8 @@ export interface RootRouteChildren {
   ApiPublicV1LeadsRoute: typeof ApiPublicV1LeadsRoute
   ApiPublicV1OpenapiDotjsonRoute: typeof ApiPublicV1OpenapiDotjsonRoute
   ApiPublicV1PostsRoute: typeof ApiPublicV1PostsRouteWithChildren
+  ApiPublicV1ReadinessRoute: typeof ApiPublicV1ReadinessRoute
+  ApiPublicV1SpecsRoute: typeof ApiPublicV1SpecsRoute
   ApiPublicWidgetBadgeDotsvgRoute: typeof ApiPublicWidgetBadgeDotsvgRoute
   ApiPublicWidgetEmbedDotjsRoute: typeof ApiPublicWidgetEmbedDotjsRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
@@ -1006,6 +1032,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWidgetBadgeDotsvgRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/specs': {
+      id: '/api/public/v1/specs'
+      path: '/api/public/v1/specs'
+      fullPath: '/api/public/v1/specs'
+      preLoaderRoute: typeof ApiPublicV1SpecsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/readiness': {
+      id: '/api/public/v1/readiness'
+      path: '/api/public/v1/readiness'
+      fullPath: '/api/public/v1/readiness'
+      preLoaderRoute: typeof ApiPublicV1ReadinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/posts': {
       id: '/api/public/v1/posts'
       path: '/api/public/v1/posts'
@@ -1149,6 +1189,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicV1LeadsRoute: ApiPublicV1LeadsRoute,
   ApiPublicV1OpenapiDotjsonRoute: ApiPublicV1OpenapiDotjsonRoute,
   ApiPublicV1PostsRoute: ApiPublicV1PostsRouteWithChildren,
+  ApiPublicV1ReadinessRoute: ApiPublicV1ReadinessRoute,
+  ApiPublicV1SpecsRoute: ApiPublicV1SpecsRoute,
   ApiPublicWidgetBadgeDotsvgRoute: ApiPublicWidgetBadgeDotsvgRoute,
   ApiPublicWidgetEmbedDotjsRoute: ApiPublicWidgetEmbedDotjsRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,

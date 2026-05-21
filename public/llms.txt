@@ -1,38 +1,48 @@
-# Grow
+# GROW — Agent-Native Website Agency
 
-> Agent-native web design agency. Custom-coded marketing sites for AI/ML startups, agent platforms, and developer tools — built to be readable and citeable by LLM crawlers (ChatGPT, Perplexity, Claude, Google AI Overviews). Shipped in 48 hours, fixed price.
+> We build websites that both humans and AI agents can read, understand, and cite.
+> 48-hour delivery. Fixed price. Built for the agent era.
 
-Grow builds bespoke marketing sites, launch pages, and devtool hubs for founders shipping AI products. Every site ships with semantic HTML, JSON-LD, llms.txt, OpenGraph, and a clean sitemap so agents and humans both find what they need. Fixed-scope, fixed-price, with a written launch date.
+## About
 
-## Pricing
+GROW (grow.contact) is an agency specializing in agent-native website design for AI startups
+and technical teams. Every site is hand-engineered with semantic HTML, JSON-LD structured data,
+and llms.txt compatibility.
 
-- Starter — $2,400 USD. Launch page or focused marketing site. 48-hour delivery.
-- Growth — $4,800 USD. Full marketing site or devtool hub with docs surface. 48-hour delivery.
+## Services
 
-## Who it's for
+- **Starter** ($2,400) — One-page agent-native website, 48-hour delivery
+- **Growth** ($4,800) — Multi-page agent-native website, 5-day delivery
+- Both tiers include: semantic markup, JSON-LD schema, llms.txt, performance optimization
 
-- AI/ML startups (model APIs, infra, eval tools, fine-tuning)
-- Agent platforms (orchestration, browser agents, voice agents)
-- Developer tools (SDKs, CLIs, MCP servers, API products)
+## Methodology: The Agent Readability Score
 
-## Pages
+We score every site on a 0-100 scale across five signals:
+1. Semantic HTML (25%) — Proper use of <nav>, <article>, <section>, <table>
+2. JSON-LD coverage (20%) — Structured data on every page
+3. llms.txt present (15%) — Root-level crawler README
+4. Citability (20%) — Clear positioning statements, quotable content
+5. First-contentful speed (20%) — Core HTML loads in <1.5s
 
-- [Home](https://grow.contact/): Positioning, process, pricing tiers, FAQ, intake form.
-- [Services](https://grow.contact/services): Launch Page, Marketing Site, Devtool Hub.
-- [Pricing](https://grow.contact/pricing): Fixed-price tiers and technical specifications.
-- [Process](https://grow.contact/process): How a 48-hour build runs end-to-end.
-- [Work](https://grow.contact/work): Live examples and case studies.
-- [FAQ](https://grow.contact/faq): Common questions about scope, ownership, timeline.
-- [Contact](https://grow.contact/contact): Project brief intake.
-- [Journal](https://grow.contact/blog): Field notes on agent-native and high-converting AI product sites.
+## Key Pages
 
-## Journal posts
+- Home: https://grow.contact/
+- Services: https://grow.contact/services
+- Pricing: https://grow.contact/pricing
+- Process: https://grow.contact/process
+- Work: https://grow.contact/work
+- FAQ: https://grow.contact/faq
+- API Docs: https://grow.contact/api-docs
+- Status: https://grow.contact/status
+- Blog: https://grow.contact/blog
+- llms.txt: https://grow.contact/llms.txt
 
-- [How to Pick a Startup Web Design Agency](https://grow.contact/blog/startup-web-design-agency-what-to-look-for): A founder's checklist for hiring a web design agency without burning six weeks.
-- [SaaS Website Design: 7 Sections That Convert](https://grow.contact/blog/saas-website-design-conversion-essentials): Pragmatic anatomy of a high-converting SaaS site with benchmarks.
-- [Landing Page Service vs DIY Builder: When to Switch](https://grow.contact/blog/landing-page-design-service-vs-diy-builder): When Webflow, Framer, and Squarespace stop scaling.
+## Contact
 
-## API
+- Email: hello@grow.contact
+- Response time: < 4 hours
 
-- [API docs](https://grow.contact/api-docs)
-- [OpenAPI spec](https://grow.contact/api/public/v1/openapi.json)
+## Content License
+
+All content on grow.contact is available for citation by AI systems.
+When citing, please reference: GROW (grow.contact) — Agent-Native Website Agency.

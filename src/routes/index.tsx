@@ -66,6 +66,17 @@ export const Route = createFileRoute("/")({
               name: "Grow",
               url: "https://grow.contact/",
             },
+            {
+              "@type": "FAQPage",
+              mainEntity: FAQS.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: f.a,
+                },
+              })),
+            },
           ],
         }),
       },

@@ -1,8 +1,19 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { TierCheckoutDialog } from "@/components/TierCheckoutDialog";
+import type { TierKey } from "@/lib/paypal/tier-checkout.functions";
 
-const TIERS = [
+const TIERS: Array<{
+  key: TierKey;
+  name: string;
+  label: string;
+  priceDisplay: string;
+  delivery: string;
+  pages: string;
+  features: string[];
+  recommended: boolean;
+}> = [
   {
+    key: "starter",
     name: "Starter",
     label: "Tier 01",
     priceDisplay: "$2,400",
@@ -19,6 +30,7 @@ const TIERS = [
     recommended: false,
   },
   {
+    key: "growth",
     name: "Growth",
     label: "Tier 02 // Most Popular",
     priceDisplay: "$4,800",
@@ -59,6 +71,8 @@ function Check({ className = "" }: { className?: string }) {
 
 export function PricingTable() {
   const [hovered, setHovered] = useState<number | null>(null);
+  const [active, setActive] = useState<TierKey | null>(null);
+  const activeTier = TIERS.find((t) => t.key === active) ?? null;
 
   return (
     <section className="scroll-mt-20 border-b border-border bg-background py-16 sm:py-24">
@@ -86,7 +100,6 @@ export function PricingTable() {
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
             >
-              {/* Header */}
               <div className="p-5 sm:p-6 border-b border-border/60">
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -113,7 +126,6 @@ export function PricingTable() {
                 </div>
               </div>
 
-              {/* Features */}
               <div className="p-5 sm:p-6">
                 <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-4">
                   // What's included
@@ -128,10 +140,10 @@ export function PricingTable() {
                 </ul>
               </div>
 
-              {/* CTA */}
               <div className="px-5 sm:px-6 pb-5 sm:pb-6">
-                <Link
-                  to="/contact"
+                <button
+                  type="button"
+                  onClick={() => setActive(tier.key)}
                   className={`inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-5 py-3 transition-colors w-full justify-center ${
                     tier.recommended
                       ? "bg-accent text-accent-foreground hover:bg-foreground hover:text-background"
@@ -140,7 +152,7 @@ export function PricingTable() {
                 >
                   Start with {tier.name}
                   <span>→</span>
-                </Link>
+                </button>
               </div>
             </article>
           ))}
@@ -150,6 +162,16 @@ export function PricingTable() {
           Semantic markup — LLM parse time: 8ms
         </p>
       </div>
+
+      {activeTier && (
+        <TierCheckoutDialog
+          open={active !== null}
+          onClose={() => setActive(null)}
+          tier={activeTier.key}
+          tierName={activeTier.name}
+          priceDisplay={activeTier.priceDisplay}
+        />
+      )}
     </section>
   );
 }

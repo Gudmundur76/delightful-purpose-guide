@@ -2,12 +2,20 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2 } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
+import { zodValidator, fallback } from "@tanstack/zod-adapter";
+import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { sendReportFollowup } from "@/lib/check/report-followup.functions";
 import { scanUrl, type ScanMetric, type ScanResult } from "@/lib/check/scan.functions";
 import { RecentScans } from "@/components/RecentScans";
 
+const checkSearchSchema = z.object({
+  url: fallback(z.string(), "").default(""),
+  auto: fallback(z.boolean(), false).default(false),
+});
+
 export const Route = createFileRoute("/check")({
+  validateSearch: zodValidator(checkSearchSchema),
   head: () => ({
     meta: [
       { title: "Agent Readability Checker — Grow" },
@@ -24,7 +32,8 @@ export const Route = createFileRoute("/check")({
 type Metric = ScanMetric;
 
 function CheckPage() {
-  const [url, setUrl] = useState("");
+  const search = Route.useSearch();
+  const [url, setUrl] = useState(search.url ?? "");
   const [phase, setPhase] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [log, setLog] = useState<string[]>([]);
   const [visibleLogCount, setVisibleLogCount] = useState(0);
@@ -34,6 +43,7 @@ function CheckPage() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const logRef = useRef<HTMLDivElement>(null);
   const runScan = useServerFn(scanUrl);
+  const autoRanRef = useRef(false);
 
   useEffect(() => {
     if (visibleLogCount >= log.length) return;
@@ -45,18 +55,18 @@ function CheckPage() {
     logRef.current?.scrollTo({ top: logRef.current.scrollHeight, behavior: "smooth" });
   }, [visibleLogCount]);
 
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!url.trim()) return;
+  const runScanFor = async (raw: string) => {
+    const target = raw.trim();
+    if (!target) return;
     setPhase("loading");
-    setLog([`$ scan ${url.trim()}`, "→ dispatching…"]);
+    setLog([`$ scan ${target}`, "→ dispatching…"]);
     setVisibleLogCount(0);
     setMetrics([]);
     setOpenKey(null);
     setErrorMsg(null);
 
     try {
-      const result: ScanResult = await runScan({ data: { url: url.trim() } });
+      const result: ScanResult = await runScan({ data: { url: target } });
       if (!result.ok) {
         setLog(result.log);
         setVisibleLogCount(0);
@@ -76,6 +86,21 @@ function CheckPage() {
       setPhase("error");
     }
   };
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await runScanFor(url);
+  };
+
+  // Auto-run scan when arriving with ?url=...&auto=true (e.g. from MiniChecker on home).
+  useEffect(() => {
+    if (autoRanRef.current) return;
+    if (search.auto && search.url) {
+      autoRanRef.current = true;
+      void runScanFor(search.url);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search.auto, search.url]);
 
   const reset = () => {
     setPhase("idle");

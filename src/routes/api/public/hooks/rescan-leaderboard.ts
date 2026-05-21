@@ -8,8 +8,21 @@ import { scanUrl } from "@/lib/check/scan.functions";
 export const Route = createFileRoute("/api/public/hooks/rescan-leaderboard")({
   server: {
     handlers: {
-      POST: async () => {
+      POST: async ({ request }) => {
+        // Shared-secret check — caller (pg_cron) must send X-Cron-Secret.
+        const expected = process.env.CRON_SECRET;
+        if (!expected) {
+          console.error("[rescan-leaderboard] CRON_SECRET not configured");
+          return new Response("Server misconfigured", { status: 500 });
+        }
+        const provided = request.headers.get("x-cron-secret");
+        if (!provided || provided !== expected) {
+          return new Response("Forbidden", { status: 403 });
+        }
+
         const results: Array<{ domain: string; ok: boolean; score?: number; error?: string }> = [];
+
+
 
         // Cap to avoid worker timeouts. Cron can call again next week.
         const targets = LEADERBOARD.slice(0, 30);

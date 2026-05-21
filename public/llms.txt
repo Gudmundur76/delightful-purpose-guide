@@ -32,6 +32,7 @@ We score every site on a 0-100 scale across five signals:
 - [Process](/process): How a 48-hour build runs end to end.
 - [Work](/work): Recent agent-native site launches.
 - [Leaderboard](/leaderboard): Top 30 AI sites ranked by Agent Readability Score.
+- [Playbook](/playbook): 12-week agent-native SEO content calendar for AI startups.
 - [Comparisons](/vs): Grow vs Webflow, Framer, Wix Studio, and traditional agencies.
 - [Badge](/badge): Free embeddable Agent Readability Score badge.
 - [FAQ](/faq): Common questions about scope, timeline, and ownership.

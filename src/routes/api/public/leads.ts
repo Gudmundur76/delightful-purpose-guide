@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { sendTransactionalEmailInternal } from "@/lib/email/send-internal";
+import { qualifyLeadAndSendReplies } from "@/lib/leads/qualify.server";
 
 const LeadSchema = z.object({
   name: z.string().trim().min(1).max(100),
@@ -101,7 +102,7 @@ export const Route = createFileRoute("/api/public/leads")({
             message: data.message,
           };
 
-          // Run both in parallel; swallow errors.
+          // Run confirm + internal notify in parallel; swallow errors.
           await Promise.allSettled([
             sendTransactionalEmailInternal({
               templateName: "lead-confirmation",
@@ -115,6 +116,17 @@ export const Route = createFileRoute("/api/public/leads")({
               templateData: emailData,
             }).catch((e) => console.error("lead-notification send failed", e)),
           ]);
+
+          // AI qualification + auto-reply (fire and forget — must not block 200).
+          // Awaited here because Workers may suspend the request context after
+          // the response is returned; we keep it inline but tolerate failure.
+          await qualifyLeadAndSendReplies({
+            id: leadId,
+            name: data.name,
+            email: data.email,
+            budget_tier: data.budget_tier,
+            message: data.message,
+          }).catch((e) => console.error("lead qualification failed", e));
 
           return new Response(JSON.stringify({ success: true, id: leadId }), {
             status: 200,

@@ -60,12 +60,20 @@ export function SiteHeader() {
               </Link>
             ))}
           </div>
-          <Link
-            to="/contact"
-            className="hidden sm:inline-flex bg-foreground text-background text-xs font-bold px-4 py-2 uppercase tracking-tighter hover:bg-accent hover:text-accent-foreground transition-all"
-          >
-            Start Brief
-          </Link>
+          <div className="hidden sm:flex items-center gap-3">
+            <Link
+              to="/login"
+              className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors px-3 py-2"
+            >
+              Sign In
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex bg-foreground text-background text-xs font-bold px-4 py-2 uppercase tracking-tighter hover:bg-accent hover:text-accent-foreground transition-all"
+            >
+              Start Brief
+            </Link>
+          </div>
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -95,9 +103,16 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
+              to="/login"
+              onClick={() => setOpen(false)}
+              className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors"
+            >
+              Sign In
+            </Link>
+            <Link
               to="/contact"
               onClick={() => setOpen(false)}
-              className="mt-4 inline-flex items-center justify-center bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm"
+              className="mt-2 inline-flex items-center justify-center bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm"
             >
               Start Brief →
             </Link>

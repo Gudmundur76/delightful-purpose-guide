@@ -59,14 +59,23 @@ export const captureTierOrder = createServerFn({ method: "POST" })
     z
       .object({
         orderId: z.string().min(5).max(64),
-        tier: z.enum(["starter", "growth"]),
         customerName: z.string().trim().max(200).optional(),
       })
       .parse(input),
   )
   .handler(async ({ data }) => {
-    const tier = TIERS[data.tier];
     const result = await paypalCaptureOrder(data.orderId);
+
+    // SECURITY: derive tier from the server-set reference_id on the PayPal
+    // order, NOT from any client-supplied value. Prevents an attacker from
+    // paying Starter and being credited for Growth.
+    const derivedTierKey = result.referenceId as TierKey | undefined;
+    if (!derivedTierKey || !(derivedTierKey in TIERS)) {
+      throw new Error(
+        `Capture rejected: PayPal order has unknown reference_id "${result.referenceId ?? ""}"`,
+      );
+    }
+    const tier = TIERS[derivedTierKey];
     const isCompleted = result.status.toUpperCase() === "COMPLETED";
     const email = result.email ?? null;
     const amount = tier.amountCents / 100;

@@ -12,9 +12,11 @@ export interface TemplateEntry {
 import { template as leadConfirmation } from './lead-confirmation'
 import { template as leadNotification } from './lead-notification'
 import { template as reportFollowup } from './report-followup'
+import { template as scanLeadNotification } from './scan-lead-notification'
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'lead-confirmation': leadConfirmation,
   'lead-notification': leadNotification,
   'report-followup': reportFollowup,
+  'scan-lead-notification': scanLeadNotification,
 }

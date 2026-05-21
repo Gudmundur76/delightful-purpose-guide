@@ -16,6 +16,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as RefundRouteImport } from './routes/refund'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ProcessRouteImport } from './routes/process'
@@ -53,6 +54,8 @@ import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/em
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as ApiPublicWidgetEmbedDotjsRouteImport } from './routes/api/public/widget/embed[.]js'
 import { Route as ApiPublicWidgetBadgeDotsvgRouteImport } from './routes/api/public/widget/badge[.]svg'
+import { Route as ApiPublicV1SpecsRouteImport } from './routes/api/public/v1/specs'
+import { Route as ApiPublicV1ReadinessRouteImport } from './routes/api/public/v1/readiness'
 import { Route as ApiPublicV1PostsRouteImport } from './routes/api/public/v1/posts'
 import { Route as ApiPublicV1OpenapiDotjsonRouteImport } from './routes/api/public/v1/openapi[.]json'
 import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/leads'
@@ -94,6 +97,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RssDotxmlRoute = RssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RefundRoute = RefundRouteImport.update({
@@ -287,6 +295,16 @@ const ApiPublicWidgetBadgeDotsvgRoute =
     path: '/api/public/widget/badge.svg',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicV1SpecsRoute = ApiPublicV1SpecsRouteImport.update({
+  id: '/api/public/v1/specs',
+  path: '/api/public/v1/specs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1ReadinessRoute = ApiPublicV1ReadinessRouteImport.update({
+  id: '/api/public/v1/readiness',
+  path: '/api/public/v1/readiness',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicV1PostsRoute = ApiPublicV1PostsRouteImport.update({
   id: '/api/public/v1/posts',
   path: '/api/public/v1/posts',
@@ -344,6 +362,7 @@ export interface FileRoutesByFullPath {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
@@ -367,6 +386,8 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
+  '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -397,6 +418,7 @@ export interface FileRoutesByTo {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
@@ -420,6 +442,8 @@ export interface FileRoutesByTo {
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
+  '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -451,6 +475,7 @@ export interface FileRoutesById {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
@@ -474,6 +499,8 @@ export interface FileRoutesById {
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
+  '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -506,6 +533,7 @@ export interface FileRouteTypes {
     | '/process'
     | '/products'
     | '/refund'
+    | '/rss.xml'
     | '/services'
     | '/sitemap.xml'
     | '/status'
@@ -529,6 +557,8 @@ export interface FileRouteTypes {
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
+    | '/api/public/v1/readiness'
+    | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/lovable/email/auth/preview'
@@ -559,6 +589,7 @@ export interface FileRouteTypes {
     | '/process'
     | '/products'
     | '/refund'
+    | '/rss.xml'
     | '/services'
     | '/sitemap.xml'
     | '/status'
@@ -582,6 +613,8 @@ export interface FileRouteTypes {
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
+    | '/api/public/v1/readiness'
+    | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/lovable/email/auth/preview'
@@ -612,6 +645,7 @@ export interface FileRouteTypes {
     | '/process'
     | '/products'
     | '/refund'
+    | '/rss.xml'
     | '/services'
     | '/sitemap.xml'
     | '/status'
@@ -635,6 +669,8 @@ export interface FileRouteTypes {
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
+    | '/api/public/v1/readiness'
+    | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/lovable/email/auth/preview'
@@ -666,6 +702,7 @@ export interface RootRouteChildren {
   ProcessRoute: typeof ProcessRoute
   ProductsRoute: typeof ProductsRoute
   RefundRoute: typeof RefundRoute
+  RssDotxmlRoute: typeof RssDotxmlRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StatusRoute: typeof StatusRoute
@@ -685,6 +722,8 @@ export interface RootRouteChildren {
   ApiPublicV1LeadsRoute: typeof ApiPublicV1LeadsRoute
   ApiPublicV1OpenapiDotjsonRoute: typeof ApiPublicV1OpenapiDotjsonRoute
   ApiPublicV1PostsRoute: typeof ApiPublicV1PostsRouteWithChildren
+  ApiPublicV1ReadinessRoute: typeof ApiPublicV1ReadinessRoute
+  ApiPublicV1SpecsRoute: typeof ApiPublicV1SpecsRoute
   ApiPublicWidgetBadgeDotsvgRoute: typeof ApiPublicWidgetBadgeDotsvgRoute
   ApiPublicWidgetEmbedDotjsRoute: typeof ApiPublicWidgetEmbedDotjsRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
@@ -745,6 +784,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rss.xml': {
+      id: '/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/rss.xml'
+      preLoaderRoute: typeof RssDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/refund': {
@@ -1006,6 +1052,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWidgetBadgeDotsvgRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/specs': {
+      id: '/api/public/v1/specs'
+      path: '/api/public/v1/specs'
+      fullPath: '/api/public/v1/specs'
+      preLoaderRoute: typeof ApiPublicV1SpecsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/readiness': {
+      id: '/api/public/v1/readiness'
+      path: '/api/public/v1/readiness'
+      fullPath: '/api/public/v1/readiness'
+      preLoaderRoute: typeof ApiPublicV1ReadinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/posts': {
       id: '/api/public/v1/posts'
       path: '/api/public/v1/posts'
@@ -1130,6 +1190,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProcessRoute: ProcessRoute,
   ProductsRoute: ProductsRoute,
   RefundRoute: RefundRoute,
+  RssDotxmlRoute: RssDotxmlRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StatusRoute: StatusRoute,
@@ -1149,6 +1210,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicV1LeadsRoute: ApiPublicV1LeadsRoute,
   ApiPublicV1OpenapiDotjsonRoute: ApiPublicV1OpenapiDotjsonRoute,
   ApiPublicV1PostsRoute: ApiPublicV1PostsRouteWithChildren,
+  ApiPublicV1ReadinessRoute: ApiPublicV1ReadinessRoute,
+  ApiPublicV1SpecsRoute: ApiPublicV1SpecsRoute,
   ApiPublicWidgetBadgeDotsvgRoute: ApiPublicWidgetBadgeDotsvgRoute,
   ApiPublicWidgetEmbedDotjsRoute: ApiPublicWidgetEmbedDotjsRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,

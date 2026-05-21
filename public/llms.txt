@@ -24,18 +24,23 @@ We score every site on a 0-100 scale across five signals:
 4. Citability (20%) — Clear positioning statements, quotable content
 5. First-contentful speed (20%) — Core HTML loads in <1.5s
 
-## Key Pages
+## Pages
 
-- Home: https://grow.contact/
-- Services: https://grow.contact/services
-- Pricing: https://grow.contact/pricing
-- Process: https://grow.contact/process
-- Work: https://grow.contact/work
-- FAQ: https://grow.contact/faq
-- API Docs: https://grow.contact/api-docs
-- Status: https://grow.contact/status
-- Blog: https://grow.contact/blog
-- llms.txt: https://grow.contact/llms.txt
+- [Home](/): Agent-native web design agency — 48-hour delivery, fixed price.
+- [Services](/services): What we build — semantic HTML, JSON-LD, llms.txt.
+- [Pricing](/pricing): Starter ($2,400) and Growth ($4,800) tiers.
+- [Process](/process): How a 48-hour build runs end to end.
+- [Work](/work): Recent agent-native site launches.
+- [FAQ](/faq): Common questions about scope, timeline, and ownership.
+- [Blog](/blog): Field notes on agent-native design and LLM citation.
+- [API Docs](/api-docs): Public API reference.
+- [Status](/status): System status.
+- [Contact](/contact): Start a project — response in under 4 hours.
+
+## Optional
+
+- [llms.txt](/llms.txt): This file.
+
 
 ## Contact
 

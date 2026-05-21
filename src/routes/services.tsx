@@ -12,6 +12,7 @@ export const Route = createFileRoute("/services")({
       { name: "description", content: "Agent-native marketing sites, launch pages, and devtool hubs. Custom-coded, LLM-readable, fixed price." },
       { property: "og:title", content: "Services — Grow" },
       { property: "og:description", content: "Launch pages, marketing sites, and devtool hubs built agent-native — in 48 hours." },
+      { property: "og:url", content: "https://grow.contact/services" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/services" }],
   }),

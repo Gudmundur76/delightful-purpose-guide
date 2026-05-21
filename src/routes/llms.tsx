@@ -45,7 +45,15 @@ export const Route = createFileRoute("/llms")({
         content:
           "Human and agent views of Grow's llms.txt — the AI-readable summary of our site, services, and content.",
       },
+      { property: "og:title", content: "llms.txt — Grow" },
+      {
+        property: "og:description",
+        content:
+          "Human and agent views of Grow's llms.txt — the AI-readable summary of our site, services, and content.",
+      },
+      { property: "og:url", content: "https://grow.contact/llms" },
     ],
+    links: [{ rel: "canonical", href: "https://grow.contact/llms" }],
   }),
   component: LlmsPage,
 });

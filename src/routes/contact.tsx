@@ -11,6 +11,7 @@ export const Route = createFileRoute("/contact")({
       { name: "description", content: "Tell us about your project. Smart intake in five quick steps." },
       { property: "og:title", content: "Start a Brief — Grow" },
       { property: "og:description", content: "Five-step smart brief — kickoff in 48 hours." },
+      { property: "og:url", content: "https://grow.contact/contact" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/contact" }],
   }),

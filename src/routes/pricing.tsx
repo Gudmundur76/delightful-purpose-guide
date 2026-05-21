@@ -12,6 +12,7 @@ export const Route = createFileRoute("/pricing")({
       { name: "description", content: "Fixed-price tiers for agent-native marketing sites. No hourly surprises." },
       { property: "og:title", content: "Pricing — Grow" },
       { property: "og:description", content: "Transparent fixed-price tiers and technical specifications." },
+      { property: "og:url", content: "https://grow.contact/pricing" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/pricing" }],
   }),

@@ -13,6 +13,7 @@ export const Route = createFileRoute("/work")({
       { name: "description", content: "Case studies and recent outputs: agent-native sites for AI startups and devtools." },
       { property: "og:title", content: "Work — Grow" },
       { property: "og:description", content: "Selected case studies and recent shipped sites." },
+      { property: "og:url", content: "https://grow.contact/work" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/work" }],
   }),

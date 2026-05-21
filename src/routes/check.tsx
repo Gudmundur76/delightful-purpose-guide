@@ -9,6 +9,7 @@ export const Route = createFileRoute("/check")({
       { name: "description", content: "Score any URL for how readable, citeable, and parseable it is to LLM crawlers. Free tool." },
       { property: "og:title", content: "Agent Readability Checker — Grow" },
       { property: "og:description", content: "Score any URL for LLM readability. Free." },
+      { property: "og:url", content: "https://grow.contact/check" },
     ],
   }),
   component: CheckPage,
@@ -186,7 +187,7 @@ function CheckPage() {
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://your-site.com"
               disabled={phase === "loading"}
-              className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground/60"
+              className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
             />
           </div>
           <button

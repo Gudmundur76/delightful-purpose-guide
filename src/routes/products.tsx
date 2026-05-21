@@ -13,7 +13,9 @@ export const Route = createFileRoute("/products")({
       { name: "description", content: "Browse Grow services and packages. Secure checkout with PayPal." },
       { property: "og:title", content: "Shop — Grow" },
       { property: "og:description", content: "Services and packages available for purchase." },
+      { property: "og:url", content: "https://grow.contact/products" },
     ],
+    links: [{ rel: "canonical", href: "https://grow.contact/products" }],
   }),
   component: ProductsPage,
 });

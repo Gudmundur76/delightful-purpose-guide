@@ -55,18 +55,18 @@ function CheckPage() {
     logRef.current?.scrollTo({ top: logRef.current.scrollHeight, behavior: "smooth" });
   }, [visibleLogCount]);
 
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!url.trim()) return;
+  const runScanFor = async (raw: string) => {
+    const target = raw.trim();
+    if (!target) return;
     setPhase("loading");
-    setLog([`$ scan ${url.trim()}`, "→ dispatching…"]);
+    setLog([`$ scan ${target}`, "→ dispatching…"]);
     setVisibleLogCount(0);
     setMetrics([]);
     setOpenKey(null);
     setErrorMsg(null);
 
     try {
-      const result: ScanResult = await runScan({ data: { url: url.trim() } });
+      const result: ScanResult = await runScan({ data: { url: target } });
       if (!result.ok) {
         setLog(result.log);
         setVisibleLogCount(0);
@@ -86,6 +86,21 @@ function CheckPage() {
       setPhase("error");
     }
   };
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await runScanFor(url);
+  };
+
+  // Auto-run scan when arriving with ?url=...&auto=true (e.g. from MiniChecker on home).
+  useEffect(() => {
+    if (autoRanRef.current) return;
+    if (search.auto && search.url) {
+      autoRanRef.current = true;
+      void runScanFor(search.url);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search.auto, search.url]);
 
   const reset = () => {
     setPhase("idle");

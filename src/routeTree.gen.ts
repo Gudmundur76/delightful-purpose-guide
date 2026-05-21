@@ -22,6 +22,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LlmsRouteImport } from './routes/llms'
+import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -114,6 +115,11 @@ const LoginRoute = LoginRouteImport.update({
 const LlmsRoute = LlmsRouteImport.update({
   id: '/llms',
   path: '/llms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeaderboardRoute = LeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -271,6 +277,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
@@ -314,6 +321,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
@@ -358,6 +366,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
@@ -403,6 +412,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cookies'
     | '/faq'
+    | '/leaderboard'
     | '/llms'
     | '/login'
     | '/pricing'
@@ -446,6 +456,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cookies'
     | '/faq'
+    | '/leaderboard'
     | '/llms'
     | '/login'
     | '/pricing'
@@ -489,6 +500,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cookies'
     | '/faq'
+    | '/leaderboard'
     | '/llms'
     | '/login'
     | '/pricing'
@@ -533,6 +545,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CookiesRoute: typeof CookiesRoute
   FaqRoute: typeof FaqRoute
+  LeaderboardRoute: typeof LeaderboardRoute
   LlmsRoute: typeof LlmsRoute
   LoginRoute: typeof LoginRoute
   PricingRoute: typeof PricingRoute
@@ -655,6 +668,13 @@ declare module '@tanstack/react-router' {
       path: '/llms'
       fullPath: '/llms'
       preLoaderRoute: typeof LlmsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leaderboard': {
+      id: '/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof LeaderboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -900,6 +920,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   CookiesRoute: CookiesRoute,
   FaqRoute: FaqRoute,
+  LeaderboardRoute: LeaderboardRoute,
   LlmsRoute: LlmsRoute,
   LoginRoute: LoginRoute,
   PricingRoute: PricingRoute,

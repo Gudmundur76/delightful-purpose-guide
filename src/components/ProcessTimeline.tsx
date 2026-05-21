@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   ClipboardList,
   GitBranch,
@@ -176,12 +177,19 @@ export function ProcessTimeline() {
           </div>
         </div>
 
-        {/* Total time badge */}
-        <div className="mt-16 text-center">
+        {/* Total time badge + CTA */}
+        <div className="mt-16 flex flex-col items-center gap-6">
           <span className="inline-flex items-center gap-2 font-mono text-xs border border-accent/40 bg-accent/10 text-accent px-4 py-2 rounded-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
             Total: 48 hours — fixed price, no scope creep
           </span>
+          <Link
+            to="/contact"
+            className="group inline-flex items-center gap-3 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors"
+          >
+            Start the 48-Hour Clock
+            <span className="font-mono text-[10px] opacity-70 group-hover:translate-x-1 transition-transform">→</span>
+          </Link>
         </div>
       </div>
     </section>

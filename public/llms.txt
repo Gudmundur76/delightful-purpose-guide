@@ -31,6 +31,7 @@ We score every site on a 0-100 scale across five signals:
 - [Pricing](/pricing): Starter ($2,400) and Growth ($4,800) tiers.
 - [Process](/process): How a 48-hour build runs end to end.
 - [Work](/work): Recent agent-native site launches.
+- [Leaderboard](/leaderboard): Top 30 AI sites ranked by Agent Readability Score.
 - [FAQ](/faq): Common questions about scope, timeline, and ownership.
 - [Blog](/blog): Field notes on agent-native design and LLM citation.
 - [API Docs](/api-docs): Public API reference.

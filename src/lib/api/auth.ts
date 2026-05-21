@@ -36,7 +36,8 @@ function safeEqual(a: string, b: string): boolean {
 export function requireApiKey(request: Request): Response | null {
   const expected = process.env.PUBLIC_API_KEY;
   if (!expected) {
-    return jsonResponse({ error: "Server misconfigured: PUBLIC_API_KEY is not set" }, 500);
+    console.error("[auth] PUBLIC_API_KEY environment variable is not configured");
+    return jsonResponse({ error: "Internal server error" }, 500);
   }
   const headerKey = request.headers.get("x-api-key");
   const auth = request.headers.get("authorization");

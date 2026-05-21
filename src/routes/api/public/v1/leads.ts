@@ -15,25 +15,11 @@ export const Route = createFileRoute("/api/public/v1/leads")({
     handlers: {
       OPTIONS: async () => optionsResponse(),
 
-      GET: async ({ request }) => {
-        const unauth = requireApiKey(request);
-        if (unauth) return unauth;
-        const url = new URL(request.url);
-        const limit = Math.min(
-          Math.max(Number(url.searchParams.get("limit")) || 50, 1),
-          200,
-        );
-        const { data, error } = await supabaseAdmin
-          .from("leads")
-          .select("id, name, email, budget_tier, message, created_at")
-          .order("created_at", { ascending: false })
-          .limit(limit);
-        if (error) {
-          console.error("leads GET failed", error);
-          return jsonResponse({ error: "Failed to fetch leads" }, 500);
-        }
-        return jsonResponse({ count: data?.length ?? 0, leads: data ?? [] });
-      },
+      // GET removed: returning lead PII via a shared API key would expose
+      // every contact form submission (name, email, message) to any key
+      // holder. Leads are accessed via the internal admin endpoint instead.
+
+
 
       POST: async ({ request }) => {
         const unauth = requireApiKey(request);

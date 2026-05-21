@@ -87,7 +87,7 @@ export const Route = createFileRoute("/vs/$competitor")({
 });
 
 function VsPage() {
-  const { comparison: c } = Route.useLoaderData();
+  const { comparison: c } = Route.useLoaderData() as { comparison: NonNullable<ReturnType<typeof getComparison>> };
   const others = getAllComparisons().filter((o) => o.slug !== c.slug);
 
   return (

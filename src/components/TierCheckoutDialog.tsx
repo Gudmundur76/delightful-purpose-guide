@@ -44,9 +44,21 @@ function loadPaypalSdk(clientId: string, currency: string): Promise<PayPalNamesp
     script.async = true;
     script.onload = () => {
       if (window.paypal) resolve(window.paypal);
-      else reject(new Error("PayPal SDK failed to initialize"));
+      else {
+        sdkLoadingPromise = null;
+        reject(new Error("PayPal SDK loaded but initialized empty — check that PAYPAL_CLIENT_ID matches PAYPAL_ENVIRONMENT (sandbox vs live)."));
+      }
     };
-    script.onerror = () => reject(new Error("Could not load PayPal SDK"));
+    script.onerror = () => {
+      // Clear the cached promise so a retry (e.g. after closing & reopening the
+      // dialog, or after the user disables an ad blocker) can re-attempt the load.
+      sdkLoadingPromise = null;
+      reject(
+        new Error(
+          "Could not load PayPal SDK. This is usually an ad/tracker blocker on paypal.com, a network block, or an invalid PAYPAL_CLIENT_ID. Disable blockers for this site and try again.",
+        ),
+      );
+    };
     document.head.appendChild(script);
   });
 

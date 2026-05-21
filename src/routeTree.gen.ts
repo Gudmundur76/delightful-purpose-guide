@@ -217,14 +217,14 @@ const CheckReportRoute = CheckReportRouteImport.update({
   getParentRoute: () => CheckRoute,
 } as any)
 const BlogRssDotxmlRoute = BlogRssDotxmlRouteImport.update({
-  id: '/rss.xml',
-  path: '/rss.xml',
-  getParentRoute: () => BlogRoute,
+  id: '/blog/rss.xml',
+  path: '/blog/rss.xml',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BadgeChar123idChar125DotsvgRoute =
   BadgeChar123idChar125DotsvgRouteImport.update({
@@ -673,6 +673,8 @@ export interface RootRouteChildren {
   UnsubscribeRoute: typeof UnsubscribeRoute
   VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -915,17 +917,17 @@ declare module '@tanstack/react-router' {
     }
     '/blog/rss.xml': {
       id: '/blog/rss.xml'
-      path: '/rss.xml'
+      path: '/blog/rss.xml'
       fullPath: '/blog/rss.xml'
       preLoaderRoute: typeof BlogRssDotxmlRouteImport
-      parentRoute: typeof BlogRoute
+      parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
       id: '/blog/$slug'
-      path: '/$slug'
+      path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
+      parentRoute: typeof rootRouteImport
     }
     '/badge/{$id}.svg': {
       id: '/badge/{$id}.svg'
@@ -1135,6 +1137,8 @@ const rootRouteChildren: RootRouteChildren = {
   UnsubscribeRoute: UnsubscribeRoute,
   VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  BlogRssDotxmlRoute: BlogRssDotxmlRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
@@ -1158,13 +1162,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

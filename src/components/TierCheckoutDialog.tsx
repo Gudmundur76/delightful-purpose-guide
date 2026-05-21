@@ -121,7 +121,7 @@ export function TierCheckoutDialog({
         if (cancelled) return;
 
         async function createOrder(): Promise<string> {
-          const res = await createOrderFn({ data: { tier } });
+          const res = await createOrderFn({ data: { tier, leadId } });
           return res.orderId;
         }
 

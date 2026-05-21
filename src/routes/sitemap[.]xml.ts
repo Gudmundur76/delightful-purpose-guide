@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { getAllPosts } from "@/lib/blog/posts";
+import { getAllComparisons } from "@/lib/comparisons/data";
 
 const BASE_URL = "https://grow.contact";
 
@@ -47,6 +48,13 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/unsubscribe", lastmod: today, changefreq: "yearly", priority: "0.3" },
           { path: "/blog", lastmod: today, changefreq: "weekly", priority: "0.9" },
           { path: "/leaderboard", lastmod: today, changefreq: "weekly", priority: "0.9" },
+          { path: "/vs", lastmod: today, changefreq: "monthly", priority: "0.8" },
+          ...getAllComparisons().map<SitemapEntry>((c) => ({
+            path: `/vs/${c.slug}`,
+            lastmod: today,
+            changefreq: "monthly",
+            priority: "0.8",
+          })),
           ...posts.map<SitemapEntry>((p) => ({
             path: `/blog/${p.slug}`,
             lastmod: p.publishedAt,

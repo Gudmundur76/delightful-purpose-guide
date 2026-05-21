@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkRouteImport } from './routes/work'
+import { Route as VsRouteImport } from './routes/vs'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as StatusRouteImport } from './routes/status'
@@ -31,6 +32,7 @@ import { Route as CheckRouteImport } from './routes/check'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
@@ -55,6 +57,11 @@ import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
   path: '/work',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VsRoute = VsRouteImport.update({
+  id: '/vs',
+  path: '/vs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UnsubscribeRoute = UnsubscribeRouteImport.update({
@@ -161,6 +168,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const VsCompetitorRoute = VsCompetitorRouteImport.update({
+  id: '/$competitor',
+  path: '/$competitor',
+  getParentRoute: () => VsRoute,
 } as any)
 const VerifyIdRoute = VerifyIdRouteImport.update({
   id: '/verify/$id',
@@ -290,6 +302,7 @@ export interface FileRoutesByFullPath {
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -297,6 +310,7 @@ export interface FileRoutesByFullPath {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/verify/$id': typeof VerifyIdRoute
+  '/vs/$competitor': typeof VsCompetitorRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
@@ -334,6 +348,7 @@ export interface FileRoutesByTo {
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -341,6 +356,7 @@ export interface FileRoutesByTo {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/verify/$id': typeof VerifyIdRoute
+  '/vs/$competitor': typeof VsCompetitorRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
@@ -379,6 +395,7 @@ export interface FileRoutesById {
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -386,6 +403,7 @@ export interface FileRoutesById {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/verify/$id': typeof VerifyIdRoute
+  '/vs/$competitor': typeof VsCompetitorRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
@@ -425,6 +443,7 @@ export interface FileRouteTypes {
     | '/status'
     | '/terms'
     | '/unsubscribe'
+    | '/vs'
     | '/work'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
@@ -432,6 +451,7 @@ export interface FileRouteTypes {
     | '/checkout/success'
     | '/email/unsubscribe'
     | '/verify/$id'
+    | '/vs/$competitor'
     | '/api/public/leads'
     | '/lovable/email/suppression'
     | '/api/public/v1/docs'
@@ -469,6 +489,7 @@ export interface FileRouteTypes {
     | '/status'
     | '/terms'
     | '/unsubscribe'
+    | '/vs'
     | '/work'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
@@ -476,6 +497,7 @@ export interface FileRouteTypes {
     | '/checkout/success'
     | '/email/unsubscribe'
     | '/verify/$id'
+    | '/vs/$competitor'
     | '/api/public/leads'
     | '/lovable/email/suppression'
     | '/api/public/v1/docs'
@@ -513,6 +535,7 @@ export interface FileRouteTypes {
     | '/status'
     | '/terms'
     | '/unsubscribe'
+    | '/vs'
     | '/work'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
@@ -520,6 +543,7 @@ export interface FileRouteTypes {
     | '/checkout/success'
     | '/email/unsubscribe'
     | '/verify/$id'
+    | '/vs/$competitor'
     | '/api/public/leads'
     | '/lovable/email/suppression'
     | '/api/public/v1/docs'
@@ -558,6 +582,7 @@ export interface RootRouteChildren {
   StatusRoute: typeof StatusRoute
   TermsRoute: typeof TermsRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
+  VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
   BadgeChar123idChar125DotsvgRoute: typeof BadgeChar123idChar125DotsvgRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
@@ -584,6 +609,13 @@ declare module '@tanstack/react-router' {
       path: '/work'
       fullPath: '/work'
       preLoaderRoute: typeof WorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vs': {
+      id: '/vs'
+      path: '/vs'
+      fullPath: '/vs'
+      preLoaderRoute: typeof VsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/unsubscribe': {
@@ -732,6 +764,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/vs/$competitor': {
+      id: '/vs/$competitor'
+      path: '/$competitor'
+      fullPath: '/vs/$competitor'
+      preLoaderRoute: typeof VsCompetitorRouteImport
+      parentRoute: typeof VsRoute
     }
     '/verify/$id': {
       id: '/verify/$id'
@@ -900,6 +939,16 @@ const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
   CheckoutRouteChildren,
 )
 
+interface VsRouteChildren {
+  VsCompetitorRoute: typeof VsCompetitorRoute
+}
+
+const VsRouteChildren: VsRouteChildren = {
+  VsCompetitorRoute: VsCompetitorRoute,
+}
+
+const VsRouteWithChildren = VsRoute._addFileChildren(VsRouteChildren)
+
 interface ApiPublicV1PostsRouteChildren {
   ApiPublicV1PostsSlugRoute: typeof ApiPublicV1PostsSlugRoute
 }
@@ -933,6 +982,7 @@ const rootRouteChildren: RootRouteChildren = {
   StatusRoute: StatusRoute,
   TermsRoute: TermsRoute,
   UnsubscribeRoute: UnsubscribeRoute,
+  VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,
   BadgeChar123idChar125DotsvgRoute: BadgeChar123idChar125DotsvgRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,

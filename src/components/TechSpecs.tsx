@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { getOverviewStats, type OverviewStats } from "@/lib/check/stats.functions";
 
 type TabKey = "html" | "schema" | "performance" | "agent";
 

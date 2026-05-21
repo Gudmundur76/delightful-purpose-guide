@@ -340,6 +340,48 @@ export type Database = {
         }
         Relationships: []
       }
+      scans: {
+        Row: {
+          citability: number
+          host: string
+          id: string
+          jsonld: number
+          llms: number
+          overall: number
+          scanned_at: string
+          semantic: number
+          source: string
+          speed: number
+          url: string
+        }
+        Insert: {
+          citability: number
+          host: string
+          id?: string
+          jsonld: number
+          llms: number
+          overall: number
+          scanned_at?: string
+          semantic: number
+          source?: string
+          speed: number
+          url: string
+        }
+        Update: {
+          citability?: number
+          host?: string
+          id?: string
+          jsonld?: number
+          llms?: number
+          overall?: number
+          scanned_at?: string
+          semantic?: number
+          source?: string
+          speed?: number
+          url?: string
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string

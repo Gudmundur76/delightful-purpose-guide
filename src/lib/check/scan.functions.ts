@@ -1,8 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { persistScan } from "./scans.server";
 
 const InputSchema = z.object({
   url: z.string().min(3).max(2048),
+  source: z.string().max(40).optional(),
 });
 
 export type ScanStatus = "pass" | "warn" | "fail";
@@ -329,6 +331,21 @@ export const scanUrl = createServerFn({ method: "POST" })
     };
     const overall = clamp(metrics.reduce((s, m) => s + m.score * weights[m.key], 0));
     log.push(`→ done · agent_readability_score = ${overall}`);
+
+    // Persist to history (fire-and-forget — never fail the user-facing scan).
+    persistScan({
+      url,
+      finalUrl,
+      overall,
+      scores: {
+        semantic: semanticScore,
+        jsonld: jsonldScore,
+        llms: llmsScore,
+        citability: citabilityScore,
+        speed: speedScore,
+      },
+      source: data.source ?? "check",
+    }).catch((e) => console.error("persistScan error", e));
 
     return {
       ok: true,

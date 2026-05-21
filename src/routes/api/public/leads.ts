@@ -8,7 +8,35 @@ const LeadSchema = z.object({
   email: z.string().trim().email().max(255),
   budget_tier: z.enum(["tier_01", "tier_02", "tier_03"]),
   message: z.string().trim().min(1).max(2000),
+  // Honeypot — real users leave this empty. Bots tend to fill every field.
+  website: z.string().max(0).optional(),
 });
+
+// Simple in-memory sliding-window rate limit per IP. Resets when the worker
+// recycles, which is acceptable for an anti-spam guard on a contact form.
+const RATE_WINDOW_MS = 60_000;
+const RATE_MAX = 5;
+const hits = new Map<string, number[]>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  if (recent.length >= RATE_MAX) {
+    hits.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  hits.set(ip, recent);
+  return false;
+}
+
+function getClientIp(request: Request): string {
+  return (
+    request.headers.get("cf-connecting-ip") ||
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    "unknown"
+  );
+}
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -23,6 +51,14 @@ export const Route = createFileRoute("/api/public/leads")({
         new Response(null, { status: 204, headers: corsHeaders }),
       POST: async ({ request }) => {
         try {
+          const ip = getClientIp(request);
+          if (rateLimited(ip)) {
+            return new Response(
+              JSON.stringify({ error: "Too many requests" }),
+              { status: 429, headers: { "Content-Type": "application/json", "Retry-After": "60", ...corsHeaders } },
+            );
+          }
+
           const json = await request.json();
           const parsed = LeadSchema.safeParse(json);
           if (!parsed.success) {
@@ -31,6 +67,16 @@ export const Route = createFileRoute("/api/public/leads")({
               { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } },
             );
           }
+
+          // Honeypot tripped — quietly return success so bots stop retrying.
+          if (parsed.data.website && parsed.data.website.length > 0) {
+            return new Response(JSON.stringify({ success: true }), {
+              status: 200,
+              headers: { "Content-Type": "application/json", ...corsHeaders },
+            });
+          }
+
+          const { website: _hp, ...leadData } = parsed.data;
 
           const { data: inserted, error } = await supabaseAdmin
             .from("leads")

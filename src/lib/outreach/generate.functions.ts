@@ -1,6 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequest } from "@tanstack/react-start/server";
 import { z } from "zod";
 import { scanUrl, type ScanMetric } from "@/lib/check/scan.functions";
+import { rateLimit, clientIpFromRequest } from "@/lib/api/rate-limit";
 
 const InputSchema = z.object({
   url: z.string().min(3).max(2048),
@@ -74,6 +76,17 @@ export const generateOutreach = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }): Promise<OutreachResult> => {
     try {
+      // Per-IP rate limit — generation calls a paid AI API. 3 per 10 minutes.
+      try {
+        const req = getRequest();
+        const ip = clientIpFromRequest(req);
+        if (rateLimit(`outreach:${ip}`, 3, 10 * 60_000)) {
+          return { ok: false, error: "Rate limited — try again in a few minutes." };
+        }
+      } catch {
+        // ignore — fall through if request context unavailable
+      }
+
       const scan = await scanUrl({ data: { url: data.url } });
       if (!scan.ok) {
         return { ok: false, error: `Scan failed: ${scan.error}` };

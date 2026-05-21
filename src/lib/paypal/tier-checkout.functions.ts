@@ -86,7 +86,7 @@ export const captureTierOrder = createServerFn({ method: "POST" })
       .insert({
         order_id: data.orderId,
         amount,
-        tier: data.tier,
+        tier: derivedTierKey,
         customer_email: email,
         customer_name: data.customerName ?? null,
         status: isCompleted ? "paid" : result.status.toLowerCase(),
@@ -107,7 +107,7 @@ export const captureTierOrder = createServerFn({ method: "POST" })
         payment_id: payment.id,
         client_email: email,
         client_name: data.customerName ?? null,
-        tier: data.tier,
+        tier: derivedTierKey,
         budget: amount,
         status: "deposit_paid",
         start_date: now.toISOString(),

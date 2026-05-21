@@ -80,7 +80,7 @@ export const Route = createFileRoute("/api/public/leads")({
 
           const { data: inserted, error } = await supabaseAdmin
             .from("leads")
-            .insert(parsed.data)
+            .insert(leadData)
             .select("id")
             .single();
           if (error) {
@@ -93,7 +93,7 @@ export const Route = createFileRoute("/api/public/leads")({
 
           // Fire emails — failures must not break the user-facing 200.
           const leadId = inserted?.id ?? crypto.randomUUID();
-          const data = parsed.data;
+          const data = leadData;
           const emailData = {
             name: data.name,
             email: data.email,

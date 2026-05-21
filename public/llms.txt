@@ -4,6 +4,11 @@
 
 Grow builds bespoke marketing sites, launch pages, and devtool hubs for founders shipping AI products. Every site ships with semantic HTML, JSON-LD, llms.txt, OpenGraph, and a clean sitemap so agents and humans both find what they need. Fixed-scope, fixed-price, with a written launch date.
 
+## Pricing
+
+- Starter — $2,400 USD. Launch page or focused marketing site. 48-hour delivery.
+- Growth — $4,800 USD. Full marketing site or devtool hub with docs surface. 48-hour delivery.
+
 ## Who it's for
 
 - AI/ML startups (model APIs, infra, eval tools, fine-tuning)
@@ -12,11 +17,22 @@ Grow builds bespoke marketing sites, launch pages, and devtool hubs for founders
 
 ## Pages
 
-- [Home](/): Positioning, process, pricing tiers (Launch Page, Marketing Site, Devtool Hub), FAQ, intake form.
-- [Journal](/blog): Field notes on shipping agent-native websites and high-converting AI product sites.
+- [Home](https://grow.contact/): Positioning, process, pricing tiers, FAQ, intake form.
+- [Services](https://grow.contact/services): Launch Page, Marketing Site, Devtool Hub.
+- [Pricing](https://grow.contact/pricing): Fixed-price tiers and technical specifications.
+- [Process](https://grow.contact/process): How a 48-hour build runs end-to-end.
+- [Work](https://grow.contact/work): Live examples and case studies.
+- [FAQ](https://grow.contact/faq): Common questions about scope, ownership, timeline.
+- [Contact](https://grow.contact/contact): Project brief intake.
+- [Journal](https://grow.contact/blog): Field notes on agent-native and high-converting AI product sites.
 
 ## Journal posts
 
-- [How to Pick a Startup Web Design Agency](/blog/startup-web-design-agency-what-to-look-for): A founder's checklist for hiring a web design agency without burning six weeks.
-- [SaaS Website Design: 7 Sections That Convert](/blog/saas-website-design-conversion-essentials): Pragmatic anatomy of a high-converting SaaS site with benchmarks.
-- [Landing Page Service vs DIY Builder: When to Switch](/blog/landing-page-design-service-vs-diy-builder): When Webflow, Framer, and Squarespace stop scaling.
+- [How to Pick a Startup Web Design Agency](https://grow.contact/blog/startup-web-design-agency-what-to-look-for): A founder's checklist for hiring a web design agency without burning six weeks.
+- [SaaS Website Design: 7 Sections That Convert](https://grow.contact/blog/saas-website-design-conversion-essentials): Pragmatic anatomy of a high-converting SaaS site with benchmarks.
+- [Landing Page Service vs DIY Builder: When to Switch](https://grow.contact/blog/landing-page-design-service-vs-diy-builder): When Webflow, Framer, and Squarespace stop scaling.
+
+## API
+
+- [API docs](https://grow.contact/api-docs)
+- [OpenAPI spec](https://grow.contact/api/public/v1/openapi.json)

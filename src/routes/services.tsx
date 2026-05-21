@@ -15,6 +15,42 @@ export const Route = createFileRoute("/services")({
       { property: "og:url", content: "https://grow.contact/services" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/services" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: "Web Design",
+          name: "Agent-native web design",
+          description:
+            "Launch pages, marketing sites, and devtool hubs for AI/ML startups, agent platforms, and developer tools. Custom-coded, LLM-readable, 48-hour delivery.",
+          provider: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
+          areaServed: "Worldwide",
+          url: "https://grow.contact/services",
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Grow tiers",
+            itemListElement: [
+              {
+                "@type": "Offer",
+                name: "Starter",
+                price: "2400",
+                priceCurrency: "USD",
+                url: "https://grow.contact/pricing",
+              },
+              {
+                "@type": "Offer",
+                name: "Growth",
+                price: "4800",
+                priceCurrency: "USD",
+                url: "https://grow.contact/pricing",
+              },
+            ],
+          },
+        }),
+      },
+    ],
   }),
 });
 

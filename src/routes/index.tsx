@@ -77,6 +77,19 @@ export const Route = createFileRoute("/")({
                 },
               })),
             },
+            {
+              "@type": "Service",
+              serviceType: "Web Design",
+              provider: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
+              areaServed: "Worldwide",
+              name: "Agent-native marketing sites",
+              description:
+                "Custom-coded marketing sites, launch pages, and devtool hubs for AI/ML startups, agent platforms, and developer tools. Delivered in 48 hours, fixed price.",
+              offers: [
+                { "@type": "Offer", name: "Starter", price: "2400", priceCurrency: "USD", url: "https://grow.contact/pricing" },
+                { "@type": "Offer", name: "Growth", price: "4800", priceCurrency: "USD", url: "https://grow.contact/pricing" },
+              ],
+            },
           ],
         }),
       },

@@ -25,6 +25,7 @@ export const Route = createFileRoute("/faq")({
       { name: "description", content: "Answers to common questions about agent-native sites, pricing, timelines, and ownership." },
       { property: "og:title", content: "FAQ — Grow" },
       { property: "og:description", content: "What 'agent-native' means, how 48h works, pricing, ownership, and more." },
+      { property: "og:url", content: "https://grow.contact/faq" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/faq" }],
     scripts: [

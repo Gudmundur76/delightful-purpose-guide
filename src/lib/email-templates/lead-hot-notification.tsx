@@ -32,10 +32,10 @@ const HotLeadNotification = ({
 }: Props) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>🔥 Hot lead — {name ?? email ?? "new"} (score {score ?? "—"})</Preview>
+    <Preview>{`🔥 Hot lead — ${name ?? email ?? "new"} (score ${score ?? "—"})`}</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Text style={mono}>// HOT_LEAD · SCORE {score ?? "—"}/100</Text>
+        <Text style={mono}>{`// HOT_LEAD · SCORE ${score ?? "—"}/100`}</Text>
         <Heading style={h1}>{name ?? "Hot lead"}</Heading>
         <Text style={text}>{email}</Text>
 

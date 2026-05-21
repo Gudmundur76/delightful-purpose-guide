@@ -3,7 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { listScoredLeads } from "@/lib/admin/leads.functions";
+import { listScoredLeads, type ScoredLead } from "@/lib/admin/leads.functions";
 
 export const Route = createFileRoute("/admin/leads")({
   head: () => ({
@@ -38,21 +38,7 @@ function AdminLeadsPage() {
   const [filter, setFilter] = useState<TierFilter>("all");
   const [expanded, setExpanded] = useState<string | null>(null);
 
-  const leads = (data?.leads ?? []) as Array<{
-    id: string;
-    created_at: string;
-    name: string;
-    email: string;
-    budget_tier: string;
-    message: string;
-    qualification_score: number | null;
-    qualification_tier: string | null;
-    qualification_reasoning: string | null;
-    qualification_suggested_tier: string | null;
-    auto_reply_subject: string | null;
-    auto_reply_body: string | null;
-    auto_replied_at: string | null;
-  }>;
+  const leads: ScoredLead[] = data?.leads ?? [];
 
   const filtered = leads.filter((l) => {
     if (filter === "all") return true;

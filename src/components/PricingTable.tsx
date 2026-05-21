@@ -170,6 +170,7 @@ export function PricingTable({ leadId }: { leadId?: string } = {}) {
           tier={activeTier.key}
           tierName={activeTier.name}
           priceDisplay={activeTier.priceDisplay}
+          leadId={leadId}
         />
       )}
     </section>

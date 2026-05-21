@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, ChevronRight, Check, AlertTriangle, X } from "lucide-react";
+import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/check")({
   head: () => ({
@@ -245,6 +246,8 @@ function CheckPage() {
                 />
               ))}
             </div>
+
+            <ReportGate url={url} score={overall} />
 
             <div className="rounded-xl border border-accent/40 bg-accent/5 p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>

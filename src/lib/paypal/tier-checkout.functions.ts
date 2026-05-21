@@ -5,13 +5,15 @@ import {
   paypalCaptureOrder,
   formatPayPalAmount,
 } from "./paypal.server";
+import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const TIERS = {
-  starter: { name: "Starter — 48h build", amountCents: 240000 },
-  growth: { name: "Growth — 5-day build", amountCents: 480000 },
+  starter: { name: "Starter — 48h build", amountCents: 240000, deliveryHours: 48 },
+  growth: { name: "Growth — 5-day build", amountCents: 480000, deliveryHours: 24 * 5 },
 } as const;
 
 export type TierKey = keyof typeof TIERS;
+
 
 export const createTierOrder = createServerFn({ method: "POST" })
   .inputValidator((input) =>

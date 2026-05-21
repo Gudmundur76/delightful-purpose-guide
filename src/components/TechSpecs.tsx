@@ -71,13 +71,12 @@ const AGENT_CODE = `# llms.txt
 ## Contact
 hello@grow.contact`;
 
-const PERF_METRICS = [
-  { label: "Lighthouse", value: "96", unit: "/100", good: true },
-  { label: "LCP", value: "1.1", unit: "s", good: true },
-  { label: "CLS", value: "0.02", unit: "", good: true },
-  { label: "TBT", value: "40", unit: "ms", good: true },
-  { label: "INP", value: "118", unit: "ms", good: true },
-  { label: "TTFB", value: "180", unit: "ms", good: true },
+const PERF_KEYS: { key: keyof OverviewStats["metrics"]; label: string }[] = [
+  { key: "semantic", label: "Semantic" },
+  { key: "jsonld", label: "JSON-LD" },
+  { key: "llms", label: "llms.txt" },
+  { key: "citability", label: "Citability" },
+  { key: "speed", label: "Speed" },
 ];
 
 function CodeBlock({ code, lang }: { code: string; lang: string }) {

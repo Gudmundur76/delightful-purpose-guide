@@ -66,6 +66,8 @@ export function SmartContactForm() {
   const [data, setData] = useState<FormState>(INITIAL);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [leadId, setLeadId] = useState<string | null>(null);
+  const [checkoutTier, setCheckoutTier] = useState<TierKey | null>(null);
 
   const host = useMemo(() => normalizeUrl(data.url), [data.url]);
 

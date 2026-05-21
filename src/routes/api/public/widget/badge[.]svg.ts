@@ -6,6 +6,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchLatestScanForHost } from "@/lib/check/scans.server";
 import { scanUrl } from "@/lib/check/scan.functions";
+import { rateLimit, clientIpFromRequest } from "@/lib/api/rate-limit";
 
 function normalizeHost(input: string): string | null {
   try {
@@ -74,6 +75,15 @@ export const Route = createFileRoute("/api/public/widget/badge.svg")({
 
         if (!host) {
           return new Response(errorSvg("?url=yoursite.com required"), { status: 400, headers });
+        }
+
+        // Per-IP rate limit — guards inline scanUrl calls from being a
+        // resource-abuse vector. 20 requests/min per IP is plenty for any
+        // legitimate badge embed (which is heavily cached) and stops scripted
+        // enumeration of arbitrary hostnames.
+        const ip = clientIpFromRequest(request);
+        if (rateLimit(`badge:${ip}`, 20, 60_000)) {
+          return new Response(errorSvg("rate limited"), { status: 429, headers });
         }
 
         let latest = await fetchLatestScanForHost(host);

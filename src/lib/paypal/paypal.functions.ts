@@ -35,7 +35,21 @@ export const listProducts = createServerFn({ method: "GET" }).handler(async () =
 });
 
 export const createPaypalOrder = createServerFn({ method: "POST" })
-  .inputValidator((input) => itemsSchema.parse(input))
+  .inputValidator((input) =>
+    z
+      .object({
+        items: z
+          .array(
+            z.object({
+              productId: z.string().uuid(),
+              qty: z.number().int().min(1).max(99),
+            }),
+          )
+          .min(1)
+          .max(50),
+      })
+      .parse(input),
+  )
   .handler(async ({ data }) => {
     const ids = data.items.map((i) => i.productId);
     const { data: products, error } = await supabaseAdmin

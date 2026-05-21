@@ -74,7 +74,7 @@ export function SiteHeader() {
               Start Brief
             </Link>
           </div>
-          <Link
+          <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}

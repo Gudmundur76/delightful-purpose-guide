@@ -44,20 +44,27 @@ export const Route = createFileRoute("/lovable/email/transactional/send")({
           )
         }
 
-        // Verify the caller has a valid Supabase auth token.
-        // In TanStack, there is no Supabase gateway — we validate the JWT ourselves.
-        const authHeader = request.headers.get('Authorization')
-        if (!authHeader?.startsWith('Bearer ')) {
+        // SECURITY: This HTTP endpoint is intentionally locked down.
+        // All in-app email sending goes through `sendTransactionalEmailInternal`
+        // (service-role, no HTTP). The only callers of this route would be
+        // staff tooling, so we require a privileged admin API key rather
+        // than any authenticated Google user (who could otherwise abuse the
+        // verified sending domain for spam/phishing).
+        const adminKey = process.env.ADMIN_API_KEY
+        if (!adminKey) {
+          return Response.json({ error: 'Endpoint disabled' }, { status: 503 })
+        }
+        const provided =
+          request.headers.get('x-admin-api-key') ||
+          (request.headers.get('authorization')?.toLowerCase().startsWith('bearer ')
+            ? request.headers.get('authorization')!.slice(7).trim()
+            : undefined)
+        if (!provided || provided !== adminKey) {
           return Response.json({ error: 'Unauthorized' }, { status: 401 })
         }
 
-        const token = authHeader.slice('Bearer '.length).trim()
         const supabase = createClient(supabaseUrl, supabaseServiceKey)
-        const { data: { user }, error: authError } = await supabase.auth.getUser(token)
 
-        if (authError || !user) {
-          return Response.json({ error: 'Unauthorized' }, { status: 401 })
-        }
 
         // Parse request body
         let templateName: string

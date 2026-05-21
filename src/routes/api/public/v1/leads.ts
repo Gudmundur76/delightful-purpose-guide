@@ -40,12 +40,14 @@ export const Route = createFileRoute("/api/public/v1/leads")({
         const { data, error } = await supabaseAdmin
           .from("leads")
           .insert(parsed.data)
-          .select("id, name, email, budget_tier, message, created_at")
+          .select("id, created_at")
           .single();
         if (error) {
           console.error("leads POST failed", error);
           return jsonResponse({ error: "Failed to create lead" }, 500);
         }
+        // Intentionally do NOT echo PII (name, email, message) back to the
+        // caller — PUBLIC_API_KEY is shared with external consumers.
         return jsonResponse({ lead: data }, 201);
       },
     },

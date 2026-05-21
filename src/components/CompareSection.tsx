@@ -1,22 +1,74 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { scanUrl, type ScanResult } from "@/lib/check/scan.functions";
+import { getOverviewStats, type OverviewStats } from "@/lib/check/stats.functions";
 
-const METRICS = [
-  { key: "semantic", label: "Semantic HTML", yours: 42, ours: 92 },
-  { key: "jsonld", label: "JSON-LD Coverage", yours: 18, ours: 88 },
-  { key: "llms", label: "llms.txt", yours: 0, ours: 100 },
-  { key: "citability", label: "Citability", yours: 51, ours: 78 },
-  { key: "speed", label: "Speed (LCP)", yours: 64, ours: 70 },
+type Row = { key: string; label: string; yours: number | null; ours: number };
+
+const METRIC_KEYS: { key: keyof OverviewStats["metrics"]; label: string }[] = [
+  { key: "semantic", label: "Semantic HTML" },
+  { key: "jsonld", label: "JSON-LD" },
+  { key: "llms", label: "llms.txt" },
+  { key: "citability", label: "Citability" },
+  { key: "speed", label: "Speed" },
 ];
 
 export function CompareSection() {
   const [url, setUrl] = useState("");
-  const [shown, setShown] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [yours, setYours] = useState<ScanResult | null>(null);
 
-  const submit = (e: React.FormEvent) => {
+  const runScan = useServerFn(scanUrl);
+  const fetchStats = useServerFn(getOverviewStats);
+  const [stats, setStats] = useState<OverviewStats | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchStats()
+      .then((r) => !cancelled && setStats(r))
+      .catch(() => !cancelled && setStats(null));
+    return () => {
+      cancelled = true;
+    };
+  }, [fetchStats]);
+
+  const baseline = stats?.metrics ?? {
+    semantic: 0,
+    jsonld: 0,
+    llms: 0,
+    citability: 0,
+    speed: 0,
+  };
+
+  const yourMetrics: Record<string, number> = {};
+  if (yours?.ok) {
+    for (const m of yours.metrics) yourMetrics[m.key] = m.score;
+  }
+
+  const rows: Row[] = METRIC_KEYS.map(({ key, label }) => ({
+    key,
+    label,
+    yours: yours?.ok ? (yourMetrics[key] ?? 0) : null,
+    ours: baseline[key],
+  }));
+
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!url.trim()) return;
-    setShown(true);
+    if (!url.trim() || loading) return;
+    setLoading(true);
+    setError(null);
+    setYours(null);
+    try {
+      const r = await runScan({ data: { url: url.trim(), source: "compare" } });
+      setYours(r);
+      if (!r.ok) setError(r.error);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Scan failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -28,7 +80,8 @@ export function CompareSection() {
             See how your site stacks up.
           </h2>
           <p className="text-muted-foreground max-w-2xl">
-            Paste your URL. We'll preview the gap between a typical marketing site and an agent-native one across five readability metrics.
+            Paste your URL. We run a real scan and compare it against the live average across every
+            site scanned on grow.contact.
           </p>
         </div>
 
@@ -44,25 +97,39 @@ export function CompareSection() {
           </div>
           <button
             type="submit"
-            disabled={!url.trim()}
+            disabled={!url.trim() || loading}
             className="rounded-md bg-foreground text-background font-mono text-sm px-6 py-3 hover:opacity-90 transition disabled:opacity-40"
           >
-            compare
+            {loading ? "scanning…" : "compare"}
           </button>
         </form>
 
-        <div className={`grid md:grid-cols-2 gap-4 transition-opacity duration-500 ${shown ? "opacity-100" : "opacity-60"}`}>
+        {error && (
+          <div className="mb-6 rounded-md border border-red-400/40 bg-red-400/5 p-4 font-mono text-xs text-red-400">
+            {error}
+          </div>
+        )}
+
+        <div className="grid md:grid-cols-2 gap-4">
           <CompareColumn
             label="Your Site"
-            sub={shown && url ? url : "awaiting URL…"}
+            sub={yours?.ok ? yours.finalUrl : url ? url : "awaiting URL…"}
             tone="muted"
-            values={METRICS.map((m) => ({ label: m.label, value: shown ? m.yours : 0 }))}
+            live={!!yours?.ok}
+            values={rows.map((r) => ({ label: r.label, value: r.yours ?? 0 }))}
+            empty={!yours}
           />
           <CompareColumn
-            label="Agent-Native Site"
-            sub="grow.contact baseline"
+            label="Live grow.contact Average"
+            sub={
+              stats && stats.totalScans > 0
+                ? `${stats.totalScans} scans · ${stats.uniqueHosts} sites`
+                : "no scans yet"
+            }
             tone="accent"
-            values={METRICS.map((m) => ({ label: m.label, value: m.ours }))}
+            live
+            values={rows.map((r) => ({ label: r.label, value: r.ours }))}
+            empty={!stats || stats.totalScans === 0}
           />
         </div>
 
@@ -70,7 +137,8 @@ export function CompareSection() {
           <div>
             <div className="font-mono text-xs text-accent mb-1">FULL_REPORT</div>
             <p className="text-sm text-muted-foreground">
-              These bars are a preview. The full scan inspects 40+ signals and gives per-metric fixes.
+              These bars are a real scan summary. The full report on /check breaks down every
+              signal and ships an actionable fix list.
             </p>
           </div>
           <Link
@@ -89,32 +157,48 @@ function CompareColumn({
   label,
   sub,
   tone,
+  live,
   values,
+  empty,
 }: {
   label: string;
   sub: string;
   tone: "muted" | "accent";
+  live: boolean;
   values: { label: string; value: number }[];
+  empty: boolean;
 }) {
   const border = tone === "accent" ? "border-accent/40" : "border-border";
   const accentText = tone === "accent" ? "text-accent" : "text-muted-foreground";
   return (
     <div className={`rounded-xl border ${border} bg-background p-6`}>
       <div className="flex items-baseline justify-between mb-1">
-        <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{label}</div>
-        <div className={`font-mono text-[11px] ${accentText}`}>{tone === "accent" ? "● live" : "○ preview"}</div>
+        <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+          {label}
+        </div>
+        <div className={`font-mono text-[11px] ${accentText}`}>
+          {live ? "● live" : "○ awaiting"}
+        </div>
       </div>
       <div className="font-mono text-xs text-foreground/80 mb-6 truncate">{sub}</div>
       <div className="space-y-4">
         {values.map((v) => (
-          <Bar key={v.label} label={v.label} value={v.value} tone={tone} />
+          <Bar key={v.label} label={v.label} value={empty ? 0 : v.value} tone={tone} />
         ))}
       </div>
     </div>
   );
 }
 
-function Bar({ label, value, tone }: { label: string; value: number; tone: "muted" | "accent" }) {
+function Bar({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: number;
+  tone: "muted" | "accent";
+}) {
   const fill = tone === "accent" ? "bg-accent" : "bg-muted-foreground/60";
   return (
     <div>

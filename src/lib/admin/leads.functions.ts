@@ -14,9 +14,25 @@ async function assertAdmin(userId: string): Promise<void> {
   }
 }
 
+export interface ScoredLead {
+  id: string;
+  created_at: string;
+  name: string;
+  email: string;
+  budget_tier: string;
+  message: string;
+  qualification_score: number | null;
+  qualification_tier: string | null;
+  qualification_reasoning: string | null;
+  qualification_suggested_tier: string | null;
+  auto_reply_subject: string | null;
+  auto_reply_body: string | null;
+  auto_replied_at: string | null;
+}
+
 export const listScoredLeads = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
+  .handler(async ({ context }): Promise<{ leads: ScoredLead[]; error: string | null }> => {
     await assertAdmin(context.userId);
     const { data, error } = await supabaseAdmin
       .from("leads")
@@ -27,9 +43,9 @@ export const listScoredLeads = createServerFn({ method: "GET" })
       .limit(200);
     if (error) {
       console.error("[admin/listLeads]", error);
-      return { leads: [] as Array<Record<string, unknown>>, error: error.message };
+      return { leads: [], error: error.message };
     }
-    return { leads: data ?? [], error: null };
+    return { leads: (data ?? []) as ScoredLead[], error: null };
   });
 
 export const isCurrentUserAdmin = createServerFn({ method: "GET" })

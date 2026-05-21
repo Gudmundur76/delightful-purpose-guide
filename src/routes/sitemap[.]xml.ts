@@ -44,6 +44,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/api-docs", lastmod: today, changefreq: "monthly", priority: "0.5" },
           { path: "/status", lastmod: today, changefreq: "weekly", priority: "0.4" },
           { path: "/llms", lastmod: today, changefreq: "monthly", priority: "0.4" },
+          { path: "/unsubscribe", lastmod: today, changefreq: "yearly", priority: "0.3" },
           { path: "/blog", lastmod: today, changefreq: "weekly", priority: "0.9" },
           ...posts.map<SitemapEntry>((p) => ({
             path: `/blog/${p.slug}`,

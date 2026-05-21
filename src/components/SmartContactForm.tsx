@@ -314,6 +314,16 @@ export function SmartContactForm() {
           </div>
         )}
       </div>
+      {checkoutTier && (
+        <TierCheckoutDialog
+          open={checkoutTier !== null}
+          onClose={() => setCheckoutTier(null)}
+          tier={checkoutTier}
+          tierName={checkoutTier === "starter" ? "Starter" : "Growth"}
+          priceDisplay={checkoutTier === "starter" ? "$2,400" : "$4,800"}
+          leadId={leadId ?? undefined}
+        />
+      )}
     </div>
   );
 }

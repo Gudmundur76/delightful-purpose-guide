@@ -1,5 +1,10 @@
 // Server-only PayPal REST API helpers. Never import from client code.
 
+export function formatPayPalAmount(cents: number): string {
+  return (cents / 100).toFixed(2);
+}
+
+
 function getBaseUrl(): string {
   const env = (process.env.PAYPAL_ENVIRONMENT || "sandbox").toLowerCase();
   return env === "live"

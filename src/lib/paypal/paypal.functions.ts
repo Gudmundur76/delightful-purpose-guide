@@ -1,23 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
-import { paypalCreateOrder, paypalCaptureOrder } from "./paypal.server";
-
-const itemsSchema = z.object({
-  items: z
-    .array(
-      z.object({
-        productId: z.string().uuid(),
-        qty: z.number().int().min(1).max(99),
-      }),
-    )
-    .min(1)
-    .max(50),
-});
-
-function formatAmount(cents: number): string {
-  return (cents / 100).toFixed(2);
-}
+import {
+  paypalCreateOrder,
+  paypalCaptureOrder,
+  formatPayPalAmount,
+} from "./paypal.server";
 
 export const getPaypalPublicConfig = createServerFn({ method: "GET" }).handler(
   async () => {

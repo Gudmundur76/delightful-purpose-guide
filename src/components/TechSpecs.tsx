@@ -198,16 +198,7 @@ export function TechSpecs() {
                 ]}
               />
             )}
-            {tab === "performance" && (
-              <MetaList
-                items={[
-                  ["runner", "Lighthouse 12 · mobile"],
-                  ["network", "4G throttled"],
-                  ["cpu", "4x slowdown"],
-                  ["region", "edge · global"],
-                ]}
-              />
-            )}
+            {tab === "performance" && <MetaList items={perfRunner} />}
             {tab === "agent" && (
               <MetaList
                 items={[

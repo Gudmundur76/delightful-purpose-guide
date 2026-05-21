@@ -15,6 +15,46 @@ export const Route = createFileRoute("/pricing")({
       { property: "og:url", content: "https://grow.contact/pricing" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/pricing" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Product",
+              name: "Starter",
+              description:
+                "Launch page or focused marketing site. Custom-coded, agent-native, delivered in 48 hours.",
+              brand: { "@type": "Brand", name: "Grow" },
+              url: "https://grow.contact/pricing",
+              offers: {
+                "@type": "Offer",
+                price: "2400",
+                priceCurrency: "USD",
+                availability: "https://schema.org/InStock",
+                url: "https://grow.contact/checkout",
+              },
+            },
+            {
+              "@type": "Product",
+              name: "Growth",
+              description:
+                "Full marketing site or devtool hub with docs surface. Custom-coded, agent-native, delivered in 48 hours.",
+              brand: { "@type": "Brand", name: "Grow" },
+              url: "https://grow.contact/pricing",
+              offers: {
+                "@type": "Offer",
+                price: "4800",
+                priceCurrency: "USD",
+                availability: "https://schema.org/InStock",
+                url: "https://grow.contact/checkout",
+              },
+            },
+          ],
+        }),
+      },
+    ],
   }),
 });
 

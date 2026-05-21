@@ -149,6 +149,7 @@ function Index() {
                     View Recent Outputs
                   </Link>
                 </div>
+                <MiniChecker />
               </div>
               <div className="lg:col-span-5 animate-in [animation-delay:150ms]">
                 <ReadabilityScore />

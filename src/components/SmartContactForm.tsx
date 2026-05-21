@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import { TierCheckoutDialog } from "@/components/TierCheckoutDialog";
+import type { TierKey } from "@/lib/paypal/tier-checkout.functions";
 
 type Step = 0 | 1 | 2 | 3 | 4;
 type Status = "idle" | "submitting" | "analyzing" | "done" | "error";

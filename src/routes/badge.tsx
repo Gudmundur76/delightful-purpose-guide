@@ -40,7 +40,7 @@ function BadgePage() {
   const [copied, setCopied] = useState<string | null>(null);
 
   const id = useMemo(() => slugify(domain) || "your-domain.com", [domain]);
-  const badgeUrl = `https://grow.contact/badge/${id}.svg`;
+  const badgeUrl = `https://grow.contact/api/public/widget/badge.svg?url=${encodeURIComponent(id)}`;
   const linkUrl = `https://grow.contact/check?u=${encodeURIComponent(domain || "")}`;
 
   const snippets = {
@@ -48,6 +48,8 @@ function BadgePage() {
   <img src="${badgeUrl}" alt="Agent Readability Score — ${id}" width="240" height="72" />
 </a>`,
     markdown: `[![Agent Readability Score](${badgeUrl})](${linkUrl})`,
+    script: `<script src="https://grow.contact/api/public/widget/embed.js" async></script>
+<div data-grow-badge="${id}"></div>`,
     react: `<a href="${linkUrl}" target="_blank" rel="noopener noreferrer">
   <img
     src="${badgeUrl}"

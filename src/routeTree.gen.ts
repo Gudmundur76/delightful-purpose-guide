@@ -14,17 +14,20 @@ import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as LlmsRouteImport } from './routes/llms'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckRouteImport } from './routes/check'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
+import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
@@ -66,6 +69,11 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProcessRoute = ProcessRouteImport.update({
   id: '/process',
   path: '/process',
@@ -89,6 +97,11 @@ const FaqRoute = FaqRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckRoute = CheckRouteImport.update({
@@ -120,6 +133,11 @@ const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   id: '/email/unsubscribe',
   path: '/email/unsubscribe',
   getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => CheckoutRoute,
 } as any)
 const BlogRssDotxmlRoute = BlogRssDotxmlRouteImport.update({
   id: '/rss.xml',
@@ -207,11 +225,13 @@ export interface FileRoutesByFullPath {
   '/api-docs': typeof ApiDocsRoute
   '/blog': typeof BlogRouteWithChildren
   '/check': typeof CheckRoute
+  '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/llms': typeof LlmsRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
+  '/products': typeof ProductsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
@@ -220,6 +240,7 @@ export interface FileRoutesByFullPath {
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/verify/$id': typeof VerifyIdRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -240,11 +261,13 @@ export interface FileRoutesByTo {
   '/api-docs': typeof ApiDocsRoute
   '/blog': typeof BlogRouteWithChildren
   '/check': typeof CheckRoute
+  '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/llms': typeof LlmsRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
+  '/products': typeof ProductsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
@@ -253,6 +276,7 @@ export interface FileRoutesByTo {
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/verify/$id': typeof VerifyIdRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -274,11 +298,13 @@ export interface FileRoutesById {
   '/api-docs': typeof ApiDocsRoute
   '/blog': typeof BlogRouteWithChildren
   '/check': typeof CheckRoute
+  '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/llms': typeof LlmsRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
+  '/products': typeof ProductsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
@@ -287,6 +313,7 @@ export interface FileRoutesById {
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/verify/$id': typeof VerifyIdRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -309,11 +336,13 @@ export interface FileRouteTypes {
     | '/api-docs'
     | '/blog'
     | '/check'
+    | '/checkout'
     | '/contact'
     | '/faq'
     | '/llms'
     | '/pricing'
     | '/process'
+    | '/products'
     | '/services'
     | '/sitemap.xml'
     | '/status'
@@ -322,6 +351,7 @@ export interface FileRouteTypes {
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
+    | '/checkout/success'
     | '/email/unsubscribe'
     | '/verify/$id'
     | '/api/public/leads'
@@ -342,11 +372,13 @@ export interface FileRouteTypes {
     | '/api-docs'
     | '/blog'
     | '/check'
+    | '/checkout'
     | '/contact'
     | '/faq'
     | '/llms'
     | '/pricing'
     | '/process'
+    | '/products'
     | '/services'
     | '/sitemap.xml'
     | '/status'
@@ -355,6 +387,7 @@ export interface FileRouteTypes {
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
+    | '/checkout/success'
     | '/email/unsubscribe'
     | '/verify/$id'
     | '/api/public/leads'
@@ -375,11 +408,13 @@ export interface FileRouteTypes {
     | '/api-docs'
     | '/blog'
     | '/check'
+    | '/checkout'
     | '/contact'
     | '/faq'
     | '/llms'
     | '/pricing'
     | '/process'
+    | '/products'
     | '/services'
     | '/sitemap.xml'
     | '/status'
@@ -388,6 +423,7 @@ export interface FileRouteTypes {
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
+    | '/checkout/success'
     | '/email/unsubscribe'
     | '/verify/$id'
     | '/api/public/leads'
@@ -409,11 +445,13 @@ export interface RootRouteChildren {
   ApiDocsRoute: typeof ApiDocsRoute
   BlogRoute: typeof BlogRouteWithChildren
   CheckRoute: typeof CheckRoute
+  CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   LlmsRoute: typeof LlmsRoute
   PricingRoute: typeof PricingRoute
   ProcessRoute: typeof ProcessRoute
+  ProductsRoute: typeof ProductsRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StatusRoute: typeof StatusRoute
@@ -472,6 +510,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/process': {
       id: '/process'
       path: '/process'
@@ -505,6 +550,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/check': {
@@ -548,6 +600,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/email/unsubscribe'
       preLoaderRoute: typeof EmailUnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/checkout/success': {
+      id: '/checkout/success'
+      path: '/success'
+      fullPath: '/checkout/success'
+      preLoaderRoute: typeof CheckoutSuccessRouteImport
+      parentRoute: typeof CheckoutRoute
     }
     '/blog/rss.xml': {
       id: '/blog/rss.xml'
@@ -669,6 +728,18 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface CheckoutRouteChildren {
+  CheckoutSuccessRoute: typeof CheckoutSuccessRoute
+}
+
+const CheckoutRouteChildren: CheckoutRouteChildren = {
+  CheckoutSuccessRoute: CheckoutSuccessRoute,
+}
+
+const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
+  CheckoutRouteChildren,
+)
+
 interface ApiPublicV1PostsRouteChildren {
   ApiPublicV1PostsSlugRoute: typeof ApiPublicV1PostsSlugRoute
 }
@@ -685,11 +756,13 @@ const rootRouteChildren: RootRouteChildren = {
   ApiDocsRoute: ApiDocsRoute,
   BlogRoute: BlogRouteWithChildren,
   CheckRoute: CheckRoute,
+  CheckoutRoute: CheckoutRouteWithChildren,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   LlmsRoute: LlmsRoute,
   PricingRoute: PricingRoute,
   ProcessRoute: ProcessRoute,
+  ProductsRoute: ProductsRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StatusRoute: StatusRoute,
@@ -713,13 +786,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

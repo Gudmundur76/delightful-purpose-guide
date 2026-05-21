@@ -2,12 +2,20 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2 } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
+import { zodValidator, fallback } from "@tanstack/zod-adapter";
+import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { sendReportFollowup } from "@/lib/check/report-followup.functions";
 import { scanUrl, type ScanMetric, type ScanResult } from "@/lib/check/scan.functions";
 import { RecentScans } from "@/components/RecentScans";
 
+const checkSearchSchema = z.object({
+  url: fallback(z.string(), "").default(""),
+  auto: fallback(z.boolean(), false).default(false),
+});
+
 export const Route = createFileRoute("/check")({
+  validateSearch: zodValidator(checkSearchSchema),
   head: () => ({
     meta: [
       { title: "Agent Readability Checker — Grow" },

@@ -101,6 +101,33 @@ function CodeBlock({ code, lang }: { code: string; lang: string }) {
 
 export function TechSpecs() {
   const [tab, setTab] = useState<TabKey>("html");
+  const fetchStats = useServerFn(getOverviewStats);
+  const [stats, setStats] = useState<OverviewStats | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchStats()
+      .then((r) => !cancelled && setStats(r))
+      .catch(() => !cancelled && setStats(null));
+    return () => {
+      cancelled = true;
+    };
+  }, [fetchStats]);
+
+  const perfRunner: [string, string][] = stats
+    ? [
+        ["scans", String(stats.totalScans)],
+        ["sites", String(stats.uniqueHosts)],
+        ["avg overall", `${stats.avgOverall}/100`],
+        ["source", "live /check"],
+      ]
+    : [
+        ["scans", "—"],
+        ["sites", "—"],
+        ["avg overall", "—"],
+        ["source", "live /check"],
+      ];
+
 
   return (
     <section className="border-t border-border py-16 sm:py-24 bg-background">

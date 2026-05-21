@@ -170,6 +170,53 @@ export type Database = {
         }
         Relationships: []
       }
+      payments: {
+        Row: {
+          amount: number | null
+          created_at: string
+          customer_email: string | null
+          customer_name: string | null
+          id: string
+          lead_id: string | null
+          order_id: string | null
+          paid_at: string | null
+          status: string
+          tier: string | null
+        }
+        Insert: {
+          amount?: number | null
+          created_at?: string
+          customer_email?: string | null
+          customer_name?: string | null
+          id?: string
+          lead_id?: string | null
+          order_id?: string | null
+          paid_at?: string | null
+          status?: string
+          tier?: string | null
+        }
+        Update: {
+          amount?: number | null
+          created_at?: string
+          customer_email?: string | null
+          customer_name?: string | null
+          id?: string
+          lead_id?: string | null
+          order_id?: string | null
+          paid_at?: string | null
+          status?: string
+          tier?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       products: {
         Row: {
           active: boolean
@@ -205,6 +252,66 @@ export type Database = {
           slug?: string
         }
         Relationships: []
+      }
+      projects: {
+        Row: {
+          budget: number | null
+          client_email: string | null
+          client_name: string | null
+          created_at: string
+          id: string
+          lead_id: string | null
+          notes: string | null
+          payment_id: string | null
+          start_date: string | null
+          status: string
+          target_delivery: string | null
+          tier: string | null
+        }
+        Insert: {
+          budget?: number | null
+          client_email?: string | null
+          client_name?: string | null
+          created_at?: string
+          id?: string
+          lead_id?: string | null
+          notes?: string | null
+          payment_id?: string | null
+          start_date?: string | null
+          status?: string
+          target_delivery?: string | null
+          tier?: string | null
+        }
+        Update: {
+          budget?: number | null
+          client_email?: string | null
+          client_name?: string | null
+          created_at?: string
+          id?: string
+          lead_id?: string | null
+          notes?: string | null
+          payment_id?: string | null
+          start_date?: string | null
+          status?: string
+          target_delivery?: string | null
+          tier?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "projects_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       suppressed_emails: {
         Row: {

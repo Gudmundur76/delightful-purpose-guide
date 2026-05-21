@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { openCookieSettings } from "@/components/CookieConsent";
 
 export function SiteFooter() {
   return (
@@ -39,7 +40,20 @@ export function SiteFooter() {
             </pre>
           </div>
         </div>
-        <div className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row gap-4 md:items-center md:justify-between font-mono text-[10px] text-muted-foreground uppercase">
+        <div className="mt-10 pt-6 border-t border-border flex flex-wrap gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+          <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+          <Link to="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+          <Link to="/cookies" className="hover:text-foreground transition-colors">Cookies</Link>
+          <Link to="/refund" className="hover:text-foreground transition-colors">Refunds</Link>
+          <button
+            type="button"
+            onClick={openCookieSettings}
+            className="hover:text-foreground transition-colors uppercase tracking-widest"
+          >
+            Cookie settings
+          </button>
+        </div>
+        <div className="mt-6 pt-6 border-t border-border flex flex-col md:flex-row gap-4 md:items-center md:justify-between font-mono text-[10px] text-muted-foreground uppercase">
           <span>&copy; 2026 GROW STUDIO</span>
           <a
             href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fgrow.contact"

@@ -252,14 +252,29 @@ export function SmartContactForm() {
                     </div>
                   ))}
                 </div>
-                <a
-                  href="https://cal.com/grow-contact/intro"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-center w-full py-4 bg-accent text-accent-foreground font-bold uppercase tracking-tighter hover:opacity-90 transition-opacity"
-                >
-                  Book a call → Discuss your score
-                </a>
+                <div className="space-y-3">
+                  {(data.budget.startsWith("$2.4k") || data.budget.startsWith("$4.8k")) && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setCheckoutTier(
+                          data.budget.startsWith("$2.4k") ? "starter" : "growth",
+                        )
+                      }
+                      className="block w-full py-4 bg-accent text-accent-foreground font-bold uppercase tracking-tighter hover:opacity-90 transition-opacity"
+                    >
+                      Pay deposit → Lock {data.budget.startsWith("$2.4k") ? "Starter ($2,400)" : "Growth ($4,800)"}
+                    </button>
+                  )}
+                  <a
+                    href="https://cal.com/grow-contact/intro"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-center w-full py-4 border border-border text-foreground font-bold uppercase tracking-tighter hover:border-accent transition-colors"
+                  >
+                    Or book a call → Discuss your score
+                  </a>
+                </div>
               </>
             )}
           </div>

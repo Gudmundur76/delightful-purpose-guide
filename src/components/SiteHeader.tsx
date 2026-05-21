@@ -60,13 +60,21 @@ export function SiteHeader() {
               </Link>
             ))}
           </div>
+          <div className="hidden sm:flex items-center gap-3">
+            <Link
+              to="/login"
+              className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors px-3 py-2"
+            >
+              Sign In
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex bg-foreground text-background text-xs font-bold px-4 py-2 uppercase tracking-tighter hover:bg-accent hover:text-accent-foreground transition-all"
+            >
+              Start Brief
+            </Link>
+          </div>
           <Link
-            to="/contact"
-            className="hidden sm:inline-flex bg-foreground text-background text-xs font-bold px-4 py-2 uppercase tracking-tighter hover:bg-accent hover:text-accent-foreground transition-all"
-          >
-            Start Brief
-          </Link>
-          <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}

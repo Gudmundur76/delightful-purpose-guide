@@ -17,6 +17,7 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as LlmsRouteImport } from './routes/llms'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -84,6 +85,11 @@ const ProcessRoute = ProcessRouteImport.update({
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LlmsRoute = LlmsRouteImport.update({
@@ -241,6 +247,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/llms': typeof LlmsRoute
+  '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
@@ -279,6 +286,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/llms': typeof LlmsRoute
+  '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
@@ -318,6 +326,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/llms': typeof LlmsRoute
+  '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
@@ -358,6 +367,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/llms'
+    | '/login'
     | '/pricing'
     | '/process'
     | '/products'
@@ -396,6 +406,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/llms'
+    | '/login'
     | '/pricing'
     | '/process'
     | '/products'
@@ -434,6 +445,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/llms'
+    | '/login'
     | '/pricing'
     | '/process'
     | '/products'
@@ -473,6 +485,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   LlmsRoute: typeof LlmsRoute
+  LoginRoute: typeof LoginRoute
   PricingRoute: typeof PricingRoute
   ProcessRoute: typeof ProcessRoute
   ProductsRoute: typeof ProductsRoute
@@ -555,6 +568,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/llms': {
@@ -800,6 +820,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   LlmsRoute: LlmsRoute,
+  LoginRoute: LoginRoute,
   PricingRoute: PricingRoute,
   ProcessRoute: ProcessRoute,
   ProductsRoute: ProductsRoute,
@@ -828,13 +849,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

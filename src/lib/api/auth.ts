@@ -50,3 +50,27 @@ export function requireApiKey(request: Request): Response | null {
   }
   return null;
 }
+
+/**
+ * Verify the request carries the privileged admin API key.
+ * This key MUST be distinct from PUBLIC_API_KEY and is only granted to
+ * internal/trusted tooling that needs full CRUD on internal infrastructure
+ * tables. Never share it with external API consumers.
+ */
+export function requireAdminApiKey(request: Request): Response | null {
+  const expected = process.env.ADMIN_API_KEY;
+  if (!expected) {
+    console.error("[auth] ADMIN_API_KEY environment variable is not configured");
+    return jsonResponse({ error: "Internal server error" }, 500);
+  }
+  const headerKey = request.headers.get("x-admin-api-key");
+  const auth = request.headers.get("authorization");
+  const bearer = auth?.toLowerCase().startsWith("bearer ")
+    ? auth.slice(7).trim()
+    : undefined;
+  const provided = headerKey || bearer;
+  if (!provided || !safeEqual(provided, expected)) {
+    return jsonResponse({ error: "Unauthorized" }, 401);
+  }
+  return null;
+}

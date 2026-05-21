@@ -69,7 +69,7 @@ export const Route = createFileRoute("/api/public/v1/admin/$table")({
       OPTIONS: async () => optionsResponse(),
 
       GET: async ({ request, params }) => {
-        const unauth = requireApiKey(request);
+        const unauth = requireAdminApiKey(request);
         if (unauth) return unauth;
         const { table } = params;
         if (!ALLOWED_TABLES.has(table)) {
@@ -95,7 +95,7 @@ export const Route = createFileRoute("/api/public/v1/admin/$table")({
       },
 
       POST: async ({ request, params }) => {
-        const unauth = requireApiKey(request);
+        const unauth = requireAdminApiKey(request);
         if (unauth) return unauth;
         const { table } = params;
         if (!ALLOWED_TABLES.has(table)) {
@@ -109,7 +109,7 @@ export const Route = createFileRoute("/api/public/v1/admin/$table")({
       },
 
       PATCH: async ({ request, params }) => {
-        const unauth = requireApiKey(request);
+        const unauth = requireAdminApiKey(request);
         if (unauth) return unauth;
         const { table } = params;
         if (!ALLOWED_TABLES.has(table)) {
@@ -132,7 +132,7 @@ export const Route = createFileRoute("/api/public/v1/admin/$table")({
       },
 
       DELETE: async ({ request, params }) => {
-        const unauth = requireApiKey(request);
+        const unauth = requireAdminApiKey(request);
         if (unauth) return unauth;
         const { table } = params;
         if (!ALLOWED_TABLES.has(table)) {

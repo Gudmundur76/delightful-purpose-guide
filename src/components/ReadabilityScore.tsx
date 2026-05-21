@@ -1,34 +1,52 @@
 import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { getOverviewStats, type OverviewStats } from "@/lib/check/stats.functions";
 
-
-const METRICS = [
-  { label: "Semantic HTML", value: 92 },
-  { label: "JSON-LD Schema", value: 88 },
-  { label: "llms.txt", value: 100 },
-  { label: "OpenGraph", value: 78 },
-  { label: "Sitemap + RSS", value: 70 },
-];
-
-const TARGET = 85;
 const RADIUS = 88;
 const CIRC = 2 * Math.PI * RADIUS;
 
+const METRIC_LABELS: { key: keyof OverviewStats["metrics"]; label: string }[] = [
+  { key: "semantic", label: "Semantic HTML" },
+  { key: "jsonld", label: "JSON-LD Schema" },
+  { key: "llms", label: "llms.txt" },
+  { key: "citability", label: "Citability" },
+  { key: "speed", label: "Speed" },
+];
+
 export function ReadabilityScore() {
-  const score = TARGET;
+  const fetchStats = useServerFn(getOverviewStats);
+  const [s, setS] = useState<OverviewStats | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchStats()
+      .then((r) => {
+        if (!cancelled) setS(r);
+      })
+      .catch(() => {
+        if (!cancelled) setS(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [fetchStats]);
+
+  const score = s?.avgOverall ?? 0;
   const offset = CIRC - (score / 100) * CIRC;
+  const hasData = !!s && s.totalScans > 0;
 
   return (
     <div className="bg-card border border-border p-6 md:p-8 relative overflow-hidden">
-      {/* Header */}
       <div className="flex items-center justify-between mb-6 font-mono text-[10px] uppercase tracking-widest">
         <div className="flex items-center gap-2 text-accent">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-          GET /api/readiness
+          GET /api/stats/overview
         </div>
-        <span className="text-muted-foreground">200 OK · 18ms</span>
+        <span className="text-muted-foreground">
+          {hasData ? `${s.totalScans} scans` : "no data yet"}
+        </span>
       </div>
 
-      {/* Radial gauge */}
       <div className="flex items-center gap-6 mb-8">
         <div className="relative w-[200px] h-[200px] shrink-0">
           <svg viewBox="0 0 200 200" className="w-full h-full -rotate-90">
@@ -57,10 +75,10 @@ export function ReadabilityScore() {
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
-              Score
+              Avg Score
             </span>
             <span className="font-mono text-5xl font-bold tracking-tighter tabular-nums text-foreground">
-              {score}
+              {hasData ? score : "—"}
             </span>
             <span className="font-mono text-[10px] text-muted-foreground">/ 100</span>
           </div>
@@ -71,20 +89,24 @@ export function ReadabilityScore() {
             Status
           </span>
           <span className="font-bold text-sm uppercase tracking-tighter">
-            Agent-Ready
+            {hasData ? (score >= 80 ? "Agent-Ready" : score >= 60 ? "Needs Work" : "Critical") : "Awaiting data"}
           </span>
           <span className="font-mono text-[10px] text-muted-foreground leading-relaxed">
-            ChatGPT · Perplexity
+            Aggregated from
             <br />
-            Claude · Google AI
+            {hasData ? `${s.uniqueHosts} unique sites` : "all /check scans"}
           </span>
         </div>
       </div>
 
-      {/* Metric bars */}
       <div className="space-y-3 pt-6 border-t border-border">
-        {METRICS.map((m, i) => (
-          <MetricBar key={m.label} {...m} delay={400 + i * 120} />
+        {METRIC_LABELS.map((m, i) => (
+          <MetricBar
+            key={m.key}
+            label={m.label}
+            value={s?.metrics[m.key] ?? 0}
+            delay={400 + i * 120}
+          />
         ))}
       </div>
     </div>

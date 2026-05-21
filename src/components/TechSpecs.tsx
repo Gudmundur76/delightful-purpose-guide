@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { getOverviewStats, type OverviewStats } from "@/lib/check/stats.functions";
 
 type TabKey = "html" | "schema" | "performance" | "agent";
 
@@ -69,13 +71,12 @@ const AGENT_CODE = `# llms.txt
 ## Contact
 hello@grow.contact`;
 
-const PERF_METRICS = [
-  { label: "Lighthouse", value: "96", unit: "/100", good: true },
-  { label: "LCP", value: "1.1", unit: "s", good: true },
-  { label: "CLS", value: "0.02", unit: "", good: true },
-  { label: "TBT", value: "40", unit: "ms", good: true },
-  { label: "INP", value: "118", unit: "ms", good: true },
-  { label: "TTFB", value: "180", unit: "ms", good: true },
+const PERF_KEYS: { key: keyof OverviewStats["metrics"]; label: string }[] = [
+  { key: "semantic", label: "Semantic" },
+  { key: "jsonld", label: "JSON-LD" },
+  { key: "llms", label: "llms.txt" },
+  { key: "citability", label: "Citability" },
+  { key: "speed", label: "Speed" },
 ];
 
 function CodeBlock({ code, lang }: { code: string; lang: string }) {
@@ -100,6 +101,33 @@ function CodeBlock({ code, lang }: { code: string; lang: string }) {
 
 export function TechSpecs() {
   const [tab, setTab] = useState<TabKey>("html");
+  const fetchStats = useServerFn(getOverviewStats);
+  const [stats, setStats] = useState<OverviewStats | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchStats()
+      .then((r) => !cancelled && setStats(r))
+      .catch(() => !cancelled && setStats(null));
+    return () => {
+      cancelled = true;
+    };
+  }, [fetchStats]);
+
+  const perfRunner: [string, string][] = stats
+    ? [
+        ["scans", String(stats.totalScans)],
+        ["sites", String(stats.uniqueHosts)],
+        ["avg overall", `${stats.avgOverall}/100`],
+        ["source", "live /check"],
+      ]
+    : [
+        ["scans", "—"],
+        ["sites", "—"],
+        ["avg overall", "—"],
+        ["source", "live /check"],
+      ];
+
 
   return (
     <section className="border-t border-border py-16 sm:py-24 bg-background">
@@ -170,16 +198,7 @@ export function TechSpecs() {
                 ]}
               />
             )}
-            {tab === "performance" && (
-              <MetaList
-                items={[
-                  ["runner", "Lighthouse 12 · mobile"],
-                  ["network", "4G throttled"],
-                  ["cpu", "4x slowdown"],
-                  ["region", "edge · global"],
-                ]}
-              />
-            )}
+            {tab === "performance" && <MetaList items={perfRunner} />}
             {tab === "agent" && (
               <MetaList
                 items={[
@@ -198,26 +217,43 @@ export function TechSpecs() {
             {tab === "agent" && <CodeBlock code={AGENT_CODE} lang="text" />}
             {tab === "performance" && (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {PERF_METRICS.map((m) => (
-                  <div
-                    key={m.label}
-                    className="rounded-md border border-border bg-card/40 p-5"
-                  >
-                    <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                      {m.label}
-                    </p>
-                    <p className="font-mono text-3xl text-foreground mt-2 tabular-nums">
-                      {m.value}
-                      <span className="text-base text-muted-foreground ml-0.5">
-                        {m.unit}
-                      </span>
-                    </p>
-                    <p className="font-mono text-[10px] uppercase text-accent mt-1 flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                      good
-                    </p>
-                  </div>
-                ))}
+                {PERF_KEYS.map((m) => {
+                  const value = stats?.metrics[m.key] ?? 0;
+                  const good = value >= 80;
+                  const warn = value >= 60 && value < 80;
+                  return (
+                    <div
+                      key={m.key}
+                      className="rounded-md border border-border bg-card/40 p-5"
+                    >
+                      <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                        {m.label}
+                      </p>
+                      <p className="font-mono text-3xl text-foreground mt-2 tabular-nums">
+                        {stats ? value : "—"}
+                        <span className="text-base text-muted-foreground ml-0.5">/100</span>
+                      </p>
+                      <p
+                        className={`font-mono text-[10px] uppercase mt-1 flex items-center gap-1 ${
+                          good ? "text-accent" : warn ? "text-amber-400" : "text-muted-foreground"
+                        }`}
+                      >
+                        <span
+                          className={`w-1.5 h-1.5 rounded-full ${
+                            good ? "bg-accent" : warn ? "bg-amber-400" : "bg-muted-foreground"
+                          }`}
+                        />
+                        {stats && stats.totalScans > 0
+                          ? good
+                            ? "good"
+                            : warn
+                              ? "okay"
+                              : "needs work"
+                          : "no data"}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>

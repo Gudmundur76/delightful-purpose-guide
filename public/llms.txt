@@ -33,6 +33,7 @@ We score every site on a 0-100 scale across five signals:
 - [Work](/work): Recent agent-native site launches.
 - [Leaderboard](/leaderboard): Top 30 AI sites ranked by Agent Readability Score.
 - [Comparisons](/vs): Grow vs Webflow, Framer, Wix Studio, and traditional agencies.
+- [Badge](/badge): Free embeddable Agent Readability Score badge.
 - [FAQ](/faq): Common questions about scope, timeline, and ownership.
 - [Blog](/blog): Field notes on agent-native design and LLM citation.
 - [API Docs](/api-docs): Public API reference.

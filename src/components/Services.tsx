@@ -99,11 +99,49 @@ export function Services() {
                 </span>
               </div>
 
-              {/* Code Preview */}
-              <div className="p-4 bg-[#0a0a0a] overflow-x-auto flex-1">
-                <pre className="font-mono text-[11px] leading-relaxed whitespace-pre-wrap text-foreground/80">
-                  <code>{s.preview}</code>
-                </pre>
+              {/* Preview */}
+              <div className="p-5 bg-[#0a0a0a] overflow-x-auto flex-1">
+                {s.lang === "markdown" ? (
+                  <div className="font-mono text-[11px] leading-relaxed text-foreground/80 space-y-3">
+                    <h4 className="text-base font-extrabold tracking-tight text-foreground">
+                      Grow
+                    </h4>
+                    <p className="text-accent italic border-l-2 border-accent/60 pl-2">
+                      Agent-native web design agency.
+                    </p>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1.5">
+                        Services
+                      </p>
+                      <ul className="space-y-1 list-none">
+                        <li className="flex gap-2">
+                          <span className="text-accent">–</span>
+                          <span><span className="text-foreground">Launch Page</span> — 48h, fixed price</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-accent">–</span>
+                          <span><span className="text-foreground">Marketing Site</span> — ~5 days</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-accent">–</span>
+                          <span><span className="text-foreground">Devtool Hub</span> — docs + API pages</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1.5">
+                        Contact
+                      </p>
+                      <a href="mailto:hello@grow.contact" className="text-accent hover:text-foreground transition-colors">
+                        hello@grow.contact
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  <pre className="font-mono text-[11px] leading-relaxed whitespace-pre-wrap text-foreground/80">
+                    <code>{s.preview}</code>
+                  </pre>
+                )}
               </div>
 
               {/* Card Body */}

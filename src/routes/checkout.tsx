@@ -12,16 +12,11 @@ export const Route = createFileRoute("/checkout")({
       { name: "robots", content: "noindex" },
     ],
   }),
-  component: CheckoutPage,
+  component: CheckoutInner,
 });
 
-function CheckoutPage() {
-  return (
-    <CartProvider>
-      <CheckoutInner />
-    </CartProvider>
-  );
-}
+// CartProvider is mounted at the root, so consumers below can use useCart directly.
+void CartProvider;
 
 function CheckoutInner() {
   const cart = useCart();

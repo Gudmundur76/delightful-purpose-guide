@@ -103,9 +103,16 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
+              to="/login"
+              onClick={() => setOpen(false)}
+              className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors"
+            >
+              Sign In
+            </Link>
+            <Link
               to="/contact"
               onClick={() => setOpen(false)}
-              className="mt-4 inline-flex items-center justify-center bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm"
+              className="mt-2 inline-flex items-center justify-center bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm"
             >
               Start Brief →
             </Link>

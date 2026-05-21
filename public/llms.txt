@@ -44,6 +44,9 @@ We score every site on a 0-100 scale across five signals:
 ## Optional
 
 - [llms.txt](/llms.txt): This file.
+- [RSS feed](/blog/rss.xml): Journal updates as RSS 2.0.
+- [OpenAPI spec](/api/public/v1/openapi.json): Machine-readable API contract (OpenAPI 3.1 JSON).
+- [Swagger UI](/api/public/v1/docs): Interactive API explorer.
 
 
 ## Contact

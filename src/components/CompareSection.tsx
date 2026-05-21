@@ -39,7 +39,7 @@ export function CompareSection() {
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://your-site.com"
-              className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground/60"
+              className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
             />
           </div>
           <button

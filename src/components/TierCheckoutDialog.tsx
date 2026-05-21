@@ -113,7 +113,7 @@ export function TierCheckoutDialog({
         async function onApprove(data: { orderID: string }) {
           setSubmitting(true);
           try {
-            await captureFn({ data: { orderId: data.orderID } });
+            await captureFn({ data: { orderId: data.orderID, tier } });
             setStatus("success");
             setSubmitting(false);
           } catch (e) {

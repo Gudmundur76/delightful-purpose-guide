@@ -313,6 +313,33 @@ export type Database = {
           },
         ]
       }
+      report_requests: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          score: number | null
+          source: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          score?: number | null
+          source?: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          score?: number | null
+          source?: string
+          url?: string
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string

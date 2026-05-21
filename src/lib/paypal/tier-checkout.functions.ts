@@ -8,16 +8,64 @@ import {
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const TIERS = {
-  starter: { name: "Starter — 48h build", amountCents: 240000, deliveryHours: 48 },
-  growth: { name: "Growth — 5-day build", amountCents: 480000, deliveryHours: 24 * 5 },
+  starter: {
+    name: "Starter — 48h build",
+    displayName: "Starter",
+    amountCents: 240000,
+    deliveryHours: 48,
+  },
+  growth: {
+    name: "Growth — 5-day build",
+    displayName: "Growth",
+    amountCents: 480000,
+    deliveryHours: 24 * 5,
+  },
 } as const;
 
 export type TierKey = keyof typeof TIERS;
 
+const UUID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+const WEBHOOK_URL = "https://grow.contact/api/webhooks/payment";
+
+/**
+ * Fire-and-forget POST to the payment webhook. Never throws — failures are
+ * logged but must not block the payment flow. Aborts after 5 seconds.
+ */
+function notifyPaymentWebhook(payload: Record<string, unknown>): void {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 5_000);
+
+  fetch(WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    signal: controller.signal,
+  })
+    .then((res) => {
+      if (!res.ok) {
+        console.error(
+          `Payment webhook returned non-OK: ${res.status} ${res.statusText}`,
+        );
+      }
+    })
+    .catch((err) => {
+      console.error("Payment webhook failed:", err);
+    })
+    .finally(() => clearTimeout(timer));
+}
 
 export const createTierOrder = createServerFn({ method: "POST" })
   .inputValidator((input) =>
-    z.object({ tier: z.enum(["starter", "growth"]) }).parse(input),
+    z
+      .object({
+        tier: z.enum(["starter", "growth"]),
+        // Optional lead UUID — forwarded to PayPal via custom_id so we can
+        // attribute the payment back to a lead at capture time.
+        leadId: z.string().regex(UUID_RE).optional(),
+      })
+      .parse(input),
   )
   .handler(async ({ data }) => {
     const tier = TIERS[data.tier];
@@ -27,6 +75,7 @@ export const createTierOrder = createServerFn({ method: "POST" })
       purchase_units: [
         {
           reference_id: data.tier,
+          custom_id: data.leadId ?? "",
           description: tier.name,
           amount: {
             currency_code: currency,
@@ -80,6 +129,12 @@ export const captureTierOrder = createServerFn({ method: "POST" })
     const email = result.email ?? null;
     const amount = tier.amountCents / 100;
 
+    // Pull lead_id back from PayPal's custom_id (set in createTierOrder).
+    // Validate as UUID before trusting it as a foreign key.
+    const rawCustomId = result.customId?.trim();
+    const leadId =
+      rawCustomId && UUID_RE.test(rawCustomId) ? rawCustomId : null;
+
     // Record the payment
     const { data: payment, error: payErr } = await supabaseAdmin
       .from("payments")
@@ -87,12 +142,13 @@ export const captureTierOrder = createServerFn({ method: "POST" })
         order_id: data.orderId,
         amount,
         tier: derivedTierKey,
+        lead_id: leadId,
         customer_email: email,
         customer_name: data.customerName ?? null,
         status: isCompleted ? "paid" : result.status.toLowerCase(),
         paid_at: isCompleted ? new Date().toISOString() : null,
       })
-      .select("id")
+      .select("id, paid_at, status")
       .single();
 
     if (payErr) {
@@ -105,6 +161,7 @@ export const captureTierOrder = createServerFn({ method: "POST" })
       const target = new Date(now.getTime() + tier.deliveryHours * 3600 * 1000);
       const { error: projErr } = await supabaseAdmin.from("projects").insert({
         payment_id: payment.id,
+        lead_id: leadId,
         client_email: email,
         client_name: data.customerName ?? null,
         tier: derivedTierKey,
@@ -116,6 +173,20 @@ export const captureTierOrder = createServerFn({ method: "POST" })
       if (projErr) {
         console.error("Failed to insert project row", projErr);
       }
+
+      // Fire-and-forget webhook notification.
+      notifyPaymentWebhook({
+        event: "payment.captured",
+        payment_id: payment.id,
+        order_id: data.orderId,
+        amount,
+        tier: tier.displayName,
+        lead_id: leadId,
+        customer_email: email,
+        customer_name: data.customerName ?? null,
+        status: "paid",
+        paid_at: payment.paid_at ?? new Date().toISOString(),
+      });
     }
 
     return {
@@ -124,4 +195,3 @@ export const captureTierOrder = createServerFn({ method: "POST" })
       email,
     };
   });
-

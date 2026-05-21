@@ -71,6 +71,7 @@ export async function paypalCaptureOrder(orderId: string): Promise<{
   status: string;
   email?: string;
   referenceId?: string;
+  customId?: string;
   raw: unknown;
 }> {
   const token = await getAccessToken();
@@ -88,17 +89,24 @@ export async function paypalCaptureOrder(orderId: string): Promise<{
     status?: string;
     message?: string;
     payer?: { email_address?: string };
-    purchase_units?: Array<{ reference_id?: string }>;
+    purchase_units?: Array<{
+      reference_id?: string;
+      custom_id?: string;
+      payments?: { captures?: Array<{ custom_id?: string }> };
+    }>;
   };
   if (!res.ok || !data.status) {
     throw new Error(
       `PayPal capture failed: ${res.status} ${data.message ?? JSON.stringify(data)}`,
     );
   }
+  const pu = data.purchase_units?.[0];
+  const customId = pu?.custom_id ?? pu?.payments?.captures?.[0]?.custom_id;
   return {
     status: data.status,
     email: data.payer?.email_address,
-    referenceId: data.purchase_units?.[0]?.reference_id,
+    referenceId: pu?.reference_id,
+    customId,
     raw: data,
   };
 }

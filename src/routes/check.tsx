@@ -32,7 +32,8 @@ export const Route = createFileRoute("/check")({
 type Metric = ScanMetric;
 
 function CheckPage() {
-  const [url, setUrl] = useState("");
+  const search = Route.useSearch();
+  const [url, setUrl] = useState(search.url ?? "");
   const [phase, setPhase] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [log, setLog] = useState<string[]>([]);
   const [visibleLogCount, setVisibleLogCount] = useState(0);
@@ -42,6 +43,7 @@ function CheckPage() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const logRef = useRef<HTMLDivElement>(null);
   const runScan = useServerFn(scanUrl);
+  const autoRanRef = useRef(false);
 
   useEffect(() => {
     if (visibleLogCount >= log.length) return;

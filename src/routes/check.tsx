@@ -134,13 +134,16 @@ function CheckPage() {
             ref={logRef}
             className="rounded-lg border border-border bg-[#0a0a0a] font-mono text-[13px] leading-relaxed p-5 mb-10 h-64 overflow-auto"
           >
-            {CRAWL_STEPS.slice(0, logIndex).map((line, i) => (
+            {log.slice(0, visibleLogCount).map((line, i) => (
               <div key={i} className={line.startsWith("$") ? "text-accent" : "text-muted-foreground"}>
                 {line}
               </div>
             ))}
-            {phase === "loading" && (
+            {(phase === "loading" || visibleLogCount < log.length) && (
               <div className="text-accent animate-pulse">▍</div>
+            )}
+            {phase === "error" && errorMsg && (
+              <div className="mt-3 text-red-500">! {errorMsg}</div>
             )}
           </div>
         )}

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CartProvider, useCart, formatMoney } from "@/lib/cart/CartContext";
+import { useCart, formatMoney } from "@/lib/cart/CartContext";
 import { PayPalCheckout } from "@/components/PayPalCheckout";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -14,9 +14,6 @@ export const Route = createFileRoute("/checkout")({
   }),
   component: CheckoutInner,
 });
-
-// CartProvider is mounted at the root, so consumers below can use useCart directly.
-void CartProvider;
 
 function CheckoutInner() {
   const cart = useCart();

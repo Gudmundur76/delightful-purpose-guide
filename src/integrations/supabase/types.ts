@@ -103,28 +103,49 @@ export type Database = {
       }
       leads: {
         Row: {
+          auto_replied_at: string | null
+          auto_reply_body: string | null
+          auto_reply_subject: string | null
           budget_tier: string
           created_at: string
           email: string
           id: string
           message: string
           name: string
+          qualification_reasoning: string | null
+          qualification_score: number | null
+          qualification_suggested_tier: string | null
+          qualification_tier: string | null
         }
         Insert: {
+          auto_replied_at?: string | null
+          auto_reply_body?: string | null
+          auto_reply_subject?: string | null
           budget_tier: string
           created_at?: string
           email: string
           id?: string
           message: string
           name: string
+          qualification_reasoning?: string | null
+          qualification_score?: number | null
+          qualification_suggested_tier?: string | null
+          qualification_tier?: string | null
         }
         Update: {
+          auto_replied_at?: string | null
+          auto_reply_body?: string | null
+          auto_reply_subject?: string | null
           budget_tier?: string
           created_at?: string
           email?: string
           id?: string
           message?: string
           name?: string
+          qualification_reasoning?: string | null
+          qualification_score?: number | null
+          qualification_suggested_tier?: string | null
+          qualification_tier?: string | null
         }
         Relationships: []
       }
@@ -406,6 +427,27 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -418,6 +460,13 @@ export type Database = {
       enqueue_email: {
         Args: { payload: Json; queue_name: string }
         Returns: number
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
       }
       move_to_dlq: {
         Args: {
@@ -438,7 +487,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -565,6 +614,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const

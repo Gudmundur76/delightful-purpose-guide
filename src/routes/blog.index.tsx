@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { getAllPosts, type BlogPost } from "@/lib/blog/posts";
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog/")({
   component: BlogIndex,
   head: () => ({
     meta: [

@@ -23,9 +23,7 @@ const ScanLeadNotificationEmail = ({ email, url, score }: Props) => {
   return (
     <Html lang="en" dir="ltr">
       <Head />
-      <Preview>
-        {heat} scan lead: {email} — score {s}/100
-      </Preview>
+      <Preview>{`${heat} scan lead: ${email ?? "unknown"} — score ${s}/100`}</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={mono}>// SCAN LEAD // {heat} //</Text>

@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import { TierCheckoutDialog } from "@/components/TierCheckoutDialog";
+import type { TierKey } from "@/lib/paypal/tier-checkout.functions";
 
 type Step = 0 | 1 | 2 | 3 | 4;
 type Status = "idle" | "submitting" | "analyzing" | "done" | "error";
@@ -64,6 +66,8 @@ export function SmartContactForm() {
   const [data, setData] = useState<FormState>(INITIAL);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [leadId, setLeadId] = useState<string | null>(null);
+  const [checkoutTier, setCheckoutTier] = useState<TierKey | null>(null);
 
   const host = useMemo(() => normalizeUrl(data.url), [data.url]);
 
@@ -97,6 +101,8 @@ export function SmartContactForm() {
         const j = await res.json().catch(() => ({}));
         throw new Error(j?.error ?? "Submission failed");
       }
+      const j = (await res.json().catch(() => ({}))) as { id?: string };
+      if (j?.id) setLeadId(j.id);
       setStatus("analyzing");
       setStep(4);
       // simulated analysis pause
@@ -246,14 +252,29 @@ export function SmartContactForm() {
                     </div>
                   ))}
                 </div>
-                <a
-                  href="https://cal.com/grow-contact/intro"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-center w-full py-4 bg-accent text-accent-foreground font-bold uppercase tracking-tighter hover:opacity-90 transition-opacity"
-                >
-                  Book a call → Discuss your score
-                </a>
+                <div className="space-y-3">
+                  {(data.budget.startsWith("$2.4k") || data.budget.startsWith("$4.8k")) && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setCheckoutTier(
+                          data.budget.startsWith("$2.4k") ? "starter" : "growth",
+                        )
+                      }
+                      className="block w-full py-4 bg-accent text-accent-foreground font-bold uppercase tracking-tighter hover:opacity-90 transition-opacity"
+                    >
+                      Pay deposit → Lock {data.budget.startsWith("$2.4k") ? "Starter ($2,400)" : "Growth ($4,800)"}
+                    </button>
+                  )}
+                  <a
+                    href="https://cal.com/grow-contact/intro"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-center w-full py-4 border border-border text-foreground font-bold uppercase tracking-tighter hover:border-accent transition-colors"
+                  >
+                    Or book a call → Discuss your score
+                  </a>
+                </div>
               </>
             )}
           </div>
@@ -293,6 +314,16 @@ export function SmartContactForm() {
           </div>
         )}
       </div>
+      {checkoutTier && (
+        <TierCheckoutDialog
+          open={checkoutTier !== null}
+          onClose={() => setCheckoutTier(null)}
+          tier={checkoutTier}
+          tierName={checkoutTier === "starter" ? "Starter" : "Growth"}
+          priceDisplay={checkoutTier === "starter" ? "$2,400" : "$4,800"}
+          leadId={leadId ?? undefined}
+        />
+      )}
     </div>
   );
 }

@@ -69,7 +69,7 @@ function Check({ className = "" }: { className?: string }) {
   );
 }
 
-export function PricingTable() {
+export function PricingTable({ leadId }: { leadId?: string } = {}) {
   const [hovered, setHovered] = useState<number | null>(null);
   const [active, setActive] = useState<TierKey | null>(null);
   const activeTier = TIERS.find((t) => t.key === active) ?? null;
@@ -170,6 +170,7 @@ export function PricingTable() {
           tier={activeTier.key}
           tierName={activeTier.name}
           priceDisplay={activeTier.priceDisplay}
+          leadId={leadId}
         />
       )}
     </section>

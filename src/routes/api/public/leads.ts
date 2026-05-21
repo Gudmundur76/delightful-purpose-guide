@@ -116,7 +116,7 @@ export const Route = createFileRoute("/api/public/leads")({
             }).catch((e) => console.error("lead-notification send failed", e)),
           ]);
 
-          return new Response(JSON.stringify({ success: true }), {
+          return new Response(JSON.stringify({ success: true, id: leadId }), {
             status: 200,
             headers: { "Content-Type": "application/json", ...corsHeaders },
           });

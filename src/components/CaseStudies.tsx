@@ -52,14 +52,14 @@ const CASES: Case[] = [
 function Counter({ stat }: { stat: Stat }) {
   return (
     <div className="border border-border p-6 bg-card">
-      <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-        // {stat.label}{" "}
-        <span className="text-foreground font-extrabold tracking-tighter text-base sm:text-lg">
-          {stat.prefix ?? ""}
-          {stat.value}
-          <span className="text-accent">{stat.suffix ?? ""}</span>
-        </span>
-      </div>
+      <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+        // {stat.label}
+      </p>
+      <p className="text-foreground font-extrabold tracking-tighter text-3xl sm:text-4xl tabular-nums">
+        {stat.prefix ?? ""}
+        {stat.value}
+        <span className="text-accent">{stat.suffix ?? ""}</span>
+      </p>
     </div>
   );
 }

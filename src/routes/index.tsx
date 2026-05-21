@@ -9,6 +9,7 @@ import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { Services } from "@/components/Services";
 import { TechSpecs } from "@/components/TechSpecs";
 import { SmartContactForm } from "@/components/SmartContactForm";
+import { SocialProofStrip } from "@/components/SocialProofStrip";
 
 const FAQS: { q: string; a: string }[] = [
   { q: "What does \"agent-native\" actually mean?", a: "Every page ships with semantic HTML, JSON-LD (Organization, Product, FAQ, BreadcrumbList), an llms.txt at the root, OpenGraph + Twitter cards, and a clean sitemap. The result: ChatGPT, Perplexity, Claude, and Google AI Overviews can read, cite, and link to your product without guessing." },
@@ -156,6 +157,7 @@ function Index() {
         </section>
 
         <CaseStudies />
+        <SocialProofStrip />
         <ProcessTimeline />
         <Services />
         <TechSpecs />

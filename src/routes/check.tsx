@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2 } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
+import { sendReportFollowup } from "@/lib/check/report-followup.functions";
 
 export const Route = createFileRoute("/check")({
   head: () => ({
@@ -351,6 +353,7 @@ function ReportGate({ url, score }: { url: string; score: number }) {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "saving" | "ready" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
+  const sendFollowup = useServerFn(sendReportFollowup);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -370,6 +373,10 @@ function ReportGate({ url, score }: { url: string; score: number }) {
         source: "check",
       });
       if (dbError) throw dbError;
+      // Fire follow-up email — non-blocking; ignore failures for UX.
+      sendFollowup({ data: { email: trimmed, url, score } }).catch((err) => {
+        console.error("report follow-up failed", err);
+      });
       setState("ready");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");

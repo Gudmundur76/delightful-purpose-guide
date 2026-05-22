@@ -44,6 +44,46 @@ async function getAccessToken(): Promise<string> {
   return data.access_token;
 }
 
+/**
+ * Generate a short-lived, browser-safe client token used by the PayPal v6
+ * Web SDK. Required for Fastlane, vaulting, and recommended for Apple/Google
+ * Pay. The token expires after ~15 minutes and is bound to the requesting
+ * domain.
+ */
+export async function paypalCreateClientToken(): Promise<{
+  clientToken: string;
+  expiresIn: number;
+}> {
+  const clientId = process.env.PAYPAL_CLIENT_ID;
+  const secret = process.env.PAYPAL_CLIENT_SECRET;
+  if (!clientId || !secret) {
+    throw new Error("PayPal credentials are not configured on the server.");
+  }
+  const auth = Buffer.from(`${clientId}:${secret}`).toString("base64");
+  const res = await fetch(`${getBaseUrl()}/v1/oauth2/token`, {
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${auth}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: "grant_type=client_credentials&response_type=client_token&intent=sdk_init",
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`PayPal client-token failed: ${res.status} ${text}`);
+  }
+  const data = (await res.json()) as {
+    client_token?: string;
+    access_token?: string;
+    expires_in: number;
+  };
+  const token = data.client_token ?? data.access_token;
+  if (!token) {
+    throw new Error("PayPal client-token response missing token");
+  }
+  return { clientToken: token, expiresIn: data.expires_in };
+}
+
 export async function paypalCreateOrder(payload: unknown): Promise<{
   id: string;
   status: string;
@@ -65,6 +105,36 @@ export async function paypalCreateOrder(payload: unknown): Promise<{
     );
   }
   return { id: data.id, status: data.status ?? "CREATED", raw: data };
+}
+
+/**
+ * Confirm a payment source on an existing order. Used by Apple Pay and
+ * Google Pay flows where the wallet returns an encrypted payment token that
+ * must be attached before capture.
+ */
+export async function paypalConfirmOrder(
+  orderId: string,
+  paymentSource: Record<string, unknown>,
+): Promise<{ status: string; raw: unknown }> {
+  const token = await getAccessToken();
+  const res = await fetch(
+    `${getBaseUrl()}/v2/checkout/orders/${encodeURIComponent(orderId)}/confirm-payment-source`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ payment_source: paymentSource }),
+    },
+  );
+  const data = (await res.json()) as { status?: string; message?: string };
+  if (!res.ok || !data.status) {
+    throw new Error(
+      `PayPal confirm failed: ${res.status} ${data.message ?? JSON.stringify(data)}`,
+    );
+  }
+  return { status: data.status, raw: data };
 }
 
 export async function paypalCaptureOrder(orderId: string): Promise<{

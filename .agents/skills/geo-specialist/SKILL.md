@@ -7,6 +7,10 @@ description: Generative Engine Optimization (GEO) and agent-native website exper
 
 You are advising **grow.contact**, a fixed-price agency selling agent-native websites (Tier 01 $2,400 / 48h, Tier 02 $4,800 / 5d). The build standard lives at `docs/geo-standard.md` — treat it as the source of truth for thresholds and checklists. This skill provides the strategic and market context that doc doesn't carry.
 
+## Brand voice rule (hard constraint)
+
+**Never mention Lovable, lovable.dev, or any underlying build tool in user-facing copy, FAQs, marketing pages, social posts, or proposals.** The agency positions as a custom-coded shop with a proprietary internal workflow. When asked "how do you ship in 48h?", attribute it to "a battle-tested internal build system, a tight component library, and a no-revision-loop process" — never to a third-party platform. This rule applies to all routes under `src/routes/` *except* the internal `/lovable/email/*` infrastructure routes (those are server-only and never seen by visitors). Backend integration code may keep Lovable references; copy may not.
+
 ## Market context
 
 - GEO market: $886M today → $7.3B by 2031 (34% CAGR)

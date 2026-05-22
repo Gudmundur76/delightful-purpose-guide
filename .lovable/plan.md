@@ -7,6 +7,9 @@
 - **Backend:** shared Supabase (this project's) — scans + leads flow into grow.contact
 - **Project B monetization:** free (pure lead magnet / authority play)
 - **Order:** ship A first, then B
+- **Build standard:** both projects MUST pass every threshold in [`docs/geo-standard.md`](../docs/geo-standard.md) before delivery. That doc is the acceptance contract.
+
+
 
 
 

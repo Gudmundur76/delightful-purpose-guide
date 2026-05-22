@@ -4,7 +4,7 @@ import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2 }
 import { useServerFn } from "@tanstack/react-start";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
-import { supabase } from "@/integrations/supabase/client";
+
 import { sendReportFollowup } from "@/lib/check/report-followup.functions";
 import { scanUrl, type ScanMetric, type ScanResult } from "@/lib/check/scan.functions";
 import { RecentScans } from "@/components/RecentScans";

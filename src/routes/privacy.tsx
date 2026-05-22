@@ -28,7 +28,7 @@ function PrivacyPage() {
         <H2>1. Who we are</H2>
         <P>
           Data controller: {COMPANY.legalEntity}, {COMPANY.address}. Registration: {COMPANY.registration}.
-          Contact: <a className="underline" href={`mailto:${COMPANY.privacyEmail}`}>{COMPANY.privacyEmail}</a>.
+          Contact: <span className="underline select-all">{COMPANY.privacyEmail}</span>.
         </P>
       </section>
 
@@ -96,7 +96,7 @@ function PrivacyPage() {
         </P>
         <P>
           To exercise any right, email{" "}
-          <a className="underline" href={`mailto:${COMPANY.privacyEmail}`}>{COMPANY.privacyEmail}</a>. We respond within 30 days.
+          <span className="underline select-all">{COMPANY.privacyEmail}</span>. We respond within 30 days.
         </P>
       </section>
 
@@ -105,7 +105,7 @@ function PrivacyPage() {
         <P>
           We use TLS in transit, encryption at rest, Row Level Security on our database, scoped service tokens, and
           regular dependency and security scans. No system is perfectly secure — please report concerns to{" "}
-          <a className="underline" href={`mailto:${COMPANY.privacyEmail}`}>{COMPANY.privacyEmail}</a>.
+          <span className="underline select-all">{COMPANY.privacyEmail}</span>.
         </P>
       </section>
 

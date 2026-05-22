@@ -116,7 +116,7 @@ function TermsPage() {
       <section>
         <H2>11. Contact</H2>
         <P>
-          {COMPANY.legalEntity} — {COMPANY.address} — <a className="underline" href={`mailto:${COMPANY.contactEmail}`}>{COMPANY.contactEmail}</a>.
+          {COMPANY.legalEntity} — {COMPANY.address} — <span className="underline select-all">{COMPANY.contactEmail}</span>.
         </P>
       </section>
     </LegalPage>

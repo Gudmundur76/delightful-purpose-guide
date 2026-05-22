@@ -134,13 +134,20 @@ export function loadPaypalSdk(opts: {
 }): Promise<PayPalNamespace> {
   if (typeof window === "undefined") return Promise.reject(new Error("SSR"));
 
-  const key = JSON.stringify({
+  const rawKey = JSON.stringify({
     c: opts.clientId,
     comp: [...opts.components].sort(),
     cur: opts.currency,
     ef: opts.enableFunding ?? [],
     df: opts.disableFunding ?? [],
   });
+  // Hash to a selector-safe ASCII token (raw JSON contains quotes/braces
+  // that are invalid inside a CSS attribute selector).
+  let h = 0;
+  for (let i = 0; i < rawKey.length; i++) {
+    h = (h * 31 + rawKey.charCodeAt(i)) | 0;
+  }
+  const key = `pp_${(h >>> 0).toString(36)}`;
 
   if (sdkPromise && sdkKey === key && window.paypal) {
     return sdkPromise;

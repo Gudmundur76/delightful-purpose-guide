@@ -3,6 +3,7 @@ import { PricingTable } from "@/components/PricingTable";
 import { TechSpecs } from "@/components/TechSpecs";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { breadcrumbScript } from "@/lib/seo/breadcrumb";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
@@ -70,6 +71,10 @@ export const Route = createFileRoute("/pricing")({
           ],
         }),
       },
+      breadcrumbScript([
+        { name: "Home", url: "/" },
+        { name: "Pricing", url: "/pricing" },
+      ]),
     ],
   }),
 });

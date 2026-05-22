@@ -19,8 +19,15 @@ type Props = {
 };
 
 const TIER_AMOUNTS: Record<TierKey, string> = {
+  fix: "499.00",
   starter: "2400.00",
   growth: "4800.00",
+};
+
+const TIER_LABELS: Record<TierKey, string> = {
+  fix: "Fix Pack",
+  starter: "Tier 01",
+  growth: "Tier 02",
 };
 
 export function TierCheckoutDialog({
@@ -81,7 +88,7 @@ export function TierCheckoutDialog({
 
         <div className="border-b border-border p-6">
           <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">
-            // {tier === "starter" ? "Tier 01" : "Tier 02"} — Secure checkout
+            // {TIER_LABELS[tier]} — Secure checkout
           </p>
           <div className="flex items-baseline justify-between gap-4">
             <h2 className="text-2xl font-extrabold uppercase tracking-tighter">

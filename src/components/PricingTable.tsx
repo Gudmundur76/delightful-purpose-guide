@@ -13,6 +13,23 @@ const TIERS: Array<{
   recommended: boolean;
 }> = [
   {
+    key: "fix",
+    name: "GEO Fix Pack",
+    label: "Tier 00 // Remediation",
+    priceDisplay: "$499",
+    delivery: "24 hours",
+    pages: "Existing site",
+    features: [
+      "robots.txt + llms.txt fixes",
+      "JSON-LD schema injection",
+      "OpenGraph + Twitter meta",
+      "Semantic HTML cleanup",
+      "Re-scan + score delta report",
+      "No redesign — fixes only",
+    ],
+    recommended: false,
+  },
+  {
     key: "starter",
     name: "Starter",
     label: "Tier 01",

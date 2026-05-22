@@ -1,6 +1,15 @@
 
 # Plan: Two Case-Study Projects to Prove the 48h Promise
 
+## Decisions (locked in)
+- **Project A domain:** `agentready.report`
+- **Project B domain:** `llms.direct`
+- **Backend:** shared Supabase (this project's) — scans + leads flow into grow.contact
+- **Project B monetization:** free (pure lead magnet / authority play)
+- **Order:** ship A first, then B
+
+
+
 Goal: ship two real, useful sites that double as portfolio proof for the $2,400 (Tier 01 — Launch Page) and $4,800 (Tier 02 — Marketing Site) packages. Both must be genuinely agent-native (the niche we sell) and ideally function as supporting services that funnel back to grow.contact.
 
 ---

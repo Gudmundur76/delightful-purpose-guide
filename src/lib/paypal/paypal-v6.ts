@@ -133,8 +133,9 @@ export function loadPaypalV6Core(): Promise<V6Namespace> {
       `script[src="${V6_SDK_URL}"]`,
     );
     const onLoad = () => {
-      if (window.paypal && typeof window.paypal.createInstance === "function") {
-        resolve(window.paypal as V6Namespace);
+      const pp = getPaypalGlobal();
+      if (pp && typeof pp.createInstance === "function") {
+        resolve(pp);
       } else {
         corePromise = null;
         reject(

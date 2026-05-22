@@ -86,7 +86,16 @@ export function PayPalCheckout() {
         if (!config.clientId) {
           throw new Error("PayPal is not configured. Add PAYPAL_CLIENT_ID.");
         }
-        const paypal = await loadPaypalSdk(config.clientId, config.currency);
+        const paypal = await loadPaypalSdk(config.clientId, config.currency).catch(
+          (e) => {
+            throw new Error(
+              `Could not load PayPal SDK (env: ${config.environment}, client-id ends in …${config.clientId!.slice(-6)}). ` +
+                `Most likely PAYPAL_CLIENT_ID doesn't match PAYPAL_ENVIRONMENT=${config.environment}. ` +
+                `Other causes: ad/tracker blocker on paypal.com, or invalid client ID. ` +
+                `Underlying: ${e instanceof Error ? e.message : String(e)}`,
+            );
+          },
+        );
         if (cancelled) return;
 
         const itemsPayload = () =>

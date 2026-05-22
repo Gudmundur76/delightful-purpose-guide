@@ -27,12 +27,13 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      {
-        property: "og:description",
-        content:
-          "Marketing sites built for the agent era: structured data, llms.txt, MCP-ready docs. For AI/ML startups, agent platforms, and devtools. 48 hours, fixed price.",
-      },
+      { title: "Grow — Agent-Native Websites in 48 Hours | Cited by ChatGPT, Perplexity, Claude" },
+      { name: "description", content: "73% of websites are silently excluded from AI citations. Grow ships agent-native marketing sites for AI/ML startups, agent platforms, and devtools — semantic HTML, JSON-LD, llms.txt. Custom-coded, live in 48 hours, fixed price." },
+      { property: "og:title", content: "Grow — Agent-Native Websites in 48 Hours" },
+      { property: "og:description", content: "Marketing sites built to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. 48 hours, fixed price. For AI/ML startups, agent platforms, and devtools." },
       { property: "og:url", content: "https://grow.contact/" },
+      { property: "og:image", content: "https://grow.contact/og-home.png" },
+      { name: "twitter:image", content: "https://grow.contact/og-home.png" },
     ],
     links: [
       { rel: "canonical", href: "https://grow.contact/" },

@@ -152,31 +152,9 @@ export function PayPalV6Checkout({
           }
         }
 
-        // ---- PayPal / Pay Later buttons --------------------------------
-        if (paypal.Buttons) {
-          const buttons = paypal.Buttons({
-            style: {
-              layout: "vertical",
-              shape: "rect",
-              color: "gold",
-              label: "paypal",
-            },
-            createOrder: () => createOrderRef.current(),
-            onApprove: onApproveCommon,
-            onCancel: () => setSubmitting(false),
-            onError: onErrorCommon,
-          });
-          if (buttons.isEligible()) {
-            setPaypalEligible(true);
-            queueMicrotask(() => {
-              if (paypalBtnRef.current) {
-                buttons.render(paypalBtnRef.current).catch((e) =>
-                  console.warn("PayPal Buttons render failed", e),
-                );
-              }
-            });
-          }
-        }
+        // ---- PayPal / Pay Later wallet buttons intentionally disabled.
+        // The site offers card-only checkout (via the Card funding button),
+        // which opens PayPal's hosted card + billing address form directly.
 
         // ---- Card fields (inline ACDC) --------------------------------
         if (paypal.CardFields) {

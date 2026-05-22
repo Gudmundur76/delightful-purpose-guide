@@ -45,6 +45,7 @@ const SERVICES = [
     preview: LLMS_PREVIEW,
     lang: "markdown",
     cta: "View Build Specs →",
+    href: "/services",
   },
   {
     title: "Agent Readability Audit",
@@ -53,6 +54,7 @@ const SERVICES = [
     preview: AUDIT_PREVIEW,
     lang: "bash",
     cta: "Audit Your Site →",
+    href: "/check",
   },
   {
     title: "Schema Optimization",
@@ -61,8 +63,10 @@ const SERVICES = [
     preview: SCHEMA_DIFF,
     lang: "diff",
     cta: "See Before / After →",
+    href: "/playbook",
   },
 ];
+
 
 export function Services() {
   const [hovered, setHovered] = useState<number | null>(null);

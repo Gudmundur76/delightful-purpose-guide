@@ -87,14 +87,21 @@ export function SmartContactForm() {
     setStatus("submitting");
     setError(null);
     try {
+      const budgetTier = data.budget.startsWith("$2.4k")
+        ? "tier_01"
+        : data.budget.startsWith("$4.8k")
+          ? "tier_02"
+          : data.budget.startsWith("$8.5k")
+            ? "tier_03"
+            : "tier_01"; // "Not sure yet" → default to tier_01 so qualification engine handles it
       const res = await fetch("/api/public/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: data.name,
           email: data.email,
-          budget_tier: data.budget,
-          message: `URL: ${data.url}\nStage: ${data.stage}\nAudience: ${data.audience}\nTimeline: ${data.timeline}\nNotes: ${data.notes}`,
+          budget_tier: budgetTier,
+          message: `URL: ${data.url}\nStage: ${data.stage}\nAudience: ${data.audience}\nBudget: ${data.budget}\nTimeline: ${data.timeline}\nNotes: ${data.notes}`,
         }),
       });
       if (!res.ok) {

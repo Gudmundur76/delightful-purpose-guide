@@ -12,6 +12,7 @@ export const Route = createFileRoute("/process")({
       { name: "description", content: "48-hour delivery process: kickoff, build, ship. Plus our guarantees." },
       { property: "og:title", content: "Process — Grow" },
       { property: "og:description", content: "How we ship agent-native sites in 48 hours, with verified guarantees." },
+      { property: "og:url", content: "https://grow.contact/process" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/process" }],
   }),

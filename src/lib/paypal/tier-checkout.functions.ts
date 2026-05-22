@@ -66,9 +66,7 @@ export const createTierOrder = createServerFn({ method: "POST" })
   .inputValidator((input) =>
     z
       .object({
-        tier: z.enum(["starter", "growth"]),
-        // Optional lead UUID — forwarded to PayPal via custom_id so we can
-        // attribute the payment back to a lead at capture time.
+        tier: z.enum(["fix", "starter", "growth"]),
         leadId: z.string().regex(UUID_RE).optional(),
       })
       .parse(input),

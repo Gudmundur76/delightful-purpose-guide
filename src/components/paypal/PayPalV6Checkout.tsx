@@ -52,8 +52,10 @@ export function PayPalV6Checkout({
   const [appleEligible, setAppleEligible] = useState(false);
   const [googleEligible, setGoogleEligible] = useState(false);
   const [paypalEligible, setPaypalEligible] = useState(false);
+  const [cardButtonEligible, setCardButtonEligible] = useState(false);
 
   const paypalBtnRef = useRef<HTMLDivElement>(null);
+  const cardBtnRef = useRef<HTMLDivElement>(null);
   const appleBtnRef = useRef<HTMLDivElement>(null);
   const googleBtnRef = useRef<HTMLDivElement>(null);
   const cardNameRef = useRef<HTMLDivElement>(null);
@@ -78,8 +80,6 @@ export function PayPalV6Checkout({
 
     async function init() {
       try {
-        // Client token is optional (only required for Apple/Google Pay +
-        // Fastlane). Cap at 2s so a slow PayPal API never blocks render.
         const tokenWithTimeout = Promise.race([
           getClientToken().then((t) => t.clientToken).catch((e) => {
             console.warn("PayPal client-token failed", e);
@@ -122,6 +122,36 @@ export function PayPalV6Checkout({
           setSubmitting(false);
         };
 
+        // ---- Debit or Credit Card button (guest checkout) — shown first as default ---
+        if (paypal.Buttons) {
+          const cardFunding = paypal.FUNDING?.CARD ?? "card";
+          if (paypal.isFundingEligible?.(cardFunding) !== false) {
+            const cardButtons = paypal.Buttons({
+              fundingSource: cardFunding,
+              style: {
+                layout: "vertical",
+                shape: "rect",
+                color: "black",
+                label: "checkout",
+              },
+              createOrder: () => createOrderRef.current(),
+              onApprove: onApproveCommon,
+              onCancel: () => setSubmitting(false),
+              onError: onErrorCommon,
+            });
+            if (cardButtons.isEligible()) {
+              setCardButtonEligible(true);
+              queueMicrotask(() => {
+                if (cardBtnRef.current) {
+                  cardButtons.render(cardBtnRef.current).catch((e) =>
+                    console.warn("PayPal Card button render failed", e),
+                  );
+                }
+              });
+            }
+          }
+        }
+
         // ---- PayPal / Pay Later buttons --------------------------------
         if (paypal.Buttons) {
           const buttons = paypal.Buttons({
@@ -148,7 +178,7 @@ export function PayPalV6Checkout({
           }
         }
 
-        // ---- Card fields ----------------------------------------------
+        // ---- Card fields (inline ACDC) --------------------------------
         if (paypal.CardFields) {
           const inputColor = variant === "dialog" ? "#ffffff" : "#0f172a";
           const cardFields = paypal.CardFields({
@@ -211,10 +241,6 @@ export function PayPalV6Checkout({
                   try {
                     setSubmitting(true);
                     const orderId = await createOrderRef.current();
-                    // Full Apple Pay flow needs a registered domain +
-                    // ApplePaySession with merchant validation. Here we
-                    // hand the token to PayPal via confirmOrder when the
-                    // user completes the sheet (left to integration time).
                     const result = await apple.confirmOrder({
                       orderId,
                       token: cfg,
@@ -341,8 +367,6 @@ export function PayPalV6Checkout({
     };
   }, []);
 
-  // Kept available for swapping the SDK-driven wallet confirm with a
-  // server-side confirm endpoint later.
   void confirmWalletFn;
 
   async function submitCard() {
@@ -377,8 +401,10 @@ export function PayPalV6Checkout({
         </div>
       )}
 
-      {/* Hosts are always mounted so SDK render() has a valid ref;
-          hidden via CSS until the corresponding method is eligible. */}
+      {/* Debit or Credit Card button (guest checkout) — shown first as default */}
+      <div ref={cardBtnRef} aria-label="Debit or Credit Card" style={{ display: cardButtonEligible ? undefined : "none" }} />
+
+      {/* Standard PayPal button */}
       <div ref={paypalBtnRef} aria-label="PayPal" style={{ display: paypalEligible ? undefined : "none" }} />
       <div ref={appleBtnRef} aria-label="Apple Pay" style={{ display: appleEligible ? undefined : "none" }} />
       <div ref={googleBtnRef} aria-label="Google Pay" style={{ display: googleEligible ? undefined : "none" }} />
@@ -418,7 +444,7 @@ export function PayPalV6Checkout({
         </div>
       </div>
 
-      {status === "ready" && !paypalEligible && !appleEligible && !googleEligible && !cardEligible && (
+      {status === "ready" && !paypalEligible && !cardButtonEligible && !appleEligible && !googleEligible && !cardEligible && (
         <div className="p-3 border border-destructive/40 bg-destructive/10 text-destructive text-sm">
           No payment methods are available in this environment. Please contact us to complete your purchase.
         </div>

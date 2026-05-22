@@ -33,6 +33,7 @@ export function TierCheckoutDialog({
 }: Props) {
   const createOrderFn = useServerFn(createTierOrder);
   const captureFn = useServerFn(captureTierOrder);
+  const navigate = useNavigate();
 
   const [success, setSuccess] = useState(false);
 
@@ -48,6 +49,12 @@ export function TierCheckoutDialog({
 
   async function capture(orderId: string): Promise<void> {
     await captureFn({ data: { orderId } });
+  }
+
+  function handleSuccess(orderId: string) {
+    setSuccess(true);
+    onClose();
+    navigate({ to: "/checkout/success", search: { order: orderId } });
   }
 
   if (!open) return null;

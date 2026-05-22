@@ -51,6 +51,10 @@ export const Route = createFileRoute("/services")({
           },
         }),
       },
+      breadcrumbScript([
+        { name: "Home", url: "/" },
+        { name: "Services", url: "/services" },
+      ]),
     ],
   }),
 });

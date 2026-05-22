@@ -16,6 +16,31 @@ export const Route = createFileRoute("/work")({
       { property: "og:url", content: "https://grow.contact/work" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/work" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Work — Grow",
+          url: "https://grow.contact/work",
+          description:
+            "Selected case studies and recent agent-native sites shipped by Grow for AI startups and devtools.",
+          isPartOf: { "@type": "WebSite", name: "Grow", url: "https://grow.contact/" },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
+            { "@type": "ListItem", position: 2, name: "Work", item: "https://grow.contact/work" },
+          ],
+        }),
+      },
+    ],
   }),
 });
 

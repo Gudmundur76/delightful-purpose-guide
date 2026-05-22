@@ -15,6 +15,37 @@ export const Route = createFileRoute("/process")({
       { property: "og:url", content: "https://grow.contact/process" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/process" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          name: "How Grow ships an agent-native website in 48 hours",
+          description:
+            "End-to-end 48-hour build process for fixed-price agent-native websites: brief, structure, design, content, launch.",
+          totalTime: "PT48H",
+          step: [
+            { "@type": "HowToStep", position: 1, name: "Brief", text: "Send positioning, docs, and API surface. We extract intent and constraints into a tight creative brief." },
+            { "@type": "HowToStep", position: 2, name: "Structure", text: "Turn the brief into a semantic site map, content schema, and JSON-LD taxonomy. Architecture first." },
+            { "@type": "HowToStep", position: 3, name: "Design", text: "High-fidelity UI in the dark. Every component is coded, not mocked — no handoff gap." },
+            { "@type": "HowToStep", position: 4, name: "Content", text: "llms.txt, OpenGraph, semantic markup, sitemap and RSS. Built to be parsed by agents at ingestion." },
+            { "@type": "HowToStep", position: 5, name: "Launch", text: "Lighthouse audit, agent-readability check, domain handover. Live and citeable in 48 hours." },
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
+            { "@type": "ListItem", position: 2, name: "Process", item: "https://grow.contact/process" },
+          ],
+        }),
+      },
+    ],
   }),
 });
 

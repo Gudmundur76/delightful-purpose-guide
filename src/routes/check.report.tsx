@@ -243,20 +243,22 @@ function ReportPage() {
                 // Recommended next step
               </div>
               <h2 className="text-3xl font-extrabold tracking-tighter uppercase mb-3">
-                GEO Fix Pack — $499
+                GEO Patch Pack — Free (Beta)
               </h2>
               <p className="text-foreground/80 mb-6 max-w-2xl">
-                Your score is {score}/100. We'll ship every fix in this report —
-                robots.txt, llms.txt, JSON-LD, OpenGraph, semantic HTML — on your
-                existing site in 24 hours. No redesign. Re-scan + delta report included.
+                Your score is {score}/100. We'll send you a custom patch pack
+                with every fix in this report — robots.txt, llms.txt, JSON-LD,
+                OpenGraph, semantic HTML snippets — plus a copy-paste install
+                guide and a re-scan + delta report. 48-hour turnaround. Free
+                while in beta.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
-                  to="/pricing"
-                  hash="pricing"
+                  to="/contact"
+                  search={{ tier: "fix" } as never}
                   className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-6 py-3 uppercase tracking-tighter text-sm"
                 >
-                  Buy Fix Pack →
+                  Request free patch pack →
                 </Link>
                 <Link
                   to="/contact"
@@ -266,6 +268,7 @@ function ReportPage() {
                 </Link>
               </div>
             </div>
+
           ) : (
             <>
               <h2 className="text-3xl font-extrabold tracking-tighter uppercase mb-4">

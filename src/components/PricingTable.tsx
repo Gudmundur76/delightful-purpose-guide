@@ -161,19 +161,31 @@ export function PricingTable({ leadId }: { leadId?: string } = {}) {
               </div>
 
               <div className="px-5 sm:px-6 pb-5 sm:pb-6">
-                <button
-                  type="button"
-                  onClick={() => setActive(tier.key)}
-                  className={`inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-5 py-3 transition-colors w-full justify-center ${
-                    tier.recommended
-                      ? "bg-accent text-accent-foreground hover:bg-foreground hover:text-background"
-                      : "border border-border hover:border-accent text-foreground"
-                  }`}
-                >
-                  Start with {tier.name}
-                  <span>→</span>
-                </button>
+                {tier.key === "fix" ? (
+                  <Link
+                    to="/contact"
+                    search={{ tier: "fix" } as never}
+                    className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-5 py-3 transition-colors w-full justify-center border border-accent text-accent hover:bg-accent hover:text-accent-foreground"
+                  >
+                    Request free patch pack
+                    <span>→</span>
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setActive(tier.key)}
+                    className={`inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest px-5 py-3 transition-colors w-full justify-center ${
+                      tier.recommended
+                        ? "bg-accent text-accent-foreground hover:bg-foreground hover:text-background"
+                        : "border border-border hover:border-accent text-foreground"
+                    }`}
+                  >
+                    Start with {tier.name}
+                    <span>→</span>
+                  </button>
+                )}
               </div>
+
             </article>
           ))}
         </div>

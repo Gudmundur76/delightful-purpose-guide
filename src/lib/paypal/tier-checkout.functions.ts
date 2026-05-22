@@ -8,6 +8,12 @@ import {
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const TIERS = {
+  fix: {
+    name: "GEO Fix Pack — 24h remediation",
+    displayName: "GEO Fix Pack",
+    amountCents: 49900,
+    deliveryHours: 24,
+  },
   starter: {
     name: "Starter — 48h build",
     displayName: "Starter",

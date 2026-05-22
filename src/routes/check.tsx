@@ -23,8 +23,37 @@ export const Route = createFileRoute("/check")({
       { property: "og:title", content: "Agent Readability Checker — Grow" },
       { property: "og:description", content: "Score any URL for LLM readability. Free." },
       { property: "og:url", content: "https://grow.contact/check" },
+      { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/check" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: "Agent Readability Checker",
+          url: "https://grow.contact/check",
+          applicationCategory: "DeveloperApplication",
+          operatingSystem: "Any (web)",
+          description:
+            "Free tool that scores any URL for AI-crawler readability across five signals: semantic HTML, JSON-LD coverage, llms.txt, citability, and first-contentful speed.",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          provider: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
+            { "@type": "ListItem", position: 2, name: "Agent Readability Checker", item: "https://grow.contact/check" },
+          ],
+        }),
+      },
+    ],
   }),
   component: CheckPage,
 });

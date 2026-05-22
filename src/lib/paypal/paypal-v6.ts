@@ -122,8 +122,9 @@ let googlePayPromise: Promise<void> | null = null;
 
 export function loadPaypalV6Core(): Promise<V6Namespace> {
   if (typeof window === "undefined") return Promise.reject(new Error("SSR"));
-  if (window.paypal && typeof window.paypal.createInstance === "function") {
-    return Promise.resolve(window.paypal as V6Namespace);
+  const existingGlobal = getPaypalGlobal();
+  if (existingGlobal && typeof existingGlobal.createInstance === "function") {
+    return Promise.resolve(existingGlobal);
   }
   if (corePromise) return corePromise;
 

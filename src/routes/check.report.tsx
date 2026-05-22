@@ -237,19 +237,52 @@ function ReportPage() {
 
         {/* CTA */}
         <section className="border-t border-border pt-12 mt-12 print:hidden">
-          <h2 className="text-3xl font-extrabold tracking-tighter uppercase mb-4">
-            Want us to ship these fixes?
-          </h2>
-          <p className="text-muted-foreground mb-6 max-w-2xl">
-            Grow rebuilds sites agent-native in 48 hours to 5 days. Fixed price, no discovery
-            cycles. We use this report as the spec.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-6 py-3 uppercase tracking-tighter text-sm"
-          >
-            Start a brief →
-          </Link>
+          {score < 70 ? (
+            <div className="border border-accent/60 bg-accent/[0.04] p-8">
+              <div className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">
+                // Recommended next step
+              </div>
+              <h2 className="text-3xl font-extrabold tracking-tighter uppercase mb-3">
+                GEO Fix Pack — $499
+              </h2>
+              <p className="text-foreground/80 mb-6 max-w-2xl">
+                Your score is {score}/100. We'll ship every fix in this report —
+                robots.txt, llms.txt, JSON-LD, OpenGraph, semantic HTML — on your
+                existing site in 24 hours. No redesign. Re-scan + delta report included.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  to="/pricing"
+                  hash="pricing"
+                  className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-6 py-3 uppercase tracking-tighter text-sm"
+                >
+                  Buy Fix Pack →
+                </Link>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 border border-border hover:border-accent font-bold px-6 py-3 uppercase tracking-tighter text-sm"
+                >
+                  Need a rebuild instead?
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <>
+              <h2 className="text-3xl font-extrabold tracking-tighter uppercase mb-4">
+                Want us to ship these fixes?
+              </h2>
+              <p className="text-muted-foreground mb-6 max-w-2xl">
+                Grow rebuilds sites agent-native in 48 hours to 5 days. Fixed price,
+                no discovery cycles. We use this report as the spec.
+              </p>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-6 py-3 uppercase tracking-tighter text-sm"
+              >
+                Start a brief →
+              </Link>
+            </>
+          )}
         </section>
 
         {/* Print footer */}

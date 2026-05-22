@@ -23,19 +23,20 @@ export const Route = createFileRoute("/pricing")({
           "@graph": [
             {
               "@type": "Product",
-              name: "GEO Fix Pack",
+              name: "GEO Patch Pack",
               description:
-                "24-hour GEO remediation on your existing site: robots.txt, llms.txt, JSON-LD, OpenGraph and semantic HTML fixes. No redesign.",
+                "Free GEO patch pack for your existing site: custom robots.txt, llms.txt, JSON-LD snippets, OpenGraph meta and semantic HTML fix list with copy-paste install guide. 48-hour turnaround. Beta.",
               brand: { "@type": "Brand", name: "Grow" },
               url: "https://grow.contact/pricing",
               offers: {
                 "@type": "Offer",
-                price: "499",
+                price: "0",
                 priceCurrency: "USD",
                 availability: "https://schema.org/InStock",
-                url: "https://grow.contact/pricing",
+                url: "https://grow.contact/contact",
               },
             },
+
             {
               "@type": "Product",
               name: "Starter",

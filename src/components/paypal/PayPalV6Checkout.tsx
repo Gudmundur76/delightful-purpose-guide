@@ -8,6 +8,7 @@ import {
 import {
   getPaypalV6Sdk,
   loadGooglePayScript,
+  loadPaypalV6Core,
   resetPaypalV6Cache,
   type V6CardFields,
   type V6Component,

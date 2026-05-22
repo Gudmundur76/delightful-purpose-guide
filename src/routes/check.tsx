@@ -2,23 +2,22 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2 } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
-import { zodValidator, fallback } from "@tanstack/zod-adapter";
-import { z } from "zod";
 
 import { sendReportFollowup } from "@/lib/check/report-followup.functions";
 import { scanUrl, type ScanMetric, type ScanResult } from "@/lib/check/scan.functions";
 import { RecentScans } from "@/components/RecentScans";
 
-// Keep params truly optional — no defaults — so a bare /check URL doesn't
-// 307-redirect to /check?url=&auto=false. Wasted hops break Perplexity's
-// ~1.5s timeout and burn crawl budget.
-const checkSearchSchema = z.object({
-  url: fallback(z.string().optional(), undefined),
-  auto: fallback(z.boolean().optional(), undefined),
-});
+// Validate without zod defaults so a bare /check URL doesn't 307-redirect
+// to /check?url=&auto=false. Strip undefined keys before returning.
+type CheckSearch = { url?: string; auto?: boolean };
 
 export const Route = createFileRoute("/check")({
-  validateSearch: zodValidator(checkSearchSchema),
+  validateSearch: (raw: Record<string, unknown>): CheckSearch => {
+    const out: CheckSearch = {};
+    if (typeof raw.url === "string" && raw.url) out.url = raw.url;
+    if (raw.auto === true || raw.auto === "true") out.auto = true;
+    return out;
+  },
   head: () => ({
     meta: [
       { title: "Agent Readability Checker — Grow" },

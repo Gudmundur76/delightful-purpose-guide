@@ -165,9 +165,7 @@ function ApiDocsPage() {
           </ul>
           <p className="text-xs text-muted-foreground">
             No key? Contact{" "}
-            <a href="mailto:hello@grow.contact" className="text-accent hover:underline">
-              hello@grow.contact
-            </a>{" "}
+            <span className="text-accent select-all">hello@grow.contact</span>{" "}
             to request access.
           </p>
         </section>

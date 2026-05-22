@@ -74,14 +74,16 @@ export async function paypalCreateClientToken(): Promise<{
   }
   const data = (await res.json()) as {
     client_token?: string;
-    access_token?: string;
     expires_in: number;
   };
-  const token = data.client_token ?? data.access_token;
-  if (!token) {
-    throw new Error("PayPal client-token response missing token");
+  // Only client_token is valid as data-client-token for the JS SDK.
+  // The OAuth access_token is NOT a client token — passing it makes the SDK
+  // call atob() on a non-base64 string and throw
+  // "Failed to execute 'atob' on 'Window'".
+  if (!data.client_token) {
+    throw new Error("PayPal client-token response missing client_token");
   }
-  return { clientToken: token, expiresIn: data.expires_in };
+  return { clientToken: data.client_token, expiresIn: data.expires_in };
 }
 
 export async function paypalCreateOrder(payload: unknown): Promise<{

@@ -88,7 +88,7 @@ export function TierCheckoutDialog({
 
         <div className="border-b border-border p-6">
           <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">
-            // {tier === "starter" ? "Tier 01" : "Tier 02"} — Secure checkout
+            // {TIER_LABELS[tier]} — Secure checkout
           </p>
           <div className="flex items-baseline justify-between gap-4">
             <h2 className="text-2xl font-extrabold uppercase tracking-tighter">

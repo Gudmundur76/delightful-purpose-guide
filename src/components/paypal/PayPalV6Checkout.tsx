@@ -377,14 +377,11 @@ export function PayPalV6Checkout({
         </div>
       )}
 
-      {/* PayPal / Pay Later buttons (SDK-rendered) */}
-      {paypalEligible && <div ref={paypalBtnRef} aria-label="PayPal" />}
-
-      {/* Apple Pay */}
-      {appleEligible && <div ref={appleBtnRef} aria-label="Apple Pay" />}
-
-      {/* Google Pay */}
-      {googleEligible && <div ref={googleBtnRef} aria-label="Google Pay" />}
+      {/* Hosts are always mounted so SDK render() has a valid ref;
+          hidden via CSS until the corresponding method is eligible. */}
+      <div ref={paypalBtnRef} aria-label="PayPal" style={{ display: paypalEligible ? undefined : "none" }} />
+      <div ref={appleBtnRef} aria-label="Apple Pay" style={{ display: appleEligible ? undefined : "none" }} />
+      <div ref={googleBtnRef} aria-label="Google Pay" style={{ display: googleEligible ? undefined : "none" }} />
 
       {/* Card fields */}
       {cardEligible && (

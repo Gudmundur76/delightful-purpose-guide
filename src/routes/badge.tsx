@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { useMemo, useState } from "react";
 import { Copy, Check as CheckIcon, ArrowRight } from "lucide-react";
 import { FreeToolEmailGate } from "@/components/FreeToolEmailGate";
+import { breadcrumbScript } from "@/lib/seo/breadcrumb";
 
 
 export const Route = createFileRoute("/badge")({
@@ -24,6 +25,12 @@ export const Route = createFileRoute("/badge")({
       { property: "og:url", content: "https://grow.contact/badge" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/badge" }],
+    scripts: [
+      breadcrumbScript([
+        { name: "Home", url: "/" },
+        { name: "Badge", url: "/badge" },
+      ]),
+    ],
   }),
 });
 

@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getLeaderboard } from "@/lib/leaderboard/entries";
 import { FreeToolEmailGate } from "@/components/FreeToolEmailGate";
+import { breadcrumbScript } from "@/lib/seo/breadcrumb";
 
 
 export const Route = createFileRoute("/leaderboard")({
@@ -46,6 +47,10 @@ export const Route = createFileRoute("/leaderboard")({
             })),
           }),
         },
+        breadcrumbScript([
+          { name: "Home", url: "/" },
+          { name: "Leaderboard", url: "/leaderboard" },
+        ]),
       ],
     };
   },

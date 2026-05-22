@@ -18,7 +18,7 @@ export const POSTS: BlogPost[] = [
     slug: "how-to-make-a-website-ai-readable",
     title: "How to Make a Website AI-Readable: A 2026 Step-by-Step",
     description:
-      "A practical, code-level walkthrough for making your site readable by ChatGPT, Perplexity, and Claude. Semantic HTML, JSON-LD, llms.txt, robots — in the order they matter.",
+      "A code-level walkthrough for making your site readable by ChatGPT, Perplexity & Claude. Semantic HTML, JSON-LD, llms.txt — in order.",
     publishedAt: "2026-05-21",
     readingMinutes: 9,
     tags: ["ai readable website", "geo", "llm seo", "agent native"],
@@ -48,7 +48,7 @@ export const POSTS: BlogPost[] = [
     slug: "what-is-an-agent-native-website",
     title: "What Is an Agent-Native Website? A Definition for 2026",
     description:
-      "Agent-native websites are built so AI agents — ChatGPT, Perplexity, Claude — can read, understand, and cite them. Here's the definition, the stack, and why it matters now.",
+      "Agent-native websites are built so ChatGPT, Perplexity & Claude can read and cite them. Here's the definition, the stack, and why it matters.",
     publishedAt: "2026-05-20",
     readingMinutes: 7,
     tags: ["agent native website", "ai seo", "llm citation"],
@@ -66,7 +66,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     slug: "semantic-html-agency-why-it-matters",
-    title: "Semantic HTML Is the New SEO: Why Agencies Are Rebuilding the Web",
+    title: "Semantic HTML Is the New SEO: Why Agencies Rebuild",
     description:
       "Div soup is dying. Semantic HTML — real headings, articles, sections, lists — is what makes a site readable by humans, search engines, and AI agents alike.",
     publishedAt: "2026-05-15",

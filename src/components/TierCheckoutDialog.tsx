@@ -19,8 +19,15 @@ type Props = {
 };
 
 const TIER_AMOUNTS: Record<TierKey, string> = {
+  fix: "499.00",
   starter: "2400.00",
   growth: "4800.00",
+};
+
+const TIER_LABELS: Record<TierKey, string> = {
+  fix: "Fix Pack",
+  starter: "Tier 01",
+  growth: "Tier 02",
 };
 
 export function TierCheckoutDialog({

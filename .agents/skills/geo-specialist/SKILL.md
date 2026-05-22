@@ -87,3 +87,44 @@ When asked to:
 The "73% excluded" stat is the wedge. Most prospects don't have a content
 problem — they have a reachability problem. Lead every audit with the §3
 pre-flight before discussing content, schemas, or strategy.
+
+## Four GEO failure modes external audits keep flagging on grow.contact-style sites
+
+Drilled in by a third-party GEO audit in May 2026. Check every new build and
+every audit response against these four — they are the failure modes AI
+engines (and human auditors) flag first.
+
+1. **Empty / live-only case studies.** LLMs weight real-world social proof
+   heavily. "No data yet" placeholders or pure live-stats widgets read as
+   "this agency has no track record." **Fix:** ship narrative case study
+   cards (tier, delivery, price, /check score, 2–3 sentence outcome) that
+   are always rendered in static HTML — not gated behind a fetch. Live
+   stats can supplement them, never replace them.
+
+2. **Hidden pricing.** Users ask AI: *"How much does X cost?"* If the dollar
+   figure isn't in scrapeable text on /pricing AND in an FAQ answer AND in
+   `Product` JSON-LD `offers.price`, the AI either dodges the question or
+   recommends a competitor that does publish. **Fix:** every paid tier must
+   have its price as plain text in the FAQ answer ("$2,400 USD"), in the
+   pricing table, AND in JSON-LD. Never rely on a checkout flow to reveal
+   the number.
+
+3. **Undefined jargon in short paragraphs.** Bullets like "JSON-LD
+   taxonomy" or "semantic content schema" with no explanation make a page
+   useless as a citation source for generic questions. AI prefers pages
+   that explain *why* a thing matters in 1–2 sentences alongside the term.
+   **Fix:** every technical term in a process/feature/spec list must be
+   followed by a "so that…" or "which means…" clause aimed at a
+   non-specialist buyer. This also unlocks listicle citations.
+
+4. **Ambiguous logo/badge strips.** A row of vendor logos (Anthropic,
+   Perplexity, OpenAI, etc.) with no caption is read by AI as a customer
+   claim. If those aren't actual customers, the page risks being flagged
+   as misleading or simply confusing the entity graph. **Fix:** every
+   logo strip must carry an explicit caption like *"Optimized for these
+   AI engines — not customer logos"* or *"Crawlers our sites are tuned
+   for."* Reserve "customer" framing for verifiable logos only.
+
+When auditing or building, add these four to the pre-flight in
+`docs/geo-standard.md` §3 — they're table stakes, not polish.
+

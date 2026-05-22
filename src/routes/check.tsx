@@ -209,14 +209,12 @@ function CheckPage() {
                 <h3 className="text-xl font-semibold mb-1">Want us to fix these? Free 20-min consult.</h3>
                 <p className="text-muted-foreground text-sm">We'll walk through your report and outline a fix plan.</p>
               </div>
-              <a
-                href="https://cal.com/grow-contact/intro"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/contact"
                 className="rounded-md bg-accent text-accent-foreground font-mono text-sm px-6 py-3 hover:opacity-90 transition whitespace-nowrap"
               >
                 Book a Free Consultation →
-              </a>
+              </Link>
             </div>
           </div>
         )}

@@ -4,6 +4,8 @@ import { z } from "zod";
 import { sendTransactionalEmailInternal } from "@/lib/email/send-internal";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { rateLimit, clientIpFromRequest } from "@/lib/api/rate-limit";
+import { qualifyLeadAndSendReplies } from "@/lib/leads/qualify.server";
+
 
 const Schema = z.object({
   email: z.string().email().max(254),

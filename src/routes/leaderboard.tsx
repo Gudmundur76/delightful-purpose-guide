@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getLeaderboard } from "@/lib/leaderboard/entries";
+import { FreeToolEmailGate } from "@/components/FreeToolEmailGate";
+
 
 export const Route = createFileRoute("/leaderboard")({
   component: LeaderboardPage,

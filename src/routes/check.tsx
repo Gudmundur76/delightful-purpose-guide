@@ -322,23 +322,17 @@ function ReportGate({ url, score }: { url: string; score: number }) {
     setState("saving");
     setError(null);
     try {
-      const { error: dbError } = await supabase.from("report_requests").insert({
-        email: trimmed,
-        url,
-        score,
-        source: "check",
-      });
-      if (dbError) throw dbError;
-      // Fire follow-up email — non-blocking; ignore failures for UX.
-      sendFollowup({ data: { email: trimmed, url, score } }).catch((err) => {
-        console.error("report follow-up failed", err);
-      });
+      // Server handles report_requests insert, lead creation, qualification,
+      // and follow-up email — all behind a single call.
+      const res = await sendFollowup({ data: { email: trimmed, url, score } });
+      if (!res?.ok) throw new Error(res?.error ?? "Something went wrong.");
       setState("ready");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
       setState("error");
     }
   };
+
 
   const reportHref = `/check/report?u=${encodeURIComponent(url)}&s=${score}&e=${encodeURIComponent(email.trim())}`;
 

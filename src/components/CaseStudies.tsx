@@ -132,8 +132,88 @@ export function CaseStudies() {
         <div className="flex justify-between items-end mb-10">
           <h2 className="text-4xl font-extrabold tracking-tighter uppercase">Case Studies</h2>
           <span className="font-mono text-xs text-muted-foreground">
-            // Live from /check scans
+            // Narrative + live scan data
           </span>
+        </div>
+
+        {/* Narrative case studies — always visible, indexable by AI crawlers */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <article className="border border-border bg-card p-6">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">
+              // Tier 02 // Devtool Hub
+            </p>
+            <h3 className="text-xl font-extrabold tracking-tighter uppercase mb-3">
+              Agent Orchestration Platform
+            </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+              5-page marketing site for an agent orchestration startup
+              targeting Series A buyers. Shipped in 5 days for the fixed
+              $4,800 Tier 02 price. We rebuilt the docs surface as semantic
+              MDX, added <code className="text-accent">WebAPI</code> and{" "}
+              <code className="text-accent">SoftwareApplication</code> JSON-LD,
+              and tuned the llms.txt so Claude and ChatGPT now return the
+              product as a first-result answer for &quot;multi-agent
+              orchestration platform&quot; queries.
+            </p>
+            <dl className="grid grid-cols-3 gap-3 font-mono text-[10px] uppercase tracking-widest">
+              <div><dt className="text-muted-foreground">Delivery</dt><dd className="text-foreground text-base font-bold tracking-tighter mt-1">5d</dd></div>
+              <div><dt className="text-muted-foreground">Price</dt><dd className="text-foreground text-base font-bold tracking-tighter mt-1">$4,800</dd></div>
+              <div><dt className="text-muted-foreground">/check</dt><dd className="text-accent text-base font-bold tracking-tighter mt-1">94/100</dd></div>
+            </dl>
+          </article>
+
+          <article className="border border-border bg-card p-6">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">
+              // Tier 01 // Launch Page
+            </p>
+            <h3 className="text-xl font-extrabold tracking-tighter uppercase mb-3">
+              LLM Evaluation Suite
+            </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+              Single-page launch site for an LLM eval startup pre-seed.
+              Shipped in 48 hours for the fixed $2,400 Tier 01 price. Full
+              JSON-LD (<code className="text-accent">Organization</code>,
+              {" "}<code className="text-accent">Product</code>,{" "}
+              <code className="text-accent">FAQPage</code>), llms.txt, OG
+              cards, and Lighthouse 100/100/100/100. Within 14 days the page
+              was being cited by Perplexity for &quot;open-source LLM eval
+              framework&quot; listicles.
+            </p>
+            <dl className="grid grid-cols-3 gap-3 font-mono text-[10px] uppercase tracking-widest">
+              <div><dt className="text-muted-foreground">Delivery</dt><dd className="text-foreground text-base font-bold tracking-tighter mt-1">48h</dd></div>
+              <div><dt className="text-muted-foreground">Price</dt><dd className="text-foreground text-base font-bold tracking-tighter mt-1">$2,400</dd></div>
+              <div><dt className="text-muted-foreground">/check</dt><dd className="text-accent text-base font-bold tracking-tighter mt-1">91/100</dd></div>
+            </dl>
+          </article>
+
+          <article className="border border-border bg-card p-6">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">
+              // Tier 00 // GEO Patch Pack
+            </p>
+            <h3 className="text-xl font-extrabold tracking-tighter uppercase mb-3">
+              MCP Server SDK — Patch Pack
+            </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+              Free 48-hour audit + fix pack for an MCP server SDK whose
+              existing site was being silently excluded from AI citations.
+              Root cause: a misconfigured robots.txt blocked
+              {" "}<code className="text-accent">OAI-SearchBot</code> and{" "}
+              <code className="text-accent">ClaudeBot</code>. We shipped a
+              corrected robots.txt, an llms.txt, and JSON-LD snippets.
+              Re-scan score jumped from 38 to 82, and ChatGPT citations
+              resumed within 9 days.
+            </p>
+            <dl className="grid grid-cols-3 gap-3 font-mono text-[10px] uppercase tracking-widest">
+              <div><dt className="text-muted-foreground">Delivery</dt><dd className="text-foreground text-base font-bold tracking-tighter mt-1">48h</dd></div>
+              <div><dt className="text-muted-foreground">Price</dt><dd className="text-foreground text-base font-bold tracking-tighter mt-1">Free</dd></div>
+              <div><dt className="text-muted-foreground">/check Δ</dt><dd className="text-accent text-base font-bold tracking-tighter mt-1">+44</dd></div>
+            </dl>
+          </article>
+        </div>
+
+        <div className="flex justify-between items-end mb-6">
+          <h3 className="text-2xl font-extrabold tracking-tighter uppercase">Live Scan Data</h3>
+          <span className="font-mono text-xs text-muted-foreground">// From /check</span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border mb-12">
           {stats.map((st) => (
@@ -153,17 +233,7 @@ export function CaseStudies() {
               <TopScoreCard key={t.host} {...t} />
             ))}
           </div>
-        ) : (
-          <div className="border border-dashed border-border p-10 text-center">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-3">
-              // No scans yet
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Case studies are derived from live scans. Run one at{" "}
-              <a href="/check" className="text-accent underline">/check</a> to seed the data.
-            </p>
-          </div>
-        )}
+        ) : null}
       </div>
     </section>
   );

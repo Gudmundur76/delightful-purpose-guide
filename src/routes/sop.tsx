@@ -246,7 +246,7 @@ Build (48h) → QA → Deliver → Polish (4h) → Handover → 14-day Warranty`
               ["Warranty", "C", "A/R", "—"],
             ]}
           />
-          <P className="text-xs">R = responsible, A = accountable, C = consulted.</P>
+          <p className="text-xs text-muted-foreground mb-4">R = responsible, A = accountable, C = consulted.</p>
 
           <H2 id="tooling">5. Tooling — Where Things Live</H2>
           <Table

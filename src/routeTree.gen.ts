@@ -14,6 +14,7 @@ import { Route as VsRouteImport } from './routes/vs'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as StatusRouteImport } from './routes/status'
+import { Route as SopRouteImport } from './routes/sop'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
@@ -89,6 +90,11 @@ const TermsRoute = TermsRouteImport.update({
 const StatusRoute = StatusRouteImport.update({
   id: '/status',
   path: '/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SopRoute = SopRouteImport.update({
+  id: '/sop',
+  path: '/sop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -377,6 +383,7 @@ export interface FileRoutesByFullPath {
   '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sop': typeof SopRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -435,6 +442,7 @@ export interface FileRoutesByTo {
   '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sop': typeof SopRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -494,6 +502,7 @@ export interface FileRoutesById {
   '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sop': typeof SopRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -554,6 +563,7 @@ export interface FileRouteTypes {
     | '/rss.xml'
     | '/services'
     | '/sitemap.xml'
+    | '/sop'
     | '/status'
     | '/terms'
     | '/unsubscribe'
@@ -612,6 +622,7 @@ export interface FileRouteTypes {
     | '/rss.xml'
     | '/services'
     | '/sitemap.xml'
+    | '/sop'
     | '/status'
     | '/terms'
     | '/unsubscribe'
@@ -670,6 +681,7 @@ export interface FileRouteTypes {
     | '/rss.xml'
     | '/services'
     | '/sitemap.xml'
+    | '/sop'
     | '/status'
     | '/terms'
     | '/unsubscribe'
@@ -729,6 +741,7 @@ export interface RootRouteChildren {
   RssDotxmlRoute: typeof RssDotxmlRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SopRoute: typeof SopRoute
   StatusRoute: typeof StatusRoute
   TermsRoute: typeof TermsRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
@@ -796,6 +809,13 @@ declare module '@tanstack/react-router' {
       path: '/status'
       fullPath: '/status'
       preLoaderRoute: typeof StatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sop': {
+      id: '/sop'
+      path: '/sop'
+      fullPath: '/sop'
+      preLoaderRoute: typeof SopRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -1233,6 +1253,7 @@ const rootRouteChildren: RootRouteChildren = {
   RssDotxmlRoute: RssDotxmlRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SopRoute: SopRoute,
   StatusRoute: StatusRoute,
   TermsRoute: TermsRoute,
   UnsubscribeRoute: UnsubscribeRoute,

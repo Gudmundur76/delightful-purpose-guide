@@ -4,6 +4,8 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import {
   paypalCreateOrder,
   paypalCaptureOrder,
+  paypalCreateClientToken,
+  paypalConfirmOrder,
   formatPayPalAmount,
 } from "./paypal.server";
 
@@ -15,16 +17,60 @@ export const getPaypalPublicConfig = createServerFn({ method: "GET" }).handler(
       (process.env.PAYPAL_ENVIRONMENT || "sandbox").toLowerCase() === "live"
         ? ("live" as const)
         : ("sandbox" as const);
+    const googleMerchantId = process.env.PAYPAL_GOOGLE_MERCHANT_ID?.trim() || null;
     if (!clientId) {
-      return { clientId: null, currency: "USD", environment };
+      return { clientId: null, currency: "USD", environment, googleMerchantId };
     }
     return {
       clientId,
       currency: process.env.PAYPAL_CURRENCY || "USD",
       environment,
+      googleMerchantId,
     };
   },
 );
+
+/** Short-lived browser-safe client token for the v6 Web SDK (Fastlane, wallets). */
+export const createPaypalClientToken = createServerFn({ method: "POST" }).handler(
+  async () => {
+    const res = await paypalCreateClientToken();
+    return { clientToken: res.clientToken, expiresIn: res.expiresIn };
+  },
+);
+
+/** Confirm an Apple Pay / Google Pay payment source before capture. */
+export const confirmPaypalWalletOrder = createServerFn({ method: "POST" })
+  .inputValidator((input) =>
+    z
+      .object({
+        orderId: z.string().min(5).max(64),
+        wallet: z.enum(["applepay", "googlepay"]),
+        token: z.unknown(),
+        name: z.string().max(200).optional(),
+        email: z.string().email().max(255).optional(),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data }) => {
+    const paymentSource =
+      data.wallet === "applepay"
+        ? {
+            apple_pay: {
+              attributes: { payment_token: data.token },
+              name: data.name,
+              email_address: data.email,
+            },
+          }
+        : {
+            google_pay: {
+              attributes: { payment_token: data.token },
+              name: data.name,
+              email_address: data.email,
+            },
+          };
+    const res = await paypalConfirmOrder(data.orderId, paymentSource);
+    return { status: res.status };
+  });
 
 export const listProducts = createServerFn({ method: "GET" }).handler(async () => {
   const { data, error } = await supabaseAdmin

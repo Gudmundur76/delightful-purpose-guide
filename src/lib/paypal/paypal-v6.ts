@@ -103,10 +103,14 @@ export interface V6Namespace {
 
 declare global {
   interface Window {
-    paypal?: V6Namespace & Record<string, unknown>;
     google?: { payments?: { api?: { PaymentsClient: new (cfg: unknown) => unknown } } };
     ApplePaySession?: { canMakePayments: () => boolean };
   }
+}
+
+function getPaypalGlobal(): V6Namespace | undefined {
+  if (typeof window === "undefined") return undefined;
+  return (window as unknown as { paypal?: V6Namespace }).paypal;
 }
 
 const V6_SDK_URL = "https://www.paypal.com/sdk/js/v6/core";
@@ -118,8 +122,9 @@ let googlePayPromise: Promise<void> | null = null;
 
 export function loadPaypalV6Core(): Promise<V6Namespace> {
   if (typeof window === "undefined") return Promise.reject(new Error("SSR"));
-  if (window.paypal && typeof window.paypal.createInstance === "function") {
-    return Promise.resolve(window.paypal as V6Namespace);
+  const existingGlobal = getPaypalGlobal();
+  if (existingGlobal && typeof existingGlobal.createInstance === "function") {
+    return Promise.resolve(existingGlobal);
   }
   if (corePromise) return corePromise;
 
@@ -128,8 +133,9 @@ export function loadPaypalV6Core(): Promise<V6Namespace> {
       `script[src="${V6_SDK_URL}"]`,
     );
     const onLoad = () => {
-      if (window.paypal && typeof window.paypal.createInstance === "function") {
-        resolve(window.paypal as V6Namespace);
+      const pp = getPaypalGlobal();
+      if (pp && typeof pp.createInstance === "function") {
+        resolve(pp);
       } else {
         corePromise = null;
         reject(

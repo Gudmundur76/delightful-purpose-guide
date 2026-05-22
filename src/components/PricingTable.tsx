@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { TierCheckoutDialog } from "@/components/TierCheckoutDialog";
 import type { TierKey } from "@/lib/paypal/tier-checkout.functions";
+
 
 const TIERS: Array<{
   key: TierKey;
@@ -14,21 +16,22 @@ const TIERS: Array<{
 }> = [
   {
     key: "fix",
-    name: "GEO Fix Pack",
-    label: "Tier 00 // Remediation",
-    priceDisplay: "$499",
-    delivery: "24 hours",
+    name: "GEO Patch Pack",
+    label: "Tier 00 // Free (Beta)",
+    priceDisplay: "Free",
+    delivery: "48 hours",
     pages: "Existing site",
     features: [
-      "robots.txt + llms.txt fixes",
-      "JSON-LD schema injection",
-      "OpenGraph + Twitter meta",
-      "Semantic HTML cleanup",
+      "Custom robots.txt + llms.txt",
+      "JSON-LD schema snippets",
+      "OpenGraph + Twitter meta tags",
+      "Semantic HTML fix list",
+      "Copy-paste install guide",
       "Re-scan + score delta report",
-      "No redesign — fixes only",
     ],
     recommended: false,
   },
+
   {
     key: "starter",
     name: "Starter",

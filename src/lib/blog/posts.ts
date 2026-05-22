@@ -66,7 +66,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     slug: "semantic-html-agency-why-it-matters",
-    title: "Semantic HTML Is the New SEO: Why Agencies Are Rebuilding the Web",
+    title: "Semantic HTML Is the New SEO: Why Agencies Rebuild",
     description:
       "Div soup is dying. Semantic HTML — real headings, articles, sections, lists — is what makes a site readable by humans, search engines, and AI agents alike.",
     publishedAt: "2026-05-15",

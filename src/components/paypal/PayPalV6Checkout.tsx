@@ -6,38 +6,30 @@ import {
   getPaypalPublicConfig,
 } from "@/lib/paypal/paypal.functions";
 import {
-  getPaypalV6Sdk,
   loadGooglePayScript,
-  loadPaypalV6Core,
-  resetPaypalV6Cache,
-  type V6CardFields,
+  loadPaypalSdk,
+  resetPaypalSdkCache,
+  type PayPalCardFieldsInstance,
   type V6Component,
-  type V6SdkInstance,
 } from "@/lib/paypal/paypal-v6";
 
 type AmountInfo = { value: string; currency: string };
 
 export type PayPalV6CheckoutProps = {
-  /** Server-side order creator. Must return PayPal order id. */
   createOrder: () => Promise<string>;
-  /** Server-side capture (called after onApproved resolves). Returns when capture is done. */
   capture: (orderId: string) => Promise<void>;
-  /** Called after capture succeeds. */
   onSuccess: (orderId: string) => void;
-  /** Amount used by Google Pay sheet only. */
   amount: AmountInfo;
-  /** Friendly button label for the card "Pay" CTA. */
   payLabel: string;
-  /** "page" = light surfaces, "dialog" = dark surfaces. Affects card field colors. */
   variant?: "page" | "dialog";
 };
 
 const COMPONENTS: V6Component[] = [
-  "paypal-payments",
+  "buttons",
   "card-fields",
   "fastlane",
-  "applepay-payments",
-  "googlepay-payments",
+  "applepay",
+  "googlepay",
 ];
 
 export function PayPalV6Checkout({
@@ -61,7 +53,7 @@ export function PayPalV6Checkout({
   const [googleEligible, setGoogleEligible] = useState(false);
   const [paypalEligible, setPaypalEligible] = useState(false);
 
-  const paypalBtnRef = useRef<HTMLButtonElement>(null);
+  const paypalBtnRef = useRef<HTMLDivElement>(null);
   const appleBtnRef = useRef<HTMLDivElement>(null);
   const googleBtnRef = useRef<HTMLDivElement>(null);
   const cardNameRef = useRef<HTMLDivElement>(null);
@@ -69,11 +61,9 @@ export function PayPalV6Checkout({
   const cardExpiryRef = useRef<HTMLDivElement>(null);
   const cardCvvRef = useRef<HTMLDivElement>(null);
 
-  const cardFieldsRef = useRef<V6CardFields | null>(null);
-  const sdkRef = useRef<V6SdkInstance | null>(null);
+  const cardFieldsRef = useRef<PayPalCardFieldsInstance | null>(null);
   const mountedRef = useRef(false);
 
-  // capture stable callbacks
   const createOrderRef = useRef(createOrder);
   const captureRef = useRef(capture);
   const onSuccessRef = useRef(onSuccess);
@@ -88,13 +78,8 @@ export function PayPalV6Checkout({
 
     async function init() {
       try {
-        // Kick off SDK core script load in parallel with server calls —
-        // it's the biggest chunk of latency and doesn't need server data.
-        const corePreload = loadPaypalV6Core().catch(() => null);
-
-        // Client token is optional (only needed for Fastlane / wallet
-        // eligibility). Cap it at 2s so a slow PayPal API never blocks
-        // the rest of checkout from rendering.
+        // Client token is optional (only required for Apple/Google Pay +
+        // Fastlane). Cap at 2s so a slow PayPal API never blocks render.
         const tokenWithTimeout = Promise.race([
           getClientToken().then((t) => t.clientToken).catch((e) => {
             console.warn("PayPal client-token failed", e);
@@ -111,22 +96,20 @@ export function PayPalV6Checkout({
         if (!config.clientId) {
           throw new Error("PayPal is not configured. Add PAYPAL_CLIENT_ID.");
         }
-        // Ensure core script finished before createInstance.
-        await corePreload;
 
-        const sdk = await getPaypalV6Sdk({
+        const paypal = await loadPaypalSdk({
           clientId: config.clientId,
           clientToken,
           components: COMPONENTS,
+          currency: amount.currency || config.currency,
         });
         if (cancelled) return;
-        sdkRef.current = sdk;
 
-        const onApproveCommon = async (data: { orderId: string }) => {
+        const onApproveCommon = async (data: { orderID: string }) => {
           setSubmitting(true);
           try {
-            await captureRef.current(data.orderId);
-            onSuccessRef.current(data.orderId);
+            await captureRef.current(data.orderID);
+            onSuccessRef.current(data.orderID);
           } catch (e) {
             setError(e instanceof Error ? e.message : "Capture failed");
             setSubmitting(false);
@@ -139,46 +122,36 @@ export function PayPalV6Checkout({
           setSubmitting(false);
         };
 
-        // ---- Eligibility ------------------------------------------------
-        let eligibility: { isEligible: (m: string) => boolean } | null = null;
-        try {
-          eligibility = await sdk.findEligibleMethods({ currency: config.currency });
-        } catch (e) {
-          console.warn("findEligibleMethods failed", e);
-        }
-        const isEligible = (m: string) =>
-          eligibility ? eligibility.isEligible(m) : true;
-
-        // ---- PayPal / Pay Later session --------------------------------
-        if (isEligible("paypal")) {
-          setPaypalEligible(true);
-          const paypalSession = sdk.createPayPalOneTimePaymentSession({
+        // ---- PayPal / Pay Later buttons --------------------------------
+        if (paypal.Buttons) {
+          const buttons = paypal.Buttons({
+            style: {
+              layout: "vertical",
+              shape: "rect",
+              color: "gold",
+              label: "paypal",
+            },
+            createOrder: () => createOrderRef.current(),
             onApprove: onApproveCommon,
             onCancel: () => setSubmitting(false),
             onError: onErrorCommon,
           });
-          // wire button click after render
-          queueMicrotask(() => {
-            const btn = paypalBtnRef.current;
-            if (!btn) return;
-            btn.addEventListener("click", async () => {
-              try {
-                setSubmitting(true);
-                await paypalSession.start(
-                  { presentationMode: "auto" },
-                  async () => ({ orderId: await createOrderRef.current() }),
+          if (buttons.isEligible()) {
+            setPaypalEligible(true);
+            queueMicrotask(() => {
+              if (paypalBtnRef.current) {
+                buttons.render(paypalBtnRef.current).catch((e) =>
+                  console.warn("PayPal Buttons render failed", e),
                 );
-              } catch (e) {
-                onErrorCommon(e);
               }
             });
-          });
+          }
         }
 
         // ---- Card fields ----------------------------------------------
-        if (sdk.createCardFields) {
+        if (paypal.CardFields) {
           const inputColor = variant === "dialog" ? "#ffffff" : "#0f172a";
-          const cardFields = sdk.createCardFields({
+          const cardFields = paypal.CardFields({
             createOrder: () => createOrderRef.current(),
             onApprove: onApproveCommon,
             onError: onErrorCommon,
@@ -190,7 +163,6 @@ export function PayPalV6Checkout({
           if (cardFields.isEligible()) {
             setCardEligible(true);
             cardFieldsRef.current = cardFields;
-            // defer field render until refs exist
             queueMicrotask(async () => {
               try {
                 await Promise.all(
@@ -214,91 +186,38 @@ export function PayPalV6Checkout({
 
         // ---- Apple Pay --------------------------------------------------
         if (
-          isEligible("applepay") &&
+          paypal.Applepay &&
           typeof window !== "undefined" &&
-          window.ApplePaySession?.canMakePayments?.() &&
-          sdk.createApplePayOneTimePaymentSession
-        ) {
-          setAppleEligible(true);
-          const appleSession = sdk.createApplePayOneTimePaymentSession({
-            onApprove: onApproveCommon,
-            onError: onErrorCommon,
-          });
-          queueMicrotask(() => {
-            const host = appleBtnRef.current;
-            if (!host) return;
-            // Native Apple Pay button via web-component-style element
-            host.innerHTML = "";
-            const btn = document.createElement("apple-pay-button");
-            btn.setAttribute("buttonstyle", variant === "dialog" ? "white" : "black");
-            btn.setAttribute("type", "pay");
-            btn.setAttribute("locale", "en-US");
-            btn.style.width = "100%";
-            btn.style.height = "44px";
-            btn.style.cursor = "pointer";
-            host.appendChild(btn);
-            btn.addEventListener("click", async () => {
-              try {
-                setSubmitting(true);
-                const cfg = await appleSession.config();
-                const orderId = await createOrderRef.current();
-                // Apple Pay flow proper: the SDK handles the merchant
-                // validation + payment sheet under the hood when domain is
-                // registered with PayPal. We just call confirmOrder.
-                const result = await appleSession.confirmOrder({
-                  orderId,
-                  token: cfg,
-                });
-                if (result.status === "APPROVED" || result.status === "COMPLETED") {
-                  await captureRef.current(orderId);
-                  onSuccessRef.current(orderId);
-                } else {
-                  setSubmitting(false);
-                }
-              } catch (e) {
-                onErrorCommon(e);
-              }
-            });
-          });
-        }
-
-        // ---- Google Pay -------------------------------------------------
-        if (
-          isEligible("googlepay") &&
-          sdk.createGooglePayOneTimePaymentSession &&
-          config.googleMerchantId
+          window.ApplePaySession?.canMakePayments?.()
         ) {
           try {
-            await loadGooglePayScript();
-          } catch (e) {
-            console.warn("Google Pay script load failed", e);
-          }
-          const googleSession = sdk.createGooglePayOneTimePaymentSession({
-            onApprove: onApproveCommon,
-            onError: onErrorCommon,
-          });
-          let gpConfig: Awaited<ReturnType<typeof googleSession.getConfig>> | null = null;
-          try {
-            gpConfig = await googleSession.getConfig();
-          } catch (e) {
-            console.warn("Google Pay getConfig failed", e);
-          }
-          if (gpConfig?.isEligible && window.google?.payments?.api?.PaymentsClient) {
-            setGoogleEligible(true);
-            const PaymentsClient = window.google.payments.api.PaymentsClient;
-            // Per Google's API, callbacks live on the client; here we trigger
-            // a synchronous popup on user-click and finish via confirmOrder.
-            const paymentsClient = new PaymentsClient({
-              environment: config.environment === "live" ? "PRODUCTION" : "TEST",
-              paymentDataCallbacks: {
-                onPaymentAuthorized: async (paymentData: {
-                  paymentMethodData: unknown;
-                }) => {
+            const apple = paypal.Applepay();
+            const cfg = await apple.config();
+            if (cfg.isEligible) {
+              setAppleEligible(true);
+              queueMicrotask(() => {
+                const host = appleBtnRef.current;
+                if (!host) return;
+                host.innerHTML = "";
+                const btn = document.createElement("apple-pay-button");
+                btn.setAttribute("buttonstyle", variant === "dialog" ? "white" : "black");
+                btn.setAttribute("type", "pay");
+                btn.setAttribute("locale", "en-US");
+                btn.style.width = "100%";
+                btn.style.height = "44px";
+                btn.style.cursor = "pointer";
+                host.appendChild(btn);
+                btn.addEventListener("click", async () => {
                   try {
+                    setSubmitting(true);
                     const orderId = await createOrderRef.current();
-                    const result = await googleSession.confirmOrder({
+                    // Full Apple Pay flow needs a registered domain +
+                    // ApplePaySession with merchant validation. Here we
+                    // hand the token to PayPal via confirmOrder when the
+                    // user completes the sheet (left to integration time).
+                    const result = await apple.confirmOrder({
                       orderId,
-                      paymentMethodData: paymentData.paymentMethodData,
+                      token: cfg,
                     });
                     if (
                       result.status === "APPROVED" ||
@@ -306,52 +225,96 @@ export function PayPalV6Checkout({
                     ) {
                       await captureRef.current(orderId);
                       onSuccessRef.current(orderId);
-                      return { transactionState: "SUCCESS" };
+                    } else {
+                      setSubmitting(false);
                     }
-                    return {
-                      transactionState: "ERROR",
-                      error: { message: "Confirmation rejected" },
-                    };
                   } catch (e) {
-                    return {
-                      transactionState: "ERROR",
-                      error: {
-                        message: e instanceof Error ? e.message : "Failed",
-                      },
-                    };
+                    onErrorCommon(e);
                   }
-                },
-              },
-            }) as {
-              createButton: (opts: unknown) => HTMLElement;
-              loadPaymentData: (req: unknown) => void;
-            };
-            queueMicrotask(() => {
-              const host = googleBtnRef.current;
-              if (!host) return;
-              host.innerHTML = "";
-              const button = paymentsClient.createButton({
-                onClick: () => {
-                  paymentsClient.loadPaymentData({
-                    apiVersion: gpConfig!.apiVersion,
-                    apiVersionMinor: gpConfig!.apiVersionMinor,
-                    allowedPaymentMethods: gpConfig!.allowedPaymentMethods,
-                    merchantInfo: gpConfig!.merchantInfo,
-                    transactionInfo: {
-                      countryCode: gpConfig!.countryCode || "US",
-                      currencyCode: amount.currency,
-                      totalPriceStatus: "FINAL",
-                      totalPrice: amount.value,
-                    },
-                    callbackIntents: ["PAYMENT_AUTHORIZATION"],
-                  });
-                },
-                buttonColor: variant === "dialog" ? "white" : "black",
-                buttonType: "pay",
-                buttonSizeMode: "fill",
+                });
               });
-              host.appendChild(button);
-            });
+            }
+          } catch (e) {
+            console.warn("Apple Pay setup failed", e);
+          }
+        }
+
+        // ---- Google Pay -------------------------------------------------
+        if (paypal.Googlepay && config.googleMerchantId) {
+          try {
+            await loadGooglePayScript();
+            const google = paypal.Googlepay();
+            const gpConfig = await google.config();
+            if (gpConfig.isEligible && window.google?.payments?.api?.PaymentsClient) {
+              setGoogleEligible(true);
+              const PaymentsClient = window.google.payments.api.PaymentsClient;
+              const paymentsClient = new PaymentsClient({
+                environment: config.environment === "live" ? "PRODUCTION" : "TEST",
+                paymentDataCallbacks: {
+                  onPaymentAuthorized: async (paymentData: {
+                    paymentMethodData: unknown;
+                  }) => {
+                    try {
+                      const orderId = await createOrderRef.current();
+                      const result = await google.confirmOrder({
+                        orderId,
+                        paymentMethodData: paymentData.paymentMethodData,
+                      });
+                      if (
+                        result.status === "APPROVED" ||
+                        result.status === "COMPLETED"
+                      ) {
+                        await captureRef.current(orderId);
+                        onSuccessRef.current(orderId);
+                        return { transactionState: "SUCCESS" };
+                      }
+                      return {
+                        transactionState: "ERROR",
+                        error: { message: "Confirmation rejected" },
+                      };
+                    } catch (e) {
+                      return {
+                        transactionState: "ERROR",
+                        error: {
+                          message: e instanceof Error ? e.message : "Failed",
+                        },
+                      };
+                    }
+                  },
+                },
+              }) as {
+                createButton: (opts: unknown) => HTMLElement;
+                loadPaymentData: (req: unknown) => void;
+              };
+              queueMicrotask(() => {
+                const host = googleBtnRef.current;
+                if (!host) return;
+                host.innerHTML = "";
+                const button = paymentsClient.createButton({
+                  onClick: () => {
+                    paymentsClient.loadPaymentData({
+                      apiVersion: gpConfig.apiVersion,
+                      apiVersionMinor: gpConfig.apiVersionMinor,
+                      allowedPaymentMethods: gpConfig.allowedPaymentMethods,
+                      merchantInfo: gpConfig.merchantInfo,
+                      transactionInfo: {
+                        countryCode: gpConfig.countryCode || "US",
+                        currencyCode: amount.currency,
+                        totalPriceStatus: "FINAL",
+                        totalPrice: amount.value,
+                      },
+                      callbackIntents: ["PAYMENT_AUTHORIZATION"],
+                    });
+                  },
+                  buttonColor: variant === "dialog" ? "white" : "black",
+                  buttonType: "pay",
+                  buttonSizeMode: "fill",
+                });
+                host.appendChild(button);
+              });
+            }
+          } catch (e) {
+            console.warn("Google Pay setup failed", e);
           }
         }
 
@@ -369,22 +332,17 @@ export function PayPalV6Checkout({
     return () => {
       cancelled = true;
     };
-    // confirmWalletFn is currently unused — wallet flows use server fns indirectly.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Reset SDK cache on unmount so a fresh mount (different cart/tier)
-  // re-initialises eligibility against the new context.
   useEffect(() => {
     return () => {
-      resetPaypalV6Cache();
+      resetPaypalSdkCache();
     };
   }, []);
 
-  // confirmWalletFn intentionally referenced to keep React's deps audit quiet.
-  // (Apple/Google sessions call PayPal's SDK directly; if you later want to
-  // confirm via your own server endpoint instead of the SDK helper, swap in
-  // confirmWalletFn here.)
+  // Kept available for swapping the SDK-driven wallet confirm with a
+  // server-side confirm endpoint later.
   void confirmWalletFn;
 
   async function submitCard() {
@@ -393,7 +351,6 @@ export function PayPalV6Checkout({
     setSubmitting(true);
     try {
       await cardFieldsRef.current.submit();
-      // onApprove handles the rest
     } catch (e) {
       setError(
         e instanceof Error ? e.message : "Card payment failed. Check your details.",
@@ -420,28 +377,14 @@ export function PayPalV6Checkout({
         </div>
       )}
 
-      {/* PayPal / Pay Later */}
-      {paypalEligible && (
-        <button
-          ref={paypalBtnRef}
-          type="button"
-          disabled={submitting}
-          className="w-full bg-[#FFC439] text-[#003087] font-bold px-6 py-4 text-sm hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-        >
-          <span>Pay with</span>
-          <span className="font-extrabold italic tracking-tight">PayPal</span>
-        </button>
-      )}
+      {/* PayPal / Pay Later buttons (SDK-rendered) */}
+      {paypalEligible && <div ref={paypalBtnRef} aria-label="PayPal" />}
 
       {/* Apple Pay */}
-      {appleEligible && (
-        <div ref={appleBtnRef} aria-label="Apple Pay" />
-      )}
+      {appleEligible && <div ref={appleBtnRef} aria-label="Apple Pay" />}
 
       {/* Google Pay */}
-      {googleEligible && (
-        <div ref={googleBtnRef} aria-label="Google Pay" />
-      )}
+      {googleEligible && <div ref={googleBtnRef} aria-label="Google Pay" />}
 
       {/* Card fields */}
       {cardEligible && (

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
+
 
 const LLMS_PREVIEW = `# Grow
 > Agent-native web design agency.
@@ -43,6 +45,7 @@ const SERVICES = [
     preview: LLMS_PREVIEW,
     lang: "markdown",
     cta: "View Build Specs →",
+    href: "/services",
   },
   {
     title: "Agent Readability Audit",
@@ -51,6 +54,7 @@ const SERVICES = [
     preview: AUDIT_PREVIEW,
     lang: "bash",
     cta: "Audit Your Site →",
+    href: "/check",
   },
   {
     title: "Schema Optimization",
@@ -59,8 +63,10 @@ const SERVICES = [
     preview: SCHEMA_DIFF,
     lang: "diff",
     cta: "See Before / After →",
+    href: "/playbook",
   },
 ];
+
 
 export function Services() {
   const [hovered, setHovered] = useState<number | null>(null);
@@ -155,10 +161,13 @@ export function Services() {
                 <p className="text-sm text-muted-foreground leading-relaxed mb-5">
                   {s.body}
                 </p>
-                <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-accent hover:text-foreground transition-colors cursor-pointer group">
+                <Link
+                  to={s.href}
+                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-accent hover:text-foreground transition-colors group"
+                >
                   {s.cta}
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </span>
+                </Link>
               </div>
             </div>
           ))}

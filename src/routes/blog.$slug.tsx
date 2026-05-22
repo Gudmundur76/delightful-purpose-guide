@@ -50,7 +50,7 @@ export const Route = createFileRoute("/blog/$slug")({
     const url = `https://grow.contact/blog/${post.slug}`;
     return {
       meta: [
-        { title: `${post.title} — Grow` },
+        { title: post.title.length > 55 ? post.title : `${post.title} — Grow` },
         { name: "description", content: post.description },
         { property: "og:title", content: post.title },
         { property: "og:description", content: post.description },

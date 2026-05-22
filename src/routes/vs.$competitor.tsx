@@ -17,7 +17,7 @@ export const Route = createFileRoute("/vs/$competitor")({
       return { meta: [{ title: "Comparison — Grow" }] };
     }
     const url = `https://grow.contact/vs/${c.slug}`;
-    const title = `Grow vs ${c.competitor} — Which Should AI Startups Choose?`;
+    const title = `Grow vs ${c.competitor} — AI Startup Sites`;
     const description = c.oneLiner;
     return {
       meta: [

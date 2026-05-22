@@ -1,69 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import {
   createTierOrder,
   captureTierOrder,
   type TierKey,
 } from "@/lib/paypal/tier-checkout.functions";
-import { getPaypalPublicConfig } from "@/lib/paypal/paypal.functions";
-
-type PayPalNamespace = {
-  Buttons: (opts: unknown) => { render: (sel: string | HTMLElement) => Promise<void> };
-  CardFields: (opts: unknown) => {
-    isEligible: () => boolean;
-    NameField: () => { render: (sel: string | HTMLElement) => Promise<void> };
-    NumberField: () => { render: (sel: string | HTMLElement) => Promise<void> };
-    ExpiryField: () => { render: (sel: string | HTMLElement) => Promise<void> };
-    CVVField: () => { render: (sel: string | HTMLElement) => Promise<void> };
-    submit: () => Promise<void>;
-  };
-};
-
-declare global {
-  interface Window {
-    paypal?: PayPalNamespace;
-  }
-}
-
-let sdkLoadingPromise: Promise<PayPalNamespace> | null = null;
-
-function loadPaypalSdk(clientId: string, currency: string): Promise<PayPalNamespace> {
-  if (typeof window === "undefined") return Promise.reject(new Error("SSR"));
-  if (window.paypal) return Promise.resolve(window.paypal);
-  if (sdkLoadingPromise) return sdkLoadingPromise;
-
-  sdkLoadingPromise = new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    const params = new URLSearchParams({
-      "client-id": clientId,
-      currency,
-      components: "buttons,card-fields",
-      intent: "capture",
-    });
-    script.src = `https://www.paypal.com/sdk/js?${params.toString()}`;
-    script.async = true;
-    script.onload = () => {
-      if (window.paypal) resolve(window.paypal);
-      else {
-        sdkLoadingPromise = null;
-        reject(new Error("PayPal SDK loaded but initialized empty — check that PAYPAL_CLIENT_ID matches PAYPAL_ENVIRONMENT (sandbox vs live)."));
-      }
-    };
-    script.onerror = () => {
-      // Clear the cached promise so a retry (e.g. after closing & reopening the
-      // dialog, or after the user disables an ad blocker) can re-attempt the load.
-      sdkLoadingPromise = null;
-      reject(
-        new Error(
-          "Could not load PayPal SDK. This is usually an ad/tracker blocker on paypal.com, a network block, or an invalid PAYPAL_CLIENT_ID. Disable blockers for this site and try again.",
-        ),
-      );
-    };
-    document.head.appendChild(script);
-  });
-
-  return sdkLoadingPromise;
-}
+import { PayPalV6Checkout } from "@/components/paypal/PayPalV6Checkout";
 
 type Props = {
   open: boolean;
@@ -73,6 +15,11 @@ type Props = {
   priceDisplay: string;
   /** Optional lead UUID — forwarded to PayPal so the payment links back to the brief. */
   leadId?: string;
+};
+
+const TIER_AMOUNTS: Record<TierKey, string> = {
+  starter: "2400.00",
+  growth: "4800.00",
 };
 
 export function TierCheckoutDialog({
@@ -85,151 +32,21 @@ export function TierCheckoutDialog({
 }: Props) {
   const createOrderFn = useServerFn(createTierOrder);
   const captureFn = useServerFn(captureTierOrder);
-  const getConfig = useServerFn(getPaypalPublicConfig);
 
-  const [status, setStatus] = useState<"loading" | "ready" | "error" | "success">(
-    "loading",
-  );
-  const [error, setError] = useState<string | null>(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [cardEligible, setCardEligible] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const buttonsRef = useRef<HTMLDivElement>(null);
-  const cardNameRef = useRef<HTMLDivElement>(null);
-  const cardNumberRef = useRef<HTMLDivElement>(null);
-  const cardExpiryRef = useRef<HTMLDivElement>(null);
-  const cardCvvRef = useRef<HTMLDivElement>(null);
-  const cardFieldsInstance = useRef<ReturnType<PayPalNamespace["CardFields"]> | null>(
-    null,
-  );
-  const mountedRef = useRef(false);
-
+  // reset success state when dialog opens fresh
   useEffect(() => {
-    if (!open || mountedRef.current) return;
-    mountedRef.current = true;
-    let cancelled = false;
-
-    async function init() {
-      try {
-        const config = await getConfig();
-        if (!config.clientId) {
-          throw new Error(
-            "PayPal is not configured. Add PAYPAL_CLIENT_ID in backend secrets.",
-          );
-        }
-        const paypal = await loadPaypalSdk(config.clientId, config.currency);
-        if (cancelled) return;
-
-        async function createOrder(): Promise<string> {
-          const res = await createOrderFn({ data: { tier, leadId } });
-          return res.orderId;
-        }
-
-        async function onApprove(data: { orderID: string }) {
-          setSubmitting(true);
-          try {
-            await captureFn({ data: { orderId: data.orderID } });
-            setStatus("success");
-            setSubmitting(false);
-          } catch (e) {
-            console.error(e);
-            setError("Try again or contact hello@grow.contact");
-            setSubmitting(false);
-          }
-        }
-
-        function onError(err: unknown) {
-          console.error("PayPal error", err);
-          setError("Try again or contact hello@grow.contact");
-          setSubmitting(false);
-        }
-
-        if (buttonsRef.current) {
-          await paypal
-            .Buttons({
-              style: { layout: "vertical", shape: "rect", color: "white" },
-              createOrder,
-              onApprove,
-              onError,
-              onCancel: () => setSubmitting(false),
-            })
-            .render(buttonsRef.current);
-        }
-
-        const cardFields = paypal.CardFields({
-          createOrder,
-          onApprove,
-          onError,
-          style: {
-            input: {
-              "font-size": "15px",
-              color: "#ffffff",
-              "font-family": "ui-monospace, monospace",
-            },
-            ".invalid": { color: "#ef4444" },
-          },
-        });
-
-        if (cardFields.isEligible()) {
-          setCardEligible(true);
-          await Promise.all(
-            [
-              cardNameRef.current &&
-                cardFields.NameField().render(cardNameRef.current),
-              cardNumberRef.current &&
-                cardFields.NumberField().render(cardNumberRef.current),
-              cardExpiryRef.current &&
-                cardFields.ExpiryField().render(cardExpiryRef.current),
-              cardCvvRef.current &&
-                cardFields.CVVField().render(cardCvvRef.current),
-            ].filter(Boolean) as Promise<void>[],
-          );
-          cardFieldsInstance.current = cardFields;
-        }
-
-        if (!cancelled) setStatus("ready");
-      } catch (e) {
-        console.error(e);
-        if (!cancelled) {
-          setError(
-            e instanceof Error
-              ? e.message
-              : "Could not load payment. Try again or contact hello@grow.contact",
-          );
-          setStatus("error");
-        }
-      }
-    }
-
-    init();
-    return () => {
-      cancelled = true;
-    };
-  }, [open, tier, leadId, createOrderFn, captureFn, getConfig]);
-
-  // Reset on close so dialog can re-init for a different tier
-  useEffect(() => {
-    if (!open) {
-      mountedRef.current = false;
-      cardFieldsInstance.current = null;
-      setStatus("loading");
-      setError(null);
-      setCardEligible(false);
-      setSubmitting(false);
-    }
+    if (open) setSuccess(false);
   }, [open]);
 
-  async function submitCard() {
-    if (!cardFieldsInstance.current || submitting) return;
-    setError(null);
-    setSubmitting(true);
-    try {
-      await cardFieldsInstance.current.submit();
-    } catch (e) {
-      console.error(e);
-      setError("Try again or contact hello@grow.contact");
-      setSubmitting(false);
-    }
+  async function createOrder(): Promise<string> {
+    const res = await createOrderFn({ data: { tier, leadId } });
+    return res.orderId;
+  }
+
+  async function capture(orderId: string): Promise<void> {
+    await captureFn({ data: { orderId } });
   }
 
   if (!open) return null;
@@ -267,7 +84,7 @@ export function TierCheckoutDialog({
         </div>
 
         <div className="p-6 space-y-5">
-          {status === "success" ? (
+          {success ? (
             <div className="space-y-3 py-6 text-center">
               <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
                 // Confirmed
@@ -286,84 +103,25 @@ export function TierCheckoutDialog({
             </div>
           ) : (
             <>
-              {status === "loading" && (
-                <div className="p-4 border border-border bg-muted/20 font-mono text-xs text-muted-foreground">
-                  Loading secure payment…
-                </div>
-              )}
-
-              {error && (
-                <div className="p-3 border border-destructive/40 bg-destructive/10 text-destructive text-sm">
-                  {error}
-                </div>
-              )}
-
-              <div
-                ref={buttonsRef}
-                className={status === "ready" ? "" : "hidden"}
+              <PayPalV6Checkout
+                key={`${tier}-${open ? "open" : "closed"}`}
+                createOrder={createOrder}
+                capture={capture}
+                onSuccess={() => setSuccess(true)}
+                amount={{ value: TIER_AMOUNTS[tier], currency: "USD" }}
+                payLabel={`Pay ${priceDisplay}`}
+                variant="dialog"
               />
-
-              {cardEligible && (
-                <>
-                  <div className="flex items-center gap-3">
-                    <div className="h-px flex-1 bg-border" />
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                      Or pay by card
-                    </span>
-                    <div className="h-px flex-1 bg-border" />
-                  </div>
-
-                  <div className="space-y-3">
-                    <Field label="Cardholder name" innerRef={cardNameRef} />
-                    <Field label="Card number" innerRef={cardNumberRef} />
-                    <div className="grid grid-cols-2 gap-3">
-                      <Field label="Expiry" innerRef={cardExpiryRef} />
-                      <Field label="CVV" innerRef={cardCvvRef} />
-                    </div>
-                    <button
-                      type="button"
-                      onClick={submitCard}
-                      disabled={submitting}
-                      className="w-full bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {submitting ? "Processing…" : `Pay ${priceDisplay}`}
-                    </button>
-                    <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center">
-                      PCI-DSS handled by PayPal — card data never touches this site
-                    </p>
-                    <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
-                      By paying you agree to our{" "}
-                      <a href="/terms" className="underline hover:text-foreground">Terms</a>,{" "}
-                      <a href="/refund" className="underline hover:text-foreground">Refund Policy</a> and{" "}
-                      <a href="/privacy" className="underline hover:text-foreground">Privacy Policy</a>. A receipt is emailed on capture.
-                    </p>
-                  </div>
-                </>
-              )}
+              <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
+                By paying you agree to our{" "}
+                <a href="/terms" className="underline hover:text-foreground">Terms</a>,{" "}
+                <a href="/refund" className="underline hover:text-foreground">Refund Policy</a> and{" "}
+                <a href="/privacy" className="underline hover:text-foreground">Privacy Policy</a>. A receipt is emailed on capture.
+              </p>
             </>
           )}
         </div>
       </div>
     </div>
-  );
-}
-
-function Field({
-  label,
-  innerRef,
-}: {
-  label: string;
-  innerRef: React.RefObject<HTMLDivElement | null>;
-}) {
-  return (
-    <label className="block">
-      <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-1.5 block">
-        {label}
-      </span>
-      <div
-        ref={innerRef}
-        className="min-h-[44px] px-3 py-2 border border-input bg-background focus-within:border-accent transition-colors"
-      />
-    </label>
   );
 }

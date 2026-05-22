@@ -115,7 +115,7 @@ export function TierCheckoutDialog({
                 key={`${tier}-${open ? "open" : "closed"}`}
                 createOrder={createOrder}
                 capture={capture}
-                onSuccess={() => setSuccess(true)}
+                onSuccess={handleSuccess}
                 amount={{ value: TIER_AMOUNTS[tier], currency: "USD" }}
                 payLabel={`Pay ${priceDisplay}`}
                 variant="dialog"

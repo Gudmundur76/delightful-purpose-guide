@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
+import { useNavigate } from "@tanstack/react-router";
 import {
   createTierOrder,
   captureTierOrder,
@@ -32,6 +33,7 @@ export function TierCheckoutDialog({
 }: Props) {
   const createOrderFn = useServerFn(createTierOrder);
   const captureFn = useServerFn(captureTierOrder);
+  const navigate = useNavigate();
 
   const [success, setSuccess] = useState(false);
 
@@ -47,6 +49,12 @@ export function TierCheckoutDialog({
 
   async function capture(orderId: string): Promise<void> {
     await captureFn({ data: { orderId } });
+  }
+
+  function handleSuccess(orderId: string) {
+    setSuccess(true);
+    onClose();
+    navigate({ to: "/checkout/success", search: { order: orderId } });
   }
 
   if (!open) return null;
@@ -107,7 +115,7 @@ export function TierCheckoutDialog({
                 key={`${tier}-${open ? "open" : "closed"}`}
                 createOrder={createOrder}
                 capture={capture}
-                onSuccess={() => setSuccess(true)}
+                onSuccess={handleSuccess}
                 amount={{ value: TIER_AMOUNTS[tier], currency: "USD" }}
                 payLabel={`Pay ${priceDisplay}`}
                 variant="dialog"

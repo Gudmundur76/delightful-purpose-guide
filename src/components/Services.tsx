@@ -138,9 +138,9 @@ export function Services() {
                       <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1.5">
                         Contact
                       </p>
-                      <a href="mailto:hello@grow.contact" className="text-accent hover:text-foreground transition-colors">
+                      <span className="text-accent">
                         hello@grow.contact
-                      </a>
+                      </span>
                     </div>
                   </div>
                 ) : (

@@ -8,6 +8,7 @@ import {
 import {
   getPaypalV6Sdk,
   loadGooglePayScript,
+  loadPaypalV6Core,
   resetPaypalV6Cache,
   type V6CardFields,
   type V6Component,
@@ -87,20 +88,31 @@ export function PayPalV6Checkout({
 
     async function init() {
       try {
-        const config = await getConfig();
+        // Kick off SDK core script load in parallel with server calls —
+        // it's the biggest chunk of latency and doesn't need server data.
+        const corePreload = loadPaypalV6Core().catch(() => null);
+
+        // Client token is optional (only needed for Fastlane / wallet
+        // eligibility). Cap it at 2s so a slow PayPal API never blocks
+        // the rest of checkout from rendering.
+        const tokenWithTimeout = Promise.race([
+          getClientToken().then((t) => t.clientToken).catch((e) => {
+            console.warn("PayPal client-token failed", e);
+            return undefined;
+          }),
+          new Promise<undefined>((resolve) => setTimeout(() => resolve(undefined), 2000)),
+        ]);
+
+        const [config, clientToken] = await Promise.all([
+          getConfig(),
+          tokenWithTimeout,
+        ]);
+        if (cancelled) return;
         if (!config.clientId) {
           throw new Error("PayPal is not configured. Add PAYPAL_CLIENT_ID.");
         }
-
-        // Client token unlocks Fastlane + improves wallet eligibility.
-        // If it fails, fall back to clientId-only init.
-        let clientToken: string | undefined;
-        try {
-          const t = await getClientToken();
-          clientToken = t.clientToken;
-        } catch (e) {
-          console.warn("PayPal client-token unavailable, continuing with clientId", e);
-        }
+        // Ensure core script finished before createInstance.
+        await corePreload;
 
         const sdk = await getPaypalV6Sdk({
           clientId: config.clientId,

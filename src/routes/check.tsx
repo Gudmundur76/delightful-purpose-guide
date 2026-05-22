@@ -2,8 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2 } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
-import { zodValidator, fallback } from "@tanstack/zod-adapter";
-import { z } from "zod";
 
 import { sendReportFollowup } from "@/lib/check/report-followup.functions";
 import { scanUrl, type ScanMetric, type ScanResult } from "@/lib/check/scan.functions";

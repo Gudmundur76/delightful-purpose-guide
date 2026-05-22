@@ -27,13 +27,6 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Grow — Agent-Native Websites for AI startups & devtools" },
-      {
-        name: "description",
-        content:
-          "Grow ships agent-native marketing sites for AI/ML startups, agent platforms, and developer tools. Custom-coded, LLM-readable, live in 48 hours — fixed price.",
-      },
-      { property: "og:title", content: "Grow — Agent-Native Websites for AI startups & devtools" },
       {
         property: "og:description",
         content:

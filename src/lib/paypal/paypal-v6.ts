@@ -103,10 +103,14 @@ export interface V6Namespace {
 
 declare global {
   interface Window {
-    paypal?: V6Namespace & Record<string, unknown>;
     google?: { payments?: { api?: { PaymentsClient: new (cfg: unknown) => unknown } } };
     ApplePaySession?: { canMakePayments: () => boolean };
   }
+}
+
+function getPaypalGlobal(): V6Namespace | undefined {
+  if (typeof window === "undefined") return undefined;
+  return (window as unknown as { paypal?: V6Namespace }).paypal;
 }
 
 const V6_SDK_URL = "https://www.paypal.com/sdk/js/v6/core";

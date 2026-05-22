@@ -169,7 +169,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           name: "Grow",
           alternateName: "grow.contact",
           url: "https://grow.contact",
-          logo: "https://grow.contact/favicon.ico",
+          logo: "https://grow.contact/og-home.png",
           description:
             "Agent-native marketing sites for AI/ML startups, agent platforms, and developer tools. 48 hours, fixed price.",
           email: "hello@grow.contact",

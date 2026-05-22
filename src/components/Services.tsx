@@ -161,10 +161,13 @@ export function Services() {
                 <p className="text-sm text-muted-foreground leading-relaxed mb-5">
                   {s.body}
                 </p>
-                <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-accent hover:text-foreground transition-colors cursor-pointer group">
+                <Link
+                  to={s.href}
+                  className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-accent hover:text-foreground transition-colors group"
+                >
                   {s.cta}
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </span>
+                </Link>
               </div>
             </div>
           ))}

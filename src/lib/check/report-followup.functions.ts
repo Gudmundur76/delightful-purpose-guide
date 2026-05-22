@@ -4,6 +4,8 @@ import { z } from "zod";
 import { sendTransactionalEmailInternal } from "@/lib/email/send-internal";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { rateLimit, clientIpFromRequest } from "@/lib/api/rate-limit";
+import { qualifyLeadAndSendReplies } from "@/lib/leads/qualify.server";
+
 
 const Schema = z.object({
   email: z.string().email().max(254),
@@ -62,6 +64,37 @@ export const sendReportFollowup = createServerFn({ method: "POST" })
       source: "check",
     });
 
+    // Also create a lead row so free-tool emails flow through the same
+    // qualification + auto-reply pipeline as contact-form submissions.
+    const leadName = (data.email.split("@")[0] ?? "there")
+      .replace(/[._-]+/g, " ")
+      .replace(/\b\w/g, (c) => c.toUpperCase())
+      .slice(0, 60);
+    const leadMessage = `Requested PDF report from /check for ${verifiedUrl} (score ${verifiedScore}/100)`;
+
+    const { data: lead, error: leadErr } = await supabaseAdmin
+      .from("leads")
+      .insert({
+        name: leadName,
+        email: data.email,
+        budget_tier: "unknown",
+        message: leadMessage,
+        source: "check_report",
+      })
+      .select("id")
+      .single();
+    if (leadErr) console.error("[report-followup] lead insert failed", leadErr);
+
+    const qualifyPromise = lead
+      ? qualifyLeadAndSendReplies({
+          id: lead.id,
+          name: leadName,
+          email: data.email,
+          budget_tier: "unknown",
+          message: leadMessage,
+        }).catch((e) => console.error("[report-followup] qualify failed", e))
+      : Promise.resolve();
+
     const [followup, notify] = await Promise.allSettled([
       sendTransactionalEmailInternal({
         templateName: "report-followup",
@@ -75,9 +108,11 @@ export const sendReportFollowup = createServerFn({ method: "POST" })
         idempotencyKey: `scan-lead-notify:${data.email}:${verifiedUrl}`,
       }),
     ]);
+    await qualifyPromise;
     return {
       ok: true as const,
       followup: followup.status === "fulfilled" ? followup.value : { ok: false },
       notify: notify.status === "fulfilled" ? notify.value : { ok: false },
     };
   });
+

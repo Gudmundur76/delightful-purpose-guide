@@ -116,6 +116,7 @@ export type Database = {
           qualification_score: number | null
           qualification_suggested_tier: string | null
           qualification_tier: string | null
+          source: string
         }
         Insert: {
           auto_replied_at?: string | null
@@ -131,6 +132,7 @@ export type Database = {
           qualification_score?: number | null
           qualification_suggested_tier?: string | null
           qualification_tier?: string | null
+          source?: string
         }
         Update: {
           auto_replied_at?: string | null
@@ -146,6 +148,7 @@ export type Database = {
           qualification_score?: number | null
           qualification_suggested_tier?: string | null
           qualification_tier?: string | null
+          source?: string
         }
         Relationships: []
       }

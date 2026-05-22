@@ -3,6 +3,8 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useMemo, useState } from "react";
 import { Copy, Check as CheckIcon, ArrowRight } from "lucide-react";
+import { FreeToolEmailGate } from "@/components/FreeToolEmailGate";
+
 
 export const Route = createFileRoute("/badge")({
   component: BadgePage,
@@ -129,7 +131,7 @@ function BadgePage() {
               </Link>
             </div>
 
-            <div className="border border-border bg-card p-8 flex flex-col md:flex-row items-center gap-8">
+            <div className="border border-border bg-card p-8 flex flex-col md:flex-row items-center gap-8 mb-10">
               <img
                 src={badgeUrl}
                 alt={`Agent Readability Score badge for ${id}`}
@@ -143,8 +145,21 @@ function BadgePage() {
                 {badgeUrl}
               </div>
             </div>
+
+            <div className="max-w-2xl">
+              <FreeToolEmailGate
+                source="badge"
+                context={id}
+                eyebrow="EMAIL ME THE EMBED"
+                headline="Get the embed snippets in your inbox"
+                sub="We'll send the HTML, Markdown, React, and script-tag versions for your domain — plus a quick guide to keep your score climbing."
+                cta="Email me the embed →"
+                successText="Sent. Check your inbox in a minute."
+              />
+            </div>
           </div>
         </section>
+
 
         {/* Snippets */}
         <section className="border-b border-border">

@@ -3,6 +3,8 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useMemo, useState } from "react";
 import { Copy, Check as CheckIcon, ArrowRight } from "lucide-react";
+import { FreeToolEmailGate } from "@/components/FreeToolEmailGate";
+
 
 export const Route = createFileRoute("/badge")({
   component: BadgePage,

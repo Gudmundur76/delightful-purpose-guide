@@ -27,7 +27,7 @@ export function SiteFooter() {
           <div>
             <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Contact</h5>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="mailto:hello@grow.contact" className="hover:text-foreground transition-colors">hello@grow.contact</a></li>
+              <li><span className="select-all">hello@grow.contact</span></li>
               <li><Link to="/contact" className="hover:text-foreground transition-colors">Start a Brief</Link></li>
               <li><Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link></li>
             </ul>

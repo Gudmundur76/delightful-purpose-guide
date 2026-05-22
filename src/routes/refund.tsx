@@ -61,7 +61,7 @@ function RefundPage() {
       <section>
         <H2>5. How to request a refund</H2>
         <P>
-          Email <a className="underline" href={`mailto:${COMPANY.contactEmail}`}>{COMPANY.contactEmail}</a> with your
+          Email <span className="underline select-all">{COMPANY.contactEmail}</span> with your
           order ID and a short explanation. We respond within 5 business days and process approved refunds within 10
           business days via the original payment method (PayPal).
         </P>

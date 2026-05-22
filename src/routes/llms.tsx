@@ -208,9 +208,7 @@ function HumanView() {
       <Block title="Contact">
         <p className="text-sm text-muted-foreground">
           Email{" "}
-          <a href="mailto:hello@grow.contact" className="text-accent hover:underline">
-            hello@grow.contact
-          </a>{" "}
+          <span className="text-accent select-all">hello@grow.contact</span>{" "}
           or start a brief at{" "}
           <a href="/#cta" className="text-accent hover:underline">grow.contact/#cta</a>.
         </p>

@@ -70,7 +70,7 @@ function CookiesPage() {
       <section>
         <H2>5. Contact</H2>
         <P>
-          Questions: <a className="underline" href={`mailto:${COMPANY.privacyEmail}`}>{COMPANY.privacyEmail}</a>.
+          Questions: <span className="select-all">{COMPANY.privacyEmail}</span>.
         </P>
       </section>
     </LegalPage>

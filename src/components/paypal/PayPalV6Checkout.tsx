@@ -383,41 +383,45 @@ export function PayPalV6Checkout({
       <div ref={appleBtnRef} aria-label="Apple Pay" style={{ display: appleEligible ? undefined : "none" }} />
       <div ref={googleBtnRef} aria-label="Google Pay" style={{ display: googleEligible ? undefined : "none" }} />
 
-      {/* Card fields */}
-      {cardEligible && (
-        <>
-          <div className="flex items-center gap-3">
-            <div className="h-px flex-1 bg-border" />
-            <span className={`font-mono text-[10px] ${dividerLabel}`}>
-              Or pay by card
-            </span>
-            <div className="h-px flex-1 bg-border" />
-          </div>
+      {/* Card fields — hosts always mounted, UI hidden until eligible */}
+      <div style={{ display: cardEligible ? undefined : "none" }}>
+        <div className="flex items-center gap-3">
+          <div className="h-px flex-1 bg-border" />
+          <span className={`font-mono text-[10px] ${dividerLabel}`}>
+            Or pay by card
+          </span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
 
-          <div className="space-y-3">
-            <CardField label="Cardholder name" innerRef={cardNameRef} />
-            <CardField label="Card number" innerRef={cardNumberRef} />
-            <div className="grid grid-cols-2 gap-3">
-              <CardField label="Expiry" innerRef={cardExpiryRef} />
-              <CardField label="CVV" innerRef={cardCvvRef} />
-            </div>
-            <button
-              type="button"
-              onClick={submitCard}
-              disabled={submitting}
-              className={
-                variant === "dialog"
-                  ? "w-full bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  : "w-full bg-foreground text-background font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-accent hover:text-accent-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              }
-            >
-              {submitting ? "Processing…" : payLabel}
-            </button>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center">
-              PCI-DSS handled by PayPal — card data never touches this site
-            </p>
+        <div className="space-y-3 mt-5">
+          <CardField label="Cardholder name" innerRef={cardNameRef} />
+          <CardField label="Card number" innerRef={cardNumberRef} />
+          <div className="grid grid-cols-2 gap-3">
+            <CardField label="Expiry" innerRef={cardExpiryRef} />
+            <CardField label="CVV" innerRef={cardCvvRef} />
           </div>
-        </>
+          <button
+            type="button"
+            onClick={submitCard}
+            disabled={submitting}
+            className={
+              variant === "dialog"
+                ? "w-full bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                : "w-full bg-foreground text-background font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-accent hover:text-accent-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            }
+          >
+            {submitting ? "Processing…" : payLabel}
+          </button>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center">
+            PCI-DSS handled by PayPal — card data never touches this site
+          </p>
+        </div>
+      </div>
+
+      {status === "ready" && !paypalEligible && !appleEligible && !googleEligible && !cardEligible && (
+        <div className="p-3 border border-destructive/40 bg-destructive/10 text-destructive text-sm">
+          No payment methods are available in this environment. Please contact us to complete your purchase.
+        </div>
       )}
     </div>
   );

@@ -9,17 +9,19 @@ import {
 
 export const getPaypalPublicConfig = createServerFn({ method: "GET" }).handler(
   async () => {
-    const clientId = process.env.PAYPAL_CLIENT_ID;
+    const raw = process.env.PAYPAL_CLIENT_ID;
+    const clientId = raw?.trim() || null;
+    const environment =
+      (process.env.PAYPAL_ENVIRONMENT || "sandbox").toLowerCase() === "live"
+        ? ("live" as const)
+        : ("sandbox" as const);
     if (!clientId) {
-      return { clientId: null, currency: "USD", environment: "sandbox" as const };
+      return { clientId: null, currency: "USD", environment };
     }
     return {
       clientId,
       currency: process.env.PAYPAL_CURRENCY || "USD",
-      environment:
-        (process.env.PAYPAL_ENVIRONMENT || "sandbox").toLowerCase() === "live"
-          ? ("live" as const)
-          : ("sandbox" as const),
+      environment,
     };
   },
 );

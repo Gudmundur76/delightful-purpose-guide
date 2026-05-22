@@ -274,12 +274,10 @@ export function SmartContactForm() {
                     </button>
                   )}
                   <a
-                    href="https://cal.com/grow-contact/intro"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#contact"
                     className="block text-center w-full py-4 border border-border text-foreground font-bold uppercase tracking-tighter hover:border-accent transition-colors"
                   >
-                    Or book a call → Discuss your score
+                    Or send us your brief → Discuss your score
                   </a>
                 </div>
               </>

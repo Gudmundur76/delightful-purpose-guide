@@ -9,9 +9,12 @@ import { sendReportFollowup } from "@/lib/check/report-followup.functions";
 import { scanUrl, type ScanMetric, type ScanResult } from "@/lib/check/scan.functions";
 import { RecentScans } from "@/components/RecentScans";
 
+// Keep params truly optional — no defaults — so a bare /check URL doesn't
+// 307-redirect to /check?url=&auto=false. Wasted hops break Perplexity's
+// ~1.5s timeout and burn crawl budget.
 const checkSearchSchema = z.object({
-  url: fallback(z.string(), "").default(""),
-  auto: fallback(z.boolean(), false).default(false),
+  url: fallback(z.string().optional(), undefined),
+  auto: fallback(z.boolean().optional(), undefined),
 });
 
 export const Route = createFileRoute("/check")({

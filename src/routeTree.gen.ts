@@ -39,6 +39,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
+import { Route as GuideGenerativeEngineOptimizationRouteImport } from './routes/guide.generative-engine-optimization'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as CheckReportRouteImport } from './routes/check.report'
@@ -218,6 +219,12 @@ const VerifyIdRoute = VerifyIdRouteImport.update({
   path: '/verify/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuideGenerativeEngineOptimizationRoute =
+  GuideGenerativeEngineOptimizationRouteImport.update({
+    id: '/guide/generative-engine-optimization',
+    path: '/guide/generative-engine-optimization',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   id: '/email/unsubscribe',
   path: '/email/unsubscribe',
@@ -402,6 +409,7 @@ export interface FileRoutesByFullPath {
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
@@ -462,6 +470,7 @@ export interface FileRoutesByTo {
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog': typeof BlogIndexRoute
@@ -523,6 +532,7 @@ export interface FileRoutesById {
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
@@ -585,6 +595,7 @@ export interface FileRouteTypes {
     | '/check/report'
     | '/checkout/success'
     | '/email/unsubscribe'
+    | '/guide/generative-engine-optimization'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
@@ -645,6 +656,7 @@ export interface FileRouteTypes {
     | '/check/report'
     | '/checkout/success'
     | '/email/unsubscribe'
+    | '/guide/generative-engine-optimization'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog'
@@ -705,6 +717,7 @@ export interface FileRouteTypes {
     | '/check/report'
     | '/checkout/success'
     | '/email/unsubscribe'
+    | '/guide/generative-engine-optimization'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
@@ -763,6 +776,7 @@ export interface RootRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
   BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
+  GuideGenerativeEngineOptimizationRoute: typeof GuideGenerativeEngineOptimizationRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
@@ -997,6 +1011,13 @@ declare module '@tanstack/react-router' {
       path: '/verify/$id'
       fullPath: '/verify/$id'
       preLoaderRoute: typeof VerifyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guide/generative-engine-optimization': {
+      id: '/guide/generative-engine-optimization'
+      path: '/guide/generative-engine-optimization'
+      fullPath: '/guide/generative-engine-optimization'
+      preLoaderRoute: typeof GuideGenerativeEngineOptimizationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/email/unsubscribe': {
@@ -1283,6 +1304,8 @@ const rootRouteChildren: RootRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
   BlogRssDotxmlRoute: BlogRssDotxmlRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
+  GuideGenerativeEngineOptimizationRoute:
+    GuideGenerativeEngineOptimizationRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,

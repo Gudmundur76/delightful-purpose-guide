@@ -2,13 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createMcpServer, withMcpAuth } from "mcp-tanstack-start";
 import { pingTool } from "@/lib/mcp/tools/ping";
 import { siteInfoTool } from "@/lib/mcp/tools/site-info";
+import { brandKitTool } from "@/lib/mcp/tools/brand-kit";
+import { copyTool } from "@/lib/mcp/tools/copy";
+import { submitForReviewTool } from "@/lib/mcp/tools/submit-for-review";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",
-  version: "1.0.0",
+  version: "1.1.0",
   instructions:
-    "Tools for working with the grow.contact project. Use site_info for context about the site, and ping for health checks.",
-  tools: [pingTool, siteInfoTool],
+    "Tools for building with the grow.contact standards. Pull get_brand_kit + get_copy before generating UI, then call submit_for_review with the preview URL so a human approves before launch.",
+  tools: [pingTool, siteInfoTool, brandKitTool, copyTool, submitForReviewTool],
 });
 
 const methodNotAllowed = () =>

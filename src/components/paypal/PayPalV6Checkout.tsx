@@ -158,7 +158,7 @@ export function PayPalV6Checkout({
           }
         }
 
-        // ---- PayPal / Pay Later buttons --------------------------------
+        // ---- PayPal button ---------------------------------------------
         if (paypal.Buttons) {
           const buttons = paypal.Buttons({
             style: {
@@ -167,7 +167,6 @@ export function PayPalV6Checkout({
               color: "gold",
               label: "paypal",
             },
-            // Card is rendered separately above — avoid duplicate button.
             fundingSource: paypal.FUNDING?.PAYPAL ?? "paypal",
             createOrder: () => createOrderRef.current(),
             onApprove: onApproveCommon,
@@ -186,6 +185,36 @@ export function PayPalV6Checkout({
             });
           }
         }
+
+        // ---- Pay Later button (separate funding source) ----------------
+        if (paypal.Buttons) {
+          const paylaterFunding = paypal.FUNDING?.PAYLATER ?? "paylater";
+          if (paypal.isFundingEligible?.(paylaterFunding) !== false) {
+            const paylaterButtons = paypal.Buttons({
+              fundingSource: paylaterFunding,
+              style: {
+                layout: "vertical",
+                shape: "rect",
+                color: "gold",
+                label: "paypal",
+              },
+              createOrder: () => createOrderRef.current(),
+              onApprove: onApproveCommon,
+              onCancel: () => setSubmitting(false),
+              onError: onErrorCommon,
+            });
+            if (paylaterButtons.isEligible()) {
+              queueMicrotask(() => {
+                if (paylaterBtnRef.current) {
+                  paylaterButtons.render(paylaterBtnRef.current).catch((e) =>
+                    console.warn("PayPal PayLater render failed", e),
+                  );
+                }
+              });
+            }
+          }
+        }
+
 
         // ---- Card fields (inline ACDC) --------------------------------
         if (paypal.CardFields) {

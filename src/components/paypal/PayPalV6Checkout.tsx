@@ -354,32 +354,23 @@ export function PayPalV6Checkout({
         </div>
       )}
 
-      {/* Debit or Credit Card button (guest checkout) — shown first as default */}
-      <div ref={cardBtnRef} aria-label="Debit or Credit Card" style={{ display: cardButtonEligible ? undefined : "none" }} />
-      {cardButtonEligible && (
-        <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center -mt-3 mb-2">
-          Opens PayPal's secure guest checkout — you can pay with any card without a PayPal account
-        </p>
-      )}
-
-      {/* Standard PayPal button */}
-      <div ref={paypalBtnRef} aria-label="PayPal" style={{ display: paypalEligible ? undefined : "none" }} />
-      <div ref={paylaterBtnRef} aria-label="Pay Later" />
-
+      {/* Wallets — fully inline */}
       <div ref={appleBtnRef} aria-label="Apple Pay" style={{ display: appleEligible ? undefined : "none" }} />
       <div ref={googleBtnRef} aria-label="Google Pay" style={{ display: googleEligible ? undefined : "none" }} />
 
-      {/* Card fields — hosts always mounted, UI hidden until eligible */}
+      {/* Card fields — fully inline, hosts always mounted, UI hidden until eligible */}
       <div style={{ display: cardEligible ? undefined : "none" }}>
-        <div className="flex items-center gap-3">
-          <div className="h-px flex-1 bg-border" />
-          <span className={`font-mono text-[10px] ${dividerLabel}`}>
-            Or pay by card
-          </span>
-          <div className="h-px flex-1 bg-border" />
-        </div>
+        {(appleEligible || googleEligible) && (
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-px flex-1 bg-border" />
+            <span className={`font-mono text-[10px] ${dividerLabel}`}>
+              Or pay by card
+            </span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+        )}
 
-        <div className="space-y-3 mt-5">
+        <div className="space-y-3">
           <CardField label="Cardholder name" innerRef={cardNameRef} />
           <CardField label="Card number" innerRef={cardNumberRef} />
           <div className="grid grid-cols-2 gap-3">
@@ -404,7 +395,7 @@ export function PayPalV6Checkout({
         </div>
       </div>
 
-      {status === "ready" && !paypalEligible && !cardButtonEligible && !appleEligible && !googleEligible && !cardEligible && (
+      {status === "ready" && !appleEligible && !googleEligible && !cardEligible && (
         <div className="p-3 border border-destructive/40 bg-destructive/10 text-destructive text-sm">
           No payment methods are available in this environment. Please contact us to complete your purchase.
         </div>

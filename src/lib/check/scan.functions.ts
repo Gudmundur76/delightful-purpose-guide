@@ -264,7 +264,6 @@ export const scanUrl = createServerFn({ method: "POST" })
     log.push(`$ measure --first-byte`);
     const firstByteMs = main.headerMs;
     let speedScore = 100;
-    if (firstByteMs > 300) speedScore -= 10;
     if (firstByteMs > 800) speedScore -= 20;
     if (firstByteMs > 1500) speedScore -= 25;
     if (firstByteMs > 3000) speedScore -= 25;

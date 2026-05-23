@@ -51,19 +51,18 @@ export function PayPalV6Checkout({
   const [cardEligible, setCardEligible] = useState(false);
   const [appleEligible, setAppleEligible] = useState(false);
   const [googleEligible, setGoogleEligible] = useState(false);
-  const [paypalEligible, setPaypalEligible] = useState(false);
+  // Fallback for accounts without ACDC (inline CardFields). When CardFields
+  // isn't eligible, we render PayPal's hosted card button which works on any
+  // standard PayPal account but opens a popup overlay.
   const [cardButtonEligible, setCardButtonEligible] = useState(false);
 
-  const paypalBtnRef = useRef<HTMLDivElement>(null);
-  const paylaterBtnRef = useRef<HTMLDivElement>(null);
-
-  const cardBtnRef = useRef<HTMLDivElement>(null);
-  const appleBtnRef = useRef<HTMLDivElement>(null);
-  const googleBtnRef = useRef<HTMLDivElement>(null);
   const cardNameRef = useRef<HTMLDivElement>(null);
   const cardNumberRef = useRef<HTMLDivElement>(null);
   const cardExpiryRef = useRef<HTMLDivElement>(null);
   const cardCvvRef = useRef<HTMLDivElement>(null);
+  const appleBtnRef = useRef<HTMLDivElement>(null);
+  const googleBtnRef = useRef<HTMLDivElement>(null);
+  const cardBtnRef = useRef<HTMLDivElement>(null);
 
   const cardFieldsRef = useRef<PayPalCardFieldsInstance | null>(null);
   const mountedRef = useRef(false);
@@ -130,96 +129,14 @@ export function PayPalV6Checkout({
           setSubmitting(false);
         };
 
-        // ---- Debit or Credit Card button (guest checkout) — shown first as default ---
-        if (paypal.Buttons) {
-          const cardFunding = paypal.FUNDING?.CARD ?? "card";
-          if (paypal.isFundingEligible?.(cardFunding) !== false) {
-            const cardButtons = paypal.Buttons({
-              fundingSource: cardFunding,
-              style: {
-                layout: "vertical",
-                shape: "rect",
-                color: "black",
-                label: "pay",
-              },
 
-              createOrder: () => createOrderRef.current(),
-              onApprove: onApproveCommon,
-              onCancel: () => setSubmitting(false),
-              onError: onErrorCommon,
-            });
-            if (cardButtons.isEligible()) {
-              setCardButtonEligible(true);
-              queueMicrotask(() => {
-                if (cardBtnRef.current) {
-                  cardButtons.render(cardBtnRef.current).catch((e) =>
-                    console.warn("PayPal Card button render failed", e),
-                  );
-                }
-              });
-            }
-          }
-        }
 
-        // ---- PayPal button ---------------------------------------------
-        if (paypal.Buttons) {
-          const buttons = paypal.Buttons({
-            style: {
-              layout: "vertical",
-              shape: "rect",
-              color: "gold",
-              label: "paypal",
-            },
-            fundingSource: paypal.FUNDING?.PAYPAL ?? "paypal",
-            createOrder: () => createOrderRef.current(),
-            onApprove: onApproveCommon,
-            onCancel: () => setSubmitting(false),
-            onError: onErrorCommon,
-          });
 
-          if (buttons.isEligible()) {
-            setPaypalEligible(true);
-            queueMicrotask(() => {
-              if (paypalBtnRef.current) {
-                buttons.render(paypalBtnRef.current).catch((e) =>
-                  console.warn("PayPal Buttons render failed", e),
-                );
-              }
-            });
-          }
-        }
 
-        // ---- Pay Later button (separate funding source) ----------------
-        if (paypal.Buttons) {
-          const paylaterFunding = paypal.FUNDING?.PAYLATER ?? "paylater";
-          if (paypal.isFundingEligible?.(paylaterFunding) !== false) {
-            const paylaterButtons = paypal.Buttons({
-              fundingSource: paylaterFunding,
-              style: {
-                layout: "vertical",
-                shape: "rect",
-                color: "gold",
-                label: "paypal",
-              },
-              createOrder: () => createOrderRef.current(),
-              onApprove: onApproveCommon,
-              onCancel: () => setSubmitting(false),
-              onError: onErrorCommon,
-            });
-            if (paylaterButtons.isEligible()) {
-              queueMicrotask(() => {
-                if (paylaterBtnRef.current) {
-                  paylaterButtons.render(paylaterBtnRef.current).catch((e) =>
-                    console.warn("PayPal PayLater render failed", e),
-                  );
-                }
-              });
-            }
-          }
-        }
 
 
         // ---- Card fields (inline ACDC) --------------------------------
+        let cardFieldsEligible = false;
         if (paypal.CardFields) {
           const inputColor = variant === "dialog" ? "#ffffff" : "#0f172a";
           const cardFields = paypal.CardFields({
@@ -232,6 +149,7 @@ export function PayPalV6Checkout({
             },
           });
           if (cardFields.isEligible()) {
+            cardFieldsEligible = true;
             setCardEligible(true);
             cardFieldsRef.current = cardFields;
             queueMicrotask(async () => {
@@ -254,6 +172,39 @@ export function PayPalV6Checkout({
             });
           }
         }
+
+        // ---- Card button fallback (hosted card popup) -----------------
+        // Only render when inline CardFields aren't available — keeps the
+        // checkout functional on PayPal accounts without ACDC enabled.
+        if (!cardFieldsEligible && paypal.Buttons) {
+          const cardFunding = paypal.FUNDING?.CARD ?? "card";
+          if (paypal.isFundingEligible?.(cardFunding) !== false) {
+            const cardButtons = paypal.Buttons({
+              fundingSource: cardFunding,
+              style: {
+                layout: "vertical",
+                shape: "rect",
+                color: "black",
+                label: "pay",
+              },
+              createOrder: () => createOrderRef.current(),
+              onApprove: onApproveCommon,
+              onCancel: () => setSubmitting(false),
+              onError: onErrorCommon,
+            });
+            if (cardButtons.isEligible()) {
+              setCardButtonEligible(true);
+              queueMicrotask(() => {
+                if (cardBtnRef.current) {
+                  cardButtons.render(cardBtnRef.current).catch((e) =>
+                    console.warn("PayPal Card button render failed", e),
+                  );
+                }
+              });
+            }
+          }
+        }
+
 
         // ---- Apple Pay --------------------------------------------------
         if (
@@ -443,32 +394,23 @@ export function PayPalV6Checkout({
         </div>
       )}
 
-      {/* Debit or Credit Card button (guest checkout) — shown first as default */}
-      <div ref={cardBtnRef} aria-label="Debit or Credit Card" style={{ display: cardButtonEligible ? undefined : "none" }} />
-      {cardButtonEligible && (
-        <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center -mt-3 mb-2">
-          Opens PayPal's secure guest checkout — you can pay with any card without a PayPal account
-        </p>
-      )}
-
-      {/* Standard PayPal button */}
-      <div ref={paypalBtnRef} aria-label="PayPal" style={{ display: paypalEligible ? undefined : "none" }} />
-      <div ref={paylaterBtnRef} aria-label="Pay Later" />
-
+      {/* Wallets — fully inline */}
       <div ref={appleBtnRef} aria-label="Apple Pay" style={{ display: appleEligible ? undefined : "none" }} />
       <div ref={googleBtnRef} aria-label="Google Pay" style={{ display: googleEligible ? undefined : "none" }} />
 
-      {/* Card fields — hosts always mounted, UI hidden until eligible */}
+      {/* Card fields — fully inline, hosts always mounted, UI hidden until eligible */}
       <div style={{ display: cardEligible ? undefined : "none" }}>
-        <div className="flex items-center gap-3">
-          <div className="h-px flex-1 bg-border" />
-          <span className={`font-mono text-[10px] ${dividerLabel}`}>
-            Or pay by card
-          </span>
-          <div className="h-px flex-1 bg-border" />
-        </div>
+        {(appleEligible || googleEligible) && (
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-px flex-1 bg-border" />
+            <span className={`font-mono text-[10px] ${dividerLabel}`}>
+              Or pay by card
+            </span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+        )}
 
-        <div className="space-y-3 mt-5">
+        <div className="space-y-3">
           <CardField label="Cardholder name" innerRef={cardNameRef} />
           <CardField label="Card number" innerRef={cardNumberRef} />
           <div className="grid grid-cols-2 gap-3">
@@ -493,7 +435,15 @@ export function PayPalV6Checkout({
         </div>
       </div>
 
-      {status === "ready" && !paypalEligible && !cardButtonEligible && !appleEligible && !googleEligible && !cardEligible && (
+      {/* Card button fallback — only shown when inline CardFields isn't eligible */}
+      <div ref={cardBtnRef} aria-label="Debit or Credit Card" style={{ display: cardButtonEligible ? undefined : "none" }} />
+      {cardButtonEligible && (
+        <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center -mt-3">
+          Card checkout opens in a secure PayPal window — no PayPal account needed
+        </p>
+      )}
+
+      {status === "ready" && !appleEligible && !googleEligible && !cardEligible && !cardButtonEligible && (
         <div className="p-3 border border-destructive/40 bg-destructive/10 text-destructive text-sm">
           No payment methods are available in this environment. Please contact us to complete your purchase.
         </div>

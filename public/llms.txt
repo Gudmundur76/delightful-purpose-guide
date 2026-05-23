@@ -33,7 +33,8 @@ We score every site on a 0-100 scale across five signals:
 - [Work](/work): Recent agent-native site launches.
 - [Leaderboard](/leaderboard): Top 30 AI sites ranked by Agent Readability Score.
 - [Playbook](/playbook): 12-week agent-native SEO content calendar for AI startups.
-- [Comparisons](/vs): Grow vs Webflow, Framer, Wix Studio, and traditional agencies.
+- [GEO Guide](/guide/generative-engine-optimization): The 2026 pillar guide to Generative Engine Optimization — definitions, five pillars, per-engine playbook, common mistakes, measurement.
+- [Comparisons](/vs): Grow vs Webflow, Framer, Wix Studio, agencies, Profound, Rankscale, and DIY.
 - [Badge](/badge): Free embeddable Agent Readability Score badge.
 - [FAQ](/faq): Common questions about scope, timeline, and ownership.
 - [Blog](/blog): Field notes on agent-native design and LLM citation.

@@ -5,6 +5,7 @@ import { persistScan } from "./scans.server";
 const InputSchema = z.object({
   url: z.string().min(3).max(2048),
   source: z.string().max(40).optional(),
+  clientId: z.string().uuid().optional(),
 });
 
 export type ScanStatus = "pass" | "warn" | "fail";

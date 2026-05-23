@@ -167,11 +167,14 @@ export function PayPalV6Checkout({
               color: "gold",
               label: "paypal",
             },
+            // Card is rendered separately above — avoid duplicate button.
+            fundingSource: paypal.FUNDING?.PAYPAL ?? "paypal",
             createOrder: () => createOrderRef.current(),
             onApprove: onApproveCommon,
             onCancel: () => setSubmitting(false),
             onError: onErrorCommon,
           });
+
           if (buttons.isEligible()) {
             setPaypalEligible(true);
             queueMicrotask(() => {

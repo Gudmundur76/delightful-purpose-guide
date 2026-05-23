@@ -75,18 +75,17 @@ export default {
 
       // Edge-cache the homepage HTML so repeat visits (and agent scanners)
       // get sub-100ms TTFB instead of paying SSR cost on every request.
-      if (
-        request.method === "GET" &&
-        normalized.status === 200 &&
-        !normalized.headers.has("cache-control")
-      ) {
+      if (request.method === "GET" && normalized.status === 200) {
         const url = new URL(request.url);
         const ct = normalized.headers.get("content-type") ?? "";
         if (url.pathname === "/" && ct.includes("text/html")) {
           const headers = new Headers(normalized.headers);
+          // Override TanStack's default no-cache so Cloudflare can serve
+          // the homepage HTML from the edge (sub-100ms TTFB for scanners
+          // and repeat visitors).
           headers.set(
             "cache-control",
-            "public, max-age=0, s-maxage=120, stale-while-revalidate=600",
+            "public, max-age=0, s-maxage=300, stale-while-revalidate=600",
           );
           return new Response(normalized.body, {
             status: normalized.status,

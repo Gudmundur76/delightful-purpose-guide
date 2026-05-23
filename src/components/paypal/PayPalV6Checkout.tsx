@@ -135,93 +135,42 @@ export function PayPalV6Checkout({
           setSubmitting(false);
         };
 
-        // ---- Debit or Credit Card button (guest checkout) — shown first as default ---
-        if (paypal.Buttons) {
-          const cardFunding = paypal.FUNDING?.CARD ?? "card";
-          if (paypal.isFundingEligible?.(cardFunding) !== false) {
-            const cardButtons = paypal.Buttons({
-              fundingSource: cardFunding,
-              style: {
-                layout: "vertical",
-                shape: "rect",
-                color: "black",
-                label: "pay",
-              },
-
-              createOrder: () => createOrderRef.current(),
-              onApprove: onApproveCommon,
-              onCancel: () => setSubmitting(false),
-              onError: onErrorCommon,
-            });
-            if (cardButtons.isEligible()) {
-              setCardButtonEligible(true);
-              queueMicrotask(() => {
-                if (cardBtnRef.current) {
-                  cardButtons.render(cardBtnRef.current).catch((e) =>
-                    console.warn("PayPal Card button render failed", e),
-                  );
+        // ---- Fastlane (returning-customer one-tap) --------------------
+        // Optional. Requires Fastlane to be enabled on the merchant's
+        // PayPal account. If unavailable, we silently fall back to the
+        // standard inline card fields below.
+        const paypalAny = paypal as unknown as {
+          Fastlane?: () => Promise<FastlaneInstance>;
+        };
+        if (typeof paypalAny.Fastlane === "function") {
+          try {
+            const fastlane = await paypalAny.Fastlane();
+            fastlaneRef.current = fastlane;
+            setFastlaneReady(true);
+            queueMicrotask(async () => {
+              try {
+                if (
+                  fastlaneWatermarkRef.current &&
+                  fastlane.FastlaneWatermarkComponent
+                ) {
+                  const wm = await fastlane.FastlaneWatermarkComponent({
+                    includeAdditionalInfo: true,
+                  });
+                  await wm.render(fastlaneWatermarkRef.current);
                 }
-              });
-            }
-          }
-        }
-
-        // ---- PayPal button ---------------------------------------------
-        if (paypal.Buttons) {
-          const buttons = paypal.Buttons({
-            style: {
-              layout: "vertical",
-              shape: "rect",
-              color: "gold",
-              label: "paypal",
-            },
-            fundingSource: paypal.FUNDING?.PAYPAL ?? "paypal",
-            createOrder: () => createOrderRef.current(),
-            onApprove: onApproveCommon,
-            onCancel: () => setSubmitting(false),
-            onError: onErrorCommon,
-          });
-
-          if (buttons.isEligible()) {
-            setPaypalEligible(true);
-            queueMicrotask(() => {
-              if (paypalBtnRef.current) {
-                buttons.render(paypalBtnRef.current).catch((e) =>
-                  console.warn("PayPal Buttons render failed", e),
-                );
+              } catch (e) {
+                console.warn("Fastlane watermark render failed", e);
               }
             });
+          } catch (e) {
+            console.info(
+              "Fastlane unavailable on this account; using card fields fallback.",
+              e,
+            );
           }
         }
 
-        // ---- Pay Later button (separate funding source) ----------------
-        if (paypal.Buttons) {
-          const paylaterFunding = paypal.FUNDING?.PAYLATER ?? "paylater";
-          if (paypal.isFundingEligible?.(paylaterFunding) !== false) {
-            const paylaterButtons = paypal.Buttons({
-              fundingSource: paylaterFunding,
-              style: {
-                layout: "vertical",
-                shape: "rect",
-                color: "gold",
-                label: "paypal",
-              },
-              createOrder: () => createOrderRef.current(),
-              onApprove: onApproveCommon,
-              onCancel: () => setSubmitting(false),
-              onError: onErrorCommon,
-            });
-            if (paylaterButtons.isEligible()) {
-              queueMicrotask(() => {
-                if (paylaterBtnRef.current) {
-                  paylaterButtons.render(paylaterBtnRef.current).catch((e) =>
-                    console.warn("PayPal PayLater render failed", e),
-                  );
-                }
-              });
-            }
-          }
-        }
+
 
 
         // ---- Card fields (inline ACDC) --------------------------------

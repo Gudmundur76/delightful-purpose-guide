@@ -36,7 +36,7 @@ export function SiteFooter() {
             <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Readiness</h5>
             <pre className="font-mono text-[11px] leading-relaxed bg-card border border-border rounded-md p-3 text-emerald-400 overflow-x-auto">
 <span className="text-muted-foreground">user@grow:~$</span> curl /api/readiness
-{`{"status":"agent-ready","score":85}`}<span className="inline-block w-2 h-3 bg-emerald-400 ml-1 align-middle animate-[blink_1s_steps(2,start)_infinite]" />
+{`{"status":"agent-ready","score":100}`}<span className="inline-block w-2 h-3 bg-emerald-400 ml-1 align-middle animate-[blink_1s_steps(2,start)_infinite]" />
             </pre>
           </div>
         </div>

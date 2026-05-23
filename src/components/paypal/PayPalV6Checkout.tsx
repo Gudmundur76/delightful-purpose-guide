@@ -52,25 +52,14 @@ export function PayPalV6Checkout({
   const [appleEligible, setAppleEligible] = useState(false);
   const [googleEligible, setGoogleEligible] = useState(false);
 
-  // Fastlane (returning-customer one-tap)
-  const [fastlaneReady, setFastlaneReady] = useState(false);
-  const [fastlaneEmail, setFastlaneEmail] = useState("");
-  const [fastlaneLookupState, setFastlaneLookupState] = useState<
-    "idle" | "looking-up" | "recognized" | "not-found"
-  >("idle");
-  const [fastlaneAuthing, setFastlaneAuthing] = useState(false);
-
   const cardNameRef = useRef<HTMLDivElement>(null);
   const cardNumberRef = useRef<HTMLDivElement>(null);
   const cardExpiryRef = useRef<HTMLDivElement>(null);
   const cardCvvRef = useRef<HTMLDivElement>(null);
   const appleBtnRef = useRef<HTMLDivElement>(null);
   const googleBtnRef = useRef<HTMLDivElement>(null);
-  const fastlaneWatermarkRef = useRef<HTMLDivElement>(null);
 
   const cardFieldsRef = useRef<PayPalCardFieldsInstance | null>(null);
-  const fastlaneRef = useRef<FastlaneInstance | null>(null);
-  const fastlaneCustomerContextRef = useRef<string | null>(null);
   const mountedRef = useRef(false);
 
   const createOrderRef = useRef(createOrder);

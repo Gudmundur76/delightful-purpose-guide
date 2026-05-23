@@ -47,6 +47,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicV1IndexRouteImport } from './routes/api/public/v1/index'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
@@ -258,6 +259,11 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicPingRoute = ApiPublicPingRouteImport.update({
+  id: '/api/public/ping',
+  path: '/api/public/ping',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicLeadsRoute = ApiPublicLeadsRouteImport.update({
   id: '/api/public/leads',
   path: '/api/public/leads',
@@ -400,6 +406,7 @@ export interface FileRoutesByFullPath {
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
+  '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
@@ -459,6 +466,7 @@ export interface FileRoutesByTo {
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog': typeof BlogIndexRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
+  '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
@@ -519,6 +527,7 @@ export interface FileRoutesById {
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
+  '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
@@ -580,6 +589,7 @@ export interface FileRouteTypes {
     | '/vs/$competitor'
     | '/blog/'
     | '/api/public/leads'
+    | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/v1/analyze'
@@ -639,6 +649,7 @@ export interface FileRouteTypes {
     | '/vs/$competitor'
     | '/blog'
     | '/api/public/leads'
+    | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/v1/analyze'
@@ -698,6 +709,7 @@ export interface FileRouteTypes {
     | '/vs/$competitor'
     | '/blog/'
     | '/api/public/leads'
+    | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/v1/analyze'
@@ -754,6 +766,7 @@ export interface RootRouteChildren {
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
+  ApiPublicPingRoute: typeof ApiPublicPingRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
   ApiPublicV1AnalyzeRoute: typeof ApiPublicV1AnalyzeRoute
@@ -1042,6 +1055,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/ping': {
+      id: '/api/public/ping'
+      path: '/api/public/ping'
+      fullPath: '/api/public/ping'
+      preLoaderRoute: typeof ApiPublicPingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/leads': {
       id: '/api/public/leads'
       path: '/api/public/leads'
@@ -1266,6 +1286,7 @@ const rootRouteChildren: RootRouteChildren = {
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
+  ApiPublicPingRoute: ApiPublicPingRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
   ApiPublicV1AnalyzeRoute: ApiPublicV1AnalyzeRoute,

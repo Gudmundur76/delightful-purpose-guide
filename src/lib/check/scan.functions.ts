@@ -80,8 +80,9 @@ async function fetchWithTimeout(url: string, ms: number): Promise<{ res: Respons
 }
 
 export const scanUrl = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => InputSchema.parse(input))
-  .handler(async ({ data }): Promise<ScanResult> => {
+  .handler(async ({ data, context }): Promise<ScanResult> => {
     const log: string[] = [];
     const url = normalizeUrl(data.url);
     log.push(`$ curl -sL ${url}`);

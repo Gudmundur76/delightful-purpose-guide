@@ -31,7 +31,7 @@ We score every site on a 0-100 scale across five signals:
 - [Pricing](/pricing): Starter ($2,400) and Growth ($4,800) tiers.
 - [Process](/process): How a 48-hour build runs end to end.
 - [Work](/work): Recent agent-native site launches.
-- [Leaderboard](/leaderboard): Top 30 AI sites ranked by Agent Readability Score.
+- [Leaderboard](/leaderboard): Public benchmark of ~390 AI companies (infra, models, agents, dev tools) ranked by Agent Readability Score. JSON dataset at /api/public/leaderboard.json.
 - [Playbook](/playbook): 12-week agent-native SEO content calendar for AI startups.
 - [GEO Guide](/guide/generative-engine-optimization): The 2026 pillar guide to Generative Engine Optimization — definitions, five pillars, per-engine playbook, common mistakes, measurement.
 - [Comparisons](/vs): Grow vs Webflow, Framer, Wix Studio, agencies, Profound, Rankscale, and DIY.

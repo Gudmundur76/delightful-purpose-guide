@@ -66,7 +66,7 @@ const AGENT_CODE = `# llms.txt
 ## Endpoints
 - /api/public/v1/openapi.json
 - /api/public/v1/docs
-- /api/readiness  →  {"status":"agent-ready","score":85}
+- /api/readiness  →  {"status":"agent-ready","score":100}
 
 ## Contact
 hello@grow.contact`;

@@ -95,7 +95,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   useEffect(() => {
     console.log(
-      "%c⚡ Agent-native. Score: 85/100",
+      "%c⚡ Agent-native. Score: 100/100",
       "color:#22d3ee;font-family:monospace;font-weight:bold;font-size:13px",
     );
     console.log(

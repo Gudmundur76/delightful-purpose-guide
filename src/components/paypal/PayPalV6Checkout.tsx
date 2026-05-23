@@ -124,40 +124,8 @@ export function PayPalV6Checkout({
           setSubmitting(false);
         };
 
-        // ---- Fastlane (returning-customer one-tap) --------------------
-        // Optional. Requires Fastlane to be enabled on the merchant's
-        // PayPal account. If unavailable, we silently fall back to the
-        // standard inline card fields below.
-        const paypalAny = paypal as unknown as {
-          Fastlane?: () => Promise<FastlaneInstance>;
-        };
-        if (typeof paypalAny.Fastlane === "function") {
-          try {
-            const fastlane = await paypalAny.Fastlane();
-            fastlaneRef.current = fastlane;
-            setFastlaneReady(true);
-            queueMicrotask(async () => {
-              try {
-                if (
-                  fastlaneWatermarkRef.current &&
-                  fastlane.FastlaneWatermarkComponent
-                ) {
-                  const wm = await fastlane.FastlaneWatermarkComponent({
-                    includeAdditionalInfo: true,
-                  });
-                  await wm.render(fastlaneWatermarkRef.current);
-                }
-              } catch (e) {
-                console.warn("Fastlane watermark render failed", e);
-              }
-            });
-          } catch (e) {
-            console.info(
-              "Fastlane unavailable on this account; using card fields fallback.",
-              e,
-            );
-          }
-        }
+
+
 
 
 

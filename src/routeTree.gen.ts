@@ -15,7 +15,9 @@ import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as SopRouteImport } from './routes/sop'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as RefundRouteImport } from './routes/refund'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ProcessRouteImport } from './routes/process'
@@ -34,11 +36,16 @@ import { Route as CheckRouteImport } from './routes/check'
 import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
+import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as CheckReportRouteImport } from './routes/check.report'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123Char125DotsvgRouteImport } from './routes/badge.{}[.]svg'
+import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
@@ -59,8 +66,8 @@ import { Route as ApiPublicV1DocsRouteImport } from './routes/api/public/v1/docs
 import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/analyze'
 import { Route as ApiPublicHooksWarmRouteImport } from './routes/api/public/hooks/warm'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
-import { Route as ApiPublicV1PostsRouteImport } from './routes/api/public/v1/posts.'
-import { Route as ApiPublicV1AdminRouteImport } from './routes/api/public/v1/admin.'
+import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
+import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
 
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
@@ -92,9 +99,19 @@ const SopRoute = SopRouteImport.update({
   path: '/sop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RssDotxmlRoute = RssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RefundRoute = RefundRouteImport.update({
@@ -187,6 +204,21 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VsCompetitorRoute = VsCompetitorRouteImport.update({
+  id: '/$competitor',
+  path: '/$competitor',
+  getParentRoute: () => VsRoute,
+} as any)
+const VerifyIdRoute = VerifyIdRouteImport.update({
+  id: '/verify/$id',
+  path: '/verify/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   id: '/email/unsubscribe',
   path: '/email/unsubscribe',
@@ -207,10 +239,21 @@ const BlogRssDotxmlRoute = BlogRssDotxmlRouteImport.update({
   path: '/blog/rss.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BadgeChar123Char125DotsvgRoute =
   BadgeChar123Char125DotsvgRouteImport.update({
     id: '/{}.svg',
     path: '/{}.svg',
+    getParentRoute: () => BadgeRoute,
+  } as any)
+const BadgeChar123idChar125DotsvgRoute =
+  BadgeChar123idChar125DotsvgRouteImport.update({
+    id: '/{$id}.svg',
+    path: '/{$id}.svg',
     getParentRoute: () => BadgeRoute,
   } as any)
 const AdminLeadsRoute = AdminLeadsRouteImport.update({
@@ -320,14 +363,14 @@ const ApiPublicHooksRescanLeaderboardRoute =
     path: '/api/public/hooks/rescan-leaderboard',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicV1PostsRoute = ApiPublicV1PostsRouteImport.update({
-  id: '/',
-  path: '/',
+const ApiPublicV1PostsSlugRoute = ApiPublicV1PostsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
   getParentRoute: () => ApiPublicV1PostsRoute,
 } as any)
-const ApiPublicV1AdminRoute = ApiPublicV1AdminRouteImport.update({
-  id: '/api/public/v1/admin/',
-  path: '/api/public/v1/admin/',
+const ApiPublicV1AdminTableRoute = ApiPublicV1AdminTableRouteImport.update({
+  id: '/api/public/v1/admin/$table',
+  path: '/api/public/v1/admin/$table',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -350,19 +393,26 @@ export interface FileRoutesByFullPath {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sop': typeof SopRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
   '/unsubscribe': typeof UnsubscribeRoute
-  '/vs': typeof VsRoute
+  '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/badge/{}.svg': typeof BadgeChar123Char125DotsvgRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/verify/$id': typeof VerifyIdRoute
+  '/vs/$competitor': typeof VsCompetitorRoute
+  '/blog/': typeof BlogIndexRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -382,8 +432,8 @@ export interface FileRoutesByFullPath {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/api/public/v1/': typeof ApiPublicV1IndexRoute
-  '/api/public/v1/admin/': typeof ApiPublicV1AdminRoute
-  '/api/public/v1/posts/': typeof ApiPublicV1PostsRoute
+  '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
+  '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -404,19 +454,26 @@ export interface FileRoutesByTo {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sop': typeof SopRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
   '/unsubscribe': typeof UnsubscribeRoute
-  '/vs': typeof VsRoute
+  '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/badge/{}.svg': typeof BadgeChar123Char125DotsvgRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/verify/$id': typeof VerifyIdRoute
+  '/vs/$competitor': typeof VsCompetitorRoute
+  '/blog': typeof BlogIndexRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -425,6 +482,7 @@ export interface FileRoutesByTo {
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
+  '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
@@ -435,8 +493,8 @@ export interface FileRoutesByTo {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/api/public/v1': typeof ApiPublicV1IndexRoute
-  '/api/public/v1/admin': typeof ApiPublicV1AdminRoute
-  '/api/public/v1/posts': typeof ApiPublicV1PostsRoute
+  '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
+  '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -458,19 +516,26 @@ export interface FileRoutesById {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sop': typeof SopRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
   '/unsubscribe': typeof UnsubscribeRoute
-  '/vs': typeof VsRoute
+  '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/badge/{}.svg': typeof BadgeChar123Char125DotsvgRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/verify/$id': typeof VerifyIdRoute
+  '/vs/$competitor': typeof VsCompetitorRoute
+  '/blog/': typeof BlogIndexRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -490,8 +555,8 @@ export interface FileRoutesById {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/api/public/v1/': typeof ApiPublicV1IndexRoute
-  '/api/public/v1/admin/': typeof ApiPublicV1AdminRoute
-  '/api/public/v1/posts/': typeof ApiPublicV1PostsRoute
+  '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
+  '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -514,7 +579,9 @@ export interface FileRouteTypes {
     | '/process'
     | '/products'
     | '/refund'
+    | '/rss.xml'
     | '/services'
+    | '/sitemap.xml'
     | '/sop'
     | '/status'
     | '/terms'
@@ -522,11 +589,16 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/admin/leads'
+    | '/badge/{$id}.svg'
     | '/badge/{}.svg'
+    | '/blog/$slug'
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
     | '/email/unsubscribe'
+    | '/verify/$id'
+    | '/vs/$competitor'
+    | '/blog/'
     | '/api/public/leads'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
@@ -546,8 +618,8 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/api/public/v1/'
-    | '/api/public/v1/admin/'
-    | '/api/public/v1/posts/'
+    | '/api/public/v1/admin/$table'
+    | '/api/public/v1/posts/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -568,7 +640,9 @@ export interface FileRouteTypes {
     | '/process'
     | '/products'
     | '/refund'
+    | '/rss.xml'
     | '/services'
+    | '/sitemap.xml'
     | '/sop'
     | '/status'
     | '/terms'
@@ -576,11 +650,16 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/admin/leads'
+    | '/badge/{$id}.svg'
     | '/badge/{}.svg'
+    | '/blog/$slug'
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
     | '/email/unsubscribe'
+    | '/verify/$id'
+    | '/vs/$competitor'
+    | '/blog'
     | '/api/public/leads'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
@@ -589,6 +668,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
+    | '/api/public/v1/posts'
     | '/api/public/v1/readiness'
     | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
@@ -599,8 +679,8 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/api/public/v1'
-    | '/api/public/v1/admin'
-    | '/api/public/v1/posts'
+    | '/api/public/v1/admin/$table'
+    | '/api/public/v1/posts/$slug'
   id:
     | '__root__'
     | '/'
@@ -621,7 +701,9 @@ export interface FileRouteTypes {
     | '/process'
     | '/products'
     | '/refund'
+    | '/rss.xml'
     | '/services'
+    | '/sitemap.xml'
     | '/sop'
     | '/status'
     | '/terms'
@@ -629,11 +711,16 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/admin/leads'
+    | '/badge/{$id}.svg'
     | '/badge/{}.svg'
+    | '/blog/$slug'
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
     | '/email/unsubscribe'
+    | '/verify/$id'
+    | '/vs/$competitor'
+    | '/blog/'
     | '/api/public/leads'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
@@ -653,8 +740,8 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/api/public/v1/'
-    | '/api/public/v1/admin/'
-    | '/api/public/v1/posts/'
+    | '/api/public/v1/admin/$table'
+    | '/api/public/v1/posts/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -676,16 +763,21 @@ export interface RootRouteChildren {
   ProcessRoute: typeof ProcessRoute
   ProductsRoute: typeof ProductsRoute
   RefundRoute: typeof RefundRoute
+  RssDotxmlRoute: typeof RssDotxmlRoute
   ServicesRoute: typeof ServicesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SopRoute: typeof SopRoute
   StatusRoute: typeof StatusRoute
   TermsRoute: typeof TermsRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
-  VsRoute: typeof VsRoute
+  VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
+  VerifyIdRoute: typeof VerifyIdRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
@@ -705,7 +797,7 @@ export interface RootRouteChildren {
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
   LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
   ApiPublicV1IndexRoute: typeof ApiPublicV1IndexRoute
-  ApiPublicV1AdminRoute: typeof ApiPublicV1AdminRoute
+  ApiPublicV1AdminTableRoute: typeof ApiPublicV1AdminTableRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -752,11 +844,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rss.xml': {
+      id: '/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/rss.xml'
+      preLoaderRoute: typeof RssDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/refund': {
@@ -885,6 +991,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vs/$competitor': {
+      id: '/vs/$competitor'
+      path: '/$competitor'
+      fullPath: '/vs/$competitor'
+      preLoaderRoute: typeof VsCompetitorRouteImport
+      parentRoute: typeof VsRoute
+    }
+    '/verify/$id': {
+      id: '/verify/$id'
+      path: '/verify/$id'
+      fullPath: '/verify/$id'
+      preLoaderRoute: typeof VerifyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/email/unsubscribe': {
       id: '/email/unsubscribe'
       path: '/email/unsubscribe'
@@ -913,11 +1040,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRssDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/badge/{}.svg': {
       id: '/badge/{}.svg'
       path: '/{}.svg'
       fullPath: '/badge/{}.svg'
       preLoaderRoute: typeof BadgeChar123Char125DotsvgRouteImport
+      parentRoute: typeof BadgeRoute
+    }
+    '/badge/{$id}.svg': {
+      id: '/badge/{$id}.svg'
+      path: '/{$id}.svg'
+      fullPath: '/badge/{$id}.svg'
+      preLoaderRoute: typeof BadgeChar123idChar125DotsvgRouteImport
       parentRoute: typeof BadgeRoute
     }
     '/admin/leads': {
@@ -1060,28 +1201,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksRescanLeaderboardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/v1/posts/': {
-      id: '/api/public/v1/posts/'
-      path: '/'
-      fullPath: '/api/public/v1/posts/'
-      preLoaderRoute: typeof ApiPublicV1PostsRouteImport
+    '/api/public/v1/posts/$slug': {
+      id: '/api/public/v1/posts/$slug'
+      path: '/$slug'
+      fullPath: '/api/public/v1/posts/$slug'
+      preLoaderRoute: typeof ApiPublicV1PostsSlugRouteImport
       parentRoute: typeof ApiPublicV1PostsRoute
     }
-    '/api/public/v1/admin/': {
-      id: '/api/public/v1/admin/'
-      path: '/api/public/v1/admin'
-      fullPath: '/api/public/v1/admin/'
-      preLoaderRoute: typeof ApiPublicV1AdminRouteImport
+    '/api/public/v1/admin/$table': {
+      id: '/api/public/v1/admin/$table'
+      path: '/api/public/v1/admin/$table'
+      fullPath: '/api/public/v1/admin/$table'
+      preLoaderRoute: typeof ApiPublicV1AdminTableRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 interface BadgeRouteChildren {
+  BadgeChar123idChar125DotsvgRoute: typeof BadgeChar123idChar125DotsvgRoute
   BadgeChar123Char125DotsvgRoute: typeof BadgeChar123Char125DotsvgRoute
 }
 
 const BadgeRouteChildren: BadgeRouteChildren = {
+  BadgeChar123idChar125DotsvgRoute: BadgeChar123idChar125DotsvgRoute,
   BadgeChar123Char125DotsvgRoute: BadgeChar123Char125DotsvgRoute,
 }
 
@@ -1109,12 +1252,22 @@ const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
   CheckoutRouteChildren,
 )
 
+interface VsRouteChildren {
+  VsCompetitorRoute: typeof VsCompetitorRoute
+}
+
+const VsRouteChildren: VsRouteChildren = {
+  VsCompetitorRoute: VsCompetitorRoute,
+}
+
+const VsRouteWithChildren = VsRoute._addFileChildren(VsRouteChildren)
+
 interface ApiPublicV1PostsRouteChildren {
-  ApiPublicV1PostsRoute: typeof ApiPublicV1PostsRoute
+  ApiPublicV1PostsSlugRoute: typeof ApiPublicV1PostsSlugRoute
 }
 
 const ApiPublicV1PostsRouteChildren: ApiPublicV1PostsRouteChildren = {
-  ApiPublicV1PostsRoute: ApiPublicV1PostsRoute,
+  ApiPublicV1PostsSlugRoute: ApiPublicV1PostsSlugRoute,
 }
 
 const ApiPublicV1PostsRouteWithChildren =
@@ -1139,16 +1292,21 @@ const rootRouteChildren: RootRouteChildren = {
   ProcessRoute: ProcessRoute,
   ProductsRoute: ProductsRoute,
   RefundRoute: RefundRoute,
+  RssDotxmlRoute: RssDotxmlRoute,
   ServicesRoute: ServicesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SopRoute: SopRoute,
   StatusRoute: StatusRoute,
   TermsRoute: TermsRoute,
   UnsubscribeRoute: UnsubscribeRoute,
-  VsRoute: VsRoute,
+  VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,
   AdminLeadsRoute: AdminLeadsRoute,
+  BlogSlugRoute: BlogSlugRoute,
   BlogRssDotxmlRoute: BlogRssDotxmlRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
+  VerifyIdRoute: VerifyIdRoute,
+  BlogIndexRoute: BlogIndexRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
@@ -1168,7 +1326,7 @@ const rootRouteChildren: RootRouteChildren = {
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
   LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
   ApiPublicV1IndexRoute: ApiPublicV1IndexRoute,
-  ApiPublicV1AdminRoute: ApiPublicV1AdminRoute,
+  ApiPublicV1AdminTableRoute: ApiPublicV1AdminTableRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

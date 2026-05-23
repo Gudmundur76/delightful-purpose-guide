@@ -435,10 +435,63 @@ export function PayPalV6Checkout({
         </div>
       </div>
 
-      {/* Card button fallback — only shown when inline CardFields isn't eligible */}
-      <div ref={cardBtnRef} aria-label="Debit or Credit Card" style={{ display: cardButtonEligible ? undefined : "none" }} />
+      {/* Card button fallback — wrapped in bespoke branded card */}
+      <div style={{ display: cardButtonEligible ? undefined : "none" }}>
+        <div className="border border-border bg-card p-5 space-y-4">
+          {/* Header lockup */}
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-accent shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <span className="font-mono text-[11px] uppercase tracking-widest text-foreground font-bold">
+                Secure checkout
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 shrink-0">
+              {/* Visa */}
+              <div className="w-8 h-5 rounded-sm bg-white flex items-center justify-center">
+                <svg viewBox="0 0 48 32" className="w-6 h-4">
+                  <rect width="48" height="32" rx="3" fill="#1A1F71" />
+                  <path d="M19.2 21.5l2.4-14h3.8l-2.4 14H19.2zM33.4 8.9c-.7-.3-1.8-.5-3.2-.5-3.5 0-6 1.8-6 4.3 0 1.9 1.8 2.9 3.1 3.5 1.4.7 1.9 1.1 1.9 1.7 0 .9-1.2 1.4-2.3 1.4-1.5 0-2.3-.2-3.5-.7l-.5-.2-.5 3c.9.4 2.5.7 4.2.7 3.7 0 6.1-1.8 6.1-4.5 0-1.5-1-2.4-3-3.3-1.2-.6-2-.9-2-1.6 0-.5.6-1.1 1.9-1.1 1.2 0 2.1.3 2.8.5l.4.2.4-2.9zM42.6 8.9c-1.5 0-2.6.6-3.2 1.7l-.1.2-.1-.2-.9-1.5h-2.7c.1.4.3 1.1.3 1.7l1.2 7.3h3.5l-1.6-7.5c.5-.3 1.1-.4 1.7-.4.5 0 1 .1 1.3.2l.6-3.2c-.2-.1-.7-.3-1.9-.3h-.1zM15.1 8.9l-3.4 9.1.4-1.7-1.3-6.2c-.2-.7-.6-1.1-1.2-1.2H7.3l-.1.4c1.4.3 2.4.8 3.2 1.5l1.7 7.7h3.6l5.3-9.1h-3.6l-.3.1z" fill="white" />
+                </svg>
+              </div>
+              {/* Mastercard */}
+              <div className="w-8 h-5 rounded-sm bg-white flex items-center justify-center">
+                <svg viewBox="0 0 48 32" className="w-6 h-4">
+                  <rect width="48" height="32" rx="3" fill="white" />
+                  <circle cx="18" cy="16" r="9" fill="#EB001B" />
+                  <circle cx="30" cy="16" r="9" fill="#F79E1B" />
+                  <path d="M24 9.5a9 9 0 0 0 0 13 9 9 0 0 0 0-13z" fill="#FF5F00" />
+                </svg>
+              </div>
+              {/* Amex */}
+              <div className="w-8 h-5 rounded-sm bg-white flex items-center justify-center">
+                <svg viewBox="0 0 48 32" className="w-6 h-4">
+                  <rect width="48" height="32" rx="3" fill="#016FD0" />
+                  <path d="M4 10h7.5l2.5 3.5L16.5 10H24v12h-5.5v-7l-3 7h-3l-3-7v7H4V10zm28 0h6l4 12h-6l-.5-1.5h-4L31 22h-6l4-12zm2.5 3.5l-1.5 5h3l-1.5-5z" fill="white" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* PayPal card button mount */}
+          <div ref={cardBtnRef} aria-label="Debit or Credit Card" />
+
+          {/* Trust strip */}
+          <div className="flex items-center justify-center gap-2 pt-1 border-t border-border">
+            <svg className="w-3 h-3 text-muted-foreground shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+              256-bit SSL · PayPal protected · No account needed
+            </span>
+          </div>
+        </div>
+      </div>
       {cardButtonEligible && (
-        <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center -mt-3">
+        <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center -mt-3 hidden">
           Card checkout opens in a secure PayPal window — no PayPal account needed
         </p>
       )}

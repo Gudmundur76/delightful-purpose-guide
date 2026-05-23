@@ -1,103 +1,29 @@
-import { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
-  Link,
   createRootRouteWithContext,
   useRouter,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
-import { CartProvider } from "@/lib/cart/CartContext";
 import { supabase } from "@/integrations/supabase/client";
-import { CookieConsent } from "@/components/CookieConsent";
-
 
 function NotFoundComponent() {
-  const [path, setPath] = useState("/this-page");
-  const [hovered, setHovered] = useState(false);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setPath(window.location.pathname || "/this-page");
-      // Easter egg console log
-      console.log(
-        "%c⚡ Agent-native. Score: 85/100",
-        "color:#22d3ee;font-family:monospace;font-weight:bold;font-size:13px",
-      );
-      console.log(
-        "%c  curl /this-page → 404. Try: npm install agent-native",
-        "color:#64748b;font-family:monospace;font-size:11px",
-      );
-    }
-  }, []);
-
   return (
     <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-4 py-16">
-      <div className="w-full max-w-2xl border border-border bg-card shadow-2xl">
-        {/* Terminal chrome */}
-        <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-muted/30">
-          <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-red-500/80" />
-            <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-            <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-          </div>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-            grow@agent-shell ~ %
-          </span>
-          <span className="font-mono text-[10px] text-muted-foreground">404</span>
-        </div>
-
-        {/* Terminal body */}
-        <pre className="p-6 font-mono text-[13px] leading-relaxed overflow-x-auto whitespace-pre-wrap">
-<span className="text-muted-foreground">user@grow:~$ </span><span className="text-foreground">curl https://grow.contact{path}</span>
-{"\n"}<span className="text-red-400">curl: (22) The requested URL returned error: 404 Not Found</span>
-{"\n"}
-{"\n"}<span className="text-muted-foreground">user@grow:~$ </span><span className="text-foreground">echo $?</span>
-{"\n"}<span className="text-yellow-400">404</span>
-{"\n"}
-{"\n"}<span className="text-muted-foreground">user@grow:~$ </span><span className="text-foreground">cat ./error.log</span>
-{"\n"}<span className="text-red-400">[ERROR] Page not found.</span>
-{"\n"}<span className="text-muted-foreground">[INFO]  This path was never indexed by humans or agents.</span>
-{"\n"}<span className="text-muted-foreground">[INFO]  Exit code: </span><span className="text-red-400">404</span>
-{"\n"}
-{"\n"}<span className="text-muted-foreground">user@grow:~$ </span><span className="text-accent">_</span><span className="inline-block w-2 h-3.5 bg-accent ml-0.5 align-middle animate-[blink_1s_steps(2,start)_infinite]" />
-        </pre>
-
-        {/* CTA row */}
-        <div className="px-6 py-5 border-t border-border flex flex-wrap items-center justify-between gap-4">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-            // hover the button — it knows the cure
-          </p>
-          <Link
-            to="/"
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            onFocus={() => setHovered(true)}
-            onBlur={() => setHovered(false)}
-            className="group relative inline-flex items-center gap-3 bg-accent text-accent-foreground font-bold px-5 py-3 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors"
-          >
-            <span>cd /</span>
-            <span className="font-mono text-[10px] opacity-70 group-hover:translate-x-1 transition-transform">
-              →
-            </span>
-            {hovered && (
-              <span
-                role="tooltip"
-                className="pointer-events-none absolute -top-10 right-0 bg-background border border-accent/60 text-accent px-3 py-1.5 font-mono text-[11px] whitespace-nowrap shadow-lg"
-              >
-                <span className="text-muted-foreground">&gt; </span>
-                npm install agent-native
-              </span>
-            )}
-          </Link>
-        </div>
+      <div className="w-full max-w-md text-center">
+        <h1 className="text-2xl font-bold tracking-tight mb-2">404</h1>
+        <p className="text-muted-foreground text-sm mb-6">This page does not exist.</p>
+        <a href="/" className="inline-flex items-center gap-2 text-sm text-accent hover:underline">
+          ← Back to dashboard
+        </a>
       </div>
     </div>
   );
 }
-
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
@@ -139,54 +65,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "google-site-verification", content: "HbTX1qSEq9ZU_E2EVtzo_mw84F9k2TnNr6uPAatkNYQ" },
-      { title: "Grow — Agent-Native Websites for AI startups & devtools" },
-      { name: "description", content: "Grow ships agent-native marketing sites for AI/ML startups, agent platforms, and developer tools. Custom-coded, LLM-readable, live in 48 hours — fixed price." },
-      { name: "author", content: "Grow" },
-      { property: "og:title", content: "Grow — Agent-Native Websites for AI startups & devtools" },
-      { property: "og:description", content: "Marketing sites for AI/ML startups, agent platforms, and devtools. Structured for humans, parseable by LLMs. 48 hours, fixed price." },
-      { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "Grow" },
-      { property: "og:locale", content: "en_US" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Grow — Agent-Native Websites" },
-      { name: "twitter:description", content: "Sites built for AI/ML startups, agent platforms, and devtools. 48 hours, fixed price." },
-      { name: "theme-color", content: "#0a0a0a" },
-      { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
+      { title: "Citation Scan — Internal Tool" },
+      { name: "robots", content: "noindex,nofollow" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
-      },
-    ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Grow",
-          alternateName: "grow.contact",
-          url: "https://grow.contact",
-          logo: "https://grow.contact/og-home.png",
-          description:
-            "Agent-native marketing sites for AI/ML startups, agent platforms, and developer tools. 48 hours, fixed price.",
-          email: "hello@grow.contact",
-          contactPoint: {
-            "@type": "ContactPoint",
-            email: "hello@grow.contact",
-            contactType: "customer support",
-            availableLanguage: ["English"],
-          },
-          knowsAbout: [
-            "Generative Engine Optimization",
-            "AI search optimization",
-            "Agent-native web design",
-            "Structured data",
-            "LLMs.txt",
-          ],
-        }),
       },
     ],
   }),
@@ -226,10 +111,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <Outlet />
-        <CookieConsent />
-      </CartProvider>
+      <Outlet />
     </QueryClientProvider>
   );
 }

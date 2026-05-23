@@ -14,6 +14,8 @@ interface PersistArgs {
     speed: number;
   };
   source?: string;
+  clientId?: string | null;
+  createdBy?: string | null;
 }
 
 export async function persistScan(args: PersistArgs): Promise<void> {
@@ -33,6 +35,8 @@ export async function persistScan(args: PersistArgs): Promise<void> {
     citability: args.scores.citability,
     speed: args.scores.speed,
     source: args.source ?? "check",
+    client_id: args.clientId ?? null,
+    created_by: args.createdBy ?? null,
   });
   if (error) {
     console.error("persistScan failed", error);

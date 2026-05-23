@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      clients: {
+        Row: {
+          created_at: string
+          created_by: string
+          domain: string | null
+          id: string
+          name: string
+          notes: string | null
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          domain?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          domain?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string
@@ -367,6 +400,8 @@ export type Database = {
       scans: {
         Row: {
           citability: number
+          client_id: string | null
+          created_by: string | null
           host: string
           id: string
           jsonld: number
@@ -380,6 +415,8 @@ export type Database = {
         }
         Insert: {
           citability: number
+          client_id?: string | null
+          created_by?: string | null
           host: string
           id?: string
           jsonld: number
@@ -393,6 +430,8 @@ export type Database = {
         }
         Update: {
           citability?: number
+          client_id?: string | null
+          created_by?: string | null
           host?: string
           id?: string
           jsonld?: number
@@ -404,7 +443,15 @@ export type Database = {
           speed?: number
           url?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "scans_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       suppressed_emails: {
         Row: {

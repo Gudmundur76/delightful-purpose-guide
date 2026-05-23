@@ -54,7 +54,7 @@ function NotFoundView() {
         </p>
         <Link
           to="/check"
-          search={{ url: `https://${id}`, auto: "true" }}
+          search={{ url: `https://${id}`, auto: true }}
           className="inline-flex items-center gap-2 rounded-md bg-emerald-500 px-4 py-2 text-sm font-medium text-zinc-950 hover:bg-emerald-400"
         >
           Scan {id} <ExternalLink className="h-3 w-3" />
@@ -221,7 +221,7 @@ function VerifyPage() {
           <div className="flex gap-3">
             <Link
               to="/check"
-              search={{ url: record.url, auto: "true" }}
+              search={{ url: record.url, auto: true }}
               className="inline-flex items-center gap-1.5 rounded-md bg-emerald-500 px-4 py-2 text-sm font-medium text-zinc-950 hover:bg-emerald-400"
             >
               <RefreshCw className="h-3 w-3" /> Rescan {record.host}

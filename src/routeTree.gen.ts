@@ -9,38 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WorkRouteImport } from './routes/work'
-import { Route as VsRouteImport } from './routes/vs'
-import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as StatusRouteImport } from './routes/status'
-import { Route as SopRouteImport } from './routes/sop'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ServicesRouteImport } from './routes/services'
 import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
-import { Route as RefundRouteImport } from './routes/refund'
-import { Route as ProductsRouteImport } from './routes/products'
-import { Route as ProcessRouteImport } from './routes/process'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PricingRouteImport } from './routes/pricing'
-import { Route as PlaybookRouteImport } from './routes/playbook'
-import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as LlmsRouteImport } from './routes/llms'
-import { Route as LeaderboardRouteImport } from './routes/leaderboard'
-import { Route as FaqRouteImport } from './routes/faq'
-import { Route as CookiesRouteImport } from './routes/cookies'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckRouteImport } from './routes/check'
-import { Route as BadgeRouteImport } from './routes/badge'
-import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
-import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as CheckReportRouteImport } from './routes/check.report'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -68,44 +45,9 @@ import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/ap
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
 
-const WorkRoute = WorkRouteImport.update({
-  id: '/work',
-  path: '/work',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const VsRoute = VsRouteImport.update({
-  id: '/vs',
-  path: '/vs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const UnsubscribeRoute = UnsubscribeRouteImport.update({
-  id: '/unsubscribe',
-  path: '/unsubscribe',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StatusRoute = StatusRouteImport.update({
-  id: '/status',
-  path: '/status',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SopRoute = SopRouteImport.update({
-  id: '/sop',
-  path: '/sop',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RssDotxmlRoute = RssDotxmlRouteImport.update({
@@ -113,89 +55,14 @@ const RssDotxmlRoute = RssDotxmlRouteImport.update({
   path: '/rss.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RefundRoute = RefundRouteImport.update({
-  id: '/refund',
-  path: '/refund',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProductsRoute = ProductsRouteImport.update({
-  id: '/products',
-  path: '/products',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProcessRoute = ProcessRouteImport.update({
-  id: '/process',
-  path: '/process',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PricingRoute = PricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlaybookRoute = PlaybookRouteImport.update({
-  id: '/playbook',
-  path: '/playbook',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OutreachRoute = OutreachRouteImport.update({
-  id: '/outreach',
-  path: '/outreach',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LlmsRoute = LlmsRouteImport.update({
-  id: '/llms',
-  path: '/llms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LeaderboardRoute = LeaderboardRouteImport.update({
-  id: '/leaderboard',
-  path: '/leaderboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqRoute = FaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CookiesRoute = CookiesRouteImport.update({
-  id: '/cookies',
-  path: '/cookies',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CheckoutRoute = CheckoutRouteImport.update({
-  id: '/checkout',
-  path: '/checkout',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CheckRoute = CheckRouteImport.update({
   id: '/check',
   path: '/check',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BadgeRoute = BadgeRouteImport.update({
-  id: '/badge',
-  path: '/badge',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiDocsRoute = ApiDocsRouteImport.update({
-  id: '/api-docs',
-  path: '/api-docs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -222,11 +89,6 @@ const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   id: '/email/unsubscribe',
   path: '/email/unsubscribe',
   getParentRoute: () => rootRouteImport,
-} as any)
-const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
-  id: '/success',
-  path: '/success',
-  getParentRoute: () => CheckoutRoute,
 } as any)
 const CheckReportRoute = CheckReportRouteImport.update({
   id: '/report',
@@ -369,38 +231,15 @@ const ApiPublicV1AdminTableRoute = ApiPublicV1AdminTableRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/api-docs': typeof ApiDocsRoute
-  '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
-  '/checkout': typeof CheckoutRouteWithChildren
-  '/contact': typeof ContactRoute
-  '/cookies': typeof CookiesRoute
-  '/faq': typeof FaqRoute
-  '/leaderboard': typeof LeaderboardRoute
-  '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
-  '/outreach': typeof OutreachRoute
-  '/playbook': typeof PlaybookRoute
-  '/pricing': typeof PricingRoute
-  '/privacy': typeof PrivacyRoute
-  '/process': typeof ProcessRoute
-  '/products': typeof ProductsRoute
-  '/refund': typeof RefundRoute
   '/rss.xml': typeof RssDotxmlRoute
-  '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/sop': typeof SopRoute
-  '/status': typeof StatusRoute
-  '/terms': typeof TermsRoute
-  '/unsubscribe': typeof UnsubscribeRoute
-  '/vs': typeof VsRouteWithChildren
-  '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
-  '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -429,38 +268,15 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/api-docs': typeof ApiDocsRoute
-  '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
-  '/checkout': typeof CheckoutRouteWithChildren
-  '/contact': typeof ContactRoute
-  '/cookies': typeof CookiesRoute
-  '/faq': typeof FaqRoute
-  '/leaderboard': typeof LeaderboardRoute
-  '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
-  '/outreach': typeof OutreachRoute
-  '/playbook': typeof PlaybookRoute
-  '/pricing': typeof PricingRoute
-  '/privacy': typeof PrivacyRoute
-  '/process': typeof ProcessRoute
-  '/products': typeof ProductsRoute
-  '/refund': typeof RefundRoute
   '/rss.xml': typeof RssDotxmlRoute
-  '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/sop': typeof SopRoute
-  '/status': typeof StatusRoute
-  '/terms': typeof TermsRoute
-  '/unsubscribe': typeof UnsubscribeRoute
-  '/vs': typeof VsRouteWithChildren
-  '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
-  '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -490,38 +306,15 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/api-docs': typeof ApiDocsRoute
-  '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
-  '/checkout': typeof CheckoutRouteWithChildren
-  '/contact': typeof ContactRoute
-  '/cookies': typeof CookiesRoute
-  '/faq': typeof FaqRoute
-  '/leaderboard': typeof LeaderboardRoute
-  '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
-  '/outreach': typeof OutreachRoute
-  '/playbook': typeof PlaybookRoute
-  '/pricing': typeof PricingRoute
-  '/privacy': typeof PrivacyRoute
-  '/process': typeof ProcessRoute
-  '/products': typeof ProductsRoute
-  '/refund': typeof RefundRoute
   '/rss.xml': typeof RssDotxmlRoute
-  '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/sop': typeof SopRoute
-  '/status': typeof StatusRoute
-  '/terms': typeof TermsRoute
-  '/unsubscribe': typeof UnsubscribeRoute
-  '/vs': typeof VsRouteWithChildren
-  '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
-  '/checkout/success': typeof CheckoutSuccessRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -552,38 +345,15 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/api-docs'
-    | '/badge'
     | '/check'
-    | '/checkout'
-    | '/contact'
-    | '/cookies'
-    | '/faq'
-    | '/leaderboard'
-    | '/llms'
     | '/login'
-    | '/outreach'
-    | '/playbook'
-    | '/pricing'
-    | '/privacy'
-    | '/process'
-    | '/products'
-    | '/refund'
     | '/rss.xml'
-    | '/services'
     | '/sitemap.xml'
-    | '/sop'
-    | '/status'
-    | '/terms'
-    | '/unsubscribe'
-    | '/vs'
-    | '/work'
     | '/admin/leads'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/check/report'
-    | '/checkout/success'
     | '/email/unsubscribe'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -612,38 +382,15 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/api-docs'
-    | '/badge'
     | '/check'
-    | '/checkout'
-    | '/contact'
-    | '/cookies'
-    | '/faq'
-    | '/leaderboard'
-    | '/llms'
     | '/login'
-    | '/outreach'
-    | '/playbook'
-    | '/pricing'
-    | '/privacy'
-    | '/process'
-    | '/products'
-    | '/refund'
     | '/rss.xml'
-    | '/services'
     | '/sitemap.xml'
-    | '/sop'
-    | '/status'
-    | '/terms'
-    | '/unsubscribe'
-    | '/vs'
-    | '/work'
     | '/admin/leads'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/check/report'
-    | '/checkout/success'
     | '/email/unsubscribe'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -672,38 +419,15 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/api-docs'
-    | '/badge'
     | '/check'
-    | '/checkout'
-    | '/contact'
-    | '/cookies'
-    | '/faq'
-    | '/leaderboard'
-    | '/llms'
     | '/login'
-    | '/outreach'
-    | '/playbook'
-    | '/pricing'
-    | '/privacy'
-    | '/process'
-    | '/products'
-    | '/refund'
     | '/rss.xml'
-    | '/services'
     | '/sitemap.xml'
-    | '/sop'
-    | '/status'
-    | '/terms'
-    | '/unsubscribe'
-    | '/vs'
-    | '/work'
     | '/admin/leads'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/check/report'
-    | '/checkout/success'
     | '/email/unsubscribe'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -733,32 +457,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ApiDocsRoute: typeof ApiDocsRoute
-  BadgeRoute: typeof BadgeRouteWithChildren
   CheckRoute: typeof CheckRouteWithChildren
-  CheckoutRoute: typeof CheckoutRouteWithChildren
-  ContactRoute: typeof ContactRoute
-  CookiesRoute: typeof CookiesRoute
-  FaqRoute: typeof FaqRoute
-  LeaderboardRoute: typeof LeaderboardRoute
-  LlmsRoute: typeof LlmsRoute
   LoginRoute: typeof LoginRoute
-  OutreachRoute: typeof OutreachRoute
-  PlaybookRoute: typeof PlaybookRoute
-  PricingRoute: typeof PricingRoute
-  PrivacyRoute: typeof PrivacyRoute
-  ProcessRoute: typeof ProcessRoute
-  ProductsRoute: typeof ProductsRoute
-  RefundRoute: typeof RefundRoute
   RssDotxmlRoute: typeof RssDotxmlRoute
-  ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  SopRoute: typeof SopRoute
-  StatusRoute: typeof StatusRoute
-  TermsRoute: typeof TermsRoute
-  UnsubscribeRoute: typeof UnsubscribeRoute
-  VsRoute: typeof VsRouteWithChildren
-  WorkRoute: typeof WorkRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
@@ -789,60 +491,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/work': {
-      id: '/work'
-      path: '/work'
-      fullPath: '/work'
-      preLoaderRoute: typeof WorkRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/vs': {
-      id: '/vs'
-      path: '/vs'
-      fullPath: '/vs'
-      preLoaderRoute: typeof VsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/unsubscribe': {
-      id: '/unsubscribe'
-      path: '/unsubscribe'
-      fullPath: '/unsubscribe'
-      preLoaderRoute: typeof UnsubscribeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/status': {
-      id: '/status'
-      path: '/status'
-      fullPath: '/status'
-      preLoaderRoute: typeof StatusRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sop': {
-      id: '/sop'
-      path: '/sop'
-      fullPath: '/sop'
-      preLoaderRoute: typeof SopRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rss.xml': {
@@ -852,55 +505,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RssDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/refund': {
-      id: '/refund'
-      path: '/refund'
-      fullPath: '/refund'
-      preLoaderRoute: typeof RefundRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/products': {
-      id: '/products'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof ProductsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/process': {
-      id: '/process'
-      path: '/process'
-      fullPath: '/process'
-      preLoaderRoute: typeof ProcessRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/playbook': {
-      id: '/playbook'
-      path: '/playbook'
-      fullPath: '/playbook'
-      preLoaderRoute: typeof PlaybookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/outreach': {
-      id: '/outreach'
-      path: '/outreach'
-      fullPath: '/outreach'
-      preLoaderRoute: typeof OutreachRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -908,67 +512,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/llms': {
-      id: '/llms'
-      path: '/llms'
-      fullPath: '/llms'
-      preLoaderRoute: typeof LlmsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/leaderboard': {
-      id: '/leaderboard'
-      path: '/leaderboard'
-      fullPath: '/leaderboard'
-      preLoaderRoute: typeof LeaderboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq': {
-      id: '/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cookies': {
-      id: '/cookies'
-      path: '/cookies'
-      fullPath: '/cookies'
-      preLoaderRoute: typeof CookiesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/checkout': {
-      id: '/checkout'
-      path: '/checkout'
-      fullPath: '/checkout'
-      preLoaderRoute: typeof CheckoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/check': {
       id: '/check'
       path: '/check'
       fullPath: '/check'
       preLoaderRoute: typeof CheckRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/badge': {
-      id: '/badge'
-      path: '/badge'
-      fullPath: '/badge'
-      preLoaderRoute: typeof BadgeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api-docs': {
-      id: '/api-docs'
-      path: '/api-docs'
-      fullPath: '/api-docs'
-      preLoaderRoute: typeof ApiDocsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -1005,13 +553,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/email/unsubscribe'
       preLoaderRoute: typeof EmailUnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/checkout/success': {
-      id: '/checkout/success'
-      path: '/success'
-      fullPath: '/checkout/success'
-      preLoaderRoute: typeof CheckoutSuccessRouteImport
-      parentRoute: typeof CheckoutRoute
     }
     '/check/report': {
       id: '/check/report'
@@ -1198,16 +739,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface BadgeRouteChildren {
-  BadgeChar123idChar125DotsvgRoute: typeof BadgeChar123idChar125DotsvgRoute
-}
-
-const BadgeRouteChildren: BadgeRouteChildren = {
-  BadgeChar123idChar125DotsvgRoute: BadgeChar123idChar125DotsvgRoute,
-}
-
-const BadgeRouteWithChildren = BadgeRoute._addFileChildren(BadgeRouteChildren)
-
 interface CheckRouteChildren {
   CheckReportRoute: typeof CheckReportRoute
 }
@@ -1217,28 +748,6 @@ const CheckRouteChildren: CheckRouteChildren = {
 }
 
 const CheckRouteWithChildren = CheckRoute._addFileChildren(CheckRouteChildren)
-
-interface CheckoutRouteChildren {
-  CheckoutSuccessRoute: typeof CheckoutSuccessRoute
-}
-
-const CheckoutRouteChildren: CheckoutRouteChildren = {
-  CheckoutSuccessRoute: CheckoutSuccessRoute,
-}
-
-const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
-  CheckoutRouteChildren,
-)
-
-interface VsRouteChildren {
-  VsCompetitorRoute: typeof VsCompetitorRoute
-}
-
-const VsRouteChildren: VsRouteChildren = {
-  VsCompetitorRoute: VsCompetitorRoute,
-}
-
-const VsRouteWithChildren = VsRoute._addFileChildren(VsRouteChildren)
 
 interface ApiPublicV1PostsRouteChildren {
   ApiPublicV1PostsSlugRoute: typeof ApiPublicV1PostsSlugRoute
@@ -1253,32 +762,10 @@ const ApiPublicV1PostsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ApiDocsRoute: ApiDocsRoute,
-  BadgeRoute: BadgeRouteWithChildren,
   CheckRoute: CheckRouteWithChildren,
-  CheckoutRoute: CheckoutRouteWithChildren,
-  ContactRoute: ContactRoute,
-  CookiesRoute: CookiesRoute,
-  FaqRoute: FaqRoute,
-  LeaderboardRoute: LeaderboardRoute,
-  LlmsRoute: LlmsRoute,
   LoginRoute: LoginRoute,
-  OutreachRoute: OutreachRoute,
-  PlaybookRoute: PlaybookRoute,
-  PricingRoute: PricingRoute,
-  PrivacyRoute: PrivacyRoute,
-  ProcessRoute: ProcessRoute,
-  ProductsRoute: ProductsRoute,
-  RefundRoute: RefundRoute,
   RssDotxmlRoute: RssDotxmlRoute,
-  ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  SopRoute: SopRoute,
-  StatusRoute: StatusRoute,
-  TermsRoute: TermsRoute,
-  UnsubscribeRoute: UnsubscribeRoute,
-  VsRoute: VsRouteWithChildren,
-  WorkRoute: WorkRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogRssDotxmlRoute: BlogRssDotxmlRoute,

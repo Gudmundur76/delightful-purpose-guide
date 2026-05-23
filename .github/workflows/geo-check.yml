@@ -1,0 +1,76 @@
+name: GEO Standard Check
+
+# Blocks merges below the Grow GEO Standard pass threshold (90/100).
+# Spec: docs/geo-standard.md  ·  Version: geo-standard@2026.05
+#
+# Required repo secrets:
+#   GEO_CHECK_TARGET_URL — PR preview URL (e.g. https://pr-123.preview.example.com)
+#                          or a staging URL that auto-updates from main/PR.
+#   GEO_CHECK_API_KEY    — PUBLIC_API_KEY for the /api/public/v1/analyze endpoint.
+#                          Defaults to hitting https://grow.contact if the target
+#                          secret is omitted (useful for the template repo itself).
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: "URL to scan (overrides GEO_CHECK_TARGET_URL secret)"
+        required: false
+
+jobs:
+  geo-check:
+    name: Agent Readability ≥ 90
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Resolve target URL
+        id: target
+        run: |
+          URL="${{ github.event.inputs.target_url }}"
+          if [ -z "$URL" ]; then URL="${{ secrets.GEO_CHECK_TARGET_URL }}"; fi
+          if [ -z "$URL" ]; then URL="https://grow.contact"; fi
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "Scanning: $URL"
+
+      - name: Run /check scanner
+        id: scan
+        env:
+          API_KEY: ${{ secrets.GEO_CHECK_API_KEY }}
+          TARGET_URL: ${{ steps.target.outputs.url }}
+        run: |
+          set -euo pipefail
+          RESP=$(curl -sS -X POST \
+            -H "Content-Type: application/json" \
+            -H "X-API-Key: ${API_KEY:-}" \
+            -d "{\"url\":\"${TARGET_URL}\"}" \
+            https://grow.contact/api/public/v1/analyze)
+          echo "$RESP" > scan.json
+          cat scan.json | python3 -m json.tool || true
+          SCORE=$(python3 -c "import json,sys;d=json.load(open('scan.json'));print(d.get('score',d.get('overall',0)))")
+          echo "score=$SCORE" >> "$GITHUB_OUTPUT"
+          echo "## GEO Standard Check — geo-standard@2026.05" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Target:** \`${TARGET_URL}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Score:** **${SCORE} / 100** (threshold: 90)" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat scan.json >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Enforce pass threshold (≥ 90)
+        run: |
+          SCORE="${{ steps.scan.outputs.score }}"
+          if [ -z "$SCORE" ] || [ "$SCORE" -lt 90 ]; then
+            echo "::error::Agent Readability Score ${SCORE} is below the 90/100 threshold required by geo-standard@2026.05. See docs/geo-standard.md §2."
+            exit 1
+          fi
+          echo "✓ Score ${SCORE} ≥ 90 — passes geo-standard@2026.05"
+
+      - name: Upload scan artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: geo-check-result
+          path: scan.json

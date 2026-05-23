@@ -1,10 +1,8 @@
 # The Grow GEO Standard
 
-**Version:** `geo-standard@2026.05` (v1.0) — 2026-05-22
+**Version:** 1.0 — 2026-05-22
 **Owner:** Grow (grow.contact)
 **Status:** Acceptance criteria for every Tier 01 / Tier 02 delivery.
-**Changelog:** `.agents/skills/grow-standard/references/CHANGELOG.md`
-**CI gate:** `.github/workflows/geo-check.yml` (blocks PRs scoring <90)
 
 This document is the engineering contract. A site is not "done" until it passes
 every MUST in this file. The `/check` scanner enforces the scored portion;

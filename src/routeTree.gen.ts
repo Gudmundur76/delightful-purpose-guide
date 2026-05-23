@@ -65,6 +65,7 @@ import { Route as ApiPublicV1OpenapiDotjsonRouteImport } from './routes/api/publ
 import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/leads'
 import { Route as ApiPublicV1DocsRouteImport } from './routes/api/public/v1/docs'
 import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/analyze'
+import { Route as ApiPublicStatsOverviewRouteImport } from './routes/api/public/stats/overview'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
@@ -357,6 +358,11 @@ const ApiPublicV1AnalyzeRoute = ApiPublicV1AnalyzeRouteImport.update({
   path: '/api/public/v1/analyze',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicStatsOverviewRoute = ApiPublicStatsOverviewRouteImport.update({
+  id: '/api/public/stats/overview',
+  path: '/api/public/stats/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicHooksRescanLeaderboardRoute =
   ApiPublicHooksRescanLeaderboardRouteImport.update({
     id: '/api/public/hooks/rescan-leaderboard',
@@ -417,6 +423,7 @@ export interface FileRoutesByFullPath {
   '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
@@ -478,6 +485,7 @@ export interface FileRoutesByTo {
   '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
@@ -540,6 +548,7 @@ export interface FileRoutesById {
   '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
@@ -603,6 +612,7 @@ export interface FileRouteTypes {
     | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
@@ -664,6 +674,7 @@ export interface FileRouteTypes {
     | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
@@ -725,6 +736,7 @@ export interface FileRouteTypes {
     | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
@@ -783,6 +795,7 @@ export interface RootRouteChildren {
   ApiPublicPingRoute: typeof ApiPublicPingRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
+  ApiPublicStatsOverviewRoute: typeof ApiPublicStatsOverviewRoute
   ApiPublicV1AnalyzeRoute: typeof ApiPublicV1AnalyzeRoute
   ApiPublicV1DocsRoute: typeof ApiPublicV1DocsRoute
   ApiPublicV1LeadsRoute: typeof ApiPublicV1LeadsRoute
@@ -1195,6 +1208,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1AnalyzeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/stats/overview': {
+      id: '/api/public/stats/overview'
+      path: '/api/public/stats/overview'
+      fullPath: '/api/public/stats/overview'
+      preLoaderRoute: typeof ApiPublicStatsOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/rescan-leaderboard': {
       id: '/api/public/hooks/rescan-leaderboard'
       path: '/api/public/hooks/rescan-leaderboard'
@@ -1312,6 +1332,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicPingRoute: ApiPublicPingRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
+  ApiPublicStatsOverviewRoute: ApiPublicStatsOverviewRoute,
   ApiPublicV1AnalyzeRoute: ApiPublicV1AnalyzeRoute,
   ApiPublicV1DocsRoute: ApiPublicV1DocsRoute,
   ApiPublicV1LeadsRoute: ApiPublicV1LeadsRoute,

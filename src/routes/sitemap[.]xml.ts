@@ -53,6 +53,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/vs", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/playbook", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/guide/generative-engine-optimization", lastmod: today, changefreq: "monthly", priority: "0.9" },
+          { path: "/api/public/stats/overview", lastmod: today, changefreq: "hourly", priority: "0.5" },
           { path: "/outreach", lastmod: today, changefreq: "monthly", priority: "0.6" },
           ...getAllComparisons().map<SitemapEntry>((c) => ({
             path: `/vs/${c.slug}`,

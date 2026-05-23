@@ -55,6 +55,8 @@ export function PayPalV6Checkout({
   const [cardButtonEligible, setCardButtonEligible] = useState(false);
 
   const paypalBtnRef = useRef<HTMLDivElement>(null);
+  const paylaterBtnRef = useRef<HTMLDivElement>(null);
+
   const cardBtnRef = useRef<HTMLDivElement>(null);
   const appleBtnRef = useRef<HTMLDivElement>(null);
   const googleBtnRef = useRef<HTMLDivElement>(null);

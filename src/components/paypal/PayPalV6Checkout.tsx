@@ -403,6 +403,11 @@ export function PayPalV6Checkout({
 
       {/* Debit or Credit Card button (guest checkout) — shown first as default */}
       <div ref={cardBtnRef} aria-label="Debit or Credit Card" style={{ display: cardButtonEligible ? undefined : "none" }} />
+      {cardButtonEligible && (
+        <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center -mt-3 mb-2">
+          Opens PayPal's secure guest checkout — you can pay with any card without a PayPal account
+        </p>
+      )}
 
       {/* Standard PayPal button */}
       <div ref={paypalBtnRef} aria-label="PayPal" style={{ display: paypalEligible ? undefined : "none" }} />

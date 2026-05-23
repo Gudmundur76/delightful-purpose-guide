@@ -6,24 +6,47 @@ import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/vs")({
   component: VsLayout,
-  head: () => ({
-    meta: [
-      { title: "Grow vs Webflow, Framer, Wix & Agencies — Comparisons" },
-      {
-        name: "description",
-        content:
-          "Honest comparisons of Grow against Webflow, Framer, Wix Studio, and traditional agencies. Where each wins, where each loses, and which to pick.",
-      },
-      { property: "og:title", content: "Grow vs the alternatives" },
-      {
-        property: "og:description",
-        content:
-          "Side-by-side comparisons of Grow against the major web design tools and agencies.",
-      },
-      { property: "og:url", content: "https://grow.contact/vs" },
-    ],
-    links: [{ rel: "canonical", href: "https://grow.contact/vs" }],
-  }),
+  head: () => {
+    const all = getAllComparisons();
+    return {
+      meta: [
+        { title: "Grow vs Webflow, Framer, Wix, Profound, Rankscale & Agencies" },
+        {
+          name: "description",
+          content:
+            "Honest comparisons of Grow against Webflow, Framer, Wix Studio, traditional agencies, Profound, Rankscale, and DIY GEO. Where each wins and which to pick.",
+        },
+        { property: "og:title", content: "Grow vs the alternatives" },
+        {
+          property: "og:description",
+          content:
+            "Side-by-side comparisons of Grow against the major web design tools, AI visibility platforms, and agencies.",
+        },
+        { property: "og:url", content: "https://grow.contact/vs" },
+      ],
+      links: [{ rel: "canonical", href: "https://grow.contact/vs" }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Grow vs the alternatives",
+            description:
+              "Side-by-side comparisons of Grow against web builders, AI visibility platforms, GEO audit tools, agencies, and DIY.",
+            url: "https://grow.contact/vs",
+            numberOfItems: all.length,
+            itemListElement: all.map((c, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `https://grow.contact/vs/${c.slug}`,
+              name: `Grow vs ${c.competitor}`,
+            })),
+          }),
+        },
+      ],
+    };
+  },
 });
 
 function VsLayout() {

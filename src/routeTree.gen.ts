@@ -9,21 +9,178 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WorkRouteImport } from './routes/work'
+import { Route as VsRouteImport } from './routes/vs'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as StatusRouteImport } from './routes/status'
+import { Route as SopRouteImport } from './routes/sop'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
+import { Route as RefundRouteImport } from './routes/refund'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as ProcessRouteImport } from './routes/process'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PlaybookRouteImport } from './routes/playbook'
+import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LlmsRouteImport } from './routes/llms'
+import { Route as LeaderboardRouteImport } from './routes/leaderboard'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckRouteImport } from './routes/check'
+import { Route as BadgeRouteImport } from './routes/badge'
+import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
+import { Route as VerifyIdRouteImport } from './routes/verify.$id'
+import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
+import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as CheckReportRouteImport } from './routes/check.report'
+import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
+import { Route as ApiPublicV1IndexRouteImport } from './routes/api/public/v1/index'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as ApiPublicWidgetEmbedDotjsRouteImport } from './routes/api/public/widget/embed[.]js'
+import { Route as ApiPublicWidgetBadgeDotsvgRouteImport } from './routes/api/public/widget/badge[.]svg'
+import { Route as ApiPublicV1SpecsRouteImport } from './routes/api/public/v1/specs'
+import { Route as ApiPublicV1ReadinessRouteImport } from './routes/api/public/v1/readiness'
+import { Route as ApiPublicV1PostsRouteImport } from './routes/api/public/v1/posts'
+import { Route as ApiPublicV1OpenapiDotjsonRouteImport } from './routes/api/public/v1/openapi[.]json'
+import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/leads'
+import { Route as ApiPublicV1DocsRouteImport } from './routes/api/public/v1/docs'
+import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/analyze'
+import { Route as ApiPublicHooksWarmRouteImport } from './routes/api/public/hooks/warm'
+import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
+import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
+import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
 
+const WorkRoute = WorkRouteImport.update({
+  id: '/work',
+  path: '/work',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VsRoute = VsRouteImport.update({
+  id: '/vs',
+  path: '/vs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatusRoute = StatusRouteImport.update({
+  id: '/status',
+  path: '/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SopRoute = SopRouteImport.update({
+  id: '/sop',
+  path: '/sop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RssDotxmlRoute = RssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundRoute = RefundRouteImport.update({
+  id: '/refund',
+  path: '/refund',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProcessRoute = ProcessRouteImport.update({
+  id: '/process',
+  path: '/process',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlaybookRoute = PlaybookRouteImport.update({
+  id: '/playbook',
+  path: '/playbook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OutreachRoute = OutreachRouteImport.update({
+  id: '/outreach',
+  path: '/outreach',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsRoute = LlmsRouteImport.update({
+  id: '/llms',
+  path: '/llms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeaderboardRoute = LeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckRoute = CheckRouteImport.update({
@@ -31,16 +188,67 @@ const CheckRoute = CheckRouteImport.update({
   path: '/check',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BadgeRoute = BadgeRouteImport.update({
+  id: '/badge',
+  path: '/badge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDocsRoute = ApiDocsRouteImport.update({
+  id: '/api-docs',
+  path: '/api-docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VsCompetitorRoute = VsCompetitorRouteImport.update({
+  id: '/$competitor',
+  path: '/$competitor',
+  getParentRoute: () => VsRoute,
+} as any)
+const VerifyIdRoute = VerifyIdRouteImport.update({
+  id: '/verify/$id',
+  path: '/verify/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
+  id: '/email/unsubscribe',
+  path: '/email/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => CheckoutRoute,
 } as any)
 const CheckReportRoute = CheckReportRouteImport.update({
   id: '/report',
   path: '/report',
   getParentRoute: () => CheckRoute,
 } as any)
+const BlogRssDotxmlRoute = BlogRssDotxmlRouteImport.update({
+  id: '/blog/rss.xml',
+  path: '/blog/rss.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BadgeChar123idChar125DotsvgRoute =
+  BadgeChar123idChar125DotsvgRouteImport.update({
+    id: '/{$id}.svg',
+    path: '/{$id}.svg',
+    getParentRoute: () => BadgeRoute,
+  } as any)
 const AdminLeadsRoute = AdminLeadsRouteImport.update({
   id: '/admin/leads',
   path: '/admin/leads',
@@ -49,6 +257,16 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicLeadsRoute = ApiPublicLeadsRouteImport.update({
+  id: '/api/public/leads',
+  path: '/api/public/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1IndexRoute = ApiPublicV1IndexRouteImport.update({
+  id: '/api/public/v1/',
+  path: '/api/public/v1/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LovableEmailTransactionalSendRoute =
@@ -79,109 +297,657 @@ const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   path: '/lovable/email/auth/preview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicWidgetEmbedDotjsRoute =
+  ApiPublicWidgetEmbedDotjsRouteImport.update({
+    id: '/api/public/widget/embed.js',
+    path: '/api/public/widget/embed.js',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicWidgetBadgeDotsvgRoute =
+  ApiPublicWidgetBadgeDotsvgRouteImport.update({
+    id: '/api/public/widget/badge.svg',
+    path: '/api/public/widget/badge.svg',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicV1SpecsRoute = ApiPublicV1SpecsRouteImport.update({
+  id: '/api/public/v1/specs',
+  path: '/api/public/v1/specs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1ReadinessRoute = ApiPublicV1ReadinessRouteImport.update({
+  id: '/api/public/v1/readiness',
+  path: '/api/public/v1/readiness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1PostsRoute = ApiPublicV1PostsRouteImport.update({
+  id: '/api/public/v1/posts',
+  path: '/api/public/v1/posts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1OpenapiDotjsonRoute =
+  ApiPublicV1OpenapiDotjsonRouteImport.update({
+    id: '/api/public/v1/openapi.json',
+    path: '/api/public/v1/openapi.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicV1LeadsRoute = ApiPublicV1LeadsRouteImport.update({
+  id: '/api/public/v1/leads',
+  path: '/api/public/v1/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1DocsRoute = ApiPublicV1DocsRouteImport.update({
+  id: '/api/public/v1/docs',
+  path: '/api/public/v1/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1AnalyzeRoute = ApiPublicV1AnalyzeRouteImport.update({
+  id: '/api/public/v1/analyze',
+  path: '/api/public/v1/analyze',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicHooksWarmRoute = ApiPublicHooksWarmRouteImport.update({
+  id: '/api/public/hooks/warm',
+  path: '/api/public/hooks/warm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicHooksRescanLeaderboardRoute =
+  ApiPublicHooksRescanLeaderboardRouteImport.update({
+    id: '/api/public/hooks/rescan-leaderboard',
+    path: '/api/public/hooks/rescan-leaderboard',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicV1PostsSlugRoute = ApiPublicV1PostsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ApiPublicV1PostsRoute,
+} as any)
+const ApiPublicV1AdminTableRoute = ApiPublicV1AdminTableRouteImport.update({
+  id: '/api/public/v1/admin/$table',
+  path: '/api/public/v1/admin/$table',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api-docs': typeof ApiDocsRoute
+  '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
+  '/checkout': typeof CheckoutRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
+  '/faq': typeof FaqRoute
+  '/leaderboard': typeof LeaderboardRoute
+  '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
+  '/outreach': typeof OutreachRoute
+  '/playbook': typeof PlaybookRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
+  '/process': typeof ProcessRoute
+  '/products': typeof ProductsRoute
+  '/refund': typeof RefundRoute
+  '/rss.xml': typeof RssDotxmlRoute
+  '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sop': typeof SopRoute
+  '/status': typeof StatusRoute
+  '/terms': typeof TermsRoute
+  '/unsubscribe': typeof UnsubscribeRoute
+  '/vs': typeof VsRouteWithChildren
+  '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/verify/$id': typeof VerifyIdRoute
+  '/vs/$competitor': typeof VsCompetitorRoute
+  '/blog/': typeof BlogIndexRoute
+  '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/hooks/warm': typeof ApiPublicHooksWarmRoute
+  '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
+  '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
+  '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
+  '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
+  '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
+  '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
+  '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
+  '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
+  '/api/public/v1/': typeof ApiPublicV1IndexRoute
+  '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
+  '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api-docs': typeof ApiDocsRoute
+  '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
+  '/checkout': typeof CheckoutRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
+  '/faq': typeof FaqRoute
+  '/leaderboard': typeof LeaderboardRoute
+  '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
+  '/outreach': typeof OutreachRoute
+  '/playbook': typeof PlaybookRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
+  '/process': typeof ProcessRoute
+  '/products': typeof ProductsRoute
+  '/refund': typeof RefundRoute
+  '/rss.xml': typeof RssDotxmlRoute
+  '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sop': typeof SopRoute
+  '/status': typeof StatusRoute
+  '/terms': typeof TermsRoute
+  '/unsubscribe': typeof UnsubscribeRoute
+  '/vs': typeof VsRouteWithChildren
+  '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/verify/$id': typeof VerifyIdRoute
+  '/vs/$competitor': typeof VsCompetitorRoute
+  '/blog': typeof BlogIndexRoute
+  '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/hooks/warm': typeof ApiPublicHooksWarmRoute
+  '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
+  '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
+  '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
+  '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
+  '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
+  '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
+  '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
+  '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
+  '/api/public/v1': typeof ApiPublicV1IndexRoute
+  '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
+  '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api-docs': typeof ApiDocsRoute
+  '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
+  '/checkout': typeof CheckoutRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
+  '/faq': typeof FaqRoute
+  '/leaderboard': typeof LeaderboardRoute
+  '/llms': typeof LlmsRoute
   '/login': typeof LoginRoute
+  '/outreach': typeof OutreachRoute
+  '/playbook': typeof PlaybookRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
+  '/process': typeof ProcessRoute
+  '/products': typeof ProductsRoute
+  '/refund': typeof RefundRoute
+  '/rss.xml': typeof RssDotxmlRoute
+  '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sop': typeof SopRoute
+  '/status': typeof StatusRoute
+  '/terms': typeof TermsRoute
+  '/unsubscribe': typeof UnsubscribeRoute
+  '/vs': typeof VsRouteWithChildren
+  '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/verify/$id': typeof VerifyIdRoute
+  '/vs/$competitor': typeof VsCompetitorRoute
+  '/blog/': typeof BlogIndexRoute
+  '/api/public/leads': typeof ApiPublicLeadsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/hooks/warm': typeof ApiPublicHooksWarmRoute
+  '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
+  '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
+  '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
+  '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
+  '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
+  '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
+  '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
+  '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
+  '/api/public/v1/': typeof ApiPublicV1IndexRoute
+  '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
+  '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/api-docs'
+    | '/badge'
     | '/check'
+    | '/checkout'
+    | '/contact'
+    | '/cookies'
+    | '/faq'
+    | '/leaderboard'
+    | '/llms'
     | '/login'
+    | '/outreach'
+    | '/playbook'
+    | '/pricing'
+    | '/privacy'
+    | '/process'
+    | '/products'
+    | '/refund'
+    | '/rss.xml'
+    | '/services'
+    | '/sitemap.xml'
+    | '/sop'
+    | '/status'
+    | '/terms'
+    | '/unsubscribe'
+    | '/vs'
+    | '/work'
     | '/admin/leads'
+    | '/badge/{$id}.svg'
+    | '/blog/$slug'
+    | '/blog/rss.xml'
     | '/check/report'
+    | '/checkout/success'
+    | '/email/unsubscribe'
+    | '/verify/$id'
+    | '/vs/$competitor'
+    | '/blog/'
+    | '/api/public/leads'
     | '/lovable/email/suppression'
+    | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/hooks/warm'
+    | '/api/public/v1/analyze'
+    | '/api/public/v1/docs'
+    | '/api/public/v1/leads'
+    | '/api/public/v1/openapi.json'
+    | '/api/public/v1/posts'
+    | '/api/public/v1/readiness'
+    | '/api/public/v1/specs'
+    | '/api/public/widget/badge.svg'
+    | '/api/public/widget/embed.js'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
+    | '/api/public/v1/'
+    | '/api/public/v1/admin/$table'
+    | '/api/public/v1/posts/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/api-docs'
+    | '/badge'
     | '/check'
+    | '/checkout'
+    | '/contact'
+    | '/cookies'
+    | '/faq'
+    | '/leaderboard'
+    | '/llms'
     | '/login'
+    | '/outreach'
+    | '/playbook'
+    | '/pricing'
+    | '/privacy'
+    | '/process'
+    | '/products'
+    | '/refund'
+    | '/rss.xml'
+    | '/services'
+    | '/sitemap.xml'
+    | '/sop'
+    | '/status'
+    | '/terms'
+    | '/unsubscribe'
+    | '/vs'
+    | '/work'
     | '/admin/leads'
+    | '/badge/{$id}.svg'
+    | '/blog/$slug'
+    | '/blog/rss.xml'
     | '/check/report'
+    | '/checkout/success'
+    | '/email/unsubscribe'
+    | '/verify/$id'
+    | '/vs/$competitor'
+    | '/blog'
+    | '/api/public/leads'
     | '/lovable/email/suppression'
+    | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/hooks/warm'
+    | '/api/public/v1/analyze'
+    | '/api/public/v1/docs'
+    | '/api/public/v1/leads'
+    | '/api/public/v1/openapi.json'
+    | '/api/public/v1/posts'
+    | '/api/public/v1/readiness'
+    | '/api/public/v1/specs'
+    | '/api/public/widget/badge.svg'
+    | '/api/public/widget/embed.js'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
+    | '/api/public/v1'
+    | '/api/public/v1/admin/$table'
+    | '/api/public/v1/posts/$slug'
   id:
     | '__root__'
     | '/'
+    | '/api-docs'
+    | '/badge'
     | '/check'
+    | '/checkout'
+    | '/contact'
+    | '/cookies'
+    | '/faq'
+    | '/leaderboard'
+    | '/llms'
     | '/login'
+    | '/outreach'
+    | '/playbook'
+    | '/pricing'
+    | '/privacy'
+    | '/process'
+    | '/products'
+    | '/refund'
+    | '/rss.xml'
+    | '/services'
+    | '/sitemap.xml'
+    | '/sop'
+    | '/status'
+    | '/terms'
+    | '/unsubscribe'
+    | '/vs'
+    | '/work'
     | '/admin/leads'
+    | '/badge/{$id}.svg'
+    | '/blog/$slug'
+    | '/blog/rss.xml'
     | '/check/report'
+    | '/checkout/success'
+    | '/email/unsubscribe'
+    | '/verify/$id'
+    | '/vs/$competitor'
+    | '/blog/'
+    | '/api/public/leads'
     | '/lovable/email/suppression'
+    | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/hooks/warm'
+    | '/api/public/v1/analyze'
+    | '/api/public/v1/docs'
+    | '/api/public/v1/leads'
+    | '/api/public/v1/openapi.json'
+    | '/api/public/v1/posts'
+    | '/api/public/v1/readiness'
+    | '/api/public/v1/specs'
+    | '/api/public/widget/badge.svg'
+    | '/api/public/widget/embed.js'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
+    | '/api/public/v1/'
+    | '/api/public/v1/admin/$table'
+    | '/api/public/v1/posts/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiDocsRoute: typeof ApiDocsRoute
+  BadgeRoute: typeof BadgeRouteWithChildren
   CheckRoute: typeof CheckRouteWithChildren
+  CheckoutRoute: typeof CheckoutRouteWithChildren
+  ContactRoute: typeof ContactRoute
+  CookiesRoute: typeof CookiesRoute
+  FaqRoute: typeof FaqRoute
+  LeaderboardRoute: typeof LeaderboardRoute
+  LlmsRoute: typeof LlmsRoute
   LoginRoute: typeof LoginRoute
+  OutreachRoute: typeof OutreachRoute
+  PlaybookRoute: typeof PlaybookRoute
+  PricingRoute: typeof PricingRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ProcessRoute: typeof ProcessRoute
+  ProductsRoute: typeof ProductsRoute
+  RefundRoute: typeof RefundRoute
+  RssDotxmlRoute: typeof RssDotxmlRoute
+  ServicesRoute: typeof ServicesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SopRoute: typeof SopRoute
+  StatusRoute: typeof StatusRoute
+  TermsRoute: typeof TermsRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
+  VsRoute: typeof VsRouteWithChildren
+  WorkRoute: typeof WorkRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
+  EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
+  VerifyIdRoute: typeof VerifyIdRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+  ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
+  ApiPublicHooksWarmRoute: typeof ApiPublicHooksWarmRoute
+  ApiPublicV1AnalyzeRoute: typeof ApiPublicV1AnalyzeRoute
+  ApiPublicV1DocsRoute: typeof ApiPublicV1DocsRoute
+  ApiPublicV1LeadsRoute: typeof ApiPublicV1LeadsRoute
+  ApiPublicV1OpenapiDotjsonRoute: typeof ApiPublicV1OpenapiDotjsonRoute
+  ApiPublicV1PostsRoute: typeof ApiPublicV1PostsRouteWithChildren
+  ApiPublicV1ReadinessRoute: typeof ApiPublicV1ReadinessRoute
+  ApiPublicV1SpecsRoute: typeof ApiPublicV1SpecsRoute
+  ApiPublicWidgetBadgeDotsvgRoute: typeof ApiPublicWidgetBadgeDotsvgRoute
+  ApiPublicWidgetEmbedDotjsRoute: typeof ApiPublicWidgetEmbedDotjsRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
   LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
+  ApiPublicV1IndexRoute: typeof ApiPublicV1IndexRoute
+  ApiPublicV1AdminTableRoute: typeof ApiPublicV1AdminTableRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/work': {
+      id: '/work'
+      path: '/work'
+      fullPath: '/work'
+      preLoaderRoute: typeof WorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vs': {
+      id: '/vs'
+      path: '/vs'
+      fullPath: '/vs'
+      preLoaderRoute: typeof VsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/status': {
+      id: '/status'
+      path: '/status'
+      fullPath: '/status'
+      preLoaderRoute: typeof StatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sop': {
+      id: '/sop'
+      path: '/sop'
+      fullPath: '/sop'
+      preLoaderRoute: typeof SopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rss.xml': {
+      id: '/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/rss.xml'
+      preLoaderRoute: typeof RssDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refund': {
+      id: '/refund'
+      path: '/refund'
+      fullPath: '/refund'
+      preLoaderRoute: typeof RefundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/process': {
+      id: '/process'
+      path: '/process'
+      fullPath: '/process'
+      preLoaderRoute: typeof ProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/playbook': {
+      id: '/playbook'
+      path: '/playbook'
+      fullPath: '/playbook'
+      preLoaderRoute: typeof PlaybookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/outreach': {
+      id: '/outreach'
+      path: '/outreach'
+      fullPath: '/outreach'
+      preLoaderRoute: typeof OutreachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms': {
+      id: '/llms'
+      path: '/llms'
+      fullPath: '/llms'
+      preLoaderRoute: typeof LlmsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leaderboard': {
+      id: '/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof LeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/check': {
@@ -191,6 +957,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/badge': {
+      id: '/badge'
+      path: '/badge'
+      fullPath: '/badge'
+      preLoaderRoute: typeof BadgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api-docs': {
+      id: '/api-docs'
+      path: '/api-docs'
+      fullPath: '/api-docs'
+      preLoaderRoute: typeof ApiDocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -198,12 +978,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vs/$competitor': {
+      id: '/vs/$competitor'
+      path: '/$competitor'
+      fullPath: '/vs/$competitor'
+      preLoaderRoute: typeof VsCompetitorRouteImport
+      parentRoute: typeof VsRoute
+    }
+    '/verify/$id': {
+      id: '/verify/$id'
+      path: '/verify/$id'
+      fullPath: '/verify/$id'
+      preLoaderRoute: typeof VerifyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/email/unsubscribe': {
+      id: '/email/unsubscribe'
+      path: '/email/unsubscribe'
+      fullPath: '/email/unsubscribe'
+      preLoaderRoute: typeof EmailUnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout/success': {
+      id: '/checkout/success'
+      path: '/success'
+      fullPath: '/checkout/success'
+      preLoaderRoute: typeof CheckoutSuccessRouteImport
+      parentRoute: typeof CheckoutRoute
+    }
     '/check/report': {
       id: '/check/report'
       path: '/report'
       fullPath: '/check/report'
       preLoaderRoute: typeof CheckReportRouteImport
       parentRoute: typeof CheckRoute
+    }
+    '/blog/rss.xml': {
+      id: '/blog/rss.xml'
+      path: '/blog/rss.xml'
+      fullPath: '/blog/rss.xml'
+      preLoaderRoute: typeof BlogRssDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/badge/{$id}.svg': {
+      id: '/badge/{$id}.svg'
+      path: '/{$id}.svg'
+      fullPath: '/badge/{$id}.svg'
+      preLoaderRoute: typeof BadgeChar123idChar125DotsvgRouteImport
+      parentRoute: typeof BadgeRoute
     }
     '/admin/leads': {
       id: '/admin/leads'
@@ -217,6 +1053,20 @@ declare module '@tanstack/react-router' {
       path: '/lovable/email/suppression'
       fullPath: '/lovable/email/suppression'
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/leads': {
+      id: '/api/public/leads'
+      path: '/api/public/leads'
+      fullPath: '/api/public/leads'
+      preLoaderRoute: typeof ApiPublicLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/': {
+      id: '/api/public/v1/'
+      path: '/api/public/v1'
+      fullPath: '/api/public/v1/'
+      preLoaderRoute: typeof ApiPublicV1IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/transactional/send': {
@@ -254,8 +1104,109 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/widget/embed.js': {
+      id: '/api/public/widget/embed.js'
+      path: '/api/public/widget/embed.js'
+      fullPath: '/api/public/widget/embed.js'
+      preLoaderRoute: typeof ApiPublicWidgetEmbedDotjsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/widget/badge.svg': {
+      id: '/api/public/widget/badge.svg'
+      path: '/api/public/widget/badge.svg'
+      fullPath: '/api/public/widget/badge.svg'
+      preLoaderRoute: typeof ApiPublicWidgetBadgeDotsvgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/specs': {
+      id: '/api/public/v1/specs'
+      path: '/api/public/v1/specs'
+      fullPath: '/api/public/v1/specs'
+      preLoaderRoute: typeof ApiPublicV1SpecsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/readiness': {
+      id: '/api/public/v1/readiness'
+      path: '/api/public/v1/readiness'
+      fullPath: '/api/public/v1/readiness'
+      preLoaderRoute: typeof ApiPublicV1ReadinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/posts': {
+      id: '/api/public/v1/posts'
+      path: '/api/public/v1/posts'
+      fullPath: '/api/public/v1/posts'
+      preLoaderRoute: typeof ApiPublicV1PostsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/openapi.json': {
+      id: '/api/public/v1/openapi.json'
+      path: '/api/public/v1/openapi.json'
+      fullPath: '/api/public/v1/openapi.json'
+      preLoaderRoute: typeof ApiPublicV1OpenapiDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/leads': {
+      id: '/api/public/v1/leads'
+      path: '/api/public/v1/leads'
+      fullPath: '/api/public/v1/leads'
+      preLoaderRoute: typeof ApiPublicV1LeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/docs': {
+      id: '/api/public/v1/docs'
+      path: '/api/public/v1/docs'
+      fullPath: '/api/public/v1/docs'
+      preLoaderRoute: typeof ApiPublicV1DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/analyze': {
+      id: '/api/public/v1/analyze'
+      path: '/api/public/v1/analyze'
+      fullPath: '/api/public/v1/analyze'
+      preLoaderRoute: typeof ApiPublicV1AnalyzeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/warm': {
+      id: '/api/public/hooks/warm'
+      path: '/api/public/hooks/warm'
+      fullPath: '/api/public/hooks/warm'
+      preLoaderRoute: typeof ApiPublicHooksWarmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/rescan-leaderboard': {
+      id: '/api/public/hooks/rescan-leaderboard'
+      path: '/api/public/hooks/rescan-leaderboard'
+      fullPath: '/api/public/hooks/rescan-leaderboard'
+      preLoaderRoute: typeof ApiPublicHooksRescanLeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/posts/$slug': {
+      id: '/api/public/v1/posts/$slug'
+      path: '/$slug'
+      fullPath: '/api/public/v1/posts/$slug'
+      preLoaderRoute: typeof ApiPublicV1PostsSlugRouteImport
+      parentRoute: typeof ApiPublicV1PostsRoute
+    }
+    '/api/public/v1/admin/$table': {
+      id: '/api/public/v1/admin/$table'
+      path: '/api/public/v1/admin/$table'
+      fullPath: '/api/public/v1/admin/$table'
+      preLoaderRoute: typeof ApiPublicV1AdminTableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
+
+interface BadgeRouteChildren {
+  BadgeChar123idChar125DotsvgRoute: typeof BadgeChar123idChar125DotsvgRoute
+}
+
+const BadgeRouteChildren: BadgeRouteChildren = {
+  BadgeChar123idChar125DotsvgRoute: BadgeChar123idChar125DotsvgRoute,
+}
+
+const BadgeRouteWithChildren = BadgeRoute._addFileChildren(BadgeRouteChildren)
 
 interface CheckRouteChildren {
   CheckReportRoute: typeof CheckReportRoute
@@ -267,18 +1218,104 @@ const CheckRouteChildren: CheckRouteChildren = {
 
 const CheckRouteWithChildren = CheckRoute._addFileChildren(CheckRouteChildren)
 
+interface CheckoutRouteChildren {
+  CheckoutSuccessRoute: typeof CheckoutSuccessRoute
+}
+
+const CheckoutRouteChildren: CheckoutRouteChildren = {
+  CheckoutSuccessRoute: CheckoutSuccessRoute,
+}
+
+const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
+  CheckoutRouteChildren,
+)
+
+interface VsRouteChildren {
+  VsCompetitorRoute: typeof VsCompetitorRoute
+}
+
+const VsRouteChildren: VsRouteChildren = {
+  VsCompetitorRoute: VsCompetitorRoute,
+}
+
+const VsRouteWithChildren = VsRoute._addFileChildren(VsRouteChildren)
+
+interface ApiPublicV1PostsRouteChildren {
+  ApiPublicV1PostsSlugRoute: typeof ApiPublicV1PostsSlugRoute
+}
+
+const ApiPublicV1PostsRouteChildren: ApiPublicV1PostsRouteChildren = {
+  ApiPublicV1PostsSlugRoute: ApiPublicV1PostsSlugRoute,
+}
+
+const ApiPublicV1PostsRouteWithChildren =
+  ApiPublicV1PostsRoute._addFileChildren(ApiPublicV1PostsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiDocsRoute: ApiDocsRoute,
+  BadgeRoute: BadgeRouteWithChildren,
   CheckRoute: CheckRouteWithChildren,
+  CheckoutRoute: CheckoutRouteWithChildren,
+  ContactRoute: ContactRoute,
+  CookiesRoute: CookiesRoute,
+  FaqRoute: FaqRoute,
+  LeaderboardRoute: LeaderboardRoute,
+  LlmsRoute: LlmsRoute,
   LoginRoute: LoginRoute,
+  OutreachRoute: OutreachRoute,
+  PlaybookRoute: PlaybookRoute,
+  PricingRoute: PricingRoute,
+  PrivacyRoute: PrivacyRoute,
+  ProcessRoute: ProcessRoute,
+  ProductsRoute: ProductsRoute,
+  RefundRoute: RefundRoute,
+  RssDotxmlRoute: RssDotxmlRoute,
+  ServicesRoute: ServicesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SopRoute: SopRoute,
+  StatusRoute: StatusRoute,
+  TermsRoute: TermsRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
+  VsRoute: VsRouteWithChildren,
+  WorkRoute: WorkRoute,
   AdminLeadsRoute: AdminLeadsRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  BlogRssDotxmlRoute: BlogRssDotxmlRoute,
+  EmailUnsubscribeRoute: EmailUnsubscribeRoute,
+  VerifyIdRoute: VerifyIdRoute,
+  BlogIndexRoute: BlogIndexRoute,
+  ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
+  ApiPublicHooksWarmRoute: ApiPublicHooksWarmRoute,
+  ApiPublicV1AnalyzeRoute: ApiPublicV1AnalyzeRoute,
+  ApiPublicV1DocsRoute: ApiPublicV1DocsRoute,
+  ApiPublicV1LeadsRoute: ApiPublicV1LeadsRoute,
+  ApiPublicV1OpenapiDotjsonRoute: ApiPublicV1OpenapiDotjsonRoute,
+  ApiPublicV1PostsRoute: ApiPublicV1PostsRouteWithChildren,
+  ApiPublicV1ReadinessRoute: ApiPublicV1ReadinessRoute,
+  ApiPublicV1SpecsRoute: ApiPublicV1SpecsRoute,
+  ApiPublicWidgetBadgeDotsvgRoute: ApiPublicWidgetBadgeDotsvgRoute,
+  ApiPublicWidgetEmbedDotjsRoute: ApiPublicWidgetEmbedDotjsRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
   LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
+  ApiPublicV1IndexRoute: ApiPublicV1IndexRoute,
+  ApiPublicV1AdminTableRoute: ApiPublicV1AdminTableRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

@@ -55,6 +55,8 @@ export function PayPalV6Checkout({
   const [cardButtonEligible, setCardButtonEligible] = useState(false);
 
   const paypalBtnRef = useRef<HTMLDivElement>(null);
+  const paylaterBtnRef = useRef<HTMLDivElement>(null);
+
   const cardBtnRef = useRef<HTMLDivElement>(null);
   const appleBtnRef = useRef<HTMLDivElement>(null);
   const googleBtnRef = useRef<HTMLDivElement>(null);
@@ -76,7 +78,13 @@ export function PayPalV6Checkout({
   useEffect(() => {
     if (mountedRef.current) return;
     mountedRef.current = true;
-    let cancelled = false;
+    // NOTE: do NOT use a cancellation flag tied to effect cleanup. React 18
+    // Strict Mode double-invokes effects in dev — the first cleanup would
+    // flip `cancelled=true` before async init resolves, and the guarded
+    // re-run wouldn't restart it, leaving status stuck on "loading".
+    const cancelled = false;
+
+
 
     async function init() {
       try {
@@ -132,8 +140,9 @@ export function PayPalV6Checkout({
                 layout: "vertical",
                 shape: "rect",
                 color: "black",
-                label: "checkout",
+                label: "pay",
               },
+
               createOrder: () => createOrderRef.current(),
               onApprove: onApproveCommon,
               onCancel: () => setSubmitting(false),
@@ -152,7 +161,7 @@ export function PayPalV6Checkout({
           }
         }
 
-        // ---- PayPal / Pay Later buttons --------------------------------
+        // ---- PayPal button ---------------------------------------------
         if (paypal.Buttons) {
           const buttons = paypal.Buttons({
             style: {
@@ -161,11 +170,13 @@ export function PayPalV6Checkout({
               color: "gold",
               label: "paypal",
             },
+            fundingSource: paypal.FUNDING?.PAYPAL ?? "paypal",
             createOrder: () => createOrderRef.current(),
             onApprove: onApproveCommon,
             onCancel: () => setSubmitting(false),
             onError: onErrorCommon,
           });
+
           if (buttons.isEligible()) {
             setPaypalEligible(true);
             queueMicrotask(() => {
@@ -177,6 +188,36 @@ export function PayPalV6Checkout({
             });
           }
         }
+
+        // ---- Pay Later button (separate funding source) ----------------
+        if (paypal.Buttons) {
+          const paylaterFunding = paypal.FUNDING?.PAYLATER ?? "paylater";
+          if (paypal.isFundingEligible?.(paylaterFunding) !== false) {
+            const paylaterButtons = paypal.Buttons({
+              fundingSource: paylaterFunding,
+              style: {
+                layout: "vertical",
+                shape: "rect",
+                color: "gold",
+                label: "paypal",
+              },
+              createOrder: () => createOrderRef.current(),
+              onApprove: onApproveCommon,
+              onCancel: () => setSubmitting(false),
+              onError: onErrorCommon,
+            });
+            if (paylaterButtons.isEligible()) {
+              queueMicrotask(() => {
+                if (paylaterBtnRef.current) {
+                  paylaterButtons.render(paylaterBtnRef.current).catch((e) =>
+                    console.warn("PayPal PayLater render failed", e),
+                  );
+                }
+              });
+            }
+          }
+        }
+
 
         // ---- Card fields (inline ACDC) --------------------------------
         if (paypal.CardFields) {
@@ -356,8 +397,9 @@ export function PayPalV6Checkout({
 
     init();
     return () => {
-      cancelled = true;
+      // no-op: mountedRef guard prevents double-init under Strict Mode
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -411,6 +453,8 @@ export function PayPalV6Checkout({
 
       {/* Standard PayPal button */}
       <div ref={paypalBtnRef} aria-label="PayPal" style={{ display: paypalEligible ? undefined : "none" }} />
+      <div ref={paylaterBtnRef} aria-label="Pay Later" />
+
       <div ref={appleBtnRef} aria-label="Apple Pay" style={{ display: appleEligible ? undefined : "none" }} />
       <div ref={googleBtnRef} aria-label="Google Pay" style={{ display: googleEligible ? undefined : "none" }} />
 

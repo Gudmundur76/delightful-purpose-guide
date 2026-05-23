@@ -435,7 +435,15 @@ export function PayPalV6Checkout({
         </div>
       </div>
 
-      {status === "ready" && !appleEligible && !googleEligible && !cardEligible && (
+      {/* Card button fallback — only shown when inline CardFields isn't eligible */}
+      <div ref={cardBtnRef} aria-label="Debit or Credit Card" style={{ display: cardButtonEligible ? undefined : "none" }} />
+      {cardButtonEligible && (
+        <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center -mt-3">
+          Card checkout opens in a secure PayPal window — no PayPal account needed
+        </p>
+      )}
+
+      {status === "ready" && !appleEligible && !googleEligible && !cardEligible && !cardButtonEligible && (
         <div className="p-3 border border-destructive/40 bg-destructive/10 text-destructive text-sm">
           No payment methods are available in this environment. Please contact us to complete your purchase.
         </div>

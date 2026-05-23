@@ -9,17 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as CheckRouteImport } from './routes/check'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as BlogIndexRouteImport } from './routes/blog.index'
-import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
-import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as CheckReportRouteImport } from './routes/check.report'
-import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
-import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
@@ -28,16 +21,6 @@ import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/e
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RssDotxmlRoute = RssDotxmlRouteImport.update({
-  id: '/rss.xml',
-  path: '/rss.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -53,37 +36,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogIndexRoute = BlogIndexRouteImport.update({
-  id: '/blog/',
-  path: '/blog/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const VsCompetitorRoute = VsCompetitorRouteImport.update({
-  id: '/$competitor',
-  path: '/$competitor',
-  getParentRoute: () => VsRoute,
-} as any)
-const VerifyIdRoute = VerifyIdRouteImport.update({
-  id: '/verify/$id',
-  path: '/verify/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CheckReportRoute = CheckReportRouteImport.update({
   id: '/report',
   path: '/report',
   getParentRoute: () => CheckRoute,
 } as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/blog/$slug',
-  path: '/blog/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BadgeChar123idChar125DotsvgRoute =
-  BadgeChar123idChar125DotsvgRouteImport.update({
-    id: '/{$id}.svg',
-    path: '/{$id}.svg',
-    getParentRoute: () => BadgeRoute,
-  } as any)
 const AdminLeadsRoute = AdminLeadsRouteImport.update({
   id: '/admin/leads',
   path: '/admin/leads',
@@ -127,15 +84,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/check': typeof CheckRouteWithChildren
   '/login': typeof LoginRoute
-  '/rss.xml': typeof RssDotxmlRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/leads': typeof AdminLeadsRoute
-  '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
-  '/blog/$slug': typeof BlogSlugRoute
   '/check/report': typeof CheckReportRoute
-  '/verify/$id': typeof VerifyIdRoute
-  '/vs/$competitor': typeof VsCompetitorRoute
-  '/blog/': typeof BlogIndexRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -147,15 +97,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/check': typeof CheckRouteWithChildren
   '/login': typeof LoginRoute
-  '/rss.xml': typeof RssDotxmlRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/leads': typeof AdminLeadsRoute
-  '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
-  '/blog/$slug': typeof BlogSlugRoute
   '/check/report': typeof CheckReportRoute
-  '/verify/$id': typeof VerifyIdRoute
-  '/vs/$competitor': typeof VsCompetitorRoute
-  '/blog': typeof BlogIndexRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -168,15 +111,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/check': typeof CheckRouteWithChildren
   '/login': typeof LoginRoute
-  '/rss.xml': typeof RssDotxmlRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/leads': typeof AdminLeadsRoute
-  '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
-  '/blog/$slug': typeof BlogSlugRoute
   '/check/report': typeof CheckReportRoute
-  '/verify/$id': typeof VerifyIdRoute
-  '/vs/$competitor': typeof VsCompetitorRoute
-  '/blog/': typeof BlogIndexRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -190,15 +126,8 @@ export interface FileRouteTypes {
     | '/'
     | '/check'
     | '/login'
-    | '/rss.xml'
-    | '/sitemap.xml'
     | '/admin/leads'
-    | '/badge/{$id}.svg'
-    | '/blog/$slug'
     | '/check/report'
-    | '/verify/$id'
-    | '/vs/$competitor'
-    | '/blog/'
     | '/lovable/email/suppression'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -210,15 +139,8 @@ export interface FileRouteTypes {
     | '/'
     | '/check'
     | '/login'
-    | '/rss.xml'
-    | '/sitemap.xml'
     | '/admin/leads'
-    | '/badge/{$id}.svg'
-    | '/blog/$slug'
     | '/check/report'
-    | '/verify/$id'
-    | '/vs/$competitor'
-    | '/blog'
     | '/lovable/email/suppression'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -230,15 +152,8 @@ export interface FileRouteTypes {
     | '/'
     | '/check'
     | '/login'
-    | '/rss.xml'
-    | '/sitemap.xml'
     | '/admin/leads'
-    | '/badge/{$id}.svg'
-    | '/blog/$slug'
     | '/check/report'
-    | '/verify/$id'
-    | '/vs/$competitor'
-    | '/blog/'
     | '/lovable/email/suppression'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -251,12 +166,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CheckRoute: typeof CheckRouteWithChildren
   LoginRoute: typeof LoginRoute
-  RssDotxmlRoute: typeof RssDotxmlRoute
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
-  BlogSlugRoute: typeof BlogSlugRoute
-  VerifyIdRoute: typeof VerifyIdRoute
-  BlogIndexRoute: typeof BlogIndexRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -267,20 +177,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/rss.xml': {
-      id: '/rss.xml'
-      path: '/rss.xml'
-      fullPath: '/rss.xml'
-      preLoaderRoute: typeof RssDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -302,47 +198,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog/': {
-      id: '/blog/'
-      path: '/blog'
-      fullPath: '/blog/'
-      preLoaderRoute: typeof BlogIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/vs/$competitor': {
-      id: '/vs/$competitor'
-      path: '/$competitor'
-      fullPath: '/vs/$competitor'
-      preLoaderRoute: typeof VsCompetitorRouteImport
-      parentRoute: typeof VsRoute
-    }
-    '/verify/$id': {
-      id: '/verify/$id'
-      path: '/verify/$id'
-      fullPath: '/verify/$id'
-      preLoaderRoute: typeof VerifyIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/check/report': {
       id: '/check/report'
       path: '/report'
       fullPath: '/check/report'
       preLoaderRoute: typeof CheckReportRouteImport
       parentRoute: typeof CheckRoute
-    }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/blog/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/badge/{$id}.svg': {
-      id: '/badge/{$id}.svg'
-      path: '/{$id}.svg'
-      fullPath: '/badge/{$id}.svg'
-      preLoaderRoute: typeof BadgeChar123idChar125DotsvgRouteImport
-      parentRoute: typeof BadgeRoute
     }
     '/admin/leads': {
       id: '/admin/leads'
@@ -410,12 +271,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CheckRoute: CheckRouteWithChildren,
   LoginRoute: LoginRoute,
-  RssDotxmlRoute: RssDotxmlRoute,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminLeadsRoute: AdminLeadsRoute,
-  BlogSlugRoute: BlogSlugRoute,
-  VerifyIdRoute: VerifyIdRoute,
-  BlogIndexRoute: BlogIndexRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,

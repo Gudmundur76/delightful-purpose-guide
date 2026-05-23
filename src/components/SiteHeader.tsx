@@ -31,13 +31,14 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <nav
+    <header
       className={`sticky top-0 z-50 transition-all duration-300 border-b ${
         scrolled
           ? "bg-background/70 backdrop-blur-xl border-border/80 shadow-[0_1px_0_0_rgba(255,255,255,0.04)]"
           : "bg-background border-transparent"
       }`}
     >
+      <nav aria-label="Primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <span className="font-extrabold tracking-tighter text-xl uppercase">GROW_</span>

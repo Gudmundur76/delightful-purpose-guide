@@ -51,6 +51,10 @@ export function PayPalV6Checkout({
   const [cardEligible, setCardEligible] = useState(false);
   const [appleEligible, setAppleEligible] = useState(false);
   const [googleEligible, setGoogleEligible] = useState(false);
+  // Fallback for accounts without ACDC (inline CardFields). When CardFields
+  // isn't eligible, we render PayPal's hosted card button which works on any
+  // standard PayPal account but opens a popup overlay.
+  const [cardButtonEligible, setCardButtonEligible] = useState(false);
 
   const cardNameRef = useRef<HTMLDivElement>(null);
   const cardNumberRef = useRef<HTMLDivElement>(null);
@@ -58,6 +62,7 @@ export function PayPalV6Checkout({
   const cardCvvRef = useRef<HTMLDivElement>(null);
   const appleBtnRef = useRef<HTMLDivElement>(null);
   const googleBtnRef = useRef<HTMLDivElement>(null);
+  const cardBtnRef = useRef<HTMLDivElement>(null);
 
   const cardFieldsRef = useRef<PayPalCardFieldsInstance | null>(null);
   const mountedRef = useRef(false);

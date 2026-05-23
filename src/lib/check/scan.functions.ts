@@ -56,7 +56,7 @@ function fmtKb(bytes: number): string {
   return `${(bytes / 1024).toFixed(1)}kb`;
 }
 
-async function fetchWithTimeout(url: string, ms: number): Promise<{ res: Response; ms: number; bytes: number; text: string }> {
+async function fetchWithTimeout(url: string, ms: number): Promise<{ res: Response; ms: number; headerMs: number; totalMs: number; bytes: number; text: string }> {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), ms);
   const start = Date.now();
@@ -69,9 +69,10 @@ async function fetchWithTimeout(url: string, ms: number): Promise<{ res: Respons
         Accept: "text/html,application/xhtml+xml",
       },
     });
+    const headerMs = Date.now() - start;
     const text = await res.text();
-    const elapsed = Date.now() - start;
-    return { res, ms: elapsed, bytes: new TextEncoder().encode(text).length, text };
+    const totalMs = Date.now() - start;
+    return { res, ms: totalMs, headerMs, totalMs, bytes: new TextEncoder().encode(text).length, text };
   } finally {
     clearTimeout(timer);
   }
@@ -105,7 +106,7 @@ export const scanUrl = createServerFn({ method: "POST" })
 
     const finalUrl = main.res.url || url;
     const html = main.text;
-    log.push(`→ ${main.res.status} OK · ${fmtKb(main.bytes)} · ${main.ms}ms`);
+    log.push(`→ ${main.res.status} OK · ${fmtKb(main.bytes)} · ${main.totalMs}ms total · first byte ${main.headerMs}ms`);
 
     // -------- Semantic HTML --------
     log.push(`$ parse --semantic-tags`);
@@ -261,17 +262,18 @@ export const scanUrl = createServerFn({ method: "POST" })
 
     // -------- Speed --------
     log.push(`$ measure --first-byte`);
+    const firstByteMs = main.headerMs;
     let speedScore = 100;
-    if (main.ms > 300) speedScore -= 10;
-    if (main.ms > 800) speedScore -= 20;
-    if (main.ms > 1500) speedScore -= 25;
-    if (main.ms > 3000) speedScore -= 25;
+    if (firstByteMs > 300) speedScore -= 10;
+    if (firstByteMs > 800) speedScore -= 20;
+    if (firstByteMs > 1500) speedScore -= 25;
+    if (firstByteMs > 3000) speedScore -= 25;
     if (main.bytes > 200_000) speedScore -= 10;
     if (main.bytes > 500_000) speedScore -= 15;
     if (main.bytes > 1_000_000) speedScore -= 20;
     speedScore = clamp(speedScore);
 
-    log.push(`→ TTFB+body ${main.ms}ms · payload ${fmtKb(main.bytes)}`);
+    log.push(`→ first byte ${firstByteMs}ms · full HTML ${main.totalMs}ms · payload ${fmtKb(main.bytes)}`);
     log.push(`$ compile report.json`);
 
     const metrics: ScanMetric[] = [
@@ -314,9 +316,10 @@ export const scanUrl = createServerFn({ method: "POST" })
         status: statusFor(speedScore),
         summary: "Slow pages get partial crawls and timeouts.",
         details: [
-          `Response time: ${main.ms}ms`,
+          `First byte: ${firstByteMs}ms`,
+          `Full HTML download: ${main.totalMs}ms`,
           `Payload size: ${fmtKb(main.bytes)}`,
-          main.ms < 800 ? "✓ Fast time-to-content" : main.ms < 2000 ? "△ Acceptable but improvable" : "✗ Too slow for reliable crawls",
+          firstByteMs < 800 ? "✓ Fast time-to-content" : firstByteMs < 2000 ? "△ Acceptable but improvable" : "✗ Too slow for reliable crawls",
         ],
       },
     ];

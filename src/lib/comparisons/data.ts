@@ -198,6 +198,132 @@ export const COMPARISONS: Comparison[] = [
       },
     ],
   },
+  {
+    slug: "profound",
+    competitor: "Profound",
+    competitorDomain: "tryprofound.com",
+    category: "AI visibility platform",
+    tagline: "Profound tells you how you rank in ChatGPT. Grow makes you rank in ChatGPT.",
+    oneLiner:
+      "Profound is an analytics layer that measures your brand's share-of-voice across ChatGPT, Perplexity, and Gemini. Grow is the build shop that ships the semantic HTML, JSON-LD, and llms.txt those engines actually cite.",
+    verdict:
+      "These are complementary, not competitive — but if you have to pick one first, fix the site. A dashboard telling you you're invisible in ChatGPT every week doesn't move the number. Shipping a citable site does. Buy Profound after Grow, not before.",
+    bestFor:
+      "Teams who need a site that gets cited now, not a dashboard that confirms they aren't.",
+    switchIf: [
+      "Profound shows you a flat share-of-voice line and you don't know what to ship to move it.",
+      "Your AI visibility budget is going to monitoring instead of the underlying markup.",
+      "You want a one-time fixed-price rebuild, not a $1k+/mo SaaS contract.",
+      "You're pre-PMF and need the site itself to work before measuring it.",
+    ],
+    stayIf: [
+      "Your site is already best-in-class semantic and you need ongoing share-of-voice tracking across 50+ prompts.",
+      "You have an in-house GEO team that needs weekly competitive intelligence to prioritise content.",
+    ],
+    rows: [
+      { dimension: "What it does", grow: "Builds the site LLMs cite", competitor: "Measures whether LLMs cite you", growWins: true },
+      { dimension: "Output", grow: "Shipped, hosted, semantic site", competitor: "Dashboard + weekly report", growWins: true },
+      { dimension: "Time to value", grow: "48 hours — 5 days", competitor: "Instant insight, months to move the number", growWins: true },
+      { dimension: "Pricing model", grow: "$2,400–$4,800 one-time", competitor: "$1k+/mo SaaS, annual contracts typical", growWins: true },
+      { dimension: "Prompt-set tracking", grow: "Not included", competitor: "Core feature, 100s of prompts", growWins: false },
+      { dimension: "Competitive share-of-voice", grow: "Not included", competitor: "Core feature", growWins: false },
+      { dimension: "Fixes the underlying markup", grow: "Yes — that's the deliverable", competitor: "No — measurement only", growWins: true },
+    ],
+    faqs: [
+      {
+        q: "Should I use Profound and Grow together?",
+        a: "Yes, in that order. Grow rebuilds the site so it's actually citable, then Profound measures the lift. Running Profound on a site that crawlers can't read just produces a flat line.",
+      },
+      {
+        q: "Does Grow include AI visibility tracking?",
+        a: "Not as a SaaS. We hand over a /check score at delivery and you can re-run it any time for free. For continuous multi-prompt tracking across engines, Profound or Peec are the right tools.",
+      },
+    ],
+  },
+  {
+    slug: "rankscale",
+    competitor: "Rankscale",
+    competitorDomain: "rankscale.ai",
+    category: "AI readiness scoring",
+    tagline: "Rankscale grades your site. Grow rebuilds it.",
+    oneLiner:
+      "Rankscale is an audit tool that scores your site's AI readiness and hands you a remediation checklist. Grow is the team that executes that checklist — and ships the site.",
+    verdict:
+      "Audit tools are cheap to run and useless without execution. If your engineering team has bandwidth to act on a 40-item GEO checklist, Rankscale is fine. If they don't, you're buying a PDF that ages on a Notion page. Grow ships the fixes.",
+    bestFor:
+      "Founders who'd rather pay for the rebuild than for a list of things to rebuild.",
+    switchIf: [
+      "You ran a Rankscale audit, got a 60/100, and the list is still sitting in Linear three months later.",
+      "Your eng team's roadmap is full and GEO keeps getting deprioritised.",
+      "You want the score moved to 90+, not just measured.",
+      "You'd rather pay once than subscribe to audits forever.",
+    ],
+    stayIf: [
+      "You have in-house engineers who actively want a prioritised technical SEO/GEO backlog every month.",
+      "Your stack is custom and you need ongoing audits as you ship new pages.",
+    ],
+    rows: [
+      { dimension: "Deliverable", grow: "Shipped semantic site + JSON-LD + llms.txt", competitor: "Audit report + checklist", growWins: true },
+      { dimension: "Execution included", grow: "Yes — we build it", competitor: "No — your team executes", growWins: true },
+      { dimension: "Time from start to fixed", grow: "48 hours – 5 days", competitor: "Weeks-to-quarters depending on your eng capacity", growWins: true },
+      { dimension: "Free /check scanner", grow: "Yes, unlimited at grow.contact/check", competitor: "Free tier exists, paid tiers for depth", growWins: true },
+      { dimension: "Per-page deep audit", grow: "Not the product", competitor: "Core feature", growWins: false },
+      { dimension: "Ongoing monitoring", grow: "Re-run /check any time", competitor: "Continuous in dashboard", growWins: false },
+      { dimension: "Price", grow: "$2,400–$4,800 fixed, one-time", competitor: "Subscription", growWins: true },
+    ],
+    faqs: [
+      {
+        q: "Is /check just Rankscale?",
+        a: "No. /check is a free, lighter-weight scan that gives you the five dimensions we ship against: Semantic HTML, JSON-LD, llms.txt, Citability, Speed. Rankscale goes deeper on per-page audits and continuous tracking. Different products, overlapping space.",
+      },
+      {
+        q: "Can I send Rankscale's report to Grow and have you fix it?",
+        a: "Yes. Forward the report with your brief and we'll scope a fixed-price rebuild against the gaps it flagged. Most reports collapse into a 48-hour or 5-day engagement.",
+      },
+    ],
+  },
+  {
+    slug: "diy",
+    competitor: "DIY (roll your own)",
+    competitorDomain: "",
+    category: "Build it yourself",
+    tagline: "Anyone can write llms.txt. Few teams ship the whole standard.",
+    oneLiner:
+      "Everything Grow ships is technically free — semantic HTML, JSON-LD, llms.txt, robots.txt, edge caching. The cost isn't the code, it's the 30+ hours of engineering judgement to do it right and the 6+ weeks of revision cycles to find out you didn't.",
+    verdict:
+      "If you have a senior engineer with GEO experience and a free week, build it yourself. Most teams have neither, ship a half-finished version, score 65/100, and convince themselves AI traffic isn't a real channel. Grow is the shortcut: a 100/100 site delivered against a published standard.",
+    bestFor:
+      "Teams whose eng leads can't justify a quarter of internal time to relearn what we've already shipped 50+ times.",
+    switchIf: [
+      "Your team Googled \"llms.txt format\" three times this month and is still debating the spec.",
+      "Your eng roadmap can't spare a week, let alone a month.",
+      "You want a delivered site that scores 100/100, not a backlog ticket that says \"investigate GEO.\"",
+      "You'd rather review a finished build than write the brief, hire the contractor, and QA it.",
+    ],
+    stayIf: [
+      "You have a staff engineer with shipped GEO experience and explicit headroom for it.",
+      "Your build pipeline already produces semantic SSR + per-route JSON-LD and you just need llms.txt added.",
+    ],
+    rows: [
+      { dimension: "Total cost", grow: "$2,400–$4,800 fixed", competitor: "30–80 eng hours + opportunity cost", growWins: true },
+      { dimension: "Time to live", grow: "48 hours – 5 days", competitor: "2–8 weeks typical, with revisions", growWins: true },
+      { dimension: "Standard followed", grow: "geo-standard@2026.05, published", competitor: "Whatever your team decides", growWins: true },
+      { dimension: "Verified score at delivery", grow: "100/100 on /check or we fix it", competitor: "Self-graded", growWins: true },
+      { dimension: "Ownership of the code", grow: "You own it, host anywhere", competitor: "You own it, host anywhere", growWins: false },
+      { dimension: "Internal team learns the craft", grow: "Less hands-on learning", competitor: "Deep learning by doing", growWins: false },
+      { dimension: "Maintenance after launch", grow: "You maintain", competitor: "You maintain", growWins: false },
+    ],
+    faqs: [
+      {
+        q: "Can I just copy your /check criteria and build it myself?",
+        a: "Yes — the standard is public at geo-standard@2026.05 and the /check scanner is free. The gap is execution: most teams stall on edge caching, per-route JSON-LD shape, and the robots.txt bot matrix. If those three sentences sound trivial to you, build it yourself.",
+      },
+      {
+        q: "What do I actually pay you for?",
+        a: "Compressed time, a published standard, and a verified score. The code is open — the judgement isn't.",
+      },
+    ],
+  },
 ];
 
 export function getComparison(slug: string): Comparison | undefined {

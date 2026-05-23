@@ -1,12 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { persistScan } from "./scans.server";
 
 const InputSchema = z.object({
   url: z.string().min(3).max(2048),
   source: z.string().max(40).optional(),
-  clientId: z.string().uuid().optional(),
 });
 
 export type ScanStatus = "pass" | "warn" | "fail";
@@ -80,9 +78,8 @@ async function fetchWithTimeout(url: string, ms: number): Promise<{ res: Respons
 }
 
 export const scanUrl = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => InputSchema.parse(input))
-  .handler(async ({ data, context }): Promise<ScanResult> => {
+  .handler(async ({ data }): Promise<ScanResult> => {
     const log: string[] = [];
     const url = normalizeUrl(data.url);
     log.push(`$ curl -sL ${url}`);
@@ -348,8 +345,6 @@ export const scanUrl = createServerFn({ method: "POST" })
         speed: speedScore,
       },
       source: data.source ?? "check",
-      clientId: data.clientId ?? null,
-      createdBy: (context as any).userId ?? null,
     }).catch((e) => console.error("persistScan error", e));
 
     return {

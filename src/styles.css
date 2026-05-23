@@ -44,28 +44,29 @@
 :root {
   --radius: 0.375rem;
 
-  /* Internal tool palette — darker, more utilitarian than marketing site */
-  --background: oklch(0.11 0 0);
-  --foreground: oklch(0.94 0.005 250);
-  --card: oklch(0.15 0.02 270);
-  --card-foreground: oklch(0.94 0.005 250);
-  --popover: oklch(0.15 0.02 270);
-  --popover-foreground: oklch(0.94 0.005 250);
-  --primary: oklch(0.75 0.12 215);
-  --primary-foreground: oklch(0.11 0 0);
-  --secondary: oklch(0.17 0.02 270);
-  --secondary-foreground: oklch(0.94 0.005 250);
-  --muted: oklch(0.17 0.02 270);
-  --muted-foreground: oklch(0.65 0.015 250);
-  --accent: oklch(0.75 0.12 215);
-  --accent-foreground: oklch(0.11 0 0);
+  /* Global design system — Vercel/Linear inspired
+     bg #0a0a0a, surface #1a1a2e, accent #22d3ee, text #f8fafc */
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.984 0.003 247.86);
+  --card: oklch(0.215 0.035 280);
+  --card-foreground: oklch(0.984 0.003 247.86);
+  --popover: oklch(0.215 0.035 280);
+  --popover-foreground: oklch(0.984 0.003 247.86);
+  --primary: oklch(0.823 0.137 215.6);
+  --primary-foreground: oklch(0.145 0 0);
+  --secondary: oklch(0.215 0.035 280);
+  --secondary-foreground: oklch(0.984 0.003 247.86);
+  --muted: oklch(0.215 0.035 280);
+  --muted-foreground: oklch(0.745 0.018 250);
+  --accent: oklch(0.823 0.137 215.6);
+  --accent-foreground: oklch(0.145 0 0);
   --destructive: oklch(0.62 0.22 25);
-  --destructive-foreground: oklch(0.94 0 0);
-  --border: oklch(0.22 0.02 270);
-  --input: oklch(0.22 0.02 270);
-  --ring: oklch(0.75 0.12 215);
+  --destructive-foreground: oklch(0.984 0 0);
+  --border: oklch(0.27 0.02 270);
+  --input: oklch(0.27 0.02 270);
+  --ring: oklch(0.823 0.137 215.6);
 
-  --surface-elevated: oklch(0.17 0.02 270);
+  --surface-elevated: oklch(0.215 0.035 280);
 }
 
 @layer base {
@@ -86,30 +87,25 @@
   }
 }
 
-@layer utilities {
-  .animate-in {
-    animation: slideUp 400ms var(--ease-out-expo) both;
-  }
-
-  .animate-fade-in {
-    animation: fadeIn 300ms ease-out both;
-  }
-}
-
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.animate-in {
+  animation: slideUp 600ms var(--ease-out-expo) both;
 }
 
 html {
+  scroll-behavior: smooth;
   overflow-x: clip;
 }
 
 body {
   overflow-x: clip;
+}
+
+
+@keyframes blink {
+  to { visibility: hidden; }
 }

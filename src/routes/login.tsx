@@ -7,10 +7,11 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
   head: () => ({
     meta: [
-      { title: "Sign In — Citation Scan" },
-      { name: "description", content: "Team sign in." },
+      { title: "Sign In — GROW_" },
+      { name: "description", content: "Sign in to your account." },
       { name: "robots", content: "noindex, nofollow" },
     ],
+    links: [{ rel: "canonical", href: "https://grow.contact/login" }],
   }),
 });
 
@@ -41,17 +42,14 @@ function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-6 bg-background">
-      <div className="w-full max-w-sm">
-        <div className="mb-10">
-          <div className="font-mono text-xs text-accent mb-3 uppercase tracking-[0.2em]">
-            // Internal Tool
-          </div>
-          <h1 className="font-extrabold tracking-tighter text-3xl uppercase mb-2">
-            Citation Scan
+    <main className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-6 py-16">
+      <div className="w-full max-w-md">
+        <div className="mb-10 text-center">
+          <h1 className="font-extrabold tracking-tighter text-4xl sm:text-5xl uppercase mb-3">
+            Sign in
           </h1>
-          <p className="text-sm text-muted-foreground">
-            Team access only. Contact your admin if you need an account.
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            Access your GROW_ account
           </p>
         </div>
 
@@ -59,17 +57,21 @@ function LoginPage() {
           type="button"
           onClick={handleGoogle}
           disabled={loading}
-          className="w-full inline-flex items-center justify-center gap-3 bg-foreground text-background font-bold px-6 py-3 uppercase tracking-tighter text-xs hover:bg-accent hover:text-accent-foreground transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full inline-flex items-center justify-center gap-3 bg-foreground text-background font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-accent hover:text-accent-foreground transition-all disabled:opacity-60 disabled:cursor-not-allowed"
         >
           <GoogleIcon />
           {loading ? "Redirecting…" : "Continue with Google"}
         </button>
 
         {error && (
-          <p className="mt-4 font-mono text-xs text-destructive">
+          <p className="mt-4 font-mono text-xs text-destructive text-center">
             {error}
           </p>
         )}
+
+        <p className="mt-8 font-mono text-[10px] uppercase tracking-widest text-muted-foreground text-center">
+          By continuing you agree to our terms.
+        </p>
       </div>
     </main>
   );

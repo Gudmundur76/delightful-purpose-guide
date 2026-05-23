@@ -47,6 +47,7 @@ import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
 import { Route as ApiMcpRouteImport } from './routes/api/mcp'
+import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
@@ -264,6 +265,11 @@ const ApiMcpRoute = ApiMcpRouteImport.update({
   path: '/api/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminReviewsRoute = AdminReviewsRouteImport.update({
+  id: '/admin/reviews',
+  path: '/admin/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminLeadsRoute = AdminLeadsRouteImport.update({
   id: '/admin/leads',
   path: '/admin/leads',
@@ -422,6 +428,7 @@ export interface FileRoutesByFullPath {
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/reviews': typeof AdminReviewsRoute
   '/api/mcp': typeof ApiMcpRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -486,6 +493,7 @@ export interface FileRoutesByTo {
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/reviews': typeof AdminReviewsRoute
   '/api/mcp': typeof ApiMcpRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -551,6 +559,7 @@ export interface FileRoutesById {
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/reviews': typeof AdminReviewsRoute
   '/api/mcp': typeof ApiMcpRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -617,6 +626,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/admin/leads'
+    | '/admin/reviews'
     | '/api/mcp'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
@@ -681,6 +691,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/admin/leads'
+    | '/admin/reviews'
     | '/api/mcp'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
@@ -745,6 +756,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/admin/leads'
+    | '/admin/reviews'
     | '/api/mcp'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
@@ -810,6 +822,7 @@ export interface RootRouteChildren {
   VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
+  AdminReviewsRoute: typeof AdminReviewsRoute
   ApiMcpRoute: typeof ApiMcpRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
@@ -1109,6 +1122,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiMcpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/reviews': {
+      id: '/admin/reviews'
+      path: '/admin/reviews'
+      fullPath: '/admin/reviews'
+      preLoaderRoute: typeof AdminReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/leads': {
       id: '/admin/leads'
       path: '/admin/leads'
@@ -1362,6 +1382,7 @@ const rootRouteChildren: RootRouteChildren = {
   VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,
   AdminLeadsRoute: AdminLeadsRoute,
+  AdminReviewsRoute: AdminReviewsRoute,
   ApiMcpRoute: ApiMcpRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogRssDotxmlRoute: BlogRssDotxmlRoute,

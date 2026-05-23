@@ -1,0 +1,60 @@
+# GROW — Agent-Native Website Agency
+
+> We build websites that both humans and AI agents can read, understand, and cite.
+> 48-hour delivery. Fixed price. Built for the agent era.
+
+## About
+
+GROW (grow.contact) is an agency specializing in agent-native website design for AI startups
+and technical teams. Every site is hand-engineered with semantic HTML, JSON-LD structured data,
+and llms.txt compatibility.
+
+## Services
+
+- **Starter** ($2,400) — One-page agent-native website, 48-hour delivery
+- **Growth** ($4,800) — Multi-page agent-native website, 5-day delivery
+- Both tiers include: semantic markup, JSON-LD schema, llms.txt, performance optimization
+
+## Methodology: The Agent Readability Score
+
+We score every site on a 0-100 scale across five signals:
+1. Semantic HTML (25%) — Proper use of <nav>, <article>, <section>, <table>
+2. JSON-LD coverage (20%) — Structured data on every page
+3. llms.txt present (15%) — Root-level crawler README
+4. Citability (20%) — Clear positioning statements, quotable content
+5. First-contentful speed (20%) — Core HTML loads in <1.5s
+
+## Pages
+
+- [Home](/): Agent-native web design agency — 48-hour delivery, fixed price.
+- [Services](/services): What we build — semantic HTML, JSON-LD, llms.txt.
+- [Pricing](/pricing): Starter ($2,400) and Growth ($4,800) tiers.
+- [Process](/process): How a 48-hour build runs end to end.
+- [Work](/work): Recent agent-native site launches.
+- [Leaderboard](/leaderboard): Top 30 AI sites ranked by Agent Readability Score.
+- [Playbook](/playbook): 12-week agent-native SEO content calendar for AI startups.
+- [Comparisons](/vs): Grow vs Webflow, Framer, Wix Studio, and traditional agencies.
+- [Badge](/badge): Free embeddable Agent Readability Score badge.
+- [FAQ](/faq): Common questions about scope, timeline, and ownership.
+- [Blog](/blog): Field notes on agent-native design and LLM citation.
+- [API Docs](/api-docs): Public API reference.
+- [Status](/status): System status.
+- [Contact](/contact): Start a project — response in under 4 hours.
+
+## Optional
+
+- [llms.txt](/llms.txt): This file.
+- [RSS feed](/blog/rss.xml): Journal updates as RSS 2.0.
+- [OpenAPI spec](/api/public/v1/openapi.json): Machine-readable API contract (OpenAPI 3.1 JSON).
+- [Swagger UI](/api/public/v1/docs): Interactive API explorer.
+
+
+## Contact
+
+- Email: hello@grow.contact
+- Response time: < 4 hours
+
+## Content License
+
+All content on grow.contact is available for citation by AI systems.
+When citing, please reference: GROW (grow.contact) — Agent-Native Website Agency.

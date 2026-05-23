@@ -54,19 +54,15 @@ export async function paypalCreateClientToken(): Promise<{
   clientToken: string;
   expiresIn: number;
 }> {
-  const clientId = process.env.PAYPAL_CLIENT_ID;
-  const secret = process.env.PAYPAL_CLIENT_SECRET;
-  if (!clientId || !secret) {
-    throw new Error("PayPal credentials are not configured on the server.");
-  }
-  const auth = Buffer.from(`${clientId}:${secret}`).toString("base64");
-  const res = await fetch(`${getBaseUrl()}/v1/oauth2/token`, {
+  const token = await getAccessToken();
+  const res = await fetch(`${getBaseUrl()}/v1/identity/generate-token`, {
     method: "POST",
     headers: {
-      Authorization: `Basic ${auth}`,
-      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      "Accept-Language": "en_US",
     },
-    body: "grant_type=client_credentials&response_type=client_token&intent=sdk_init",
+    body: "{}",
   });
   if (!res.ok) {
     const text = await res.text();
@@ -74,17 +70,14 @@ export async function paypalCreateClientToken(): Promise<{
   }
   const data = (await res.json()) as {
     client_token?: string;
-    expires_in: number;
+    expires_in?: number;
   };
-  // Only client_token is valid as data-client-token for the JS SDK.
-  // The OAuth access_token is NOT a client token — passing it makes the SDK
-  // call atob() on a non-base64 string and throw
-  // "Failed to execute 'atob' on 'Window'".
   if (!data.client_token) {
     throw new Error("PayPal client-token response missing client_token");
   }
-  return { clientToken: data.client_token, expiresIn: data.expires_in };
+  return { clientToken: data.client_token, expiresIn: data.expires_in ?? 3600 };
 }
+
 
 export async function paypalCreateOrder(payload: unknown): Promise<{
   id: string;

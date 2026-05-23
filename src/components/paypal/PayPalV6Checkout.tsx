@@ -136,6 +136,7 @@ export function PayPalV6Checkout({
 
 
         // ---- Card fields (inline ACDC) --------------------------------
+        let cardFieldsEligible = false;
         if (paypal.CardFields) {
           const inputColor = variant === "dialog" ? "#ffffff" : "#0f172a";
           const cardFields = paypal.CardFields({
@@ -148,6 +149,7 @@ export function PayPalV6Checkout({
             },
           });
           if (cardFields.isEligible()) {
+            cardFieldsEligible = true;
             setCardEligible(true);
             cardFieldsRef.current = cardFields;
             queueMicrotask(async () => {
@@ -170,6 +172,39 @@ export function PayPalV6Checkout({
             });
           }
         }
+
+        // ---- Card button fallback (hosted card popup) -----------------
+        // Only render when inline CardFields aren't available — keeps the
+        // checkout functional on PayPal accounts without ACDC enabled.
+        if (!cardFieldsEligible && paypal.Buttons) {
+          const cardFunding = paypal.FUNDING?.CARD ?? "card";
+          if (paypal.isFundingEligible?.(cardFunding) !== false) {
+            const cardButtons = paypal.Buttons({
+              fundingSource: cardFunding,
+              style: {
+                layout: "vertical",
+                shape: "rect",
+                color: "black",
+                label: "pay",
+              },
+              createOrder: () => createOrderRef.current(),
+              onApprove: onApproveCommon,
+              onCancel: () => setSubmitting(false),
+              onError: onErrorCommon,
+            });
+            if (cardButtons.isEligible()) {
+              setCardButtonEligible(true);
+              queueMicrotask(() => {
+                if (cardBtnRef.current) {
+                  cardButtons.render(cardBtnRef.current).catch((e) =>
+                    console.warn("PayPal Card button render failed", e),
+                  );
+                }
+              });
+            }
+          }
+        }
+
 
         // ---- Apple Pay --------------------------------------------------
         if (

@@ -140,8 +140,9 @@ export function PayPalV6Checkout({
                 layout: "vertical",
                 shape: "rect",
                 color: "black",
-                label: "checkout",
+                label: "pay",
               },
+
               createOrder: () => createOrderRef.current(),
               onApprove: onApproveCommon,
               onCancel: () => setSubmitting(false),

@@ -40,7 +40,7 @@ export function ReadabilityScore() {
       <div className="flex items-center justify-between mb-6 font-mono text-[10px] uppercase tracking-widest">
         <div className="flex items-center gap-2 text-accent">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-          GET /api/stats/overview
+          GET /api/public/stats/overview
         </div>
         <span className="text-muted-foreground">
           {hasData ? `${s.totalScans} scans` : "no data yet"}

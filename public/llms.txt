@@ -48,6 +48,7 @@ We score every site on a 0-100 scale across five signals:
 - [RSS feed](/blog/rss.xml): Journal updates as RSS 2.0.
 - [OpenAPI spec](/api/public/v1/openapi.json): Machine-readable API contract (OpenAPI 3.1 JSON).
 - [Swagger UI](/api/public/v1/docs): Interactive API explorer.
+- [Stats overview](/api/public/stats/overview): Public JSON endpoint with live aggregated scan metrics — total scans, unique hosts, average scores across semantic HTML, JSON-LD, llms.txt, citability, and speed.
 
 
 ## Contact

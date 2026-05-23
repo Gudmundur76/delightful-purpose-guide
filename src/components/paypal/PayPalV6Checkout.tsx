@@ -76,7 +76,13 @@ export function PayPalV6Checkout({
   useEffect(() => {
     if (mountedRef.current) return;
     mountedRef.current = true;
-    let cancelled = false;
+    // NOTE: do NOT use a cancellation flag tied to effect cleanup. React 18
+    // Strict Mode double-invokes effects in dev — the first cleanup would
+    // flip `cancelled=true` before async init resolves, and the guarded
+    // re-run wouldn't restart it, leaving status stuck on "loading".
+    const cancelled = false;
+
+
 
     async function init() {
       try {

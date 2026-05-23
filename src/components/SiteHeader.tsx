@@ -44,7 +44,7 @@ export function SiteHeader() {
           <span className="font-extrabold tracking-tighter text-xl uppercase">GROW_</span>
           <span className="hidden sm:inline-flex font-mono text-[10px] font-medium px-2 py-1 border border-accent/40 bg-accent/10 text-accent tracking-tight rounded-sm items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            Score: 85
+            Score: 100
           </span>
         </Link>
 

@@ -237,55 +237,19 @@ function ReportPage() {
 
         {/* CTA */}
         <section className="border-t border-border pt-12 mt-12 print:hidden">
-          {score < 70 ? (
-            <div className="border border-accent/60 bg-accent/[0.04] p-8">
-              <div className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">
-                // Recommended next step
-              </div>
-              <h2 className="text-3xl font-extrabold tracking-tighter uppercase mb-3">
-                GEO Patch Pack — Free (Beta)
-              </h2>
-              <p className="text-foreground/80 mb-6 max-w-2xl">
-                Your score is {score}/100. We'll send you a custom patch pack
-                with every fix in this report — robots.txt, llms.txt, JSON-LD,
-                OpenGraph, semantic HTML snippets — plus a copy-paste install
-                guide and a re-scan + delta report. 48-hour turnaround. Free
-                while in beta.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  to="/contact"
-                  search={{ tier: "fix" } as never}
-                  className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-6 py-3 uppercase tracking-tighter text-sm"
-                >
-                  Request free patch pack →
-                </Link>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-2 border border-border hover:border-accent font-bold px-6 py-3 uppercase tracking-tighter text-sm"
-                >
-                  Need a rebuild instead?
-                </Link>
-              </div>
-            </div>
-
-          ) : (
-            <>
-              <h2 className="text-3xl font-extrabold tracking-tighter uppercase mb-4">
-                Want us to ship these fixes?
-              </h2>
-              <p className="text-muted-foreground mb-6 max-w-2xl">
-                Grow rebuilds sites agent-native in 48 hours to 5 days. Fixed price,
-                no discovery cycles. We use this report as the spec.
-              </p>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-6 py-3 uppercase tracking-tighter text-sm"
-              >
-                Start a brief →
-              </Link>
-            </>
-          )}
+          <h2 className="text-3xl font-extrabold tracking-tighter uppercase mb-4">
+            Want us to ship these fixes?
+          </h2>
+          <p className="text-muted-foreground mb-6 max-w-2xl">
+            Grow rebuilds sites agent-native in 48 hours to 5 days. Fixed price, no discovery
+            cycles. We use this report as the spec.
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-6 py-3 uppercase tracking-tighter text-sm"
+          >
+            Start a brief →
+          </Link>
         </section>
 
         {/* Print footer */}

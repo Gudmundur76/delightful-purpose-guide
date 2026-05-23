@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { breadcrumbScript } from "@/lib/seo/breadcrumb";
 
 export const Route = createFileRoute("/api-docs")({
   component: ApiDocsPage,
@@ -20,12 +19,6 @@ export const Route = createFileRoute("/api-docs")({
       { property: "og:url", content: "https://grow.contact/api-docs" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/api-docs" }],
-    scripts: [
-      breadcrumbScript([
-        { name: "Home", url: "/" },
-        { name: "API Docs", url: "/api-docs" },
-      ]),
-    ],
   }),
 });
 

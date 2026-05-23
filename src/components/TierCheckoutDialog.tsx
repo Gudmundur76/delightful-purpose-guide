@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { useNavigate } from "@tanstack/react-router";
 import {
   createTierOrder,
   captureTierOrder,
@@ -19,15 +18,8 @@ type Props = {
 };
 
 const TIER_AMOUNTS: Record<TierKey, string> = {
-  fix: "499.00",
   starter: "2400.00",
   growth: "4800.00",
-};
-
-const TIER_LABELS: Record<TierKey, string> = {
-  fix: "Fix Pack",
-  starter: "Tier 01",
-  growth: "Tier 02",
 };
 
 export function TierCheckoutDialog({
@@ -40,7 +32,6 @@ export function TierCheckoutDialog({
 }: Props) {
   const createOrderFn = useServerFn(createTierOrder);
   const captureFn = useServerFn(captureTierOrder);
-  const navigate = useNavigate();
 
   const [success, setSuccess] = useState(false);
 
@@ -58,23 +49,17 @@ export function TierCheckoutDialog({
     await captureFn({ data: { orderId } });
   }
 
-  function handleSuccess(orderId: string) {
-    setSuccess(true);
-    onClose();
-    navigate({ to: "/checkout/success", search: { order: orderId } });
-  }
-
   if (!open) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-stretch sm:items-center justify-center bg-black/80 p-0 sm:p-4 backdrop-blur-sm overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
     >
       <div
-        className="relative w-full max-w-md border border-border bg-card text-foreground my-auto max-h-dvh sm:max-h-[calc(100dvh-2rem)] overflow-y-auto"
+        className="relative w-full max-w-md border border-border bg-card text-foreground"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -88,7 +73,7 @@ export function TierCheckoutDialog({
 
         <div className="border-b border-border p-6">
           <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">
-            // {TIER_LABELS[tier]} — Secure checkout
+            // {tier === "starter" ? "Tier 01" : "Tier 02"} — Secure checkout
           </p>
           <div className="flex items-baseline justify-between gap-4">
             <h2 className="text-2xl font-extrabold uppercase tracking-tighter">
@@ -122,7 +107,7 @@ export function TierCheckoutDialog({
                 key={`${tier}-${open ? "open" : "closed"}`}
                 createOrder={createOrder}
                 capture={capture}
-                onSuccess={handleSuccess}
+                onSuccess={() => setSuccess(true)}
                 amount={{ value: TIER_AMOUNTS[tier], currency: "USD" }}
                 payLabel={`Pay ${priceDisplay}`}
                 variant="dialog"

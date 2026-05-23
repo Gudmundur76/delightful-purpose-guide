@@ -16,7 +16,7 @@ export const Route = createFileRoute("/api/public/v1/specs")({
             bundler: "Vite 7",
             runtime: "Cloudflare Workers (nodejs_compat)",
             styling: "Tailwind CSS v4",
-            database: "Postgres (managed, edge-replicated)",
+            database: "Postgres via Lovable Cloud",
           },
           performance: {
             firstContentfulPaint: "< 1.5s",

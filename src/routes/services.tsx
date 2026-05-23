@@ -3,7 +3,6 @@ import { Services } from "@/components/Services";
 import { CompareSection } from "@/components/CompareSection";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { breadcrumbScript } from "@/lib/seo/breadcrumb";
 
 export const Route = createFileRoute("/services")({
   component: ServicesPage,
@@ -51,10 +50,6 @@ export const Route = createFileRoute("/services")({
           },
         }),
       },
-      breadcrumbScript([
-        { name: "Home", url: "/" },
-        { name: "Services", url: "/services" },
-      ]),
     ],
   }),
 });

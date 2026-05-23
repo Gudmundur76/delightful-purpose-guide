@@ -1,16 +1,8 @@
-# grow.contact — robots.txt
-# Source of truth: docs/geo-standard.md §4 (crawler allow / block matrix)
-# Default = allow. We let citation bots AND training bots in.
-
 User-agent: *
 Allow: /
 
-# ---- Search & citation bots (drive traffic — always allow) ----
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: bingbot
+# AI / LLM crawlers — explicitly allowed
+User-agent: GPTBot
 Allow: /
 
 User-agent: OAI-SearchBot
@@ -25,38 +17,16 @@ Allow: /
 User-agent: Perplexity-User
 Allow: /
 
-User-agent: Claude-SearchBot
-Allow: /
-
 User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-User
 Allow: /
 
 User-agent: Claude-Web
 Allow: /
 
-User-agent: FacebookBot
-Allow: /
-
-# ---- Training crawlers (separate UAs — allowed by default) ----
-# Per docs/geo-standard.md: block only if the client explicitly opts out.
-
-User-agent: GPTBot
+User-agent: anthropic-ai
 Allow: /
 
 User-agent: Google-Extended
 Allow: /
 
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: Meta-ExternalAgent
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-Host: grow.contact
 Sitemap: https://grow.contact/sitemap.xml

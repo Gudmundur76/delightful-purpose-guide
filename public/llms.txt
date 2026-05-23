@@ -28,18 +28,15 @@ We score every site on a 0-100 scale across five signals:
 
 - [Home](/): Agent-native web design agency — 48-hour delivery, fixed price.
 - [Services](/services): What we build — semantic HTML, JSON-LD, llms.txt.
-- [Pricing](/pricing): Starter ($2,400) and Growth ($4,800) tiers, plus free GEO Patch Pack.
+- [Pricing](/pricing): Starter ($2,400) and Growth ($4,800) tiers.
 - [Process](/process): How a 48-hour build runs end to end.
 - [Work](/work): Recent agent-native site launches.
-- [Check](/check): Free Agent Readability Score scanner — audit any URL in 30 seconds.
 - [Leaderboard](/leaderboard): Top 30 AI sites ranked by Agent Readability Score.
 - [Playbook](/playbook): 12-week agent-native SEO content calendar for AI startups.
-- [SOP](/sop): The 48-hour delivery standard operating procedure.
 - [Comparisons](/vs): Grow vs Webflow, Framer, Wix Studio, and traditional agencies.
 - [Badge](/badge): Free embeddable Agent Readability Score badge.
 - [FAQ](/faq): Common questions about scope, timeline, and ownership.
 - [Blog](/blog): Field notes on agent-native design and LLM citation.
-- [Outreach](/outreach): Generate personalised audit-led outreach for any prospect domain.
 - [API Docs](/api-docs): Public API reference.
 - [Status](/status): System status.
 - [Contact](/contact): Start a project — response in under 4 hours.
@@ -47,11 +44,9 @@ We score every site on a 0-100 scale across five signals:
 ## Optional
 
 - [llms.txt](/llms.txt): This file.
-- [Sitemap](/sitemap.xml): Machine-readable URL index.
 - [RSS feed](/blog/rss.xml): Journal updates as RSS 2.0.
 - [OpenAPI spec](/api/public/v1/openapi.json): Machine-readable API contract (OpenAPI 3.1 JSON).
 - [Swagger UI](/api/public/v1/docs): Interactive API explorer.
-
 
 
 ## Contact

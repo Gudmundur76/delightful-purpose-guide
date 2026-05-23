@@ -8,12 +8,6 @@ import {
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const TIERS = {
-  fix: {
-    name: "GEO Fix Pack — 24h remediation",
-    displayName: "GEO Fix Pack",
-    amountCents: 49900,
-    deliveryHours: 24,
-  },
   starter: {
     name: "Starter — 48h build",
     displayName: "Starter",
@@ -66,7 +60,9 @@ export const createTierOrder = createServerFn({ method: "POST" })
   .inputValidator((input) =>
     z
       .object({
-        tier: z.enum(["fix", "starter", "growth"]),
+        tier: z.enum(["starter", "growth"]),
+        // Optional lead UUID — forwarded to PayPal via custom_id so we can
+        // attribute the payment back to a lead at capture time.
         leadId: z.string().regex(UUID_RE).optional(),
       })
       .parse(input),

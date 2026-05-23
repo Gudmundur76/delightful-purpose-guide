@@ -27,16 +27,21 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Grow — Agent-Native Websites in 48 Hours" },
-      { name: "description", content: "73% of sites are silently excluded from AI citations. Grow ships agent-native marketing sites for AI startups & devtools — 48h, fixed price." },
-      { property: "og:title", content: "Grow — Agent-Native Websites in 48 Hours" },
-      { property: "og:description", content: "Marketing sites built to be cited by ChatGPT, Perplexity & Claude. 48h, fixed price. For AI startups, agent platforms & devtools." },
+      {
+        property: "og:description",
+        content:
+          "Marketing sites built for the agent era: structured data, llms.txt, MCP-ready docs. For AI/ML startups, agent platforms, and devtools. 48 hours, fixed price.",
+      },
       { property: "og:url", content: "https://grow.contact/" },
-      { property: "og:image", content: "https://grow.contact/og-home.png" },
-      { name: "twitter:image", content: "https://grow.contact/og-home.png" },
     ],
     links: [
       { rel: "canonical", href: "https://grow.contact/" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=JetBrains+Mono:wght@400;500&display=swap",
+      },
     ],
     scripts: [
       {

@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { breadcrumbScript } from "@/lib/seo/breadcrumb";
 
 export const Route = createFileRoute("/playbook")({
   head: () => ({
@@ -17,9 +16,6 @@ export const Route = createFileRoute("/playbook")({
       },
       { property: "og:url", content: "https://grow.contact/playbook" },
       { property: "og:type", content: "article" },
-      { property: "og:image", content: "https://grow.contact/og-home.png" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/og-home.png" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/playbook" }],
     scripts: [
@@ -29,25 +25,13 @@ export const Route = createFileRoute("/playbook")({
           "@context": "https://schema.org",
           "@type": "Article",
           headline: "The 12-Week Agent-Native SEO Playbook",
-          author: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
-          publisher: {
-            "@type": "Organization",
-            name: "Grow",
-            url: "https://grow.contact/",
-            logo: { "@type": "ImageObject", url: "https://grow.contact/og-home.png" },
-          },
+          author: { "@type": "Organization", name: "Grow" },
+          publisher: { "@type": "Organization", name: "Grow" },
           datePublished: "2026-05-21",
-          dateModified: "2026-05-22",
-          image: ["https://grow.contact/og-home.png"],
-          mainEntityOfPage: "https://grow.contact/playbook",
           description:
             "12-week content calendar for AI startups targeting LLM citation.",
         }),
       },
-      breadcrumbScript([
-        { name: "Home", url: "/" },
-        { name: "Playbook", url: "/playbook" },
-      ]),
     ],
   }),
   component: PlaybookPage,

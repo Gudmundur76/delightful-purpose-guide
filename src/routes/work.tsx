@@ -16,31 +16,6 @@ export const Route = createFileRoute("/work")({
       { property: "og:url", content: "https://grow.contact/work" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/work" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          name: "Work — Grow",
-          url: "https://grow.contact/work",
-          description:
-            "Selected case studies and recent agent-native sites shipped by Grow for AI startups and devtools.",
-          isPartOf: { "@type": "WebSite", name: "Grow", url: "https://grow.contact/" },
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
-            { "@type": "ListItem", position: 2, name: "Work", item: "https://grow.contact/work" },
-          ],
-        }),
-      },
-    ],
   }),
 });
 
@@ -63,17 +38,17 @@ function WorkPage() {
           </div>
           <div className="grid md:grid-cols-2 gap-px bg-border border border-border">
             <div className="bg-background p-4">
-              <img src={nimbusImg} alt="Sample output — agent orchestration platform marketing site" width={1280} height={960} loading="lazy" className="w-full aspect-[4/3] object-cover bg-card" />
+              <img src={nimbusImg} alt="Nimbus Agents — agent orchestration platform marketing site" width={1280} height={960} loading="lazy" className="w-full aspect-[4/3] object-cover bg-card" />
               <div className="mt-4 flex justify-between items-center">
-                <span className="font-bold uppercase tracking-tighter">Sample Output — Orchestration Platform</span>
-                <span className="text-[10px] font-mono text-muted-foreground">SAMPLE // DEVTOOL HUB</span>
+                <span className="font-bold uppercase tracking-tighter">Nimbus Agents — Orchestration Platform</span>
+                <span className="text-[10px] font-mono text-muted-foreground">DEVTOOL HUB // 48H</span>
               </div>
             </div>
             <div className="bg-background p-4">
-              <img src={vectorImg} alt="Sample output — LLM evaluation platform marketing site" width={1280} height={960} loading="lazy" className="w-full aspect-[4/3] object-cover bg-card" />
+              <img src={vectorImg} alt="Vector Eval — LLM evaluation platform marketing site" width={1280} height={960} loading="lazy" className="w-full aspect-[4/3] object-cover bg-card" />
               <div className="mt-4 flex justify-between items-center">
-                <span className="font-bold uppercase tracking-tighter">Sample Output — LLM Eval Suite</span>
-                <span className="text-[10px] font-mono text-muted-foreground">SAMPLE // MARKETING SITE</span>
+                <span className="font-bold uppercase tracking-tighter">Vector Eval — LLM Eval Suite</span>
+                <span className="text-[10px] font-mono text-muted-foreground">MARKETING SITE // 48H</span>
               </div>
             </div>
           </div>

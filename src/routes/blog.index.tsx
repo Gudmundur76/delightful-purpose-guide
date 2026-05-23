@@ -4,79 +4,32 @@ import { getAllPosts, type BlogPost } from "@/lib/blog/posts";
 
 export const Route = createFileRoute("/blog/")({
   component: BlogIndex,
-  head: () => {
-    const posts = getAllPosts();
-    return {
-      meta: [
-        { title: "Journal — Grow" },
-        {
-          name: "description",
-          content:
-            "Field notes on shipping agent-native websites: structured data, llms.txt, and design that gets cited by LLMs.",
-        },
-        { property: "og:title", content: "Journal — Grow" },
-        {
-          property: "og:description",
-          content:
-            "Field notes on shipping agent-native websites: structured data, llms.txt, and design that gets cited by LLMs.",
-        },
-        { property: "og:url", content: "https://grow.contact/blog" },
-      ],
-      links: [
-        { rel: "canonical", href: "https://grow.contact/blog" },
-        {
-          rel: "alternate",
-          type: "application/rss+xml",
-          title: "Grow — Journal",
-          href: "https://grow.contact/blog/rss.xml",
-        },
-      ],
-      scripts: [
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Blog",
-            name: "Grow — Journal",
-            url: "https://grow.contact/blog",
-            description:
-              "Field notes on shipping agent-native websites: structured data, llms.txt, and design that gets cited by LLMs.",
-            publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
-            blogPost: posts.map((p) => ({
-              "@type": "BlogPosting",
-              headline: p.title,
-              url: `https://grow.contact/blog/${p.slug}`,
-              datePublished: p.publishedAt,
-            })),
-          }),
-        },
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            itemListElement: posts.map((p, i) => ({
-              "@type": "ListItem",
-              position: i + 1,
-              url: `https://grow.contact/blog/${p.slug}`,
-              name: p.title,
-            })),
-          }),
-        },
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
-              { "@type": "ListItem", position: 2, name: "Journal", item: "https://grow.contact/blog" },
-            ],
-          }),
-        },
-      ],
-    };
-  },
+  head: () => ({
+    meta: [
+      { title: "Journal — Grow" },
+      {
+        name: "description",
+        content:
+          "Field notes on shipping agent-native websites: structured data, llms.txt, and design that gets cited by LLMs.",
+      },
+      { property: "og:title", content: "Journal — Grow" },
+      {
+        property: "og:description",
+        content:
+          "Field notes on shipping agent-native websites: structured data, llms.txt, and design that gets cited by LLMs.",
+      },
+      { property: "og:url", content: "https://grow.contact/blog" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://grow.contact/blog" },
+      {
+        rel: "alternate",
+        type: "application/rss+xml",
+        title: "Grow — Journal",
+        href: "https://grow.contact/blog/rss.xml",
+      },
+    ],
+  }),
 });
 
 // Deterministic agent metadata derived from the post slug, so the same post

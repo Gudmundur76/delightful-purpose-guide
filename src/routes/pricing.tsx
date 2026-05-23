@@ -3,7 +3,6 @@ import { PricingTable } from "@/components/PricingTable";
 import { TechSpecs } from "@/components/TechSpecs";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { breadcrumbScript } from "@/lib/seo/breadcrumb";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
@@ -22,22 +21,6 @@ export const Route = createFileRoute("/pricing")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@graph": [
-            {
-              "@type": "Product",
-              name: "GEO Patch Pack",
-              description:
-                "Free GEO patch pack for your existing site: custom robots.txt, llms.txt, JSON-LD snippets, OpenGraph meta and semantic HTML fix list with copy-paste install guide. 48-hour turnaround. Beta.",
-              brand: { "@type": "Brand", name: "Grow" },
-              url: "https://grow.contact/pricing",
-              offers: {
-                "@type": "Offer",
-                price: "0",
-                priceCurrency: "USD",
-                availability: "https://schema.org/InStock",
-                url: "https://grow.contact/contact",
-              },
-            },
-
             {
               "@type": "Product",
               name: "Starter",
@@ -71,10 +54,6 @@ export const Route = createFileRoute("/pricing")({
           ],
         }),
       },
-      breadcrumbScript([
-        { name: "Home", url: "/" },
-        { name: "Pricing", url: "/pricing" },
-      ]),
     ],
   }),
 });

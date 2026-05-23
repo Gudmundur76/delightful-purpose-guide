@@ -50,17 +50,13 @@ export const Route = createFileRoute("/blog/$slug")({
     const url = `https://grow.contact/blog/${post.slug}`;
     return {
       meta: [
-        { title: post.title.length > 53 ? post.title : `${post.title} — Grow` },
+        { title: post.title.length > 55 ? post.title : `${post.title} — Grow` },
         { name: "description", content: post.description },
         { property: "og:title", content: post.title },
         { property: "og:description", content: post.description },
         { property: "og:url", content: url },
         { property: "og:type", content: "article" },
-        { property: "og:image", content: "https://grow.contact/og-home.png" },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:image", content: "https://grow.contact/og-home.png" },
         { property: "article:published_time", content: post.publishedAt },
-        { property: "article:author", content: "Grow Editorial" },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [
@@ -71,32 +67,11 @@ export const Route = createFileRoute("/blog/$slug")({
             "@type": "Article",
             headline: post.title,
             description: post.description,
-            image: ["https://grow.contact/og-home.png"],
             datePublished: post.publishedAt,
             dateModified: post.publishedAt,
-            author: { "@type": "Organization", name: "Grow Editorial", url: "https://grow.contact/" },
-            publisher: {
-              "@type": "Organization",
-              name: "Grow",
-              url: "https://grow.contact/",
-              logo: {
-                "@type": "ImageObject",
-                url: "https://grow.contact/og-home.png",
-              },
-            },
+            author: { "@type": "Person", name: "Grow Editorial", url: "https://grow.contact/" },
+            publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
             mainEntityOfPage: url,
-          }),
-        },
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
-              { "@type": "ListItem", position: 2, name: "Journal", item: "https://grow.contact/blog" },
-              { "@type": "ListItem", position: 3, name: post.title, item: url },
-            ],
           }),
         },
       ],

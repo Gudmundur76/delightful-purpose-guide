@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SmartContactForm } from "@/components/SmartContactForm";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { breadcrumbScript } from "@/lib/seo/breadcrumb";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
@@ -15,12 +14,6 @@ export const Route = createFileRoute("/contact")({
       { property: "og:url", content: "https://grow.contact/contact" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/contact" }],
-    scripts: [
-      breadcrumbScript([
-        { name: "Home", url: "/" },
-        { name: "Contact", url: "/contact" },
-      ]),
-    ],
   }),
 });
 

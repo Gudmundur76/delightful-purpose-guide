@@ -6,60 +6,24 @@ import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/vs")({
   component: VsLayout,
-  head: () => {
-    const all = getAllComparisons();
-    return {
-      meta: [
-        { title: "Grow vs Webflow, Framer, Wix & Agencies — Comparisons" },
-        {
-          name: "description",
-          content:
-            "Honest comparisons of Grow against Webflow, Framer, Wix Studio, and traditional agencies. Where each wins, where each loses, and which to pick.",
-        },
-        { property: "og:title", content: "Grow vs the alternatives" },
-        {
-          property: "og:description",
-          content:
-            "Side-by-side comparisons of Grow against the major web design tools and agencies.",
-        },
-        { property: "og:url", content: "https://grow.contact/vs" },
-      ],
-      links: [{ rel: "canonical", href: "https://grow.contact/vs" }],
-      scripts: [
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            name: "Grow vs the alternatives",
-            url: "https://grow.contact/vs",
-            description:
-              "Side-by-side comparisons of Grow against Webflow, Framer, Wix Studio, and traditional agencies.",
-            mainEntity: {
-              "@type": "ItemList",
-              itemListElement: all.map((c, i) => ({
-                "@type": "ListItem",
-                position: i + 1,
-                url: `https://grow.contact/vs/${c.slug}`,
-                name: `Grow vs ${c.competitor}`,
-              })),
-            },
-          }),
-        },
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
-              { "@type": "ListItem", position: 2, name: "Comparisons", item: "https://grow.contact/vs" },
-            ],
-          }),
-        },
-      ],
-    };
-  },
+  head: () => ({
+    meta: [
+      { title: "Grow vs Webflow, Framer, Wix & Agencies — Comparisons" },
+      {
+        name: "description",
+        content:
+          "Honest comparisons of Grow against Webflow, Framer, Wix Studio, and traditional agencies. Where each wins, where each loses, and which to pick.",
+      },
+      { property: "og:title", content: "Grow vs the alternatives" },
+      {
+        property: "og:description",
+        content:
+          "Side-by-side comparisons of Grow against the major web design tools and agencies.",
+      },
+      { property: "og:url", content: "https://grow.contact/vs" },
+    ],
+    links: [{ rel: "canonical", href: "https://grow.contact/vs" }],
+  }),
 });
 
 function VsLayout() {

@@ -2,9 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getLeaderboard } from "@/lib/leaderboard/entries";
-import { FreeToolEmailGate } from "@/components/FreeToolEmailGate";
-import { breadcrumbScript } from "@/lib/seo/breadcrumb";
-
 
 export const Route = createFileRoute("/leaderboard")({
   component: LeaderboardPage,
@@ -47,10 +44,6 @@ export const Route = createFileRoute("/leaderboard")({
             })),
           }),
         },
-        breadcrumbScript([
-          { name: "Home", url: "/" },
-          { name: "Leaderboard", url: "/leaderboard" },
-        ]),
       ],
     };
   },
@@ -207,22 +200,7 @@ function LeaderboardPage() {
             </div>
           </div>
         </section>
-
-        {/* Email capture */}
-        <section className="border-t border-border">
-          <div className="max-w-3xl mx-auto px-6 py-16">
-            <FreeToolEmailGate
-              source="leaderboard"
-              eyebrow="MONTHLY LEADERBOARD UPDATE"
-              headline="Get the next leaderboard refresh by email"
-              sub="Once a month: new entrants, biggest score jumps, and what changed on the top-ranked sites."
-              cta="Subscribe →"
-              successText="Subscribed. Next drop hits your inbox on the 1st."
-            />
-          </div>
-        </section>
       </main>
-
       <SiteFooter />
     </div>
   );

@@ -44,7 +44,6 @@ import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as CheckReportRouteImport } from './routes/check.report'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
-import { Route as BadgeChar123Char125DotsvgRouteImport } from './routes/badge.{}[.]svg'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
@@ -244,12 +243,6 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BadgeChar123Char125DotsvgRoute =
-  BadgeChar123Char125DotsvgRouteImport.update({
-    id: '/{}.svg',
-    path: '/{}.svg',
-    getParentRoute: () => BadgeRoute,
-  } as any)
 const BadgeChar123idChar125DotsvgRoute =
   BadgeChar123idChar125DotsvgRouteImport.update({
     id: '/{$id}.svg',
@@ -404,7 +397,6 @@ export interface FileRoutesByFullPath {
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
-  '/badge/{}.svg': typeof BadgeChar123Char125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
@@ -465,7 +457,6 @@ export interface FileRoutesByTo {
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
-  '/badge/{}.svg': typeof BadgeChar123Char125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
@@ -527,7 +518,6 @@ export interface FileRoutesById {
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
-  '/badge/{}.svg': typeof BadgeChar123Char125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
@@ -590,7 +580,6 @@ export interface FileRouteTypes {
     | '/work'
     | '/admin/leads'
     | '/badge/{$id}.svg'
-    | '/badge/{}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/check/report'
@@ -651,7 +640,6 @@ export interface FileRouteTypes {
     | '/work'
     | '/admin/leads'
     | '/badge/{$id}.svg'
-    | '/badge/{}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/check/report'
@@ -712,7 +700,6 @@ export interface FileRouteTypes {
     | '/work'
     | '/admin/leads'
     | '/badge/{$id}.svg'
-    | '/badge/{}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/check/report'
@@ -1047,13 +1034,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/badge/{}.svg': {
-      id: '/badge/{}.svg'
-      path: '/{}.svg'
-      fullPath: '/badge/{}.svg'
-      preLoaderRoute: typeof BadgeChar123Char125DotsvgRouteImport
-      parentRoute: typeof BadgeRoute
-    }
     '/badge/{$id}.svg': {
       id: '/badge/{$id}.svg'
       path: '/{$id}.svg'
@@ -1220,12 +1200,10 @@ declare module '@tanstack/react-router' {
 
 interface BadgeRouteChildren {
   BadgeChar123idChar125DotsvgRoute: typeof BadgeChar123idChar125DotsvgRoute
-  BadgeChar123Char125DotsvgRoute: typeof BadgeChar123Char125DotsvgRoute
 }
 
 const BadgeRouteChildren: BadgeRouteChildren = {
   BadgeChar123idChar125DotsvgRoute: BadgeChar123idChar125DotsvgRoute,
-  BadgeChar123Char125DotsvgRoute: BadgeChar123Char125DotsvgRoute,
 }
 
 const BadgeRouteWithChildren = BadgeRoute._addFileChildren(BadgeRouteChildren)

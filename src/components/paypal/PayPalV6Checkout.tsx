@@ -452,6 +452,8 @@ export function PayPalV6Checkout({
 
       {/* Standard PayPal button */}
       <div ref={paypalBtnRef} aria-label="PayPal" style={{ display: paypalEligible ? undefined : "none" }} />
+      <div ref={paylaterBtnRef} aria-label="Pay Later" />
+
       <div ref={appleBtnRef} aria-label="Apple Pay" style={{ display: appleEligible ? undefined : "none" }} />
       <div ref={googleBtnRef} aria-label="Google Pay" style={{ display: googleEligible ? undefined : "none" }} />
 

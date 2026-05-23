@@ -1,26 +1,39 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { getLeaderboard } from "@/lib/leaderboard/entries";
+import {
+  CATEGORY_LABELS,
+  LEADERBOARD,
+  type LeaderboardCategory,
+  getLeaderboard,
+} from "@/lib/leaderboard/entries";
+import { z } from "zod";
+
+const CATEGORIES: LeaderboardCategory[] = ["infra", "models", "agents", "devtools"];
+
+const searchSchema = z.object({
+  cat: z.enum(["all", "infra", "models", "agents", "devtools"]).catch("all"),
+});
 
 export const Route = createFileRoute("/leaderboard")({
+  validateSearch: searchSchema,
   component: LeaderboardPage,
   head: () => {
     const top = getLeaderboard().slice(0, 5).map((e) => e.name).join(", ");
     return {
       meta: [
-        { title: "Agent Readability Leaderboard — Top 30 AI Sites | Grow" },
+        { title: `Agent Readability Leaderboard — ${LEADERBOARD.length} AI Sites | Grow` },
         {
           name: "description",
           content:
-            "The Agent Readability Score ranks AI startups on how well ChatGPT, Perplexity, and Claude can read and cite their sites. Top 5: " +
+            `Public benchmark ranking ${LEADERBOARD.length} AI companies across infra, models, agents, and dev tools on how well ChatGPT, Perplexity, and Claude can read and cite their sites. Top 5: ` +
             top + ".",
         },
-        { property: "og:title", content: "Agent Readability Leaderboard — Top 30 AI Sites" },
+        { property: "og:title", content: `Agent Readability Leaderboard — ${LEADERBOARD.length} AI Sites` },
         {
           property: "og:description",
           content:
-            "Which AI startups are most readable by ChatGPT, Perplexity, and Claude? Scored across semantic HTML, JSON-LD, llms.txt, citability, and speed.",
+            "Living benchmark of how well AI startups are read by ChatGPT, Perplexity, and Claude. Filter by infra, models, agents, dev tools. Open dataset.",
         },
         { property: "og:url", content: "https://grow.contact/leaderboard" },
       ],
@@ -30,18 +43,21 @@ export const Route = createFileRoute("/leaderboard")({
           type: "application/ld+json",
           children: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ItemList",
+            "@type": "Dataset",
             name: "Agent Readability Leaderboard",
             description:
-              "Top AI companies ranked by Agent Readability Score — how well their site is parsed and cited by AI agents.",
-            itemListOrder: "https://schema.org/ItemListOrderDescending",
-            numberOfItems: getLeaderboard().length,
-            itemListElement: getLeaderboard().map((e) => ({
-              "@type": "ListItem",
-              position: e.rank,
-              name: e.name,
-              url: `https://${e.domain}`,
-            })),
+              `Public benchmark of ${LEADERBOARD.length} AI companies scored on how well ChatGPT, Perplexity, and Claude can read and cite their sites.`,
+            url: "https://grow.contact/leaderboard",
+            license: "https://creativecommons.org/licenses/by/4.0/",
+            creator: { "@type": "Organization", name: "Grow", url: "https://grow.contact" },
+            distribution: [
+              {
+                "@type": "DataDownload",
+                encodingFormat: "application/json",
+                contentUrl: "https://grow.contact/api/public/leaderboard.json",
+              },
+            ],
+            variableMeasured: ["Semantic HTML", "JSON-LD", "llms.txt", "Citability", "Speed"],
           }),
         },
       ],
@@ -57,10 +73,21 @@ function tier(score: number) {
 }
 
 function LeaderboardPage() {
-  const rows = getLeaderboard();
-  const avg = Math.round(rows.reduce((s, r) => s + r.score, 0) / rows.length);
+  const { cat } = Route.useSearch();
+  const activeCategory = cat === "all" ? undefined : cat;
+  const rows = getLeaderboard(activeCategory);
+  const allRows = getLeaderboard();
+  const avg = Math.round(rows.reduce((s, r) => s + r.score, 0) / Math.max(1, rows.length));
   const agentNative = rows.filter((r) => r.score >= 85).length;
   const opaque = rows.filter((r) => r.score < 55).length;
+
+  const counts: Record<string, number> = {
+    all: allRows.length,
+    infra: LEADERBOARD.filter((e) => e.category === "infra").length,
+    models: LEADERBOARD.filter((e) => e.category === "models").length,
+    agents: LEADERBOARD.filter((e) => e.category === "agents").length,
+    devtools: LEADERBOARD.filter((e) => e.category === "devtools").length,
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -70,7 +97,7 @@ function LeaderboardPage() {
         <section className="border-b border-border">
           <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
             <p className="font-mono text-accent text-xs mb-6 uppercase tracking-[0.2em]">
-              // Leaderboard · live ranking
+              // Leaderboard · open dataset · {LEADERBOARD.length} companies
             </p>
             <h1 className="text-4xl md:text-7xl font-extrabold tracking-tighter uppercase leading-[0.9]">
               Who gets cited
@@ -78,19 +105,53 @@ function LeaderboardPage() {
               by ChatGPT?
             </h1>
             <p className="mt-8 max-w-2xl text-muted-foreground text-lg">
-              The Agent Readability Score ranks {rows.length} well-known AI
-              companies on how cleanly their site is parsed by ChatGPT,
-              Perplexity, and Claude. Scored across five signals: semantic HTML,
-              JSON-LD coverage, llms.txt, citability, and first-contentful
-              speed.
+              The Agent Readability Score ranks {LEADERBOARD.length} AI companies
+              across <strong className="text-foreground">infra</strong>,{" "}
+              <strong className="text-foreground">models</strong>,{" "}
+              <strong className="text-foreground">agents</strong>, and{" "}
+              <strong className="text-foreground">dev tools</strong> on how cleanly
+              their site is parsed by ChatGPT, Perplexity, and Claude. Scored
+              across five signals: semantic HTML, JSON-LD coverage, llms.txt,
+              citability, and first-contentful speed.
             </p>
 
             <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border">
-              <StatCell label="Sites scored" value={String(rows.length)} />
+              <StatCell label="Sites in view" value={String(rows.length)} />
               <StatCell label="Average score" value={`${avg}/100`} />
               <StatCell label="Agent-native (85+)" value={String(agentNative)} accent />
               <StatCell label="Opaque (<55)" value={String(opaque)} />
             </div>
+
+            {/* Dataset chip */}
+            <div className="mt-6 flex flex-wrap items-center gap-3 font-mono text-[11px] text-muted-foreground">
+              <a
+                href="/api/public/leaderboard.json"
+                className="border border-border px-3 py-1.5 hover:border-accent hover:text-accent transition-colors uppercase tracking-widest"
+              >
+                GET /api/public/leaderboard.json
+              </a>
+              <span className="uppercase tracking-widest">// CC BY 4.0 · re-scored weekly</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Filter tabs */}
+        <section className="border-b border-border bg-card/40 sticky top-0 z-10 backdrop-blur">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center gap-2">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mr-2">
+              // Filter:
+            </span>
+            <CategoryTab to="/leaderboard" search={{ cat: "all" as const }} active={cat === "all"} label="All" count={counts.all} />
+            {CATEGORIES.map((c) => (
+              <CategoryTab
+                key={c}
+                to="/leaderboard"
+                search={{ cat: c }}
+                active={cat === c}
+                label={CATEGORY_LABELS[c]}
+                count={counts[c]}
+              />
+            ))}
           </div>
         </section>
 
@@ -98,7 +159,6 @@ function LeaderboardPage() {
         <section>
           <div className="max-w-7xl mx-auto px-6 py-12 md:py-20">
             <div className="border border-border bg-card overflow-hidden">
-              {/* Header row */}
               <div className="hidden md:grid grid-cols-12 gap-4 px-5 py-3 border-b border-border bg-muted/30 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                 <div className="col-span-1">Rank</div>
                 <div className="col-span-4">Company</div>
@@ -116,13 +176,12 @@ function LeaderboardPage() {
                       className="grid grid-cols-12 gap-4 px-5 py-4 hover:bg-muted/20 transition-colors items-center"
                     >
                       <div className="col-span-2 md:col-span-1 font-mono text-sm tabular-nums text-muted-foreground">
-                        {String(row.rank).padStart(2, "0")}
+                        {String(row.rank).padStart(3, "0")}
                       </div>
                       <div className="col-span-10 md:col-span-4">
-                        <a
-                          href={`https://${row.domain}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <Link
+                          to="/verify/$id"
+                          params={{ id: row.domain }}
                           className="block group"
                         >
                           <div className="font-bold tracking-tighter uppercase group-hover:text-accent transition-colors">
@@ -132,10 +191,10 @@ function LeaderboardPage() {
                             {row.domain}
                             {row.note ? <span className="ml-2 text-foreground/60">// {row.note}</span> : null}
                           </div>
-                        </a>
+                        </Link>
                       </div>
                       <div className="col-span-6 md:col-span-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                        {row.category}
+                        {CATEGORY_LABELS[row.category]}
                       </div>
                       <div className="col-span-6 md:col-span-1 md:text-right">
                         <span className={`font-mono text-sm tabular-nums px-2 py-1 border ${t.className}`}>
@@ -161,7 +220,8 @@ function LeaderboardPage() {
             <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
               // Methodology: weighted across semantic HTML (25), JSON-LD (20),
               llms.txt (15), citability (20), first-contentful speed (20).
-              Updated monthly.
+              Flagship rows hand-scored; long-tail rows re-scored weekly. Click any
+              row for the live verdict.
             </p>
           </div>
         </section>
@@ -180,7 +240,7 @@ function LeaderboardPage() {
               </h2>
               <p className="mt-6 text-muted-foreground text-lg max-w-md">
                 Free scan. Semantic HTML, JSON-LD, llms.txt, citability, speed.
-                See where you'd rank against the top 30.
+                See where you'd rank against {LEADERBOARD.length} AI companies.
               </p>
             </div>
             <div className="flex flex-col gap-3 md:items-end">
@@ -203,6 +263,34 @@ function LeaderboardPage() {
       </main>
       <SiteFooter />
     </div>
+  );
+}
+
+function CategoryTab({
+  to,
+  search,
+  active,
+  label,
+  count,
+}: {
+  to: string;
+  search: { cat: "all" | LeaderboardCategory };
+  active: boolean;
+  label: string;
+  count: number;
+}) {
+  return (
+    <Link
+      to={to}
+      search={search}
+      className={`px-3 py-1.5 font-mono text-xs uppercase tracking-widest border transition-colors ${
+        active
+          ? "bg-accent text-accent-foreground border-accent"
+          : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/40"
+      }`}
+    >
+      {label} <span className="tabular-nums opacity-70">({count})</span>
+    </Link>
   );
 }
 

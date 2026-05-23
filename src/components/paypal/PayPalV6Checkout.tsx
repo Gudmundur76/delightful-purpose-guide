@@ -362,8 +362,9 @@ export function PayPalV6Checkout({
 
     init();
     return () => {
-      cancelled = true;
+      // no-op: mountedRef guard prevents double-init under Strict Mode
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

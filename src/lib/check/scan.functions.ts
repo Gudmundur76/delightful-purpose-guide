@@ -334,6 +334,7 @@ export const scanUrl = createServerFn({ method: "POST" })
     log.push(`→ done · agent_readability_score = ${overall}`);
 
     // Persist to history (fire-and-forget — never fail the user-facing scan).
+    const userId = (context as any).userId;
     persistScan({
       url,
       finalUrl,
@@ -346,6 +347,8 @@ export const scanUrl = createServerFn({ method: "POST" })
         speed: speedScore,
       },
       source: data.source ?? "check",
+      clientId: data.clientId ?? null,
+      createdBy: userId ?? null,
     }).catch((e) => console.error("persistScan error", e));
 
     return {

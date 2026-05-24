@@ -74,12 +74,11 @@ function OverviewPage() {
       try {
         const [s, feed, emailStats] = await Promise.allSettled([
           callTool<Stats>("get_stats"),
-          callTool<{ events?: ActivityEvent[] } | ActivityEvent[]>("activity_feed", {
-            limit: 20,
-          }),
-          callTool<{ delivered?: number; sent?: number; total?: number }>(
-            "email_delivery_stats",
+          callTool<Record<string, ActivityEvent[]> | ActivityEvent[]>(
+            "get_activity_feed",
+            { limit_per_type: 10 },
           ),
+          callTool<Record<string, number>>("get_email_delivery_stats", { days: 30 }),
         ]);
         if (cancelled) return;
         if (s.status === "fulfilled") setStats(s.value);

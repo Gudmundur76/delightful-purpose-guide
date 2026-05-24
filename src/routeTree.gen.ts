@@ -46,7 +46,6 @@ import { Route as CheckReportRouteImport } from './routes/check.report'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
-import { Route as ApiMcpRouteImport } from './routes/api/mcp'
 import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
@@ -261,11 +260,6 @@ const BadgeChar123idChar125DotsvgRoute =
     path: '/{$id}.svg',
     getParentRoute: () => BadgeRoute,
   } as any)
-const ApiMcpRoute = ApiMcpRouteImport.update({
-  id: '/api/mcp',
-  path: '/api/mcp',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminReviewsRoute = AdminReviewsRouteImport.update({
   id: '/admin/reviews',
   path: '/admin/reviews',
@@ -435,7 +429,6 @@ export interface FileRoutesByFullPath {
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
-  '/api/mcp': typeof ApiMcpRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
@@ -501,7 +494,6 @@ export interface FileRoutesByTo {
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
-  '/api/mcp': typeof ApiMcpRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
@@ -568,7 +560,6 @@ export interface FileRoutesById {
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
-  '/api/mcp': typeof ApiMcpRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
@@ -636,7 +627,6 @@ export interface FileRouteTypes {
     | '/work'
     | '/admin/leads'
     | '/admin/reviews'
-    | '/api/mcp'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
@@ -702,7 +692,6 @@ export interface FileRouteTypes {
     | '/work'
     | '/admin/leads'
     | '/admin/reviews'
-    | '/api/mcp'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
@@ -768,7 +757,6 @@ export interface FileRouteTypes {
     | '/work'
     | '/admin/leads'
     | '/admin/reviews'
-    | '/api/mcp'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
@@ -835,7 +823,6 @@ export interface RootRouteChildren {
   WorkRoute: typeof WorkRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminReviewsRoute: typeof AdminReviewsRoute
-  ApiMcpRoute: typeof ApiMcpRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
@@ -1128,13 +1115,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BadgeChar123idChar125DotsvgRouteImport
       parentRoute: typeof BadgeRoute
     }
-    '/api/mcp': {
-      id: '/api/mcp'
-      path: '/api/mcp'
-      fullPath: '/api/mcp'
-      preLoaderRoute: typeof ApiMcpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin/reviews': {
       id: '/admin/reviews'
       path: '/admin/reviews'
@@ -1403,7 +1383,6 @@ const rootRouteChildren: RootRouteChildren = {
   WorkRoute: WorkRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminReviewsRoute: AdminReviewsRoute,
-  ApiMcpRoute: ApiMcpRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogRssDotxmlRoute: BlogRssDotxmlRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
@@ -1438,3 +1417,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

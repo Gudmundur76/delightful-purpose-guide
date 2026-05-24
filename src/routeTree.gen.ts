@@ -45,6 +45,7 @@ import { Route as GuideGenerativeEngineOptimizationRouteImport } from './routes/
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as DashboardScanRouteImport } from './routes/dashboard.scan'
 import { Route as DashboardReviewsRouteImport } from './routes/dashboard.reviews'
+import { Route as DashboardPublishRouteImport } from './routes/dashboard.publish'
 import { Route as DashboardCitationRouteImport } from './routes/dashboard.citation'
 import { Route as DashboardBadgeRouteImport } from './routes/dashboard.badge'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
@@ -259,6 +260,11 @@ const DashboardScanRoute = DashboardScanRouteImport.update({
 const DashboardReviewsRoute = DashboardReviewsRouteImport.update({
   id: '/reviews',
   path: '/reviews',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardPublishRoute = DashboardPublishRouteImport.update({
+  id: '/publish',
+  path: '/publish',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardCitationRoute = DashboardCitationRouteImport.update({
@@ -480,6 +486,7 @@ export interface FileRoutesByFullPath {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/badge': typeof DashboardBadgeRoute
   '/dashboard/citation': typeof DashboardCitationRoute
+  '/dashboard/publish': typeof DashboardPublishRoute
   '/dashboard/reviews': typeof DashboardReviewsRoute
   '/dashboard/scan': typeof DashboardScanRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -551,6 +558,7 @@ export interface FileRoutesByTo {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/badge': typeof DashboardBadgeRoute
   '/dashboard/citation': typeof DashboardCitationRoute
+  '/dashboard/publish': typeof DashboardPublishRoute
   '/dashboard/reviews': typeof DashboardReviewsRoute
   '/dashboard/scan': typeof DashboardScanRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -624,6 +632,7 @@ export interface FileRoutesById {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/badge': typeof DashboardBadgeRoute
   '/dashboard/citation': typeof DashboardCitationRoute
+  '/dashboard/publish': typeof DashboardPublishRoute
   '/dashboard/reviews': typeof DashboardReviewsRoute
   '/dashboard/scan': typeof DashboardScanRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -698,6 +707,7 @@ export interface FileRouteTypes {
     | '/checkout/success'
     | '/dashboard/badge'
     | '/dashboard/citation'
+    | '/dashboard/publish'
     | '/dashboard/reviews'
     | '/dashboard/scan'
     | '/email/unsubscribe'
@@ -769,6 +779,7 @@ export interface FileRouteTypes {
     | '/checkout/success'
     | '/dashboard/badge'
     | '/dashboard/citation'
+    | '/dashboard/publish'
     | '/dashboard/reviews'
     | '/dashboard/scan'
     | '/email/unsubscribe'
@@ -841,6 +852,7 @@ export interface FileRouteTypes {
     | '/checkout/success'
     | '/dashboard/badge'
     | '/dashboard/citation'
+    | '/dashboard/publish'
     | '/dashboard/reviews'
     | '/dashboard/scan'
     | '/email/unsubscribe'
@@ -1193,6 +1205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardReviewsRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/publish': {
+      id: '/dashboard/publish'
+      path: '/publish'
+      fullPath: '/dashboard/publish'
+      preLoaderRoute: typeof DashboardPublishRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/citation': {
       id: '/dashboard/citation'
       path: '/citation'
@@ -1469,6 +1488,7 @@ const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
 interface DashboardRouteChildren {
   DashboardBadgeRoute: typeof DashboardBadgeRoute
   DashboardCitationRoute: typeof DashboardCitationRoute
+  DashboardPublishRoute: typeof DashboardPublishRoute
   DashboardReviewsRoute: typeof DashboardReviewsRoute
   DashboardScanRoute: typeof DashboardScanRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
@@ -1477,6 +1497,7 @@ interface DashboardRouteChildren {
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardBadgeRoute: DashboardBadgeRoute,
   DashboardCitationRoute: DashboardCitationRoute,
+  DashboardPublishRoute: DashboardPublishRoute,
   DashboardReviewsRoute: DashboardReviewsRoute,
   DashboardScanRoute: DashboardScanRoute,
   DashboardIndexRoute: DashboardIndexRoute,

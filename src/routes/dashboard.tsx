@@ -16,6 +16,7 @@ const TABS = [
   { to: "/dashboard", label: "OVERVIEW", exact: true },
   { to: "/dashboard/citation", label: "CITATION", exact: false },
   { to: "/dashboard/scan", label: "SCAN", exact: false },
+  { to: "/dashboard/publish", label: "PUBLISH", exact: false },
   { to: "/dashboard/reviews", label: "REVIEWS", exact: false },
   { to: "/dashboard/badge", label: "BADGE", exact: false },
 ] as const;

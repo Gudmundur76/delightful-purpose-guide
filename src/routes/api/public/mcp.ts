@@ -33,6 +33,12 @@ import { aiCompleteTool, draftBlogPostTool } from "@/lib/mcp/tools/ai-content";
 import { topScannedHostsTool, leadFunnelTool } from "@/lib/mcp/tools/insights";
 import { fetchUrlTool, checkLlmsTxtTool } from "@/lib/mcp/tools/web-probe";
 import { getCompetitorScoreTool } from "@/lib/mcp/tools/competitor";
+import { bulkScanTool } from "@/lib/mcp/tools/bulk-scan";
+import { generateImageTool } from "@/lib/mcp/tools/generate-image";
+import { validateJsonLdTool, extractMetaTagsTool } from "@/lib/mcp/tools/page-audit";
+import { tableRowCountsTool, recentActivityForHostTool } from "@/lib/mcp/tools/db-insights";
+import { generateLlmsTxtTool } from "@/lib/mcp/tools/llms-txt";
+import { siteUrlsTool } from "@/lib/mcp/tools/site-urls";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",

@@ -15,7 +15,7 @@ export const bulkScanTool = defineTool({
     for (const url of urls) {
       try {
         const r = await scanUrl({ data: { url, source } });
-        results.push({ url, ok: true, ...r });
+        results.push({ url, scan: r });
       } catch (err) {
         results.push({ url, ok: false, error: err instanceof Error ? err.message : String(err) });
       }

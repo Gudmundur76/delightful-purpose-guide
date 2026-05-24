@@ -495,6 +495,51 @@ export type Database = {
           },
         ]
       }
+      scheduled_scans: {
+        Row: {
+          active: boolean
+          cadence: string
+          created_at: string
+          created_by: string | null
+          host: string
+          id: string
+          last_run_at: string | null
+          last_scan_id: string | null
+          next_run_at: string
+          notes: string | null
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          active?: boolean
+          cadence: string
+          created_at?: string
+          created_by?: string | null
+          host: string
+          id?: string
+          last_run_at?: string | null
+          last_scan_id?: string | null
+          next_run_at?: string
+          notes?: string | null
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          active?: boolean
+          cadence?: string
+          created_at?: string
+          created_by?: string | null
+          host?: string
+          id?: string
+          last_run_at?: string | null
+          last_scan_id?: string | null
+          next_run_at?: string
+          notes?: string | null
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string

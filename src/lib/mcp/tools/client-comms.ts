@@ -24,7 +24,7 @@ export const sendReportEmailTool = defineTool({
       recipientEmail: (lead as { email: string }).email,
       templateData: { name: (lead as { name: string }).name, ...template_data },
     });
-    return JSON.stringify({ ok: result.ok, lead_id, ...result }, null, 2);
+    return JSON.stringify({ lead_id, ...result }, null, 2);
   },
 });
 
@@ -44,6 +44,6 @@ export const triggerClientAlertTool = defineTool({
       recipientEmail: email,
       templateData: { subject, message, body: message },
     });
-    return JSON.stringify({ ok: result.ok, ...result }, null, 2);
+    return JSON.stringify({ ...result }, null, 2);
   },
 });

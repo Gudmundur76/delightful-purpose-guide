@@ -10,11 +10,25 @@ export const getCompetitorScoreTool = defineTool({
     query: z.string().min(2).max(200).describe("Domain or company name (case-insensitive substring match)"),
   }),
   execute: async ({ query }) => {
-    const q = query.toLowerCase();
-    const match = LEADERBOARD_ENTRIES.find(
-      (e) => e.domain.toLowerCase().includes(q) || e.name.toLowerCase().includes(q),
-    );
-    if (!match) return JSON.stringify({ ok: false, error: `No leaderboard entry matches "${query}"` });
+    const raw = query.toLowerCase().trim();
+    const stripped = raw.replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/.*$/, "");
+    const root = stripped.replace(/\.(com|io|ai|co|dev|app|org|net|xyz|so|sh)$/i, "");
+    const needles = Array.from(new Set([raw, stripped, root].filter((s) => s.length >= 2)));
+    const match =
+      LEADERBOARD_ENTRIES.find((e) =>
+        needles.some((n) => e.domain.toLowerCase() === n || e.name.toLowerCase() === n),
+      ) ||
+      LEADERBOARD_ENTRIES.find((e) =>
+        needles.some((n) => e.domain.toLowerCase().includes(n) || e.name.toLowerCase().includes(n)),
+      );
+    if (!match) {
+      const suggestions = LEADERBOARD_ENTRIES.filter((e) =>
+        needles.some((n) => e.domain.toLowerCase().startsWith(n.slice(0, 3))),
+      )
+        .slice(0, 5)
+        .map((e) => ({ name: e.name, domain: e.domain }));
+      return JSON.stringify({ ok: false, error: `No leaderboard entry matches "${query}"`, suggestions });
+    }
     const peers = LEADERBOARD_ENTRIES.filter((e) => e.category === match.category).sort((a, b) => b.score - a.score);
     const rank = peers.findIndex((e) => e.domain === match.domain) + 1;
     const leader = peers[0];

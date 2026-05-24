@@ -39,12 +39,19 @@ import { validateJsonLdTool, extractMetaTagsTool } from "@/lib/mcp/tools/page-au
 import { tableRowCountsTool, recentActivityForHostTool } from "@/lib/mcp/tools/db-insights";
 import { generateLlmsTxtTool } from "@/lib/mcp/tools/llms-txt";
 import { siteUrlsTool } from "@/lib/mcp/tools/site-urls";
+import { checkAiCitationTool, getCitationSourcesTool } from "@/lib/mcp/tools/ai-citation";
+import { trackCompetitorOverTimeTool, diffScanTool } from "@/lib/mcp/tools/scan-trend";
+import { sendReportEmailTool, triggerClientAlertTool } from "@/lib/mcp/tools/client-comms";
+import { updateLeadTierTool, createInvoiceTool } from "@/lib/mcp/tools/funnel";
+import { publishLlmsTxtTool, pushSchemaTool } from "@/lib/mcp/tools/publish-helpers";
+import { generateBadgeEmbedTool, submitToLeaderboardTool, wordpressPluginConfigTool } from "@/lib/mcp/tools/distribution";
+import { aiCompleteWithContextTool } from "@/lib/mcp/tools/agent";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",
-  version: "1.7.0",
+  version: "1.8.0",
   instructions:
-    "Tools for building with and operating grow.contact. Brand/content: get_brand_kit, get_copy, get_geo_standard, list_blog_posts, get_blog_post, search_blog_content, get_site_urls, generate_llms_txt. AI generation: ai_complete, draft_blog_post, generate_image (Lovable AI Gateway, no extra key). GEO: scan_url, bulk_scan_urls, search_scans, get_scan, list_recent_scans, compare_hosts, get_leaderboard, get_competitor_score, get_host_trend, top_scanned_hosts, export_scans_csv. Page audit: validate_jsonld, extract_meta_tags, fetch_url, check_llms_txt. Sales/funnel: submit_lead, list_leads, get_lead, generate_outreach_email, save_lead_reply, requalify_lead, get_lead_funnel, recent_activity_for_host, list_report_requests. CRM/delivery: list_clients, create_client, list_projects, update_project_status. Catalog: list_products, upsert_product, set_product_active. Revenue: list_orders, get_revenue_stats. Email ops: list_email_log, get_email_delivery_stats, is_email_suppressed, suppress_email. Roles: list_admins, grant_role, revoke_role. Ops: get_activity_feed, get_stats, get_system_status, health_check, table_row_counts. Human-in-the-loop: submit_for_review, list_pending_reviews, update_review_status.",
+    "Tools for building with and operating grow.contact. NEW in 1.8: check_ai_citation (true GEO metric — does an LLM cite the host?), get_citation_sources, track_competitor_over_time, diff_scan, send_report_email, trigger_client_alert, update_lead_tier, create_invoice, publish_llms_txt (validate+stage), push_schema (JSON-LD snippet), generate_badge_embed, submit_to_leaderboard, create_wordpress_plugin_config, ai_complete_with_context (reason over our own data). Plus everything from 1.7: brand/content/blog, AI generation (ai_complete, draft_blog_post, generate_image), GEO scans, bulk_scan, page audit, sales/funnel, CRM, catalog, revenue, email ops, roles, ops, human-in-the-loop reviews.",
   tools: [
     pingTool,
     healthCheckTool,
@@ -107,6 +114,20 @@ const mcp = createMcpServer({
     recentActivityForHostTool,
     generateLlmsTxtTool,
     siteUrlsTool,
+    checkAiCitationTool,
+    getCitationSourcesTool,
+    trackCompetitorOverTimeTool,
+    diffScanTool,
+    sendReportEmailTool,
+    triggerClientAlertTool,
+    updateLeadTierTool,
+    createInvoiceTool,
+    publishLlmsTxtTool,
+    pushSchemaTool,
+    generateBadgeEmbedTool,
+    submitToLeaderboardTool,
+    wordpressPluginConfigTool,
+    aiCompleteWithContextTool,
   ],
 });
 

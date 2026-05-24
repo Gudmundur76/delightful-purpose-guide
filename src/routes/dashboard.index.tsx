@@ -74,22 +74,34 @@ function OverviewPage() {
       try {
         const [s, feed, emailStats] = await Promise.allSettled([
           callTool<Stats>("get_stats"),
-          callTool<{ events?: ActivityEvent[] } | ActivityEvent[]>("activity_feed", {
-            limit: 20,
-          }),
-          callTool<{ delivered?: number; sent?: number; total?: number }>(
-            "email_delivery_stats",
+          callTool<Record<string, ActivityEvent[]> | ActivityEvent[]>(
+            "get_activity_feed",
+            { limit_per_type: 10 },
           ),
+          callTool<Record<string, number>>("get_email_delivery_stats", { days: 30 }),
         ]);
         if (cancelled) return;
         if (s.status === "fulfilled") setStats(s.value);
         if (feed.status === "fulfilled") {
-          const v = feed.value as { events?: ActivityEvent[] } | ActivityEvent[];
-          setActivity(Array.isArray(v) ? v : v.events ?? []);
+          const v = feed.value as Record<string, ActivityEvent[] | unknown>;
+          const flat: ActivityEvent[] = [];
+          for (const [key, arr] of Object.entries(v)) {
+            if (!Array.isArray(arr)) continue;
+            const singular = key.replace(/s$/, "");
+            for (const item of arr as ActivityEvent[]) {
+              flat.push({ ...item, type: singular });
+            }
+          }
+          flat.sort((a, b) => {
+            const ta = new Date(a.created_at ?? a.scanned_at ?? a.at ?? 0).getTime();
+            const tb = new Date(b.created_at ?? b.scanned_at ?? b.at ?? 0).getTime();
+            return tb - ta;
+          });
+          setActivity(flat.slice(0, 20));
         }
         if (emailStats.status === "fulfilled") {
           const v = emailStats.value as Record<string, number>;
-          setEmailsSent(v.sent ?? v.delivered ?? v.total ?? null);
+          setEmailsSent(v.total ?? v.sent ?? v.delivered ?? null);
         }
       } catch (e) {
         if (!cancelled) setErr(e instanceof Error ? e.message : String(e));

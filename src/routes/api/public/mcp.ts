@@ -22,15 +22,22 @@ import { listProjectsTool, updateProjectStatusTool } from "@/lib/mcp/tools/proje
 import { leaderboardTool } from "@/lib/mcp/tools/leaderboard";
 import { generateOutreachTool } from "@/lib/mcp/tools/outreach";
 import { searchScansTool, listReportRequestsTool, suppressEmailTool, activityFeedTool } from "@/lib/mcp/tools/ops";
+import { systemStatusTool } from "@/lib/mcp/tools/system-status";
+import { exportScansCsvTool, hostTrendTool } from "@/lib/mcp/tools/scan-export";
+import { upsertProductTool, setProductActiveTool } from "@/lib/mcp/tools/products-admin";
+import { listEmailLogTool, emailDeliveryStatsTool, isEmailSuppressedTool } from "@/lib/mcp/tools/email-ops";
+import { saveLeadReplyTool, requalifyLeadTool } from "@/lib/mcp/tools/lead-reply";
+import { listAdminsTool, grantRoleTool, revokeRoleTool } from "@/lib/mcp/tools/admin-roles";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",
-  version: "1.4.0",
+  version: "1.5.0",
   instructions:
-    "Tools for building with and operating grow.contact. Brand/content: get_brand_kit, get_copy, get_geo_standard, list_blog_posts, get_blog_post. GEO: scan_url, search_scans, get_scan, list_recent_scans, compare_hosts, get_leaderboard. Sales: submit_lead, list_leads, get_lead, generate_outreach_email, list_report_requests, suppress_email. CRM/delivery: list_clients, create_client, list_projects, update_project_status. Revenue: list_orders, get_revenue_stats. Ops: get_activity_feed, get_stats, health_check. Human-in-the-loop: submit_for_review, list_pending_reviews, update_review_status.",
+    "Tools for building with and operating grow.contact. Brand/content: get_brand_kit, get_copy, get_geo_standard, list_blog_posts, get_blog_post. GEO: scan_url, search_scans, get_scan, list_recent_scans, compare_hosts, get_leaderboard, get_host_trend, export_scans_csv. Sales: submit_lead, list_leads, get_lead, generate_outreach_email, save_lead_reply, requalify_lead, list_report_requests. CRM/delivery: list_clients, create_client, list_projects, update_project_status. Catalog: list_products, upsert_product, set_product_active. Revenue: list_orders, get_revenue_stats. Email ops: list_email_log, get_email_delivery_stats, is_email_suppressed, suppress_email. Roles: list_admins, grant_role, revoke_role. Ops: get_activity_feed, get_stats, get_system_status, health_check. Human-in-the-loop: submit_for_review, list_pending_reviews, update_review_status.",
   tools: [
     pingTool,
     healthCheckTool,
+    systemStatusTool,
     siteInfoTool,
     brandKitTool,
     copyTool,
@@ -39,12 +46,18 @@ const mcp = createMcpServer({
     getScanTool,
     recentScansTool,
     compareHostsTool,
+    hostTrendTool,
+    exportScansCsvTool,
     listProductsTool,
+    upsertProductTool,
+    setProductActiveTool,
     listBlogPostsTool,
     getBlogPostTool,
     submitLeadTool,
     listLeadsTool,
     getLeadTool,
+    saveLeadReplyTool,
+    requalifyLeadTool,
     listOrdersTool,
     revenueStatsTool,
     submitForReviewTool,
@@ -61,6 +74,12 @@ const mcp = createMcpServer({
     listReportRequestsTool,
     suppressEmailTool,
     activityFeedTool,
+    listEmailLogTool,
+    emailDeliveryStatsTool,
+    isEmailSuppressedTool,
+    listAdminsTool,
+    grantRoleTool,
+    revokeRoleTool,
   ],
 });
 

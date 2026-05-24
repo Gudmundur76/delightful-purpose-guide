@@ -46,11 +46,11 @@ import { Route as CheckReportRouteImport } from './routes/check.report'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
-import { Route as ApiMcpRouteImport } from './routes/api/mcp'
 import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
+import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicLeaderboardDotjsonRouteImport } from './routes/api/public/leaderboard[.]json'
 import { Route as ApiPublicV1IndexRouteImport } from './routes/api/public/v1/index'
@@ -260,11 +260,6 @@ const BadgeChar123idChar125DotsvgRoute =
     path: '/{$id}.svg',
     getParentRoute: () => BadgeRoute,
   } as any)
-const ApiMcpRoute = ApiMcpRouteImport.update({
-  id: '/api/mcp',
-  path: '/api/mcp',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminReviewsRoute = AdminReviewsRouteImport.update({
   id: '/admin/reviews',
   path: '/admin/reviews',
@@ -283,6 +278,11 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
 const ApiPublicPingRoute = ApiPublicPingRouteImport.update({
   id: '/api/public/ping',
   path: '/api/public/ping',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicMcpRoute = ApiPublicMcpRouteImport.update({
+  id: '/api/public/mcp',
+  path: '/api/public/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicLeadsRoute = ApiPublicLeadsRouteImport.update({
@@ -429,7 +429,6 @@ export interface FileRoutesByFullPath {
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
-  '/api/mcp': typeof ApiMcpRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
@@ -442,6 +441,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
+  '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -494,7 +494,6 @@ export interface FileRoutesByTo {
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
-  '/api/mcp': typeof ApiMcpRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
@@ -507,6 +506,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
+  '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -560,7 +560,6 @@ export interface FileRoutesById {
   '/work': typeof WorkRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
-  '/api/mcp': typeof ApiMcpRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
@@ -573,6 +572,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
+  '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -627,7 +627,6 @@ export interface FileRouteTypes {
     | '/work'
     | '/admin/leads'
     | '/admin/reviews'
-    | '/api/mcp'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
@@ -640,6 +639,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
+    | '/api/public/mcp'
     | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
@@ -692,7 +692,6 @@ export interface FileRouteTypes {
     | '/work'
     | '/admin/leads'
     | '/admin/reviews'
-    | '/api/mcp'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
@@ -705,6 +704,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
+    | '/api/public/mcp'
     | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
@@ -757,7 +757,6 @@ export interface FileRouteTypes {
     | '/work'
     | '/admin/leads'
     | '/admin/reviews'
-    | '/api/mcp'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
@@ -770,6 +769,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
+    | '/api/public/mcp'
     | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
@@ -823,7 +823,6 @@ export interface RootRouteChildren {
   WorkRoute: typeof WorkRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminReviewsRoute: typeof AdminReviewsRoute
-  ApiMcpRoute: typeof ApiMcpRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
@@ -832,6 +831,7 @@ export interface RootRouteChildren {
   BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicLeaderboardDotjsonRoute: typeof ApiPublicLeaderboardDotjsonRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
+  ApiPublicMcpRoute: typeof ApiPublicMcpRoute
   ApiPublicPingRoute: typeof ApiPublicPingRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
@@ -1115,13 +1115,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BadgeChar123idChar125DotsvgRouteImport
       parentRoute: typeof BadgeRoute
     }
-    '/api/mcp': {
-      id: '/api/mcp'
-      path: '/api/mcp'
-      fullPath: '/api/mcp'
-      preLoaderRoute: typeof ApiMcpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin/reviews': {
       id: '/admin/reviews'
       path: '/admin/reviews'
@@ -1148,6 +1141,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/ping'
       fullPath: '/api/public/ping'
       preLoaderRoute: typeof ApiPublicPingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/mcp': {
+      id: '/api/public/mcp'
+      path: '/api/public/mcp'
+      fullPath: '/api/public/mcp'
+      preLoaderRoute: typeof ApiPublicMcpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/leads': {
@@ -1383,7 +1383,6 @@ const rootRouteChildren: RootRouteChildren = {
   WorkRoute: WorkRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminReviewsRoute: AdminReviewsRoute,
-  ApiMcpRoute: ApiMcpRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogRssDotxmlRoute: BlogRssDotxmlRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
@@ -1393,6 +1392,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogIndexRoute: BlogIndexRoute,
   ApiPublicLeaderboardDotjsonRoute: ApiPublicLeaderboardDotjsonRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
+  ApiPublicMcpRoute: ApiPublicMcpRoute,
   ApiPublicPingRoute: ApiPublicPingRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,

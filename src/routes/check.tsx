@@ -191,6 +191,8 @@ function CheckPage() {
               </div>
             </div>
 
+            <BenchmarkBlock score={overall} />
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {metrics.map((m) => (
                 <MetricCard
@@ -204,19 +206,7 @@ function CheckPage() {
 
             <ReportGate url={url} score={overall} />
 
-            <div className="rounded-xl border border-accent/40 bg-accent/5 p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <div className="font-mono text-xs text-accent mb-2">NEXT STEP</div>
-                <h3 className="text-xl font-semibold mb-1">Want us to fix these? Free 20-min consult.</h3>
-                <p className="text-muted-foreground text-sm">We'll walk through your report and outline a fix plan.</p>
-              </div>
-              <Link
-                to="/contact"
-                className="rounded-md bg-accent text-accent-foreground font-mono text-sm px-6 py-3 hover:opacity-90 transition whitespace-nowrap"
-              >
-                Book a Free Consultation →
-              </Link>
-            </div>
+            <ThreePaths url={url} score={overall} />
           </div>
         )}
 

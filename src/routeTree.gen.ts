@@ -29,6 +29,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as LlmsRouteImport } from './routes/llms'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckoutRouteImport } from './routes/checkout'
@@ -36,11 +37,16 @@ import { Route as CheckRouteImport } from './routes/check'
 import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as GuideGenerativeEngineOptimizationRouteImport } from './routes/guide.generative-engine-optimization'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
+import { Route as DashboardScanRouteImport } from './routes/dashboard.scan'
+import { Route as DashboardReviewsRouteImport } from './routes/dashboard.reviews'
+import { Route as DashboardCitationRouteImport } from './routes/dashboard.citation'
+import { Route as DashboardBadgeRouteImport } from './routes/dashboard.badge'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as CheckReportRouteImport } from './routes/check.report'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
@@ -174,6 +180,11 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CookiesRoute = CookiesRouteImport.update({
   id: '/cookies',
   path: '/cookies',
@@ -209,6 +220,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -234,6 +250,26 @@ const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   id: '/email/unsubscribe',
   path: '/email/unsubscribe',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardScanRoute = DashboardScanRouteImport.update({
+  id: '/scan',
+  path: '/scan',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardReviewsRoute = DashboardReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardCitationRoute = DashboardCitationRouteImport.update({
+  id: '/citation',
+  path: '/citation',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardBadgeRoute = DashboardBadgeRouteImport.update({
+  id: '/badge',
+  path: '/badge',
+  getParentRoute: () => DashboardRoute,
 } as any)
 const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
   id: '/success',
@@ -414,6 +450,7 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
+  '/dashboard': typeof DashboardRouteWithChildren
   '/faq': typeof FaqRoute
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
@@ -441,11 +478,16 @@ export interface FileRoutesByFullPath {
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/dashboard/badge': typeof DashboardBadgeRoute
+  '/dashboard/citation': typeof DashboardCitationRoute
+  '/dashboard/reviews': typeof DashboardReviewsRoute
+  '/dashboard/scan': typeof DashboardScanRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -507,11 +549,16 @@ export interface FileRoutesByTo {
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/dashboard/badge': typeof DashboardBadgeRoute
+  '/dashboard/citation': typeof DashboardCitationRoute
+  '/dashboard/reviews': typeof DashboardReviewsRoute
+  '/dashboard/scan': typeof DashboardScanRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog': typeof BlogIndexRoute
+  '/dashboard': typeof DashboardIndexRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -547,6 +594,7 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
+  '/dashboard': typeof DashboardRouteWithChildren
   '/faq': typeof FaqRoute
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
@@ -574,11 +622,16 @@ export interface FileRoutesById {
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/dashboard/badge': typeof DashboardBadgeRoute
+  '/dashboard/citation': typeof DashboardCitationRoute
+  '/dashboard/reviews': typeof DashboardReviewsRoute
+  '/dashboard/scan': typeof DashboardScanRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -615,6 +668,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contact'
     | '/cookies'
+    | '/dashboard'
     | '/faq'
     | '/leaderboard'
     | '/llms'
@@ -642,11 +696,16 @@ export interface FileRouteTypes {
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
+    | '/dashboard/badge'
+    | '/dashboard/citation'
+    | '/dashboard/reviews'
+    | '/dashboard/scan'
     | '/email/unsubscribe'
     | '/guide/generative-engine-optimization'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
+    | '/dashboard/'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -708,11 +767,16 @@ export interface FileRouteTypes {
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
+    | '/dashboard/badge'
+    | '/dashboard/citation'
+    | '/dashboard/reviews'
+    | '/dashboard/scan'
     | '/email/unsubscribe'
     | '/guide/generative-engine-optimization'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog'
+    | '/dashboard'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -747,6 +811,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contact'
     | '/cookies'
+    | '/dashboard'
     | '/faq'
     | '/leaderboard'
     | '/llms'
@@ -774,11 +839,16 @@ export interface FileRouteTypes {
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
+    | '/dashboard/badge'
+    | '/dashboard/citation'
+    | '/dashboard/reviews'
+    | '/dashboard/scan'
     | '/email/unsubscribe'
     | '/guide/generative-engine-optimization'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
+    | '/dashboard/'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -814,6 +884,7 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactRoute: typeof ContactRoute
   CookiesRoute: typeof CookiesRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
   FaqRoute: typeof FaqRoute
   LeaderboardRoute: typeof LeaderboardRoute
   LlmsRoute: typeof LlmsRoute
@@ -1010,6 +1081,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cookies': {
       id: '/cookies'
       path: '/cookies'
@@ -1059,6 +1137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -1093,6 +1178,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/email/unsubscribe'
       preLoaderRoute: typeof EmailUnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/scan': {
+      id: '/dashboard/scan'
+      path: '/scan'
+      fullPath: '/dashboard/scan'
+      preLoaderRoute: typeof DashboardScanRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/reviews': {
+      id: '/dashboard/reviews'
+      path: '/reviews'
+      fullPath: '/dashboard/reviews'
+      preLoaderRoute: typeof DashboardReviewsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/citation': {
+      id: '/dashboard/citation'
+      path: '/citation'
+      fullPath: '/dashboard/citation'
+      preLoaderRoute: typeof DashboardCitationRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/badge': {
+      id: '/dashboard/badge'
+      path: '/badge'
+      fullPath: '/dashboard/badge'
+      preLoaderRoute: typeof DashboardBadgeRouteImport
+      parentRoute: typeof DashboardRoute
     }
     '/checkout/success': {
       id: '/checkout/success'
@@ -1353,6 +1466,26 @@ const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
   CheckoutRouteChildren,
 )
 
+interface DashboardRouteChildren {
+  DashboardBadgeRoute: typeof DashboardBadgeRoute
+  DashboardCitationRoute: typeof DashboardCitationRoute
+  DashboardReviewsRoute: typeof DashboardReviewsRoute
+  DashboardScanRoute: typeof DashboardScanRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardBadgeRoute: DashboardBadgeRoute,
+  DashboardCitationRoute: DashboardCitationRoute,
+  DashboardReviewsRoute: DashboardReviewsRoute,
+  DashboardScanRoute: DashboardScanRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 interface VsRouteChildren {
   VsCompetitorRoute: typeof VsCompetitorRoute
 }
@@ -1382,6 +1515,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRouteWithChildren,
   ContactRoute: ContactRoute,
   CookiesRoute: CookiesRoute,
+  DashboardRoute: DashboardRouteWithChildren,
   FaqRoute: FaqRoute,
   LeaderboardRoute: LeaderboardRoute,
   LlmsRoute: LlmsRoute,

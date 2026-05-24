@@ -129,6 +129,10 @@ const mcp = createMcpServer({
     submitToLeaderboardTool,
     wordpressPluginConfigTool,
     aiCompleteWithContextTool,
+    scheduleScanTool,
+    listScheduledScansTool,
+    cancelScheduledScanTool,
+    runDueScheduledScansTool,
   ],
 });
 

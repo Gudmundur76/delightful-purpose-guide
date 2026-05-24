@@ -1,6 +1,6 @@
 import { defineTool } from "mcp-tanstack-start";
 import { z } from "zod";
-import { LEADERBOARD_ENTRIES } from "@/lib/leaderboard/entries";
+import { LEADERBOARD as LEADERBOARD_ENTRIES } from "@/lib/leaderboard/entries";
 
 export const getCompetitorScoreTool = defineTool({
   name: "get_competitor_score",

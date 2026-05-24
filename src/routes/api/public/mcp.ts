@@ -100,6 +100,13 @@ const mcp = createMcpServer({
     fetchUrlTool,
     checkLlmsTxtTool,
     getCompetitorScoreTool,
+    generateImageTool,
+    validateJsonLdTool,
+    extractMetaTagsTool,
+    tableRowCountsTool,
+    recentActivityForHostTool,
+    generateLlmsTxtTool,
+    siteUrlsTool,
   ],
 });
 

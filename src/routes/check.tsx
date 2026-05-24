@@ -1,12 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2 } from "lucide-react";
+import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2, TrendingUp, TrendingDown, Zap, Wrench, Rocket } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { sendReportFollowup } from "@/lib/check/report-followup.functions";
 import { scanUrl, type ScanMetric, type ScanResult } from "@/lib/check/scan.functions";
+import { getBenchmark, type BenchmarkResult } from "@/lib/check/benchmark.functions";
 import { RecentScans } from "@/components/RecentScans";
 
 const checkSearchSchema = z.object({
@@ -190,6 +191,8 @@ function CheckPage() {
               </div>
             </div>
 
+            <BenchmarkBlock score={overall} />
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {metrics.map((m) => (
                 <MetricCard
@@ -203,19 +206,7 @@ function CheckPage() {
 
             <ReportGate url={url} score={overall} />
 
-            <div className="rounded-xl border border-accent/40 bg-accent/5 p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <div className="font-mono text-xs text-accent mb-2">NEXT STEP</div>
-                <h3 className="text-xl font-semibold mb-1">Want us to fix these? Free 20-min consult.</h3>
-                <p className="text-muted-foreground text-sm">We'll walk through your report and outline a fix plan.</p>
-              </div>
-              <Link
-                to="/contact"
-                className="rounded-md bg-accent text-accent-foreground font-mono text-sm px-6 py-3 hover:opacity-90 transition whitespace-nowrap"
-              >
-                Book a Free Consultation →
-              </Link>
-            </div>
+            <ThreePaths url={url} score={overall} />
           </div>
         )}
 
@@ -407,6 +398,149 @@ function ReportGate({ url, score }: { url: string; score: number }) {
       <p className="mt-4 text-[11px] font-mono text-muted-foreground">
         No spam. One follow-up email max. Unsubscribe in a click.
       </p>
+    </div>
+  );
+}
+
+function BenchmarkBlock({ score }: { score: number }) {
+  const [data, setData] = useState<BenchmarkResult | null>(null);
+  const fetchBenchmark = useServerFn(getBenchmark);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchBenchmark({ data: { score } })
+      .then((res) => {
+        if (!cancelled) setData(res);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [score, fetchBenchmark]);
+
+  if (!data || data.sampleSize === 0) return null;
+  const above = data.verdict === "above";
+  const below = data.verdict === "below";
+  const accentBorder = above ? "border-accent/40" : below ? "border-red-500/40" : "border-border";
+  const accentBg = above ? "bg-accent/5" : below ? "bg-red-500/5" : "bg-card";
+  const Icon = above ? TrendingUp : TrendingDown;
+  const iconColor = above ? "text-accent" : below ? "text-red-500" : "text-muted-foreground";
+
+  return (
+    <div className={`rounded-xl border ${accentBorder} ${accentBg} p-8`}>
+      <div className="flex items-center gap-2 mb-6">
+        <Icon className={`w-4 h-4 ${iconColor}`} />
+        <span className="font-mono text-xs text-muted-foreground uppercase tracking-wider">
+          BENCHMARK · {data.sampleSize.toLocaleString()} scanned sites
+        </span>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <BenchStat label="Your score" value={score} highlight />
+        <BenchStat label="Top 10% average" value={data.top10Avg} />
+        <BenchStat label="All-sites average" value={data.avgOverall} />
+      </div>
+      {below && (
+        <p className="text-sm text-red-500">
+          You're in the bottom {Math.max(0, 100 - data.percentileBeaten)}% of scanned sites. Top 10
+          score <span className="font-mono">{data.top10Avg}</span> — a {data.top10Avg - score}-point gap.
+        </p>
+      )}
+      {above && (
+        <p className="text-sm text-accent">
+          You beat <span className="font-mono">{data.percentileBeaten}%</span> of scanned sites.{" "}
+          <Link to="/badge" className="underline hover:opacity-80">Claim your badge →</Link>
+        </p>
+      )}
+      {!above && !below && (
+        <p className="text-sm text-muted-foreground">
+          You're at the population average. A 10-point lift puts you in the top 25%.
+        </p>
+      )}
+    </div>
+  );
+}
+
+function BenchStat({ label, value, highlight }: { label: string; value: number; highlight?: boolean }) {
+  return (
+    <div>
+      <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+        {label}
+      </div>
+      <div className={`text-4xl font-semibold font-mono ${highlight ? "text-accent" : "text-foreground"}`}>
+        {value}
+        <span className="text-sm text-muted-foreground ml-1">/100</span>
+      </div>
+    </div>
+  );
+}
+
+function ThreePaths({ url, score }: { url: string; score: number }) {
+  const isWordPress = /wp-content|wp-includes|wordpress/i.test(url);
+  const paths = [
+    {
+      icon: Zap,
+      tag: "DIY",
+      title: "Scanner Pro",
+      price: "$29/mo",
+      desc: "Unlock all fixes. Weekly rescans. Track score improvements over time.",
+      cta: "Start free trial",
+      to: "/pricing",
+      show: true,
+    },
+    {
+      icon: Wrench,
+      tag: "WordPress",
+      title: "Plugin Pro",
+      price: "$19/mo",
+      desc: "Auto-apply schema, llms.txt, and semantic fixes to your WordPress site.",
+      cta: "Get plugin",
+      to: "/products",
+      show: isWordPress,
+    },
+    {
+      icon: Rocket,
+      tag: "Done-for-you",
+      title: "48h Fix Sprint",
+      price: "$497",
+      desc: "We ship the top 3 fixes for you in 48 hours. Re-scan included.",
+      cta: "Book sprint",
+      to: "/contact",
+      show: true,
+    },
+  ].filter((p) => p.show);
+
+  return (
+    <div className="space-y-4">
+      <div className="font-mono text-xs text-accent">
+        FIX YOUR {score < 60 ? "GAPS" : "REMAINING ISSUES"} · 3 PATHS
+      </div>
+      <div className={`grid gap-4 ${paths.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
+        {paths.map((p) => {
+          const Icon = p.icon;
+          return (
+            <div
+              key={p.title}
+              className="rounded-xl border border-border bg-card p-6 flex flex-col hover:border-accent/60 transition-colors"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <Icon className="w-4 h-4 text-accent" />
+                <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                  {p.tag}
+                </span>
+              </div>
+              <h3 className="text-lg font-semibold mb-1">{p.title}</h3>
+              <div className="text-2xl font-semibold font-mono text-accent mb-3">{p.price}</div>
+              <p className="text-sm text-muted-foreground mb-6 flex-1">{p.desc}</p>
+              <Link
+                to={p.to}
+                className="inline-flex items-center justify-center rounded-md bg-foreground text-background font-mono text-sm px-4 py-2.5 hover:opacity-90 transition"
+              >
+                {p.cta} →
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

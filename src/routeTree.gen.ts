@@ -51,6 +51,7 @@ import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
+import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicLeaderboardDotjsonRouteImport } from './routes/api/public/leaderboard[.]json'
 import { Route as ApiPublicV1IndexRouteImport } from './routes/api/public/v1/index'
@@ -285,6 +286,11 @@ const ApiPublicPingRoute = ApiPublicPingRouteImport.update({
   path: '/api/public/ping',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicMcpRoute = ApiPublicMcpRouteImport.update({
+  id: '/api/public/mcp',
+  path: '/api/public/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicLeadsRoute = ApiPublicLeadsRouteImport.update({
   id: '/api/public/leads',
   path: '/api/public/leads',
@@ -442,6 +448,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
+  '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -507,6 +514,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
+  '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -573,6 +581,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
+  '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -640,6 +649,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
+    | '/api/public/mcp'
     | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
@@ -705,6 +715,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
+    | '/api/public/mcp'
     | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
@@ -770,6 +781,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
+    | '/api/public/mcp'
     | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
@@ -832,6 +844,7 @@ export interface RootRouteChildren {
   BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicLeaderboardDotjsonRoute: typeof ApiPublicLeaderboardDotjsonRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
+  ApiPublicMcpRoute: typeof ApiPublicMcpRoute
   ApiPublicPingRoute: typeof ApiPublicPingRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
@@ -1150,6 +1163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicPingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/mcp': {
+      id: '/api/public/mcp'
+      path: '/api/public/mcp'
+      fullPath: '/api/public/mcp'
+      preLoaderRoute: typeof ApiPublicMcpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/leads': {
       id: '/api/public/leads'
       path: '/api/public/leads'
@@ -1393,6 +1413,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogIndexRoute: BlogIndexRoute,
   ApiPublicLeaderboardDotjsonRoute: ApiPublicLeaderboardDotjsonRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
+  ApiPublicMcpRoute: ApiPublicMcpRoute,
   ApiPublicPingRoute: ApiPublicPingRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
@@ -1417,13 +1438,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

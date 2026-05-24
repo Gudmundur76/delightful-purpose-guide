@@ -28,6 +28,11 @@ import { upsertProductTool, setProductActiveTool } from "@/lib/mcp/tools/product
 import { listEmailLogTool, emailDeliveryStatsTool, isEmailSuppressedTool } from "@/lib/mcp/tools/email-ops";
 import { saveLeadReplyTool, requalifyLeadTool } from "@/lib/mcp/tools/lead-reply";
 import { listAdminsTool, grantRoleTool, revokeRoleTool } from "@/lib/mcp/tools/admin-roles";
+import { searchBlogContentTool } from "@/lib/mcp/tools/blog-search";
+import { aiCompleteTool, draftBlogPostTool } from "@/lib/mcp/tools/ai-content";
+import { topScannedHostsTool, leadFunnelTool } from "@/lib/mcp/tools/insights";
+import { fetchUrlTool, checkLlmsTxtTool } from "@/lib/mcp/tools/web-probe";
+import { getCompetitorScoreTool } from "@/lib/mcp/tools/competitor";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",

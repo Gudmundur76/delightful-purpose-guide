@@ -7,8 +7,8 @@ export const generateLlmsTxtTool = defineTool({
     "Generate a /llms.txt file for a site from a name, tagline, and key URLs. Returns paste-ready markdown text following the llms.txt convention.",
   parameters: z.object({
     site_name: z.string().min(1).max(120),
-    tagline: z.string().min(1).max(280),
     domain: z.string().min(3).max(255),
+    tagline: z.string().min(1).max(280).optional(),
     pages: z
       .array(z.object({ title: z.string().max(120), url: z.string().url().max(2048), summary: z.string().max(280).optional() }))
       .max(40)
@@ -19,7 +19,7 @@ export const generateLlmsTxtTool = defineTool({
   execute: async ({ site_name, tagline, domain, pages, pricing, contact_email }) => {
     const lines: string[] = [];
     lines.push(`# ${site_name}`, "");
-    lines.push(`> ${tagline}`, "");
+    if (tagline) lines.push(`> ${tagline}`, "");
     if (pricing.length) {
       lines.push("## Pricing");
       for (const p of pricing) lines.push(`- ${p.tier} — ${p.price} — ${p.includes}`);

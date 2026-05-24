@@ -42,9 +42,9 @@ import { siteUrlsTool } from "@/lib/mcp/tools/site-urls";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",
-  version: "1.6.0",
+  version: "1.7.0",
   instructions:
-    "Tools for building with and operating grow.contact. Brand/content: get_brand_kit, get_copy, get_geo_standard, list_blog_posts, get_blog_post, search_blog_content. AI generation: ai_complete, draft_blog_post (Lovable AI Gateway, no extra key). GEO: scan_url, search_scans, get_scan, list_recent_scans, compare_hosts, get_leaderboard, get_competitor_score, get_host_trend, top_scanned_hosts, export_scans_csv. Web probing: fetch_url, check_llms_txt. Sales/funnel: submit_lead, list_leads, get_lead, generate_outreach_email, save_lead_reply, requalify_lead, get_lead_funnel, list_report_requests. CRM/delivery: list_clients, create_client, list_projects, update_project_status. Catalog: list_products, upsert_product, set_product_active. Revenue: list_orders, get_revenue_stats. Email ops: list_email_log, get_email_delivery_stats, is_email_suppressed, suppress_email. Roles: list_admins, grant_role, revoke_role. Ops: get_activity_feed, get_stats, get_system_status, health_check. Human-in-the-loop: submit_for_review, list_pending_reviews, update_review_status.",
+    "Tools for building with and operating grow.contact. Brand/content: get_brand_kit, get_copy, get_geo_standard, list_blog_posts, get_blog_post, search_blog_content, get_site_urls, generate_llms_txt. AI generation: ai_complete, draft_blog_post, generate_image (Lovable AI Gateway, no extra key). GEO: scan_url, bulk_scan_urls, search_scans, get_scan, list_recent_scans, compare_hosts, get_leaderboard, get_competitor_score, get_host_trend, top_scanned_hosts, export_scans_csv. Page audit: validate_jsonld, extract_meta_tags, fetch_url, check_llms_txt. Sales/funnel: submit_lead, list_leads, get_lead, generate_outreach_email, save_lead_reply, requalify_lead, get_lead_funnel, recent_activity_for_host, list_report_requests. CRM/delivery: list_clients, create_client, list_projects, update_project_status. Catalog: list_products, upsert_product, set_product_active. Revenue: list_orders, get_revenue_stats. Email ops: list_email_log, get_email_delivery_stats, is_email_suppressed, suppress_email. Roles: list_admins, grant_role, revoke_role. Ops: get_activity_feed, get_stats, get_system_status, health_check, table_row_counts. Human-in-the-loop: submit_for_review, list_pending_reviews, update_review_status.",
   tools: [
     pingTool,
     healthCheckTool,
@@ -54,6 +54,7 @@ const mcp = createMcpServer({
     copyTool,
     geoStandardTool,
     scanUrlTool,
+    bulkScanTool,
     getScanTool,
     recentScansTool,
     compareHostsTool,

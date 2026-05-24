@@ -12,28 +12,43 @@ import { listPendingReviewsTool, updateReviewStatusTool } from "@/lib/mcp/tools/
 import { submitLeadTool } from "@/lib/mcp/tools/submit-lead";
 import { statsTool } from "@/lib/mcp/tools/stats";
 import { geoStandardTool } from "@/lib/mcp/tools/geo-standard";
+import { listBlogPostsTool, getBlogPostTool } from "@/lib/mcp/tools/blog";
+import { listLeadsTool, getLeadTool } from "@/lib/mcp/tools/leads-admin";
+import { getScanTool, compareHostsTool } from "@/lib/mcp/tools/scan-detail";
+import { listOrdersTool, revenueStatsTool } from "@/lib/mcp/tools/orders";
+import { healthCheckTool } from "@/lib/mcp/tools/health";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",
-  version: "1.2.0",
+  version: "1.3.0",
   instructions:
-    "Tools for building with and operating grow.contact. Pull get_brand_kit + get_copy + get_geo_standard before generating UI. Use scan_url to grade any site. submit_for_review to queue a human approval. submit_lead when you find a prospect. list_pending_reviews + update_review_status for admin loop.",
+    "Tools for building with and operating grow.contact. Pull get_brand_kit + get_copy + get_geo_standard before generating UI. Use scan_url / get_scan / compare_hosts to grade sites. submit_lead + list_leads + get_lead for sales loop. list_orders + get_revenue_stats for revenue. list_blog_posts + get_blog_post for content. submit_for_review + list_pending_reviews + update_review_status for human-in-the-loop. health_check to self-test.",
   tools: [
     pingTool,
+    healthCheckTool,
     siteInfoTool,
     brandKitTool,
     copyTool,
     geoStandardTool,
     scanUrlTool,
+    getScanTool,
     recentScansTool,
+    compareHostsTool,
     listProductsTool,
+    listBlogPostsTool,
+    getBlogPostTool,
     submitLeadTool,
+    listLeadsTool,
+    getLeadTool,
+    listOrdersTool,
+    revenueStatsTool,
     submitForReviewTool,
     listPendingReviewsTool,
     updateReviewStatusTool,
     statsTool,
   ],
 });
+
 
 const methodNotAllowed = () =>
   new Response(

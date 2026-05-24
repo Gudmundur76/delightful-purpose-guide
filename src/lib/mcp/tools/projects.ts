@@ -34,7 +34,7 @@ export const updateProjectStatusTool = defineTool({
     target_delivery: z.string().datetime().optional(),
   }),
   execute: async ({ id, status, notes, target_delivery }) => {
-    const patch: Record<string, unknown> = { status };
+    const patch: { status: string; notes?: string; target_delivery?: string } = { status };
     if (notes !== undefined) patch.notes = notes;
     if (target_delivery) patch.target_delivery = target_delivery;
     const { data, error } = await supabaseAdmin

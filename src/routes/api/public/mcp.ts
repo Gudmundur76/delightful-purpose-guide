@@ -17,12 +17,17 @@ import { listLeadsTool, getLeadTool } from "@/lib/mcp/tools/leads-admin";
 import { getScanTool, compareHostsTool } from "@/lib/mcp/tools/scan-detail";
 import { listOrdersTool, revenueStatsTool } from "@/lib/mcp/tools/orders";
 import { healthCheckTool } from "@/lib/mcp/tools/health";
+import { listClientsTool, createClientTool } from "@/lib/mcp/tools/clients";
+import { listProjectsTool, updateProjectStatusTool } from "@/lib/mcp/tools/projects";
+import { leaderboardTool } from "@/lib/mcp/tools/leaderboard";
+import { generateOutreachTool } from "@/lib/mcp/tools/outreach";
+import { searchScansTool, listReportRequestsTool, suppressEmailTool, activityFeedTool } from "@/lib/mcp/tools/ops";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",
-  version: "1.3.0",
+  version: "1.4.0",
   instructions:
-    "Tools for building with and operating grow.contact. Pull get_brand_kit + get_copy + get_geo_standard before generating UI. Use scan_url / get_scan / compare_hosts to grade sites. submit_lead + list_leads + get_lead for sales loop. list_orders + get_revenue_stats for revenue. list_blog_posts + get_blog_post for content. submit_for_review + list_pending_reviews + update_review_status for human-in-the-loop. health_check to self-test.",
+    "Tools for building with and operating grow.contact. Brand/content: get_brand_kit, get_copy, get_geo_standard, list_blog_posts, get_blog_post. GEO: scan_url, search_scans, get_scan, list_recent_scans, compare_hosts, get_leaderboard. Sales: submit_lead, list_leads, get_lead, generate_outreach_email, list_report_requests, suppress_email. CRM/delivery: list_clients, create_client, list_projects, update_project_status. Revenue: list_orders, get_revenue_stats. Ops: get_activity_feed, get_stats, health_check. Human-in-the-loop: submit_for_review, list_pending_reviews, update_review_status.",
   tools: [
     pingTool,
     healthCheckTool,
@@ -46,6 +51,16 @@ const mcp = createMcpServer({
     listPendingReviewsTool,
     updateReviewStatusTool,
     statsTool,
+    listClientsTool,
+    createClientTool,
+    listProjectsTool,
+    updateProjectStatusTool,
+    leaderboardTool,
+    generateOutreachTool,
+    searchScansTool,
+    listReportRequestsTool,
+    suppressEmailTool,
+    activityFeedTool,
   ],
 });
 

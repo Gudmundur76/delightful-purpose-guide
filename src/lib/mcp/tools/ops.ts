@@ -55,7 +55,7 @@ export const suppressEmailTool = defineTool({
   execute: async ({ email, reason, metadata }) => {
     const { data, error } = await supabaseAdmin
       .from("suppressed_emails")
-      .insert({ email: email.toLowerCase(), reason, metadata: metadata ?? null })
+      .insert({ email: email.toLowerCase(), reason, metadata: (metadata ?? null) as never })
       .select("id, email, reason, created_at")
       .single();
     if (error) return JSON.stringify({ ok: false, error: error.message });

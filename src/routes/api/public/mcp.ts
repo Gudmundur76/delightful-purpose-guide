@@ -46,12 +46,13 @@ import { updateLeadTierTool, createInvoiceTool } from "@/lib/mcp/tools/funnel";
 import { publishLlmsTxtTool, pushSchemaTool } from "@/lib/mcp/tools/publish-helpers";
 import { generateBadgeEmbedTool, submitToLeaderboardTool, wordpressPluginConfigTool } from "@/lib/mcp/tools/distribution";
 import { aiCompleteWithContextTool } from "@/lib/mcp/tools/agent";
+import { scheduleScanTool, listScheduledScansTool, cancelScheduledScanTool, runDueScheduledScansTool } from "@/lib/mcp/tools/scheduled-scans";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",
-  version: "1.8.0",
+  version: "1.9.0",
   instructions:
-    "Tools for building with and operating grow.contact. NEW in 1.8: check_ai_citation (true GEO metric — does an LLM cite the host?), get_citation_sources, track_competitor_over_time, diff_scan, send_report_email, trigger_client_alert, update_lead_tier, create_invoice, publish_llms_txt (validate+stage), push_schema (JSON-LD snippet), generate_badge_embed, submit_to_leaderboard, create_wordpress_plugin_config, ai_complete_with_context (reason over our own data). Plus everything from 1.7: brand/content/blog, AI generation (ai_complete, draft_blog_post, generate_image), GEO scans, bulk_scan, page audit, sales/funnel, CRM, catalog, revenue, email ops, roles, ops, human-in-the-loop reviews.",
+    "Tools for building with and operating grow.contact. NEW in 1.9: schedule_scan / list_scheduled_scans / cancel_scheduled_scan / run_due_scheduled_scans — recurring GEO scans (daily/weekly/monthly) driven by an hourly cron. 1.8: check_ai_citation, get_citation_sources, track_competitor_over_time, diff_scan, send_report_email, trigger_client_alert, update_lead_tier, create_invoice, publish_llms_txt, push_schema, generate_badge_embed, submit_to_leaderboard, create_wordpress_plugin_config, ai_complete_with_context. Plus brand/content/blog, AI generation, GEO scans, bulk_scan, page audit, sales/funnel, CRM, catalog, revenue, email ops, roles, ops, reviews.",
   tools: [
     pingTool,
     healthCheckTool,
@@ -128,6 +129,10 @@ const mcp = createMcpServer({
     submitToLeaderboardTool,
     wordpressPluginConfigTool,
     aiCompleteWithContextTool,
+    scheduleScanTool,
+    listScheduledScansTool,
+    cancelScheduledScanTool,
+    runDueScheduledScansTool,
   ],
 });
 

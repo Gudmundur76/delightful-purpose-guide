@@ -69,6 +69,7 @@ import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/lea
 import { Route as ApiPublicV1DocsRouteImport } from './routes/api/public/v1/docs'
 import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/analyze'
 import { Route as ApiPublicStatsOverviewRouteImport } from './routes/api/public/stats/overview'
+import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/api/public/hooks/run-scheduled-scans'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
@@ -382,6 +383,12 @@ const ApiPublicStatsOverviewRoute = ApiPublicStatsOverviewRouteImport.update({
   path: '/api/public/stats/overview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHooksRunScheduledScansRoute =
+  ApiPublicHooksRunScheduledScansRouteImport.update({
+    id: '/api/public/hooks/run-scheduled-scans',
+    path: '/api/public/hooks/run-scheduled-scans',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksRescanLeaderboardRoute =
   ApiPublicHooksRescanLeaderboardRouteImport.update({
     id: '/api/public/hooks/rescan-leaderboard',
@@ -445,6 +452,7 @@ export interface FileRoutesByFullPath {
   '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
@@ -510,6 +518,7 @@ export interface FileRoutesByTo {
   '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
@@ -576,6 +585,7 @@ export interface FileRoutesById {
   '/api/public/ping': typeof ApiPublicPingRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
@@ -643,6 +653,7 @@ export interface FileRouteTypes {
     | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
     | '/api/public/v1/docs'
@@ -708,6 +719,7 @@ export interface FileRouteTypes {
     | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
     | '/api/public/v1/docs'
@@ -773,6 +785,7 @@ export interface FileRouteTypes {
     | '/api/public/ping'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
     | '/api/public/v1/docs'
@@ -835,6 +848,7 @@ export interface RootRouteChildren {
   ApiPublicPingRoute: typeof ApiPublicPingRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
+  ApiPublicHooksRunScheduledScansRoute: typeof ApiPublicHooksRunScheduledScansRoute
   ApiPublicStatsOverviewRoute: typeof ApiPublicStatsOverviewRoute
   ApiPublicV1AnalyzeRoute: typeof ApiPublicV1AnalyzeRoute
   ApiPublicV1DocsRoute: typeof ApiPublicV1DocsRoute
@@ -1276,6 +1290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicStatsOverviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/run-scheduled-scans': {
+      id: '/api/public/hooks/run-scheduled-scans'
+      path: '/api/public/hooks/run-scheduled-scans'
+      fullPath: '/api/public/hooks/run-scheduled-scans'
+      preLoaderRoute: typeof ApiPublicHooksRunScheduledScansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/rescan-leaderboard': {
       id: '/api/public/hooks/rescan-leaderboard'
       path: '/api/public/hooks/rescan-leaderboard'
@@ -1396,6 +1417,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicPingRoute: ApiPublicPingRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
+  ApiPublicHooksRunScheduledScansRoute: ApiPublicHooksRunScheduledScansRoute,
   ApiPublicStatsOverviewRoute: ApiPublicStatsOverviewRoute,
   ApiPublicV1AnalyzeRoute: ApiPublicV1AnalyzeRoute,
   ApiPublicV1DocsRoute: ApiPublicV1DocsRoute,

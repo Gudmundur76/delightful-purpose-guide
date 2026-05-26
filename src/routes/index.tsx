@@ -108,9 +108,26 @@ function Index() {
     );
   }, []);
 
+  const fetchFaq = useServerFn(getFaqItemsFn);
+  const fetchHome = useServerFn(getPageContentFn);
+  const { data: faqData } = useQuery({ queryKey: ["faq-items"], queryFn: () => fetchFaq() });
+  const { data: homeContent } = useQuery({ queryKey: ["site-content", "home"], queryFn: () => fetchHome({ data: "home" }) });
+
+  const faqItems = (faqData && faqData.length > 0)
+    ? faqData.map((d) => ({ q: d.question, a: d.answer }))
+    : FAQS;
+  const heroEyebrow = homeContent?.hero_eyebrow ?? "// Agent-Native Website Agency";
+  const heroHeadlinePrefix = homeContent?.hero_headline_prefix ?? "Built for";
+  const heroHeadlineHuman = homeContent?.hero_headline_human ?? "Humans.";
+  const heroHeadlineParsed = homeContent?.hero_headline_parsed ?? "Parsed by";
+  const heroHeadlineAgents = homeContent?.hero_headline_agents ?? "Agents.";
+  const heroSubheadline = homeContent?.hero_subheadline ?? "We build marketing sites engineered to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews — not just ranked by Google. Structured data, llms.txt, and semantic HTML, shipped in 48 hours.";
+  const ctaLabel = homeContent?.cta_label ?? "Check Your Site's Score";
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
+
       <main>
         {/* Hero */}
         <section className="relative border-b border-border overflow-hidden">

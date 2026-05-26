@@ -184,7 +184,7 @@ function Index() {
               <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">FAQ</h2>
             </div>
             <div className="space-y-8 sm:space-y-10">
-              {FAQS.map((f) => (
+              {faqItems.map((f) => (
                 <article key={f.q}>
                   <p className="font-bold uppercase tracking-tighter text-base sm:text-lg">{f.q}</p>
                   <p className="text-muted-foreground text-sm mt-2 leading-relaxed">{f.a}</p>

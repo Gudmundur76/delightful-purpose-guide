@@ -26,44 +26,58 @@ async function askModel(model: string, system: string, user: string) {
 export const checkAiCitationTool = defineTool({
   name: "check_ai_citation",
   description:
-    "Ask multiple LLMs a question and check whether a target host/brand is mentioned in the answer. The only true GEO success metric — does the AI actually cite this domain when asked a relevant query? Returns per-model presence, exact mentions, and accuracy notes.",
+    "Ask LLMs whether a host/brand is cited. If query is omitted, runs 3 auto-generated queries about the host. Returns per-query/per-model presence.",
   parameters: z.object({
-    host: z.string().min(3).max(255).describe("Domain or brand to look for, e.g. grow.contact or Grow"),
-    query: z.string().min(3).max(500).describe("Question to ask the LLMs"),
+    host: z.string().min(3).max(255).describe("Domain or brand, e.g. grow.contact"),
+    query: z.string().min(3).max(500).optional().describe("Optional. If omitted, 3 default queries are run."),
     models: z
       .array(z.enum(["google/gemini-2.5-flash", "google/gemini-2.5-pro", "openai/gpt-5-mini", "openai/gpt-5"]))
       .max(4)
       .default(["google/gemini-2.5-flash", "openai/gpt-5-mini"]),
   }),
   execute: async ({ host, query, models }) => {
-    const needles = [host, host.replace(/^https?:\/\//, "").replace(/^www\./, ""), host.split(".")[0]]
-      .map((n) => n.toLowerCase())
-      .filter(Boolean);
-    const results = await Promise.all(
-      models.map(async (model) => {
-        try {
-          const answer = await askModel(
-            model,
-            "You answer factually using your training knowledge. Cite specific brands or websites when relevant. Be concise.",
-            query,
-          );
-          const lower = answer.toLowerCase();
-          const mentioned = needles.some((n) => lower.includes(n));
-          const matches = needles.filter((n) => lower.includes(n));
-          return { model, mentioned, matches, answer };
-        } catch (err) {
-          return { model, error: err instanceof Error ? err.message : String(err) };
-        }
+    const bare = host.replace(/^https?:\/\//, "").replace(/^www\./, "");
+    const queries = query
+      ? [query]
+      : [
+          `${bare} what do they do`,
+          `${bare} services and pricing`,
+          bare.includes("grow.contact") ? "best agent-native website agency" : `best alternatives to ${bare}`,
+        ];
+    const needles = [host, bare, bare.split(".")[0]].map((n) => n.toLowerCase()).filter(Boolean);
+
+    const citations = await Promise.all(
+      queries.map(async (q) => {
+        const perModel = await Promise.all(
+          models.map(async (model) => {
+            try {
+              const answer = await askModel(
+                model,
+                "You answer factually using your training knowledge. Cite specific brands or websites when relevant. Be concise.",
+                q,
+              );
+              const lower = answer.toLowerCase();
+              const cited = needles.some((n) => lower.includes(n));
+              return { model, cited, excerpt: answer.slice(0, 280) };
+            } catch (err) {
+              return { model, cited: false, error: err instanceof Error ? err.message : String(err) };
+            }
+          }),
+        );
+        const cited = perModel.some((r) => r.cited);
+        return {
+          query: q,
+          cited,
+          source: perModel.find((r) => r.cited)?.model ?? null,
+          excerpt: perModel.find((r) => r.cited)?.excerpt ?? perModel[0]?.excerpt ?? "",
+          per_model: perModel,
+        };
       }),
     );
-    const cited = results.filter((r) => "mentioned" in r && r.mentioned).length;
-    return JSON.stringify(
-      { ok: true, host, query, citation_rate: `${cited}/${models.length}`, results },
-      null,
-      2,
-    );
+    return JSON.stringify({ ok: true, host, citations }, null, 2);
   },
 });
+
 
 export const getCitationSourcesTool = defineTool({
   name: "get_citation_sources",

@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import { ReadabilityScore } from "@/components/ReadabilityScore";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -11,6 +13,8 @@ import { TechSpecs } from "@/components/TechSpecs";
 import { SmartContactForm } from "@/components/SmartContactForm";
 import { SocialProofStrip } from "@/components/SocialProofStrip";
 import { MiniChecker } from "@/components/MiniChecker";
+import { getFaqItemsFn, getPageContentFn } from "@/lib/site/content.functions";
+
 
 const FAQS: { q: string; a: string }[] = [
   { q: "What does \"agent-native\" actually mean?", a: "Every page ships with semantic HTML, JSON-LD (Organization, Product, FAQ, BreadcrumbList), an llms.txt at the root, OpenGraph + Twitter cards, and a clean sitemap. The result: ChatGPT, Perplexity, Claude, and Google AI Overviews can read, cite, and link to your product without guessing." },

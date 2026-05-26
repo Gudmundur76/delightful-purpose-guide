@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import { ReadabilityScore } from "@/components/ReadabilityScore";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -11,6 +13,8 @@ import { TechSpecs } from "@/components/TechSpecs";
 import { SmartContactForm } from "@/components/SmartContactForm";
 import { SocialProofStrip } from "@/components/SocialProofStrip";
 import { MiniChecker } from "@/components/MiniChecker";
+import { getFaqItemsFn, getPageContentFn } from "@/lib/site/content.functions";
+
 
 const FAQS: { q: string; a: string }[] = [
   { q: "What does \"agent-native\" actually mean?", a: "Every page ships with semantic HTML, JSON-LD (Organization, Product, FAQ, BreadcrumbList), an llms.txt at the root, OpenGraph + Twitter cards, and a clean sitemap. The result: ChatGPT, Perplexity, Claude, and Google AI Overviews can read, cite, and link to your product without guessing." },
@@ -104,9 +108,26 @@ function Index() {
     );
   }, []);
 
+  const fetchFaq = useServerFn(getFaqItemsFn);
+  const fetchHome = useServerFn(getPageContentFn);
+  const { data: faqData } = useQuery({ queryKey: ["faq-items"], queryFn: () => fetchFaq() });
+  const { data: homeContent } = useQuery({ queryKey: ["site-content", "home"], queryFn: () => fetchHome({ data: "home" }) });
+
+  const faqItems = (faqData && faqData.length > 0)
+    ? faqData.map((d) => ({ q: d.question, a: d.answer }))
+    : FAQS;
+  const heroEyebrow = homeContent?.hero_eyebrow ?? "// Agent-Native Website Agency";
+  const heroHeadlinePrefix = homeContent?.hero_headline_prefix ?? "Built for";
+  const heroHeadlineHuman = homeContent?.hero_headline_human ?? "Humans.";
+  const heroHeadlineParsed = homeContent?.hero_headline_parsed ?? "Parsed by";
+  const heroHeadlineAgents = homeContent?.hero_headline_agents ?? "Agents.";
+  const heroSubheadline = homeContent?.hero_subheadline ?? "We build marketing sites engineered to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews — not just ranked by Google. Structured data, llms.txt, and semantic HTML, shipped in 48 hours.";
+  const ctaLabel = homeContent?.cta_label ?? "Check Your Site's Score";
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
+
       <main>
         {/* Hero */}
         <section className="relative border-b border-border overflow-hidden">
@@ -114,27 +135,25 @@ function Index() {
             <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
               <div className="lg:col-span-7 animate-in">
                 <p className="font-mono text-accent text-xs mb-6 uppercase tracking-[0.2em]">
-                  // Agent-Native Website Agency
+                  {heroEyebrow}
                 </p>
                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-balance leading-[0.95] mb-8">
-                  Built for <span className="text-muted-foreground">Humans.</span>
+                  {heroHeadlinePrefix} <span className="text-muted-foreground">{heroHeadlineHuman}</span>
                   <br />
-                  Parsed by <span className="italic text-accent">Agents.</span>
+                  {heroHeadlineParsed} <span className="italic text-accent">{heroHeadlineAgents}</span>
                 </h1>
                 <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-xl">
-                  We build marketing sites engineered to be cited by ChatGPT,
-                  Perplexity, Claude, and Google AI Overviews — not just ranked by
-                  Google. Structured data, llms.txt, and semantic HTML, shipped in
-                  48 hours.
+                  {heroSubheadline}
                 </p>
                 <div className="flex flex-wrap gap-4 items-center">
                   <Link
                     to="/contact"
                     className="group inline-flex items-center gap-3 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors"
                   >
-                    Check Your Site's Score
+                    {ctaLabel}
                     <span className="font-mono text-[10px] opacity-70 group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
+
                   <Link
                     to="/work"
                     className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors px-2"
@@ -165,7 +184,7 @@ function Index() {
               <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">FAQ</h2>
             </div>
             <div className="space-y-8 sm:space-y-10">
-              {FAQS.map((f) => (
+              {faqItems.map((f) => (
                 <article key={f.q}>
                   <p className="font-bold uppercase tracking-tighter text-base sm:text-lg">{f.q}</p>
                   <p className="text-muted-foreground text-sm mt-2 leading-relaxed">{f.a}</p>

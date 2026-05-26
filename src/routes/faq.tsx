@@ -1,6 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { getFaqItemsFn } from "@/lib/site/content.functions";
+
 
 const FAQS: { q: string; a: string }[] = [
   { q: "What does \"agent-native\" actually mean?", a: "Every page ships with semantic HTML, JSON-LD (Organization, Product, FAQ, BreadcrumbList), an llms.txt at the root, OpenGraph + Twitter cards, and a clean sitemap. The result: ChatGPT, Perplexity, Claude, and Google AI Overviews can read, cite, and link to your product without guessing." },
@@ -46,6 +50,14 @@ export const Route = createFileRoute("/faq")({
 });
 
 function FaqPage() {
+  const fetchFaq = useServerFn(getFaqItemsFn);
+  const { data } = useQuery({
+    queryKey: ["faq-items"],
+    queryFn: () => fetchFaq(),
+  });
+  const items = (data && data.length > 0)
+    ? data.map((d) => ({ q: d.question, a: d.answer }))
+    : FAQS;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -58,7 +70,7 @@ function FaqPage() {
         </section>
         <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
           <div className="space-y-8 sm:space-y-10">
-            {FAQS.map((f) => (
+            {items.map((f) => (
               <div key={f.q}>
                 <p className="font-bold uppercase tracking-tighter text-base sm:text-lg">{f.q}</p>
                 <p className="text-muted-foreground text-sm mt-2 leading-relaxed">{f.a}</p>
@@ -77,3 +89,4 @@ function FaqPage() {
     </div>
   );
 }
+

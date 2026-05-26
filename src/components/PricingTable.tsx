@@ -109,7 +109,7 @@ export function PricingTable({ leadId }: { leadId?: string } = {}) {
         </div>
 
         <div className="space-y-6">
-          {TIERS.map((tier, i) => (
+          {tiers.map((tier, i) => (
             <article
               key={tier.name}
               className={`border transition-colors duration-200 ${

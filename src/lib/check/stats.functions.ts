@@ -1,6 +1,7 @@
 // Aggregated, real-data stats derived from the scans table.
 // Used to replace mock numbers across the marketing site.
 import { createServerFn } from "@tanstack/react-start";
+import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 export interface OverviewStats {
@@ -29,25 +30,31 @@ const EMPTY: OverviewStats = {
   recentDailyCounts: new Array(24).fill(0),
 };
 
-export const getOverviewStats = createServerFn({ method: "GET" }).handler(
-  async (): Promise<OverviewStats> => {
-    const { data, error } = await supabaseAdmin
+const StatsInput = z.object({ days: z.number().int().min(1).max(365).optional().default(7) });
+
+export const getOverviewStats = createServerFn({ method: "GET" })
+  .inputValidator((input: unknown) => StatsInput.parse(input))
+  .handler(async ({ data }): Promise<OverviewStats> => {
+    const days = data.days;
+    const since = new Date(Date.now() - days * 86_400_000).toISOString();
+    const { data: rows, error } = await supabaseAdmin
       .from("scans")
       .select("host, overall, semantic, jsonld, llms, citability, speed, scanned_at")
+      .gte("scanned_at", since)
       .order("scanned_at", { ascending: false })
       .limit(2000);
-    if (error || !data || data.length === 0) return EMPTY;
+    if (error || !rows || rows.length === 0) return EMPTY;
 
-    const totalScans = data.length;
-    const hostSet = new Set(data.map((r) => r.host));
-    const avg = (key: keyof typeof data[number]) =>
+    const totalScans = rows.length;
+    const hostSet = new Set(rows.map((r) => r.host));
+    const avg = (key: keyof typeof rows[number]) =>
       Math.round(
-        data.reduce((s, r) => s + (Number(r[key]) || 0), 0) / totalScans,
+        rows.reduce((s, r) => s + (Number(r[key]) || 0), 0) / totalScans,
       );
 
     // Top scores — best per host
-    const bestByHost = new Map<string, typeof data[number]>();
-    for (const r of data) {
+    const bestByHost = new Map<string, typeof rows[number]>();
+    for (const r of rows) {
       const cur = bestByHost.get(r.host);
       if (!cur || r.overall > cur.overall) bestByHost.set(r.host, r);
     }
@@ -57,16 +64,16 @@ export const getOverviewStats = createServerFn({ method: "GET" }).handler(
       .map((r) => ({ host: r.host, overall: r.overall, scanned_at: r.scanned_at }));
 
     // Improved — for hosts with ≥2 scans, compare oldest vs newest
-    const byHost = new Map<string, typeof data>();
-    for (const r of data) {
+    const byHost = new Map<string, typeof rows>();
+    for (const r of rows) {
       const arr = byHost.get(r.host) ?? [];
       arr.push(r);
       byHost.set(r.host, arr);
     }
     const improved: OverviewStats["improved"] = [];
-    for (const [host, rows] of byHost) {
-      if (rows.length < 2) continue;
-      const sorted = [...rows].sort(
+    for (const [host, items] of byHost) {
+      if (items.length < 2) continue;
+      const sorted = [...items].sort(
         (a, b) => new Date(a.scanned_at).getTime() - new Date(b.scanned_at).getTime(),
       );
       const before = sorted[0].overall;
@@ -75,10 +82,10 @@ export const getOverviewStats = createServerFn({ method: "GET" }).handler(
     }
     improved.sort((a, b) => b.delta - a.delta);
 
-    // 24h hourly buckets
+    // 24h hourly buckets (always from the filtered set)
     const now = Date.now();
     const buckets = new Array(24).fill(0);
-    for (const r of data) {
+    for (const r of rows) {
       const t = new Date(r.scanned_at).getTime();
       const hoursAgo = Math.floor((now - t) / 3_600_000);
       if (hoursAgo >= 0 && hoursAgo < 24) buckets[23 - hoursAgo] += 1;
@@ -99,5 +106,4 @@ export const getOverviewStats = createServerFn({ method: "GET" }).handler(
       improved: improved.slice(0, 3),
       recentDailyCounts: buckets,
     };
-  },
-);
+  });

@@ -26,7 +26,7 @@ export function CompareSection() {
 
   useEffect(() => {
     let cancelled = false;
-    fetchStats()
+    fetchStats({ data: { days: 7 } })
       .then((r) => !cancelled && setStats(r))
       .catch(() => !cancelled && setStats(null));
     return () => {

@@ -47,12 +47,20 @@ import { publishLlmsTxtTool, pushSchemaTool } from "@/lib/mcp/tools/publish-help
 import { generateBadgeEmbedTool, submitToLeaderboardTool, wordpressPluginConfigTool } from "@/lib/mcp/tools/distribution";
 import { aiCompleteWithContextTool } from "@/lib/mcp/tools/agent";
 import { scheduleScanTool, listScheduledScansTool, cancelScheduledScanTool, runDueScheduledScansTool } from "@/lib/mcp/tools/scheduled-scans";
+import { updatePageContentTool, updateHeroTool, getPageContentTool } from "@/lib/mcp/tools/site-content";
+import { listFaqItemsTool, updateFaqItemTool } from "@/lib/mcp/tools/faq-admin";
+import { listBlogDraftsTool, updateBlogPostTool, publishBlogPostTool, deleteBlogPostTool } from "@/lib/mcp/tools/blog-admin";
+import { updatePricingDisplayTool } from "@/lib/mcp/tools/pricing-admin";
+import { updateClientTool, deleteLeadTool, deleteScanTool } from "@/lib/mcp/tools/crm-admin";
+import { listContentEditsTool, revertContentEditTool } from "@/lib/mcp/tools/content-edits";
+import { getDashboardStatsTool } from "@/lib/mcp/tools/dashboard-stats";
+import { revenueStatsAliasTool } from "@/lib/mcp/tools/revenue-stats";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",
-  version: "1.9.0",
+  version: "2.0.0",
   instructions:
-    "Tools for building with and operating grow.contact. NEW in 1.9: schedule_scan / list_scheduled_scans / cancel_scheduled_scan / run_due_scheduled_scans — recurring GEO scans (daily/weekly/monthly) driven by an hourly cron. 1.8: check_ai_citation, get_citation_sources, track_competitor_over_time, diff_scan, send_report_email, trigger_client_alert, update_lead_tier, create_invoice, publish_llms_txt, push_schema, generate_badge_embed, submit_to_leaderboard, create_wordpress_plugin_config, ai_complete_with_context. Plus brand/content/blog, AI generation, GEO scans, bulk_scan, page audit, sales/funnel, CRM, catalog, revenue, email ops, roles, ops, reviews.",
+    "Tools for building with and operating grow.contact. NEW in 2.0: site content editing (update_page_content, update_hero, get_page_content), FAQ admin (list_faq_items, update_faq_item), blog admin (list_blog_drafts, update_blog_post, publish_blog_post, delete_blog_post), pricing display (update_pricing_display), CRM edits (update_client, delete_lead, delete_scan), revenue_stats with per-product/per-month breakdown, get_dashboard_stats with windowed defaults, check_ai_citation auto-queries when query omitted, content edit audit log (list_content_edits, revert_content_edit). 1.9: scheduled scans. Plus brand/content/blog/AI/GEO/scans/CRM/orders/email/reviews tooling.",
   tools: [
     pingTool,
     healthCheckTool,
@@ -133,6 +141,24 @@ const mcp = createMcpServer({
     listScheduledScansTool,
     cancelScheduledScanTool,
     runDueScheduledScansTool,
+    // v2.0 — site editing + admin
+    updatePageContentTool,
+    updateHeroTool,
+    getPageContentTool,
+    listFaqItemsTool,
+    updateFaqItemTool,
+    listBlogDraftsTool,
+    updateBlogPostTool,
+    publishBlogPostTool,
+    deleteBlogPostTool,
+    updatePricingDisplayTool,
+    updateClientTool,
+    deleteLeadTool,
+    deleteScanTool,
+    listContentEditsTool,
+    revertContentEditTool,
+    getDashboardStatsTool,
+    revenueStatsAliasTool,
   ],
 });
 

@@ -54,7 +54,7 @@ export const updateBlogPostTool = defineTool({
         patch.published = published;
         if (published && !post.published_at) patch.published_at = new Date().toISOString();
       }
-      const { data, error } = await supabaseAdmin.from("blog_posts").update(patch).eq("id", post.id).select("id, slug, title, published").maybeSingle();
+      const { data, error } = await supabaseAdmin.from("blog_posts").update(patch as never).eq("id", post.id).select("id, slug, title, published").maybeSingle();
       if (error) throw new Error(error.message);
       return JSON.stringify({ ok: true, ...data });
     } catch (err) {

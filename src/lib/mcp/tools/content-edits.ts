@@ -37,7 +37,7 @@ export const revertContentEditTool = defineTool({
       const patch: Record<string, string> = {};
       if (kind === "question") patch.question = restored;
       if (kind === "answer") patch.answer = restored;
-      const { error: e2 } = await supabaseAdmin.from("faq_items").update(patch).eq("id", faqId);
+      const { error: e2 } = await supabaseAdmin.from("faq_items").update(patch as never).eq("id", faqId);
       if (e2) return JSON.stringify({ ok: false, error: e2.message });
     } else {
       const { error: e2 } = await supabaseAdmin.from("site_content")

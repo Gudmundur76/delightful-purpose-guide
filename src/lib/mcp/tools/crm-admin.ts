@@ -28,7 +28,7 @@ export const updateClientTool = defineTool({
     delete (patch as Record<string, unknown>).domain;
     if (rest.email) (patch as Record<string, unknown>).domain = rest.email.split("@")[1] ?? rest.email;
     if (Object.keys(patch).length === 0) return JSON.stringify({ ok: false, error: "No fields to update" });
-    const { data, error } = await supabaseAdmin.from("clients").update(patch).eq("id", id)
+    const { data, error } = await supabaseAdmin.from("clients").update(patch as never).eq("id", id)
       .select("id, name, domain, notes").maybeSingle();
     if (error) return JSON.stringify({ ok: false, error: error.message });
     if (!data) return JSON.stringify({ ok: false, error: "Client not found" });

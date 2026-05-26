@@ -2,6 +2,41 @@ import { defineTool } from "mcp-tanstack-start";
 import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
+export const createBlogPostTool = defineTool({
+  name: "create_blog_post",
+  description: "Create a new blog post record.",
+  parameters: z.object({
+    slug: z.string().min(1).max(255).describe("Unique URL slug"),
+    title: z.string().min(1).max(500),
+    body: z.string().min(1).max(200000).describe("HTML content"),
+    excerpt: z.string().max(2000).optional(),
+    tags: z.array(z.string().min(1).max(64)).max(20).optional(),
+    published: z.boolean().optional().default(false),
+  }),
+  execute: async ({ slug, title, body, excerpt, tags, published }) => {
+    try {
+      const existing = await supabaseAdmin.from("blog_posts").select("id").eq("slug", slug).maybeSingle();
+      if (existing.error) throw new Error(existing.error.message);
+      if (existing.data) return JSON.stringify({ ok: false, error: "Slug already exists" });
+      const insert: Record<string, unknown> = { slug, title, body };
+      if (excerpt !== undefined) insert.excerpt = excerpt;
+      if (tags !== undefined) insert.tags = tags;
+      if (published) {
+        insert.published = true;
+        insert.published_at = new Date().toISOString();
+      } else {
+        insert.published = false;
+      }
+      const { data, error } = await supabaseAdmin.from("blog_posts").insert(insert as never).select("id, slug, title, published").maybeSingle();
+      if (error) throw new Error(error.message);
+      return JSON.stringify({ ok: true, ...data });
+    } catch (err) {
+      return JSON.stringify({ ok: false, error: err instanceof Error ? err.message : String(err) });
+    }
+  },
+});
+
+
 async function findPost(id?: string, slug?: string) {
   if (id) {
     const r = await supabaseAdmin.from("blog_posts").select("*").eq("id", id).maybeSingle();

@@ -49,7 +49,7 @@ import { aiCompleteWithContextTool } from "@/lib/mcp/tools/agent";
 import { scheduleScanTool, listScheduledScansTool, cancelScheduledScanTool, runDueScheduledScansTool } from "@/lib/mcp/tools/scheduled-scans";
 import { updatePageContentTool, updateHeroTool, getPageContentTool } from "@/lib/mcp/tools/site-content";
 import { listFaqItemsTool, updateFaqItemTool } from "@/lib/mcp/tools/faq-admin";
-import { listBlogDraftsTool, updateBlogPostTool, publishBlogPostTool, deleteBlogPostTool } from "@/lib/mcp/tools/blog-admin";
+import { listBlogDraftsTool, updateBlogPostTool, publishBlogPostTool, deleteBlogPostTool, createBlogPostTool } from "@/lib/mcp/tools/blog-admin";
 import { updatePricingDisplayTool } from "@/lib/mcp/tools/pricing-admin";
 import { updateClientTool, deleteLeadTool, deleteScanTool } from "@/lib/mcp/tools/crm-admin";
 import { listContentEditsTool, revertContentEditTool } from "@/lib/mcp/tools/content-edits";

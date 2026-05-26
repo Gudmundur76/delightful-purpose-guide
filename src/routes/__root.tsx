@@ -171,6 +171,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           sameAs: ["https://grow.contact"],
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
+            { "@type": "ListItem", position: 2, name: "Services", item: "https://grow.contact/services" },
+            { "@type": "ListItem", position: 3, name: "Work", item: "https://grow.contact/work" },
+            { "@type": "ListItem", position: 4, name: "Blog", item: "https://grow.contact/blog" },
+            { "@type": "ListItem", position: 5, name: "Check Your Score", item: "https://grow.contact/check" },
+          ],
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,

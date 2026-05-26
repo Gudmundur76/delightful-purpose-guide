@@ -148,6 +148,7 @@ const mcp = createMcpServer({
     listFaqItemsTool,
     updateFaqItemTool,
     listBlogDraftsTool,
+    createBlogPostTool,
     updateBlogPostTool,
     publishBlogPostTool,
     deleteBlogPostTool,

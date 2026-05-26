@@ -76,7 +76,25 @@ function Check({ className = "" }: { className?: string }) {
 export function PricingTable({ leadId }: { leadId?: string } = {}) {
   const [hovered, setHovered] = useState<number | null>(null);
   const [active, setActive] = useState<TierKey | null>(null);
-  const activeTier = TIERS.find((t) => t.key === active) ?? null;
+
+  const fetchTiers = useServerFn(getPricingTiersFn);
+  const { data: dbTiers } = useQuery({ queryKey: ["pricing-tiers"], queryFn: () => fetchTiers() });
+
+  const tiers = (dbTiers && dbTiers.length > 0)
+    ? dbTiers.map((p) => ({
+        key: p.slug as TierKey,
+        name: p.name,
+        label: p.display_label ?? p.name,
+        priceDisplay: p.display_price ?? `$${(p.price_cents / 100).toLocaleString()}`,
+        delivery: "—",
+        pages: "—",
+        features: p.features ?? [],
+        recommended: !!p.highlight,
+      }))
+    : TIERS;
+
+  const activeTier = tiers.find((t) => t.key === active) ?? null;
+
 
   return (
     <section className="scroll-mt-20 border-b border-border bg-background py-16 sm:py-24">

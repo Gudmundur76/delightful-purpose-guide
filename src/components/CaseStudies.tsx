@@ -102,7 +102,7 @@ export function CaseStudies() {
 
   useEffect(() => {
     let cancelled = false;
-    fetchStats()
+    fetchStats({ data: { days: 7 } })
       .then((r) => {
         if (!cancelled) setS(r);
       })

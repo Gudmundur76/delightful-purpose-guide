@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_posts: {
+        Row: {
+          body: string
+          created_at: string
+          excerpt: string | null
+          id: string
+          published: boolean
+          published_at: string | null
+          reading_minutes: number | null
+          slug: string
+          tags: string[]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          published?: boolean
+          published_at?: string | null
+          reading_minutes?: number | null
+          slug: string
+          tags?: string[]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          published?: boolean
+          published_at?: string | null
+          reading_minutes?: number | null
+          slug?: string
+          tags?: string[]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       clients: {
         Row: {
           created_at: string
@@ -44,6 +86,39 @@ export type Database = {
           notes?: string | null
           slug?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      content_edits: {
+        Row: {
+          changed_at: string
+          changed_by: string | null
+          field: string | null
+          id: string
+          new_value: string | null
+          old_value: string | null
+          page: string | null
+          reason: string | null
+        }
+        Insert: {
+          changed_at?: string
+          changed_by?: string | null
+          field?: string | null
+          id?: string
+          new_value?: string | null
+          old_value?: string | null
+          page?: string | null
+          reason?: string | null
+        }
+        Update: {
+          changed_at?: string
+          changed_by?: string | null
+          field?: string | null
+          id?: string
+          new_value?: string | null
+          old_value?: string | null
+          page?: string | null
+          reason?: string | null
         }
         Relationships: []
       }
@@ -131,6 +206,36 @@ export type Database = {
           id?: string
           token?: string
           used_at?: string | null
+        }
+        Relationships: []
+      }
+      faq_items: {
+        Row: {
+          active: boolean
+          answer: string
+          created_at: string
+          id: string
+          order_index: number
+          question: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          answer: string
+          created_at?: string
+          id?: string
+          order_index?: number
+          question: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          answer?: string
+          created_at?: string
+          id?: string
+          order_index?: number
+          question?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -280,33 +385,48 @@ export type Database = {
           created_at: string
           currency: string
           description: string | null
+          display_label: string | null
+          display_price: string | null
+          features: string[]
+          highlight: boolean
           id: string
           image_url: string | null
           name: string
           price_cents: number
           slug: string
+          visible_on_homepage: boolean
         }
         Insert: {
           active?: boolean
           created_at?: string
           currency?: string
           description?: string | null
+          display_label?: string | null
+          display_price?: string | null
+          features?: string[]
+          highlight?: boolean
           id?: string
           image_url?: string | null
           name: string
           price_cents: number
           slug: string
+          visible_on_homepage?: boolean
         }
         Update: {
           active?: boolean
           created_at?: string
           currency?: string
           description?: string | null
+          display_label?: string | null
+          display_price?: string | null
+          features?: string[]
+          highlight?: boolean
           id?: string
           image_url?: string | null
           name?: string
           price_cents?: number
           slug?: string
+          visible_on_homepage?: boolean
         }
         Relationships: []
       }
@@ -537,6 +657,30 @@ export type Database = {
           notes?: string | null
           updated_at?: string
           url?: string
+        }
+        Relationships: []
+      }
+      site_content: {
+        Row: {
+          field: string
+          id: string
+          page: string
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          field: string
+          id?: string
+          page: string
+          updated_at?: string
+          value?: string
+        }
+        Update: {
+          field?: string
+          id?: string
+          page?: string
+          updated_at?: string
+          value?: string
         }
         Relationships: []
       }

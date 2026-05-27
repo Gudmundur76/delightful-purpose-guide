@@ -30,6 +30,14 @@ const FAQS: { q: string; a: string }[] = [
 
 export const Route = createFileRoute("/")({
   component: Index,
+  loader: async () => {
+    try {
+      const stats = await getOverviewStats({ data: { days: 7 } });
+      return { stats };
+    } catch {
+      return { stats: null };
+    }
+  },
   head: () => ({
     meta: [
       {

@@ -32,6 +32,13 @@ const FAQS: { q: string; a: string }[] = [
 export const Route = createFileRoute("/")({
   component: Index,
   loader: async () => {
+    // Edge-cache the rendered HTML so most requests skip the worker entirely.
+    // 5 min fresh + 1 day stale-while-revalidate keeps TTFB <100ms at the edge.
+    setResponseHeaders(
+      new Headers({
+        "Cache-Control": "public, max-age=0, s-maxage=300, stale-while-revalidate=86400",
+      }),
+    );
     try {
       const stats = await getOverviewStats({ data: { days: 7 } });
       return { stats };

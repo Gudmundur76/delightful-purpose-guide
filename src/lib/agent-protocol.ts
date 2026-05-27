@@ -9,7 +9,25 @@
 //
 // All of these are stateless and safe to compute per-request in the Worker.
 
+import { createHash } from "node:crypto";
+import { serverCard } from "./agent-protocol/mcp-server-card";
+
 const SITE_ORIGIN = "https://grow.contact";
+
+// Skill manifest body — kept here so the hash in the agent-skills index is
+// computed from the exact bytes we serve at /.well-known/agent-skills/grow-geo-scan.md.
+const GROW_GEO_SCAN_SKILL = `# grow-geo-scan
+
+Score any URL against the Grow GEO Standard (6 signals, 0–100) — semantic HTML, JSON-LD, llms.txt, citability, speed, and protocol discovery.
+
+## Endpoint
+POST https://grow.contact/api/public/v1/analyze
+Header: x-api-key: <key>
+Body: { "url": "https://example.com" }
+
+## Output
+JSON with overall score, per-signal sub-scores, and remediation findings.
+`;
 
 // ---------- Discovery Link header ----------
 

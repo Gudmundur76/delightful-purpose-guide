@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { createMcpServer, withMcpAuth } from "mcp-tanstack-start";
+import { timingSafeEqual } from "node:crypto";
 import { pingTool } from "@/lib/mcp/tools/ping";
 import { siteInfoTool } from "@/lib/mcp/tools/site-info";
 import { brandKitTool } from "@/lib/mcp/tools/brand-kit";

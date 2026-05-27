@@ -13,9 +13,9 @@ const METRIC_LABELS: { key: keyof OverviewStats["metrics"]; label: string }[] = 
   { key: "speed", label: "Speed" },
 ];
 
-export function ReadabilityScore() {
+export function ReadabilityScore({ initialData }: { initialData?: OverviewStats | null } = {}) {
   const fetchStats = useServerFn(getOverviewStats);
-  const [s, setS] = useState<OverviewStats | null>(null);
+  const [s, setS] = useState<OverviewStats | null>(initialData ?? null);
 
   useEffect(() => {
     let cancelled = false;
@@ -24,7 +24,7 @@ export function ReadabilityScore() {
         if (!cancelled) setS(r);
       })
       .catch(() => {
-        if (!cancelled) setS(null);
+        /* keep existing data on failure */
       });
     return () => {
       cancelled = true;

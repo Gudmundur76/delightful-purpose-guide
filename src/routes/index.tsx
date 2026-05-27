@@ -106,6 +106,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { stats } = Route.useLoaderData();
+
   useEffect(() => {
     console.log(
       "%c⚡ Agent-native. Score: 100/100",

@@ -37,6 +37,7 @@ import { Route as CliRouteImport } from './routes/cli'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckRouteImport } from './routes/check'
 import { Route as BadgeRouteImport } from './routes/badge'
+import { Route as AuthDotmdRouteImport } from './routes/auth[.]md'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
@@ -227,6 +228,11 @@ const CheckRoute = CheckRouteImport.update({
 const BadgeRoute = BadgeRouteImport.update({
   id: '/badge',
   path: '/badge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthDotmdRoute = AuthDotmdRouteImport.update({
+  id: '/auth.md',
+  path: '/auth.md',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiDocsRoute = ApiDocsRouteImport.update({
@@ -499,6 +505,7 @@ const ApiPublicV1AdminTableRoute = ApiPublicV1AdminTableRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api-docs': typeof ApiDocsRoute
+  '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
@@ -580,6 +587,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api-docs': typeof ApiDocsRoute
+  '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
@@ -660,6 +668,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api-docs': typeof ApiDocsRoute
+  '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
@@ -743,6 +752,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/api-docs'
+    | '/auth.md'
     | '/badge'
     | '/check'
     | '/checkout'
@@ -824,6 +834,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/api-docs'
+    | '/auth.md'
     | '/badge'
     | '/check'
     | '/checkout'
@@ -903,6 +914,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/api-docs'
+    | '/auth.md'
     | '/badge'
     | '/check'
     | '/checkout'
@@ -985,6 +997,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiDocsRoute: typeof ApiDocsRoute
+  AuthDotmdRoute: typeof AuthDotmdRoute
   BadgeRoute: typeof BadgeRouteWithChildren
   CheckRoute: typeof CheckRouteWithChildren
   CheckoutRoute: typeof CheckoutRouteWithChildren
@@ -1244,6 +1257,13 @@ declare module '@tanstack/react-router' {
       path: '/badge'
       fullPath: '/badge'
       preLoaderRoute: typeof BadgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth.md': {
+      id: '/auth.md'
+      path: '/auth.md'
+      fullPath: '/auth.md'
+      preLoaderRoute: typeof AuthDotmdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api-docs': {
@@ -1713,6 +1733,7 @@ const ApiPublicV1PostsRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiDocsRoute: ApiDocsRoute,
+  AuthDotmdRoute: AuthDotmdRoute,
   BadgeRoute: BadgeRouteWithChildren,
   CheckRoute: CheckRouteWithChildren,
   CheckoutRoute: CheckoutRouteWithChildren,

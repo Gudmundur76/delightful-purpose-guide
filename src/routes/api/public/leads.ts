@@ -78,7 +78,7 @@ export const Route = createFileRoute("/api/public/leads")({
             });
           }
 
-          const { website: _hp, ...leadData } = parsed.data;
+          const { website: _hp, company, ...leadData } = parsed.data;
 
           const { data: inserted, error } = await supabaseAdmin
             .from("leads")
@@ -101,6 +101,7 @@ export const Route = createFileRoute("/api/public/leads")({
             email: data.email,
             budgetTier: data.budget_tier,
             message: data.message,
+            company: company ?? "",
           };
 
           // Run confirm + internal notify in parallel; swallow errors.

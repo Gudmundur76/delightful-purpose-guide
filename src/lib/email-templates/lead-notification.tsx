@@ -25,7 +25,7 @@ const TIER_LABEL: Record<string, string> = {
   tier_03: "Tier 03 — Web App ($8,500+)",
 };
 
-const LeadNotificationEmail = ({ name, email, budgetTier, message }: Props) => {
+const LeadNotificationEmail = ({ name, email, budgetTier, message, company }: Props) => {
   const tier = budgetTier ? TIER_LABEL[budgetTier] ?? budgetTier : "—";
   return (
     <Html lang="en" dir="ltr">

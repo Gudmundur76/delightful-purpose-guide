@@ -101,7 +101,7 @@ export const getOverviewStats = createServerFn({ method: "GET" })
       if (hoursAgo >= 0 && hoursAgo < 24) buckets[23 - hoursAgo] += 1;
     }
 
-    return {
+    const result: OverviewStats = {
       totalScans,
       uniqueHosts: hostSet.size,
       avgOverall: avg("overall"),
@@ -116,4 +116,6 @@ export const getOverviewStats = createServerFn({ method: "GET" })
       improved: improved.slice(0, 3),
       recentDailyCounts: buckets,
     };
+    cache.set(key, { data: result, ts: now });
+    return result;
   });

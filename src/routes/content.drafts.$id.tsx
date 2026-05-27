@@ -3,7 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Link as TiptapLink from "@tiptap/extension-link";
+import TiptapLink from "@tiptap/extension-link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { getDraftFn, updateDraftFn, setDraftStatusFn } from "@/lib/content/content.functions";

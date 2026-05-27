@@ -32,10 +32,21 @@ const EMPTY: OverviewStats = {
 
 const StatsInput = z.object({ days: z.number().int().min(1).max(365).optional().default(7) });
 
+// Simple server-side in-memory cache (module-scoped → survives across requests in same Worker instance)
+const cache = new Map<string, { data: OverviewStats; ts: number }>();
+const TTL = 300_000; // 5 minutes in ms
+
 export const getOverviewStats = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => StatsInput.parse(input))
   .handler(async ({ data }): Promise<OverviewStats> => {
     const days = data.days;
+    const key = `overview-stats-${days}d`;
+    const now = Date.now();
+    const hit = cache.get(key);
+    if (hit && now - hit.ts < TTL) {
+      return hit.data;
+    }
+
     const since = new Date(Date.now() - days * 86_400_000).toISOString();
     const { data: rows, error } = await supabaseAdmin
       .from("scans")

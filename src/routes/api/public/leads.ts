@@ -9,6 +9,7 @@ const LeadSchema = z.object({
   email: z.string().trim().email().max(255),
   budget_tier: z.enum(["tier_01", "tier_02", "tier_03"]),
   message: z.string().trim().min(1).max(2000),
+  company: z.string().trim().max(255).optional(),
   // Honeypot — real users leave this empty. Bots tend to fill every field.
   website: z.string().max(0).optional(),
 });

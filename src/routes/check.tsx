@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2, TrendingUp, TrendingDown, Zap, Wrench, Rocket } from "lucide-react";
+import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2, TrendingUp, TrendingDown, Wrench } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";

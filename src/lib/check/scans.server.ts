@@ -12,6 +12,7 @@ interface PersistArgs {
     llms: number;
     citability: number;
     speed: number;
+    protocol?: number;
   };
   source?: string;
 }
@@ -32,6 +33,7 @@ export async function persistScan(args: PersistArgs): Promise<void> {
     llms: args.scores.llms,
     citability: args.scores.citability,
     speed: args.scores.speed,
+    protocol: args.scores.protocol ?? null,
     source: args.source ?? "check",
   });
   if (error) {

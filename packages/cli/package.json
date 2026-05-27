@@ -1,0 +1,39 @@
+{
+  "name": "@grow-contact/cli",
+  "version": "0.1.0",
+  "description": "Scan any site against the Grow GEO Standard — agent-readiness score in your terminal.",
+  "keywords": [
+    "geo",
+    "generative-engine-optimization",
+    "ai-seo",
+    "agent-native",
+    "llms-txt",
+    "mcp",
+    "cli",
+    "lighthouse-for-ai"
+  ],
+  "homepage": "https://grow.contact/cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grow-contact/cli"
+  },
+  "bugs": {
+    "url": "https://grow.contact/contact"
+  },
+  "license": "MIT",
+  "author": "grow.contact",
+  "type": "module",
+  "bin": {
+    "grow": "./src/index.mjs"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

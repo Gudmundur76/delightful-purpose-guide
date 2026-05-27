@@ -11,7 +11,9 @@ async function askModel(model: string, system: string, user: string) {
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
     body: JSON.stringify({
       model,
-      max_tokens: 600,
+      ...(model.startsWith("openai/")
+        ? { max_completion_tokens: 600 }
+        : { max_tokens: 600 }),
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },
@@ -57,8 +59,23 @@ export const checkAiCitationTool = defineTool({
                 q,
               );
               const lower = answer.toLowerCase();
-              const cited = needles.some((n) => lower.includes(n));
-              return { model, cited, excerpt: answer.slice(0, 280) };
+              const mentioned = needles.some((n) => lower.includes(n));
+              const negationPhrases = [
+                "no company",
+                "not aware",
+                "i am not aware",
+                "no organization",
+                "cannot find",
+                "does not exist",
+                "no information",
+                "unknown",
+              ];
+              const hasNegation = negationPhrases.some((p) => lower.includes(p));
+              const cited = mentioned && !hasNegation;
+              const excerpt = hasNegation && mentioned
+                ? `${answer.slice(0, 240)} (mentioned but not recognised)`
+                : answer.slice(0, 280);
+              return { model, cited, excerpt };
             } catch (err) {
               return { model, cited: false, error: err instanceof Error ? err.message : String(err) };
             }

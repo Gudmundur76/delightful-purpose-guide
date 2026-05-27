@@ -62,6 +62,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
 import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as DotwellKnownMcpDotjsonRouteImport } from './routes/[.]well-known.mcp[.]json'
 import { Route as DotwellKnownApiCatalogRouteImport } from './routes/[.]well-known.api-catalog'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ContentDraftsIdRouteImport } from './routes/content.drafts.$id'
@@ -357,6 +358,11 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
   path: '/admin/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DotwellKnownMcpDotjsonRoute = DotwellKnownMcpDotjsonRouteImport.update({
+  id: '/.well-known/mcp.json',
+  path: '/.well-known/mcp.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DotwellKnownApiCatalogRoute = DotwellKnownApiCatalogRouteImport.update({
   id: '/.well-known/api-catalog',
   path: '/.well-known/api-catalog',
@@ -535,6 +541,7 @@ export interface FileRoutesByFullPath {
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
+  '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -615,6 +622,7 @@ export interface FileRoutesByTo {
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
+  '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -698,6 +706,7 @@ export interface FileRoutesById {
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
+  '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -782,6 +791,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/.well-known/api-catalog'
+    | '/.well-known/mcp.json'
     | '/admin/leads'
     | '/admin/reviews'
     | '/badge/{$id}.svg'
@@ -862,6 +872,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/.well-known/api-catalog'
+    | '/.well-known/mcp.json'
     | '/admin/leads'
     | '/admin/reviews'
     | '/badge/{$id}.svg'
@@ -944,6 +955,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/.well-known/api-catalog'
+    | '/.well-known/mcp.json'
     | '/admin/leads'
     | '/admin/reviews'
     | '/badge/{$id}.svg'
@@ -1027,6 +1039,7 @@ export interface RootRouteChildren {
   VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
   DotwellKnownApiCatalogRoute: typeof DotwellKnownApiCatalogRoute
+  DotwellKnownMcpDotjsonRoute: typeof DotwellKnownMcpDotjsonRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminReviewsRoute: typeof AdminReviewsRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -1434,6 +1447,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/mcp.json': {
+      id: '/.well-known/mcp.json'
+      path: '/.well-known/mcp.json'
+      fullPath: '/.well-known/mcp.json'
+      preLoaderRoute: typeof DotwellKnownMcpDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.well-known/api-catalog': {
       id: '/.well-known/api-catalog'
       path: '/.well-known/api-catalog'
@@ -1763,6 +1783,7 @@ const rootRouteChildren: RootRouteChildren = {
   VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,
   DotwellKnownApiCatalogRoute: DotwellKnownApiCatalogRoute,
+  DotwellKnownMcpDotjsonRoute: DotwellKnownMcpDotjsonRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminReviewsRoute: AdminReviewsRoute,
   BlogSlugRoute: BlogSlugRoute,

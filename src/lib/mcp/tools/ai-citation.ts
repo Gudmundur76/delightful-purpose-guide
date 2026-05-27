@@ -14,6 +14,7 @@ async function askModel(model: string, system: string, user: string) {
       ...(model.startsWith("openai/")
         ? { max_completion_tokens: 600 }
         : { max_tokens: 600 }),
+      ...(model.startsWith("google/") ? { tools: [{ googleSearch: {} }] } : {}),
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },
@@ -24,6 +25,7 @@ async function askModel(model: string, system: string, user: string) {
   const data = (await res.json()) as { choices?: { message?: { content?: string } }[] };
   return data.choices?.[0]?.message?.content ?? "";
 }
+
 
 export const checkAiCitationTool = defineTool({
   name: "check_ai_citation",

@@ -30,14 +30,7 @@ const FAQS: { q: string; a: string }[] = [
 
 export const Route = createFileRoute("/")({
   component: Index,
-  loader: async () => {
-    try {
-      const stats = await getOverviewStats({ data: { days: 7 } });
-      return { stats };
-    } catch {
-      return { stats: null };
-    }
-  },
+
   head: () => ({
     meta: [
       {
@@ -106,8 +99,6 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { stats } = Route.useLoaderData();
-
   useEffect(() => {
     console.log(
       "%c⚡ Agent-native. Score: 100/100",
@@ -121,8 +112,14 @@ function Index() {
 
   const fetchFaq = useServerFn(getFaqItemsFn);
   const fetchHome = useServerFn(getPageContentFn);
+  const fetchStats = useServerFn(getOverviewStats);
   const { data: faqData } = useQuery({ queryKey: ["faq-items"], queryFn: () => fetchFaq() });
   const { data: homeContent } = useQuery({ queryKey: ["site-content", "home"], queryFn: () => fetchHome({ data: "home" }) });
+  const { data: stats = null } = useQuery({
+    queryKey: ["overview-stats", 7],
+    queryFn: () => fetchStats({ data: { days: 7 } }),
+  });
+
 
   const faqItems = (faqData && faqData.length > 0)
     ? faqData.map((d) => ({ q: d.question, a: d.answer }))

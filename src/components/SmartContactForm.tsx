@@ -101,7 +101,8 @@ export function SmartContactForm() {
           name: data.name,
           email: data.email,
           budget_tier: budgetTier,
-          message: `URL: ${data.url}\nStage: ${data.stage}\nAudience: ${data.audience}\nBudget: ${data.budget}\nTimeline: ${data.timeline}\nNotes: ${data.notes}`,
+          company: host ?? "",
+          message: `URL: ${data.url}\nCompany: ${host ?? "—"}\nStage: ${data.stage}\nAudience: ${data.audience}\nBudget: ${data.budget}\nTimeline: ${data.timeline}\nNotes: ${data.notes}`,
         }),
       });
       if (!res.ok) {

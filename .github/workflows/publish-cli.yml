@@ -1,0 +1,45 @@
+name: Publish CLI to npm
+
+# Publishes packages/cli to npm whenever:
+#   - a tag matching cli-v* is pushed (e.g. cli-v0.1.0)
+#   - the workflow is dispatched manually from the Actions tab
+#
+# Requires repo secret: NPM_TOKEN  (npm automation token, no 2FA required)
+
+on:
+  push:
+    tags:
+      - "cli-v*"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (pack only, do not publish)"
+        type: boolean
+        default: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # enables npm provenance
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Show package metadata
+        working-directory: packages/cli
+        run: |
+          node -e "const p=require('./package.json');console.log('Publishing',p.name,p.version)"
+          npm pack --dry-run
+
+      - name: Publish
+        if: ${{ github.event_name == 'push' || inputs.dry_run != true }}
+        working-directory: packages/cli
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public --provenance

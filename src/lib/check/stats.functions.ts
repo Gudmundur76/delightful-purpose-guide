@@ -1,6 +1,7 @@
 // Aggregated, real-data stats derived from the scans table.
 // Used to replace mock numbers across the marketing site.
 import { createServerFn } from "@tanstack/react-start";
+import { setResponseHeaders } from "@tanstack/react-start/server";
 import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
@@ -39,6 +40,18 @@ const TTL = 300_000; // 5 minutes in ms
 export const getOverviewStats = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => StatsInput.parse(input))
   .handler(async ({ data }): Promise<OverviewStats> => {
+    // Let edge/CDN cache pages that depend on these stats — keeps TTFB <100ms
+    // for the vast majority of visitors and bots while still revalidating.
+    try {
+      setResponseHeaders(
+        new Headers({
+          "Cache-Control": "public, max-age=0, s-maxage=300, stale-while-revalidate=86400",
+        }),
+      );
+    } catch {
+      // setResponseHeaders is unavailable outside a request context — ignore.
+    }
+
     const days = data.days;
     const key = `overview-stats-${days}d`;
     const now = Date.now();

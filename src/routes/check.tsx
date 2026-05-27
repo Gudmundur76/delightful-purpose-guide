@@ -497,16 +497,6 @@ function ThreePaths({ url, score }: { url: string; score: number }) {
       to: "/products",
       show: isWordPress,
     },
-    {
-      icon: Rocket,
-      tag: "Done-for-you",
-      title: "48h Fix Sprint",
-      price: "$497",
-      desc: "We ship the top 3 fixes for you in 48 hours. Re-scan included.",
-      cta: "Book sprint",
-      to: "/contact",
-      show: true,
-    },
   ].filter((p) => p.show);
 
   return (

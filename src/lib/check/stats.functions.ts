@@ -1,6 +1,7 @@
 // Aggregated, real-data stats derived from the scans table.
 // Used to replace mock numbers across the marketing site.
 import { createServerFn } from "@tanstack/react-start";
+import { setResponseHeaders } from "@tanstack/react-start/server";
 import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 

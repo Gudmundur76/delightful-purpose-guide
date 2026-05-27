@@ -32,10 +32,21 @@ const EMPTY: OverviewStats = {
 
 const StatsInput = z.object({ days: z.number().int().min(1).max(365).optional().default(7) });
 
+// Simple server-side in-memory cache (module-scoped → survives across requests in same Worker instance)
+const cache = new Map<string, { data: OverviewStats; ts: number }>();
+const TTL = 300_000; // 5 minutes in ms
+
 export const getOverviewStats = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => StatsInput.parse(input))
   .handler(async ({ data }): Promise<OverviewStats> => {
     const days = data.days;
+    const key = `overview-stats-${days}d`;
+    const now = Date.now();
+    const hit = cache.get(key);
+    if (hit && now - hit.ts < TTL) {
+      return hit.data;
+    }
+
     const since = new Date(Date.now() - days * 86_400_000).toISOString();
     const { data: rows, error } = await supabaseAdmin
       .from("scans")
@@ -83,7 +94,6 @@ export const getOverviewStats = createServerFn({ method: "GET" })
     improved.sort((a, b) => b.delta - a.delta);
 
     // 24h hourly buckets (always from the filtered set)
-    const now = Date.now();
     const buckets = new Array(24).fill(0);
     for (const r of rows) {
       const t = new Date(r.scanned_at).getTime();
@@ -91,7 +101,7 @@ export const getOverviewStats = createServerFn({ method: "GET" })
       if (hoursAgo >= 0 && hoursAgo < 24) buckets[23 - hoursAgo] += 1;
     }
 
-    return {
+    const result: OverviewStats = {
       totalScans,
       uniqueHosts: hostSet.size,
       avgOverall: avg("overall"),
@@ -106,4 +116,6 @@ export const getOverviewStats = createServerFn({ method: "GET" })
       improved: improved.slice(0, 3),
       recentDailyCounts: buckets,
     };
+    cache.set(key, { data: result, ts: now });
+    return result;
   });

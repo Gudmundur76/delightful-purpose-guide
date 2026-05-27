@@ -8,26 +8,28 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { jsonResponse, optionsResponse, requireApiKey } from "@/lib/api/auth";
 import { clientIpFromRequest, rateLimit } from "@/lib/api/rate-limit";
-import { scanUrl, type ScanMetric, type ScanResult } from "@/lib/check/scan.functions";
+import { scanUrl, type ScanMetric, type ScanMetricKey, type ScanResult } from "@/lib/check/scan.functions";
 
 const InputSchema = z.object({
   url: z.string().trim().min(3).max(2048),
 });
 
-const SIGNAL_WEIGHTS: Record<ScanMetric["key"], number> = {
-  semantic: 25,
+const SIGNAL_WEIGHTS: Record<ScanMetricKey, number> = {
+  semantic: 20,
   jsonld: 20,
   llms: 15,
-  citability: 20,
-  speed: 20,
+  citability: 15,
+  speed: 15,
+  protocol: 15,
 };
 
-const SIGNAL_KEY_MAP: Record<ScanMetric["key"], string> = {
+const SIGNAL_KEY_MAP: Record<ScanMetricKey, string> = {
   semantic: "semantic_html",
   jsonld: "json_ld",
   llms: "llms_txt",
   citability: "citability",
   speed: "speed",
+  protocol: "protocol_discovery",
 };
 
 function gradeFor(score: number): "A" | "B" | "C" | "D" | "F" {

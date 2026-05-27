@@ -9,14 +9,16 @@ export const geoStandardTool = defineTool({
   execute: async () => {
     return JSON.stringify(
       {
-        version: "geo-standard@2026.05",
+        version: "geo-standard@2026.06",
         pass_threshold: 90,
+        weights: { semantic: 0.20, jsonld: 0.20, llms: 0.15, citability: 0.15, speed: 0.15, protocol: 0.15 },
         signals: {
           semantic: "Real HTML5 landmarks. One h1 per page. Lists are <ul>/<ol>.",
           jsonld: "Per-page-type schema.org JSON-LD. Validate before ship.",
           llms: "/llms.txt at root, public routes only. /llms-full.txt for docs-heavy.",
           citability: "First 50-70 words answer the page's implicit question. Numbers, dates, entities.",
           speed: "TTFB <200ms, HTML <1MB, FCP <1.5s mobile, JS <180KB gz first paint. SSR mandatory.",
+          protocol: "Agent-native discovery surfaces: Link header (rel=llms/mcp/api-catalog), /.well-known/mcp.json server card, Accept: text/markdown content negotiation, Cloudflare Content-Signal in robots.txt, and /.well-known/oauth-protected-resource + /auth.md (RFC 9728) when the site has auth.",
         },
         head_meta_rules: [
           "Every route has unique title + description + og:*",

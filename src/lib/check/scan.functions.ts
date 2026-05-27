@@ -9,8 +9,16 @@ const InputSchema = z.object({
 
 export type ScanStatus = "pass" | "warn" | "fail";
 
+export type ScanMetricKey =
+  | "semantic"
+  | "jsonld"
+  | "llms"
+  | "citability"
+  | "speed"
+  | "protocol";
+
 export type ScanMetric = {
-  key: "semantic" | "jsonld" | "llms" | "citability" | "speed";
+  key: ScanMetricKey;
   label: string;
   score: number;
   status: ScanStatus;
@@ -273,6 +281,91 @@ export const scanUrl = createServerFn({ method: "POST" })
     speedScore = clamp(speedScore);
 
     log.push(`→ first byte ${firstByteMs}ms · full HTML ${main.totalMs}ms · payload ${fmtKb(main.bytes)}`);
+
+    // -------- Protocol Discovery (new in geo-standard@2026.06) --------
+    // Four agent-native surfaces:
+    //   1. Link header with rel="llms" on the root HTML response
+    //   2. /.well-known/mcp.json (MCP server card)
+    //   3. Markdown content negotiation (Accept: text/markdown → text/markdown response)
+    //   4. Cloudflare Content-Signal directive in robots.txt
+    log.push(`$ probe --protocol-discovery`);
+    const origin = new URL(finalUrl).origin;
+    const linkHeader = main.res.headers.get("link") ?? "";
+    const hasLlmsLink = /\brel\s*=\s*"?llms"?/i.test(linkHeader);
+    const hasMcpLink = /\brel\s*=\s*"?mcp"?/i.test(linkHeader);
+    const hasApiCatalogLink = /\brel\s*=\s*"?api-catalog"?/i.test(linkHeader);
+
+    let hasMcpCard = false;
+    try {
+      const mcpRes = await fetchWithTimeout(`${origin}/.well-known/mcp.json`, 4000);
+      if (mcpRes.res.ok && /json/i.test(mcpRes.res.headers.get("content-type") ?? "")) {
+        try {
+          JSON.parse(mcpRes.text);
+          hasMcpCard = true;
+        } catch {
+          // invalid JSON
+        }
+      }
+    } catch {
+      // network error — leave false
+    }
+
+    let supportsMarkdownNegotiation = false;
+    try {
+      const mdRes = await fetch(origin + "/", {
+        method: "GET",
+        redirect: "follow",
+        headers: {
+          "User-Agent": "GrowAgentReadabilityBot/1.0 (+https://grow.contact/check)",
+          Accept: "text/markdown",
+        },
+      });
+      const mdCt = mdRes.headers.get("content-type") ?? "";
+      if (mdRes.ok && /text\/markdown/i.test(mdCt)) {
+        supportsMarkdownNegotiation = true;
+      }
+    } catch {
+      // network error — leave false
+    }
+
+    let hasContentSignal = false;
+    try {
+      const robotsRes = await fetchWithTimeout(`${origin}/robots.txt`, 4000);
+      if (robotsRes.res.ok) {
+        hasContentSignal = /^content-signal\s*:/im.test(robotsRes.text);
+      }
+    } catch {
+      // network error — leave false
+    }
+
+    const protocolChecks = [
+      { ok: hasLlmsLink || hasMcpLink || hasApiCatalogLink, pts: 25, label: "Link header" },
+      { ok: hasMcpCard, pts: 25, label: "/.well-known/mcp.json" },
+      { ok: supportsMarkdownNegotiation, pts: 25, label: "Markdown negotiation" },
+      { ok: hasContentSignal, pts: 25, label: "Content-Signal in robots.txt" },
+    ];
+    const protocolScore = clamp(
+      protocolChecks.reduce((s, c) => s + (c.ok ? c.pts : 0), 0),
+    );
+    log.push(
+      `→ link=${hasLlmsLink || hasMcpLink ? "yes" : "no"} · mcp.json=${hasMcpCard ? "yes" : "no"} · md=${supportsMarkdownNegotiation ? "yes" : "no"} · content-signal=${hasContentSignal ? "yes" : "no"}`,
+    );
+
+    const protocolDetails: string[] = [
+      hasLlmsLink || hasMcpLink || hasApiCatalogLink
+        ? `✓ Link header advertises agent surfaces (${[hasLlmsLink && "llms", hasMcpLink && "mcp", hasApiCatalogLink && "api-catalog"].filter(Boolean).join(", ")})`
+        : "✗ No Link header with rel=\"llms\" / \"mcp\" / \"api-catalog\"",
+      hasMcpCard
+        ? "✓ /.well-known/mcp.json present and valid JSON"
+        : "✗ /.well-known/mcp.json missing — publish an MCP server card",
+      supportsMarkdownNegotiation
+        ? "✓ Serves text/markdown on Accept: text/markdown"
+        : "△ No markdown content negotiation — agents can't request a .md twin",
+      hasContentSignal
+        ? "✓ Cloudflare Content-Signal declared in robots.txt"
+        : "△ No Content-Signal in robots.txt (search/ai-train/ai-input)",
+    ];
+
     log.push(`$ compile report.json`);
 
     const metrics: ScanMetric[] = [
@@ -321,15 +414,25 @@ export const scanUrl = createServerFn({ method: "POST" })
           firstByteMs < 800 ? "✓ Fast time-to-content" : firstByteMs < 2000 ? "△ Acceptable but improvable" : "✗ Too slow for reliable crawls",
         ],
       },
+      {
+        key: "protocol",
+        label: "Protocol Discovery",
+        score: protocolScore,
+        status: statusFor(protocolScore),
+        summary: "MCP card, Link header, markdown negotiation, and Content Signals make a site agent-native, not just AI-friendly.",
+        details: protocolDetails,
+      },
     ];
 
-    // Weighted overall matches the public methodology (25/20/15/20/20)
-    const weights: Record<ScanMetric["key"], number> = {
-      semantic: 0.25,
+    // Weighted overall — geo-standard@2026.06 rubric.
+    // semantic 20 · jsonld 20 · llms 15 · citability 15 · speed 15 · protocol 15
+    const weights: Record<ScanMetricKey, number> = {
+      semantic: 0.2,
       jsonld: 0.2,
       llms: 0.15,
-      citability: 0.2,
-      speed: 0.2,
+      citability: 0.15,
+      speed: 0.15,
+      protocol: 0.15,
     };
     const overall = clamp(metrics.reduce((s, m) => s + m.score * weights[m.key], 0));
     log.push(`→ done · agent_readability_score = ${overall}`);
@@ -345,6 +448,7 @@ export const scanUrl = createServerFn({ method: "POST" })
         llms: llmsScore,
         citability: citabilityScore,
         speed: speedScore,
+        protocol: protocolScore,
       },
       source: data.source ?? "check",
     }).catch((e) => console.error("persistScan error", e));

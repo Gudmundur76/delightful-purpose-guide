@@ -37,6 +37,7 @@ import { Route as CliRouteImport } from './routes/cli'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckRouteImport } from './routes/check'
 import { Route as BadgeRouteImport } from './routes/badge'
+import { Route as AuthDotmdRouteImport } from './routes/auth[.]md'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
@@ -61,12 +62,17 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
 import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as DotwellKnownMcpDotjsonRouteImport } from './routes/[.]well-known.mcp[.]json'
+import { Route as DotwellKnownApiCatalogRouteImport } from './routes/[.]well-known.api-catalog'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ContentDraftsIdRouteImport } from './routes/content.drafts.$id'
 import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
 import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicLeaderboardDotjsonRouteImport } from './routes/api/public/leaderboard[.]json'
+import { Route as DotwellKnownMcpServerCardDotjsonRouteImport } from './routes/[.]well-known.mcp.server-card[.]json'
+import { Route as DotwellKnownAgentSkillsIndexDotjsonRouteImport } from './routes/[.]well-known.agent-skills.index[.]json'
+import { Route as DotwellKnownAgentSkillsGrowGeoScanDotmdRouteImport } from './routes/[.]well-known.agent-skills.grow-geo-scan[.]md'
 import { Route as ApiPublicV1IndexRouteImport } from './routes/api/public/v1/index'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -228,6 +234,11 @@ const BadgeRoute = BadgeRouteImport.update({
   path: '/badge',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthDotmdRoute = AuthDotmdRouteImport.update({
+  id: '/auth.md',
+  path: '/auth.md',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiDocsRoute = ApiDocsRouteImport.update({
   id: '/api-docs',
   path: '/api-docs',
@@ -350,6 +361,16 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
   path: '/admin/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DotwellKnownMcpDotjsonRoute = DotwellKnownMcpDotjsonRouteImport.update({
+  id: '/.well-known/mcp.json',
+  path: '/.well-known/mcp.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DotwellKnownApiCatalogRoute = DotwellKnownApiCatalogRouteImport.update({
+  id: '/.well-known/api-catalog',
+  path: '/.well-known/api-catalog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
@@ -379,6 +400,24 @@ const ApiPublicLeaderboardDotjsonRoute =
   ApiPublicLeaderboardDotjsonRouteImport.update({
     id: '/api/public/leaderboard.json',
     path: '/api/public/leaderboard.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DotwellKnownMcpServerCardDotjsonRoute =
+  DotwellKnownMcpServerCardDotjsonRouteImport.update({
+    id: '/.well-known/mcp/server-card.json',
+    path: '/.well-known/mcp/server-card.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DotwellKnownAgentSkillsIndexDotjsonRoute =
+  DotwellKnownAgentSkillsIndexDotjsonRouteImport.update({
+    id: '/.well-known/agent-skills/index.json',
+    path: '/.well-known/agent-skills/index.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DotwellKnownAgentSkillsGrowGeoScanDotmdRoute =
+  DotwellKnownAgentSkillsGrowGeoScanDotmdRouteImport.update({
+    id: '/.well-known/agent-skills/grow-geo-scan.md',
+    path: '/.well-known/agent-skills/grow-geo-scan.md',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicV1IndexRoute = ApiPublicV1IndexRouteImport.update({
@@ -493,6 +532,7 @@ const ApiPublicV1AdminTableRoute = ApiPublicV1AdminTableRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api-docs': typeof ApiDocsRoute
+  '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
@@ -521,6 +561,8 @@ export interface FileRoutesByFullPath {
   '/unsubscribe': typeof UnsubscribeRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
+  '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
+  '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -543,6 +585,9 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
+  '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
+  '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -573,6 +618,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api-docs': typeof ApiDocsRoute
+  '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
@@ -599,6 +645,8 @@ export interface FileRoutesByTo {
   '/unsubscribe': typeof UnsubscribeRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
+  '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
+  '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -621,6 +669,9 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/content': typeof ContentIndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
+  '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
+  '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -652,6 +703,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api-docs': typeof ApiDocsRoute
+  '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
@@ -680,6 +732,8 @@ export interface FileRoutesById {
   '/unsubscribe': typeof UnsubscribeRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
+  '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
+  '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -702,6 +756,9 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
+  '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
+  '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -734,6 +791,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/api-docs'
+    | '/auth.md'
     | '/badge'
     | '/check'
     | '/checkout'
@@ -762,6 +820,8 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/vs'
     | '/work'
+    | '/.well-known/api-catalog'
+    | '/.well-known/mcp.json'
     | '/admin/leads'
     | '/admin/reviews'
     | '/badge/{$id}.svg'
@@ -784,6 +844,9 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/content/'
     | '/dashboard/'
+    | '/.well-known/agent-skills/grow-geo-scan.md'
+    | '/.well-known/agent-skills/index.json'
+    | '/.well-known/mcp/server-card.json'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -814,6 +877,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/api-docs'
+    | '/auth.md'
     | '/badge'
     | '/check'
     | '/checkout'
@@ -840,6 +904,8 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/vs'
     | '/work'
+    | '/.well-known/api-catalog'
+    | '/.well-known/mcp.json'
     | '/admin/leads'
     | '/admin/reviews'
     | '/badge/{$id}.svg'
@@ -862,6 +928,9 @@ export interface FileRouteTypes {
     | '/blog'
     | '/content'
     | '/dashboard'
+    | '/.well-known/agent-skills/grow-geo-scan.md'
+    | '/.well-known/agent-skills/index.json'
+    | '/.well-known/mcp/server-card.json'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -892,6 +961,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/api-docs'
+    | '/auth.md'
     | '/badge'
     | '/check'
     | '/checkout'
@@ -920,6 +990,8 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/vs'
     | '/work'
+    | '/.well-known/api-catalog'
+    | '/.well-known/mcp.json'
     | '/admin/leads'
     | '/admin/reviews'
     | '/badge/{$id}.svg'
@@ -942,6 +1014,9 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/content/'
     | '/dashboard/'
+    | '/.well-known/agent-skills/grow-geo-scan.md'
+    | '/.well-known/agent-skills/index.json'
+    | '/.well-known/mcp/server-card.json'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -973,6 +1048,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiDocsRoute: typeof ApiDocsRoute
+  AuthDotmdRoute: typeof AuthDotmdRoute
   BadgeRoute: typeof BadgeRouteWithChildren
   CheckRoute: typeof CheckRouteWithChildren
   CheckoutRoute: typeof CheckoutRouteWithChildren
@@ -1001,6 +1077,8 @@ export interface RootRouteChildren {
   UnsubscribeRoute: typeof UnsubscribeRoute
   VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
+  DotwellKnownApiCatalogRoute: typeof DotwellKnownApiCatalogRoute
+  DotwellKnownMcpDotjsonRoute: typeof DotwellKnownMcpDotjsonRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminReviewsRoute: typeof AdminReviewsRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -1009,6 +1087,9 @@ export interface RootRouteChildren {
   GuideGenerativeEngineOptimizationRoute: typeof GuideGenerativeEngineOptimizationRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  DotwellKnownAgentSkillsGrowGeoScanDotmdRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
+  DotwellKnownAgentSkillsIndexDotjsonRoute: typeof DotwellKnownAgentSkillsIndexDotjsonRoute
+  DotwellKnownMcpServerCardDotjsonRoute: typeof DotwellKnownMcpServerCardDotjsonRoute
   ApiPublicLeaderboardDotjsonRoute: typeof ApiPublicLeaderboardDotjsonRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicMcpRoute: typeof ApiPublicMcpRoute
@@ -1233,6 +1314,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BadgeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth.md': {
+      id: '/auth.md'
+      path: '/auth.md'
+      fullPath: '/auth.md'
+      preLoaderRoute: typeof AuthDotmdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api-docs': {
       id: '/api-docs'
       path: '/api-docs'
@@ -1401,6 +1489,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/mcp.json': {
+      id: '/.well-known/mcp.json'
+      path: '/.well-known/mcp.json'
+      fullPath: '/.well-known/mcp.json'
+      preLoaderRoute: typeof DotwellKnownMcpDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/api-catalog': {
+      id: '/.well-known/api-catalog'
+      path: '/.well-known/api-catalog'
+      fullPath: '/.well-known/api-catalog'
+      preLoaderRoute: typeof DotwellKnownApiCatalogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/suppression': {
       id: '/lovable/email/suppression'
       path: '/lovable/email/suppression'
@@ -1441,6 +1543,27 @@ declare module '@tanstack/react-router' {
       path: '/api/public/leaderboard.json'
       fullPath: '/api/public/leaderboard.json'
       preLoaderRoute: typeof ApiPublicLeaderboardDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/mcp/server-card.json': {
+      id: '/.well-known/mcp/server-card.json'
+      path: '/.well-known/mcp/server-card.json'
+      fullPath: '/.well-known/mcp/server-card.json'
+      preLoaderRoute: typeof DotwellKnownMcpServerCardDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/agent-skills/index.json': {
+      id: '/.well-known/agent-skills/index.json'
+      path: '/.well-known/agent-skills/index.json'
+      fullPath: '/.well-known/agent-skills/index.json'
+      preLoaderRoute: typeof DotwellKnownAgentSkillsIndexDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/agent-skills/grow-geo-scan.md': {
+      id: '/.well-known/agent-skills/grow-geo-scan.md'
+      path: '/.well-known/agent-skills/grow-geo-scan.md'
+      fullPath: '/.well-known/agent-skills/grow-geo-scan.md'
+      preLoaderRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/v1/': {
@@ -1693,6 +1816,7 @@ const ApiPublicV1PostsRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiDocsRoute: ApiDocsRoute,
+  AuthDotmdRoute: AuthDotmdRoute,
   BadgeRoute: BadgeRouteWithChildren,
   CheckRoute: CheckRouteWithChildren,
   CheckoutRoute: CheckoutRouteWithChildren,
@@ -1721,6 +1845,8 @@ const rootRouteChildren: RootRouteChildren = {
   UnsubscribeRoute: UnsubscribeRoute,
   VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,
+  DotwellKnownApiCatalogRoute: DotwellKnownApiCatalogRoute,
+  DotwellKnownMcpDotjsonRoute: DotwellKnownMcpDotjsonRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminReviewsRoute: AdminReviewsRoute,
   BlogSlugRoute: BlogSlugRoute,
@@ -1730,6 +1856,11 @@ const rootRouteChildren: RootRouteChildren = {
     GuideGenerativeEngineOptimizationRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
+  DotwellKnownAgentSkillsGrowGeoScanDotmdRoute:
+    DotwellKnownAgentSkillsGrowGeoScanDotmdRoute,
+  DotwellKnownAgentSkillsIndexDotjsonRoute:
+    DotwellKnownAgentSkillsIndexDotjsonRoute,
+  DotwellKnownMcpServerCardDotjsonRoute: DotwellKnownMcpServerCardDotjsonRoute,
   ApiPublicLeaderboardDotjsonRoute: ApiPublicLeaderboardDotjsonRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicMcpRoute: ApiPublicMcpRoute,

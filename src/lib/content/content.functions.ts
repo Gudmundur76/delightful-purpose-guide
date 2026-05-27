@@ -113,7 +113,7 @@ export const getDraftFn = createServerFn({ method: "POST" })
         .select("*")
         .eq("id", draft.brief_id)
         .single();
-      brief = b ? (b as typeof brief) : null;
+      brief = (b ?? null) as unknown as typeof brief;
     }
     return { draft, brief };
   });

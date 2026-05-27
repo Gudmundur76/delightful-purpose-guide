@@ -94,7 +94,6 @@ export const getOverviewStats = createServerFn({ method: "GET" })
     improved.sort((a, b) => b.delta - a.delta);
 
     // 24h hourly buckets (always from the filtered set)
-    const now = Date.now();
     const buckets = new Array(24).fill(0);
     for (const r of rows) {
       const t = new Date(r.scanned_at).getTime();

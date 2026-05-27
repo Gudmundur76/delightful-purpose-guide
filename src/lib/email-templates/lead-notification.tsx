@@ -16,6 +16,7 @@ interface Props {
   email?: string;
   budgetTier?: string;
   message?: string;
+  company?: string;
 }
 
 const TIER_LABEL: Record<string, string> = {

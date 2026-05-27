@@ -188,16 +188,16 @@ function ReportPage() {
             <Stat label="Prepared for" value={e || "—"} />
           </div>
           <p className="mt-10 text-foreground/80 max-w-2xl text-base leading-relaxed">
-            This report scores {url} on five weighted signals that determine whether AI agents
-            (ChatGPT, Perplexity, Claude, Gemini) can read, cite, and recommend your site. Each
-            section below shows the score, what we found, and the exact fixes to ship.
+            This report scores {url} on six weighted signals that determine whether AI agents
+            (ChatGPT, Perplexity, Claude, Gemini) can discover, read, cite, and recommend your
+            site. Each section below shows the score, what we found, and the exact fixes to ship.
           </p>
         </section>
 
         {/* Methodology summary */}
         <section className="mb-12">
           <SectionTitle eyebrow="Methodology" title="How the Agent Readability Score is computed" />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mt-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-6 gap-3 mt-8">
             {sections.map((s) => (
               <div key={s.key} className="border border-border p-4">
                 <div className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground mb-2">
@@ -208,6 +208,7 @@ function ReportPage() {
             ))}
           </div>
         </section>
+
 
         {/* Sections */}
         {sections.map((sec) => (

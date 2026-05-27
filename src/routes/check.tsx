@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2, TrendingUp, TrendingDown, Zap, Wrench, Rocket } from "lucide-react";
+import { ChevronDown, ChevronRight, Check, AlertTriangle, X, FileText, Loader2, TrendingUp, TrendingDown, Wrench } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
@@ -478,16 +478,6 @@ function ThreePaths({ url, score }: { url: string; score: number }) {
   const isWordPress = /wp-content|wp-includes|wordpress/i.test(url);
   const paths = [
     {
-      icon: Zap,
-      tag: "DIY",
-      title: "Scanner Pro",
-      price: "$29/mo",
-      desc: "Unlock all fixes. Weekly rescans. Track score improvements over time.",
-      cta: "Start free trial",
-      to: "/pricing",
-      show: true,
-    },
-    {
       icon: Wrench,
       tag: "WordPress",
       title: "Plugin Pro",
@@ -499,12 +489,14 @@ function ThreePaths({ url, score }: { url: string; score: number }) {
     },
   ].filter((p) => p.show);
 
+  if (paths.length === 0) return null;
+
   return (
     <div className="space-y-4">
       <div className="font-mono text-xs text-accent">
-        FIX YOUR {score < 60 ? "GAPS" : "REMAINING ISSUES"} · 3 PATHS
+        FIX YOUR {score < 60 ? "GAPS" : "REMAINING ISSUES"}
       </div>
-      <div className={`grid gap-4 ${paths.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
+      <div className="grid gap-4 max-w-md mx-auto">
         {paths.map((p) => {
           const Icon = p.icon;
           return (

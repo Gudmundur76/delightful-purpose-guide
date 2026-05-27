@@ -11,7 +11,9 @@ async function askModel(model: string, system: string, user: string) {
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
     body: JSON.stringify({
       model,
-      max_tokens: 600,
+      ...(model.startsWith("openai/")
+        ? { max_completion_tokens: 600 }
+        : { max_tokens: 600 }),
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },

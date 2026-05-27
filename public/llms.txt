@@ -16,7 +16,8 @@ grow.contact is not affiliated with grow.com (a B2B sales platform). This is gro
 
 ## Tools
 
-- [Agent Readability Check](https://grow.contact/check): Free URL scanner. Scores any site across Semantic HTML, JSON-LD, llms.txt, Citability, and Page Speed. No signup required.
+- [Agent Readability Check](https://grow.contact/check): Free URL scanner. Scores any site across Semantic HTML, JSON-LD, llms.txt, Citability, Page Speed, and Protocol Discovery. No signup required.
+- [grow CLI](https://grow.contact/cli): Zero-dep Node CLI (`npx @grow-contact/cli check <url>`). Same six-signal score as the web scanner, CI-friendly `--fail-under` flag. MIT licensed.
 
 ## Technical
 

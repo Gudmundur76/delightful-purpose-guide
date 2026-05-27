@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      agent_runs: {
+        Row: {
+          agent_type: string
+          completed_at: string | null
+          created_at: string
+          error: string | null
+          id: string
+          input: Json
+          output: Json | null
+          status: string
+        }
+        Insert: {
+          agent_type: string
+          completed_at?: string | null
+          created_at?: string
+          error?: string | null
+          id?: string
+          input?: Json
+          output?: Json | null
+          status?: string
+        }
+        Update: {
+          agent_type?: string
+          completed_at?: string | null
+          created_at?: string
+          error?: string | null
+          id?: string
+          input?: Json
+          output?: Json | null
+          status?: string
+        }
+        Relationships: []
+      }
       blog_posts: {
         Row: {
           body: string
@@ -88,6 +121,119 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      content_briefs: {
+        Row: {
+          audience: string | null
+          content_type: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          intent: string | null
+          keywords: string[]
+          site: string
+          status: string
+          target_word_count: number | null
+          title: string
+          topic: string | null
+          updated_at: string
+        }
+        Insert: {
+          audience?: string | null
+          content_type?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          intent?: string | null
+          keywords?: string[]
+          site: string
+          status?: string
+          target_word_count?: number | null
+          title: string
+          topic?: string | null
+          updated_at?: string
+        }
+        Update: {
+          audience?: string | null
+          content_type?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          intent?: string | null
+          keywords?: string[]
+          site?: string
+          status?: string
+          target_word_count?: number | null
+          title?: string
+          topic?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      content_drafts: {
+        Row: {
+          aeo_score: number | null
+          body_html: string
+          brief_id: string | null
+          checks: Json
+          created_at: string
+          created_by: string | null
+          geo_score: number | null
+          id: string
+          overall_score: number | null
+          published_at: string | null
+          scheduled_for: string | null
+          seo_score: number | null
+          status: string
+          title: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          aeo_score?: number | null
+          body_html?: string
+          brief_id?: string | null
+          checks?: Json
+          created_at?: string
+          created_by?: string | null
+          geo_score?: number | null
+          id?: string
+          overall_score?: number | null
+          published_at?: string | null
+          scheduled_for?: string | null
+          seo_score?: number | null
+          status?: string
+          title: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          aeo_score?: number | null
+          body_html?: string
+          brief_id?: string | null
+          checks?: Json
+          created_at?: string
+          created_by?: string | null
+          geo_score?: number | null
+          id?: string
+          overall_score?: number | null
+          published_at?: string | null
+          scheduled_for?: string | null
+          seo_score?: number | null
+          status?: string
+          title?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "content_drafts_brief_id_fkey"
+            columns: ["brief_id"]
+            isOneToOne: false
+            referencedRelation: "content_briefs"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       content_edits: {
         Row: {

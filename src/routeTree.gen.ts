@@ -33,6 +33,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContentRouteImport } from './routes/content'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CliRouteImport } from './routes/cli'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckRouteImport } from './routes/check'
 import { Route as BadgeRouteImport } from './routes/badge'
@@ -205,6 +206,11 @@ const ContentRoute = ContentRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CliRoute = CliRouteImport.update({
+  id: '/cli',
+  path: '/cli',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -490,6 +496,7 @@ export interface FileRoutesByFullPath {
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
+  '/cli': typeof CliRoute
   '/contact': typeof ContactRoute
   '/content': typeof ContentRouteWithChildren
   '/cookies': typeof CookiesRoute
@@ -569,6 +576,7 @@ export interface FileRoutesByTo {
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
+  '/cli': typeof CliRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
@@ -647,6 +655,7 @@ export interface FileRoutesById {
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
+  '/cli': typeof CliRoute
   '/contact': typeof ContactRoute
   '/content': typeof ContentRouteWithChildren
   '/cookies': typeof CookiesRoute
@@ -728,6 +737,7 @@ export interface FileRouteTypes {
     | '/badge'
     | '/check'
     | '/checkout'
+    | '/cli'
     | '/contact'
     | '/content'
     | '/cookies'
@@ -807,6 +817,7 @@ export interface FileRouteTypes {
     | '/badge'
     | '/check'
     | '/checkout'
+    | '/cli'
     | '/contact'
     | '/cookies'
     | '/faq'
@@ -884,6 +895,7 @@ export interface FileRouteTypes {
     | '/badge'
     | '/check'
     | '/checkout'
+    | '/cli'
     | '/contact'
     | '/content'
     | '/cookies'
@@ -964,6 +976,7 @@ export interface RootRouteChildren {
   BadgeRoute: typeof BadgeRouteWithChildren
   CheckRoute: typeof CheckRouteWithChildren
   CheckoutRoute: typeof CheckoutRouteWithChildren
+  CliRoute: typeof CliRoute
   ContactRoute: typeof ContactRoute
   ContentRoute: typeof ContentRouteWithChildren
   CookiesRoute: typeof CookiesRoute
@@ -1190,6 +1203,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cli': {
+      id: '/cli'
+      path: '/cli'
+      fullPath: '/cli'
+      preLoaderRoute: typeof CliRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -1676,6 +1696,7 @@ const rootRouteChildren: RootRouteChildren = {
   BadgeRoute: BadgeRouteWithChildren,
   CheckRoute: CheckRouteWithChildren,
   CheckoutRoute: CheckoutRouteWithChildren,
+  CliRoute: CliRoute,
   ContactRoute: ContactRoute,
   ContentRoute: ContentRouteWithChildren,
   CookiesRoute: CookiesRoute,

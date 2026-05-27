@@ -61,6 +61,7 @@ import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.
 import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as ContentDraftsIdRouteImport } from './routes/content.drafts.$id'
 import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
 import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
@@ -348,6 +349,11 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContentDraftsIdRoute = ContentDraftsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ContentDraftsRoute,
+} as any)
 const ApiPublicPingRoute = ApiPublicPingRouteImport.update({
   id: '/api/public/ping',
   path: '/api/public/ping',
@@ -517,7 +523,7 @@ export interface FileRoutesByFullPath {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/content/briefs': typeof ContentBriefsRoute
   '/content/calendar': typeof ContentCalendarRoute
-  '/content/drafts': typeof ContentDraftsRoute
+  '/content/drafts': typeof ContentDraftsRouteWithChildren
   '/dashboard/badge': typeof DashboardBadgeRoute
   '/dashboard/citation': typeof DashboardCitationRoute
   '/dashboard/publish': typeof DashboardPublishRoute
@@ -534,6 +540,7 @@ export interface FileRoutesByFullPath {
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
+  '/content/drafts/$id': typeof ContentDraftsIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
@@ -593,7 +600,7 @@ export interface FileRoutesByTo {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/content/briefs': typeof ContentBriefsRoute
   '/content/calendar': typeof ContentCalendarRoute
-  '/content/drafts': typeof ContentDraftsRoute
+  '/content/drafts': typeof ContentDraftsRouteWithChildren
   '/dashboard/badge': typeof DashboardBadgeRoute
   '/dashboard/citation': typeof DashboardCitationRoute
   '/dashboard/publish': typeof DashboardPublishRoute
@@ -610,6 +617,7 @@ export interface FileRoutesByTo {
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
+  '/content/drafts/$id': typeof ContentDraftsIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
@@ -672,7 +680,7 @@ export interface FileRoutesById {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/content/briefs': typeof ContentBriefsRoute
   '/content/calendar': typeof ContentCalendarRoute
-  '/content/drafts': typeof ContentDraftsRoute
+  '/content/drafts': typeof ContentDraftsRouteWithChildren
   '/dashboard/badge': typeof DashboardBadgeRoute
   '/dashboard/citation': typeof DashboardCitationRoute
   '/dashboard/publish': typeof DashboardPublishRoute
@@ -689,6 +697,7 @@ export interface FileRoutesById {
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
+  '/content/drafts/$id': typeof ContentDraftsIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
@@ -769,6 +778,7 @@ export interface FileRouteTypes {
     | '/api/public/leads'
     | '/api/public/mcp'
     | '/api/public/ping'
+    | '/content/drafts/$id'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
@@ -845,6 +855,7 @@ export interface FileRouteTypes {
     | '/api/public/leads'
     | '/api/public/mcp'
     | '/api/public/ping'
+    | '/content/drafts/$id'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
@@ -923,6 +934,7 @@ export interface FileRouteTypes {
     | '/api/public/leads'
     | '/api/public/mcp'
     | '/api/public/ping'
+    | '/content/drafts/$id'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
@@ -1376,6 +1388,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/content/drafts/$id': {
+      id: '/content/drafts/$id'
+      path: '/$id'
+      fullPath: '/content/drafts/$id'
+      preLoaderRoute: typeof ContentDraftsIdRouteImport
+      parentRoute: typeof ContentDraftsRoute
+    }
     '/api/public/ping': {
       id: '/api/public/ping'
       path: '/api/public/ping'
@@ -1579,17 +1598,29 @@ const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
   CheckoutRouteChildren,
 )
 
+interface ContentDraftsRouteChildren {
+  ContentDraftsIdRoute: typeof ContentDraftsIdRoute
+}
+
+const ContentDraftsRouteChildren: ContentDraftsRouteChildren = {
+  ContentDraftsIdRoute: ContentDraftsIdRoute,
+}
+
+const ContentDraftsRouteWithChildren = ContentDraftsRoute._addFileChildren(
+  ContentDraftsRouteChildren,
+)
+
 interface ContentRouteChildren {
   ContentBriefsRoute: typeof ContentBriefsRoute
   ContentCalendarRoute: typeof ContentCalendarRoute
-  ContentDraftsRoute: typeof ContentDraftsRoute
+  ContentDraftsRoute: typeof ContentDraftsRouteWithChildren
   ContentIndexRoute: typeof ContentIndexRoute
 }
 
 const ContentRouteChildren: ContentRouteChildren = {
   ContentBriefsRoute: ContentBriefsRoute,
   ContentCalendarRoute: ContentCalendarRoute,
-  ContentDraftsRoute: ContentDraftsRoute,
+  ContentDraftsRoute: ContentDraftsRouteWithChildren,
   ContentIndexRoute: ContentIndexRoute,
 }
 

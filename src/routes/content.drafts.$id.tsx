@@ -79,10 +79,11 @@ function DraftEditor() {
 
   const brief = data?.brief
     ? {
-        keywords: (data.brief.keywords as string[]) ?? [],
-        target_word_count: (data.brief.target_word_count as number | null) ?? undefined,
+        keywords: ((data.brief as Record<string, unknown>).keywords as string[]) ?? [],
+        target_word_count: ((data.brief as Record<string, unknown>).target_word_count as number | null) ?? undefined,
       }
     : undefined;
+
 
   // Debounced scoring (1s)
   const debouncedHtml = useDebouncedValue(html, 1000);

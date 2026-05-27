@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useServerFn } from "@tanstack/react-start";
+import { setResponseHeaders } from "@tanstack/react-start/server";
 import { useQuery } from "@tanstack/react-query";
 import { ReadabilityScore } from "@/components/ReadabilityScore";
 import { SiteHeader } from "@/components/SiteHeader";

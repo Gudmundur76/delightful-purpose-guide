@@ -31,6 +31,7 @@ import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as ContentRouteImport } from './routes/content'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckRouteImport } from './routes/check'
@@ -38,6 +39,7 @@ import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as ContentIndexRouteImport } from './routes/content.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
@@ -48,6 +50,9 @@ import { Route as DashboardReviewsRouteImport } from './routes/dashboard.reviews
 import { Route as DashboardPublishRouteImport } from './routes/dashboard.publish'
 import { Route as DashboardCitationRouteImport } from './routes/dashboard.citation'
 import { Route as DashboardBadgeRouteImport } from './routes/dashboard.badge'
+import { Route as ContentDraftsRouteImport } from './routes/content.drafts'
+import { Route as ContentCalendarRouteImport } from './routes/content.calendar'
+import { Route as ContentBriefsRouteImport } from './routes/content.briefs'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as CheckReportRouteImport } from './routes/check.report'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
@@ -191,6 +196,11 @@ const CookiesRoute = CookiesRouteImport.update({
   path: '/cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContentRoute = ContentRouteImport.update({
+  id: '/content',
+  path: '/content',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -225,6 +235,11 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => DashboardRoute,
+} as any)
+const ContentIndexRoute = ContentIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ContentRoute,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
@@ -276,6 +291,21 @@ const DashboardBadgeRoute = DashboardBadgeRouteImport.update({
   id: '/badge',
   path: '/badge',
   getParentRoute: () => DashboardRoute,
+} as any)
+const ContentDraftsRoute = ContentDraftsRouteImport.update({
+  id: '/drafts',
+  path: '/drafts',
+  getParentRoute: () => ContentRoute,
+} as any)
+const ContentCalendarRoute = ContentCalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => ContentRoute,
+} as any)
+const ContentBriefsRoute = ContentBriefsRouteImport.update({
+  id: '/briefs',
+  path: '/briefs',
+  getParentRoute: () => ContentRoute,
 } as any)
 const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
   id: '/success',
@@ -455,6 +485,7 @@ export interface FileRoutesByFullPath {
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
+  '/content': typeof ContentRouteWithChildren
   '/cookies': typeof CookiesRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/faq': typeof FaqRoute
@@ -484,6 +515,9 @@ export interface FileRoutesByFullPath {
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/content/briefs': typeof ContentBriefsRoute
+  '/content/calendar': typeof ContentCalendarRoute
+  '/content/drafts': typeof ContentDraftsRoute
   '/dashboard/badge': typeof DashboardBadgeRoute
   '/dashboard/citation': typeof DashboardCitationRoute
   '/dashboard/publish': typeof DashboardPublishRoute
@@ -494,6 +528,7 @@ export interface FileRoutesByFullPath {
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
+  '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -556,6 +591,9 @@ export interface FileRoutesByTo {
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/content/briefs': typeof ContentBriefsRoute
+  '/content/calendar': typeof ContentCalendarRoute
+  '/content/drafts': typeof ContentDraftsRoute
   '/dashboard/badge': typeof DashboardBadgeRoute
   '/dashboard/citation': typeof DashboardCitationRoute
   '/dashboard/publish': typeof DashboardPublishRoute
@@ -566,6 +604,7 @@ export interface FileRoutesByTo {
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog': typeof BlogIndexRoute
+  '/content': typeof ContentIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -601,6 +640,7 @@ export interface FileRoutesById {
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
+  '/content': typeof ContentRouteWithChildren
   '/cookies': typeof CookiesRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/faq': typeof FaqRoute
@@ -630,6 +670,9 @@ export interface FileRoutesById {
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/content/briefs': typeof ContentBriefsRoute
+  '/content/calendar': typeof ContentCalendarRoute
+  '/content/drafts': typeof ContentDraftsRoute
   '/dashboard/badge': typeof DashboardBadgeRoute
   '/dashboard/citation': typeof DashboardCitationRoute
   '/dashboard/publish': typeof DashboardPublishRoute
@@ -640,6 +683,7 @@ export interface FileRoutesById {
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
+  '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -676,6 +720,7 @@ export interface FileRouteTypes {
     | '/check'
     | '/checkout'
     | '/contact'
+    | '/content'
     | '/cookies'
     | '/dashboard'
     | '/faq'
@@ -705,6 +750,9 @@ export interface FileRouteTypes {
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
+    | '/content/briefs'
+    | '/content/calendar'
+    | '/content/drafts'
     | '/dashboard/badge'
     | '/dashboard/citation'
     | '/dashboard/publish'
@@ -715,6 +763,7 @@ export interface FileRouteTypes {
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
+    | '/content/'
     | '/dashboard/'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
@@ -777,6 +826,9 @@ export interface FileRouteTypes {
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
+    | '/content/briefs'
+    | '/content/calendar'
+    | '/content/drafts'
     | '/dashboard/badge'
     | '/dashboard/citation'
     | '/dashboard/publish'
@@ -787,6 +839,7 @@ export interface FileRouteTypes {
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog'
+    | '/content'
     | '/dashboard'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
@@ -821,6 +874,7 @@ export interface FileRouteTypes {
     | '/check'
     | '/checkout'
     | '/contact'
+    | '/content'
     | '/cookies'
     | '/dashboard'
     | '/faq'
@@ -850,6 +904,9 @@ export interface FileRouteTypes {
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
+    | '/content/briefs'
+    | '/content/calendar'
+    | '/content/drafts'
     | '/dashboard/badge'
     | '/dashboard/citation'
     | '/dashboard/publish'
@@ -860,6 +917,7 @@ export interface FileRouteTypes {
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
+    | '/content/'
     | '/dashboard/'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
@@ -895,6 +953,7 @@ export interface RootRouteChildren {
   CheckRoute: typeof CheckRouteWithChildren
   CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactRoute: typeof ContactRoute
+  ContentRoute: typeof ContentRouteWithChildren
   CookiesRoute: typeof CookiesRoute
   DashboardRoute: typeof DashboardRouteWithChildren
   FaqRoute: typeof FaqRoute
@@ -1107,6 +1166,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/content': {
+      id: '/content'
+      path: '/content'
+      fullPath: '/content'
+      preLoaderRoute: typeof ContentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -1155,6 +1221,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
+    }
+    '/content/': {
+      id: '/content/'
+      path: '/'
+      fullPath: '/content/'
+      preLoaderRoute: typeof ContentIndexRouteImport
+      parentRoute: typeof ContentRoute
     }
     '/blog/': {
       id: '/blog/'
@@ -1225,6 +1298,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/badge'
       preLoaderRoute: typeof DashboardBadgeRouteImport
       parentRoute: typeof DashboardRoute
+    }
+    '/content/drafts': {
+      id: '/content/drafts'
+      path: '/drafts'
+      fullPath: '/content/drafts'
+      preLoaderRoute: typeof ContentDraftsRouteImport
+      parentRoute: typeof ContentRoute
+    }
+    '/content/calendar': {
+      id: '/content/calendar'
+      path: '/calendar'
+      fullPath: '/content/calendar'
+      preLoaderRoute: typeof ContentCalendarRouteImport
+      parentRoute: typeof ContentRoute
+    }
+    '/content/briefs': {
+      id: '/content/briefs'
+      path: '/briefs'
+      fullPath: '/content/briefs'
+      preLoaderRoute: typeof ContentBriefsRouteImport
+      parentRoute: typeof ContentRoute
     }
     '/checkout/success': {
       id: '/checkout/success'
@@ -1485,6 +1579,23 @@ const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
   CheckoutRouteChildren,
 )
 
+interface ContentRouteChildren {
+  ContentBriefsRoute: typeof ContentBriefsRoute
+  ContentCalendarRoute: typeof ContentCalendarRoute
+  ContentDraftsRoute: typeof ContentDraftsRoute
+  ContentIndexRoute: typeof ContentIndexRoute
+}
+
+const ContentRouteChildren: ContentRouteChildren = {
+  ContentBriefsRoute: ContentBriefsRoute,
+  ContentCalendarRoute: ContentCalendarRoute,
+  ContentDraftsRoute: ContentDraftsRoute,
+  ContentIndexRoute: ContentIndexRoute,
+}
+
+const ContentRouteWithChildren =
+  ContentRoute._addFileChildren(ContentRouteChildren)
+
 interface DashboardRouteChildren {
   DashboardBadgeRoute: typeof DashboardBadgeRoute
   DashboardCitationRoute: typeof DashboardCitationRoute
@@ -1535,6 +1646,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckRoute: CheckRouteWithChildren,
   CheckoutRoute: CheckoutRouteWithChildren,
   ContactRoute: ContactRoute,
+  ContentRoute: ContentRouteWithChildren,
   CookiesRoute: CookiesRoute,
   DashboardRoute: DashboardRouteWithChildren,
   FaqRoute: FaqRoute,

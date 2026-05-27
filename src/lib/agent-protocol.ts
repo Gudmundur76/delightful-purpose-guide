@@ -9,7 +9,25 @@
 //
 // All of these are stateless and safe to compute per-request in the Worker.
 
+import { createHash } from "node:crypto";
+import { serverCard } from "./agent-protocol/mcp-server-card";
+
 const SITE_ORIGIN = "https://grow.contact";
+
+// Skill manifest body — kept here so the hash in the agent-skills index is
+// computed from the exact bytes we serve at /.well-known/agent-skills/grow-geo-scan.md.
+const GROW_GEO_SCAN_SKILL = `# grow-geo-scan
+
+Score any URL against the Grow GEO Standard (6 signals, 0–100) — semantic HTML, JSON-LD, llms.txt, citability, speed, and protocol discovery.
+
+## Endpoint
+POST https://grow.contact/api/public/v1/analyze
+Header: x-api-key: <key>
+Body: { "url": "https://example.com" }
+
+## Output
+JSON with overall score, per-signal sub-scores, and remediation findings.
+`;
 
 // ---------- Discovery Link header ----------
 
@@ -36,7 +54,14 @@ export function acceptsMarkdown(request: Request): boolean {
 export function handleWellKnownRequest(url: URL): Response | null {
   switch (url.pathname) {
     case "/.well-known/mcp.json":
-      return jsonResponse(mcpServerCard());
+    case "/.well-known/mcp/server-card.json":
+      return jsonResponse(serverCard);
+    case "/.well-known/api-catalog":
+      return linksetResponse(apiCatalog());
+    case "/.well-known/agent-skills/index.json":
+      return jsonResponse(agentSkillsIndex());
+    case "/.well-known/agent-skills/grow-geo-scan.md":
+      return markdownResponse(GROW_GEO_SCAN_SKILL);
     case "/.well-known/oauth-protected-resource":
       return jsonResponse(oauthProtectedResourceMetadata());
     case "/auth.md":
@@ -58,6 +83,18 @@ function jsonResponse(body: unknown): Response {
   });
 }
 
+function linksetResponse(body: unknown): Response {
+  return new Response(JSON.stringify(body, null, 2), {
+    status: 200,
+    headers: {
+      "content-type": "application/linkset+json",
+      "cache-control": "public, max-age=300, s-maxage=3600",
+      "access-control-allow-origin": "*",
+      link: buildLinkHeader(),
+    },
+  });
+}
+
 function markdownResponse(body: string): Response {
   return new Response(body, {
     status: 200,
@@ -70,25 +107,66 @@ function markdownResponse(body: string): Response {
   });
 }
 
-// MCP Server Card — points at the existing authenticated MCP endpoint at
-// /api/public/mcp. Shape follows the emerging convention used by the
-// isitagentready.com scanner and the MCP discovery RFC.
-function mcpServerCard() {
+// RFC 9727 — API Catalog (application/linkset+json).
+function apiCatalog() {
   return {
-    name: "grow-contact-mcp",
-    version: "2.0.0",
-    description:
-      "Tools for building with and operating grow.contact: site content, scans, leads, blog, leaderboard, GEO standard, AI helpers.",
-    endpoint: `${SITE_ORIGIN}/api/public/mcp`,
-    transport: "streamable-http",
-    auth: {
-      type: "bearer",
-      description:
-        "Set Authorization: Bearer <MCP_SECRET> when MCP_SECRET is configured. Read-only ping/health work unauthenticated when no secret is set.",
-    },
-    documentation: `${SITE_ORIGIN}/api/public/v1/docs`,
-    contact: { email: "hello@grow.contact" },
-    capabilities: { tools: true, resources: false, prompts: false },
+    linkset: [
+      {
+        anchor: `${SITE_ORIGIN}/api/public/v1/`,
+        "service-desc": [
+          {
+            href: `${SITE_ORIGIN}/api/public/v1/openapi.json`,
+            type: "application/openapi+json",
+          },
+        ],
+        "service-doc": [
+          { href: `${SITE_ORIGIN}/api-docs`, type: "text/html" },
+        ],
+        "service-meta": [
+          { href: `${SITE_ORIGIN}/api/public/v1/`, type: "application/json" },
+        ],
+        status: [
+          {
+            href: `${SITE_ORIGIN}/api/public/v1/readiness`,
+            type: "application/json",
+          },
+        ],
+      },
+      {
+        anchor: `${SITE_ORIGIN}/api/public/mcp`,
+        "service-desc": [
+          {
+            href: `${SITE_ORIGIN}/.well-known/mcp/server-card.json`,
+            type: "application/json",
+          },
+        ],
+        "service-doc": [
+          { href: `${SITE_ORIGIN}/api-docs`, type: "text/html" },
+        ],
+      },
+    ],
+  };
+}
+
+// Agent Skills v0.2.0 index. sha256 must match the served manifest body bytes.
+function agentSkillsIndex() {
+  const sha256 = createHash("sha256")
+    .update(GROW_GEO_SCAN_SKILL, "utf8")
+    .digest("hex");
+  return {
+    $schema: "https://agentskills.io/schemas/v0.2.0/index.json",
+    version: "0.2.0",
+    publisher: { name: "grow.contact", url: SITE_ORIGIN },
+    skills: [
+      {
+        name: "grow-geo-scan",
+        type: "remote",
+        description:
+          "Score any URL against the Grow GEO Standard (6 signals, 0–100) for AI-agent readability.",
+        url: `${SITE_ORIGIN}/.well-known/agent-skills/grow-geo-scan.md`,
+        sha256,
+      },
+    ],
   };
 }
 

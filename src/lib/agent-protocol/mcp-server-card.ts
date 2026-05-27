@@ -31,6 +31,13 @@ export const serverCard = {
     resources: false,
     prompts: false,
   },
+  auth: {
+    type: "bearer",
+    header: "Authorization",
+    scheme: "Bearer",
+    description:
+      "Request an MCP token via https://grow.contact/contact. Tokens are scoped per-integration.",
+  },
   authentication: {
     type: "bearer",
     header: "Authorization",

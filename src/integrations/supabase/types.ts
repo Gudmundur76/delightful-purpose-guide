@@ -715,6 +715,7 @@ export type Database = {
           jsonld: number
           llms: number
           overall: number
+          protocol: number | null
           scanned_at: string
           semantic: number
           source: string
@@ -730,6 +731,7 @@ export type Database = {
           jsonld: number
           llms: number
           overall: number
+          protocol?: number | null
           scanned_at?: string
           semantic: number
           source?: string
@@ -745,6 +747,7 @@ export type Database = {
           jsonld?: number
           llms?: number
           overall?: number
+          protocol?: number | null
           scanned_at?: string
           semantic?: number
           source?: string

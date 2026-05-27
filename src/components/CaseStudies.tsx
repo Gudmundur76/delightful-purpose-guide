@@ -96,23 +96,24 @@ function TopScoreCard({
   );
 }
 
-export function CaseStudies() {
+export function CaseStudies({ initialData }: { initialData?: OverviewStats | null } = {}) {
   const fetchStats = useServerFn(getOverviewStats);
-  const [s, setS] = useState<OverviewStats | null>(null);
+  const [s, setS] = useState<OverviewStats | null>(initialData ?? null);
 
   useEffect(() => {
+    if (initialData) return;
     let cancelled = false;
     fetchStats({ data: { days: 7 } })
       .then((r) => {
         if (!cancelled) setS(r);
       })
       .catch(() => {
-        if (!cancelled) setS(null);
+        /* keep existing data on failure */
       });
     return () => {
       cancelled = true;
     };
-  }, [fetchStats]);
+  }, [fetchStats, initialData]);
 
   const stats: Stat[] = [
     { label: "Scans Run", value: s ? fmt(s.totalScans) : "—" },

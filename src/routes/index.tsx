@@ -181,7 +181,7 @@ function Index() {
           </div>
         </section>
 
-        <CaseStudies />
+        <CaseStudies initialData={stats} />
         <SocialProofStrip />
         <ProcessTimeline />
         <Services />

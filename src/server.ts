@@ -2,6 +2,12 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
+import {
+  handleWellKnownRequest,
+  buildLinkHeader,
+  buildMarkdownTwin,
+  acceptsMarkdown,
+} from "./lib/agent-protocol";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -69,30 +75,61 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const url = new URL(request.url);
+
+      // 1) /.well-known/* + /auth.md — answered before TanStack to avoid
+      //    routing edge cases with leading-dot path segments.
+      const wellKnown = handleWellKnownRequest(url);
+      if (wellKnown) return wellKnown;
+
+      // 2) Markdown content negotiation: agents may request a .md twin of
+      //    any HTML page via `Accept: text/markdown`. We serve a curated
+      //    per-route summary so scrapers can skip the JS/HTML shell.
+      if (request.method === "GET" && acceptsMarkdown(request)) {
+        const md = buildMarkdownTwin(url.pathname);
+        if (md) {
+          return new Response(md.body, {
+            status: 200,
+            headers: {
+              "content-type": "text/markdown; charset=utf-8",
+              "cache-control": "public, max-age=0, s-maxage=300, stale-while-revalidate=600",
+              "x-content-type-options": "nosniff",
+              link: buildLinkHeader(),
+            },
+          });
+        }
+      }
+
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       const normalized = await normalizeCatastrophicSsrResponse(response);
 
-      // Edge-cache the homepage HTML so repeat visits (and agent scanners)
-      // get sub-100ms TTFB instead of paying SSR cost on every request.
-      if (request.method === "GET" && normalized.status === 200) {
-        const url = new URL(request.url);
-        const ct = normalized.headers.get("content-type") ?? "";
-        if (url.pathname === "/" && ct.includes("text/html")) {
-          const headers = new Headers(normalized.headers);
-          // Override TanStack's default no-cache so Cloudflare can serve
-          // the homepage HTML from the edge (sub-100ms TTFB for scanners
-          // and repeat visitors).
+      // 3) Edge-cache the homepage HTML so repeat visits (and agent scanners)
+      //    get sub-100ms TTFB instead of paying SSR cost on every request.
+      //    Also attach the agent-protocol Link header on every HTML response.
+      const ct = normalized.headers.get("content-type") ?? "";
+      const isHtml = ct.includes("text/html");
+      const shouldOverrideHomepageCache =
+        request.method === "GET" &&
+        normalized.status === 200 &&
+        url.pathname === "/" &&
+        isHtml;
+
+      if (isHtml || shouldOverrideHomepageCache) {
+        const headers = new Headers(normalized.headers);
+        // Advertise discovery surfaces (llms.txt, OpenAPI, MCP) on every page.
+        if (!headers.has("link")) headers.set("link", buildLinkHeader());
+        if (shouldOverrideHomepageCache) {
           headers.set(
             "cache-control",
             "public, max-age=0, s-maxage=300, stale-while-revalidate=600",
           );
-          return new Response(normalized.body, {
-            status: normalized.status,
-            statusText: normalized.statusText,
-            headers,
-          });
         }
+        return new Response(normalized.body, {
+          status: normalized.status,
+          statusText: normalized.statusText,
+          headers,
+        });
       }
 
       return normalized;

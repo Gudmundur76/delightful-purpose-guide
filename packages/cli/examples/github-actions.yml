@@ -1,0 +1,23 @@
+# Agent readiness CI gate using @grow-contact/cli.
+# Drop this in .github/workflows/ to fail the build when your score drops
+# below 90/100 on the Grow GEO Standard.
+name: Agent readiness
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 9 * * 1" # weekly Monday 09:00 UTC
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Scan production site
+        env:
+          GROW_API_KEY: ${{ secrets.GROW_API_KEY }}
+        run: npx -y @grow-contact/cli check https://example.com --fail-under 90

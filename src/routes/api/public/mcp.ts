@@ -187,12 +187,22 @@ const authenticatedHandler = withMcpAuth(
   },
   async (request) => {
     const expected = process.env.MCP_SECRET;
+    // Fail closed if the secret is not configured on the server.
     if (!expected) return null;
+
     const token = request.headers
       .get("Authorization")
-      ?.replace(/^Bearer\s+/i, "");
-    if (!token || token !== expected) return null;
-    return { token };
+      ?.replace(/^Bearer\s+/i, "")
+      .trim();
+    if (!token) return null;
+
+    // Constant-time comparison to prevent timing attacks.
+    const a = Buffer.from(token, "utf8");
+    const b = Buffer.from(expected, "utf8");
+    if (a.length !== b.length) return null;
+    if (!timingSafeEqual(a, b)) return null;
+
+    return { token: "***" };
   },
 );
 

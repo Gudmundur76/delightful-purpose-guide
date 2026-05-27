@@ -37,7 +37,7 @@ function buildSections(url: string, overall: number) {
     {
       key: "semantic",
       label: "Semantic HTML",
-      weight: "25%",
+      weight: "20%",
       score: seedJitter(url, overall, 6),
       summary: "Proper landmark tags help agents map page structure and citation scope.",
       findings: [
@@ -90,7 +90,7 @@ function buildSections(url: string, overall: number) {
     {
       key: "citability",
       label: "Citability",
-      weight: "20%",
+      weight: "15%",
       score: seedJitter(url, overall, 2),
       summary: "Short, factual, well-attributed claims get cited more often.",
       findings: [
@@ -108,7 +108,7 @@ function buildSections(url: string, overall: number) {
     {
       key: "speed",
       label: "First-Contentful Speed",
-      weight: "20%",
+      weight: "15%",
       score: seedJitter(url, overall, 10),
       summary: "Slow pages get partial crawls and timeouts from agent crawlers.",
       findings: [
@@ -123,8 +123,28 @@ function buildSections(url: string, overall: number) {
         "Inline critical CSS; preload only above-the-fold images.",
       ],
     },
+    {
+      key: "protocol",
+      label: "Protocol Discovery",
+      weight: "15%",
+      score: seedJitter(url, overall, -8),
+      summary: "Agent-native protocol surfaces — Link headers, MCP card, markdown negotiation, Content-Signal — let crawlers and agents discover capabilities without guessing.",
+      findings: [
+        { tone: "warn" as Status, text: "No <Link rel=\"llms\"> / rel=\"mcp\" discovery header on HTML responses" },
+        { tone: "fail" as Status, text: "/.well-known/mcp.json not found (no MCP server card)" },
+        { tone: "fail" as Status, text: "Accept: text/markdown returns HTML (no markdown negotiation)" },
+        { tone: "warn" as Status, text: "robots.txt missing Cloudflare Content-Signal directives" },
+      ],
+      fixes: [
+        "Attach a Link header advertising llms.txt, api-catalog, mcp, and oauth-protected-resource on HTML routes.",
+        "Publish /.well-known/mcp.json as a server card so agents can negotiate tool access.",
+        "Serve a Markdown variant of every public page when the client sends Accept: text/markdown.",
+        "Add Content-Signal lines (search=yes, ai-input=no, ai-train=no) to robots.txt.",
+      ],
+    },
   ];
 }
+
 
 function ReportPage() {
   const { u, s, e } = Route.useSearch();

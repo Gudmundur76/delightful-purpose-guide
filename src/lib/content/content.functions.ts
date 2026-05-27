@@ -106,17 +106,18 @@ export const getDraftFn = createServerFn({ method: "POST" })
       .eq("id", data.id)
       .single();
     if (error) throw new Error(error.message);
-    let brief: unknown = null;
+    let brief: Record<string, unknown> | null = null;
     if (draft?.brief_id) {
       const { data: b } = await supabase
         .from("content_briefs")
         .select("*")
         .eq("id", draft.brief_id)
         .single();
-      brief = b;
+      brief = (b ?? null) as Record<string, unknown> | null;
     }
     return { draft, brief };
   });
+
 
 export const createDraftFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -148,7 +149,7 @@ export const updateDraftFn = createServerFn({ method: "POST" })
       if (v !== undefined) patch[k] = v;
     }
     if (Object.keys(patch).length === 0) return { ok: true };
-    const { error } = await supabase.from("content_drafts").update(patch).eq("id", id);
+    const { error } = await supabase.from("content_drafts").update(patch as never).eq("id", id);
     if (error) throw new Error(error.message);
     return { ok: true };
   });
@@ -169,7 +170,7 @@ export const setDraftStatusFn = createServerFn({ method: "POST" })
         .single();
       patch.version = (current?.version ?? 1) + 1;
     }
-    const { error } = await supabase.from("content_drafts").update(patch).eq("id", data.id);
+    const { error } = await supabase.from("content_drafts").update(patch as never).eq("id", data.id);
     if (error) throw new Error(error.message);
     return { ok: true };
   });

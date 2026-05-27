@@ -170,27 +170,56 @@ Read `references/technical-standards.md` for the full spec. Summary:
 ### robots.txt Canonical Allow-list
 
 ```
-User-agent: GPTBot          # OpenAI training
+User-agent: *
 Allow: /
 
-User-agent: OAI-SearchBot   # ChatGPT Search (retrieval)
+# OpenAI
+User-agent: GPTBot
 Allow: /
 
-User-agent: ChatGPT-User    # ChatGPT browser tool
+User-agent: OAI-SearchBot
 Allow: /
 
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: ClaudeBot        # Anthropic training
+User-agent: Perplexity-User
 Allow: /
 
-User-agent: Claude-SearchBot # Claude web retrieval
+# Anthropic
+User-agent: ClaudeBot
 Allow: /
 
-User-agent: Google-Extended  # Gemini/AI Overviews
+User-agent: Claude-SearchBot
 Allow: /
 
+User-agent: anthropic-ai
+Allow: /
+
+# Google
+User-agent: Google-Extended
+Allow: /
+
+# Bing / Copilot
+User-agent: bingbot
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Meta (citations allowed, training blocked)
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+Sitemap: https://[domain]/sitemap.xml
 ```
 
 ### JSON-LD Priority Schema Set (for AI/ML startups and devtools)
@@ -363,6 +392,152 @@ What every grow.contact client site should ship with:
 
 ---
 
+## Field Lessons — Tier 01 Single-Page Build (Lovable / TanStack Start)
+
+Validated against `/check` scans of shipped Tier 01 sites. Apply on every new single-page build to avoid the four scoring traps that cap unsuspecting builds at 88/100.
+
+### The four traps that block a 100/100 single-page build
+
+1.  **Placeholder root meta leaks into every page.** Lovable's TanStack Start starter ships `__root.tsx` with `title: "Lovable App"`, a generic description, and a stale `id-preview-*.lovable.app` `og:image`. TanStack merges root meta into every match — so the leaf's good `<title>` wins, but the stale `og:image` and `twitter:image` persist and the scanner reads them. **Citability score caps near 67/100 until removed.**
+
+    -   **Fix:** Strip `title`, `description`, `og:title`, `og:description`, `twitter:title`, `twitter:description`, `og:image`, `twitter:image` from `__root.tsx`. Keep only sitewide defaults: `charSet`, `viewport`, `generator`, `og:site_name`, `og:type: "website"`, `twitter:card`. Leaf route owns everything page-specific.
+
+2.  **Thin body copy.** A pure hero + 3-step strip is ~180 words — the scanner wants ≥150 words of *substantive* citable text per page, and a single-page site has no other routes to absorb the deficit.
+
+    -   **Fix:** Always add a 3-question FAQ section to single-page Tier 01 builds (typical Q-set: "What is [X]?" / "How is [X] different from [obvious-alternative]?" / "What can [X] do?"). Each answer 40–60 words. Doubles substantive word count and unlocks `FAQPage` schema in the same stroke.
+
+3.  **Under-stacked JSON-LD.** Shipping only `WebSite` + `Organization` caps JSON-LD score around 86/100. The scanner rewards schema *stacking* and *depth*.
+
+    -   **Fix:** On every single-page build, ship four schemas: `WebSite` (root, with `publisher` + `inLanguage`), `Organization` (leaf, with `logo`, `foundingDate`, `slogan`, `contactPoint`), `FAQPage` (leaf), `BreadcrumbList` (leaf, even with one item). Run Step 5 validation on each.
+
+4.  **Semantic landmarks technically valid but unrewarded.** `<dl>`/`<dt>`/`<dd>` for a numbered process is valid HTML but reads as a definition list to the scanner. `<header>` without `aria-label` is ambiguous when the site has only one nav region.
+
+    -   **Fix:** Wrap the entire content area in `<article>` inside `<main>`. Use `<ol>` + `<li>` for any numbered process (steps, "how it works"). Add `aria-label="Site"` to `<header>` and `aria-label="Primary"` to `<nav>`. Every `<section>` gets `aria-labelledby` pointing at its heading id.
+
+5.  **SSR loader blocking first byte.** Any `loader: async () => { await db.call() }` in a TanStack Start route holds the entire response until the await resolves. A cold Supabase/Lovable Cloud round trip is 1.8–2.0s — which pushes TTFB past 2000ms and collapses the Speed signal from ~95 to 55/100.
+
+    -   **Fix:** Wrap every server loader that hits an external data source in an in-memory cache with a 300s TTL and stale-while-revalidate pattern.
+
+        ```ts
+        // module-level — persists across requests on the same edge worker
+        let _cache: { data: unknown; ts: number } = { data: null, ts: 0 };
+        const TTL = 300_000;
+
+        async function getCached<T>(fn: () => Promise<T>): Promise<T> {
+          if (_cache.data && Date.now() - _cache.ts < TTL) {
+            return _cache.data as T;
+          }
+          const data = await fn();
+          _cache = { data, ts: Date.now() };
+          return data;
+        }
+        ```
+
+        Use: `const stats = await getCached(() => getOverviewStats({ data: { days: 7 } }));`
+
+        Expected outcome: first warm request ~2000ms, all subsequent requests within TTL <200ms. Speed signal recovers to 95+/100.
+
+        **Rule:** Never await an external call in a loader without a cache layer.
+
+    -   **Companion fix (edge cache header in `src/server.ts`):** Even with a loader cache, TanStack Start defaults to `Cache-Control: no-cache` on every SSR response, so each request re-renders from scratch (900ms–2000ms TTFB) and the Speed signal collapses to 80/100 or below. Override the header for the homepage route in `src/server.ts`:
+
+        ```ts
+        // In the SSR fetch wrapper, after the response is produced:
+        const EDGE_CACHED_PATHS = new Set<string>(["/"]);
+        const EDGE_CACHE_HEADER =
+          "public, max-age=0, s-maxage=300, stale-while-revalidate=600";
+
+        function withEdgeCache(request: Request, response: Response): Response {
+          if (request.method !== "GET") return response;
+          if (response.status !== 200) return response;
+          const url = new URL(request.url);
+          if (!EDGE_CACHED_PATHS.has(url.pathname)) return response;
+          const ct = response.headers.get("content-type") ?? "";
+          if (!ct.includes("text/html")) return response;
+          const headers = new Headers(response.headers);
+          headers.set("cache-control", EDGE_CACHE_HEADER);
+          return new Response(response.body, {
+            status: response.status,
+            statusText: response.statusText,
+            headers,
+          });
+        }
+        ```
+
+        Expected outcome: cold TTFB ~800ms, warm edge-cached TTFB <100ms. Speed signal locks at 100/100.
+
+        **Rule:** Every Tier 01 build ships the edge-cache header in `src/server.ts` before handover — no exceptions.
+
+### TanStack Start head-meta invariants (critical)
+
+These rules come from TanStack Router #6719 and silent overrides discovered in production:
+
+-   **Canonical `<link rel="canonical">` lives on leaf routes ONLY.** TanStack merges `meta` by name/property but **concatenates `links` without dedup** — a canonical in `__root.tsx` plus a canonical in a leaf emits both, invalid SEO. Use `og:url` via `meta` instead at root if needed.
+-   **`og:image` lives on leaf routes ONLY.** Same merge behavior as above — a root `og:image` overrides every leaf's share preview. If no real OG card asset exists, **omit `og:image` entirely**. A stale placeholder previews worse than no image.
+-   **The page `title` is a `meta` entry, not a top-level `head()` field.** TanStack's `head()` return type has no top-level `title` — a top-level title is silently ignored and the page falls back to root title.
+
+### Tier 01 file-by-file checklist (TanStack Start)
+
+| File | Must contain |
+| --- | --- |
+| `src/routes/__root.tsx` | Sitewide meta only (no title/desc/og:image). `WebSite` JSON-LD with `inLanguage: "en"` + nested `publisher`. `<meta name="generator" content="geo-standard@<version>">`. |
+| `src/routes/index.tsx` | Page-specific `title` + `description` + `og:*` + `twitter:*` in `meta`. Canonical in `links`. Four JSON-LD scripts: `Organization` (enriched), `FAQPage`, `BreadcrumbList`. `<main><article>` wrapping hero + how-it-works `<ol>` + FAQ. |
+| `public/llms.txt` | H1 + blockquote summary + Pages H2 + Contact H2 + Content License H2. |
+| `public/robots.txt` | §4 matrix (allow OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended, bingbot, FacebookBot, YouBot; block GPTBot, anthropic-ai, Meta-ExternalAgent, CCBot only if client opts out of training). `Sitemap:` directive. |
+| `src/routes/sitemap[.]xml.ts` | Server route returning XML with single `/` entry, `changefreq: weekly`, `priority: 1.0`. Edit `BASE_URL` to the project domain. |
+| `src/server.ts` | Edge-cache override for `/`: `public, max-age=0, s-maxage=300, stale-while-revalidate=600`. Without this, TanStack's default `no-cache` pegs Speed at 90/100. |
+| `src/routes/api/public/mcp.ts` | MCP server endpoint. Exposes site as an agent-readable tool via JSON-RPC 2.0 over HTTP/SSE. Minimum viable implementation ships three capabilities: (1) Resource: GET /llms.txt content, (2) Resource: GET /sitemap.xml, (3) Tool: checkUrl(url: string) → returns agent-readability score. Set `Content-Type: text/event-stream` for SSE transport. Add `User-agent: *` allow for MCP clients in robots.txt. Document the endpoint in llms.txt under a `## Tools` H2 section. |
+| `src/routes/rss[.]xml.ts` | Atom/RSS feed. Required for RAG pipeline re-indexing — Perplexity and search-enabled LLMs use RSS to discover fresh content on publish. Return `Content-Type: application/rss+xml`. Minimum: `<channel>` with `<title>`, `<link>`, `<description>`, `<lastBuildDate>`, and at minimum one `<item>` (the homepage). Add `<link rel="alternate" type="application/rss+xml" href="/rss.xml">` to `<head>` in `__root.tsx`. Reference in llms.txt under `## Technical`. |
+
+### Failure mode "the og:image won't go away"
+
+If a Lovable-generated TanStack Start project shows a stale lovable.app preview screenshot as the OG card after you've cleaned up the leaf route, the culprit is **always** an `og:image` still living in `__root.tsx`'s meta array. The leaf cannot override an image set at the root in this stack (links/scripts concatenate, and og:image via `property` does dedup but the root wins on identical property in some merge orders during SSR). **Always strip it at the root, never just override at the leaf.**
+
+### Brand voice constraint (carry into every deliverable)
+
+Never mention Lovable, lovable.dev, or any underlying build tool in user-facing copy on grow.contact client sites — FAQs, marketing pages, social posts, proposals. The agency positions as a custom-coded shop with a proprietary internal workflow. Backend integration code may reference Lovable; user-facing copy may not.
+
+### Hide the "Created by Lovable" / "Edit with Lovable" badge (mandatory before handover)
+
+Lovable injects an "Edit with Lovable" badge on all published deployments by default. **This badge must be hidden on every client site before handover.** It undermines the custom-coded positioning and is a visual quality failure.
+
+**How to hide:**
+
+1. Call `publish_settings--set_badge_visibility` with `hide_badge: true`.
+2. Republish the site after toggling — the badge disappears from the deployment within ~30 seconds.
+3. Screenshot the production URL to confirm no badge is visible.
+
+> **Requirement:** Hiding the badge requires a Pro plan or higher. If the workspace is on the Free plan, upgrading is mandatory before any client site can be delivered. Do not hand over a site with the badge visible.
+
+**Failure mode:** If a client sees the badge, the "custom-coded" positioning collapses immediately. This is a non-negotiable pre-handover step.
+
+---
+
+## Post-Build Verification Checklist (run before every handover)
+
+Complete every item below before marking a build delivered. A build that passes the file checklist but fails post-build verification is not complete.
+
+| Check | Method | Pass condition |
+|---|---|---|
+| Agent readability score | Run URL through grow.contact/check | 100/100 all signals |
+| Lovable badge hidden | Screenshot production URL | No "Edit with Lovable" badge visible |
+| llms.txt live | `curl https://[domain]/llms.txt` | Returns correct markdown content, not empty |
+| robots.txt AI directives | `curl https://[domain]/robots.txt` | All 8 bots listed with Allow: / |
+| JSON-LD valid | Step 5 validation checklist | All checks pass |
+| MCP endpoint live | `curl -s https://[domain]/api/public/mcp` | Returns JSON-RPC response, not 404 |
+| RSS feed live | `curl https://[domain]/rss.xml` | Returns valid XML with at least one item |
+| TTFB | `curl -w "%{time_starttransfer}" https://[domain]` | Under 400ms |
+| Edge cache header on `/` | `curl -sI https://[domain]/ \| grep -i cache-control` | Returns `public, max-age=0, s-maxage=300, stale-while-revalidate=600` (not `no-cache`) |
+| OG image present | View source, check og:image | Real asset URL, not lovable.app preview screenshot |
+| No stale root meta | View source, check __root meta | No generic "Lovable App" title or description |
+
+If any check fails — fix before handover. Do not deliver a partial build.
+
+> **Field note — the silent Speed regression.** A build can pass every other check, ship all four JSON-LD schemas, hide the badge, and still score 80/100 on Speed because `src/server.ts` was never patched with the edge-cache header. TanStack Start's default `no-cache` is invisible in the preview (preview is uncached by design) and only surfaces on the published deployment. Always run the `curl -sI` check against the **published URL**, not the preview — and run it as the last step before declaring handover complete.
+
+---
+
+
 ## Reference Files
 
 -   `references/technical-standards.md` — Full technical spec for every agent-native standard
@@ -384,30 +559,38 @@ What every grow.contact client site should ship with:
 ```markdown
 # COMPANY NAME — Tagline
 
-> One-paragraph blockquote summary of what the company/site does.
-> This is what LLMs read to understand context before crawling further.
+> One-paragraph blockquote summary of what the company/site does,
+> written for LLM inference context. Factual, not marketing copy.
 
-## Section Name (e.g., Services, Products, Docs)
+## Pages
 
-- [Page Title](url): Brief description of this page
-- [Another Page](url): What it contains
+- [Home](https://example.com/): What the product is, who it's for, primary CTA.
+- [About](https://example.com/about): Founding story, team, mission.
+- [Pricing](https://example.com/pricing): Plan names, prices, what's included.
 
-## Optional
+## Tools
 
-- [llms.txt](https://example.com/llms.txt): This file
-- [RSS feed](https://example.com/blog/rss.xml): Updates feed
-- [OpenAPI spec](https://example.com/api/openapi.json): Machine-readable API contract
+- [Agent Readability Check](https://example.com/check): Free URL scanner.
+  Scores any site across Semantic HTML, JSON-LD, llms.txt, Citability, Speed.
+- [MCP Endpoint](https://example.com/api/public/mcp): JSON-RPC 2.0 over SSE.
+  Resources: llms.txt, sitemap. Tools: checkUrl.
+
+## Technical
+
+- [llms-full.txt](https://example.com/llms-full.txt): Full site content in
+  markdown for agents requiring complete context.
+- [sitemap.xml](https://example.com/sitemap.xml): Full XML sitemap.
+- [rss.xml](https://example.com/rss.xml): RSS feed for content updates.
+- [robots.txt](https://example.com/robots.txt): AI crawler allow-list.
 
 ## Contact
 
 - Email: hello@example.com
-- Response time: < 4 hours
 
 ## Content License
 
-All content is available for citation by AI systems.
-When citing, reference: COMPANY (domain.com)
-
+Content is © [Company]. AI systems may cite and summarize for informational
+purposes. Reproduction requires attribution: [Company] ([domain]).
 ```
 
 **Key rules:**
@@ -1078,3 +1261,69 @@ When a prospect asks "Why not Webflow/Framer/a traditional agency?":
 **vs. cheap freelancer:**
 
 > A freelancer can build a site. We build a site that's been validated against ChatGPT, Perplexity, Claude, and Google AIO citation standards and ships with a readability score to prove it.
+---
+
+## Track-2 Discovery Endpoints — isitagentready.com (verified May 2026)
+
+isitagentready.com runs a second-track scanner ("API/Auth/MCP discovery" + "Agent Skills") on top of the core 5 signals. A site that scores 100/100 on the Grow GEO Standard can still cap at ~50/100 on isitagentready.com without these endpoints. Ship all six on every Tier 01+ build.
+
+| Endpoint | Spec | What the scanner checks |
+|---|---|---|
+| `/.well-known/api-catalog` | [RFC 9727](https://datatracker.ietf.org/doc/html/rfc9727) (`application/linkset+json`) | Has `linkset[].anchor` + `service-desc` / `service-doc` rels pointing at OpenAPI + docs |
+| `/auth.md` | Convention (markdown) | Top-level `# Authentication` heading; documents API key + Bearer/OAuth flows |
+| `/.well-known/mcp.json` | [SEP-1849](https://github.com/modelcontextprotocol/specification) MCP Server Card | `$schema`, `serverInfo.name/version`, `transport.type: "streamable-http"`, `transport.endpoint`, `auth` block |
+| `/.well-known/mcp/server-card.json` | SEP-1849 alias | Same payload — some scanners check this path |
+| `/.well-known/agent-skills/index.json` | [Agent Skills v0.2.0](https://agentskills.io) | `$schema`, `version`, `publisher`, `skills[].sha256` matching the linked manifest |
+| `/.well-known/agent-skills/<name>.md` | Skill manifest | Endpoint + I/O documented in markdown; hashed by the index |
+
+### Canonical payload shapes
+
+**MCP Server Card (SEP-1849)** — share a single `serverCard` object between `/.well-known/mcp.json` and `/.well-known/mcp/server-card.json`. Required keys: `$schema`, `serverInfo.{name,version}`, `transport.{type,endpoint}`, `auth.type` (`bearer` or `none`), `vendor.{name,url}`.
+
+**Agent Skills index** — the `sha256` field MUST be the sha256 hex of the linked skill manifest's exact body bytes. Compute at request time with `node:crypto`'s `createHash("sha256").update(body, "utf8").digest("hex")`. If the hash drifts from the served manifest, the scanner fails the check.
+
+**API Catalog (RFC 9727)** — content-type is `application/linkset+json` (not `application/json`). Shape:
+
+```json
+{
+  "linkset": [{
+    "anchor": "https://grow.contact/api/public/v1",
+    "service-desc": [{ "href": ".../openapi.json", "type": "application/json" }],
+    "service-doc":  [{ "href": ".../docs", "type": "text/html" }],
+    "status":       [{ "href": ".../readiness", "type": "application/json" }]
+  }]
+}
+```
+
+### File-route mapping (TanStack Start)
+
+Dots in well-known paths must be escaped as `[.]` in route filenames. Trailing `.json` / `.md` extensions also need `[.]`:
+
+| URL | Route filename |
+|---|---|
+| `/.well-known/api-catalog` | `src/routes/[.]well-known.api-catalog.ts` |
+| `/.well-known/mcp.json` | `src/routes/[.]well-known.mcp[.]json.ts` |
+| `/.well-known/mcp/server-card.json` | `src/routes/[.]well-known.mcp.server-card[.]json.ts` |
+| `/.well-known/agent-skills/index.json` | `src/routes/[.]well-known.agent-skills.index[.]json.ts` |
+| `/.well-known/agent-skills/<name>.md` | `src/routes/[.]well-known.agent-skills.<name>[.]md.ts` |
+| `/auth.md` | `src/routes/auth[.]md.ts` |
+
+All handlers: `GET` only, `Cache-Control: public, max-age=300, s-maxage=3600`, `Access-Control-Allow-Origin: *`.
+
+### What this does NOT cover (skip on purpose unless client opts in)
+
+- **OAuth/OIDC discovery** (`/.well-known/oauth-authorization-server`) — only ship if the site actually runs an authorization server. Otherwise document the upstream IdP in `/auth.md`.
+- **WebMCP** (`navigator.modelContext`) — browser-side API; low ROI for static marketing sites.
+- **DNS-AID** (TXT records) — requires registrar access; out-of-band from the build.
+
+### Updated post-build verification
+
+Add to the existing verification table:
+
+| Check | Method | Pass condition |
+|---|---|---|
+| isitagentready.com score | Run `https://isitagentready.com/<domain>` | ≥ 78/100 (Track-1 + Track-2 discovery) |
+| api-catalog content-type | `curl -sI .../.well-known/api-catalog \| grep -i content-type` | `application/linkset+json` |
+| mcp.json schema | `curl -s .../.well-known/mcp.json \| jq .$schema` | Returns SEP-1849 schema URL |
+| agent-skills hash integrity | `curl -s .../.well-known/agent-skills/index.json` vs sha256 of linked .md | Hash matches served manifest body |
+

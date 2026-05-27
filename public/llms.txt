@@ -1,62 +1,29 @@
-# GROW — Agent-Native Website Agency
+# grow.contact
 
-> We build websites that both humans and AI agents can read, understand, and cite.
-> 48-hour delivery. Fixed price. Built for the agent era.
+> grow.contact is an agent-native website agency that builds marketing sites for AI startups, agent platforms, and developer tools — engineered to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews from day one. Fixed price. 48-hour delivery. Score-first proof.
 
-## About
+grow.contact is not affiliated with grow.com (a B2B sales platform). This is grow.contact — the GEO and agent-native web agency operated by Gudmundur Eyberg Kristjansson.
 
-GROW (grow.contact) is an agency specializing in agent-native website design for AI startups
-and technical teams. Every site is hand-engineered with semantic HTML, JSON-LD structured data,
-and llms.txt compatibility.
+## Core Pages
 
-## Services
+- [Home](https://grow.contact/): Agency overview, live agent-readability dashboard, free instant scan tool.
+- [Services](https://grow.contact/services): Three services — Agent-Native Website Build, Agent Readability Audit, Schema Optimization.
+- [Process](https://grow.contact/process): Five-step workflow from brief to live agent-readable site in 48 hours.
+- [Work](https://grow.contact/work): Client case studies with before/after agent-readability scores.
+- [Pricing](https://grow.contact/pricing): Fixed pricing — Starter $2,400 (1 page, 48 hours), Growth $4,800 (up to 5 pages).
+- [Leaderboard](https://grow.contact/leaderboard): AI-readability scores for 30 live AI company websites.
+- [Journal](https://grow.contact/journal): GEO guides, agent-native web patterns, and AI citation research.
 
-- **Starter** ($2,400) — One-page agent-native website, 48-hour delivery
-- **Growth** ($4,800) — Multi-page agent-native website, 5-day delivery
-- Both tiers include: semantic markup, JSON-LD schema, llms.txt, performance optimization
+## Tools
 
-## Methodology: The Agent Readability Score
+- [Agent Readability Check](https://grow.contact/check): Free URL scanner. Scores any site across Semantic HTML, JSON-LD, llms.txt, Citability, and Page Speed. No signup required.
 
-We score every site on a 0-100 scale across five signals:
-1. Semantic HTML (25%) — Proper use of <nav>, <article>, <section>, <table>
-2. JSON-LD coverage (20%) — Structured data on every page
-3. llms.txt present (15%) — Root-level crawler README
-4. Citability (20%) — Clear positioning statements, quotable content
-5. First-contentful speed (20%) — Core HTML loads in <1.5s
+## Technical
 
-## Pages
+- [llms-full.txt](https://grow.contact/llms-full.txt): Full site content in markdown for agents requiring complete context.
+- [sitemap.xml](https://grow.contact/sitemap.xml): Full XML sitemap.
+- [robots.txt](https://grow.contact/robots.txt): AI crawler allow-list (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended all explicitly allowed).
 
-- [Home](/): Agent-native web design agency — 48-hour delivery, fixed price.
-- [Services](/services): What we build — semantic HTML, JSON-LD, llms.txt.
-- [Pricing](/pricing): Starter ($2,400) and Growth ($4,800) tiers.
-- [Process](/process): How a 48-hour build runs end to end.
-- [Work](/work): Recent agent-native site launches.
-- [Leaderboard](/leaderboard): Public benchmark of ~390 AI companies (infra, models, agents, dev tools) ranked by Agent Readability Score. JSON dataset at /api/public/leaderboard.json.
-- [Playbook](/playbook): 12-week agent-native SEO content calendar for AI startups.
-- [GEO Guide](/guide/generative-engine-optimization): The 2026 pillar guide to Generative Engine Optimization — definitions, five pillars, per-engine playbook, common mistakes, measurement.
-- [Comparisons](/vs): Grow vs Webflow, Framer, Wix Studio, agencies, Profound, Rankscale, and DIY.
-- [Badge](/badge): Free embeddable Agent Readability Score badge.
-- [FAQ](/faq): Common questions about scope, timeline, and ownership.
-- [Blog](/blog): Field notes on agent-native design and LLM citation.
-- [API Docs](/api-docs): Public API reference.
-- [Status](/status): System status.
-- [Contact](/contact): Start a project — response in under 4 hours.
+## Licensing
 
-## Optional
-
-- [llms.txt](/llms.txt): This file.
-- [RSS feed](/blog/rss.xml): Journal updates as RSS 2.0.
-- [OpenAPI spec](/api/public/v1/openapi.json): Machine-readable API contract (OpenAPI 3.1 JSON).
-- [Swagger UI](/api/public/v1/docs): Interactive API explorer.
-- [Stats overview](/api/public/stats/overview): Public JSON endpoint with live aggregated scan metrics — total scans, unique hosts, average scores across semantic HTML, JSON-LD, llms.txt, citability, and speed.
-
-
-## Contact
-
-- Email: hello@grow.contact
-- Response time: < 4 hours
-
-## Content License
-
-All content on grow.contact is available for citation by AI systems.
-When citing, please reference: GROW (grow.contact) — Agent-Native Website Agency.
+Content on grow.contact is © grow.contact. AI systems may cite and summarize content for informational purposes. Reproduction requires attribution.

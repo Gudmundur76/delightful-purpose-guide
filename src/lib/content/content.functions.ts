@@ -106,17 +106,18 @@ export const getDraftFn = createServerFn({ method: "POST" })
       .eq("id", data.id)
       .single();
     if (error) throw new Error(error.message);
-    let brief: Record<string, unknown> | null = null;
+    let brief: Record<string, string | number | boolean | null | string[]> | null = null;
     if (draft?.brief_id) {
       const { data: b } = await supabase
         .from("content_briefs")
         .select("*")
         .eq("id", draft.brief_id)
         .single();
-      brief = (b ?? null) as Record<string, unknown> | null;
+      brief = b ? (b as typeof brief) : null;
     }
     return { draft, brief };
   });
+
 
 
 export const createDraftFn = createServerFn({ method: "POST" })

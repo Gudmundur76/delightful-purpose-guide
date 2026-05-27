@@ -70,23 +70,37 @@ export const checkAiCitationTool = defineTool({
                 "no information",
                 "unknown",
               ];
+              const noKnowledgePhrases = [
+                "do you mean",
+                "i don't have live web access",
+                "cannot look it up",
+                "paste the homepage",
+              ];
               const hasNegation = negationPhrases.some((p) => lower.includes(p));
-              const cited = mentioned && !hasNegation;
-              const excerpt = hasNegation && mentioned
-                ? `${answer.slice(0, 240)} (mentioned but not recognised)`
-                : answer.slice(0, 280);
-              return { model, cited, excerpt };
+              const hasNoKnowledge = noKnowledgePhrases.some((p) => lower.includes(p));
+              const bareLower = bare.toLowerCase();
+              const brandConfusion =
+                bareLower.includes("grow.contact") &&
+                lower.includes("grow.com") &&
+                !lower.includes("grow.contact");
+              let note: string | undefined;
+              if (brandConfusion) note = "brand confusion: grow.com cited instead";
+              else if (hasNoKnowledge) note = "model has no knowledge of site";
+              else if (hasNegation && mentioned) note = "mentioned but not recognised";
+              const cited = mentioned && !hasNegation && !hasNoKnowledge && !brandConfusion;
+              const excerpt = note ? `${answer.slice(0, 240)} (${note})` : answer.slice(0, 280);
+              return { model, cited, excerpt, brand_confusion: brandConfusion, note };
             } catch (err) {
               return { model, cited: false, error: err instanceof Error ? err.message : String(err) };
             }
           }),
         );
-        const cited = perModel.some((r) => r.cited);
+        const cited = perModel.some((r) => r.cited && !r.brand_confusion);
         return {
           query: q,
           cited,
-          source: perModel.find((r) => r.cited)?.model ?? null,
-          excerpt: perModel.find((r) => r.cited)?.excerpt ?? perModel[0]?.excerpt ?? "",
+          source: perModel.find((r) => r.cited && !r.brand_confusion)?.model ?? null,
+          excerpt: perModel.find((r) => r.cited && !r.brand_confusion)?.excerpt ?? perModel[0]?.excerpt ?? "",
           per_model: perModel,
         };
       }),

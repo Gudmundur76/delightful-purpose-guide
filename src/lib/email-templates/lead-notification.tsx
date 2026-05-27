@@ -43,6 +43,10 @@ const LeadNotificationEmail = ({ name, email, budgetTier, message, company }: Pr
             <Text style={value}>{email ?? "—"}</Text>
           </Section>
           <Section style={row}>
+            <Text style={label}>// Company</Text>
+            <Text style={value}>{company || "—"}</Text>
+          </Section>
+          <Section style={row}>
             <Text style={label}>// Budget Tier</Text>
             <Text style={value}>{tier}</Text>
           </Section>
@@ -64,14 +68,15 @@ const LeadNotificationEmail = ({ name, email, budgetTier, message, company }: Pr
 export const template = {
   component: LeadNotificationEmail,
   subject: (data: Record<string, any>) =>
-    `New lead — ${data.name ?? "unknown"} (${data.budgetTier ?? "no tier"})`,
+    `New brief from ${data.name ?? "unknown"} — ${data.company || "no company"}`,
   displayName: "Internal lead notification",
   to: "hello@grow.contact",
   previewData: {
     name: "Jane Doe",
     email: "jane@example.com",
+    company: "acme.ai",
     budgetTier: "tier_02",
-    message: "Need a 5-page marketing site for our SaaS launch.",
+    message: "URL: acme.ai\nStage: Seed\nAudience: Developers\nBudget: $4.8k (Tier 02)\nTimeline: This week\nNotes: Need a 5-page marketing site for our SaaS launch.",
   },
 } satisfies TemplateEntry;
 

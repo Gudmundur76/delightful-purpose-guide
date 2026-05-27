@@ -35,9 +35,10 @@ export const checkAiCitationTool = defineTool({
     host: z.string().min(3).max(255).describe("Domain or brand, e.g. grow.contact"),
     query: z.string().min(3).max(500).optional().describe("Optional. If omitted, 3 default queries are run."),
     models: z
-      .array(z.enum(["perplexity/llama-3.1-sonar-large-128k-online", "perplexity/llama-3.1-sonar-small-128k-online", "openai/gpt-5"]))
+      .array(z.enum(["google/gemini-2.5-flash", "google/gemini-2.5-flash-lite", "openai/gpt-5"]))
       .max(4)
-      .default(["perplexity/llama-3.1-sonar-large-128k-online", "perplexity/llama-3.1-sonar-small-128k-online"]),
+      .default(["google/gemini-2.5-flash", "google/gemini-2.5-flash-lite"]),
+
   }),
   execute: async ({ host, query, models }) => {
     const bare = host.replace(/^https?:\/\//, "").replace(/^www\./, "");

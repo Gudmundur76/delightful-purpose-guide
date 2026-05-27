@@ -14,6 +14,7 @@ import { SmartContactForm } from "@/components/SmartContactForm";
 import { SocialProofStrip } from "@/components/SocialProofStrip";
 import { MiniChecker } from "@/components/MiniChecker";
 import { getFaqItemsFn, getPageContentFn } from "@/lib/site/content.functions";
+import { getOverviewStats } from "@/lib/check/stats.functions";
 
 
 const FAQS: { q: string; a: string }[] = [
@@ -29,6 +30,14 @@ const FAQS: { q: string; a: string }[] = [
 
 export const Route = createFileRoute("/")({
   component: Index,
+  loader: async () => {
+    try {
+      const stats = await getOverviewStats({ data: { days: 7 } });
+      return { stats };
+    } catch {
+      return { stats: null };
+    }
+  },
   head: () => ({
     meta: [
       {
@@ -97,6 +106,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { stats } = Route.useLoaderData();
+
   useEffect(() => {
     console.log(
       "%c⚡ Agent-native. Score: 100/100",
@@ -164,7 +175,7 @@ function Index() {
                 <MiniChecker />
               </div>
               <div className="lg:col-span-5 animate-in [animation-delay:150ms]">
-                <ReadabilityScore />
+                <ReadabilityScore initialData={stats} />
               </div>
             </div>
           </div>

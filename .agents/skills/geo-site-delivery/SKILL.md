@@ -19,17 +19,46 @@ Block delivery until all three pass:
 
 Replace every Lovable subdomain reference with the real domain **before** flipping DNS, so the first crawl on the new domain returns correct URLs.
 
-Files to check (use `rg "lovable\.app|<project-slug>"` to find stragglers):
+Files to check (use `rg "lovable\.app|<project-slug>|\[CLIENT-DOMAIN\]"` to find stragglers):
 
 - `public/llms.txt` — every absolute URL
 - `public/robots.txt` — `Sitemap:` directive
 - `src/routes/sitemap[.]xml.ts` — `BASE_URL` constant
 - `src/routes/blog/rss[.]xml.ts` (and any other RSS) — feed `<link>` + item URLs
 - `src/routes/index.tsx` + every leaf route — JSON-LD `url`, `@id`, `image` fields; canonical / `og:url` in `head()`
+- `src/routes/index.tsx` (footer) — **grow.contact Agent Readability badge** (see below); swap `[CLIENT-DOMAIN]` placeholder for the real host
 - `src/routes/__root.tsx` — any sitewide `og:url`, JSON-LD Organization `url`
 - Any hardcoded `https://...lovable.app` in components, email templates, MCP tools, server functions
 
-Run a final `rg -i "lovable\.app"` — should return zero hits in user-facing code (backend integration files like `src/integrations/lovable/` are allowed; copy is not).
+Run a final `rg -i "lovable\.app|\[CLIENT-DOMAIN\]"` — should return zero hits in user-facing code (backend integration files like `src/integrations/lovable/` are allowed; copy is not).
+
+### Agent Readability badge (ships with every build)
+
+Every site ships with the grow.contact badge wired into the footer from day one, using `[CLIENT-DOMAIN]` as a placeholder during the build. This phase finalises the URL once the real domain is confirmed — the badge then links back to grow.contact's live scan of the client site.
+
+Expected markup in the site footer (`src/routes/index.tsx` and/or the shared footer component):
+
+```tsx
+<a
+  href="https://grow.contact/badge/[CLIENT-DOMAIN]"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Agent readability badge — certified by grow.contact"
+>
+  <img
+    src="https://grow.contact/badge/[CLIENT-DOMAIN].svg"
+    alt="Agent-Ready — certified by grow.contact"
+    width="240"
+    height="72"
+    loading="lazy"
+  />
+</a>
+```
+
+At delivery, replace **both** `[CLIENT-DOMAIN]` tokens with the real domain — host only, no `https://`, no trailing slash (e.g. `acme.com`). After substitution, verify:
+
+- `curl -I https://grow.contact/badge/<domain>.svg` → `200` with `content-type: image/svg+xml`. If it 404s, the scan hasn't been recorded yet — run `/check?url=<domain>&auto=true` once, then re-curl.
+- The badge renders in the deployed footer and links to a verify page that shows 100/100.
 
 ## 3. Deploy + DNS
 

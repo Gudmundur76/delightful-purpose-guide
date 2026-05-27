@@ -61,6 +61,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
 import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as DotwellKnownApiCatalogRouteImport } from './routes/[.]well-known.api-catalog'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ContentDraftsIdRouteImport } from './routes/content.drafts.$id'
 import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
@@ -350,6 +351,11 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
   path: '/admin/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DotwellKnownApiCatalogRoute = DotwellKnownApiCatalogRouteImport.update({
+  id: '/.well-known/api-catalog',
+  path: '/.well-known/api-catalog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
@@ -521,6 +527,7 @@ export interface FileRoutesByFullPath {
   '/unsubscribe': typeof UnsubscribeRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
+  '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -599,6 +606,7 @@ export interface FileRoutesByTo {
   '/unsubscribe': typeof UnsubscribeRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
+  '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -680,6 +688,7 @@ export interface FileRoutesById {
   '/unsubscribe': typeof UnsubscribeRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
+  '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -762,6 +771,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/vs'
     | '/work'
+    | '/.well-known/api-catalog'
     | '/admin/leads'
     | '/admin/reviews'
     | '/badge/{$id}.svg'
@@ -840,6 +850,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/vs'
     | '/work'
+    | '/.well-known/api-catalog'
     | '/admin/leads'
     | '/admin/reviews'
     | '/badge/{$id}.svg'
@@ -920,6 +931,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/vs'
     | '/work'
+    | '/.well-known/api-catalog'
     | '/admin/leads'
     | '/admin/reviews'
     | '/badge/{$id}.svg'
@@ -1001,6 +1013,7 @@ export interface RootRouteChildren {
   UnsubscribeRoute: typeof UnsubscribeRoute
   VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
+  DotwellKnownApiCatalogRoute: typeof DotwellKnownApiCatalogRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminReviewsRoute: typeof AdminReviewsRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -1401,6 +1414,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/api-catalog': {
+      id: '/.well-known/api-catalog'
+      path: '/.well-known/api-catalog'
+      fullPath: '/.well-known/api-catalog'
+      preLoaderRoute: typeof DotwellKnownApiCatalogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/suppression': {
       id: '/lovable/email/suppression'
       path: '/lovable/email/suppression'
@@ -1721,6 +1741,7 @@ const rootRouteChildren: RootRouteChildren = {
   UnsubscribeRoute: UnsubscribeRoute,
   VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,
+  DotwellKnownApiCatalogRoute: DotwellKnownApiCatalogRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminReviewsRoute: AdminReviewsRoute,
   BlogSlugRoute: BlogSlugRoute,

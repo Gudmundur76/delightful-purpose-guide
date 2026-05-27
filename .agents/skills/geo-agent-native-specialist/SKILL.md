@@ -1261,3 +1261,69 @@ When a prospect asks "Why not Webflow/Framer/a traditional agency?":
 **vs. cheap freelancer:**
 
 > A freelancer can build a site. We build a site that's been validated against ChatGPT, Perplexity, Claude, and Google AIO citation standards and ships with a readability score to prove it.
+---
+
+## Track-2 Discovery Endpoints — isitagentready.com (verified May 2026)
+
+isitagentready.com runs a second-track scanner ("API/Auth/MCP discovery" + "Agent Skills") on top of the core 5 signals. A site that scores 100/100 on the Grow GEO Standard can still cap at ~50/100 on isitagentready.com without these endpoints. Ship all six on every Tier 01+ build.
+
+| Endpoint | Spec | What the scanner checks |
+|---|---|---|
+| `/.well-known/api-catalog` | [RFC 9727](https://datatracker.ietf.org/doc/html/rfc9727) (`application/linkset+json`) | Has `linkset[].anchor` + `service-desc` / `service-doc` rels pointing at OpenAPI + docs |
+| `/auth.md` | Convention (markdown) | Top-level `# Authentication` heading; documents API key + Bearer/OAuth flows |
+| `/.well-known/mcp.json` | [SEP-1849](https://github.com/modelcontextprotocol/specification) MCP Server Card | `$schema`, `serverInfo.name/version`, `transport.type: "streamable-http"`, `transport.endpoint`, `auth` block |
+| `/.well-known/mcp/server-card.json` | SEP-1849 alias | Same payload — some scanners check this path |
+| `/.well-known/agent-skills/index.json` | [Agent Skills v0.2.0](https://agentskills.io) | `$schema`, `version`, `publisher`, `skills[].sha256` matching the linked manifest |
+| `/.well-known/agent-skills/<name>.md` | Skill manifest | Endpoint + I/O documented in markdown; hashed by the index |
+
+### Canonical payload shapes
+
+**MCP Server Card (SEP-1849)** — share a single `serverCard` object between `/.well-known/mcp.json` and `/.well-known/mcp/server-card.json`. Required keys: `$schema`, `serverInfo.{name,version}`, `transport.{type,endpoint}`, `auth.type` (`bearer` or `none`), `vendor.{name,url}`.
+
+**Agent Skills index** — the `sha256` field MUST be the sha256 hex of the linked skill manifest's exact body bytes. Compute at request time with `node:crypto`'s `createHash("sha256").update(body, "utf8").digest("hex")`. If the hash drifts from the served manifest, the scanner fails the check.
+
+**API Catalog (RFC 9727)** — content-type is `application/linkset+json` (not `application/json`). Shape:
+
+```json
+{
+  "linkset": [{
+    "anchor": "https://grow.contact/api/public/v1",
+    "service-desc": [{ "href": ".../openapi.json", "type": "application/json" }],
+    "service-doc":  [{ "href": ".../docs", "type": "text/html" }],
+    "status":       [{ "href": ".../readiness", "type": "application/json" }]
+  }]
+}
+```
+
+### File-route mapping (TanStack Start)
+
+Dots in well-known paths must be escaped as `[.]` in route filenames. Trailing `.json` / `.md` extensions also need `[.]`:
+
+| URL | Route filename |
+|---|---|
+| `/.well-known/api-catalog` | `src/routes/[.]well-known.api-catalog.ts` |
+| `/.well-known/mcp.json` | `src/routes/[.]well-known.mcp[.]json.ts` |
+| `/.well-known/mcp/server-card.json` | `src/routes/[.]well-known.mcp.server-card[.]json.ts` |
+| `/.well-known/agent-skills/index.json` | `src/routes/[.]well-known.agent-skills.index[.]json.ts` |
+| `/.well-known/agent-skills/<name>.md` | `src/routes/[.]well-known.agent-skills.<name>[.]md.ts` |
+| `/auth.md` | `src/routes/auth[.]md.ts` |
+
+All handlers: `GET` only, `Cache-Control: public, max-age=300, s-maxage=3600`, `Access-Control-Allow-Origin: *`.
+
+### What this does NOT cover (skip on purpose unless client opts in)
+
+- **OAuth/OIDC discovery** (`/.well-known/oauth-authorization-server`) — only ship if the site actually runs an authorization server. Otherwise document the upstream IdP in `/auth.md`.
+- **WebMCP** (`navigator.modelContext`) — browser-side API; low ROI for static marketing sites.
+- **DNS-AID** (TXT records) — requires registrar access; out-of-band from the build.
+
+### Updated post-build verification
+
+Add to the existing verification table:
+
+| Check | Method | Pass condition |
+|---|---|---|
+| isitagentready.com score | Run `https://isitagentready.com/<domain>` | ≥ 78/100 (Track-1 + Track-2 discovery) |
+| api-catalog content-type | `curl -sI .../.well-known/api-catalog \| grep -i content-type` | `application/linkset+json` |
+| mcp.json schema | `curl -s .../.well-known/mcp.json \| jq .$schema` | Returns SEP-1849 schema URL |
+| agent-skills hash integrity | `curl -s .../.well-known/agent-skills/index.json` vs sha256 of linked .md | Hash matches served manifest body |
+

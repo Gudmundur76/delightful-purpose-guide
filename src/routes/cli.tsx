@@ -19,7 +19,6 @@ export const Route = createFileRoute("/cli")({
       },
       { property: "og:url", content: "https://grow.contact/cli" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
       ...ogImageMeta({
         title: "grow CLI — Agent-Readiness Scanner for Your Terminal",
         kicker: "Grow",

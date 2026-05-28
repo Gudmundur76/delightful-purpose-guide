@@ -24,7 +24,6 @@ export const Route = createFileRoute("/compare")({
         { property: "og:type", content: "website" },
         { name: "twitter:title", content: TITLE },
         { name: "twitter:description", content: DESC },
-      { name: "twitter:card", content: "summary_large_image" },
         ...ogImageMeta({
         title: "Agent-Readability Head-to-Heads — Compare AI Companies",
         kicker: "Grow",

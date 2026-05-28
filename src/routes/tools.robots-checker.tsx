@@ -25,7 +25,6 @@ export const Route = createFileRoute("/tools/robots-checker")({
       { property: "og:type", content: "website" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
-      { name: "twitter:card", content: "summary_large_image" },
       ...ogImageMeta({
         title: "robots.txt Checker for AI Crawlers — Free Tool",
         kicker: "Grow",

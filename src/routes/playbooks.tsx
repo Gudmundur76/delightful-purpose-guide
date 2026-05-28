@@ -22,7 +22,6 @@ export const Route = createFileRoute("/playbooks")({
       { property: "og:type", content: "website" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
-      { name: "twitter:card", content: "summary_large_image" },
       ...ogImageMeta({
         title: "GEO Playbooks — Step-by-Step AI Citation Tactics",
         kicker: "Grow",

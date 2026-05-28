@@ -22,7 +22,6 @@ export const Route = createFileRoute("/crawlers")({
       { property: "og:type", content: "website" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
-      { name: "twitter:card", content: "summary_large_image" },
       ...ogImageMeta({
         title: "AI Crawler Reference — OAI-SearchBot, PerplexityBot, ClaudeBot & More",
         kicker: "Grow",

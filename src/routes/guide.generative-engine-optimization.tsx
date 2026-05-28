@@ -75,7 +75,6 @@ export const Route = createFileRoute("/guide/generative-engine-optimization")({
       { property: "article:author", content: "Grow" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
-      { name: "twitter:card", content: "summary_large_image" },
       ...ogImageMeta({
         title: "Generative Engine Optimization: The 2026 Guide (GEO)",
         kicker: "Grow",

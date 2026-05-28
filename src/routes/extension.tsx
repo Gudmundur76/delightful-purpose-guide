@@ -15,7 +15,6 @@ export const Route = createFileRoute("/extension")({
       { property: "og:description", content: DESC },
       { property: "og:url", content: PAGE_URL },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
       ...ogImageMeta({
         title: "Grow GEO Browser Extension — One-Click Agent Readability Score",
         kicker: "Grow",

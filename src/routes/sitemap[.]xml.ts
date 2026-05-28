@@ -2,6 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { getAllPosts } from "@/lib/blog/posts";
 import { getAllComparisons } from "@/lib/comparisons/data";
+import { GLOSSARY } from "@/lib/glossary/data";
+import { CRAWLERS } from "@/lib/crawlers/data";
+
 
 const BASE_URL = "https://grow.contact";
 
@@ -48,12 +51,25 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/status", lastmod: today, changefreq: "weekly", priority: "0.4" },
           { path: "/llms", lastmod: today, changefreq: "monthly", priority: "0.4" },
           { path: "/unsubscribe", lastmod: today, changefreq: "yearly", priority: "0.3" },
-          { path: "/rss.xml", lastmod: today, changefreq: "weekly", priority: "0.5" },
-          { path: "/leaderboard", lastmod: today, changefreq: "weekly", priority: "0.9" },
-          { path: "/leaderboard/methodology", lastmod: today, changefreq: "monthly", priority: "0.7" },
           { path: "/vs", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/playbook", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/outreach", lastmod: today, changefreq: "monthly", priority: "0.6" },
+          { path: "/glossary", lastmod: today, changefreq: "monthly", priority: "0.8" },
+          { path: "/crawlers", lastmod: today, changefreq: "monthly", priority: "0.8" },
+          ...GLOSSARY.map<SitemapEntry>((t) => ({
+            path: `/glossary/${t.slug}`,
+            lastmod: today,
+            changefreq: "monthly",
+            priority: "0.6",
+          })),
+          ...CRAWLERS.map<SitemapEntry>((c) => ({
+            path: `/crawlers/${c.slug}`,
+            lastmod: today,
+            changefreq: "monthly",
+            priority: "0.7",
+          })),
+          { path: "/sop", lastmod: today, changefreq: "monthly", priority: "0.5" },
+
           { path: "/sop", lastmod: today, changefreq: "monthly", priority: "0.5" },
           { path: "/auth.md", lastmod: today, changefreq: "monthly", priority: "0.3" },
           { path: "/llms-full.txt", lastmod: today, changefreq: "weekly", priority: "0.4" },

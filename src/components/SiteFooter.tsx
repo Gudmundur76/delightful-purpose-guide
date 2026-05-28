@@ -19,10 +19,13 @@ export function SiteFooter() {
             <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Resources</h5>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="/blog" className="hover:text-foreground transition-colors">Journal</Link></li>
+              <li><Link to="/glossary" className="hover:text-foreground transition-colors">Glossary</Link></li>
+              <li><Link to="/crawlers" className="hover:text-foreground transition-colors">AI Crawlers</Link></li>
               <li><a href="/llms.txt" className="hover:text-foreground transition-colors">llms.txt</a></li>
               <li><Link to="/api-docs" className="hover:text-foreground transition-colors">API Docs</Link></li>
               <li><Link to="/status" className="hover:text-foreground transition-colors">Status</Link></li>
             </ul>
+
           </div>
           <div>
             <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Contact</h5>

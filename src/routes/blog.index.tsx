@@ -104,10 +104,11 @@ function BlogIndex() {
         </div>
       </section>
 
-      <section>
+      <section aria-labelledby="blog-posts-heading">
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid lg:grid-cols-12 gap-12">
           {/* Cards */}
           <div className="lg:col-span-8 grid gap-6">
+            <h2 id="blog-posts-heading" className="sr-only">Latest articles</h2>
             {posts.map((post) => (
               <PostCard key={post.slug} post={post} />
             ))}

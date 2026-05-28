@@ -367,6 +367,97 @@ export const scanUrl = createServerFn({ method: "POST" })
         : "△ No Content-Signal in robots.txt (search/ai-train/ai-input)",
     ];
 
+    // -------- Agent Auth (bonus, added in geo-standard@2026.07) --------
+    // Mirrors isitagentready.com checks: /auth.md + the two OAuth discovery
+    // documents + a valid agent_auth block + Link headers + live
+    // register_uri / claim_uri / revocation_uri (no 404 stubs).
+    // Excluded from the weighted overall — surfaced as an optional bonus.
+    log.push(`$ probe --agent-auth`);
+    let authMdOk = false;
+    let authMdHasLink = false;
+    try {
+      const r = await fetchWithTimeout(`${origin}/auth.md`, 4000);
+      const ct = r.res.headers.get("content-type") ?? "";
+      authMdOk = r.res.ok && /markdown|text\/plain/i.test(ct) && r.text.trim().length > 32;
+      authMdHasLink = /\boauth-authorization-server\b/i.test(r.res.headers.get("link") ?? "");
+    } catch { /* leave false */ }
+
+    let oprOk = false;
+    let oprHasLink = false;
+    try {
+      const r = await fetchWithTimeout(`${origin}/.well-known/oauth-protected-resource`, 4000);
+      if (r.res.ok && /json/i.test(r.res.headers.get("content-type") ?? "")) {
+        try {
+          const parsed = JSON.parse(r.text);
+          oprOk = !!parsed && typeof parsed === "object" && "resource" in parsed && "authorization_servers" in parsed;
+        } catch { /* invalid json */ }
+      }
+      oprHasLink = /\boauth-authorization-server\b/i.test(r.res.headers.get("link") ?? "");
+    } catch { /* leave false */ }
+
+    let oasOk = false;
+    let agentAuthOk = false;
+    let registerOk = false;
+    let claimOk = false;
+    let revocationOk = false;
+    try {
+      const r = await fetchWithTimeout(`${origin}/.well-known/oauth-authorization-server`, 4000);
+      if (r.res.ok && /json/i.test(r.res.headers.get("content-type") ?? "")) {
+        try {
+          const parsed = JSON.parse(r.text) as Record<string, unknown>;
+          oasOk = typeof parsed === "object" && parsed !== null && "issuer" in parsed;
+          const aa = parsed["agent_auth"] as Record<string, unknown> | undefined;
+          if (aa && typeof aa === "object") {
+            const hasRegister = typeof aa["register_uri"] === "string";
+            const hasIdentities = Array.isArray(aa["identity_types_supported"]) && (aa["identity_types_supported"] as unknown[]).length > 0;
+            const hasCredentials = Array.isArray(aa["credential_types_supported"]) && (aa["credential_types_supported"] as unknown[]).length > 0;
+            agentAuthOk = hasRegister && hasIdentities && hasCredentials;
+
+            // Probe register/claim/revocation reachability (HEAD; treat 2xx/401/405 as "exists").
+            const aliveCheck = async (u: unknown): Promise<boolean> => {
+              if (typeof u !== "string") return false;
+              try {
+                const probe = await fetch(u, { method: "HEAD", redirect: "follow" });
+                return probe.status < 400 || probe.status === 401 || probe.status === 405;
+              } catch { return false; }
+            };
+            [registerOk, claimOk, revocationOk] = await Promise.all([
+              aliveCheck(aa["register_uri"]),
+              aliveCheck(aa["claim_uri"]),
+              aliveCheck(aa["revocation_uri"]),
+            ]);
+          }
+        } catch { /* invalid json */ }
+      }
+    } catch { /* leave false */ }
+
+    const allLinkHeaders = authMdHasLink && oprHasLink;
+    const liveEndpointsCount = [registerOk, claimOk, revocationOk].filter(Boolean).length;
+
+    const agentAuthChecks = [
+      { ok: authMdOk, pts: 25, label: "/auth.md" },
+      { ok: oprOk, pts: 25, label: "/.well-known/oauth-protected-resource" },
+      { ok: oasOk && agentAuthOk, pts: 30, label: "agent_auth block" },
+      { ok: allLinkHeaders, pts: 10, label: "Link headers" },
+      { ok: liveEndpointsCount === 3, pts: 10, label: "register/claim/revocation reachable" },
+    ];
+    const agentAuthScore = clamp(agentAuthChecks.reduce((s, c) => s + (c.ok ? c.pts : 0), 0));
+    log.push(`→ auth.md=${authMdOk ? "yes" : "no"} · opr=${oprOk ? "yes" : "no"} · oas=${oasOk ? "yes" : "no"} · agent_auth=${agentAuthOk ? "yes" : "no"} · live=${liveEndpointsCount}/3`);
+
+    const agentAuthDetails: string[] = [
+      authMdOk ? "✓ /auth.md served with markdown content-type" : "✗ /auth.md missing or wrong content-type",
+      oprOk ? "✓ /.well-known/oauth-protected-resource valid (RFC 9728)" : "✗ /.well-known/oauth-protected-resource missing or invalid",
+      oasOk
+        ? agentAuthOk
+          ? "✓ oauth-authorization-server includes agent_auth block with register_uri + identity_types + credential_types"
+          : "△ oauth-authorization-server present but agent_auth block missing required fields"
+        : "✗ /.well-known/oauth-authorization-server missing or invalid",
+      allLinkHeaders ? "✓ Link headers cross-reference discovery endpoints" : "△ Add Link: <…oauth-authorization-server>; rel=\"oauth-authorization-server\" to /auth.md and /.well-known/oauth-protected-resource",
+      liveEndpointsCount === 3
+        ? "✓ register_uri, claim_uri, and revocation_uri all resolve"
+        : `△ ${liveEndpointsCount}/3 of register/claim/revocation URIs resolve — 404 stubs disqualify the block`,
+    ];
+
     log.push(`$ compile report.json`);
 
     const metrics: ScanMetric[] = [

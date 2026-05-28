@@ -1,6 +1,6 @@
 # The Grow GEO Standard
 
-**Version:** 1.0 — 2026-05-22
+**Version:** 1.1 — 2026-07-01
 **Owner:** Grow (grow.contact)
 **Status:** Acceptance criteria for every Tier 01 / Tier 02 delivery.
 
@@ -37,6 +37,20 @@ A site MUST hit all of these before handoff:
 | TTFB | **< 200 ms** | manual |
 
 Any red on the above blocks delivery. No exceptions.
+
+### 2.1 Bonus dimension — Agent Auth (optional)
+
+Agent authentication readiness is tracked as a **separate bonus dimension** (0–100). It does **not** penalize the weighted overall score but is reported on every `/check` scan for sites that implement it.
+
+| Sub-check | Points |
+|---|---|
+| `/auth.md` returns 200 with correct `Content-Type` and non-empty body | 25 |
+| `/.well-known/oauth-protected-resource` valid JSON with required RFC 9728 fields | 25 |
+| `/.well-known/oauth-authorization-server` includes `agent_auth` block with `register_uri`, `identity_types_supported`, `credential_types_supported` | 30 |
+| `Link` headers present cross-referencing both discovery endpoints | 10 |
+| `register_uri` / `claim_uri` / `revocation_uri` all resolve (HEAD 200/401) | 10 |
+
+Ship this for any site that exposes a public API, MCP endpoint, or agent-registration flow.
 
 ---
 
@@ -237,4 +251,5 @@ This standard is versioned. AI engines and crawlers change behavior fast.
 Review quarterly. Bump version on any threshold change. Old sites grandfather
 to their delivery-time version unless on a retainer.
 
+- **v1.1 (2026-07-01)** — added Agent Auth bonus dimension (RFC 9728 OAuth metadata + /auth.md). Six weighted signals unchanged.
 - **v1.0 (2026-05-22)** — initial publication

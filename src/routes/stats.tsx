@@ -102,7 +102,10 @@ function StatCard({ id, value, label, blurb, cite }: StatCardProps) {
 }
 
 function StatsPage() {
-  const { stats: s, sample } = Route.useLoaderData();
+  const { stats: s, sample } = Route.useLoaderData() as {
+    stats: ReturnType<typeof computeHeadlineStats>;
+    sample: number;
+  };
 
   const cards: StatCardProps[] = [
     {

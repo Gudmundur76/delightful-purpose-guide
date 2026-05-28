@@ -19,15 +19,13 @@ export const Route = createFileRoute("/leaderboard")({
   validateSearch: searchSchema,
   component: LeaderboardPage,
   head: () => {
-    const top = getLeaderboard().slice(0, 5).map((e) => e.name).join(", ");
     return {
       meta: [
         { title: `Agent Readability Leaderboard — ${LEADERBOARD.length} AI Sites | Grow` },
         {
           name: "description",
           content:
-            `Public benchmark ranking ${LEADERBOARD.length} AI companies across infra, models, agents, and dev tools on how well ChatGPT, Perplexity, and Claude can read and cite their sites. Top 5: ` +
-            top + ".",
+            `Public benchmark ranking ${LEADERBOARD.length} AI companies on how well ChatGPT, Perplexity, and Claude read and cite their sites.`,
         },
         { property: "og:title", content: `Agent Readability Leaderboard — ${LEADERBOARD.length} AI Sites` },
         {

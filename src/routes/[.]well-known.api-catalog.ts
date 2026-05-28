@@ -48,6 +48,21 @@ const linkset = {
         },
       ],
     },
+    {
+      anchor: `${BASE}/api/public/oauth/token`,
+      "service-desc": [
+        {
+          href: `${BASE}/.well-known/oauth-authorization-server`,
+          type: "application/json",
+        },
+      ],
+      "service-doc": [
+        {
+          href: `${BASE}/auth.md`,
+          type: "text/markdown",
+        },
+      ],
+    },
   ],
 };
 

@@ -28,6 +28,9 @@ const FAQS: { q: string; a: string }[] = [
   { q: "Do you handle hosting and post-launch fixes?", a: "We deploy to your hosting of choice (Vercel, Netlify, Cloudflare) and fix any genuine bugs free for 14 days after launch. Ongoing maintenance is available as a monthly retainer if you want it." },
 ];
 
+type FaqItem = { q: string; a: string };
+type FaqRow = { question: string; answer: string };
+
 export const Route = createFileRoute("/")({
   component: Index,
 
@@ -129,7 +132,7 @@ function Index() {
 
 
   const faqItems = (faqData && faqData.length > 0)
-    ? faqData.map((d) => ({ q: d.question, a: d.answer }))
+    ? faqData.map((d: FaqRow) => ({ q: d.question, a: d.answer }))
     : FAQS;
   const heroEyebrow = homeContent?.hero_eyebrow ?? "// Agent-Native Website Agency";
   const heroHeadlinePrefix = homeContent?.hero_headline_prefix ?? "Built for";
@@ -209,7 +212,7 @@ function Index() {
                 __html: JSON.stringify({
                   "@context": "https://schema.org",
                   "@type": "FAQPage",
-                  mainEntity: faqItems.map((f) => ({
+                  mainEntity: faqItems.map((f: FaqItem) => ({
                     "@type": "Question",
                     name: f.q,
                     acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -222,7 +225,7 @@ function Index() {
               <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">FAQ</h2>
             </div>
             <div className="space-y-8 sm:space-y-10">
-              {faqItems.map((f) => (
+              {faqItems.map((f: FaqItem) => (
                 <article key={f.q}>
                   <p className="font-bold uppercase tracking-tighter text-base sm:text-lg">{f.q}</p>
                   <p className="text-muted-foreground text-sm mt-2 leading-relaxed">{f.a}</p>

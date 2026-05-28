@@ -4,7 +4,23 @@ import { createFileRoute } from "@tanstack/react-router";
 
 const body = `# auth.md
 
-grow.contact uses simple API key authentication for its public REST API and bearer-token authentication for its MCP endpoint.
+Agent registration and authentication metadata for grow.contact.
+
+## OAuth metadata
+
+- Protected-resource metadata: https://grow.contact/.well-known/oauth-protected-resource
+- Authorization-server metadata: https://grow.contact/.well-known/oauth-authorization-server
+- Token endpoint: https://grow.contact/api/public/oauth/token
+- JWKS: https://grow.contact/.well-known/jwks.json
+
+## Agent registration
+
+grow.contact supports anonymous agent registration by human request. Request an API key for the public REST API or an MCP bearer token via https://grow.contact/contact.
+
+- Identity type: anonymous
+- Credential types: api_key, bearer_token
+- Claim URI: https://grow.contact/contact
+- Register URI: https://grow.contact/contact
 
 ## REST API — \`x-api-key\`
 

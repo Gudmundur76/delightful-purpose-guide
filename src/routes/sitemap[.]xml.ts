@@ -125,7 +125,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/.well-known/jwks.json", lastmod: today, changefreq: "monthly", priority: "0.3" },
           { path: "/.well-known/mcp.json", lastmod: today, changefreq: "monthly", priority: "0.3" },
           { path: "/.well-known/oauth-authorization-server", lastmod: today, changefreq: "monthly", priority: "0.3" },
-          { path: "/.well-known/oauth-protected-resource", lastmod: today, changefreq: "monthly", priority: "0.3" },
           ...getAllComparisons()
             .filter((c) => c.slug !== "webflow" && c.slug !== "framer")
             .map<SitemapEntry>((c) => ({
@@ -133,6 +132,7 @@ export const Route = createFileRoute("/sitemap.xml")({
               lastmod: today,
               changefreq: "monthly",
               priority: "0.8",
+            })),
           ...posts.map<SitemapEntry>((p) => ({
             path: `/blog/${p.slug}`,
             lastmod: p.publishedAt,
@@ -145,7 +145,6 @@ export const Route = createFileRoute("/sitemap.xml")({
             changefreq: "weekly",
             priority: "0.6",
           })),
-        ];
         ];
 
         const urls = entries.map((e) =>

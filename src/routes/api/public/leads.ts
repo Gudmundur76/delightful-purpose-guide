@@ -130,6 +130,17 @@ export const Route = createFileRoute("/api/public/leads")({
             message: data.message,
           }).catch((e) => console.error("lead qualification failed", e));
 
+          // Composio: fan out "new brief" to every client with HubSpot connected.
+          await import("@/lib/composio/triggers.server")
+            .then((m) =>
+              m.onBriefSubmitted({
+                briefTitle: data.message.slice(0, 80) || `Lead from ${data.name}`,
+                briefId: leadId,
+                email: data.email,
+              }),
+            )
+            .catch((e) => console.error("composio onBriefSubmitted failed", e));
+
           return new Response(JSON.stringify({ success: true, id: leadId }), {
             status: 200,
             headers: { "Content-Type": "application/json", ...corsHeaders },

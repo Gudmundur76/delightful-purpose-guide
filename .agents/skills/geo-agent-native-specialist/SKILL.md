@@ -1480,3 +1480,93 @@ Multi-page sites have multiple `<nav>`, `<section>`, and `<aside>` regions — w
 | isitagentready.com | Run `https://isitagentready.com/<domain>` | ≥ 85/100 |
 
 If any check fails — fix before handover. The Tier-1 pass is the difference between "site exists" and "site gets cited."
+
+---
+
+## auth.md + OAuth Discovery for Agent Registration (verified May 2026)
+
+isitagentready.com's Track-2 scanner checks for **agent registration metadata** beyond the six well-known endpoints listed above. A site can pass api-catalog, mcp.json, and agent-skills checks and still fail the `agent_auth` discovery check, capping the Track-2 score. The fix is three coordinated endpoints with a shared metadata source.
+
+### The three endpoints (ship together or fail together)
+
+| Endpoint | Spec | Required body shape |
+|---|---|---|
+| `/auth.md` | [auth.md convention](https://github.com/workos/auth.md) — WorkOS-led | Top-level `# auth.md` heading; sections for registration URL, identity types, credential types, claim/revocation URLs |
+| `/.well-known/oauth-protected-resource` | [RFC 9728](https://datatracker.ietf.org/doc/html/rfc9728) Protected Resource Metadata | `resource`, `resource_name`, `authorization_servers[]`, `bearer_methods_supported`, `resource_documentation` (link to `/auth.md`) |
+| `/.well-known/oauth-authorization-server` | [RFC 8414](https://datatracker.ietf.org/doc/html/rfc8414) + `agent_auth` extension | Standard AS metadata **plus** an `agent_auth` block with `skill`, `register_uri`, `identity_types_supported`, `credential_types_supported`, optional `claim_uri` + `revocation_uri` |
+
+### The `agent_auth` block (the new piece)
+
+This is the field isitagentready.com explicitly checks for. Embed inside `/.well-known/oauth-authorization-server`:
+
+```json
+{
+  "agent_auth": {
+    "skill": "https://<domain>/auth.md",
+    "register_uri": "https://<domain>/api/public/v1/agent/register",
+    "identity_types_supported": ["anonymous"],
+    "credential_types_supported": ["api_key", "access_token"],
+    "claim_uri": "https://<domain>/api/public/v1/agent/claim",
+    "revocation_uri": "https://<domain>/api/public/v1/agent/revoke"
+  }
+}
+```
+
+**Field semantics:**
+- `skill` → MUST point at the site's own `/auth.md` (not the upstream WorkOS spec URL — the scanner reads this to verify the site self-documents)
+- `identity_types_supported` → `["anonymous"]` for sites that issue API keys without account creation; `["email","oauth"]` if real user signup is required
+- `credential_types_supported` → always include `api_key` for sites that issue static keys; add `access_token` if OAuth flow is live
+- `claim_uri` / `revocation_uri` → omit if not implemented (do not stub with 404 routes — scanner penalizes broken links)
+
+### Centralize metadata in `src/lib/agent-protocol.ts`
+
+Define `oauthProtectedResourceMetadata()`, `oauthAuthorizationServerMetadata()`, and `authMarkdown()` as exported functions in a single module. Import into all three route handlers. This prevents the drift failure mode where `/auth.md` documents one set of credential types and `oauth-authorization-server` advertises a different set.
+
+### Response header invariants
+
+All three endpoints MUST return:
+- `Content-Type`: `text/markdown; charset=utf-8` for `/auth.md`; `application/json; charset=utf-8` for the two `.well-known` endpoints
+- `Cache-Control: public, max-age=300, s-maxage=3600`
+- `Access-Control-Allow-Origin: *`
+- `Link: </auth.md>; rel="service-doc"; type="text/markdown"` — the `Link` header is what RFC 9728 clients use to discover `auth.md` without parsing the JSON body. Add it on **all three** endpoints, not just the protected-resource one.
+
+### SSR loader hydration trap (cross-cutting)
+
+When centralizing metadata also forced a homepage loader change: passing pre-fetched query data into `useQuery` requires `initialData` (not just calling `ensureQueryData` in the loader), otherwise React hydration fails with "server rendered text didn't match the client" because the loader fetches fresh data but the client `useQuery` re-fetches without seeding.
+
+**Pattern:**
+```tsx
+// route loader
+loader: async ({ context }) => {
+  await context.queryClient.ensureQueryData(faqQueryOptions);
+  return { faqItems: context.queryClient.getQueryData(faqQueryOptions.queryKey) };
+},
+
+// component
+const { faqItems: initial } = Route.useLoaderData();
+const { data } = useQuery({ ...faqQueryOptions, initialData: initial });
+```
+
+Without `initialData`, SSR HTML and first client render diverge → hydration error → tree regenerates client-side → flicker + lost SEO snapshot.
+
+### Verification curls
+
+```bash
+curl -sI https://<d>/auth.md                                       | grep -iE 'content-type|link'
+curl -sI https://<d>/.well-known/oauth-protected-resource          | grep -iE 'content-type|link'
+curl -s  https://<d>/.well-known/oauth-authorization-server        | jq '.agent_auth'
+# agent_auth.skill MUST equal https://<d>/auth.md (self-reference, not upstream spec)
+```
+
+If `agent_auth.skill` points at `workos.com/auth.md` or `github.com/workos/auth.md`, the scanner flags the site as un-self-documented and the check fails even though the JSON parses.
+
+### What this adds to the Tier-1 checklist
+
+Add to the Post-Tier-1 verification table:
+
+| Check | Command | Pass condition |
+|---|---|---|
+| auth.md served as markdown | `curl -sI https://<d>/auth.md \| grep -i content-type` | `text/markdown; charset=utf-8` |
+| Protected Resource Metadata live | `curl -s https://<d>/.well-known/oauth-protected-resource \| jq .resource` | Returns site origin URL |
+| agent_auth block present | `curl -s https://<d>/.well-known/oauth-authorization-server \| jq .agent_auth.skill` | Equals `https://<d>/auth.md` |
+| Link header on all three | `curl -sI <each-endpoint> \| grep -i link` | Contains `rel="service-doc"` to `/auth.md` |

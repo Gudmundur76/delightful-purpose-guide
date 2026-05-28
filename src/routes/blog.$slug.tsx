@@ -49,6 +49,7 @@ export const Route = createFileRoute("/blog/$slug")({
     const { post } = loaderData;
     const url = `https://grow.contact/blog/${post.slug}`;
     const updatedAt = post.updatedAt ?? POSTS_REVIEWED_AT;
+    const ogImage = `https://grow.contact/api/public/widget/og.svg?kicker=${encodeURIComponent("Journal")}&title=${encodeURIComponent(post.title)}&sub=${encodeURIComponent(post.description)}`;
     return {
       meta: [
         { title: post.title.length > 53 ? post.title : `${post.title} — Grow` },
@@ -57,10 +58,19 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:description", content: post.description },
         { property: "og:url", content: url },
         { property: "og:type", content: "article" },
+        { property: "og:image", content: ogImage },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+        { property: "og:image:alt", content: post.title },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: ogImage },
+        { name: "twitter:title", content: post.title },
+        { name: "twitter:description", content: post.description },
         { property: "article:published_time", content: post.publishedAt },
         { property: "article:modified_time", content: updatedAt },
       ],
       links: [{ rel: "canonical", href: url }],
+
       scripts: [
         {
           type: "application/ld+json",

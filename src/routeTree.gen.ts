@@ -113,6 +113,7 @@ import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/l
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as ApiPublicWidgetOgDotsvgRouteImport } from './routes/api/public/widget/og[.]svg'
 import { Route as ApiPublicWidgetEmbedDotjsRouteImport } from './routes/api/public/widget/embed[.]js'
 import { Route as ApiPublicWidgetBadgeDotsvgRouteImport } from './routes/api/public/widget/badge[.]svg'
 import { Route as ApiPublicV1SpecsRouteImport } from './routes/api/public/v1/specs'
@@ -664,6 +665,11 @@ const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   path: '/lovable/email/auth/preview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicWidgetOgDotsvgRoute = ApiPublicWidgetOgDotsvgRouteImport.update({
+  id: '/api/public/widget/og.svg',
+  path: '/api/public/widget/og.svg',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicWidgetEmbedDotjsRoute =
   ApiPublicWidgetEmbedDotjsRouteImport.update({
     id: '/api/public/widget/embed.js',
@@ -870,6 +876,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
+  '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -991,6 +998,7 @@ export interface FileRoutesByTo {
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
+  '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -1115,6 +1123,7 @@ export interface FileRoutesById {
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
+  '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -1240,6 +1249,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
+    | '/api/public/widget/og.svg'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -1361,6 +1371,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
+    | '/api/public/widget/og.svg'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -1484,6 +1495,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
+    | '/api/public/widget/og.svg'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -1584,6 +1596,7 @@ export interface RootRouteChildren {
   ApiPublicV1SpecsRoute: typeof ApiPublicV1SpecsRoute
   ApiPublicWidgetBadgeDotsvgRoute: typeof ApiPublicWidgetBadgeDotsvgRoute
   ApiPublicWidgetEmbedDotjsRoute: typeof ApiPublicWidgetEmbedDotjsRoute
+  ApiPublicWidgetOgDotsvgRoute: typeof ApiPublicWidgetOgDotsvgRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -2324,6 +2337,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/widget/og.svg': {
+      id: '/api/public/widget/og.svg'
+      path: '/api/public/widget/og.svg'
+      fullPath: '/api/public/widget/og.svg'
+      preLoaderRoute: typeof ApiPublicWidgetOgDotsvgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/widget/embed.js': {
       id: '/api/public/widget/embed.js'
       path: '/api/public/widget/embed.js'
@@ -2743,6 +2763,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicV1SpecsRoute: ApiPublicV1SpecsRoute,
   ApiPublicWidgetBadgeDotsvgRoute: ApiPublicWidgetBadgeDotsvgRoute,
   ApiPublicWidgetEmbedDotjsRoute: ApiPublicWidgetEmbedDotjsRoute,
+  ApiPublicWidgetOgDotsvgRoute: ApiPublicWidgetOgDotsvgRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,

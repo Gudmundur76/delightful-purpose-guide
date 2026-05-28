@@ -1,5 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getPost, getAllPosts, POSTS_REVIEWED_AT } from "@/lib/blog/posts";
+import { ogImageMeta } from "@/lib/seo/og";
+
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {

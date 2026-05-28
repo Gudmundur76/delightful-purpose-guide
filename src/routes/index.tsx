@@ -31,6 +31,21 @@ const FAQS: { q: string; a: string }[] = [
 export const Route = createFileRoute("/")({
   component: Index,
 
+  loader: async ({ context }) => {
+    // Prefetch FAQ + home content so SSR HTML and JSON-LD reflect DB state
+    // and stay in sync with what the user sees after hydration.
+    await Promise.all([
+      context.queryClient.ensureQueryData({
+        queryKey: ["faq-items"],
+        queryFn: () => getFaqItemsFn(),
+      }),
+      context.queryClient.ensureQueryData({
+        queryKey: ["site-content", "home"],
+        queryFn: () => getPageContentFn({ data: "home" }),
+      }),
+    ]);
+  },
+
   head: () => ({
     meta: [
       {
@@ -66,17 +81,6 @@ export const Route = createFileRoute("/")({
               "@type": "WebSite",
               name: "Grow",
               url: "https://grow.contact/",
-            },
-            {
-              "@type": "FAQPage",
-              mainEntity: FAQS.map((f) => ({
-                "@type": "Question",
-                name: f.q,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: f.a,
-                },
-              })),
             },
             {
               "@type": "Service",
@@ -194,6 +198,22 @@ function Index() {
         {/* FAQ */}
         <section className="border-t border-border">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+            {/* FAQPage JSON-LD generated from the same source the UI renders,
+                so visible Q&A and structured data can never drift. */}
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  mainEntity: faqItems.map((f) => ({
+                    "@type": "Question",
+                    name: f.q,
+                    acceptedAnswer: { "@type": "Answer", text: f.a },
+                  })),
+                }),
+              }}
+            />
             <div className="mb-10">
               <p className="font-mono text-accent text-xs mb-3 uppercase tracking-[0.2em]">// Questions</p>
               <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">FAQ</h2>

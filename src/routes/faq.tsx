@@ -6,23 +6,21 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { getFaqItemsFn } from "@/lib/site/content.functions";
 
 
-const FAQS: { q: string; a: string }[] = [
+// Fallback only used if the DB returns no rows (e.g. cold-start error).
+const FALLBACK_FAQS: { q: string; a: string }[] = [
   { q: "What does \"agent-native\" actually mean?", a: "Every page ships with semantic HTML, JSON-LD (Organization, Product, FAQ, BreadcrumbList), an llms.txt at the root, OpenGraph + Twitter cards, and a clean sitemap. The result: ChatGPT, Perplexity, Claude, and Google AI Overviews can read, cite, and link to your product without guessing." },
   { q: "Who is this actually for?", a: "AI/ML startups (model APIs, infra, eval tools), agent platforms (orchestration, browser agents, voice), and developer tools (SDKs, CLIs, MCP servers). If your buyer is a technical founder or platform engineer, you're in the right place." },
-  { q: "How is 48 hours possible?", a: "We use a rapid development platform and battle-tested technical frameworks to ship in 48 hours instead of 8 weeks. We don't waste time on endless revisions; we build it right the first time." },
   { q: "How much does it cost, and what's included?", a: "Fixed price per tier — no hourly surprises. Each build includes design, custom code, on-page SEO, responsive layouts, and deployment. Copy and stock imagery are on you; we can recommend writers if you need one." },
-  { q: "What do you need from me to hit the 48-hour window?", a: "Brand assets (logo, fonts if any), final copy, and any reference sites — handed over at kickoff. The clock starts when we have everything. Slow content is the #1 reason projects slip." },
-  { q: "What if I need changes?", a: "Every build includes one 4-hour revision block after delivery to polish the details and ensure perfection. Larger scope changes are quoted as a separate mini-engagement." },
-  { q: "Do I own the code?", a: "Yes. Full GitHub repository handover. The site is yours to host, modify, and extend — no lock-in, no proprietary CMS." },
-  { q: "Do you handle hosting and post-launch fixes?", a: "We deploy to your hosting of choice (Vercel, Netlify, Cloudflare) and fix any genuine bugs free for 14 days after launch. Ongoing maintenance is available as a monthly retainer if you want it." },
-  { q: "Can I see live examples or talk to a past client?", a: "Yes — see the Work page for live sites. On request we'll connect you with a recent founder for a short reference call before you commit." },
-  { q: "Will the site actually convert?", a: "We design around a single primary action per page and ship with analytics wired up so you can measure it. Conversion depends on offer and traffic too, but the site won't be the bottleneck." },
-  { q: "Do I need a launch page, a marketing site, or a devtool hub?", a: "Launching a model or waitlist? Start with a Launch Page. Raising or selling to enterprise? Marketing Site. Shipping an SDK, API, or MCP server with docs and dashboards? Devtool Hub. Tell us the goal and we'll recommend the smallest thing that works." },
-  { q: "What if I'm not happy with the result?", a: "If the first delivery misses the brief, we rework it on us until it matches what we agreed at kickoff. If it still isn't right after that, you pay only for time spent and walk away with whatever's been built." },
 ];
 
 export const Route = createFileRoute("/faq")({
   component: FaqPage,
+  loader: async ({ context }) => {
+    await context.queryClient.ensureQueryData({
+      queryKey: ["faq-items"],
+      queryFn: () => getFaqItemsFn(),
+    });
+  },
   head: () => ({
     meta: [
       { title: "FAQ — Grow" },
@@ -32,20 +30,8 @@ export const Route = createFileRoute("/faq")({
       { property: "og:url", content: "https://grow.contact/faq" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/faq" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: FAQS.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
-          })),
-        }),
-      },
-    ],
+    // FAQPage JSON-LD is rendered inside the component from the same data
+    // source the UI uses, so visible Q&A and structured data cannot drift.
   }),
 });
 
@@ -57,10 +43,24 @@ function FaqPage() {
   });
   const items = (data && data.length > 0)
     ? data.map((d) => ({ q: d.question, a: d.answer }))
-    : FAQS;
+    : FALLBACK_FAQS;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: items.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          }),
+        }}
+      />
       <main>
         <section className="border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-24">
@@ -89,4 +89,5 @@ function FaqPage() {
     </div>
   );
 }
+
 

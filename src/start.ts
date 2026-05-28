@@ -38,7 +38,7 @@ const CACHE_HEADER =
   "public, max-age=0, s-maxage=300, stale-while-revalidate=86400";
 
 const cacheMiddleware = createMiddleware().server(async ({ request, next }) => {
-  const response = (await next()) as Response;
+  const response = (await next()) as unknown as Response;
   try {
     if (request.method !== "GET") return response;
     const url = new URL(request.url);

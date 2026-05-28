@@ -51,7 +51,7 @@ export const Route = createFileRoute("/blog/$slug")({
     const updatedAt = post.updatedAt ?? POSTS_REVIEWED_AT;
     return {
       meta: [
-        { title: post.title.length > 55 ? post.title : `${post.title} — Grow` },
+        { title: post.title.length > 53 ? post.title : `${post.title} — Grow` },
         { name: "description", content: post.description },
         { property: "og:title", content: post.title },
         { property: "og:description", content: post.description },

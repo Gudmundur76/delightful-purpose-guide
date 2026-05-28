@@ -363,6 +363,7 @@ function ReportGate({ url, score }: { url: string; score: number }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@company.com"
+            aria-label="Email address for full report"
             disabled={state === "saving"}
             className="flex-1 rounded-md border border-border bg-background px-4 py-3 font-mono text-sm outline-none focus:border-accent transition-colors disabled:opacity-50"
             required

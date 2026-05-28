@@ -26,14 +26,14 @@ export const Route = createFileRoute("/glossary/$term")({
         { property: "og:type", content: "article" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: t.short },
-      ],
-      links: [{ rel: "canonical", href: url }],
-      scr        ...ogImageMeta({
+        ...ogImageMeta({
           title: title,
           kicker: "Glossary",
           sub: t.short,
         }),
-ipts: [
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
         {
           type: "application/ld+json",
           children: JSON.stringify({

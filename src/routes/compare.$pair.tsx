@@ -34,14 +34,14 @@ export const Route = createFileRoute("/compare/$pair")({
         { property: "og:type", content: "article" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: desc },
-      ],
-      links: [{ rel: "canonical", href: url }],
-      scr        ...ogImageMeta({
+        ...ogImageMeta({
           title: title,
           kicker: "Compare",
           sub: desc,
         }),
-ipts: [
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
         {
           type: "application/ld+json",
           children: JSON.stringify({

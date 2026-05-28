@@ -28,14 +28,14 @@ export const Route = createFileRoute("/playbooks/$slug")({
         { property: "article:modified_time", content: p.updatedAt },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: p.short },
-      ],
-      links: [{ rel: "canonical", href: url }],
-      scr        ...ogImageMeta({
+        ...ogImageMeta({
           title: title,
           kicker: "Playbook",
           sub: p.short,
         }),
-ipts: [
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
         {
           type: "application/ld+json",
           children: JSON.stringify({

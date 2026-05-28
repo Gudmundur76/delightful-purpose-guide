@@ -26,14 +26,14 @@ export const Route = createFileRoute("/crawlers/$bot")({
         { property: "og:type", content: "article" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: c.short },
-      ],
-      links: [{ rel: "canonical", href: url }],
-      scr        ...ogImageMeta({
+        ...ogImageMeta({
           title: title,
           kicker: "Crawler",
           sub: c.short,
         }),
-ipts: [
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
         {
           type: "application/ld+json",
           children: JSON.stringify({

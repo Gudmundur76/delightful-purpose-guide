@@ -57,7 +57,7 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
-import { Route as StandardVersionDotmdRouteImport } from './routes/standard.$version[.]md'
+import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
 import { Route as StandardVersionRouteImport } from './routes/standard.$version'
 import { Route as ReportQ22026DotpdfRouteImport } from './routes/report.q2-2026[.]pdf'
 import { Route as ReportQ22026RouteImport } from './routes/report.q2-2026'
@@ -368,11 +368,12 @@ const ToolsRobotsCheckerRoute = ToolsRobotsCheckerRouteImport.update({
   path: '/tools/robots-checker',
   getParentRoute: () => rootRouteImport,
 } as any)
-const StandardVersionDotmdRoute = StandardVersionDotmdRouteImport.update({
-  id: '/$version.md',
-  path: '/$version.md',
-  getParentRoute: () => StandardRoute,
-} as any)
+const StandardChar123versionChar125DotmdRoute =
+  StandardChar123versionChar125DotmdRouteImport.update({
+    id: '/{$version}.md',
+    path: '/{$version}.md',
+    getParentRoute: () => StandardRoute,
+  } as any)
 const StandardVersionRoute = StandardVersionRouteImport.update({
   id: '/$version',
   path: '/$version',
@@ -815,7 +816,7 @@ export interface FileRoutesByFullPath {
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
   '/standard/$version': typeof StandardVersionRoute
-  '/standard/$version.md': typeof StandardVersionDotmdRoute
+  '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -933,7 +934,7 @@ export interface FileRoutesByTo {
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
   '/standard/$version': typeof StandardVersionRoute
-  '/standard/$version.md': typeof StandardVersionDotmdRoute
+  '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -1054,7 +1055,7 @@ export interface FileRoutesById {
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
   '/standard/$version': typeof StandardVersionRoute
-  '/standard/$version.md': typeof StandardVersionDotmdRoute
+  '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -1176,7 +1177,7 @@ export interface FileRouteTypes {
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
     | '/standard/$version'
-    | '/standard/$version.md'
+    | '/standard/{$version}.md'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1294,7 +1295,7 @@ export interface FileRouteTypes {
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
     | '/standard/$version'
-    | '/standard/$version.md'
+    | '/standard/{$version}.md'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1414,7 +1415,7 @@ export interface FileRouteTypes {
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
     | '/standard/$version'
-    | '/standard/$version.md'
+    | '/standard/{$version}.md'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1891,11 +1892,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsRobotsCheckerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/standard/$version.md': {
-      id: '/standard/$version.md'
-      path: '/$version.md'
-      fullPath: '/standard/$version.md'
-      preLoaderRoute: typeof StandardVersionDotmdRouteImport
+    '/standard/{$version}.md': {
+      id: '/standard/{$version}.md'
+      path: '/{$version}.md'
+      fullPath: '/standard/{$version}.md'
+      preLoaderRoute: typeof StandardChar123versionChar125DotmdRouteImport
       parentRoute: typeof StandardRoute
     }
     '/standard/$version': {
@@ -2540,12 +2541,13 @@ const PlaybooksRouteWithChildren = PlaybooksRoute._addFileChildren(
 
 interface StandardRouteChildren {
   StandardVersionRoute: typeof StandardVersionRoute
-  StandardVersionDotmdRoute: typeof StandardVersionDotmdRoute
+  StandardChar123versionChar125DotmdRoute: typeof StandardChar123versionChar125DotmdRoute
 }
 
 const StandardRouteChildren: StandardRouteChildren = {
   StandardVersionRoute: StandardVersionRoute,
-  StandardVersionDotmdRoute: StandardVersionDotmdRoute,
+  StandardChar123versionChar125DotmdRoute:
+    StandardChar123versionChar125DotmdRoute,
 }
 
 const StandardRouteWithChildren = StandardRoute._addFileChildren(
@@ -2689,3 +2691,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

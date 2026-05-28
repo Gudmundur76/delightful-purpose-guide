@@ -65,6 +65,8 @@ export const Route = createFileRoute("/standard/$version")({
         },
         { property: "og:title", content: `The Agent-Native Web Standard — ${v.label}` },
         { property: "og:description", content: v.abstract },
+        { property: "og:url", content: url },
+        { property: "og:type", content: "article" },
         { property: "article:published_time", content: v.publishedAt },
         { property: "article:author", content: "grow.contact" },
         ...ogImageMeta({
@@ -74,7 +76,6 @@ export const Route = createFileRoute("/standard/$version")({
         }),
       ],
 
-      ],
       links: [
         { rel: "canonical", href: url },
         { rel: "alternate", type: "text/markdown", href: `${url}.md` },

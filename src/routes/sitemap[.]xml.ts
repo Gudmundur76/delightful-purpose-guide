@@ -133,13 +133,19 @@ export const Route = createFileRoute("/sitemap.xml")({
               lastmod: today,
               changefreq: "monthly",
               priority: "0.8",
-            })),
           ...posts.map<SitemapEntry>((p) => ({
             path: `/blog/${p.slug}`,
             lastmod: p.publishedAt,
             changefreq: "monthly",
             priority: "0.7",
           })),
+          ...LEADERBOARD.map<SitemapEntry>((e) => ({
+            path: `/verify/${e.domain}`,
+            lastmod: today,
+            changefreq: "weekly",
+            priority: "0.6",
+          })),
+        ];
         ];
 
         const urls = entries.map((e) =>

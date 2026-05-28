@@ -17,6 +17,53 @@ const errorMiddleware = createMiddleware().server(async ({ next }) => {
   }
 });
 
+// Marketing pages with no per-user content — safe to cache at the edge.
+// Cloudflare honors s-maxage; browsers honor max-age. SWR keeps repeat
+// loads instant while origin revalidates in the background.
+const CACHEABLE_PATHS = new Set<string>([
+  "/",
+  "/services",
+  "/pricing",
+  "/work",
+  "/playbook",
+  "/contact",
+  "/about",
+  "/leaderboard",
+  "/badge",
+  "/check",
+  "/blog",
+]);
+
+const CACHE_HEADER =
+  "public, max-age=0, s-maxage=300, stale-while-revalidate=86400";
+
+const cacheMiddleware = createMiddleware().server(async ({ request, next }) => {
+  const response = (await next()) as Response;
+  try {
+    if (request.method !== "GET") return response;
+    const url = new URL(request.url);
+    const path = url.pathname.replace(/\/+$/, "") || "/";
+    const isCacheable =
+      CACHEABLE_PATHS.has(path) || path.startsWith("/blog/");
+    if (!isCacheable) return response;
+    const ct = response.headers.get("content-type") || "";
+    if (!ct.includes("text/html")) return response;
+    if (response.status !== 200) return response;
+    // Do not cache responses with Set-Cookie (per-user state).
+    if (response.headers.get("set-cookie")) return response;
+    const headers = new Headers(response.headers);
+    headers.set("cache-control", CACHE_HEADER);
+    headers.set("vary", "Accept, Accept-Encoding");
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
+  } catch {
+    return response;
+  }
+});
+
 export const startInstance = createStart(() => ({
-  requestMiddleware: [errorMiddleware],
+  requestMiddleware: [errorMiddleware, cacheMiddleware],
 }));

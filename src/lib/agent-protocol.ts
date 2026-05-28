@@ -171,53 +171,58 @@ function agentSkillsIndex() {
 }
 
 // RFC 9728 — OAuth 2.0 Protected Resource Metadata.
-// grow.contact's user-facing auth runs on Supabase; this document tells an
-// agent where to discover the authorization server and what scopes apply.
+// Advertise grow.contact as the authorization server so agents discover the
+// matching RFC 8414 document with our agent_auth registration metadata.
 function oauthProtectedResourceMetadata() {
-  const supabaseUrl =
-    (typeof process !== "undefined" && process.env?.SUPABASE_URL) ||
-    "https://uyvxsrkikipyrmgcuiph.supabase.co";
   return {
     resource: SITE_ORIGIN,
-    authorization_servers: [supabaseUrl],
+    authorization_servers: [SITE_ORIGIN],
     bearer_methods_supported: ["header"],
     resource_documentation: `${SITE_ORIGIN}/auth.md`,
-    scopes_supported: ["openid", "email", "profile"],
+    scopes_supported: ["mcp:read", "mcp:write", "api:read"],
     resource_signing_alg_values_supported: ["RS256"],
   };
 }
 
 function authMarkdown(): string {
-  return `# Authentication — grow.contact
+  return `# auth.md
 
-> Human-readable companion to \`/.well-known/oauth-protected-resource\` (RFC 9728).
+Agent registration and authentication metadata for grow.contact.
 
-grow.contact uses Supabase Auth (OAuth 2.0 / OIDC) for its dashboard,
-admin tools, and authenticated MCP / API endpoints.
+## OAuth metadata
+
+- Protected-resource metadata: ${SITE_ORIGIN}/.well-known/oauth-protected-resource
+- Authorization-server metadata: ${SITE_ORIGIN}/.well-known/oauth-authorization-server
+- Token endpoint: ${SITE_ORIGIN}/api/public/oauth/token
+- JWKS: ${SITE_ORIGIN}/.well-known/jwks.json
+
+## Agent registration
+
+grow.contact supports anonymous agent registration by human request. Request an
+API key for the public REST API or an MCP bearer token via ${SITE_ORIGIN}/contact.
+
+- Identity type: anonymous
+- Credential types: api_key, bearer_token
+- Claim URI: ${SITE_ORIGIN}/contact
+- Register URI: ${SITE_ORIGIN}/contact
 
 ## For agents
 
-- **Protected-resource metadata:** \`${SITE_ORIGIN}/.well-known/oauth-protected-resource\`
-- **Authorization server:** the \`authorization_servers\` URL listed in the
-  metadata document. Follow standard OIDC discovery from there
-  (\`/.well-known/openid-configuration\`).
-- **Bearer token:** send \`Authorization: Bearer <access_token>\` on every
-  request to an authenticated endpoint.
-- **Public, unauthenticated surfaces** (no token required):
+- Public REST API keys use the \`x-api-key\` request header.
+- MCP credentials use \`Authorization: Bearer <token>\`.
+- Public, unauthenticated surfaces (no token required):
   - \`GET /\`, \`GET /llms.txt\`, \`GET /sitemap.xml\`
   - \`GET /api/public/v1/openapi.json\`
   - \`GET /api/public/v1/readiness\`, \`GET /api/public/ping\`
   - \`POST /api/public/v1/analyze\` (rate-limited)
   - \`POST /api/public/v1/leads\` (rate-limited)
-- **MCP endpoint:** \`POST /api/public/mcp\`. Bearer token validated against
-  the \`MCP_SECRET\` server-side env var when configured.
+- MCP endpoint: \`POST /api/public/mcp\`
 
 ## For humans
 
 - Sign in at [/login](${SITE_ORIGIN}/login).
 - Account settings live on the dashboard at [/dashboard](${SITE_ORIGIN}/dashboard).
-- API keys for the public REST API are issued on request — email
-  hello@grow.contact.
+- API keys and MCP bearer tokens are issued on request via ${SITE_ORIGIN}/contact.
 
 ## Standards we implement
 

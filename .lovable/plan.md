@@ -1,98 +1,55 @@
-## Composio integration plan
+# Score History & Diff
 
-Before I start, two stack-level corrections to flag — both keep the spec's intent intact:
+Turn the `scans` table into a visible, client-facing **trajectory** — not just a "latest score." This is the foundation for retainer reporting, the proof-of-work artifact agencies show clients, and the data source future features (sequences, content recs, alerts) will read from.
 
-1. **Not a Supabase Edge Function.** This project is TanStack Start on Cloudflare Workers. The right home for `/agent-action` is a TanStack server route at `src/routes/api/public/agent-action.ts` (the `/api/public/*` prefix is the documented home for external callers — MCP, Skywork, n8n — and bypasses Lovable's published-site auth gate). Same URL semantics, same caller contract; just no separate Supabase Functions deployment.
-2. **Composio SDK runtime.** `@composio/core` ≥ 0.6.0 added explicit Cloudflare Workers support (Jan 2026 release). I'll pin `^0.6.4` so it runs in the Worker SSR runtime. Older versions would crash with `[unenv]` stubs.
+## What we're building
 
-If you want it to be a Supabase Edge Function instead, say so and I'll route it through `supabase/functions/agent-action/` — but the published URL, auth model, and caller code are simpler with the server-route approach.
+1. **Per-host history page** at `/history/$host` — sparkline + scan table for any domain that's been scanned.
+2. **Diff view** at `/history/$host/diff?a=<id>&b=<id>` — side-by-side metric comparison between two scans, with deltas highlighted.
+3. **"View history" entry points** — from `/check/report`, the recent-scans feed, and the dashboard.
+4. **Lightweight server fns** that aggregate the existing `scans` rows (no schema changes needed for v1).
 
----
+## User-visible behavior
 
-### 1. Secret + dependency
+- After any scan, the report page gets a **"View full history for {host}"** link.
+- History page shows: current score, 30/90-day trend sparkline, list of all scans with date + overall + sub-scores, and a "Compare" checkbox on each row.
+- Pick any two scans → diff page shows each of the 6 metrics (overall, semantic, jsonld, llms, citability, speed) side-by-side with a green/red delta badge and a one-line plain-English summary ("LLMs.txt fixed: +18", "Speed regressed: -7").
+- Public, no auth required (hosts that have been scanned are already public info via the leaderboard).
 
-- `add_secret(["COMPOSIO_API_KEY"])` — user pastes value from composio.dev.
-- `COMPOSIO_ENTITY_PREFIX` is a constant (`"grow_contact_"`) — hardcoded in `src/lib/composio/config.ts`, not a secret.
-- `bun add @composio/core@^0.6.4`.
+## Technical plan
 
-### 2. Database
+### New files
+- `src/lib/check/history.functions.ts` — two server fns:
+  - `getHostHistory({ host, days })` — returns ordered scan rows + computed sparkline buckets.
+  - `getScanDiff({ aId, bId })` — fetches two scans, returns per-metric delta + auto-generated summary lines.
+- `src/routes/history.$host.tsx` — history page (loader uses `ensureQueryData` + `useSuspenseQuery`).
+- `src/routes/history.$host.diff.tsx` — diff page, reads `?a=` & `?b=` from search params.
+- `src/components/ScoreSparkline.tsx` — small inline SVG sparkline (no chart lib needed).
+- `src/components/ScanHistoryTable.tsx` — table with row checkboxes + "Compare selected" button.
 
-One new table, RLS-scoped to the owning user:
+### Edits
+- `src/routes/check.report.tsx` — add "View full history" link after a successful scan.
+- `src/components/RecentScans.tsx` — make each host a link to `/history/{host}`.
 
-```text
-public.client_integrations
-  id            uuid pk
-  user_id       uuid references auth.users(id) on delete cascade
-  toolkit       text   -- 'gmail' | 'hubspot' | 'pipedrive' | 'slack' | 'linkedin' | 'google_analytics'
-  entity_id     text   -- "grow_contact_<user_id>"
-  connection_id text   -- Composio connectedAccountId
-  status        text   -- 'pending' | 'active' | 'error'
-  created_at, updated_at
-  unique (user_id, toolkit)
-```
+### Reuse, don't duplicate
+- `fetchLatestScanForHost` already exists in `scans.server.ts`.
+- The MCP tools `track_competitor_over_time` and `diff_scan` already compute exactly this data — the server fns will share that logic (extract to `scans.server.ts` helpers so both MCP and the UI call the same code).
 
-Grants: `authenticated` (CRUD own rows), `service_role` (all). RLS: user can see/manage only their own rows. No anon access.
+### No DB changes for v1
+The `scans` table already stores everything needed (host, all 6 metrics, scanned_at). A future iteration could add a `notes` column to annotate "what changed between scan A and B" but that's not in scope.
 
-### 3. Server functions (app-internal, `createServerFn`)
+### Summary-line generation
+Deterministic, not LLM-based for v1 — a simple rules table:
+- delta ≥ +10 on a metric → "{Metric} improved significantly: +{n}"
+- delta ≤ -10 → "{Metric} regressed: {n}"
+- |delta| < 3 → omit
+Keeps it instant and free; we can swap to Lovable AI for nuance later.
 
-All under `src/lib/composio/`:
+## Out of scope (next iterations)
+- Annotations / change-log entries
+- Email/Slack alerts on score drops (the Composio triggers already fire — just need a UI to manage thresholds)
+- Multi-host comparison (competitor overlay on the same chart)
+- PDF export of the diff for client reports
 
-- `composio.server.ts` — singleton Composio client (reads `COMPOSIO_API_KEY` inside handler scope, never module scope).
-- `integrations.functions.ts`:
-  - `listIntegrations()` — returns the 6 toolkits + the current user's status from `client_integrations`.
-  - `initiateConnection({ toolkit })` — calls Composio `connectedAccounts.initiate`, upserts row with `status:'pending'`, returns the OAuth `redirectUrl`.
-  - `refreshConnectionStatus({ toolkit })` — polls Composio for `ACTIVE`, flips DB row.
-  - `disconnectIntegration({ toolkit })` — Composio delete + DB row delete.
-- All three are `.middleware([requireSupabaseAuth])` so they act as the logged-in user.
-
-### 4. `/integrations` page (auth-gated)
-
-- File: `src/routes/_authenticated/integrations.tsx` (sits under the existing `_authenticated` layout — same gate the rest of the app uses).
-- Dark-themed settings card per toolkit: name, one-line purpose, status pill (`Connected` / `Not connected` / `Pending`), Connect / Reconnect / Disconnect button.
-- Connect flow: server fn returns `redirectUrl` → `window.location.href = redirectUrl` → Composio handles OAuth → returns to `/integrations` → page polls `refreshConnectionStatus` on focus until `ACTIVE`.
-- `head()` sets `noindex` (private settings page).
-
-### 5. Agent Action endpoint (external callers)
-
-`src/routes/api/public/agent-action.ts` — POST handler:
-
-- Body: `{ tool: string, params: object, client_id: string }` validated with Zod (string min/max, params is a generic object).
-- Auth: requires `Authorization: Bearer <ADMIN_API_KEY>` header (already in your secrets) — this is what MCP, Skywork, n8n use.
-- Looks up the client's entity ID from `client_integrations` (using `supabaseAdmin`).
-- Calls `composio.tools.execute(tool, { userId: entityId, arguments: params })`.
-- Returns `{ success, result, error }` JSON.
-
-### 6. Event triggers
-
-Wire each event by calling a small helper from the existing emit site — no new background queue.
-
-`src/lib/composio/triggers.server.ts` exports four functions, each takes the relevant payload + client `user_id`:
-
-| Event source (existing) | Trigger | Composio action |
-|---|---|---|
-| `/check` scan completes with score < 70 | `onLowScoreScan(scan)` | Gmail: send personalized report to lead email |
-| Scan score drops >10 vs last for same URL | `onScoreDrop(scan, prev)` | Slack: post alert to client's connected channel |
-| `/contact` brief submitted | `onBriefSubmitted(lead)` | HubSpot: create deal, stage = "Brief Received" |
-| Blog post `published` flips true | `onPostPublished(post)` | LinkedIn: create draft post for approval |
-
-I'll trace where each event is currently emitted and add a single `await trigger(...)` call wrapped in try/catch so a Composio failure never breaks the originating request. All four are skipped silently when the client has no matching toolkit connected.
-
-### 7. No changes to existing user-facing pages
-
-Only addition to existing UI: a "Integrations" link inside the existing authenticated nav (if there is one — otherwise just live at `/integrations`).
-
----
-
-### Technical notes (for the engineer)
-
-- Composio client is constructed inside each server-fn `.handler()` (never at module top level — same rule as `process.env`).
-- Entity ID format: `${COMPOSIO_ENTITY_PREFIX}${supabaseUserId}` — stable across reconnects.
-- `redirectUrl` for OAuth callback: `https://grow.contact/integrations` (Composio handles the round-trip).
-- `/api/public/agent-action` does its own bearer-token check (no `requireSupabaseAuth` — external callers don't have Supabase sessions).
-- Triggers run on the request thread; if Composio is slow they'll add latency. If that becomes an issue we can move them to a queued worker later.
-
-### What I need from you
-
-- Approve the plan (especially the server-route vs Edge Function call).
-- After approval I'll request `COMPOSIO_API_KEY` via the secret tool.
-- Confirm Pipedream is intentional (spec said "HubSpot or Pipedream" — Composio's toolkit is `pipedrive`, not Pipedream the workflow tool). I'll assume **Pipedrive** unless you say otherwise.
+## Estimated effort
+~4 files new, 2 edits. No migration. Should be one focused session.

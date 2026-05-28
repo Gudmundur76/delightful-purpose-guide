@@ -49,9 +49,11 @@ const cacheMiddleware = createMiddleware().server(async ({ request, next }) => {
     const ct = response.headers.get("content-type") || "";
     if (!ct.includes("text/html")) return response;
     if (response.status !== 200) return response;
-    // Do not cache responses with Set-Cookie (per-user state).
-    if (response.headers.get("set-cookie")) return response;
+    // These marketing pages render no per-user content, so it's safe to
+    // strip any incidental Set-Cookie (e.g. Supabase SSR session refresh)
+    // and let Cloudflare cache the response at the edge.
     const headers = new Headers(response.headers);
+    headers.delete("set-cookie");
     headers.set("cache-control", CACHE_HEADER);
     headers.set("vary", "Accept, Accept-Encoding");
     return new Response(response.body, {

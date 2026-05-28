@@ -129,6 +129,7 @@ function ServicesPage() {
             </div>
           </div>
         </section>
+      </main>
       <SiteFooter />
     </div>
   );

@@ -154,8 +154,9 @@ function LeaderboardPage() {
         </section>
 
         {/* Table */}
-        <section>
+        <section aria-labelledby="leaderboard-ranking-heading">
           <div className="max-w-7xl mx-auto px-6 py-12 md:py-20">
+            <h2 id="leaderboard-ranking-heading" className="sr-only">Ranked AI sites by agent readability score</h2>
             <div className="border border-border bg-card overflow-hidden">
               <div className="hidden md:grid grid-cols-12 gap-4 px-5 py-3 border-b border-border bg-muted/30 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                 <div className="col-span-1">Rank</div>

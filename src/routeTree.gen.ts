@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as VsRouteImport } from './routes/vs'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
+import { Route as TrustRouteImport } from './routes/trust'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as StatsRouteImport } from './routes/stats'
@@ -123,6 +124,11 @@ const VsRoute = VsRouteImport.update({
 const UnsubscribeRoute = UnsubscribeRouteImport.update({
   id: '/unsubscribe',
   path: '/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrustRoute = TrustRouteImport.update({
+  id: '/trust',
+  path: '/trust',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -662,6 +668,7 @@ export interface FileRoutesByFullPath {
   '/stats': typeof StatsRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
+  '/trust': typeof TrustRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
@@ -762,6 +769,7 @@ export interface FileRoutesByTo {
   '/stats': typeof StatsRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
+  '/trust': typeof TrustRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
@@ -865,6 +873,7 @@ export interface FileRoutesById {
   '/stats': typeof StatsRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
+  '/trust': typeof TrustRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
@@ -969,6 +978,7 @@ export interface FileRouteTypes {
     | '/stats'
     | '/status'
     | '/terms'
+    | '/trust'
     | '/unsubscribe'
     | '/vs'
     | '/work'
@@ -1069,6 +1079,7 @@ export interface FileRouteTypes {
     | '/stats'
     | '/status'
     | '/terms'
+    | '/trust'
     | '/unsubscribe'
     | '/vs'
     | '/work'
@@ -1171,6 +1182,7 @@ export interface FileRouteTypes {
     | '/stats'
     | '/status'
     | '/terms'
+    | '/trust'
     | '/unsubscribe'
     | '/vs'
     | '/work'
@@ -1274,6 +1286,7 @@ export interface RootRouteChildren {
   StatsRoute: typeof StatsRoute
   StatusRoute: typeof StatusRoute
   TermsRoute: typeof TermsRoute
+  TrustRoute: typeof TrustRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
@@ -1344,6 +1357,13 @@ declare module '@tanstack/react-router' {
       path: '/unsubscribe'
       fullPath: '/unsubscribe'
       preLoaderRoute: typeof UnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trust': {
+      id: '/trust'
+      path: '/trust'
+      fullPath: '/trust'
+      preLoaderRoute: typeof TrustRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -2214,6 +2234,7 @@ const rootRouteChildren: RootRouteChildren = {
   StatsRoute: StatsRoute,
   StatusRoute: StatusRoute,
   TermsRoute: TermsRoute,
+  TrustRoute: TrustRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,

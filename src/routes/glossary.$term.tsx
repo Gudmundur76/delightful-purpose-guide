@@ -81,9 +81,11 @@ export const Route = createFileRoute("/glossary/$term")({
 function GlossaryTermPage() {
 function GlossaryTermPage() {
   const { term } = Route.useLoaderData() as { term: NonNullable<ReturnType<typeof getGlossaryTerm>> };
-  const related = (term.related ?? [])
-    .map((slug: string) => GLOSSARY.find((t) => t.slug === slug))
-    .filter((t): t is NonNullable<typeof t> => !!t);
+  const relatedSlugs: string[] = term.related ?? [];
+  const related = relatedSlugs
+    .map((slug) => GLOSSARY.find((t) => t.slug === slug))
+    .filter(Boolean) as Array<NonNullable<ReturnType<typeof getGlossaryTerm>>>;
+
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">

@@ -63,6 +63,7 @@
     "embla-carousel-react": "^8.6.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.575.0",
+    "marked": "^18.0.4",
     "mcp-tanstack-start": "^0.4.1",
     "pdf-lib": "^1.17.1",
     "react": "^19.2.0",

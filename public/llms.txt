@@ -6,7 +6,9 @@ grow.contact is not affiliated with grow.com (a B2B sales platform). This is gro
 
 ## Core Pages
 
+- [The Agent-Native Web Standard](https://grow.contact/standard): Canonical, versioned, open specification (CC BY 4.0) defining how a website becomes legible to ChatGPT, Perplexity, Claude, and Google AI Overviews. Five signals, hard thresholds, the crawler allow/block matrix, llms.txt and JSON-LD requirements, performance budget, delivery checklist. Current version: geo-standard@2026.05. Stable raw markdown at /standard.md and /standard/v1.md.
 - [Home](https://grow.contact/): Agency overview, live agent-readability dashboard, free instant scan tool.
+
 - [Services](https://grow.contact/services): Three services — Agent-Native Website Build, Agent Readability Audit, Schema Optimization.
 - [Process](https://grow.contact/process): Five-step workflow from brief to live agent-readable site in 48 hours.
 - [Work](https://grow.contact/work): Client case studies with before/after agent-readability scores.

@@ -104,3 +104,117 @@ body {
 @keyframes blink {
   to { visibility: hidden; }
 }
+
+/* Standard specification prose — used by /standard/<version>. */
+.standard-prose {
+  color: var(--foreground);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.standard-prose h1 {
+  font-size: 1.875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+.standard-prose h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.standard-prose h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+.standard-prose p {
+  margin: 0.85rem 0;
+  color: var(--muted-foreground);
+}
+.standard-prose strong { color: var(--foreground); font-weight: 700; }
+.standard-prose em { font-style: italic; }
+.standard-prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.standard-prose a:hover { color: var(--foreground); }
+.standard-prose ul,
+.standard-prose ol {
+  margin: 0.85rem 0 0.85rem 1.5rem;
+  color: var(--muted-foreground);
+}
+.standard-prose ul { list-style: disc; }
+.standard-prose ol { list-style: decimal; }
+.standard-prose li { margin: 0.35rem 0; }
+.standard-prose li > input[type="checkbox"] {
+  margin-right: 0.5rem;
+  transform: translateY(1px);
+}
+.standard-prose code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 0.1rem 0.35rem;
+  font-size: 0.85em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: var(--foreground);
+  border-radius: 3px;
+}
+.standard-prose pre {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+}
+.standard-prose pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.standard-prose blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: var(--muted-foreground);
+  font-style: italic;
+}
+.standard-prose hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+.standard-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  display: block;
+  overflow-x: auto;
+}
+.standard-prose th,
+.standard-prose td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+.standard-prose th {
+  background: var(--card);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--foreground);
+}
+.standard-prose td { color: var(--muted-foreground); }
+

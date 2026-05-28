@@ -3,6 +3,8 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getAuthor, personJsonLd, AUTHORS } from "@/lib/authors/data";
 import { getAllDataDrops } from "@/lib/data-drops/data";
+import { ogImageMeta } from "@/lib/seo/og";
+
 
 export const Route = createFileRoute("/about/author/$slug")({
   component: AuthorPage,

@@ -68,7 +68,7 @@ function ServicesPage() {
             </p>
             <p className="text-muted-foreground mt-4 max-w-2xl text-sm leading-relaxed">
               Why this matters:{" "}
-              <a href="https://sevisible.com" rel="noopener" className="text-accent underline underline-offset-2">83% of AI Overview citations come from pages outside the organic top 10</a>,{" "}
+              <a href="https://allbusinessrealm.com/index.php/2026/04/30/the-83-rule-why-ai-overviews-skip-the-top-10-and-where-small-sites-are-quietly-winning/" rel="noopener" className="text-accent underline underline-offset-2">83% of AI Overview citations come from pages outside the organic top 10</a>,{" "}
               <a href="https://grow.contact/check" rel="noopener" className="text-accent underline underline-offset-2">73% of sites are silently excluded from AI citations</a> due to fixable technical issues, and{" "}
               <a href="https://arxiv.org/abs/2311.09735" rel="noopener" className="text-accent underline underline-offset-2">pages over 20,000 characters receive 4.3× more AI citations</a> than thin pages (Princeton GEO framework).
             </p>

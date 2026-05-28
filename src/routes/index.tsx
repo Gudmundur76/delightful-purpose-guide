@@ -165,10 +165,10 @@ function Index() {
                 </p>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-10 max-w-xl">
                   Why now:{" "}
-                  <a href="https://sevisible.com" rel="noopener" className="text-accent underline underline-offset-2">83% of AI Overview citations come from outside the organic top 10</a>,{" "}
+                  <a href="https://allbusinessrealm.com/index.php/2026/04/30/the-83-rule-why-ai-overviews-skip-the-top-10-and-where-small-sites-are-quietly-winning/" rel="noopener" className="text-accent underline underline-offset-2">83% of AI Overview citations come from outside the organic top 10</a>,{" "}
                   <a href="https://grow.contact/check" rel="noopener" className="text-accent underline underline-offset-2">73% of sites are silently excluded from AI citations</a>, and{" "}
                   AI-referred sessions{" "}
-                  <a href="https://www.similarweb.com/blog/insights/ai-news/ai-traffic-growth-2025/" rel="noopener" className="text-accent underline underline-offset-2">jumped 527% year-over-year in early 2025</a>.
+                  <a href="https://searchengineland.com/ai-traffic-up-seo-rewritten-459954" rel="noopener" className="text-accent underline underline-offset-2">jumped 527% year-over-year in early 2025</a>.
                 </p>
                 <div className="flex flex-wrap gap-4 items-center">
                   <Link

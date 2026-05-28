@@ -22,6 +22,25 @@ const metadata = {
   // Non-standard but useful for agents
   resource_documentation: `${ISSUER}/.well-known/api-catalog`,
   mcp_server_metadata: `${ISSUER}/.well-known/mcp.json`,
+  // Auth.md agent-registration discovery
+  agent_auth: {
+    skill: "https://isitagentready.com/.well-known/agent-skills/auth-md/SKILL.md",
+    register_uri: `${ISSUER}/contact`,
+    identity_types_supported: ["anonymous"],
+    anonymous: {
+      credential_types_supported: ["api_key", "bearer_token"],
+      claim_uri: `${ISSUER}/contact`,
+    },
+    registration_methods: [
+      {
+        type: "human_request",
+        register_uri: `${ISSUER}/contact`,
+        credential_types: ["api_key", "bearer_token"],
+        description:
+          "Request an API key (x-api-key) or MCP bearer token via the contact form. Credentials are issued out-of-band.",
+      },
+    ],
+  },
 };
 
 export const Route = createFileRoute("/.well-known/oauth-authorization-server")({

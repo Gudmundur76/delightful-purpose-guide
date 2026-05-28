@@ -2,8 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 const TITLE = "Grow GEO Browser Extension — One-Click Agent Readability Score";
 const DESC =
-  "See how AI agents read any website. Free Chrome/Edge/Brave extension. GEO + AEO score in your toolbar, top fixes, one click to the full report.";
-const URL = "https://grow.contact/extension";
+const PAGE_URL = "https://grow.contact/extension";
 
 export const Route = createFileRoute("/extension")({
   head: () => ({

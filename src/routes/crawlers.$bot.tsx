@@ -77,16 +77,17 @@ export const Route = createFileRoute("/crawlers/$bot")({
 
 function CrawlerPage() {
   const { crawler: c } = Route.useLoaderData();
+function CrawlerPage() {
+  const { crawler: c } = Route.useLoaderData() as { crawler: NonNullable<ReturnType<typeof getCrawler>> };
   const robotsBlock =
     c.recommendation === "allow"
       ? `User-agent: ${c.robotsToken}\nAllow: /`
       : `User-agent: ${c.robotsToken}\nDisallow: /`;
-function CrawlerPage() {
-  const { crawler: c } = Route.useLoaderData() as { crawler: NonNullable<ReturnType<typeof getCrawler>> };
 
   const related = CRAWLERS.filter(
     (x) => x.slug !== c.slug && x.operator === c.operator,
   ).slice(0, 4);
+
 
 
   return (

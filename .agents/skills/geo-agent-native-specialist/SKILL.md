@@ -1327,3 +1327,156 @@ Add to the existing verification table:
 | mcp.json schema | `curl -s .../.well-known/mcp.json \| jq .$schema` | Returns SEP-1849 schema URL |
 | agent-skills hash integrity | `curl -s .../.well-known/agent-skills/index.json` vs sha256 of linked .md | Hash matches served manifest body |
 
+
+---
+
+## Track-2 Endpoint Fixes — Content-Type & Schema Conformance (verified May 2026)
+
+`isitagentready.com` and similar Track-2 scanners parse the **response headers and body shape**, not just the URL existence. A site can ship all six well-known endpoints and still cap below 50/100 if the handlers return the wrong `Content-Type` or a malformed payload. These are the failure modes drilled in on grow.contact's own build.
+
+### The four content-type traps
+
+1. **`/.well-known/api-catalog` served as `text/html`.** TanStack Start's default response is HTML — the scanner reads the body as a webpage, the linkset never parses, and the API discovery check fails silently. **Fix:** explicit `Content-Type: application/linkset+json` (RFC 9727). Not `application/json`.
+
+2. **`/.well-known/mcp.json` served as a flat MCP card.** Older "MCP server card" formats (flat `name`/`version`/`endpoint` at the root) fail SEP-1849 validators. **Fix:** ship the SEP-1849 shape — `$schema`, `serverInfo.{name,version}`, `transport.{type:"streamable-http",endpoint}`, and an `auth` block with `type` (`bearer`/`none`), `header`, and `scheme`. Share the **same `serverCard` object** between `/.well-known/mcp.json` and `/.well-known/mcp/server-card.json`.
+
+3. **Agent-skills index sha256 drifts from the served manifest.** If the index is generated from a constant string but the `.md` route serves a different (even whitespace-different) body, the hash mismatches and the scanner flags the manifest as tampered. **Fix:** define the skill body **once** as a constant in `src/lib/agent-protocol.ts` (or equivalent), import it into both the index handler and the `.md` route, and compute sha256 at request time with `crypto.createHash("sha256").update(body, "utf8").digest("hex")`. Never hardcode the hash.
+
+4. **Markdown endpoints served as `text/plain` or `text/html`.** `/.well-known/agent-skills/<name>.md` and `/auth.md` must be `text/markdown; charset=utf-8`. Some scanners reject anything else even if the body is valid markdown.
+
+### Canonical handler skeleton
+
+```ts
+export const Route = createFileRoute("/.well-known/<path>")({
+  server: {
+    handlers: {
+      GET: async () => new Response(BODY, {
+        status: 200,
+        headers: {
+          "Content-Type": "<exact-spec-type>",
+          "Cache-Control": "public, max-age=300, s-maxage=3600",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }),
+    },
+  },
+});
+```
+
+### Verification curls (run against published URL, not preview)
+
+```bash
+curl -sI https://<domain>/.well-known/api-catalog            | grep -i content-type  # application/linkset+json
+curl -sI https://<domain>/.well-known/mcp.json               | grep -i content-type  # application/json
+curl -s  https://<domain>/.well-known/mcp.json               | jq '.["$schema"], .serverInfo, .transport, .auth'
+curl -sI https://<domain>/.well-known/agent-skills/index.json| grep -i content-type  # application/json
+curl -sI https://<domain>/.well-known/agent-skills/<name>.md | grep -i content-type  # text/markdown
+curl -sI https://<domain>/auth.md                             | grep -i content-type  # text/markdown
+
+# Hash integrity
+INDEX=$(curl -s https://<domain>/.well-known/agent-skills/index.json | jq -r '.skills[0].sha256')
+ACTUAL=$(curl -s https://<domain>/.well-known/agent-skills/<name>.md | shasum -a 256 | awk '{print $1}')
+[ "$INDEX" = "$ACTUAL" ] && echo OK || echo HASH_MISMATCH
+```
+
+If any check fails, the site will lose Track-2 discovery points even with all six routes live.
+
+---
+
+## Full Tier-1 GEO Citability Pass (verified May 2026)
+
+Beyond the single-page Tier 01 checklist, every multi-page grow.contact site (Tier 02+) must ship this Tier-1 pass before handover. Skipping any item caps the site below the 90+ citability score, regardless of how clean the schema and discovery layers are.
+
+### 1. TTFB edge-cache for ALL public GET routes (not just `/`)
+
+The single-page recipe in §"Field Lessons" patches `EDGE_CACHED_PATHS = new Set(["/"])`. For multi-page builds, that's a trap — `/services`, `/pricing`, `/blog`, `/work` all collapse to 800–2000ms TTFB on first hit and the scanner samples them randomly.
+
+**Fix in `src/server.ts`:** drop the per-path allow-list. Apply the edge-cache header to **every GET that returns 200 + `text/html`**:
+
+```ts
+function withEdgeCache(request: Request, response: Response): Response {
+  if (request.method !== "GET") return response;
+  if (response.status !== 200) return response;
+  const ct = response.headers.get("content-type") ?? "";
+  if (!ct.includes("text/html")) return response;
+  // Skip auth-gated routes — they must not be edge-cached
+  const url = new URL(request.url);
+  if (url.pathname.startsWith("/dashboard") || url.pathname.startsWith("/admin")) return response;
+  const headers = new Headers(response.headers);
+  headers.set("cache-control", "public, max-age=0, s-maxage=300, stale-while-revalidate=600");
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+}
+```
+
+**Never cache** routes under `/dashboard`, `/admin`, `/api/`, or anything that reads per-user session state. Edge-caching a logged-in page leaks the wrong user's HTML.
+
+### 2. `/llms-full.txt` route (full markdown dump)
+
+Required for agents that need complete context without crawling. Lives at `src/routes/llms-full[.]txt.ts`, serves a single hand-curated markdown file containing the full text of every public page. Headers: `text/markdown; charset=utf-8`, `Cache-Control: public, max-age=0, s-maxage=3600, stale-while-revalidate=86400`.
+
+**Rule:** every page listed in `llms.txt` must have its full body content present in `llms-full.txt`. If the two drift, ChatGPT and Claude cite from the cached `llms-full.txt` and the live page contradicts it.
+
+Link from `llms.txt`:
+
+```markdown
+## Full Content
+- [llms-full.txt](https://<domain>/llms-full.txt): Full site content in markdown for agents requiring complete context.
+```
+
+### 3. RSS feed (`/rss.xml`) — RAG re-indexing trigger
+
+Perplexity, ChatGPT Search, and Claude's web tool all use RSS for freshness re-discovery. A site without RSS gets re-crawled on the engine's default schedule (weeks); with RSS, it re-indexes on publish (hours).
+
+**Minimum viable feed:** RSS 2.0 with `<channel>` (`title`, `link`, `description`, `lastBuildDate`) and at least one `<item>` per blog post + journal entry. Content-Type: `application/rss+xml`.
+
+**Mandatory:** add the alternate link in `__root.tsx`:
+
+```tsx
+{ rel: "alternate", type: "application/rss+xml", href: "/rss.xml", title: "<Site> RSS" }
+```
+
+And reference in `llms.txt` under `## Feeds`.
+
+### 4. Answer-first paragraphs on every leaf route
+
+Every primary content page (Home, Services, Pricing, Process, each blog post) must open with a **50–70 word direct-answer paragraph** before any marketing prose. This is the snippet Google AIO and Perplexity extract verbatim.
+
+**Pattern:** First sentence answers "what is this?", second sentence answers "who is it for?", third sentence quantifies "what's the proof?".
+
+If the page leads with a `<h1>` + tagline + CTA and no answer paragraph, AIO will skip it for a competitor that has one.
+
+### 5. Hyperlinked verifiable statistics (1 per ~150 words)
+
+Princeton GEO: hyperlinked stats give +40% citation impact, more than any other lever. Every long-form content page should include at least 2–3 stats with inline `<a href="<primary-source>">` to the original research.
+
+**Sourcing rule:** never inline a stat without linking to its primary source. Wikipedia, Reddit summaries, and secondary blog coverage don't count — link the Princeton paper, the Cloudflare radar page, the Ahrefs research post, etc.
+
+### 6. Visible "Last updated" timestamps
+
+Every primary content page must render a `<time datetime="YYYY-MM-DD">` element visible to the user. Gemini and AIO apply a 3× freshness multiplier for content under 90 days; without a visible date, the engine assumes the worst.
+
+```tsx
+<p className="meta">Last updated: <time dateTime="2026-05-28">May 28, 2026</time></p>
+```
+
+A stale "Last updated: Jan 2024" on an otherwise current page is worse than no date at all.
+
+### 7. Semantic landmarks with `aria-label` per `<section>`
+
+Multi-page sites have multiple `<nav>`, `<section>`, and `<aside>` regions — without `aria-label` / `aria-labelledby`, the scanner can't distinguish them and the Semantic HTML signal caps at ~85/100.
+
+**Rule:** every `<section>` gets `aria-labelledby` pointing at its `<h2>` id. Every `<nav>` gets an explicit `aria-label` ("Primary", "Footer", "Breadcrumb"). Every `<header>` and `<aside>` gets an `aria-label` describing its role.
+
+### Post-Tier-1 verification (run on published URL)
+
+| Check | Command | Pass condition |
+|---|---|---|
+| All public GETs edge-cached | `curl -sI https://<d>/services \| grep -i cache-control` | `s-maxage=300` (not `no-cache`) |
+| llms-full.txt live | `curl -sI https://<d>/llms-full.txt \| grep -i content-type` | `text/markdown; charset=utf-8` |
+| RSS feed valid | `curl -s https://<d>/rss.xml \| head -c 200` | Valid `<?xml` + `<rss version="2.0">` |
+| RSS alternate link | `curl -s https://<d>/ \| grep 'application/rss+xml'` | `<link rel="alternate" ...>` present |
+| Answer-first present | View source of `/` | First text node under `<main>` is 50–70 word paragraph |
+| Visible Last-updated | View source of `/services` | `<time datetime="...">` rendered |
+| isitagentready.com | Run `https://isitagentready.com/<domain>` | ≥ 85/100 |
+
+If any check fails — fix before handover. The Tier-1 pass is the difference between "site exists" and "site gets cited."

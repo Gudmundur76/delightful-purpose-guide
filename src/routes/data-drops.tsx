@@ -82,7 +82,7 @@ function DataDropsIndex() {
           ))}
         </ul>
 
-        </ul>
+
       </main>
       <SiteFooter />
     </div>

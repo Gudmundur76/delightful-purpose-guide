@@ -128,7 +128,8 @@ function ReportPage() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Six headline findings</h2>
           <ol className="space-y-4 list-decimal list-inside">
-            {stats.citable_headlines.map((line, i) => (
+            {stats.citable_headlines.map((line: string, i: number) => (
+
               <li key={i} className="text-base leading-relaxed pl-2">
                 <span className="font-medium">{line}</span>
               </li>
@@ -143,7 +144,8 @@ function ReportPage() {
             a {Math.abs(leader.avg - trailer.avg)}-point gap inside one industry.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {stats.category_averages.map((c) => (
+            {stats.category_averages.map((c: { category: string; label: string; avg: number; count: number }) => (
+
               <div key={c.category} className="border border-border bg-card p-5">
                 <p className="font-mono text-[10px] uppercase tracking-widest text-accent">// {c.label}</p>
                 <p className="text-4xl font-bold mt-2">{c.avg}<span className="text-lg text-muted-foreground">/100</span></p>
@@ -159,7 +161,8 @@ function ReportPage() {
             <div>
               <h3 className="font-mono text-[10px] uppercase tracking-widest text-emerald-400 mb-3">// Agent-native</h3>
               <ul className="space-y-2">
-                {stats.top5.map((e) => (
+                {stats.top5.map((e: { name: string; domain: string; score: number }) => (
+
                   <li key={e.domain} className="flex justify-between border-b border-border pb-2 text-sm">
                     <span className="font-medium">{e.name}</span>
                     <span className="font-mono text-emerald-400">{e.score}/100</span>
@@ -170,7 +173,8 @@ function ReportPage() {
             <div>
               <h3 className="font-mono text-[10px] uppercase tracking-widest text-destructive mb-3">// Effectively opaque</h3>
               <ul className="space-y-2">
-                {stats.bottom5.map((e) => (
+                {stats.bottom5.map((e: { name: string; domain: string; score: number }) => (
+
                   <li key={e.domain} className="flex justify-between border-b border-border pb-2 text-sm">
                     <span className="font-medium">{e.name}</span>
                     <span className="font-mono text-destructive">{e.score}/100</span>

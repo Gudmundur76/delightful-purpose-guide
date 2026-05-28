@@ -82,7 +82,7 @@ function PressPage() {
             ))}
           </div>
 
-          </div>
+
           <p className="mt-3 text-xs text-muted-foreground">
             All figures derive from the open dataset at <a href="/api/public/leaderboard.json" className="text-accent hover:underline">/api/public/leaderboard.json</a>.
             Re-verify any number by re-scoring its source row at <Link to="/check" className="text-accent hover:underline">/check</Link>.

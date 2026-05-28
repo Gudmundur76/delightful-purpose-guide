@@ -98,7 +98,7 @@ function DataDropPage() {
             <p key={i} className="text-base leading-relaxed">{p}</p>
           ))}
 
-          ))}
+
         </article>
 
         <section className="mb-10 border border-border bg-card p-6">

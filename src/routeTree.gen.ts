@@ -40,6 +40,7 @@ import { Route as CrawlersRouteImport } from './routes/crawlers'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContentRouteImport } from './routes/content'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CompareRouteImport } from './routes/compare'
 import { Route as CliRouteImport } from './routes/cli'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckRouteImport } from './routes/check'
@@ -52,6 +53,7 @@ import { Route as ContentIndexRouteImport } from './routes/content.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
+import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
 import { Route as PlaybooksSlugRouteImport } from './routes/playbooks.$slug'
 import { Route as LeaderboardMethodologyRouteImport } from './routes/leaderboard.methodology'
 import { Route as HistoryHostRouteImport } from './routes/history.$host'
@@ -67,6 +69,7 @@ import { Route as CrawlersBotRouteImport } from './routes/crawlers.$bot'
 import { Route as ContentDraftsRouteImport } from './routes/content.drafts'
 import { Route as ContentCalendarRouteImport } from './routes/content.calendar'
 import { Route as ContentBriefsRouteImport } from './routes/content.briefs'
+import { Route as ComparePairRouteImport } from './routes/compare.$pair'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as CheckReportRouteImport } from './routes/check.report'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
@@ -268,6 +271,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CliRoute = CliRouteImport.update({
   id: '/cli',
   path: '/cli',
@@ -326,6 +334,11 @@ const VsCompetitorRoute = VsCompetitorRouteImport.update({
 const VerifyIdRoute = VerifyIdRouteImport.update({
   id: '/verify/$id',
   path: '/verify/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsRobotsCheckerRoute = ToolsRobotsCheckerRouteImport.update({
+  id: '/tools/robots-checker',
+  path: '/tools/robots-checker',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlaybooksSlugRoute = PlaybooksSlugRouteImport.update({
@@ -403,6 +416,11 @@ const ContentBriefsRoute = ContentBriefsRouteImport.update({
   id: '/briefs',
   path: '/briefs',
   getParentRoute: () => ContentRoute,
+} as any)
+const ComparePairRoute = ComparePairRouteImport.update({
+  id: '/$pair',
+  path: '/$pair',
+  getParentRoute: () => CompareRoute,
 } as any)
 const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
   id: '/success',
@@ -654,6 +672,7 @@ export interface FileRoutesByFullPath {
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
   '/cli': typeof CliRoute
+  '/compare': typeof CompareRouteWithChildren
   '/contact': typeof ContactRoute
   '/content': typeof ContentRouteWithChildren
   '/cookies': typeof CookiesRoute
@@ -698,6 +717,7 @@ export interface FileRoutesByFullPath {
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/compare/$pair': typeof ComparePairRoute
   '/content/briefs': typeof ContentBriefsRoute
   '/content/calendar': typeof ContentCalendarRoute
   '/content/drafts': typeof ContentDraftsRouteWithChildren
@@ -713,6 +733,7 @@ export interface FileRoutesByFullPath {
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
+  '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
@@ -759,6 +780,7 @@ export interface FileRoutesByTo {
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
   '/cli': typeof CliRoute
+  '/compare': typeof CompareRouteWithChildren
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/crawlers': typeof CrawlersRouteWithChildren
@@ -801,6 +823,7 @@ export interface FileRoutesByTo {
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/compare/$pair': typeof ComparePairRoute
   '/content/briefs': typeof ContentBriefsRoute
   '/content/calendar': typeof ContentCalendarRoute
   '/content/drafts': typeof ContentDraftsRouteWithChildren
@@ -816,6 +839,7 @@ export interface FileRoutesByTo {
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
+  '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog': typeof BlogIndexRoute
@@ -863,6 +887,7 @@ export interface FileRoutesById {
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
   '/cli': typeof CliRoute
+  '/compare': typeof CompareRouteWithChildren
   '/contact': typeof ContactRoute
   '/content': typeof ContentRouteWithChildren
   '/cookies': typeof CookiesRoute
@@ -907,6 +932,7 @@ export interface FileRoutesById {
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/compare/$pair': typeof ComparePairRoute
   '/content/briefs': typeof ContentBriefsRoute
   '/content/calendar': typeof ContentCalendarRoute
   '/content/drafts': typeof ContentDraftsRouteWithChildren
@@ -922,6 +948,7 @@ export interface FileRoutesById {
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
+  '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
@@ -970,6 +997,7 @@ export interface FileRouteTypes {
     | '/check'
     | '/checkout'
     | '/cli'
+    | '/compare'
     | '/contact'
     | '/content'
     | '/cookies'
@@ -1014,6 +1042,7 @@ export interface FileRouteTypes {
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
+    | '/compare/$pair'
     | '/content/briefs'
     | '/content/calendar'
     | '/content/drafts'
@@ -1029,6 +1058,7 @@ export interface FileRouteTypes {
     | '/history/$host'
     | '/leaderboard/methodology'
     | '/playbooks/$slug'
+    | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
@@ -1075,6 +1105,7 @@ export interface FileRouteTypes {
     | '/check'
     | '/checkout'
     | '/cli'
+    | '/compare'
     | '/contact'
     | '/cookies'
     | '/crawlers'
@@ -1117,6 +1148,7 @@ export interface FileRouteTypes {
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
+    | '/compare/$pair'
     | '/content/briefs'
     | '/content/calendar'
     | '/content/drafts'
@@ -1132,6 +1164,7 @@ export interface FileRouteTypes {
     | '/history/$host'
     | '/leaderboard/methodology'
     | '/playbooks/$slug'
+    | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog'
@@ -1178,6 +1211,7 @@ export interface FileRouteTypes {
     | '/check'
     | '/checkout'
     | '/cli'
+    | '/compare'
     | '/contact'
     | '/content'
     | '/cookies'
@@ -1222,6 +1256,7 @@ export interface FileRouteTypes {
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
+    | '/compare/$pair'
     | '/content/briefs'
     | '/content/calendar'
     | '/content/drafts'
@@ -1237,6 +1272,7 @@ export interface FileRouteTypes {
     | '/history/$host'
     | '/leaderboard/methodology'
     | '/playbooks/$slug'
+    | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
@@ -1284,6 +1320,7 @@ export interface RootRouteChildren {
   CheckRoute: typeof CheckRouteWithChildren
   CheckoutRoute: typeof CheckoutRouteWithChildren
   CliRoute: typeof CliRoute
+  CompareRoute: typeof CompareRouteWithChildren
   ContactRoute: typeof ContactRoute
   ContentRoute: typeof ContentRouteWithChildren
   CookiesRoute: typeof CookiesRoute
@@ -1328,6 +1365,7 @@ export interface RootRouteChildren {
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   GuideGenerativeEngineOptimizationRoute: typeof GuideGenerativeEngineOptimizationRoute
   HistoryHostRoute: typeof HistoryHostRouteWithChildren
+  ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
@@ -1580,6 +1618,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cli': {
       id: '/cli'
       path: '/cli'
@@ -1662,6 +1707,13 @@ declare module '@tanstack/react-router' {
       path: '/verify/$id'
       fullPath: '/verify/$id'
       preLoaderRoute: typeof VerifyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/robots-checker': {
+      id: '/tools/robots-checker'
+      path: '/tools/robots-checker'
+      fullPath: '/tools/robots-checker'
+      preLoaderRoute: typeof ToolsRobotsCheckerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/playbooks/$slug': {
@@ -1768,6 +1820,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/content/briefs'
       preLoaderRoute: typeof ContentBriefsRouteImport
       parentRoute: typeof ContentRoute
+    }
+    '/compare/$pair': {
+      id: '/compare/$pair'
+      path: '/$pair'
+      fullPath: '/compare/$pair'
+      preLoaderRoute: typeof ComparePairRouteImport
+      parentRoute: typeof CompareRoute
     }
     '/checkout/success': {
       id: '/checkout/success'
@@ -2119,6 +2178,17 @@ const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
   CheckoutRouteChildren,
 )
 
+interface CompareRouteChildren {
+  ComparePairRoute: typeof ComparePairRoute
+}
+
+const CompareRouteChildren: CompareRouteChildren = {
+  ComparePairRoute: ComparePairRoute,
+}
+
+const CompareRouteWithChildren =
+  CompareRoute._addFileChildren(CompareRouteChildren)
+
 interface ContentDraftsRouteChildren {
   ContentDraftsIdRoute: typeof ContentDraftsIdRoute
 }
@@ -2259,6 +2329,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckRoute: CheckRouteWithChildren,
   CheckoutRoute: CheckoutRouteWithChildren,
   CliRoute: CliRoute,
+  CompareRoute: CompareRouteWithChildren,
   ContactRoute: ContactRoute,
   ContentRoute: ContentRouteWithChildren,
   CookiesRoute: CookiesRoute,
@@ -2307,6 +2378,7 @@ const rootRouteChildren: RootRouteChildren = {
   GuideGenerativeEngineOptimizationRoute:
     GuideGenerativeEngineOptimizationRoute,
   HistoryHostRoute: HistoryHostRouteWithChildren,
+  ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute:

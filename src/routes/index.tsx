@@ -28,13 +28,16 @@ const FAQS: { q: string; a: string }[] = [
   { q: "Do you handle hosting and post-launch fixes?", a: "We deploy to your hosting of choice (Vercel, Netlify, Cloudflare) and fix any genuine bugs free for 14 days after launch. Ongoing maintenance is available as a monthly retainer if you want it." },
 ];
 
+type FaqItem = { q: string; a: string };
+type FaqRow = { question: string; answer: string };
+
 export const Route = createFileRoute("/")({
   component: Index,
 
   loader: async ({ context }) => {
     // Prefetch FAQ + home content so SSR HTML and JSON-LD reflect DB state
     // and stay in sync with what the user sees after hydration.
-    await Promise.all([
+    const [faqData, homeContent] = await Promise.all([
       context.queryClient.ensureQueryData({
         queryKey: ["faq-items"],
         queryFn: () => getFaqItemsFn(),
@@ -44,6 +47,7 @@ export const Route = createFileRoute("/")({
         queryFn: () => getPageContentFn({ data: "home" }),
       }),
     ]);
+    return { faqData, homeContent };
   },
 
   head: () => ({
@@ -103,6 +107,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const loaderData = Route.useLoaderData();
+
   useEffect(() => {
     console.log(
       "%c⚡ Agent-native. Score: 100/100",
@@ -117,8 +123,8 @@ function Index() {
   const fetchFaq = useServerFn(getFaqItemsFn);
   const fetchHome = useServerFn(getPageContentFn);
   const fetchStats = useServerFn(getOverviewStats);
-  const { data: faqData } = useQuery({ queryKey: ["faq-items"], queryFn: () => fetchFaq() });
-  const { data: homeContent } = useQuery({ queryKey: ["site-content", "home"], queryFn: () => fetchHome({ data: "home" }) });
+  const { data: faqData } = useQuery({ queryKey: ["faq-items"], queryFn: () => fetchFaq(), initialData: loaderData.faqData });
+  const { data: homeContent } = useQuery({ queryKey: ["site-content", "home"], queryFn: () => fetchHome({ data: "home" }), initialData: loaderData.homeContent });
   const { data: stats = null } = useQuery({
     queryKey: ["overview-stats", 7],
     queryFn: () => fetchStats({ data: { days: 7 } }),
@@ -126,7 +132,7 @@ function Index() {
 
 
   const faqItems = (faqData && faqData.length > 0)
-    ? faqData.map((d) => ({ q: d.question, a: d.answer }))
+    ? faqData.map((d: FaqRow) => ({ q: d.question, a: d.answer }))
     : FAQS;
   const heroEyebrow = homeContent?.hero_eyebrow ?? "// Agent-Native Website Agency";
   const heroHeadlinePrefix = homeContent?.hero_headline_prefix ?? "Built for";
@@ -206,7 +212,7 @@ function Index() {
                 __html: JSON.stringify({
                   "@context": "https://schema.org",
                   "@type": "FAQPage",
-                  mainEntity: faqItems.map((f) => ({
+                  mainEntity: faqItems.map((f: FaqItem) => ({
                     "@type": "Question",
                     name: f.q,
                     acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -219,7 +225,7 @@ function Index() {
               <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">FAQ</h2>
             </div>
             <div className="space-y-8 sm:space-y-10">
-              {faqItems.map((f) => (
+              {faqItems.map((f: FaqItem) => (
                 <article key={f.q}>
                   <p className="font-bold uppercase tracking-tighter text-base sm:text-lg">{f.q}</p>
                   <p className="text-muted-foreground text-sm mt-2 leading-relaxed">{f.a}</p>

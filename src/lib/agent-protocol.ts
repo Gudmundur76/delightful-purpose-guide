@@ -13,6 +13,9 @@ import { createHash } from "node:crypto";
 import { serverCard } from "./agent-protocol/mcp-server-card";
 
 const SITE_ORIGIN = "https://grow.contact";
+const AUTH_MD_URL = `${SITE_ORIGIN}/auth.md`;
+const AGENT_REGISTRATION_URL = `${SITE_ORIGIN}/contact`;
+const AGENT_CREDENTIAL_TYPES = ["api_key", "access_token"];
 
 // Skill manifest body — kept here so the hash in the agent-skills index is
 // computed from the exact bytes we serve at /.well-known/agent-skills/grow-geo-scan.md.
@@ -64,6 +67,8 @@ export function handleWellKnownRequest(url: URL): Response | null {
       return markdownResponse(GROW_GEO_SCAN_SKILL);
     case "/.well-known/oauth-protected-resource":
       return jsonResponse(oauthProtectedResourceMetadata());
+    case "/.well-known/oauth-authorization-server":
+      return jsonResponse(oauthAuthorizationServerMetadata());
     case "/auth.md":
       return markdownResponse(authMarkdown());
     default:
@@ -173,18 +178,67 @@ function agentSkillsIndex() {
 // RFC 9728 — OAuth 2.0 Protected Resource Metadata.
 // Advertise grow.contact as the authorization server so agents discover the
 // matching RFC 8414 document with our agent_auth registration metadata.
-function oauthProtectedResourceMetadata() {
+function agentAuthMetadata() {
   return {
-    resource: SITE_ORIGIN,
-    authorization_servers: [SITE_ORIGIN],
-    bearer_methods_supported: ["header"],
-    resource_documentation: `${SITE_ORIGIN}/auth.md`,
-    scopes_supported: ["mcp:read", "mcp:write", "api:read"],
-    resource_signing_alg_values_supported: ["RS256"],
+    skill: AUTH_MD_URL,
+    register_uri: AGENT_REGISTRATION_URL,
+    claim_uri: AGENT_REGISTRATION_URL,
+    identity_types_supported: ["anonymous"],
+    anonymous: {
+      credential_types_supported: AGENT_CREDENTIAL_TYPES,
+      claim_uri: AGENT_REGISTRATION_URL,
+    },
+    registration_methods: [
+      {
+        type: "anonymous",
+        register_uri: AGENT_REGISTRATION_URL,
+        claim_uri: AGENT_REGISTRATION_URL,
+        credential_types_supported: AGENT_CREDENTIAL_TYPES,
+        description:
+          "Request an API key or MCP access token via the contact form. Credentials are issued out-of-band after review.",
+      },
+    ],
   };
 }
 
-function authMarkdown(): string {
+export function oauthProtectedResourceMetadata() {
+  return {
+    resource: SITE_ORIGIN,
+    resource_name: "grow.contact",
+    authorization_servers: [SITE_ORIGIN],
+    bearer_methods_supported: ["header"],
+    resource_documentation: AUTH_MD_URL,
+    scopes_supported: ["mcp:read", "mcp:write", "api:read"],
+    resource_signing_alg_values_supported: ["RS256"],
+    agent_auth: agentAuthMetadata(),
+  };
+}
+
+export function oauthAuthorizationServerMetadata() {
+  return {
+    issuer: SITE_ORIGIN,
+    resource: SITE_ORIGIN,
+    authorization_servers: [SITE_ORIGIN],
+    authorization_endpoint: `${SITE_ORIGIN}/api/public/oauth/authorize`,
+    token_endpoint: `${SITE_ORIGIN}/api/public/oauth/token`,
+    jwks_uri: `${SITE_ORIGIN}/.well-known/jwks.json`,
+    registration_endpoint: AGENT_REGISTRATION_URL,
+    scopes_supported: ["mcp:read", "mcp:write", "api:read"],
+    bearer_methods_supported: ["header"],
+    response_types_supported: ["token"],
+    grant_types_supported: ["client_credentials"],
+    token_endpoint_auth_methods_supported: [
+      "client_secret_basic",
+      "client_secret_post",
+    ],
+    service_documentation: AUTH_MD_URL,
+    resource_documentation: `${SITE_ORIGIN}/.well-known/api-catalog`,
+    mcp_server_metadata: `${SITE_ORIGIN}/.well-known/mcp.json`,
+    agent_auth: agentAuthMetadata(),
+  };
+}
+
+export function authMarkdown(): string {
   return `# auth.md
 
 Agent registration and authentication metadata for grow.contact.
@@ -199,17 +253,17 @@ Agent registration and authentication metadata for grow.contact.
 ## Agent registration
 
 grow.contact supports anonymous agent registration by human request. Request an
-API key for the public REST API or an MCP bearer token via ${SITE_ORIGIN}/contact.
+API key for the public REST API or an MCP access token via ${AGENT_REGISTRATION_URL}.
 
 - Identity type: anonymous
-- Credential types: api_key, bearer_token
-- Claim URI: ${SITE_ORIGIN}/contact
-- Register URI: ${SITE_ORIGIN}/contact
+- Credential types: api_key, access_token
+- Claim URI: ${AGENT_REGISTRATION_URL}
+- Register URI: ${AGENT_REGISTRATION_URL}
 
 ## For agents
 
 - Public REST API keys use the \`x-api-key\` request header.
-- MCP credentials use \`Authorization: Bearer <token>\`.
+- MCP access tokens use \`Authorization: Bearer <token>\`.
 - Public, unauthenticated surfaces (no token required):
   - \`GET /\`, \`GET /llms.txt\`, \`GET /sitemap.xml\`
   - \`GET /api/public/v1/openapi.json\`

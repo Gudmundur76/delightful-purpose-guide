@@ -33,8 +33,15 @@ export const Route = createFileRoute("/data-drops/$slug")({
         { property: "og:description", content: d.headline },
         { property: "og:url", content: url },
         { property: "og:type", content: "article" },
+        { property: "og:image", content: `https://grow.contact/api/public/widget/chart/${d.slug}.svg` },
+        { property: "twitter:card", content: "summary_large_image" },
+        { property: "twitter:image", content: `https://grow.contact/api/public/widget/chart/${d.slug}.svg` },
         { property: "article:published_time", content: d.publishedAt },
-        { property: "article:author", content: "grow.contact" },
+        { property: "article:author", content: AUTHOR.name },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [

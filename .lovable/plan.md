@@ -1,81 +1,98 @@
-# GrowContent build plan
+## Composio integration plan
 
-A working content workflow at `/content` with three tabs (Briefs, Drafts, Calendar) and a Tiptap draft editor that scores SEO/GEO/AEO live as you type. Replaces the existing "coming soon" placeholder.
+Before I start, two stack-level corrections to flag — both keep the spec's intent intact:
 
-## 1. Database (one migration)
+1. **Not a Supabase Edge Function.** This project is TanStack Start on Cloudflare Workers. The right home for `/agent-action` is a TanStack server route at `src/routes/api/public/agent-action.ts` (the `/api/public/*` prefix is the documented home for external callers — MCP, Skywork, n8n — and bypasses Lovable's published-site auth gate). Same URL semantics, same caller contract; just no separate Supabase Functions deployment.
+2. **Composio SDK runtime.** `@composio/core` ≥ 0.6.0 added explicit Cloudflare Workers support (Jan 2026 release). I'll pin `^0.6.4` so it runs in the Worker SSR runtime. Older versions would crash with `[unenv]` stubs.
 
-New tables in `public`:
+If you want it to be a Supabase Edge Function instead, say so and I'll route it through `supabase/functions/agent-action/` — but the published URL, auth model, and caller code are simpler with the server-route approach.
 
-- **`content_briefs`** — `id`, `site` (text), `title`, `topic`, `intent`, `audience`, `keywords` (text[]), `content_type`, `target_word_count` (int), `status` (text default `'open'`), `created_by`, `created_at`, `updated_at`.
-- **`content_drafts`** — `id`, `brief_id` (fk content_briefs), `title`, `version` (int default 1), `body_html` (text), `seo_score`, `geo_score`, `aeo_score`, `overall_score`, `checks` (jsonb), `status` (text: `draft|in_review|approved|scheduled|published|rejected`), `scheduled_for` (timestamptz), `published_at`, `created_by`, `created_at`, `updated_at`.
-- **`agent_runs`** — `id`, `agent_type` (text), `input` (jsonb), `output` (jsonb), `status` (text default `'queued'`), `error`, `created_at`, `completed_at`. (Generic — reused by future agents.)
+---
 
-GRANTs to `authenticated` + `service_role`. RLS: authenticated team members can CRUD all rows (matches existing `clients`/`scans` pattern). `update_updated_at_column` triggers on briefs + drafts.
+### 1. Secret + dependency
 
-## 2. Scoring engine — `src/lib/scoring/content-score.ts`
+- `add_secret(["COMPOSIO_API_KEY"])` — user pastes value from composio.dev.
+- `COMPOSIO_ENTITY_PREFIX` is a constant (`"grow_contact_"`) — hardcoded in `src/lib/composio/config.ts`, not a secret.
+- `bun add @composio/core@^0.6.4`.
 
-Pure, no I/O. Parses `html` with a lightweight DOMParser (use `linkedom` — already Worker-safe; install if absent, otherwise regex-based fallback).
+### 2. Database
 
-```ts
-export type ContentBrief = { keywords?: string[]; target_word_count?: number };
-export type Check = { id: string; label: string; pass: boolean; category: 'seo'|'geo'|'aeo'; weight: number };
-export type ContentScore = { seo: number; geo: number; aeo: number; overall: number; checks: Check[] };
-export function scoreContent(html: string, brief?: ContentBrief): ContentScore;
+One new table, RLS-scoped to the owning user:
+
+```text
+public.client_integrations
+  id            uuid pk
+  user_id       uuid references auth.users(id) on delete cascade
+  toolkit       text   -- 'gmail' | 'hubspot' | 'pipedrive' | 'slack' | 'linkedin' | 'google_analytics'
+  entity_id     text   -- "grow_contact_<user_id>"
+  connection_id text   -- Composio connectedAccountId
+  status        text   -- 'pending' | 'active' | 'error'
+  created_at, updated_at
+  unique (user_id, toolkit)
 ```
 
-- 6 SEO checks, 6 GEO checks, 6 AEO checks (exactly per spec).
-- Each category score = `(passing weight / total weight) * 100`, rounded.
-- `overall = round(seo*0.25 + geo*0.35 + aeo*0.40)`.
-- Unit-testable; export helpers (`extractText`, `paragraphs`, `findFaqPairs`, `hasDirectAnswer`).
+Grants: `authenticated` (CRUD own rows), `service_role` (all). RLS: user can see/manage only their own rows. No anon access.
 
-## 3. Server functions — `src/lib/content/content.functions.ts`
+### 3. Server functions (app-internal, `createServerFn`)
 
-All `requireSupabaseAuth` protected:
-- `listBriefsFn`, `createBriefFn(input)` — also inserts an `agent_runs` row (`agent_type='content'`, `input={brief_id}`).
-- `listDraftsFn`, `getDraftFn(id)`, `updateDraftFn({id, body_html, scores, checks})`, `setDraftStatusFn({id, status})`.
-- `listCalendarFn({month})` — drafts where `status in (published, scheduled, draft)`.
+All under `src/lib/composio/`:
 
-## 4. Routes
+- `composio.server.ts` — singleton Composio client (reads `COMPOSIO_API_KEY` inside handler scope, never module scope).
+- `integrations.functions.ts`:
+  - `listIntegrations()` — returns the 6 toolkits + the current user's status from `client_integrations`.
+  - `initiateConnection({ toolkit })` — calls Composio `connectedAccounts.initiate`, upserts row with `status:'pending'`, returns the OAuth `redirectUrl`.
+  - `refreshConnectionStatus({ toolkit })` — polls Composio for `ACTIVE`, flips DB row.
+  - `disconnectIntegration({ toolkit })` — Composio delete + DB row delete.
+- All three are `.middleware([requireSupabaseAuth])` so they act as the logged-in user.
 
-- `src/routes/content.tsx` — layout `<Outlet/>` + tab nav (`Briefs | Drafts | Calendar`). Replaces existing placeholder if any (we'll check `/content` route existence).
-- `src/routes/content.index.tsx` — redirects to `/content/briefs`.
-- `src/routes/content.briefs.tsx` — table of briefs + "New brief" dialog (form: site, title, topic, intent, audience, keywords (comma-split), content type select, word count). On submit → `createBriefFn` → toast → refetch.
-- `src/routes/content.drafts.tsx` — grid of draft cards (title, v{version}, three score badges color-coded, status pill). Click → `/content/drafts/$id`.
-- `src/routes/content.drafts.$id.tsx` — editor page (see §5).
-- `src/routes/content.calendar.tsx` — month grid (current month default, prev/next nav). Cells show drafts colored by status (published=emerald, scheduled=blue, draft=zinc).
+### 4. `/integrations` page (auth-gated)
 
-All under `_authenticated`? Existing dashboard isn't gated by a layout — check `src/routes/dashboard.tsx`. Match the same auth pattern (`beforeLoad` redirect-to-login).
+- File: `src/routes/_authenticated/integrations.tsx` (sits under the existing `_authenticated` layout — same gate the rest of the app uses).
+- Dark-themed settings card per toolkit: name, one-line purpose, status pill (`Connected` / `Not connected` / `Pending`), Connect / Reconnect / Disconnect button.
+- Connect flow: server fn returns `redirectUrl` → `window.location.href = redirectUrl` → Composio handles OAuth → returns to `/integrations` → page polls `refreshConnectionStatus` on focus until `ACTIVE`.
+- `head()` sets `noindex` (private settings page).
 
-## 5. Draft editor `/content/drafts/$id`
+### 5. Agent Action endpoint (external callers)
 
-- Install `@tiptap/react`, `@tiptap/starter-kit`, `@tiptap/extension-link`.
-- Layout: `grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-6`.
-- **Left (60%)**: Tiptap editor bound to `body_html`. Toolbar: bold, italic, H2, H3, link, bullet/ordered list. Prose styling via Tailwind `prose` class.
-- **Right (40%)**: live score panel
-  - Overall ring + three sub-scores (SEO/GEO/AEO) with progress bars.
-  - Three `<Collapsible>` sections (one per category) listing each check with ✅/❌ and label.
-  - "Top 3 fixes" — first 3 failing checks across all categories.
-  - Recomputes via `useMemo`/debounced state on editor update (1s debounce).
-- **Action bar** (sticky bottom): `Approve` → status `approved`, `Request revision` → status `draft` + bump `version`, `Reject` → status `rejected`.
-- **Autosave**: debounced 3s after edits → `updateDraftFn({id, body_html, ...scores, checks})`. Show "Saved · 12s ago" indicator.
+`src/routes/api/public/agent-action.ts` — POST handler:
 
-## 6. Navigation
+- Body: `{ tool: string, params: object, client_id: string }` validated with Zod (string min/max, params is a generic object).
+- Auth: requires `Authorization: Bearer <ADMIN_API_KEY>` header (already in your secrets) — this is what MCP, Skywork, n8n use.
+- Looks up the client's entity ID from `client_integrations` (using `supabaseAdmin`).
+- Calls `composio.tools.execute(tool, { userId: entityId, arguments: params })`.
+- Returns `{ success, result, error }` JSON.
 
-Add `Content` link to `SiteHeader` / dashboard nav if it points elsewhere. Keep existing `/content` content if it's marketing — otherwise replace.
+### 6. Event triggers
 
-## Technical notes
+Wire each event by calling a small helper from the existing emit site — no new background queue.
 
-- HTML parsing: prefer `linkedom` (`bun add linkedom`) — works on Cloudflare Workers and in browser. Fallback regex if install fails.
-- Tiptap is React-friendly and SSR-safe with `immediatelyRender: false`.
-- Debouncing: small inline `useDebouncedValue` hook (no new dep).
-- Calendar: pure JS month grid, no `date-fns` needed (project may already have it — check).
-- No PayPal/email touches — pure CRUD + scoring.
+`src/lib/composio/triggers.server.ts` exports four functions, each takes the relevant payload + client `user_id`:
 
-## Out of scope (call out explicitly)
+| Event source (existing) | Trigger | Composio action |
+|---|---|---|
+| `/check` scan completes with score < 70 | `onLowScoreScan(scan)` | Gmail: send personalized report to lead email |
+| Scan score drops >10 vs last for same URL | `onScoreDrop(scan, prev)` | Slack: post alert to client's connected channel |
+| `/contact` brief submitted | `onBriefSubmitted(lead)` | HubSpot: create deal, stage = "Brief Received" |
+| Blog post `published` flips true | `onPostPublished(post)` | LinkedIn: create draft post for approval |
 
-- No AI draft generation (the `agent_runs` row is enqueued but not processed — a future worker will read it).
-- No publishing pipeline (status=`published` is manual flag, no external CMS push).
-- No collaboration / presence.
-- No version diff view (version just increments on "Request revision").
+I'll trace where each event is currently emitted and add a single `await trigger(...)` call wrapped in try/catch so a Composio failure never breaks the originating request. All four are skipped silently when the client has no matching toolkit connected.
 
-Ship order: migration → scoring engine + tests-in-head → server fns → routes → editor.
+### 7. No changes to existing user-facing pages
+
+Only addition to existing UI: a "Integrations" link inside the existing authenticated nav (if there is one — otherwise just live at `/integrations`).
+
+---
+
+### Technical notes (for the engineer)
+
+- Composio client is constructed inside each server-fn `.handler()` (never at module top level — same rule as `process.env`).
+- Entity ID format: `${COMPOSIO_ENTITY_PREFIX}${supabaseUserId}` — stable across reconnects.
+- `redirectUrl` for OAuth callback: `https://grow.contact/integrations` (Composio handles the round-trip).
+- `/api/public/agent-action` does its own bearer-token check (no `requireSupabaseAuth` — external callers don't have Supabase sessions).
+- Triggers run on the request thread; if Composio is slow they'll add latency. If that becomes an issue we can move them to a queued worker later.
+
+### What I need from you
+
+- Approve the plan (especially the server-route vs Edge Function call).
+- After approval I'll request `COMPOSIO_API_KEY` via the secret tool.
+- Confirm Pipedream is intentional (spec said "HubSpot or Pipedream" — Composio's toolkit is `pipedrive`, not Pipedream the workflow tool). I'll assume **Pipedrive** unless you say otherwise.

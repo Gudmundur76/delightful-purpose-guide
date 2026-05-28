@@ -125,6 +125,7 @@ import { Route as ApiPublicStatsOverviewRouteImport } from './routes/api/public/
 import { Route as ApiPublicOauthTokenRouteImport } from './routes/api/public/oauth/token'
 import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/api/public/hooks/run-scheduled-scans'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
+import { Route as ApiPublicHooksGenerateDraftsRouteImport } from './routes/api/public/hooks/generate-drafts'
 import { Route as ApiPublicWidgetChartSlugDotsvgRouteImport } from './routes/api/public/widget/chart.$slug[.]svg'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
@@ -727,6 +728,12 @@ const ApiPublicHooksRescanLeaderboardRoute =
     path: '/api/public/hooks/rescan-leaderboard',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicHooksGenerateDraftsRoute =
+  ApiPublicHooksGenerateDraftsRouteImport.update({
+    id: '/api/public/hooks/generate-drafts',
+    path: '/api/public/hooks/generate-drafts',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicWidgetChartSlugDotsvgRoute =
   ApiPublicWidgetChartSlugDotsvgRouteImport.update({
     id: '/api/public/widget/chart/$slug.svg',
@@ -842,6 +849,7 @@ export interface FileRoutesByFullPath {
   '/content/drafts/$id': typeof ContentDraftsIdRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
@@ -961,6 +969,7 @@ export interface FileRoutesByTo {
   '/content/drafts/$id': typeof ContentDraftsIdRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
@@ -1083,6 +1092,7 @@ export interface FileRoutesById {
   '/content/drafts/$id': typeof ContentDraftsIdRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
@@ -1206,6 +1216,7 @@ export interface FileRouteTypes {
     | '/content/drafts/$id'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/oauth/token'
@@ -1325,6 +1336,7 @@ export interface FileRouteTypes {
     | '/content/drafts/$id'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/oauth/token'
@@ -1446,6 +1458,7 @@ export interface FileRouteTypes {
     | '/content/drafts/$id'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/oauth/token'
@@ -1544,6 +1557,7 @@ export interface RootRouteChildren {
   ApiPublicMcpRoute: typeof ApiPublicMcpRoute
   ApiPublicPingRoute: typeof ApiPublicPingRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicHooksGenerateDraftsRoute: typeof ApiPublicHooksGenerateDraftsRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
   ApiPublicHooksRunScheduledScansRoute: typeof ApiPublicHooksRunScheduledScansRoute
   ApiPublicOauthTokenRoute: typeof ApiPublicOauthTokenRoute
@@ -2381,6 +2395,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksRescanLeaderboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/generate-drafts': {
+      id: '/api/public/hooks/generate-drafts'
+      path: '/api/public/hooks/generate-drafts'
+      fullPath: '/api/public/hooks/generate-drafts'
+      preLoaderRoute: typeof ApiPublicHooksGenerateDraftsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/widget/chart/$slug.svg': {
       id: '/api/public/widget/chart/$slug.svg'
       path: '/api/public/widget/chart/$slug.svg'
@@ -2687,6 +2708,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicMcpRoute: ApiPublicMcpRoute,
   ApiPublicPingRoute: ApiPublicPingRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicHooksGenerateDraftsRoute: ApiPublicHooksGenerateDraftsRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
   ApiPublicHooksRunScheduledScansRoute: ApiPublicHooksRunScheduledScansRoute,
   ApiPublicOauthTokenRoute: ApiPublicOauthTokenRoute,

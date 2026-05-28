@@ -7,6 +7,7 @@ import { CRAWLERS } from "@/lib/crawlers/data";
 import { PLAYBOOKS } from "@/lib/playbooks/data";
 import { getFeaturedPairsWithEntries } from "@/lib/compare/data";
 import { getAllDataDrops } from "@/lib/data-drops/data";
+import { LEADERBOARD } from "@/lib/leaderboard/entries";
 
 
 

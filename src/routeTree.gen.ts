@@ -27,6 +27,7 @@ import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PlaygroundRouteImport } from './routes/playground'
 import { Route as PlaybooksRouteImport } from './routes/playbooks'
 import { Route as PlaybookRouteImport } from './routes/playbook'
 import { Route as OutreachRouteImport } from './routes/outreach'
@@ -216,6 +217,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlaygroundRoute = PlaygroundRouteImport.update({
+  id: '/playground',
+  path: '/playground',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlaybooksRoute = PlaybooksRouteImport.update({
@@ -763,6 +769,7 @@ export interface FileRoutesByFullPath {
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
   '/playbooks': typeof PlaybooksRouteWithChildren
+  '/playground': typeof PlaygroundRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
@@ -881,6 +888,7 @@ export interface FileRoutesByTo {
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
   '/playbooks': typeof PlaybooksRouteWithChildren
+  '/playground': typeof PlaygroundRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
@@ -1002,6 +1010,7 @@ export interface FileRoutesById {
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
   '/playbooks': typeof PlaybooksRouteWithChildren
+  '/playground': typeof PlaygroundRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
@@ -1124,6 +1133,7 @@ export interface FileRouteTypes {
     | '/outreach'
     | '/playbook'
     | '/playbooks'
+    | '/playground'
     | '/pricing'
     | '/privacy'
     | '/process'
@@ -1242,6 +1252,7 @@ export interface FileRouteTypes {
     | '/outreach'
     | '/playbook'
     | '/playbooks'
+    | '/playground'
     | '/pricing'
     | '/privacy'
     | '/process'
@@ -1362,6 +1373,7 @@ export interface FileRouteTypes {
     | '/outreach'
     | '/playbook'
     | '/playbooks'
+    | '/playground'
     | '/pricing'
     | '/privacy'
     | '/process'
@@ -1483,6 +1495,7 @@ export interface RootRouteChildren {
   OutreachRoute: typeof OutreachRoute
   PlaybookRoute: typeof PlaybookRoute
   PlaybooksRoute: typeof PlaybooksRouteWithChildren
+  PlaygroundRoute: typeof PlaygroundRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   ProcessRoute: typeof ProcessRoute
@@ -1680,6 +1693,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/playground': {
+      id: '/playground'
+      path: '/playground'
+      fullPath: '/playground'
+      preLoaderRoute: typeof PlaygroundRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/playbooks': {
@@ -2612,6 +2632,7 @@ const rootRouteChildren: RootRouteChildren = {
   OutreachRoute: OutreachRoute,
   PlaybookRoute: PlaybookRoute,
   PlaybooksRoute: PlaybooksRouteWithChildren,
+  PlaygroundRoute: PlaygroundRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   ProcessRoute: ProcessRoute,

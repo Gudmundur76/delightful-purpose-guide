@@ -15,7 +15,8 @@ export type ScanMetricKey =
   | "llms"
   | "citability"
   | "speed"
-  | "protocol";
+  | "protocol"
+  | "agent_auth";
 
 export type ScanMetric = {
   key: ScanMetricKey;

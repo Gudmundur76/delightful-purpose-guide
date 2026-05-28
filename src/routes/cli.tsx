@@ -14,7 +14,7 @@ export const Route = createFileRoute("/cli")({
       {
         property: "og:description",
         content:
-          "npx @grow-contact/cli check <url> — Lighthouse for AI agents. 6 signals, 0–100, CI-ready.",
+          "npx @grow-contact/cli check <url> — Lighthouse for AI agents. 5 signals, 0–100, CI-ready.",
       },
       { property: "og:url", content: "https://grow.contact/cli" },
       { property: "og:type", content: "website" },

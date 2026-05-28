@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
+import { Link } from "@tanstack/react-router";
 import { getRecentScans } from "@/lib/check/recent-scans.functions";
 
 interface Row {
@@ -39,12 +40,18 @@ export function RecentScans() {
           const ago = timeAgo(r.scanned_at);
           return (
             <li key={r.id} className="flex items-center justify-between py-3">
-              <div className="flex items-baseline gap-3 min-w-0">
+              <Link
+                to="/history/$host"
+                params={{ host: r.host }}
+                className="flex items-baseline gap-3 min-w-0 hover:text-accent transition-colors group flex-1"
+              >
                 <span className={`font-mono font-semibold text-base ${color} w-10 shrink-0`}>
                   {r.overall}
                 </span>
-                <span className="font-mono text-sm text-foreground truncate">{r.host}</span>
-              </div>
+                <span className="font-mono text-sm text-foreground truncate group-hover:text-accent">
+                  {r.host}
+                </span>
+              </Link>
               <span className="font-mono text-[11px] text-muted-foreground shrink-0 ml-3">
                 {ago}
               </span>

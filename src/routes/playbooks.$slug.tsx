@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getPlaybook, PLAYBOOKS } from "@/lib/playbooks/data";
 import { ArrowLeft, ArrowRight, AlertTriangle, CheckCircle2, Clock } from "lucide-react";
+import { ogImageMeta } from "@/lib/seo/og";
 
 export const Route = createFileRoute("/playbooks/$slug")({
   loader: ({ params }) => {
@@ -25,15 +26,13 @@ export const Route = createFileRoute("/playbooks/$slug")({
         { property: "og:type", content: "article" },
         { property: "article:published_time", content: p.publishedAt },
         { property: "article:modified_time", content: p.updatedAt },
-        { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: p.short },
-        { property: "og:image", content: `https://grow.contact/api/public/widget/og.svg?kicker=Playbook&title=${encodeURIComponent(title)}&sub=${encodeURIComponent(p.short)}` },
-        { property: "og:image:width", content: "1200" },
-        { property: "og:image:height", content: "630" },
-        { property: "og:image:alt", content: title },
-        { name: "twitter:image", content: `https://grow.contact/api/public/widget/og.svg?kicker=Playbook&title=${encodeURIComponent(title)}&sub=${encodeURIComponent(p.short)}` },
-
+        ...ogImageMeta({
+          title: title,
+          kicker: "Playbook",
+          sub: p.short,
+        }),
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getFaqItemsFn } from "@/lib/site/content.functions";
+import { ogImageMeta } from "@/lib/seo/og";
 
 
 // Fallback only used if the DB returns no rows (e.g. cold-start error).
@@ -28,12 +29,11 @@ export const Route = createFileRoute("/faq")({
       { property: "og:title", content: "FAQ — Grow" },
       { property: "og:description", content: "What 'agent-native' means, how 48h works, pricing, ownership, and more." },
       { property: "og:url", content: "https://grow.contact/faq" },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=FAQ%20%E2%80%94%20Grow&sub=Answers%20to%20common%20questions%20about%20agent-native%20sites%2C%20pricing%2C%20timelines%2C%20and%20ownership." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "FAQ — Grow" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=FAQ%20%E2%80%94%20Grow&sub=Answers%20to%20common%20questions%20about%20agent-native%20sites%2C%20pricing%2C%20timelines%2C%20and%20ownership." },
+      ...ogImageMeta({
+        title: "FAQ — Grow",
+        kicker: "Grow",
+        sub: "Answers to common questions about agent-native sites, pricing, timelines, and ownership.",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/faq" }],
     // FAQPage JSON-LD is rendered inside the component from the same data

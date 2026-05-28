@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useMemo, useState } from "react";
 import { Copy, Check as CheckIcon, ArrowRight } from "lucide-react";
+import { ogImageMeta } from "@/lib/seo/og";
 
 export const Route = createFileRoute("/badge")({
   component: BadgePage,
@@ -20,12 +21,11 @@ export const Route = createFileRoute("/badge")({
         content: "Free embeddable badge that proves your site is built for the agent era.",
       },
       { property: "og:url", content: "https://grow.contact/badge" },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Agent-Native%20Badge%20%E2%80%94%20Show%20Your%20Score%20%7C%20Grow&sub=Embed%20your%20Agent%20Readability%20Score%20on%20your%20site.%20A%20live%20SVG%20badge%20that%20updates%20as%20your%20site%20improves.%20Free%20for%20any%20domain." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Agent-Native Badge — Show Your Score | Grow" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Agent-Native%20Badge%20%E2%80%94%20Show%20Your%20Score%20%7C%20Grow&sub=Embed%20your%20Agent%20Readability%20Score%20on%20your%20site.%20A%20live%20SVG%20badge%20that%20updates%20as%20your%20site%20improves.%20Free%20for%20any%20domain." },
+      ...ogImageMeta({
+        title: "Agent-Native Badge — Show Your Score | Grow",
+        kicker: "Grow",
+        sub: "Embed your Agent Readability Score on your site. A live SVG badge that updates as your site improves. Free for any domain.",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/badge" }],
   }),

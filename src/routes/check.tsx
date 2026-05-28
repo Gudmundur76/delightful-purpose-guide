@@ -9,6 +9,7 @@ import { sendReportFollowup } from "@/lib/check/report-followup.functions";
 import { scanUrl, type ScanMetric, type ScanResult } from "@/lib/check/scan.functions";
 import { getBenchmark, type BenchmarkResult } from "@/lib/check/benchmark.functions";
 import { RecentScans } from "@/components/RecentScans";
+import { ogImageMeta } from "@/lib/seo/og";
 
 const checkSearchSchema = z.object({
   url: fallback(z.string(), "").default(""),
@@ -24,12 +25,11 @@ export const Route = createFileRoute("/check")({
       { property: "og:title", content: "Agent Readability Checker — Grow" },
       { property: "og:description", content: "Score any URL for LLM readability. Free." },
       { property: "og:url", content: "https://grow.contact/check" },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Agent%20Readability%20Checker%20%E2%80%94%20Grow&sub=Score%20any%20URL%20for%20how%20readable%2C%20citeable%2C%20and%20parseable%20it%20is%20to%20LLM%20crawlers.%20Free%20tool." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Agent Readability Checker — Grow" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Agent%20Readability%20Checker%20%E2%80%94%20Grow&sub=Score%20any%20URL%20for%20how%20readable%2C%20citeable%2C%20and%20parseable%20it%20is%20to%20LLM%20crawlers.%20Free%20tool." },
+      ...ogImageMeta({
+        title: "Agent Readability Checker — Grow",
+        kicker: "Grow",
+        sub: "Score any URL for how readable, citeable, and parseable it is to LLM crawlers. Free tool.",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/check" }],
   }),

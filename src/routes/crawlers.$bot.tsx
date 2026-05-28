@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getCrawler, CRAWLERS } from "@/lib/crawlers/data";
 import { ArrowLeft, ArrowRight, ExternalLink, Check, X, AlertTriangle } from "lucide-react";
+import { ogImageMeta } from "@/lib/seo/og";
 
 export const Route = createFileRoute("/crawlers/$bot")({
   loader: ({ params }) => {
@@ -23,15 +24,13 @@ export const Route = createFileRoute("/crawlers/$bot")({
         { property: "og:description", content: c.short },
         { property: "og:url", content: url },
         { property: "og:type", content: "article" },
-        { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: c.short },
-        { property: "og:image", content: `https://grow.contact/api/public/widget/og.svg?kicker=Crawler&title=${encodeURIComponent(title)}&sub=${encodeURIComponent(c.short)}` },
-        { property: "og:image:width", content: "1200" },
-        { property: "og:image:height", content: "630" },
-        { property: "og:image:alt", content: title },
-        { name: "twitter:image", content: `https://grow.contact/api/public/widget/og.svg?kicker=Crawler&title=${encodeURIComponent(title)}&sub=${encodeURIComponent(c.short)}` },
-
+        ...ogImageMeta({
+          title: title,
+          kicker: "Crawler",
+          sub: c.short,
+        }),
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [

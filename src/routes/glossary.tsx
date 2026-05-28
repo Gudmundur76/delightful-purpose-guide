@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { GLOSSARY, getGlossaryByCategory } from "@/lib/glossary/data";
 import { ArrowRight } from "lucide-react";
+import { ogImageMeta } from "@/lib/seo/og";
 
 const URL = "https://grow.contact/glossary";
 const TITLE = "GEO Glossary — Agent-Native Web Terms";
@@ -19,15 +20,13 @@ export const Route = createFileRoute("/glossary")({
       { property: "og:description", content: DESC },
       { property: "og:url", content: URL },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=GEO%20Glossary%20%E2%80%94%20Agent-Native%20Web%20Terms&sub=Definitions%20for%20the%20terms%20shaping%20generative%20engine%20optimization%3A%20llms.txt%2C%20MCP%2C%20OAI-SearchBot%2C%20JSON-LD%2C%20citability%2C%20and%20the%20rest%20of%20the%20agent-native%20web%20vocabulary." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "GEO Glossary — Agent-Native Web Terms" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=GEO%20Glossary%20%E2%80%94%20Agent-Native%20Web%20Terms&sub=Definitions%20for%20the%20terms%20shaping%20generative%20engine%20optimization%3A%20llms.txt%2C%20MCP%2C%20OAI-SearchBot%2C%20JSON-LD%2C%20citability%2C%20and%20the%20rest%20of%20the%20agent-native%20web%20vocabulary." },
+      ...ogImageMeta({
+        title: "GEO Glossary — Agent-Native Web Terms",
+        kicker: "Grow",
+        sub: "Definitions for the terms shaping generative engine optimization: llms.txt, MCP, OAI-SearchBot, JSON-LD, citability, and the rest of the agent-native web vocabulary.",
+      }),
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

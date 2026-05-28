@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CRAWLERS, getCrawlersByPurpose } from "@/lib/crawlers/data";
 import { ArrowRight, Check, X, AlertTriangle } from "lucide-react";
+import { ogImageMeta } from "@/lib/seo/og";
 
 const URL = "https://grow.contact/crawlers";
 const TITLE = "AI Crawler Reference — OAI-SearchBot, PerplexityBot, ClaudeBot & More";
@@ -19,15 +20,13 @@ export const Route = createFileRoute("/crawlers")({
       { property: "og:description", content: DESC },
       { property: "og:url", content: URL },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=AI%20Crawler%20Reference%20%E2%80%94%20OAI-SearchBot%2C%20PerplexityBot%2C%20ClaudeBot%20%26%20More&sub=Per-bot%20reference%20for%20every%20major%20AI%20crawler%3A%20user-agents%2C%20what%20they%20power%2C%20robots.txt%20recommendations%2C%20and%20whether%20blocking%20them%20affects%20AI%20citations." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "AI Crawler Reference — OAI-SearchBot, PerplexityBot, ClaudeBot & More" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=AI%20Crawler%20Reference%20%E2%80%94%20OAI-SearchBot%2C%20PerplexityBot%2C%20ClaudeBot%20%26%20More&sub=Per-bot%20reference%20for%20every%20major%20AI%20crawler%3A%20user-agents%2C%20what%20they%20power%2C%20robots.txt%20recommendations%2C%20and%20whether%20blocking%20them%20affects%20AI%20citations." },
+      ...ogImageMeta({
+        title: "AI Crawler Reference — OAI-SearchBot, PerplexityBot, ClaudeBot & More",
+        kicker: "Grow",
+        sub: "Per-bot reference for every major AI crawler: user-agents, what they power, robots.txt recommendations, and whether blocking them affects AI citations.",
+      }),
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { getAllPosts, type BlogPost } from "@/lib/blog/posts";
+import { ogImageMeta } from "@/lib/seo/og";
 
 export const Route = createFileRoute("/blog/")({
   component: BlogIndex,
@@ -19,12 +20,11 @@ export const Route = createFileRoute("/blog/")({
           "Field notes on shipping agent-native websites: structured data, llms.txt, and design that gets cited by LLMs.",
       },
       { property: "og:url", content: "https://grow.contact/blog" },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Journal%20%E2%80%94%20Grow&sub=Field%20notes%20on%20shipping%20agent-native%20websites%3A%20structured%20data%2C%20llms.txt%2C%20and%20design%20that%20gets%20cited%20by%20LLMs." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Journal — Grow" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Journal%20%E2%80%94%20Grow&sub=Field%20notes%20on%20shipping%20agent-native%20websites%3A%20structured%20data%2C%20llms.txt%2C%20and%20design%20that%20gets%20cited%20by%20LLMs." },
+      ...ogImageMeta({
+        title: "Journal — Grow",
+        kicker: "Grow",
+        sub: "Field notes on shipping agent-native websites: structured data, llms.txt, and design that gets cited by LLMs.",
+      }),
     ],
     links: [
       { rel: "canonical", href: "https://grow.contact/blog" },

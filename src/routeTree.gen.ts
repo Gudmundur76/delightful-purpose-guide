@@ -66,6 +66,7 @@ import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as DotwellKnownOauthAuthorizationServerRouteImport } from './routes/[.]well-known.oauth-authorization-server'
 import { Route as DotwellKnownMcpDotjsonRouteImport } from './routes/[.]well-known.mcp[.]json'
 import { Route as DotwellKnownJwksDotjsonRouteImport } from './routes/[.]well-known.jwks[.]json'
+import { Route as DotwellKnownHttpMessageSignaturesDirectoryRouteImport } from './routes/[.]well-known.http-message-signatures-directory'
 import { Route as DotwellKnownApiCatalogRouteImport } from './routes/[.]well-known.api-catalog'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ContentDraftsIdRouteImport } from './routes/content.drafts.$id'
@@ -386,6 +387,12 @@ const DotwellKnownJwksDotjsonRoute = DotwellKnownJwksDotjsonRouteImport.update({
   path: '/.well-known/jwks.json',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DotwellKnownHttpMessageSignaturesDirectoryRoute =
+  DotwellKnownHttpMessageSignaturesDirectoryRouteImport.update({
+    id: '/.well-known/http-message-signatures-directory',
+    path: '/.well-known/http-message-signatures-directory',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DotwellKnownApiCatalogRoute = DotwellKnownApiCatalogRouteImport.update({
   id: '/.well-known/api-catalog',
   path: '/.well-known/api-catalog',
@@ -588,6 +595,7 @@ export interface FileRoutesByFullPath {
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
+  '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
   '/.well-known/jwks.json': typeof DotwellKnownJwksDotjsonRoute
   '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
   '/.well-known/oauth-authorization-server': typeof DotwellKnownOauthAuthorizationServerRoute
@@ -676,6 +684,7 @@ export interface FileRoutesByTo {
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
+  '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
   '/.well-known/jwks.json': typeof DotwellKnownJwksDotjsonRoute
   '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
   '/.well-known/oauth-authorization-server': typeof DotwellKnownOauthAuthorizationServerRoute
@@ -767,6 +776,7 @@ export interface FileRoutesById {
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
+  '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
   '/.well-known/jwks.json': typeof DotwellKnownJwksDotjsonRoute
   '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
   '/.well-known/oauth-authorization-server': typeof DotwellKnownOauthAuthorizationServerRoute
@@ -859,6 +869,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/.well-known/api-catalog'
+    | '/.well-known/http-message-signatures-directory'
     | '/.well-known/jwks.json'
     | '/.well-known/mcp.json'
     | '/.well-known/oauth-authorization-server'
@@ -947,6 +958,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/.well-known/api-catalog'
+    | '/.well-known/http-message-signatures-directory'
     | '/.well-known/jwks.json'
     | '/.well-known/mcp.json'
     | '/.well-known/oauth-authorization-server'
@@ -1037,6 +1049,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/.well-known/api-catalog'
+    | '/.well-known/http-message-signatures-directory'
     | '/.well-known/jwks.json'
     | '/.well-known/mcp.json'
     | '/.well-known/oauth-authorization-server'
@@ -1128,6 +1141,7 @@ export interface RootRouteChildren {
   VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
   DotwellKnownApiCatalogRoute: typeof DotwellKnownApiCatalogRoute
+  DotwellKnownHttpMessageSignaturesDirectoryRoute: typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
   DotwellKnownJwksDotjsonRoute: typeof DotwellKnownJwksDotjsonRoute
   DotwellKnownMcpDotjsonRoute: typeof DotwellKnownMcpDotjsonRoute
   DotwellKnownOauthAuthorizationServerRoute: typeof DotwellKnownOauthAuthorizationServerRoute
@@ -1570,6 +1584,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotwellKnownJwksDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/http-message-signatures-directory': {
+      id: '/.well-known/http-message-signatures-directory'
+      path: '/.well-known/http-message-signatures-directory'
+      fullPath: '/.well-known/http-message-signatures-directory'
+      preLoaderRoute: typeof DotwellKnownHttpMessageSignaturesDirectoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.well-known/api-catalog': {
       id: '/.well-known/api-catalog'
       path: '/.well-known/api-catalog'
@@ -1928,6 +1949,8 @@ const rootRouteChildren: RootRouteChildren = {
   VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,
   DotwellKnownApiCatalogRoute: DotwellKnownApiCatalogRoute,
+  DotwellKnownHttpMessageSignaturesDirectoryRoute:
+    DotwellKnownHttpMessageSignaturesDirectoryRoute,
   DotwellKnownJwksDotjsonRoute: DotwellKnownJwksDotjsonRoute,
   DotwellKnownMcpDotjsonRoute: DotwellKnownMcpDotjsonRoute,
   DotwellKnownOauthAuthorizationServerRoute:

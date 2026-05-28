@@ -32,7 +32,7 @@ export const Route = createFileRoute("/cli")({
           applicationCategory: "DeveloperApplication",
           operatingSystem: "Linux, macOS, Windows",
           description:
-            "Command-line scanner that scores any URL against the Grow GEO Standard (6 signals, 0–100) for AI agent readability.",
+            "Command-line scanner that scores any URL against the Grow GEO Standard (5 signals, 0–100) for AI agent readability.",
           url: "https://grow.contact/cli",
           softwareVersion: "0.1.0",
           downloadUrl: "https://www.npmjs.com/package/@grow-contact/cli",

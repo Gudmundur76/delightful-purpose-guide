@@ -2,6 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { getAllPosts } from "@/lib/blog/posts";
 import { getAllComparisons } from "@/lib/comparisons/data";
+import { GLOSSARY } from "@/lib/glossary/data";
+import { CRAWLERS } from "@/lib/crawlers/data";
+
 
 const BASE_URL = "https://grow.contact";
 

@@ -69,7 +69,7 @@ function CliPage() {
         </h1>
         <p className="text-lg text-muted-foreground">
           A zero-dependency Node CLI that scores any URL against the Grow GEO Standard —
-          the same six signals as the public scanner at{" "}
+          the same five signals as the public scanner at{" "}
           <Link to="/check" className="underline">/check</Link>. Pipe it into CI, gate
           deploys on agent readability, ship with confidence.
         </p>

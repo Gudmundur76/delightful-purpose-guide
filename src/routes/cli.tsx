@@ -90,8 +90,7 @@ function CliPage() {
   ● llms txt              80 · /llms.txt found, missing 2 routes
   ● citability            85 · First 60 words answer the page's implicit question
   ● speed                 92 · TTFB 180ms, HTML 240KB
-  ● protocol discovery    78 · No Link header advertising llms.txt
-      ↳ Add: Link: </llms.txt>; rel="llms"`}</Code>
+      ↳ Tip: Add a Link: </llms.txt>; rel="llms" header for faster discovery`}</Code>
       </section>
 
       <section className="mb-12">

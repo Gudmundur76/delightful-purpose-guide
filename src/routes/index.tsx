@@ -34,7 +34,7 @@ export const Route = createFileRoute("/")({
   loader: async ({ context }) => {
     // Prefetch FAQ + home content so SSR HTML and JSON-LD reflect DB state
     // and stay in sync with what the user sees after hydration.
-    await Promise.all([
+    const [faqData, homeContent] = await Promise.all([
       context.queryClient.ensureQueryData({
         queryKey: ["faq-items"],
         queryFn: () => getFaqItemsFn(),
@@ -44,6 +44,7 @@ export const Route = createFileRoute("/")({
         queryFn: () => getPageContentFn({ data: "home" }),
       }),
     ]);
+    return { faqData, homeContent };
   },
 
   head: () => ({
@@ -103,6 +104,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const loaderData = Route.useLoaderData();
+
   useEffect(() => {
     console.log(
       "%c⚡ Agent-native. Score: 100/100",
@@ -117,8 +120,8 @@ function Index() {
   const fetchFaq = useServerFn(getFaqItemsFn);
   const fetchHome = useServerFn(getPageContentFn);
   const fetchStats = useServerFn(getOverviewStats);
-  const { data: faqData } = useQuery({ queryKey: ["faq-items"], queryFn: () => fetchFaq() });
-  const { data: homeContent } = useQuery({ queryKey: ["site-content", "home"], queryFn: () => fetchHome({ data: "home" }) });
+  const { data: faqData } = useQuery({ queryKey: ["faq-items"], queryFn: () => fetchFaq(), initialData: loaderData.faqData });
+  const { data: homeContent } = useQuery({ queryKey: ["site-content", "home"], queryFn: () => fetchHome({ data: "home" }), initialData: loaderData.homeContent });
   const { data: stats = null } = useQuery({
     queryKey: ["overview-stats", 7],
     queryFn: () => fetchStats({ data: { days: 7 } }),

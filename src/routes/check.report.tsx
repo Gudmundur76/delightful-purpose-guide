@@ -159,16 +159,31 @@ function ReportPage() {
     <div className="min-h-screen bg-background text-foreground report-root">
       {/* Screen-only header */}
       <header className="border-b border-border print:hidden">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
           <Link to="/check" className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground flex items-center gap-2">
             <ArrowLeft className="w-3 h-3" /> back to scanner
           </Link>
-          <button
-            onClick={() => window.print()}
-            className="inline-flex items-center gap-2 bg-foreground text-background font-bold px-4 py-2 uppercase tracking-tighter text-xs"
-          >
-            <Printer className="w-3 h-3" /> Save as PDF
-          </button>
+          <div className="flex items-center gap-3">
+            {(() => {
+              let host = "";
+              try { host = new URL(url).hostname.replace(/^www\./, ""); } catch { /* noop */ }
+              return host ? (
+                <Link
+                  to="/history/$host"
+                  params={{ host }}
+                  className="font-mono text-xs uppercase tracking-widest text-accent hover:underline"
+                >
+                  View full history →
+                </Link>
+              ) : null;
+            })()}
+            <button
+              onClick={() => window.print()}
+              className="inline-flex items-center gap-2 bg-foreground text-background font-bold px-4 py-2 uppercase tracking-tighter text-xs"
+            >
+              <Printer className="w-3 h-3" /> Save as PDF
+            </button>
+          </div>
         </div>
       </header>
 

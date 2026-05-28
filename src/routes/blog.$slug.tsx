@@ -48,6 +48,7 @@ export const Route = createFileRoute("/blog/$slug")({
     }
     const { post } = loaderData;
     const url = `https://grow.contact/blog/${post.slug}`;
+    const updatedAt = post.updatedAt ?? POSTS_REVIEWED_AT;
     return {
       meta: [
         { title: post.title.length > 55 ? post.title : `${post.title} — Grow` },
@@ -57,6 +58,7 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:url", content: url },
         { property: "og:type", content: "article" },
         { property: "article:published_time", content: post.publishedAt },
+        { property: "article:modified_time", content: updatedAt },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [
@@ -68,7 +70,7 @@ export const Route = createFileRoute("/blog/$slug")({
             headline: post.title,
             description: post.description,
             datePublished: post.publishedAt,
-            dateModified: post.publishedAt,
+            dateModified: updatedAt,
             author: { "@type": "Person", name: "Grow Editorial", url: "https://grow.contact/" },
             publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
             mainEntityOfPage: url,

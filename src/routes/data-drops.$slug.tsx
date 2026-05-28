@@ -42,10 +42,6 @@ export const Route = createFileRoute("/data-drops/$slug")({
       links: [{ rel: "canonical", href: url }],
       scripts: [
         {
-      ],
-      links: [{ rel: "canonical", href: url }],
-      scripts: [
-        {
           type: "application/ld+json",
           children: JSON.stringify({
             "@context": "https://schema.org",
@@ -55,12 +51,17 @@ export const Route = createFileRoute("/data-drops/$slug")({
             dateModified: d.publishedAt,
             url,
             inLanguage: "en",
-            author: { "@type": "Organization", name: "grow.contact", url: "https://grow.contact" },
+            image: `https://grow.contact/api/public/widget/chart/${d.slug}.svg`,
+            author: personJsonLd(AUTHOR),
             publisher: { "@type": "Organization", name: "grow.contact", url: "https://grow.contact" },
             description: d.headline,
             isBasedOn: "https://grow.contact/leaderboard",
             license: "https://creativecommons.org/licenses/by/4.0/",
           }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(personJsonLd(AUTHOR)),
         },
       ],
     };

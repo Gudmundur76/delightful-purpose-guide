@@ -1,8 +1,8 @@
 // /auth.md — describes how AI agents authenticate to the grow.contact public API.
-// Required by the agent-readiness "Auth.md" check; must include an `Auth.md` heading.
+// Required by the agent-readiness "auth.md" check; must include an `# auth.md` heading.
 import { createFileRoute } from "@tanstack/react-router";
 
-const body = `# Auth.md
+const body = `# auth.md
 
 grow.contact uses simple API key authentication for its public REST API and bearer-token authentication for its MCP endpoint.
 

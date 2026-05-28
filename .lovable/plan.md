@@ -1,55 +1,108 @@
-# Score History & Diff
+# The Agent-Readability Index
 
-Turn the `scans` table into a visible, client-facing **trajectory** — not just a "latest score." This is the foundation for retainer reporting, the proof-of-work artifact agencies show clients, and the data source future features (sequences, content recs, alerts) will read from.
+Turn the existing `/leaderboard` (30 hand-picked AI sites) into **the** reference dataset for "which AI companies are actually agent-readable" — the kind of asset Perplexity, ChatGPT, and bloggers cite by name.
 
-## What we're building
+## Why this gets cited (the virality angle)
 
-1. **Per-host history page** at `/history/$host` — sparkline + scan table for any domain that's been scanned.
-2. **Diff view** at `/history/$host/diff?a=<id>&b=<id>` — side-by-side metric comparison between two scans, with deltas highlighted.
-3. **"View history" entry points** — from `/check/report`, the recent-scans feed, and the dashboard.
-4. **Lightweight server fns** that aggregate the existing `scans` rows (no schema changes needed for v1).
+Three ingredients AI engines reward, all stackable in one asset:
 
-## User-visible behavior
+1. **Original ranked data** — competitors don't publish per-signal agent-readability scores for the whole AI industry. We do.
+2. **Listicle + comparison format** — Perplexity's #1 preferred shape; ChatGPT extracts "top N" lists directly.
+3. **Quotable headline stats** — e.g. *"Only 18% of YC W26 AI startups allow OAI-SearchBot"* — bloggers reuse them, those blogs get cited, citation graph compounds.
 
-- After any scan, the report page gets a **"View full history for {host}"** link.
-- History page shows: current score, 30/90-day trend sparkline, list of all scans with date + overall + sub-scores, and a "Compare" checkbox on each row.
-- Pick any two scans → diff page shows each of the 6 metrics (overall, semantic, jsonld, llms, citability, speed) side-by-side with a green/red delta badge and a one-line plain-English summary ("LLMs.txt fixed: +18", "Speed regressed: -7").
-- Public, no auth required (hosts that have been scanned are already public info via the leaderboard).
+Bonus: every entry is a backlink magnet. Founders share "we scored 94/100 on the Agent-Readability Index" → inbound links → Claude/Gemini weight us higher.
 
-## Technical plan
+## Scope (v1)
 
-### New files
-- `src/lib/check/history.functions.ts` — two server fns:
-  - `getHostHistory({ host, days })` — returns ordered scan rows + computed sparkline buckets.
-  - `getScanDiff({ aId, bId })` — fetches two scans, returns per-metric delta + auto-generated summary lines.
-- `src/routes/history.$host.tsx` — history page (loader uses `ensureQueryData` + `useSuspenseQuery`).
-- `src/routes/history.$host.diff.tsx` — diff page, reads `?a=` & `?b=` from search params.
-- `src/components/ScoreSparkline.tsx` — small inline SVG sparkline (no chart lib needed).
-- `src/components/ScanHistoryTable.tsx` — table with row checkboxes + "Compare selected" button.
+### 1. Expand the dataset to 200 entries
+Categorize across 8 buckets the AI industry actually searches for:
+- LLM providers (OpenAI, Anthropic, Google, Mistral, Cohere…)
+- Agent platforms (LangChain, CrewAI, AutoGPT, Composio…)
+- AI IDEs / coding (Cursor, Windsurf, Lovable, Bolt, v0…)
+- Vector DBs / RAG (Pinecone, Weaviate, Chroma, Qdrant…)
+- Eval & observability (Braintrust, Langfuse, Helicone…)
+- MCP servers / tooling
+- Voice / multimodal
+- Inference / infra (Modal, Replicate, Together…)
 
-### Edits
-- `src/routes/check.report.tsx` — add "View full history" link after a successful scan.
-- `src/components/RecentScans.tsx` — make each host a link to `/history/{host}`.
+Seed the list from YC W25/S25/W26 AI batches + Product Hunt AI top 100. Run them through the existing scanner in a batch job.
 
-### Reuse, don't duplicate
-- `fetchLatestScanForHost` already exists in `scans.server.ts`.
-- The MCP tools `track_competitor_over_time` and `diff_scan` already compute exactly this data — the server fns will share that logic (extract to `scans.server.ts` helpers so both MCP and the UI call the same code).
+### 2. New `/index` route (rename + redirect)
+- `/leaderboard` → 301 → `/index` (keep link equity)
+- Filterable by: category, score range, signal failures (e.g. "show me everyone missing llms.txt")
+- Sortable: overall score, semantic, JSON-LD, llms.txt, citability, speed
+- Per-entry detail panel: 5 signal breakdowns + 2–3 specific findings ("missing FAQPage schema", "blocks OAI-SearchBot")
 
-### No DB changes for v1
-The `scans` table already stores everything needed (host, all 6 metrics, scanned_at). A future iteration could add a `notes` column to annotate "what changed between scan A and B" but that's not in scope.
+### 3. Quotable headline stats strip
+Auto-computed across the index, refreshed nightly:
+- % of AI companies that block OAI-SearchBot accidentally
+- Average score by category (LLM providers vs. agent platforms etc.)
+- Top 10 / bottom 10
+- "Biggest gap": who has the worst score relative to their funding/popularity
 
-### Summary-line generation
-Deterministic, not LLM-based for v1 — a simple rules table:
-- delta ≥ +10 on a metric → "{Metric} improved significantly: +{n}"
-- delta ≤ -10 → "{Metric} regressed: {n}"
-- |delta| < 3 → omit
-Keeps it instant and free; we can swap to Lovable AI for nuance later.
+### 4. Public JSON API
+`GET /api/public/index.json` — full dataset, CC-BY licensed. This is the citation engine: every blog or analyst that uses our data links back.
 
-## Out of scope (next iterations)
-- Annotations / change-log entries
-- Email/Slack alerts on score drops (the Composio triggers already fire — just need a UI to manage thresholds)
-- Multi-host comparison (competitor overlay on the same chart)
-- PDF export of the diff for client reports
+```json
+{
+  "updated_at": "2026-05-28T...",
+  "license": "CC-BY-4.0",
+  "attribution": "grow.contact/index",
+  "methodology_url": "https://grow.contact/index/methodology",
+  "entries": [
+    { "host": "openai.com", "category": "llm-provider",
+      "score": 87, "signals": { "semantic": 95, "jsonld": 80, ... },
+      "findings": ["missing llms.txt"], "last_scanned": "..." }
+  ]
+}
+```
+
+### 5. JSON-LD on the index page
+`Dataset` schema + `ItemList` with each company as a `ListItem` containing `Organization`. This is what makes us machine-cite-able as a structured ranking, not just a webpage.
+
+### 6. Per-company embeddable badge
+"Scored 94/100 — Agent-Readability Index" SVG (we already have `/api/public/widget/badge.svg`). Add a one-click "share your score" flow on the per-entry panel. Backlinks farming, ethical version.
+
+### 7. `/index/methodology` page
+Reuses content from `docs/geo-standard.md`. Strong E-E-A-T signal: explains the 5 signals, the scoring formula, the rescan cadence. This is what gets cited when someone challenges a score.
+
+## Out of scope (v2+)
+- Historical score charts per company (the history feature we just built handles this)
+- Email alerts when a company's score changes
+- Paid "verified" tier for companies to claim their listing
+- Comparison view (vs.com-style head-to-head — could fold into the existing `/vs` infra later)
+
+## Technical sketch
+
+**Data layer**
+- Reuse existing `scans` table — no new tables for v1
+- New `index_entries` table (or just a static seed file `src/lib/index/companies.ts`) mapping `host → { category, display_name, funding?, yc_batch? }`
+- Nightly cron via existing `run-scheduled-scans` infra to keep all 200 hosts re-scanned weekly
+
+**Routes**
+- `src/routes/index.tsx` is taken (homepage). Use `src/routes/the-index.tsx` or `src/routes/ari.tsx` ("Agent-Readability Index"). Recommend **`/the-index`** — clean, brandable, no collision.
+- `src/routes/the-index.methodology.tsx`
+- `src/routes/api/public/the-index[.]json.ts`
+
+**Server functions**
+- `getIndexEntries({ category?, minScore?, sortBy? })` — server fn that joins seed list with latest scan per host
+- `getIndexHeadlineStats()` — computes the quotable strip, cached 1h
+
+**SEO/citation wiring**
+- Per-entry deep link: `/the-index/openai.com` → individual company page with full breakdown + JSON-LD `Organization` + `Article` (the audit) → 200 new indexable pages, each citable independently
+- Update `llms.txt`, `sitemap.xml`, `rss.xml` to include the index
+- `Dataset` JSON-LD with `distribution` pointing to the public JSON endpoint
 
 ## Estimated effort
-~4 files new, 2 edits. No migration. Should be one focused session.
+~2 focused sessions:
+- Session 1: seed list, batch-scan infra, JSON endpoint, base `/the-index` route with filtering
+- Session 2: per-company pages, methodology page, headline stats, badge share flow, JSON-LD
+
+## Why this beats alternatives I considered
+- **Generic glossary** — useful but doesn't generate backlinks, no virality
+- **Quarterly research report** — high-leverage but slow; the Index is the *data source* every future report draws from
+- **Generic AI tools directory** — table stakes, already owned by Futurepedia/G2
+
+The Index is the foundation. Once it exists, the quarterly research report (#3 from earlier) writes itself from its data.
+
+Want me to start with Session 1?

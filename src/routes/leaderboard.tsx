@@ -134,7 +134,8 @@ function LeaderboardPage() {
         </section>
 
         {/* Filter tabs */}
-        <section className="border-b border-border bg-card/40 sticky top-0 z-10 backdrop-blur">
+        <section aria-labelledby="leaderboard-filter-heading" className="border-b border-border bg-card/40 sticky top-0 z-10 backdrop-blur">
+          <h2 id="leaderboard-filter-heading" className="sr-only">Filter leaderboard by category</h2>
           <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center gap-2">
             <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mr-2">
               // Filter:

@@ -72,7 +72,7 @@ function AuthorPage() {
         <section className="mb-10">
           <h2 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">// Focus areas</h2>
           <ul className="flex flex-wrap gap-2">
-            {author.knowsAbout.map((k) => (
+            {author.knowsAbout.map((k: string) => (
               <li key={k} className="border border-border bg-card px-3 py-1.5 text-sm">{k}</li>
             ))}
           </ul>

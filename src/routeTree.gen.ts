@@ -96,6 +96,7 @@ import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicLeaderboardDotjsonRouteImport } from './routes/api/public/leaderboard[.]json'
 import { Route as ApiPublicAgentActionRouteImport } from './routes/api/public/agent-action'
+import { Route as AboutAuthorSlugRouteImport } from './routes/about.author.$slug'
 import { Route as DotwellKnownMcpServerCardDotjsonRouteImport } from './routes/[.]well-known.mcp.server-card[.]json'
 import { Route as DotwellKnownAgentSkillsIndexDotjsonRouteImport } from './routes/[.]well-known.agent-skills.index[.]json'
 import { Route as DotwellKnownAgentSkillsGrowGeoScanDotmdRouteImport } from './routes/[.]well-known.agent-skills.grow-geo-scan[.]md'
@@ -562,6 +563,11 @@ const ApiPublicAgentActionRoute = ApiPublicAgentActionRouteImport.update({
   path: '/api/public/agent-action',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutAuthorSlugRoute = AboutAuthorSlugRouteImport.update({
+  id: '/about/author/$slug',
+  path: '/about/author/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DotwellKnownMcpServerCardDotjsonRoute =
   DotwellKnownMcpServerCardDotjsonRouteImport.update({
     id: '/.well-known/mcp/server-card.json',
@@ -777,6 +783,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
+  '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -888,6 +895,7 @@ export interface FileRoutesByTo {
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
+  '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -1002,6 +1010,7 @@ export interface FileRoutesById {
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
+  '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -1117,6 +1126,7 @@ export interface FileRouteTypes {
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
+    | '/about/author/$slug'
     | '/api/public/agent-action'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
@@ -1228,6 +1238,7 @@ export interface FileRouteTypes {
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
+    | '/about/author/$slug'
     | '/api/public/agent-action'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
@@ -1341,6 +1352,7 @@ export interface FileRouteTypes {
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
+    | '/about/author/$slug'
     | '/api/public/agent-action'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
@@ -1435,6 +1447,7 @@ export interface RootRouteChildren {
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   DotwellKnownAgentSkillsIndexDotjsonRoute: typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   DotwellKnownMcpServerCardDotjsonRoute: typeof DotwellKnownMcpServerCardDotjsonRoute
+  AboutAuthorSlugRoute: typeof AboutAuthorSlugRoute
   ApiPublicAgentActionRoute: typeof ApiPublicAgentActionRoute
   ApiPublicLeaderboardDotjsonRoute: typeof ApiPublicLeaderboardDotjsonRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
@@ -2074,6 +2087,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicAgentActionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/author/$slug': {
+      id: '/about/author/$slug'
+      path: '/about/author/$slug'
+      fullPath: '/about/author/$slug'
+      preLoaderRoute: typeof AboutAuthorSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.well-known/mcp/server-card.json': {
       id: '/.well-known/mcp/server-card.json'
       path: '/.well-known/mcp/server-card.json'
@@ -2501,6 +2521,7 @@ const rootRouteChildren: RootRouteChildren = {
   DotwellKnownAgentSkillsIndexDotjsonRoute:
     DotwellKnownAgentSkillsIndexDotjsonRoute,
   DotwellKnownMcpServerCardDotjsonRoute: DotwellKnownMcpServerCardDotjsonRoute,
+  AboutAuthorSlugRoute: AboutAuthorSlugRoute,
   ApiPublicAgentActionRoute: ApiPublicAgentActionRoute,
   ApiPublicLeaderboardDotjsonRoute: ApiPublicLeaderboardDotjsonRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,

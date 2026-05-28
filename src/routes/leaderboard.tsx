@@ -326,6 +326,8 @@ function LeaderboardPage() {
   );
 }
 
+type FailSearch = "none" | SignalKey;
+
 function CategoryTab({
   to,
   search,
@@ -334,7 +336,7 @@ function CategoryTab({
   count,
 }: {
   to: string;
-  search: { cat: "all" | LeaderboardCategory };
+  search: { cat: "all" | LeaderboardCategory; fail: FailSearch };
   active: boolean;
   label: string;
   count: number;
@@ -353,6 +355,33 @@ function CategoryTab({
     </Link>
   );
 }
+
+function FailTab({
+  to,
+  search,
+  active,
+  label,
+}: {
+  to: string;
+  search: { cat: "all" | LeaderboardCategory; fail: FailSearch };
+  active: boolean;
+  label: string;
+}) {
+  return (
+    <Link
+      to={to}
+      search={search}
+      className={`px-3 py-1.5 font-mono text-xs uppercase tracking-widest border transition-colors ${
+        active
+          ? "bg-accent text-accent-foreground border-accent"
+          : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/40"
+      }`}
+    >
+      {label}
+    </Link>
+  );
+}
+
 
 function StatCell({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (

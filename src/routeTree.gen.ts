@@ -120,6 +120,7 @@ import { Route as ApiPublicStatsOverviewRouteImport } from './routes/api/public/
 import { Route as ApiPublicOauthTokenRouteImport } from './routes/api/public/oauth/token'
 import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/api/public/hooks/run-scheduled-scans'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
+import { Route as ApiPublicWidgetChartSlugDotsvgRouteImport } from './routes/api/public/widget/chart.$slug[.]svg'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
 
@@ -695,6 +696,12 @@ const ApiPublicHooksRescanLeaderboardRoute =
     path: '/api/public/hooks/rescan-leaderboard',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicWidgetChartSlugDotsvgRoute =
+  ApiPublicWidgetChartSlugDotsvgRouteImport.update({
+    id: '/api/public/widget/chart/$slug.svg',
+    path: '/api/public/widget/chart/$slug.svg',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicV1PostsSlugRoute = ApiPublicV1PostsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -820,6 +827,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/': typeof ApiPublicV1IndexRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
+  '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -933,6 +941,7 @@ export interface FileRoutesByTo {
   '/api/public/v1': typeof ApiPublicV1IndexRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
+  '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -1049,6 +1058,7 @@ export interface FileRoutesById {
   '/api/public/v1/': typeof ApiPublicV1IndexRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
+  '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -1166,6 +1176,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
+    | '/api/public/widget/chart/$slug.svg'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1279,6 +1290,7 @@ export interface FileRouteTypes {
     | '/api/public/v1'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
+    | '/api/public/widget/chart/$slug.svg'
   id:
     | '__root__'
     | '/'
@@ -1394,6 +1406,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
+    | '/api/public/widget/chart/$slug.svg'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1487,6 +1500,7 @@ export interface RootRouteChildren {
   LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
   ApiPublicV1IndexRoute: typeof ApiPublicV1IndexRoute
   ApiPublicV1AdminTableRoute: typeof ApiPublicV1AdminTableRoute
+  ApiPublicWidgetChartSlugDotsvgRoute: typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -2268,6 +2282,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksRescanLeaderboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/widget/chart/$slug.svg': {
+      id: '/api/public/widget/chart/$slug.svg'
+      path: '/api/public/widget/chart/$slug.svg'
+      fullPath: '/api/public/widget/chart/$slug.svg'
+      preLoaderRoute: typeof ApiPublicWidgetChartSlugDotsvgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/posts/$slug': {
       id: '/api/public/v1/posts/$slug'
       path: '/$slug'
@@ -2569,6 +2590,7 @@ const rootRouteChildren: RootRouteChildren = {
   LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
   ApiPublicV1IndexRoute: ApiPublicV1IndexRoute,
   ApiPublicV1AdminTableRoute: ApiPublicV1AdminTableRoute,
+  ApiPublicWidgetChartSlugDotsvgRoute: ApiPublicWidgetChartSlugDotsvgRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

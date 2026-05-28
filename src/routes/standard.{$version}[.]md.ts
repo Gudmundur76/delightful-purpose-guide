@@ -5,7 +5,7 @@ import { getStandardVersion } from "@/lib/standard/data";
 // published, the content at this URL never changes — that's the whole
 // point of versioning a citable spec.
 
-export const Route = createFileRoute("/standard/$version.md")({
+export const Route = createFileRoute("/standard/{$version}.md")({
   server: {
     handlers: {
       GET: async ({ params }) => {

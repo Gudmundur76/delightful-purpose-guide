@@ -16,6 +16,8 @@ import { Route as TrustRouteImport } from './routes/trust'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as StatsRouteImport } from './routes/stats'
+import { Route as StandardDotmdRouteImport } from './routes/standard[.]md'
+import { Route as StandardRouteImport } from './routes/standard'
 import { Route as SopRouteImport } from './routes/sop'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
@@ -55,6 +57,8 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
+import { Route as StandardVersionDotmdRouteImport } from './routes/standard.$version[.]md'
+import { Route as StandardVersionRouteImport } from './routes/standard.$version'
 import { Route as ReportQ22026DotpdfRouteImport } from './routes/report.q2-2026[.]pdf'
 import { Route as ReportQ22026RouteImport } from './routes/report.q2-2026'
 import { Route as ReportPressRouteImport } from './routes/report.press'
@@ -157,6 +161,16 @@ const StatusRoute = StatusRouteImport.update({
 const StatsRoute = StatsRouteImport.update({
   id: '/stats',
   path: '/stats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StandardDotmdRoute = StandardDotmdRouteImport.update({
+  id: '/standard.md',
+  path: '/standard.md',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StandardRoute = StandardRouteImport.update({
+  id: '/standard',
+  path: '/standard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SopRoute = SopRouteImport.update({
@@ -353,6 +367,16 @@ const ToolsRobotsCheckerRoute = ToolsRobotsCheckerRouteImport.update({
   id: '/tools/robots-checker',
   path: '/tools/robots-checker',
   getParentRoute: () => rootRouteImport,
+} as any)
+const StandardVersionDotmdRoute = StandardVersionDotmdRouteImport.update({
+  id: '/$version.md',
+  path: '/$version.md',
+  getParentRoute: () => StandardRoute,
+} as any)
+const StandardVersionRoute = StandardVersionRouteImport.update({
+  id: '/$version',
+  path: '/$version',
+  getParentRoute: () => StandardRoute,
 } as any)
 const ReportQ22026DotpdfRoute = ReportQ22026DotpdfRouteImport.update({
   id: '/report/q2-2026.pdf',
@@ -747,6 +771,8 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sop': typeof SopRoute
+  '/standard': typeof StandardRouteWithChildren
+  '/standard.md': typeof StandardDotmdRoute
   '/stats': typeof StatsRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
@@ -788,6 +814,8 @@ export interface FileRoutesByFullPath {
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
+  '/standard/$version': typeof StandardVersionRoute
+  '/standard/$version.md': typeof StandardVersionDotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -861,6 +889,8 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sop': typeof SopRoute
+  '/standard': typeof StandardRouteWithChildren
+  '/standard.md': typeof StandardDotmdRoute
   '/stats': typeof StatsRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
@@ -902,6 +932,8 @@ export interface FileRoutesByTo {
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
+  '/standard/$version': typeof StandardVersionRoute
+  '/standard/$version.md': typeof StandardVersionDotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -978,6 +1010,8 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sop': typeof SopRoute
+  '/standard': typeof StandardRouteWithChildren
+  '/standard.md': typeof StandardDotmdRoute
   '/stats': typeof StatsRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
@@ -1019,6 +1053,8 @@ export interface FileRoutesById {
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
+  '/standard/$version': typeof StandardVersionRoute
+  '/standard/$version.md': typeof StandardVersionDotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -1096,6 +1132,8 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/sop'
+    | '/standard'
+    | '/standard.md'
     | '/stats'
     | '/status'
     | '/terms'
@@ -1137,6 +1175,8 @@ export interface FileRouteTypes {
     | '/report/press'
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
+    | '/standard/$version'
+    | '/standard/$version.md'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1210,6 +1250,8 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/sop'
+    | '/standard'
+    | '/standard.md'
     | '/stats'
     | '/status'
     | '/terms'
@@ -1251,6 +1293,8 @@ export interface FileRouteTypes {
     | '/report/press'
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
+    | '/standard/$version'
+    | '/standard/$version.md'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1326,6 +1370,8 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/sop'
+    | '/standard'
+    | '/standard.md'
     | '/stats'
     | '/status'
     | '/terms'
@@ -1367,6 +1413,8 @@ export interface FileRouteTypes {
     | '/report/press'
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
+    | '/standard/$version'
+    | '/standard/$version.md'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1443,6 +1491,8 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SopRoute: typeof SopRoute
+  StandardRoute: typeof StandardRouteWithChildren
+  StandardDotmdRoute: typeof StandardDotmdRoute
   StatsRoute: typeof StatsRoute
   StatusRoute: typeof StatusRoute
   TermsRoute: typeof TermsRoute
@@ -1552,6 +1602,20 @@ declare module '@tanstack/react-router' {
       path: '/stats'
       fullPath: '/stats'
       preLoaderRoute: typeof StatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/standard.md': {
+      id: '/standard.md'
+      path: '/standard.md'
+      fullPath: '/standard.md'
+      preLoaderRoute: typeof StandardDotmdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/standard': {
+      id: '/standard'
+      path: '/standard'
+      fullPath: '/standard'
+      preLoaderRoute: typeof StandardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sop': {
@@ -1826,6 +1890,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/tools/robots-checker'
       preLoaderRoute: typeof ToolsRobotsCheckerRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/standard/$version.md': {
+      id: '/standard/$version.md'
+      path: '/$version.md'
+      fullPath: '/standard/$version.md'
+      preLoaderRoute: typeof StandardVersionDotmdRouteImport
+      parentRoute: typeof StandardRoute
+    }
+    '/standard/$version': {
+      id: '/standard/$version'
+      path: '/$version'
+      fullPath: '/standard/$version'
+      preLoaderRoute: typeof StandardVersionRouteImport
+      parentRoute: typeof StandardRoute
     }
     '/report/q2-2026.pdf': {
       id: '/report/q2-2026.pdf'
@@ -2460,6 +2538,20 @@ const PlaybooksRouteWithChildren = PlaybooksRoute._addFileChildren(
   PlaybooksRouteChildren,
 )
 
+interface StandardRouteChildren {
+  StandardVersionRoute: typeof StandardVersionRoute
+  StandardVersionDotmdRoute: typeof StandardVersionDotmdRoute
+}
+
+const StandardRouteChildren: StandardRouteChildren = {
+  StandardVersionRoute: StandardVersionRoute,
+  StandardVersionDotmdRoute: StandardVersionDotmdRoute,
+}
+
+const StandardRouteWithChildren = StandardRoute._addFileChildren(
+  StandardRouteChildren,
+)
+
 interface VsRouteChildren {
   VsCompetitorRoute: typeof VsCompetitorRoute
 }
@@ -2527,6 +2619,8 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SopRoute: SopRoute,
+  StandardRoute: StandardRouteWithChildren,
+  StandardDotmdRoute: StandardDotmdRoute,
   StatsRoute: StatsRoute,
   StatusRoute: StatusRoute,
   TermsRoute: TermsRoute,
@@ -2595,13 +2689,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -7,6 +7,7 @@ import {
   type LeaderboardCategory,
   getLeaderboard,
 } from "@/lib/leaderboard/entries";
+import { computeHeadlineStats } from "@/lib/leaderboard/stats";
 
 const VALID: LeaderboardCategory[] = ["infra", "models", "agents", "devtools"];
 

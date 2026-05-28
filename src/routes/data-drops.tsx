@@ -64,7 +64,7 @@ function DataDropsIndex() {
         </header>
 
         <ul className="space-y-6">
-          {drops.map((d) => (
+          {drops.map((d: ReturnType<typeof getAllDataDrops>[number]) => (
             <li key={d.slug} className="border border-border bg-card p-6">
               <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">
                 // {d.publishedAt} · {d.category}
@@ -80,6 +80,8 @@ function DataDropsIndex() {
               </Link>
             </li>
           ))}
+        </ul>
+
         </ul>
       </main>
       <SiteFooter />

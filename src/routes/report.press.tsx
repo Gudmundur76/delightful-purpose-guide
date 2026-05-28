@@ -77,9 +77,11 @@ function PressPage() {
         <section className="mb-10">
           <h2 className="text-2xl font-bold mb-4">Headline statistics</h2>
           <div className="border border-border bg-card divide-y divide-border">
-            {stats.citable_headlines.map((line, i) => (
+            {stats.citable_headlines.map((line: string, i: number) => (
               <p key={i} className="p-4 text-sm select-all">{line}</p>
             ))}
+          </div>
+
           </div>
           <p className="mt-3 text-xs text-muted-foreground">
             All figures derive from the open dataset at <a href="/api/public/leaderboard.json" className="text-accent hover:underline">/api/public/leaderboard.json</a>.

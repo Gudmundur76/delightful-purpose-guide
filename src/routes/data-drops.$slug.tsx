@@ -94,8 +94,10 @@ function DataDropPage() {
         ) : null}
 
         <article className="prose prose-invert max-w-none mb-10 space-y-4">
-          {drop.body.map((p, i) => (
+          {drop.body.map((p: string, i: number) => (
             <p key={i} className="text-base leading-relaxed">{p}</p>
+          ))}
+
           ))}
         </article>
 

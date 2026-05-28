@@ -35,6 +35,7 @@ import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as GlossaryRouteImport } from './routes/glossary'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as DataDropsRouteImport } from './routes/data-drops'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CrawlersRouteImport } from './routes/crawlers'
 import { Route as CookiesRouteImport } from './routes/cookies'
@@ -54,12 +55,16 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
+import { Route as ReportQ22026RouteImport } from './routes/report.q2-2026'
+import { Route as ReportPressRouteImport } from './routes/report.press'
+import { Route as ReportMethodologyRouteImport } from './routes/report.methodology'
 import { Route as PlaybooksSlugRouteImport } from './routes/playbooks.$slug'
 import { Route as LeaderboardMethodologyRouteImport } from './routes/leaderboard.methodology'
 import { Route as HistoryHostRouteImport } from './routes/history.$host'
 import { Route as GuideGenerativeEngineOptimizationRouteImport } from './routes/guide.generative-engine-optimization'
 import { Route as GlossaryTermRouteImport } from './routes/glossary.$term'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
+import { Route as DataDropsSlugRouteImport } from './routes/data-drops.$slug'
 import { Route as DashboardScanRouteImport } from './routes/dashboard.scan'
 import { Route as DashboardReviewsRouteImport } from './routes/dashboard.reviews'
 import { Route as DashboardPublishRouteImport } from './routes/dashboard.publish'
@@ -246,6 +251,11 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DataDropsRoute = DataDropsRouteImport.update({
+  id: '/data-drops',
+  path: '/data-drops',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -341,6 +351,21 @@ const ToolsRobotsCheckerRoute = ToolsRobotsCheckerRouteImport.update({
   path: '/tools/robots-checker',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReportQ22026Route = ReportQ22026RouteImport.update({
+  id: '/report/q2-2026',
+  path: '/report/q2-2026',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportPressRoute = ReportPressRouteImport.update({
+  id: '/report/press',
+  path: '/report/press',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportMethodologyRoute = ReportMethodologyRouteImport.update({
+  id: '/report/methodology',
+  path: '/report/methodology',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlaybooksSlugRoute = PlaybooksSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -371,6 +396,11 @@ const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   id: '/email/unsubscribe',
   path: '/email/unsubscribe',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DataDropsSlugRoute = DataDropsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => DataDropsRoute,
 } as any)
 const DashboardScanRoute = DashboardScanRouteImport.update({
   id: '/scan',
@@ -678,6 +708,7 @@ export interface FileRoutesByFullPath {
   '/cookies': typeof CookiesRoute
   '/crawlers': typeof CrawlersRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
+  '/data-drops': typeof DataDropsRouteWithChildren
   '/faq': typeof FaqRoute
   '/glossary': typeof GlossaryRouteWithChildren
   '/integrations': typeof IntegrationsRoute
@@ -727,12 +758,16 @@ export interface FileRoutesByFullPath {
   '/dashboard/publish': typeof DashboardPublishRoute
   '/dashboard/reviews': typeof DashboardReviewsRoute
   '/dashboard/scan': typeof DashboardScanRoute
+  '/data-drops/$slug': typeof DataDropsSlugRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/glossary/$term': typeof GlossaryTermRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
+  '/report/methodology': typeof ReportMethodologyRoute
+  '/report/press': typeof ReportPressRoute
+  '/report/q2-2026': typeof ReportQ22026Route
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -784,6 +819,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/crawlers': typeof CrawlersRouteWithChildren
+  '/data-drops': typeof DataDropsRouteWithChildren
   '/faq': typeof FaqRoute
   '/glossary': typeof GlossaryRouteWithChildren
   '/integrations': typeof IntegrationsRoute
@@ -833,12 +869,16 @@ export interface FileRoutesByTo {
   '/dashboard/publish': typeof DashboardPublishRoute
   '/dashboard/reviews': typeof DashboardReviewsRoute
   '/dashboard/scan': typeof DashboardScanRoute
+  '/data-drops/$slug': typeof DataDropsSlugRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/glossary/$term': typeof GlossaryTermRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
+  '/report/methodology': typeof ReportMethodologyRoute
+  '/report/press': typeof ReportPressRoute
+  '/report/q2-2026': typeof ReportQ22026Route
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -893,6 +933,7 @@ export interface FileRoutesById {
   '/cookies': typeof CookiesRoute
   '/crawlers': typeof CrawlersRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
+  '/data-drops': typeof DataDropsRouteWithChildren
   '/faq': typeof FaqRoute
   '/glossary': typeof GlossaryRouteWithChildren
   '/integrations': typeof IntegrationsRoute
@@ -942,12 +983,16 @@ export interface FileRoutesById {
   '/dashboard/publish': typeof DashboardPublishRoute
   '/dashboard/reviews': typeof DashboardReviewsRoute
   '/dashboard/scan': typeof DashboardScanRoute
+  '/data-drops/$slug': typeof DataDropsSlugRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/glossary/$term': typeof GlossaryTermRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
+  '/report/methodology': typeof ReportMethodologyRoute
+  '/report/press': typeof ReportPressRoute
+  '/report/q2-2026': typeof ReportQ22026Route
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -1003,6 +1048,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/crawlers'
     | '/dashboard'
+    | '/data-drops'
     | '/faq'
     | '/glossary'
     | '/integrations'
@@ -1052,12 +1098,16 @@ export interface FileRouteTypes {
     | '/dashboard/publish'
     | '/dashboard/reviews'
     | '/dashboard/scan'
+    | '/data-drops/$slug'
     | '/email/unsubscribe'
     | '/glossary/$term'
     | '/guide/generative-engine-optimization'
     | '/history/$host'
     | '/leaderboard/methodology'
     | '/playbooks/$slug'
+    | '/report/methodology'
+    | '/report/press'
+    | '/report/q2-2026'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1109,6 +1159,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cookies'
     | '/crawlers'
+    | '/data-drops'
     | '/faq'
     | '/glossary'
     | '/integrations'
@@ -1158,12 +1209,16 @@ export interface FileRouteTypes {
     | '/dashboard/publish'
     | '/dashboard/reviews'
     | '/dashboard/scan'
+    | '/data-drops/$slug'
     | '/email/unsubscribe'
     | '/glossary/$term'
     | '/guide/generative-engine-optimization'
     | '/history/$host'
     | '/leaderboard/methodology'
     | '/playbooks/$slug'
+    | '/report/methodology'
+    | '/report/press'
+    | '/report/q2-2026'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1217,6 +1272,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/crawlers'
     | '/dashboard'
+    | '/data-drops'
     | '/faq'
     | '/glossary'
     | '/integrations'
@@ -1266,12 +1322,16 @@ export interface FileRouteTypes {
     | '/dashboard/publish'
     | '/dashboard/reviews'
     | '/dashboard/scan'
+    | '/data-drops/$slug'
     | '/email/unsubscribe'
     | '/glossary/$term'
     | '/guide/generative-engine-optimization'
     | '/history/$host'
     | '/leaderboard/methodology'
     | '/playbooks/$slug'
+    | '/report/methodology'
+    | '/report/press'
+    | '/report/q2-2026'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1326,6 +1386,7 @@ export interface RootRouteChildren {
   CookiesRoute: typeof CookiesRoute
   CrawlersRoute: typeof CrawlersRouteWithChildren
   DashboardRoute: typeof DashboardRouteWithChildren
+  DataDropsRoute: typeof DataDropsRouteWithChildren
   FaqRoute: typeof FaqRoute
   GlossaryRoute: typeof GlossaryRouteWithChildren
   IntegrationsRoute: typeof IntegrationsRoute
@@ -1365,6 +1426,9 @@ export interface RootRouteChildren {
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   GuideGenerativeEngineOptimizationRoute: typeof GuideGenerativeEngineOptimizationRoute
   HistoryHostRoute: typeof HistoryHostRouteWithChildren
+  ReportMethodologyRoute: typeof ReportMethodologyRoute
+  ReportPressRoute: typeof ReportPressRoute
+  ReportQ22026Route: typeof ReportQ22026Route
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -1583,6 +1647,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/data-drops': {
+      id: '/data-drops'
+      path: '/data-drops'
+      fullPath: '/data-drops'
+      preLoaderRoute: typeof DataDropsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -1716,6 +1787,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsRobotsCheckerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/report/q2-2026': {
+      id: '/report/q2-2026'
+      path: '/report/q2-2026'
+      fullPath: '/report/q2-2026'
+      preLoaderRoute: typeof ReportQ22026RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report/press': {
+      id: '/report/press'
+      path: '/report/press'
+      fullPath: '/report/press'
+      preLoaderRoute: typeof ReportPressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report/methodology': {
+      id: '/report/methodology'
+      path: '/report/methodology'
+      fullPath: '/report/methodology'
+      preLoaderRoute: typeof ReportMethodologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/playbooks/$slug': {
       id: '/playbooks/$slug'
       path: '/$slug'
@@ -1757,6 +1849,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/email/unsubscribe'
       preLoaderRoute: typeof EmailUnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/data-drops/$slug': {
+      id: '/data-drops/$slug'
+      path: '/$slug'
+      fullPath: '/data-drops/$slug'
+      preLoaderRoute: typeof DataDropsSlugRouteImport
+      parentRoute: typeof DataDropsRoute
     }
     '/dashboard/scan': {
       id: '/dashboard/scan'
@@ -2252,6 +2351,18 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface DataDropsRouteChildren {
+  DataDropsSlugRoute: typeof DataDropsSlugRoute
+}
+
+const DataDropsRouteChildren: DataDropsRouteChildren = {
+  DataDropsSlugRoute: DataDropsSlugRoute,
+}
+
+const DataDropsRouteWithChildren = DataDropsRoute._addFileChildren(
+  DataDropsRouteChildren,
+)
+
 interface GlossaryRouteChildren {
   GlossaryTermRoute: typeof GlossaryTermRoute
 }
@@ -2335,6 +2446,7 @@ const rootRouteChildren: RootRouteChildren = {
   CookiesRoute: CookiesRoute,
   CrawlersRoute: CrawlersRouteWithChildren,
   DashboardRoute: DashboardRouteWithChildren,
+  DataDropsRoute: DataDropsRouteWithChildren,
   FaqRoute: FaqRoute,
   GlossaryRoute: GlossaryRouteWithChildren,
   IntegrationsRoute: IntegrationsRoute,
@@ -2378,6 +2490,9 @@ const rootRouteChildren: RootRouteChildren = {
   GuideGenerativeEngineOptimizationRoute:
     GuideGenerativeEngineOptimizationRoute,
   HistoryHostRoute: HistoryHostRouteWithChildren,
+  ReportMethodologyRoute: ReportMethodologyRoute,
+  ReportPressRoute: ReportPressRoute,
+  ReportQ22026Route: ReportQ22026Route,
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
@@ -2416,13 +2531,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

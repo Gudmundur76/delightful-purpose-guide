@@ -163,7 +163,7 @@ function PostPage() {
             <h1 className="mt-8 text-4xl md:text-6xl font-extrabold tracking-tighter uppercase leading-[0.95]">
               {post.title}
             </h1>
-            <div className="mt-8 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            <div className="mt-8 font-mono text-xs uppercase tracking-widest text-muted-foreground flex flex-wrap gap-x-3 gap-y-1 items-center">
               <time dateTime={post.publishedAt}>
                 {new Date(post.publishedAt).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -171,8 +171,19 @@ function PostPage() {
                   day: "numeric",
                 })}
               </time>
-              <span className="mx-2">·</span>
+              <span>·</span>
               <span>{post.readingMinutes} min read</span>
+              <span>·</span>
+              <span>
+                Last updated{" "}
+                <time dateTime={post.updatedAt ?? POSTS_REVIEWED_AT}>
+                  {new Date(post.updatedAt ?? POSTS_REVIEWED_AT).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+              </span>
             </div>
           </div>
         </header>

@@ -52,7 +52,7 @@ export const POSTS: BlogPost[] = [
     slug: "what-is-an-agent-native-website",
     title: "What Is an Agent-Native Website? A Definition for 2026",
     description:
-      "Agent-native websites are built so AI agents — ChatGPT, Perplexity, Claude — can read, understand, and cite them. Here's the definition, the stack, and why it matters now.",
+      "Agent-native sites are built so ChatGPT, Perplexity, and Claude can read, understand, and cite them. The definition, stack, and why it matters now.",
     publishedAt: "2026-05-20",
     readingMinutes: 7,
     tags: ["agent native website", "ai seo", "llm citation"],

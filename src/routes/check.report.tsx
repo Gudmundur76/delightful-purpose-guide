@@ -212,6 +212,17 @@ function ReportPage() {
         {/* Methodology summary */}
         <section className="mb-12">
           <SectionTitle eyebrow="Methodology" title="How the Agent Readability Score is computed" />
+          <p className="mt-4 text-sm text-foreground/70 max-w-3xl">
+            Scored against{" "}
+            <Link to="/standard/$version" params={{ version: "v1" }} className="text-accent hover:underline font-mono">
+              geo-standard@2026.05
+            </Link>
+            {" "}— the open, versioned specification this scanner enforces. CC BY 4.0. Embed your score with the{" "}
+            <Link to="/badge" className="text-accent hover:underline font-mono">
+              /badge
+            </Link>
+            .
+          </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-6 gap-3 mt-8">
             {sections.map((s) => (
               <div key={s.key} className="border border-border p-4">

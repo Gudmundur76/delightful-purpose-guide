@@ -68,9 +68,9 @@ function ServicesPage() {
             </p>
             <p className="text-muted-foreground mt-4 max-w-2xl text-sm leading-relaxed">
               Why this matters:{" "}
-              <a href="https://allbusinessrealm.com/index.php/2026/04/30/the-83-rule-why-ai-overviews-skip-the-top-10-and-where-small-sites-are-quietly-winning/" rel="noopener" className="text-accent underline underline-offset-2">83% of AI Overview citations come from pages outside the organic top 10</a>,{" "}
-              <a href="https://grow.contact/check" rel="noopener" className="text-accent underline underline-offset-2">73% of sites are silently excluded from AI citations</a> due to fixable technical issues, and{" "}
-              <a href="https://arxiv.org/abs/2311.09735" rel="noopener" className="text-accent underline underline-offset-2">pages over 20,000 characters receive 4.3× more AI citations</a> than thin pages (Princeton GEO framework).
+              <a href="https://allbusinessrealm.com/index.php/2026/04/30/the-83-rule-why-ai-overviews-skip-the-top-10-and-where-small-sites-are-quietly-winning/" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">83% of AI Overview citations come from pages outside the organic top 10</a>,{" "}
+              <a href="https://grow.contact/check" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">73% of sites are silently excluded from AI citations</a> due to fixable technical issues, and{" "}
+              <a href="https://arxiv.org/abs/2311.09735" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">pages over 20,000 characters receive 4.3× more AI citations</a> than thin pages (Princeton GEO framework).
             </p>
             <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-6">
               <time dateTime="2026-05-28">Last updated: May 2026</time>

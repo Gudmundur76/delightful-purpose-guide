@@ -28,7 +28,13 @@ export const Route = createFileRoute("/stats")({
         { property: "og:title", content: "State of the Agent-Readable Web" },
         { property: "og:description", content: description },
         { property: "og:url", content: PAGE_URL },
-      ],
+      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=State%20of%20the%20Agent-Readable%20Web%20%E2%80%94%20Citable%20Stats%20%7C%20Grow" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "State of the Agent-Readable Web — Citable Stats | Grow" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=State%20of%20the%20Agent-Readable%20Web%20%E2%80%94%20Citable%20Stats%20%7C%20Grow" },
+    ],
       links: [{ rel: "canonical", href: PAGE_URL }],
       scripts: s
         ? [

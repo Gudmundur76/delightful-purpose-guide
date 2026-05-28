@@ -42,7 +42,13 @@ export const Route = createFileRoute("/leaderboard")({
             "Living benchmark of how well AI startups are read by ChatGPT, Perplexity, and Claude. Filter by infra, models, agents, dev tools. Open dataset.",
         },
         { property: "og:url", content: "https://grow.contact/leaderboard" },
-      ],
+      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Agent%20Readability%20Leaderboard%20%E2%80%94%20%24%7BLEADERBOARD.length%7D%20AI%20Sites%20%7C%20Grow&sub=Public%20benchmark%20ranking%20%24%7BLEADERBOARD.length%7D%20AI%20companies%20on%20how%20well%20ChatGPT%2C%20Perplexity%2C%20and%20Claude%20read%20and%20cite%20their%20sites." },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Agent Readability Leaderboard — ${LEADERBOARD.length} AI Sites | Grow" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Agent%20Readability%20Leaderboard%20%E2%80%94%20%24%7BLEADERBOARD.length%7D%20AI%20Sites%20%7C%20Grow&sub=Public%20benchmark%20ranking%20%24%7BLEADERBOARD.length%7D%20AI%20companies%20on%20how%20well%20ChatGPT%2C%20Perplexity%2C%20and%20Claude%20read%20and%20cite%20their%20sites." },
+    ],
       links: [{ rel: "canonical", href: "https://grow.contact/leaderboard" }],
       scripts: [
         {

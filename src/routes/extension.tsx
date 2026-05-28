@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 const TITLE = "Grow GEO Browser Extension — One-Click Agent Readability Score";
 const DESC =
+  "See how AI agents read any website. Free Chrome/Edge/Brave extension. GEO + AEO score in your toolbar, top fixes, one click to the full report.";
 const PAGE_URL = "https://grow.contact/extension";
 
 export const Route = createFileRoute("/extension")({
@@ -11,11 +12,11 @@ export const Route = createFileRoute("/extension")({
       { name: "description", content: DESC },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
-      { property: "og:url", content: URL },
+      { property: "og:url", content: PAGE_URL },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: URL }],
+    links: [{ rel: "canonical", href: PAGE_URL }],
     scripts: [
       {
         type: "application/ld+json",
@@ -26,7 +27,7 @@ export const Route = createFileRoute("/extension")({
           applicationCategory: "BrowserApplication",
           operatingSystem: "Chrome, Edge, Brave, Arc, Opera",
           description: DESC,
-          url: URL,
+          url: PAGE_URL,
           offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
           publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact" },
         }),
@@ -44,17 +45,16 @@ function downloadZip() {
     })
     .then((blob) => {
       const a = document.createElement("a");
-      a.href = URL_.createObjectURL(blob);
+      a.href = URL.createObjectURL(blob);
       a.download = "grow-geo.zip";
       document.body.appendChild(a);
       a.click();
       a.remove();
-      URL_.revokeObjectURL(a.href);
+      URL.revokeObjectURL(a.href);
     })
     .catch((err) => alert(err.message));
 }
-// Avoid TS shadowing of the URL constant above.
-const URL_ = typeof window !== "undefined" ? window.URL : (globalThis as { URL: typeof URL }).URL;
+
 
 function ExtensionPage() {
   return (

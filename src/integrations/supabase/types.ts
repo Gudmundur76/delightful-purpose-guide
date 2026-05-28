@@ -89,6 +89,42 @@ export type Database = {
         }
         Relationships: []
       }
+      client_integrations: {
+        Row: {
+          client_id: string
+          connection_id: string | null
+          created_at: string
+          entity_id: string
+          id: string
+          metadata: Json
+          status: string
+          toolkit: string
+          updated_at: string
+        }
+        Insert: {
+          client_id: string
+          connection_id?: string | null
+          created_at?: string
+          entity_id: string
+          id?: string
+          metadata?: Json
+          status?: string
+          toolkit: string
+          updated_at?: string
+        }
+        Update: {
+          client_id?: string
+          connection_id?: string | null
+          created_at?: string
+          entity_id?: string
+          id?: string
+          metadata?: Json
+          status?: string
+          toolkit?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       clients: {
         Row: {
           created_at: string

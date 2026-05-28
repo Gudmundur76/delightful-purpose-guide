@@ -198,7 +198,8 @@ function VerifyPage() {
             score changes.
           </p>
           <div className="relative mt-4 overflow-hidden rounded-xl border border-border bg-zinc-950">
-            <pre className="overflow-x-auto p-4 text-xs leading-relaxed text-zinc-300">
+            <pre className="overflow-x-auto p-4 text-xs leading-relaxed text-zinc-50">
+
               <code>{embedSnippet}</code>
             </pre>
             <button

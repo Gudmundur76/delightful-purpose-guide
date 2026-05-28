@@ -6,6 +6,8 @@ import { GLOSSARY } from "@/lib/glossary/data";
 import { CRAWLERS } from "@/lib/crawlers/data";
 import { PLAYBOOKS } from "@/lib/playbooks/data";
 import { getFeaturedPairsWithEntries } from "@/lib/compare/data";
+import { getAllDataDrops } from "@/lib/data-drops/data";
+
 
 
 const BASE_URL = "https://grow.contact";
@@ -63,6 +65,17 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/playbooks", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/compare", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/tools/robots-checker", lastmod: today, changefreq: "monthly", priority: "0.8" },
+          { path: "/report/q2-2026", lastmod: today, changefreq: "monthly", priority: "0.9" },
+          { path: "/report/methodology", lastmod: today, changefreq: "monthly", priority: "0.7" },
+          { path: "/report/press", lastmod: today, changefreq: "monthly", priority: "0.6" },
+          { path: "/data-drops", lastmod: today, changefreq: "weekly", priority: "0.8" },
+          ...getAllDataDrops().map<SitemapEntry>((d) => ({
+            path: `/data-drops/${d.slug}`,
+            lastmod: d.publishedAt,
+            changefreq: "monthly",
+            priority: "0.7",
+          })),
+
           ...PLAYBOOKS.map<SitemapEntry>((p) => ({
             path: `/playbooks/${p.slug}`,
             lastmod: p.updatedAt,

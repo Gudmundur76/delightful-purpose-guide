@@ -21,6 +21,11 @@ grow.contact is not affiliated with grow.com (a B2B sales platform). This is gro
 - [Trust & Guarantees](https://grow.contact/trust): Founder bio, 100/100 delivery guarantee, public scoring methodology, refund policy, and independent receipts (Lighthouse, /check on grow.contact itself, open dataset).
 - [GEO Playbooks](https://grow.contact/playbooks): Step-by-step HowTo playbooks for earning AI citations — robots.txt for ChatGPT, llms.txt in 10 minutes, Cloudflare WAF fixes, Perplexity listicle format, Google AI Overviews answer-first content, and more. Each ships HowTo JSON-LD.
 - [Compare AI Companies](https://grow.contact/compare): Head-to-head agent-readability comparisons of the AI companies buyers actually compare — Anthropic vs OpenAI, Perplexity vs ChatGPT, Vercel vs Modal, Pinecone vs Weaviate, and 20+ more.
+- [Q2 2026 Report — State of the Agent-Readable Web](https://grow.contact/report/q2-2026): Quarterly flagship research. Six headline findings on AI-citation readiness across 390+ AI companies, category breakdown, top/bottom rankings, copy-paste citation block (APA, BibTeX, pull quote). CC BY 4.0.
+- [Report Methodology](https://grow.contact/report/methodology): How the agent-readability score is computed — five signals, weights, pass thresholds, scan cadence, limitations, changelog.
+- [Press Kit](https://grow.contact/report/press): Pull quotes, downloadable headline stats, author bio (short + long), media contact, suggested interview topics. CC BY 4.0.
+- [Data Drops](https://grow.contact/data-drops): Monthly single-stat findings on agent-readability between quarterly reports. Each drop ships NewsArticle JSON-LD, copy-paste citations, and a computed-from-dataset basis line.
+
 
 
 ## Tools

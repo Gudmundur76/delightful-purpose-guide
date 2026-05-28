@@ -40,6 +40,7 @@ export function buildLinkHeader(): string {
     `<${SITE_ORIGIN}/api/public/v1/openapi.json>; rel="api-catalog"; type="application/json"`,
     `<${SITE_ORIGIN}/api/public/mcp>; rel="mcp"`,
     `<${SITE_ORIGIN}/.well-known/oauth-protected-resource>; rel="oauth-protected-resource"`,
+    `<${SITE_ORIGIN}/.well-known/oauth-authorization-server>; rel="oauth-authorization-server"`,
   ].join(", ");
 }
 

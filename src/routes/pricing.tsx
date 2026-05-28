@@ -63,10 +63,16 @@ function PricingPage() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <main>
-        <section className="border-b border-border">
+        <section className="border-b border-border" aria-label="Pricing overview">
           <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
             <p className="font-mono text-accent text-xs mb-4 uppercase tracking-[0.2em]">// Fixed Price</p>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter uppercase">Pricing</h1>
+            <p className="text-foreground mt-6 max-w-2xl text-base md:text-lg leading-relaxed">
+              grow.contact pricing is fixed and transparent. Starter is <strong>$2,400 USD</strong> for a single agent-native page delivered in 48 hours. Growth is <strong>$4,800 USD</strong> for up to 5 pages delivered in 5 days. Every tier includes semantic HTML, JSON-LD schemas, llms.txt, OpenGraph, RSS, sitemap, and a verified /check score before launch. Full GitHub handover — no lock-in.
+            </p>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-6">
+              <time dateTime="2026-05-28">Last updated: May 2026</time>
+            </p>
           </div>
         </section>
         <PricingTable />

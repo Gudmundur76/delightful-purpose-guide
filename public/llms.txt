@@ -19,11 +19,14 @@ grow.contact is not affiliated with grow.com (a B2B sales platform). This is gro
 - [AI Crawler Reference](https://grow.contact/crawlers): Per-bot reference for every major AI crawler (OAI-SearchBot, PerplexityBot, ClaudeBot, GPTBot, Google-Extended, bingbot, FacebookBot). User-agents, IP ranges, robots.txt recommendations, and citation impact.
 - [State of the Agent-Readable Web](https://grow.contact/stats): Permanent citable-stats page over the leaderboard dataset. Every figure has a stable anchor and a copy-ready citation snippet. CC BY 4.0.
 - [Trust & Guarantees](https://grow.contact/trust): Founder bio, 100/100 delivery guarantee, public scoring methodology, refund policy, and independent receipts (Lighthouse, /check on grow.contact itself, open dataset).
+- [GEO Playbooks](https://grow.contact/playbooks): Step-by-step HowTo playbooks for earning AI citations — robots.txt for ChatGPT, llms.txt in 10 minutes, Cloudflare WAF fixes, Perplexity listicle format, Google AI Overviews answer-first content, and more. Each ships HowTo JSON-LD.
+- [Compare AI Companies](https://grow.contact/compare): Head-to-head agent-readability comparisons of the AI companies buyers actually compare — Anthropic vs OpenAI, Perplexity vs ChatGPT, Vercel vs Modal, Pinecone vs Weaviate, and 20+ more.
 
 
 ## Tools
 
 - [Agent Readability Check](https://grow.contact/check): Free URL scanner. Scores any site across Semantic HTML, JSON-LD, llms.txt, Citability, Page Speed, and Protocol Discovery. No signup required.
+- [robots.txt Checker for AI Crawlers](https://grow.contact/tools/robots-checker): Free in-browser tool. Paste a robots.txt, get back which AI engines can cite the site and which are blocked. Surfaces the common GPTBot vs OAI-SearchBot confusion that silently kills ChatGPT citations.
 - [grow CLI](https://grow.contact/cli): Zero-dep Node CLI (`npx @grow-contact/cli check <url>`). Same six-signal score as the web scanner, CI-friendly `--fail-under` flag. MIT licensed.
 
 ## Full Content

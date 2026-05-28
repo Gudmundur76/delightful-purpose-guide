@@ -4,6 +4,8 @@ import { getAllPosts } from "@/lib/blog/posts";
 import { getAllComparisons } from "@/lib/comparisons/data";
 import { GLOSSARY } from "@/lib/glossary/data";
 import { CRAWLERS } from "@/lib/crawlers/data";
+import { PLAYBOOKS } from "@/lib/playbooks/data";
+import { getFeaturedPairsWithEntries } from "@/lib/compare/data";
 
 
 const BASE_URL = "https://grow.contact";
@@ -58,6 +60,21 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/crawlers", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/stats", lastmod: today, changefreq: "weekly", priority: "0.9" },
           { path: "/trust", lastmod: today, changefreq: "monthly", priority: "0.8" },
+          { path: "/playbooks", lastmod: today, changefreq: "monthly", priority: "0.8" },
+          { path: "/compare", lastmod: today, changefreq: "monthly", priority: "0.8" },
+          { path: "/tools/robots-checker", lastmod: today, changefreq: "monthly", priority: "0.8" },
+          ...PLAYBOOKS.map<SitemapEntry>((p) => ({
+            path: `/playbooks/${p.slug}`,
+            lastmod: p.updatedAt,
+            changefreq: "monthly",
+            priority: "0.7",
+          })),
+          ...getFeaturedPairsWithEntries().map<SitemapEntry>((p) => ({
+            path: `/compare/${p.slug}`,
+            lastmod: today,
+            changefreq: "monthly",
+            priority: "0.6",
+          })),
           ...GLOSSARY.map<SitemapEntry>((t) => ({
             path: `/glossary/${t.slug}`,
             lastmod: today,

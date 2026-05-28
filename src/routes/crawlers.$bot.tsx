@@ -84,8 +84,10 @@ function CrawlerPage() {
 function CrawlerPage() {
   const { crawler: c } = Route.useLoaderData() as { crawler: NonNullable<ReturnType<typeof getCrawler>> };
 
+  const related = CRAWLERS.filter(
     (x) => x.slug !== c.slug && x.operator === c.operator,
   ).slice(0, 4);
+
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">

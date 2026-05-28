@@ -511,11 +511,6 @@ export const scanUrl = createServerFn({ method: "POST" })
         label: "Protocol Discovery",
         score: protocolScore,
         status: statusFor(protocolScore),
-      {
-        key: "protocol",
-        label: "Protocol Discovery",
-        score: protocolScore,
-        status: statusFor(protocolScore),
         summary: "MCP card, Link header, markdown negotiation, and Content Signals make a site agent-native, not just AI-friendly.",
         details: protocolDetails,
       },

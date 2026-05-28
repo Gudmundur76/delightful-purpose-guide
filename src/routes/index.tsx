@@ -31,6 +31,21 @@ const FAQS: { q: string; a: string }[] = [
 export const Route = createFileRoute("/")({
   component: Index,
 
+  loader: async ({ context }) => {
+    // Prefetch FAQ + home content so SSR HTML and JSON-LD reflect DB state
+    // and stay in sync with what the user sees after hydration.
+    await Promise.all([
+      context.queryClient.ensureQueryData({
+        queryKey: ["faq-items"],
+        queryFn: () => getFaqItemsFn(),
+      }),
+      context.queryClient.ensureQueryData({
+        queryKey: ["site-content", "home"],
+        queryFn: () => getPageContentFn({ data: "home" }),
+      }),
+    ]);
+  },
+
   head: () => ({
     meta: [
       {
@@ -66,17 +81,6 @@ export const Route = createFileRoute("/")({
               "@type": "WebSite",
               name: "Grow",
               url: "https://grow.contact/",
-            },
-            {
-              "@type": "FAQPage",
-              mainEntity: FAQS.map((f) => ({
-                "@type": "Question",
-                name: f.q,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: f.a,
-                },
-              })),
             },
             {
               "@type": "Service",

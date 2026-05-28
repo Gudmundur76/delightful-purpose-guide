@@ -26,6 +26,7 @@ import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PlaybookRouteImport } from './routes/playbook'
 import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
 import { Route as LlmsRouteImport } from './routes/llms'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as FaqRouteImport } from './routes/faq'
@@ -177,6 +178,11 @@ const OutreachRoute = OutreachRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsFullDottxtRoute = LlmsFullDottxtRouteImport.update({
+  id: '/llms-full.txt',
+  path: '/llms-full.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LlmsRoute = LlmsRouteImport.update({
@@ -544,6 +550,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
@@ -628,6 +635,7 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
@@ -715,6 +723,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
@@ -803,6 +812,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/leaderboard'
     | '/llms'
+    | '/llms-full.txt'
     | '/login'
     | '/outreach'
     | '/playbook'
@@ -887,6 +897,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/leaderboard'
     | '/llms'
+    | '/llms-full.txt'
     | '/login'
     | '/outreach'
     | '/playbook'
@@ -973,6 +984,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/leaderboard'
     | '/llms'
+    | '/llms-full.txt'
     | '/login'
     | '/outreach'
     | '/playbook'
@@ -1060,6 +1072,7 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   LeaderboardRoute: typeof LeaderboardRoute
   LlmsRoute: typeof LlmsRoute
+  LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
   LoginRoute: typeof LoginRoute
   OutreachRoute: typeof OutreachRoute
   PlaybookRoute: typeof PlaybookRoute
@@ -1235,6 +1248,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms-full.txt': {
+      id: '/llms-full.txt'
+      path: '/llms-full.txt'
+      fullPath: '/llms-full.txt'
+      preLoaderRoute: typeof LlmsFullDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/llms': {
@@ -1828,6 +1848,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   LeaderboardRoute: LeaderboardRoute,
   LlmsRoute: LlmsRoute,
+  LlmsFullDottxtRoute: LlmsFullDottxtRoute,
   LoginRoute: LoginRoute,
   OutreachRoute: OutreachRoute,
   PlaybookRoute: PlaybookRoute,

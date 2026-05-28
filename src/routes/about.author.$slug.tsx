@@ -3,6 +3,8 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getAuthor, personJsonLd, AUTHORS } from "@/lib/authors/data";
 import { getAllDataDrops } from "@/lib/data-drops/data";
+import { ogImageMeta } from "@/lib/seo/og";
+
 
 export const Route = createFileRoute("/about/author/$slug")({
   component: AuthorPage,
@@ -31,6 +33,11 @@ export const Route = createFileRoute("/about/author/$slug")({
         { property: "og:description", content: a.shortBio },
         { property: "og:url", content: url },
         { property: "og:type", content: "profile" },
+        ...ogImageMeta({
+          title: a.name,
+          kicker: a.role,
+          sub: a.shortBio,
+        }),
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [

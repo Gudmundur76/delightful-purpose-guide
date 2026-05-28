@@ -2,10 +2,12 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StandardMarkdown } from "@/components/StandardMarkdown";
+import { ogImageMeta } from "@/lib/seo/og";
 import {
   getStandardVersion,
   STANDARD_LICENSE,
 } from "@/lib/standard/data";
+
 
 export const Route = createFileRoute("/standard/$version")({
   loader: ({ params }) => {
@@ -67,7 +69,13 @@ export const Route = createFileRoute("/standard/$version")({
         { property: "og:type", content: "article" },
         { property: "article:published_time", content: v.publishedAt },
         { property: "article:author", content: "grow.contact" },
+        ...ogImageMeta({
+          title: `Standard ${v.label} (${v.buildId})`,
+          kicker: "Standard",
+          sub: v.abstract,
+        }),
       ],
+
       links: [
         { rel: "canonical", href: url },
         { rel: "alternate", type: "text/markdown", href: `${url}.md` },

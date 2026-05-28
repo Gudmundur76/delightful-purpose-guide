@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { parsePairSlug, findEntry, getFeaturedPairsWithEntries } from "@/lib/compare/data";
 import type { LeaderboardEntry } from "@/lib/leaderboard/entries";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ogImageMeta } from "@/lib/seo/og";
 
 export const Route = createFileRoute("/compare/$pair")({
   loader: ({ params }) => {
@@ -31,18 +32,16 @@ export const Route = createFileRoute("/compare/$pair")({
         { property: "og:description", content: desc },
         { property: "og:url", content: url },
         { property: "og:type", content: "article" },
-        { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: desc },
-        { property: "og:image", content: `https://grow.contact/api/public/widget/og.svg?kicker=Compare&title=${encodeURIComponent(title)}&sub=${encodeURIComponent(desc)}` },
-        { property: "og:image:width", content: "1200" },
-        { property: "og:image:height", content: "630" },
-        { property: "og:image:alt", content: title },
-        { name: "twitter:image", content: `https://grow.contact/api/public/widget/og.svg?kicker=Compare&title=${encodeURIComponent(title)}&sub=${encodeURIComponent(desc)}` },
-
       ],
       links: [{ rel: "canonical", href: url }],
-      scripts: [
+      scr        ...ogImageMeta({
+          title: title,
+          kicker: "Compare",
+          sub: desc,
+        }),
+ipts: [
         {
           type: "application/ld+json",
           children: JSON.stringify({

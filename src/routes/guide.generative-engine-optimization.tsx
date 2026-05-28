@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArrowRight, Check } from "lucide-react";
+import { ogImageMeta } from "@/lib/seo/og";
 
 const URL = "https://grow.contact/guide/generative-engine-optimization";
 const TITLE = "Generative Engine Optimization: The 2026 Guide (GEO)";
@@ -72,15 +73,14 @@ export const Route = createFileRoute("/guide/generative-engine-optimization")({
       { property: "article:published_time", content: PUBLISHED },
       { property: "article:modified_time", content: UPDATED },
       { property: "article:author", content: "Grow" },
-      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Generative%20Engine%20Optimization%3A%20The%202026%20Guide%20(GEO)&sub=Generative%20Engine%20Optimization%20(GEO)%20is%20the%20practice%20of%20structuring%20a%20website%20so%20large%20language%20models%20cite%20it%20in%20answers.%20This%20guide%20is%20the%20working%20standard%3A%20definitions%2C%20technical%20checklist%2C%20per-engine%20playbook%2C%20and%20how%20to%20measure%20it." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Generative Engine Optimization: The 2026 Guide (GEO)" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Generative%20Engine%20Optimization%3A%20The%202026%20Guide%20(GEO)&sub=Generative%20Engine%20Optimization%20(GEO)%20is%20the%20practice%20of%20structuring%20a%20website%20so%20large%20language%20models%20cite%20it%20in%20answers.%20This%20guide%20is%20the%20working%20standard%3A%20definitions%2C%20technical%20checklist%2C%20per-engine%20playbook%2C%20and%20how%20to%20measure%20it." },
+      ...ogImageMeta({
+        title: "Generative Engine Optimization: The 2026 Guide (GEO)",
+        kicker: "Grow",
+        sub: "Generative Engine Optimization (GEO) is the practice of structuring a website so large language models cite it in answers. This guide is the working standard: definitions, technical checklist, per-engine playbook, and how to measure it.",
+      }),
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

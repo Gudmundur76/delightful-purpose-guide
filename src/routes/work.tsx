@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import nimbusImg from "@/assets/portfolio-nimbus.jpg";
 import vectorImg from "@/assets/portfolio-vector.jpg";
+import { ogImageMeta } from "@/lib/seo/og";
 
 type ShippedCase = {
   client: string;
@@ -43,12 +44,11 @@ export const Route = createFileRoute("/work")({
       { property: "og:title", content: "Work — Grow" },
       { property: "og:description", content: "Selected case studies and recent shipped sites." },
       { property: "og:url", content: "https://grow.contact/work" },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Work%20%E2%80%94%20Grow&sub=Case%20studies%20and%20recent%20outputs%3A%20agent-native%20sites%20for%20AI%20startups%20and%20devtools." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Work — Grow" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Work%20%E2%80%94%20Grow&sub=Case%20studies%20and%20recent%20outputs%3A%20agent-native%20sites%20for%20AI%20startups%20and%20devtools." },
+      ...ogImageMeta({
+        title: "Work — Grow",
+        kicker: "Grow",
+        sub: "Case studies and recent outputs: agent-native sites for AI startups and devtools.",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/work" }],
     scripts: CASE_JSONLD.map((j) => ({

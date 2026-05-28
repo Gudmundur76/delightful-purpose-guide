@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { PLAYBOOKS } from "@/lib/playbooks/data";
 import { ArrowRight, Clock } from "lucide-react";
+import { ogImageMeta } from "@/lib/seo/og";
 
 const URL_ = "https://grow.contact/playbooks";
 const TITLE = "GEO Playbooks — Step-by-Step AI Citation Tactics";
@@ -19,15 +20,14 @@ export const Route = createFileRoute("/playbooks")({
       { property: "og:description", content: DESC },
       { property: "og:url", content: URL_ },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=GEO%20Playbooks%20%E2%80%94%20Step-by-Step%20AI%20Citation%20Tactics&sub=Tactical%20step-by-step%20playbooks%20for%20earning%20AI%20citations%3A%20robots.txt%20for%20ChatGPT%2C%20llms.txt%20in%2010%20minutes%2C%20Cloudflare%20WAF%20fixes%2C%20Perplexity%20listicle%20format%2C%20and%20more.%20Each%20ships%20HowTo%20JSON-LD." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "GEO Playbooks — Step-by-Step AI Citation Tactics" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=GEO%20Playbooks%20%E2%80%94%20Step-by-Step%20AI%20Citation%20Tactics&sub=Tactical%20step-by-step%20playbooks%20for%20earning%20AI%20citations%3A%20robots.txt%20for%20ChatGPT%2C%20llms.txt%20in%2010%20minutes%2C%20Cloudflare%20WAF%20fixes%2C%20Perplexity%20listicle%20format%2C%20and%20more.%20Each%20ships%20HowTo%20JSON-LD." },
+      ...ogImageMeta({
+        title: "GEO Playbooks — Step-by-Step AI Citation Tactics",
+        kicker: "Grow",
+        sub: "Tactical step-by-step playbooks for earning AI citations: robots.txt for ChatGPT, llms.txt in 10 minutes, Cloudflare WAF fixes, Perplexity listicle format, and more. Each ships HowTo JSON-LD.",
+      }),
     ],
     links: [{ rel: "canonical", href: URL_ }],
     scripts: [

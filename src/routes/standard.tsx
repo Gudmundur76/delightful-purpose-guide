@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ogImageMeta } from "@/lib/seo/og";
 import {
   STANDARD_VERSIONS,
   getCurrentStandard,
@@ -32,12 +33,11 @@ export const Route = createFileRoute("/standard")({
         },
         { property: "og:url", content: PAGE_URL },
         { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=The%20Agent-Native%20Web%20Standard%20%E2%80%94%20A%20Canonical%20Specification%20for%20AI-Citable%20Websites%20%7C%20Grow%22%2C%20%7D%2C%20%7B%20name%3A%20%22description%22%2C%20content%3A%20%22The%20Agent-Native%20Web%20Standard%20is%20a%20versioned%2C%20open%20specification%20defining%20how%20a%20website%20becomes%20legible%20to%20ChatGPT%2C%20Perplexity%2C%20Claude%2C%20and%20Google%20AI%20Overviews.%20Five%20signals%2C%20hard%20thresholds%2C%20the%20crawler%20matrix%2C%20llms.txt%20and%20JSON-LD%20requirements.%20CC%20BY%204.0.%22%2C%20%7D%2C%20%7B%20property%3A%20%22og%3Atitle%22%2C%20content%3A%20%22The%20Agent-Native%20Web%20Standard&sub=The%20Agent-Native%20Web%20Standard%20is%20a%20versioned%2C%20open%20specification%20defining%20how%20a%20website%20becomes%20legible%20to%20ChatGPT%2C%20Perplexity%2C%20Claude%2C%20and%20Google%20AI%20Overviews.%20Five%20signals%2C%20hard%20thresholds%2C%20the%20crawler%20matrix%2C%20llms.txt%20and%20JSON-LD%20requirements.%20CC%20BY%204.0." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "The Agent-Native Web Standard — A Canonical Specification for AI-Citable Websites | Grow\", }, { name: \"description\", content: \"The Agent-Native Web Standard is a versioned, open specification defining how a website becomes legible to ChatGPT, Perplexity, Claude, and Google AI Overviews. Five signals, hard thresholds, the crawler matrix, llms.txt and JSON-LD requirements. CC BY 4.0.\", }, { property: \"og:title\", content: \"The Agent-Native Web Standard" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=The%20Agent-Native%20Web%20Standard%20%E2%80%94%20A%20Canonical%20Specification%20for%20AI-Citable%20Websites%20%7C%20Grow%22%2C%20%7D%2C%20%7B%20name%3A%20%22description%22%2C%20content%3A%20%22The%20Agent-Native%20Web%20Standard%20is%20a%20versioned%2C%20open%20specification%20defining%20how%20a%20website%20becomes%20legible%20to%20ChatGPT%2C%20Perplexity%2C%20Claude%2C%20and%20Google%20AI%20Overviews.%20Five%20signals%2C%20hard%20thresholds%2C%20the%20crawler%20matrix%2C%20llms.txt%20and%20JSON-LD%20requirements.%20CC%20BY%204.0.%22%2C%20%7D%2C%20%7B%20property%3A%20%22og%3Atitle%22%2C%20content%3A%20%22The%20Agent-Native%20Web%20Standard&sub=The%20Agent-Native%20Web%20Standard%20is%20a%20versioned%2C%20open%20specification%20defining%20how%20a%20website%20becomes%20legible%20to%20ChatGPT%2C%20Perplexity%2C%20Claude%2C%20and%20Google%20AI%20Overviews.%20Five%20signals%2C%20hard%20thresholds%2C%20the%20crawler%20matrix%2C%20llms.txt%20and%20JSON-LD%20requirements.%20CC%20BY%204.0." },
+      ...ogImageMeta({
+        title: "The Agent-Native Web Standard — A Canonical Specification for AI-Citable Websites | Grow\", }, { name: \"description\", content: \"The Agent-Native Web Standard is a versioned, open specification defining how a website becomes legible to ChatGPT, Perplexity, Claude, and Google AI Overviews. Five signals, hard thresholds, the crawler matrix, llms.txt and JSON-LD requirements. CC BY 4.0.\", }, { property: \"og:title\", content: \"The Agent-Native Web Standard",
+        kicker: "Grow",
+        sub: "The Agent-Native Web Standard is a versioned, open specification defining how a website becomes legible to ChatGPT, Perplexity, Claude, and Google AI Overviews. Five signals, hard thresholds, the crawler matrix, llms.txt and JSON-LD requirements. CC BY 4.0.",
+      }),
     ],
       links: [{ rel: "canonical", href: PAGE_URL }],
       scripts: [

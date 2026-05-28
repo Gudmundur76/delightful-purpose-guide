@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getFeaturedPairsWithEntries } from "@/lib/compare/data";
 import { ArrowRight } from "lucide-react";
+import { ogImageMeta } from "@/lib/seo/og";
 
 const URL_ = "https://grow.contact/compare";
 const TITLE = "Agent-Readability Head-to-Heads — Compare AI Companies";
@@ -21,16 +22,15 @@ export const Route = createFileRoute("/compare")({
         { property: "og:description", content: DESC },
         { property: "og:url", content: URL_ },
         { property: "og:type", content: "website" },
-        { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: TITLE },
         { name: "twitter:description", content: DESC },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Agent-Readability%20Head-to-Heads%20%E2%80%94%20Compare%20AI%20Companies&sub=Side-by-side%20agent-readability%20comparisons%20of%20the%20AI%20companies%20you%20actually%20compare%3A%20Anthropic%20vs%20OpenAI%2C%20Perplexity%20vs%20ChatGPT%2C%20Vercel%20vs%20Modal%2C%20Pinecone%20vs%20Weaviate%2C%20and%20more." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Agent-Readability Head-to-Heads — Compare AI Companies" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Agent-Readability%20Head-to-Heads%20%E2%80%94%20Compare%20AI%20Companies&sub=Side-by-side%20agent-readability%20comparisons%20of%20the%20AI%20companies%20you%20actually%20compare%3A%20Anthropic%20vs%20OpenAI%2C%20Perplexity%20vs%20ChatGPT%2C%20Vercel%20vs%20Modal%2C%20Pinecone%20vs%20Weaviate%2C%20and%20more." },
-    ],
+        ...ogImageMeta({
+        title: "Agent-Readability Head-to-Heads — Compare AI Companies",
+        kicker: "Grow",
+        sub: "Side-by-side agent-readability comparisons of the AI companies you actually compare: Anthropic vs OpenAI, Perplexity vs ChatGPT, Vercel vs Modal, Pinecone vs Weaviate, and more.",
+      }),
+  ],
       links: [{ rel: "canonical", href: URL_ }],
       scripts: [
         {

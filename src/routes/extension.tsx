@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ogImageMeta } from "@/lib/seo/og";
 
 const TITLE = "Grow GEO Browser Extension — One-Click Agent Readability Score";
 const DESC =
@@ -15,12 +16,11 @@ export const Route = createFileRoute("/extension")({
       { property: "og:url", content: PAGE_URL },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Grow%20GEO%20Browser%20Extension%20%E2%80%94%20One-Click%20Agent%20Readability%20Score&sub=See%20how%20AI%20agents%20read%20any%20website.%20Free%20Chrome%2FEdge%2FBrave%20extension.%20GEO%20%2B%20AEO%20score%20in%20your%20toolbar%2C%20top%20fixes%2C%20one%20click%20to%20the%20full%20report." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Grow GEO Browser Extension — One-Click Agent Readability Score" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Grow%20GEO%20Browser%20Extension%20%E2%80%94%20One-Click%20Agent%20Readability%20Score&sub=See%20how%20AI%20agents%20read%20any%20website.%20Free%20Chrome%2FEdge%2FBrave%20extension.%20GEO%20%2B%20AEO%20score%20in%20your%20toolbar%2C%20top%20fixes%2C%20one%20click%20to%20the%20full%20report." },
+      ...ogImageMeta({
+        title: "Grow GEO Browser Extension — One-Click Agent Readability Score",
+        kicker: "Grow",
+        sub: "See how AI agents read any website. Free Chrome/Edge/Brave extension. GEO + AEO score in your toolbar, top fixes, one click to the full report.",
+      }),
     ],
     links: [{ rel: "canonical", href: PAGE_URL }],
     scripts: [

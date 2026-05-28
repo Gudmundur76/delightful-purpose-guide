@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getAllDataDrops } from "@/lib/data-drops/data";
+import { ogImageMeta } from "@/lib/seo/og";
 
 const PAGE_URL = "https://grow.contact/data-drops";
 
@@ -17,12 +18,11 @@ export const Route = createFileRoute("/data-drops")({
         { property: "og:title", content: "Data Drops — Monthly Agent-Readability Findings" },
         { property: "og:description", content: "One stat. One chart. One methodology link. Monthly. CC BY 4.0." },
         { property: "og:url", content: PAGE_URL },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Data%20Drops%20%E2%80%94%20Monthly%20Agent-Readability%20Findings%20%7C%20Grow&sub=Monthly%20single-stat%20findings%20from%20the%20open%20Agent%20Readability%20Leaderboard.%20%24%7Bcount%7D%20drops%20published.%20Citable%2C%20CC%20BY%204.0%2C%20RSS-enabled." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Data Drops — Monthly Agent-Readability Findings | Grow" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Data%20Drops%20%E2%80%94%20Monthly%20Agent-Readability%20Findings%20%7C%20Grow&sub=Monthly%20single-stat%20findings%20from%20the%20open%20Agent%20Readability%20Leaderboard.%20%24%7Bcount%7D%20drops%20published.%20Citable%2C%20CC%20BY%204.0%2C%20RSS-enabled." },
+      ...ogImageMeta({
+        title: "Data Drops — Monthly Agent-Readability Findings | Grow",
+        kicker: "Grow",
+        sub: "Monthly single-stat findings from the open Agent Readability Leaderboard. ${count} drops published. Citable, CC BY 4.0, RSS-enabled.",
+      }),
     ],
       links: [{ rel: "canonical", href: PAGE_URL }],
       scripts: [

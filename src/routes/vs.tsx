@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getAllComparisons } from "@/lib/comparisons/data";
 import { ArrowRight } from "lucide-react";
+import { ogImageMeta } from "@/lib/seo/og";
 
 export const Route = createFileRoute("/vs")({
   component: VsLayout,
@@ -23,12 +24,11 @@ export const Route = createFileRoute("/vs")({
             "Side-by-side comparisons of Grow against the major web design tools, AI visibility platforms, and agencies.",
         },
         { property: "og:url", content: "https://grow.contact/vs" },
-      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Grow%20vs%20Webflow%2C%20Framer%2C%20Wix%2C%20Profound%2C%20Rankscale%20%26%20Agencies&sub=Honest%20comparisons%20of%20Grow%20against%20Webflow%2C%20Framer%2C%20Wix%20Studio%2C%20traditional%20agencies%2C%20Profound%2C%20Rankscale%2C%20and%20DIY%20GEO.%20Where%20each%20wins%20and%20which%20to%20pick." },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Grow vs Webflow, Framer, Wix, Profound, Rankscale & Agencies" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Grow%20vs%20Webflow%2C%20Framer%2C%20Wix%2C%20Profound%2C%20Rankscale%20%26%20Agencies&sub=Honest%20comparisons%20of%20Grow%20against%20Webflow%2C%20Framer%2C%20Wix%20Studio%2C%20traditional%20agencies%2C%20Profound%2C%20Rankscale%2C%20and%20DIY%20GEO.%20Where%20each%20wins%20and%20which%20to%20pick." },
+      ...ogImageMeta({
+        title: "Grow vs Webflow, Framer, Wix, Profound, Rankscale & Agencies",
+        kicker: "Grow",
+        sub: "Honest comparisons of Grow against Webflow, Framer, Wix Studio, traditional agencies, Profound, Rankscale, and DIY GEO. Where each wins and which to pick.",
+      }),
     ],
       links: [{ rel: "canonical", href: "https://grow.contact/vs" }],
       scripts: [

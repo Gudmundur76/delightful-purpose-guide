@@ -25,6 +25,12 @@ export const Route = createFileRoute("/tools/robots-checker")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
+      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=robots.txt%20Checker%20for%20AI%20Crawlers%20%E2%80%94%20Free%20Tool&sub=Paste%20your%20robots.txt%20%E2%80%94%20get%20back%20which%20AI%20engines%20can%20cite%20you.%20Checks%20ChatGPT%2C%20Perplexity%2C%20Claude%2C%20Google%20AI%20Overviews%2C%20Bing%20Copilot%2C%20and%20Meta%20AI.%20No%20signup." },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "robots.txt Checker for AI Crawlers — Free Tool" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=robots.txt%20Checker%20for%20AI%20Crawlers%20%E2%80%94%20Free%20Tool&sub=Paste%20your%20robots.txt%20%E2%80%94%20get%20back%20which%20AI%20engines%20can%20cite%20you.%20Checks%20ChatGPT%2C%20Perplexity%2C%20Claude%2C%20Google%20AI%20Overviews%2C%20Bing%20Copilot%2C%20and%20Meta%20AI.%20No%20signup." },
     ],
     links: [{ rel: "canonical", href: URL_ }],
     scripts: [

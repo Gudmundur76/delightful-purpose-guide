@@ -7,7 +7,7 @@ export function SiteFooter() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
           <div>
-            <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Studio</h5>
+            <h3 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Studio</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="/services" className="hover:text-foreground transition-colors">Services</Link></li>
               <li><Link to="/process" className="hover:text-foreground transition-colors">Process</Link></li>
@@ -16,7 +16,7 @@ export function SiteFooter() {
             </ul>
           </div>
           <div>
-            <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Resources</h5>
+            <h3 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Resources</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="/standard" className="hover:text-foreground transition-colors">The Standard</Link></li>
               <li><Link to="/blog" className="hover:text-foreground transition-colors">Journal</Link></li>
@@ -38,7 +38,7 @@ export function SiteFooter() {
 
           </div>
           <div>
-            <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Contact</h5>
+            <h3 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Contact</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><span className="select-all">hello@grow.contact</span></li>
               <li><Link to="/contact" className="hover:text-foreground transition-colors">Start a Brief</Link></li>
@@ -46,7 +46,7 @@ export function SiteFooter() {
             </ul>
           </div>
           <div>
-            <h5 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Readiness</h5>
+            <h3 className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">// Readiness</h3>
             <pre className="font-mono text-[11px] leading-relaxed bg-card border border-border rounded-md p-3 text-emerald-400 overflow-x-auto">
 <span className="text-muted-foreground">user@grow:~$</span> curl /api/readiness
 {`{"status":"agent-ready","score":100}`}<span className="inline-block w-2 h-3 bg-emerald-400 ml-1 align-middle animate-[blink_1s_steps(2,start)_infinite]" />

@@ -109,9 +109,12 @@ export function Services() {
               <div className="p-5 bg-[#0a0a0a] overflow-x-auto flex-1">
                 {s.lang === "markdown" ? (
                   <div className="font-mono text-[11px] leading-relaxed text-foreground/80 space-y-3">
-                    <h4 className="text-base font-extrabold tracking-tight text-foreground">
-                      Grow
-                    </h4>
+                    <h3 className="text-base font-extrabold tracking-tight text-foreground">
+                      {s.title}
+
+
+                    </h3>
+
                     <p className="text-accent italic border-l-2 border-accent/60 pl-2">
                       Agent-native web design agency.
                     </p>

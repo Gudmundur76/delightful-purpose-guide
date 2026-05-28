@@ -92,8 +92,10 @@ export function CompareSection() {
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://your-site.com"
+              aria-label="Website URL"
               className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
             />
+
           </div>
           <button
             type="submit"

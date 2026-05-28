@@ -151,8 +151,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "Grow — Agent-Native Websites" },
       { name: "twitter:description", content: "Sites built for AI/ML startups, agent platforms, and devtools. 48 hours, fixed price." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/996a429e-5824-49af-a027-4a1104a76c38/id-preview-6eecb591--fe0719fd-8a73-47fd-82c4-676843f17c94.lovable.app-1779182535758.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/996a429e-5824-49af-a027-4a1104a76c38/id-preview-6eecb591--fe0719fd-8a73-47fd-82c4-676843f17c94.lovable.app-1779182535758.png" },
+
     ],
     links: [
       {
@@ -175,21 +174,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           name: "Grow",
           url: "https://grow.contact",
           description: "Agent-native marketing sites for AI/ML startups, agent platforms, and developer tools. 48 hours, fixed price.",
-          sameAs: ["https://grow.contact"],
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
-            { "@type": "ListItem", position: 2, name: "Services", item: "https://grow.contact/services" },
-            { "@type": "ListItem", position: 3, name: "Work", item: "https://grow.contact/work" },
-            { "@type": "ListItem", position: 4, name: "Blog", item: "https://grow.contact/blog" },
-            { "@type": "ListItem", position: 5, name: "Check Your Score", item: "https://grow.contact/check" },
-          ],
         }),
       },
     ],

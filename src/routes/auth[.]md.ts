@@ -39,9 +39,28 @@ Content-Type: application/json
 Accept: application/json, text/event-stream
 \`\`\`
 
-## OAuth / OpenID Connect
+## OAuth 2.0 — Client Credentials Grant
 
-Not used. grow.contact does not expose end-user delegated flows; the public surfaces above are key/bearer authenticated only. Agents that require OAuth should integrate against a downstream provider, not against grow.contact.
+grow.contact publishes RFC 8414 authorization-server metadata at https://grow.contact/.well-known/oauth-authorization-server. Agents may exchange a pre-issued \`client_id\` + \`client_secret\` at the token endpoint for the same bearer token used by the MCP endpoint.
+
+- Discovery: https://grow.contact/.well-known/oauth-authorization-server
+- Token endpoint: https://grow.contact/api/public/oauth/token
+- Grant types: \`client_credentials\`
+- Client authentication: \`client_secret_basic\` or \`client_secret_post\`
+- Token type: opaque Bearer (use with the MCP endpoint)
+- Credentials issuance: by request via https://grow.contact/contact
+
+Example:
+
+\`\`\`
+POST https://grow.contact/api/public/oauth/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic base64(client_id:client_secret)
+
+grant_type=client_credentials
+\`\`\`
+
+End-user delegated flows (authorization_code, OIDC sign-in) are not offered — grow.contact has no first-party end-user accounts to delegate.
 
 ## Agent registration
 

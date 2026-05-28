@@ -12,8 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as VsRouteImport } from './routes/vs'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
+import { Route as TrustRouteImport } from './routes/trust'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as StatusRouteImport } from './routes/status'
+import { Route as StatsRouteImport } from './routes/stats'
 import { Route as SopRouteImport } from './routes/sop'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
@@ -124,6 +126,11 @@ const UnsubscribeRoute = UnsubscribeRouteImport.update({
   path: '/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TrustRoute = TrustRouteImport.update({
+  id: '/trust',
+  path: '/trust',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -132,6 +139,11 @@ const TermsRoute = TermsRouteImport.update({
 const StatusRoute = StatusRouteImport.update({
   id: '/status',
   path: '/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatsRoute = StatsRouteImport.update({
+  id: '/stats',
+  path: '/stats',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SopRoute = SopRouteImport.update({
@@ -653,8 +665,10 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sop': typeof SopRoute
+  '/stats': typeof StatsRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
+  '/trust': typeof TrustRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
@@ -752,8 +766,10 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sop': typeof SopRoute
+  '/stats': typeof StatsRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
+  '/trust': typeof TrustRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
@@ -854,8 +870,10 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sop': typeof SopRoute
+  '/stats': typeof StatsRoute
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
+  '/trust': typeof TrustRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
@@ -957,8 +975,10 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/sop'
+    | '/stats'
     | '/status'
     | '/terms'
+    | '/trust'
     | '/unsubscribe'
     | '/vs'
     | '/work'
@@ -1056,8 +1076,10 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/sop'
+    | '/stats'
     | '/status'
     | '/terms'
+    | '/trust'
     | '/unsubscribe'
     | '/vs'
     | '/work'
@@ -1157,8 +1179,10 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/sop'
+    | '/stats'
     | '/status'
     | '/terms'
+    | '/trust'
     | '/unsubscribe'
     | '/vs'
     | '/work'
@@ -1259,8 +1283,10 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SopRoute: typeof SopRoute
+  StatsRoute: typeof StatsRoute
   StatusRoute: typeof StatusRoute
   TermsRoute: typeof TermsRoute
+  TrustRoute: typeof TrustRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
@@ -1333,6 +1359,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/trust': {
+      id: '/trust'
+      path: '/trust'
+      fullPath: '/trust'
+      preLoaderRoute: typeof TrustRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -1345,6 +1378,13 @@ declare module '@tanstack/react-router' {
       path: '/status'
       fullPath: '/status'
       preLoaderRoute: typeof StatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stats': {
+      id: '/stats'
+      path: '/stats'
+      fullPath: '/stats'
+      preLoaderRoute: typeof StatsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sop': {
@@ -2191,8 +2231,10 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SopRoute: SopRoute,
+  StatsRoute: StatsRoute,
   StatusRoute: StatusRoute,
   TermsRoute: TermsRoute,
+  TrustRoute: TrustRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,

@@ -56,6 +56,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/outreach", lastmod: today, changefreq: "monthly", priority: "0.6" },
           { path: "/glossary", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/crawlers", lastmod: today, changefreq: "monthly", priority: "0.8" },
+          { path: "/stats", lastmod: today, changefreq: "weekly", priority: "0.9" },
+          { path: "/trust", lastmod: today, changefreq: "monthly", priority: "0.8" },
           ...GLOSSARY.map<SitemapEntry>((t) => ({
             path: `/glossary/${t.slug}`,
             lastmod: today,

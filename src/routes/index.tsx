@@ -15,6 +15,8 @@ import { SocialProofStrip } from "@/components/SocialProofStrip";
 import { MiniChecker } from "@/components/MiniChecker";
 import { getFaqItemsFn, getPageContentFn } from "@/lib/site/content.functions";
 import { getOverviewStats } from "@/lib/check/stats.functions";
+import { ogImageMeta } from "@/lib/seo/og";
+
 
 
 const FAQS: { q: string; a: string }[] = [

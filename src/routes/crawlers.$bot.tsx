@@ -81,8 +81,9 @@ function CrawlerPage() {
     c.recommendation === "allow"
       ? `User-agent: ${c.robotsToken}\nAllow: /`
       : `User-agent: ${c.robotsToken}\nDisallow: /`;
+function CrawlerPage() {
+  const { crawler: c } = Route.useLoaderData() as { crawler: NonNullable<ReturnType<typeof getCrawler>> };
 
-  const related = CRAWLERS.filter(
     (x) => x.slug !== c.slug && x.operator === c.operator,
   ).slice(0, 4);
 
@@ -143,7 +144,8 @@ function CrawlerPage() {
               // Details
             </h2>
             <div className="space-y-4 text-base leading-relaxed">
-              {c.details.split("\n\n").map((p, i) => (
+              {c.details.split("\n\n").map((p: string, i: number) => (
+
                 <p key={i}>{p}</p>
               ))}
             </div>
@@ -154,7 +156,8 @@ function CrawlerPage() {
               // User-agent strings
             </h2>
             <ul className="space-y-2">
-              {c.userAgents.map((ua) => (
+              {c.userAgents.map((ua: string) => (
+
                 <li
                   key={ua}
                   className="font-mono text-xs bg-muted/40 border border-border p-3 break-all"
@@ -194,7 +197,8 @@ function CrawlerPage() {
                 // Official documentation
               </h2>
               <ul className="space-y-2">
-                {c.docs.map((d) => (
+                {c.docs.map((d: { label: string; url: string }) => (
+
                   <li key={d.url}>
                     <a
                       href={d.url}

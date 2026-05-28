@@ -79,9 +79,10 @@ export const Route = createFileRoute("/glossary/$term")({
 });
 
 function GlossaryTermPage() {
-  const { term } = Route.useLoaderData();
+function GlossaryTermPage() {
+  const { term } = Route.useLoaderData() as { term: NonNullable<ReturnType<typeof getGlossaryTerm>> };
   const related = (term.related ?? [])
-    .map((slug) => GLOSSARY.find((t) => t.slug === slug))
+    .map((slug: string) => GLOSSARY.find((t) => t.slug === slug))
     .filter((t): t is NonNullable<typeof t> => !!t);
 
   return (
@@ -107,7 +108,8 @@ function GlossaryTermPage() {
           </p>
 
           <div className="prose prose-invert max-w-none space-y-5 text-base leading-relaxed">
-            {term.long.split("\n\n").map((p, i) => (
+            {term.long.split("\n\n").map((p: string, i: number) => (
+
               <p key={i}>{p}</p>
             ))}
           </div>
@@ -118,7 +120,8 @@ function GlossaryTermPage() {
                 // Sources
               </h2>
               <ul className="space-y-2">
-                {term.sources.map((s) => (
+                {term.sources.map((s: { label: string; url: string }) => (
+
                   <li key={s.url}>
                     <a
                       href={s.url}
@@ -140,7 +143,8 @@ function GlossaryTermPage() {
                 // Related terms
               </h2>
               <ul className="grid sm:grid-cols-2 gap-3">
-                {related.map((r) => (
+                {related.map((r: NonNullable<ReturnType<typeof getGlossaryTerm>>) => (
+
                   <li key={r.slug}>
                     <Link
                       to="/glossary/$term"

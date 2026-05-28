@@ -1,0 +1,25 @@
+name: validate-og-meta
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/routes/**"
+      - "src/lib/seo/**"
+      - "scripts/validate-og-meta.mjs"
+  pull_request:
+    paths:
+      - "src/routes/**"
+      - "src/lib/seo/**"
+      - "scripts/validate-og-meta.mjs"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate per-route og:image / twitter:image meta
+        run: node scripts/validate-og-meta.mjs

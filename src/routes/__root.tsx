@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { CartProvider } from "@/lib/cart/CartContext";
 import { supabase } from "@/integrations/supabase/client";
 import { CookieConsent } from "@/components/CookieConsent";
+import { WebMcpProvider } from "@/components/WebMcpProvider";
 
 
 function NotFoundComponent() {

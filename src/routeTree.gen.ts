@@ -55,6 +55,7 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
+import { Route as ReportQ22026DotpdfRouteImport } from './routes/report.q2-2026[.]pdf'
 import { Route as ReportQ22026RouteImport } from './routes/report.q2-2026'
 import { Route as ReportPressRouteImport } from './routes/report.press'
 import { Route as ReportMethodologyRouteImport } from './routes/report.methodology'
@@ -350,6 +351,11 @@ const VerifyIdRoute = VerifyIdRouteImport.update({
 const ToolsRobotsCheckerRoute = ToolsRobotsCheckerRouteImport.update({
   id: '/tools/robots-checker',
   path: '/tools/robots-checker',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportQ22026DotpdfRoute = ReportQ22026DotpdfRouteImport.update({
+  id: '/report/q2-2026.pdf',
+  path: '/report/q2-2026.pdf',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReportQ22026Route = ReportQ22026RouteImport.update({
@@ -774,6 +780,7 @@ export interface FileRoutesByFullPath {
   '/report/methodology': typeof ReportMethodologyRoute
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
+  '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -886,6 +893,7 @@ export interface FileRoutesByTo {
   '/report/methodology': typeof ReportMethodologyRoute
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
+  '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -1001,6 +1009,7 @@ export interface FileRoutesById {
   '/report/methodology': typeof ReportMethodologyRoute
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
+  '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -1117,6 +1126,7 @@ export interface FileRouteTypes {
     | '/report/methodology'
     | '/report/press'
     | '/report/q2-2026'
+    | '/report/q2-2026.pdf'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1229,6 +1239,7 @@ export interface FileRouteTypes {
     | '/report/methodology'
     | '/report/press'
     | '/report/q2-2026'
+    | '/report/q2-2026.pdf'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1343,6 +1354,7 @@ export interface FileRouteTypes {
     | '/report/methodology'
     | '/report/press'
     | '/report/q2-2026'
+    | '/report/q2-2026.pdf'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1441,6 +1453,7 @@ export interface RootRouteChildren {
   ReportMethodologyRoute: typeof ReportMethodologyRoute
   ReportPressRoute: typeof ReportPressRoute
   ReportQ22026Route: typeof ReportQ22026Route
+  ReportQ22026DotpdfRoute: typeof ReportQ22026DotpdfRoute
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -1798,6 +1811,13 @@ declare module '@tanstack/react-router' {
       path: '/tools/robots-checker'
       fullPath: '/tools/robots-checker'
       preLoaderRoute: typeof ToolsRobotsCheckerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report/q2-2026.pdf': {
+      id: '/report/q2-2026.pdf'
+      path: '/report/q2-2026.pdf'
+      fullPath: '/report/q2-2026.pdf'
+      preLoaderRoute: typeof ReportQ22026DotpdfRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/report/q2-2026': {
@@ -2513,6 +2533,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReportMethodologyRoute: ReportMethodologyRoute,
   ReportPressRoute: ReportPressRoute,
   ReportQ22026Route: ReportQ22026Route,
+  ReportQ22026DotpdfRoute: ReportQ22026DotpdfRoute,
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,

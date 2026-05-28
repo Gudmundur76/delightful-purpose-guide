@@ -228,7 +228,7 @@ export const Route = createFileRoute("/report/q2-2026.pdf")({
       GET: async () => {
         try {
           const bytes = await buildPdf();
-          return new Response(bytes, {
+          return new Response(bytes as BodyInit, {
             status: 200,
             headers: {
               "Content-Type": "application/pdf",

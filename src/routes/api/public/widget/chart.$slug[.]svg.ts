@@ -170,7 +170,8 @@ export const Route = createFileRoute("/api/public/widget/chart/$slug.svg")({
           "Cache-Control": "public, max-age=3600, s-maxage=21600, stale-while-revalidate=86400",
           "Access-Control-Allow-Origin": "*",
         } as const;
-        const slug = ((params as Record<string, string>).slug ?? "").replace(/\.svg$/, "");
+        const raw = (params as Record<string, string>)["slug.svg"] ?? (params as Record<string, string>).slug ?? "";
+        const slug = raw.replace(/\.svg$/, "");
         const drop = getDataDrop(slug);
         if (!drop) {
           return new Response(errorSvg(`Unknown data drop: ${slug}`), { status: 404, headers });

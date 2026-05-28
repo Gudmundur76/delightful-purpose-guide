@@ -5,7 +5,7 @@ description: Paste-in recipe to score 90+/100 on the grow.contact /check agent-r
 
 # Grow GEO Recipe
 
-Drop-in recipe for the **Grow GEO Standard** (geo-standard@2026.05). Apply this on any new project to hit 90+/100 on all five `/check` dimensions: Semantic HTML, JSON-LD, llms.txt, Citability, Speed.
+Drop-in recipe for the **Grow GEO Standard** (geo-standard@2026.07). Apply this on any new project to hit 90+/100 on all six weighted `/check` dimensions — Semantic HTML, JSON-LD, llms.txt, Citability, Speed, Protocol — plus the optional Agent Auth bonus dimension.
 
 The full spec is in `references/geo-standard.md` — it's the contract. This skill is the **applier**: it tells you what to ship and gives you the files to copy.
 
@@ -59,18 +59,29 @@ Look at the project root:
 | llms.txt | Present at `/llms.txt`, lists public routes | Keep in sync with sitemap |
 | Citability | Title + description + ≥150 words substantive text per leaf | Front-load the answer, numbers/dates/entities |
 | Speed | First-byte < 800ms (sub-300ms = full 100) | Edge-cache HTML (step 7), no JS-only content |
+| Protocol | Link header + `/.well-known/mcp.json` + `Accept: text/markdown` support | Implement agent-native discovery surfaces |
+
+### Bonus — Agent Auth (optional, does not affect overall)
+
+| Sub-check | Points | How to pass |
+|---|---|---|
+| `/auth.md` present and valid | 25 | Ship `/auth.md` with human-readable auth metadata |
+| `/.well-known/oauth-protected-resource` | 25 | Valid RFC 9728 JSON with `resource`, `authorization_servers`, `scopes_supported` |
+| `/.well-known/oauth-authorization-server` `agent_auth` block | 30 | Include `register_uri`, `identity_types_supported`, `credential_types_supported` |
+| Link headers cross-referencing | 10 | `Link` header on `/auth.md` and both `/.well-known/` endpoints |
+| URI reachability | 10 | `register_uri` / `claim_uri` / `revocation_uri` all return 200 or 401 (not 404) |
 
 ## Stamping the build
 
 Add to `__root.tsx` head meta or footer copy:
 ```
-<meta name="generator" content="geo-standard@2026.05">
+<meta name="generator" content="geo-standard@2026.07">
 ```
 Old sites grandfather to their delivery-time version unless on a retainer.
 
 ## Files in this skill
 
-- `references/geo-standard.md` — full spec (geo-standard@2026.05)
+- `references/geo-standard.md` — full spec (geo-standard@2026.07)
 - `assets/robots.txt` — §4 matrix, drop-in for `public/`
 - `assets/llms.txt.example` — starter, rewrite for the project
 - `assets/tanstack/*` — TanStack Start templates (sitemap route, route head, root head, server cache snippet)

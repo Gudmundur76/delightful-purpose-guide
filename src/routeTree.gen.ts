@@ -38,6 +38,7 @@ import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as GlossaryRouteImport } from './routes/glossary'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ExtensionRouteImport } from './routes/extension'
 import { Route as DataDropsRouteImport } from './routes/data-drops'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CrawlersRouteImport } from './routes/crawlers'
@@ -273,6 +274,11 @@ const GlossaryRoute = GlossaryRouteImport.update({
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExtensionRoute = ExtensionRouteImport.update({
+  id: '/extension',
+  path: '/extension',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DataDropsRoute = DataDropsRouteImport.update({
@@ -766,6 +772,7 @@ export interface FileRoutesByFullPath {
   '/crawlers': typeof CrawlersRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
   '/data-drops': typeof DataDropsRouteWithChildren
+  '/extension': typeof ExtensionRoute
   '/faq': typeof FaqRoute
   '/glossary': typeof GlossaryRouteWithChildren
   '/integrations': typeof IntegrationsRoute
@@ -886,6 +893,7 @@ export interface FileRoutesByTo {
   '/cookies': typeof CookiesRoute
   '/crawlers': typeof CrawlersRouteWithChildren
   '/data-drops': typeof DataDropsRouteWithChildren
+  '/extension': typeof ExtensionRoute
   '/faq': typeof FaqRoute
   '/glossary': typeof GlossaryRouteWithChildren
   '/integrations': typeof IntegrationsRoute
@@ -1009,6 +1017,7 @@ export interface FileRoutesById {
   '/crawlers': typeof CrawlersRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
   '/data-drops': typeof DataDropsRouteWithChildren
+  '/extension': typeof ExtensionRoute
   '/faq': typeof FaqRoute
   '/glossary': typeof GlossaryRouteWithChildren
   '/integrations': typeof IntegrationsRoute
@@ -1133,6 +1142,7 @@ export interface FileRouteTypes {
     | '/crawlers'
     | '/dashboard'
     | '/data-drops'
+    | '/extension'
     | '/faq'
     | '/glossary'
     | '/integrations'
@@ -1253,6 +1263,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/crawlers'
     | '/data-drops'
+    | '/extension'
     | '/faq'
     | '/glossary'
     | '/integrations'
@@ -1375,6 +1386,7 @@ export interface FileRouteTypes {
     | '/crawlers'
     | '/dashboard'
     | '/data-drops'
+    | '/extension'
     | '/faq'
     | '/glossary'
     | '/integrations'
@@ -1498,6 +1510,7 @@ export interface RootRouteChildren {
   CrawlersRoute: typeof CrawlersRouteWithChildren
   DashboardRoute: typeof DashboardRouteWithChildren
   DataDropsRoute: typeof DataDropsRouteWithChildren
+  ExtensionRoute: typeof ExtensionRoute
   FaqRoute: typeof FaqRoute
   GlossaryRoute: typeof GlossaryRouteWithChildren
   IntegrationsRoute: typeof IntegrationsRoute
@@ -1784,6 +1797,13 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/extension': {
+      id: '/extension'
+      path: '/extension'
+      fullPath: '/extension'
+      preLoaderRoute: typeof ExtensionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/data-drops': {
@@ -2643,6 +2663,7 @@ const rootRouteChildren: RootRouteChildren = {
   CrawlersRoute: CrawlersRouteWithChildren,
   DashboardRoute: DashboardRouteWithChildren,
   DataDropsRoute: DataDropsRouteWithChildren,
+  ExtensionRoute: ExtensionRoute,
   FaqRoute: FaqRoute,
   GlossaryRoute: GlossaryRouteWithChildren,
   IntegrationsRoute: IntegrationsRoute,

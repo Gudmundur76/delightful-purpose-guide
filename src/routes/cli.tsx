@@ -134,7 +134,7 @@ grow check https://example.com`}</Code>
         <h2 className="mb-3 text-xl font-semibold">Why a CLI</h2>
         <ul className="list-inside list-disc space-y-2 text-muted-foreground">
           <li>Same six signals as the public scanner — no second rubric to learn.</li>
-          <li>Works in any CI runner with Node 18+. No browser, no Docker.</li>
+          <li>Same five signals as the public scanner — no second rubric to learn.</li>
           <li>MIT, zero deps, ~250 LOC. Audit it in a coffee break.</li>
           <li>When the score is low, a 48-hour fix is one click away at <Link to="/pricing" className="underline">/pricing</Link>.</li>
         </ul>

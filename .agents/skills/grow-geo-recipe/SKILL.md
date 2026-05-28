@@ -5,7 +5,7 @@ description: Paste-in recipe to score 90+/100 on the grow.contact /check agent-r
 
 # Grow GEO Recipe
 
-Drop-in recipe for the **Grow GEO Standard** (geo-standard@2026.05). Apply this on any new project to hit 90+/100 on all five `/check` dimensions: Semantic HTML, JSON-LD, llms.txt, Citability, Speed.
+Drop-in recipe for the **Grow GEO Standard** (geo-standard@2026.07). Apply this on any new project to hit 90+/100 on all six weighted `/check` dimensions — Semantic HTML, JSON-LD, llms.txt, Citability, Speed, Protocol — plus the optional Agent Auth bonus dimension.
 
 The full spec is in `references/geo-standard.md` — it's the contract. This skill is the **applier**: it tells you what to ship and gives you the files to copy.
 

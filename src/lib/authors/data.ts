@@ -23,7 +23,7 @@ export const AUTHORS: Author[] = [
     name: "Grow Research",
     role: "Research desk, grow.contact",
     shortBio:
-      "Grow Research is the data desk behind the Agent Readability Leaderboard. We continuously scan the top AI companies on five GEO signals (Semantic HTML, JSON-LD, llms.txt, Citability, Page Speed) and publish the underlying dataset under CC BY 4.0.",
+      "The data desk behind the Agent Readability Leaderboard. We scan top AI companies on five GEO signals and publish the dataset under CC BY 4.0.",
     bio:
       "Grow Research operates the only open, continuously-scored dataset of agent-readability across the AI industry. The desk publishes a quarterly State of the Agent-Readable Web report, monthly Data Drops, and a versioned methodology. All findings are reproducible from the public JSON dataset at /api/public/leaderboard.json.",
     knowsAbout: [

@@ -110,7 +110,8 @@ export function Services() {
                 {s.lang === "markdown" ? (
                   <div className="font-mono text-[11px] leading-relaxed text-foreground/80 space-y-3">
                     <h3 className="text-base font-extrabold tracking-tight text-foreground">
-                      {service.previewTitle}
+                      {s.previewTitle}
+
                     </h3>
 
                     <p className="text-accent italic border-l-2 border-accent/60 pl-2">

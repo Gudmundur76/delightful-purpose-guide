@@ -76,8 +76,7 @@ export const Route = createFileRoute("/crawlers/$bot")({
 });
 
 function CrawlerPage() {
-  const { crawler: c } = Route.useLoaderData();
-function CrawlerPage() {
+
   const { crawler: c } = Route.useLoaderData() as { crawler: NonNullable<ReturnType<typeof getCrawler>> };
   const robotsBlock =
     c.recommendation === "allow"

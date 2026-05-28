@@ -145,8 +145,22 @@ function LeaderboardPage() {
               >
                 Methodology →
               </Link>
+              <Link
+                to="/standard/$version"
+                params={{ version: "v1" }}
+                className="border border-border px-3 py-1.5 hover:border-accent hover:text-accent transition-colors uppercase tracking-widest"
+              >
+                Standard v1 →
+              </Link>
+              <Link
+                to="/badge"
+                className="border border-border px-3 py-1.5 hover:border-accent hover:text-accent transition-colors uppercase tracking-widest"
+              >
+                Embed badge →
+              </Link>
               <span className="uppercase tracking-widest">// CC BY 4.0 · re-scored weekly</span>
             </div>
+
           </div>
         </section>
 

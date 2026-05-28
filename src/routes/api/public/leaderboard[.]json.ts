@@ -30,12 +30,15 @@ export const Route = createFileRoute("/api/public/leaderboard.json")({
         const body = {
           generated_at: new Date().toISOString(),
           standard: "geo-standard@2026.05",
+          attribution: "grow.contact Agent Readability Leaderboard (CC BY 4.0)",
+          methodology_url: "https://grow.contact/leaderboard/methodology",
           methodology: {
             weights: { semantic: 25, jsonLd: 20, llmsTxt: 15, citability: 20, speed: 20 },
             scale: "0-100",
             notes:
               "Flagship rows are hand-scored; long-tail rows are deterministic estimates re-scored weekly by /api/public/hooks/rescan-leaderboard. Re-score any domain live at /check?u=<domain>.",
           },
+          headline_stats: computeHeadlineStats(),
           categories: CATEGORY_LABELS,
           counts: {
             total: LEADERBOARD.length,

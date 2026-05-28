@@ -4,7 +4,7 @@ import { z } from "zod";
 export const geoStandardTool = defineTool({
   name: "get_geo_standard",
   description:
-    "Returns the Grow GEO Standard (geo-standard@2026.05): the engineering contract every site must meet to be cited by AI engines. Use as build-time guidance when generating or auditing pages.",
+    "Returns the Grow GEO Standard (geo-standard@2026.07): the engineering contract every site must meet to be cited by AI engines. Use as build-time guidance when generating or auditing pages.",
   parameters: z.object({}),
   execute: async () => {
     return JSON.stringify(

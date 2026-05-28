@@ -88,11 +88,28 @@ function DataDropPage() {
 
         <header className="mb-8 pb-6 border-b border-border">
           <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">
-            // Data Drop · {drop.publishedAt} · {drop.category}
+            // Data Drop · {drop.publishedAt} · {drop.category} · By{" "}
+            <Link to="/about/author/$slug" params={{ slug: AUTHOR.slug }} className="hover:text-foreground underline-offset-2 hover:underline">
+              {AUTHOR.name}
+            </Link>
           </p>
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">{drop.title}</h1>
           <p className="text-lg text-muted-foreground leading-relaxed">{drop.headline}</p>
         </header>
+
+        <figure className="mb-8 border border-border bg-card">
+          <img
+            src={`/api/public/widget/chart/${drop.slug}.svg`}
+            alt={`Chart: ${drop.title}`}
+            width={720}
+            height={360}
+            className="w-full h-auto"
+            loading="lazy"
+          />
+          <figcaption className="px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground border-t border-border">
+            // Embeddable · CC BY 4.0 · Hotlink the SVG below
+          </figcaption>
+        </figure>
 
         {compute ? (
           <div className="mb-8 border border-accent/40 bg-accent/5 p-5 flex items-baseline justify-between gap-4 flex-wrap">
@@ -108,8 +125,6 @@ function DataDropPage() {
           {drop.body.map((p: string, i: number) => (
             <p key={i} className="text-base leading-relaxed">{p}</p>
           ))}
-
-
         </article>
 
         <section className="mb-10 border border-border bg-card p-6">

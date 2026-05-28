@@ -22,7 +22,7 @@ export const POSTS: BlogPost[] = [
     slug: "how-to-make-a-website-ai-readable",
     title: "How to Make a Website AI-Readable: A 2026 Step-by-Step",
     description:
-      "A practical, code-level walkthrough for making your site readable by ChatGPT, Perplexity, and Claude. Semantic HTML, JSON-LD, llms.txt, robots — in the order they matter.",
+      "Code-level walkthrough for making your site readable by ChatGPT, Perplexity, and Claude — semantic HTML, JSON-LD, llms.txt, robots, in order.",
     publishedAt: "2026-05-21",
     readingMinutes: 9,
     tags: ["ai readable website", "geo", "llm seo", "agent native"],

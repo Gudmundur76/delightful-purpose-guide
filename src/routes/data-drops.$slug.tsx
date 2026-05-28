@@ -140,7 +140,11 @@ function DataDropPage() {
             </div>
             <div>
               <p className="text-muted-foreground mb-1">Pull quote</p>
-              <p className="select-all bg-background border border-border p-3 not-italic">"{drop.cite.pull_quote}" — grow.contact</p>
+              <p className="select-all bg-background border border-border p-3 not-italic">"{drop.cite.pull_quote}" — {AUTHOR.name}, grow.contact</p>
+            </div>
+            <div>
+              <p className="text-muted-foreground mb-1">Embed the chart (HTML)</p>
+              <pre className="select-all bg-background border border-border p-3 overflow-x-auto whitespace-pre-wrap">{`<a href="https://grow.contact/data-drops/${drop.slug}"><img src="https://grow.contact/api/public/widget/chart/${drop.slug}.svg" alt="${drop.title.replace(/"/g, "'")}" width="720" height="360" /></a>`}</pre>
             </div>
           </div>
         </section>

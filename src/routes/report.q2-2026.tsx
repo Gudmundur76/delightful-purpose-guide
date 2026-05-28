@@ -108,7 +108,10 @@ function ReportPage() {
 
         <header className="mb-12 pb-8 border-b border-border">
           <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">
-            // Quarterly Report · Published {PUBLISHED}
+            // Quarterly Report · Published {PUBLISHED} · By{" "}
+            <Link to="/about/author/$slug" params={{ slug: AUTHOR.slug }} className="hover:text-foreground underline-offset-2 hover:underline">
+              {AUTHOR.name}
+            </Link>
           </p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
             State of the Agent-Readable Web
@@ -122,6 +125,13 @@ function ReportPage() {
             engines cite by name.
           </p>
           <div className="mt-6 flex flex-wrap gap-3 text-xs font-mono">
+            <a
+              href={PDF_URL}
+              className="border border-accent bg-accent/10 px-3 py-1.5 text-accent hover:bg-accent/20"
+              download
+            >
+              Download PDF →
+            </a>
             <Link to="/report/methodology" className="border border-border px-3 py-1.5 hover:border-accent">
               Methodology →
             </Link>

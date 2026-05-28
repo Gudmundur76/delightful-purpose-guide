@@ -49,6 +49,8 @@ export const Route = createFileRoute("/blog/$slug")({
       return { meta: [{ title: "Post not found — Grow" }] };
     }
     const { post } = loaderData;
+    const url = `https://grow.contact/blog/${post.slug}`;
+    const updatedAt = post.updatedAt ?? POSTS_REVIEWED_AT;
     return {
       meta: [
         { title: post.title.length > 53 ? post.title : `${post.title} — Grow` },
@@ -68,8 +70,6 @@ export const Route = createFileRoute("/blog/$slug")({
         }),
       ],
 
-        { property: "article:modified_time", content: updatedAt },
-      ],
       links: [{ rel: "canonical", href: url }],
 
       scripts: [

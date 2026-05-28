@@ -184,19 +184,23 @@ function agentAuthMetadata() {
     skill: AUTH_MD_URL,
     register_uri: AGENT_REGISTRATION_URL,
     claim_uri: AGENT_REGISTRATION_URL,
+    revocation_uri: AGENT_REGISTRATION_URL,
     identity_types_supported: ["anonymous"],
+    credential_types_supported: AGENT_CREDENTIAL_TYPES,
     anonymous: {
       credential_types_supported: AGENT_CREDENTIAL_TYPES,
       claim_uri: AGENT_REGISTRATION_URL,
+      revocation_uri: AGENT_REGISTRATION_URL,
     },
     registration_methods: [
       {
         type: "anonymous",
         register_uri: AGENT_REGISTRATION_URL,
         claim_uri: AGENT_REGISTRATION_URL,
+        revocation_uri: AGENT_REGISTRATION_URL,
         credential_types_supported: AGENT_CREDENTIAL_TYPES,
         description:
-          "Request an API key or MCP access token via the contact form. Credentials are issued out-of-band after review.",
+          "Request an API key or MCP access token via the contact form. Credentials are issued (and revoked) out-of-band after review.",
       },
     ],
   };

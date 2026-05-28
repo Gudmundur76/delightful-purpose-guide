@@ -63,7 +63,9 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
 import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as DotwellKnownOauthAuthorizationServerRouteImport } from './routes/[.]well-known.oauth-authorization-server'
 import { Route as DotwellKnownMcpDotjsonRouteImport } from './routes/[.]well-known.mcp[.]json'
+import { Route as DotwellKnownJwksDotjsonRouteImport } from './routes/[.]well-known.jwks[.]json'
 import { Route as DotwellKnownApiCatalogRouteImport } from './routes/[.]well-known.api-catalog'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ContentDraftsIdRouteImport } from './routes/content.drafts.$id'
@@ -90,6 +92,7 @@ import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/lea
 import { Route as ApiPublicV1DocsRouteImport } from './routes/api/public/v1/docs'
 import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/analyze'
 import { Route as ApiPublicStatsOverviewRouteImport } from './routes/api/public/stats/overview'
+import { Route as ApiPublicOauthTokenRouteImport } from './routes/api/public/oauth/token'
 import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/api/public/hooks/run-scheduled-scans'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
@@ -367,9 +370,20 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
   path: '/admin/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DotwellKnownOauthAuthorizationServerRoute =
+  DotwellKnownOauthAuthorizationServerRouteImport.update({
+    id: '/.well-known/oauth-authorization-server',
+    path: '/.well-known/oauth-authorization-server',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DotwellKnownMcpDotjsonRoute = DotwellKnownMcpDotjsonRouteImport.update({
   id: '/.well-known/mcp.json',
   path: '/.well-known/mcp.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DotwellKnownJwksDotjsonRoute = DotwellKnownJwksDotjsonRouteImport.update({
+  id: '/.well-known/jwks.json',
+  path: '/.well-known/jwks.json',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DotwellKnownApiCatalogRoute = DotwellKnownApiCatalogRouteImport.update({
@@ -512,6 +526,11 @@ const ApiPublicStatsOverviewRoute = ApiPublicStatsOverviewRouteImport.update({
   path: '/api/public/stats/overview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicOauthTokenRoute = ApiPublicOauthTokenRouteImport.update({
+  id: '/api/public/oauth/token',
+  path: '/api/public/oauth/token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicHooksRunScheduledScansRoute =
   ApiPublicHooksRunScheduledScansRouteImport.update({
     id: '/api/public/hooks/run-scheduled-scans',
@@ -569,7 +588,9 @@ export interface FileRoutesByFullPath {
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
+  '/.well-known/jwks.json': typeof DotwellKnownJwksDotjsonRoute
   '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
+  '/.well-known/oauth-authorization-server': typeof DotwellKnownOauthAuthorizationServerRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -603,6 +624,7 @@ export interface FileRoutesByFullPath {
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
+  '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
@@ -654,7 +676,9 @@ export interface FileRoutesByTo {
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
+  '/.well-known/jwks.json': typeof DotwellKnownJwksDotjsonRoute
   '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
+  '/.well-known/oauth-authorization-server': typeof DotwellKnownOauthAuthorizationServerRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -688,6 +712,7 @@ export interface FileRoutesByTo {
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
+  '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
@@ -742,7 +767,9 @@ export interface FileRoutesById {
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
+  '/.well-known/jwks.json': typeof DotwellKnownJwksDotjsonRoute
   '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
+  '/.well-known/oauth-authorization-server': typeof DotwellKnownOauthAuthorizationServerRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -776,6 +803,7 @@ export interface FileRoutesById {
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
+  '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
@@ -831,7 +859,9 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/.well-known/api-catalog'
+    | '/.well-known/jwks.json'
     | '/.well-known/mcp.json'
+    | '/.well-known/oauth-authorization-server'
     | '/admin/leads'
     | '/admin/reviews'
     | '/badge/{$id}.svg'
@@ -865,6 +895,7 @@ export interface FileRouteTypes {
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
+    | '/api/public/oauth/token'
     | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
     | '/api/public/v1/docs'
@@ -916,7 +947,9 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/.well-known/api-catalog'
+    | '/.well-known/jwks.json'
     | '/.well-known/mcp.json'
+    | '/.well-known/oauth-authorization-server'
     | '/admin/leads'
     | '/admin/reviews'
     | '/badge/{$id}.svg'
@@ -950,6 +983,7 @@ export interface FileRouteTypes {
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
+    | '/api/public/oauth/token'
     | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
     | '/api/public/v1/docs'
@@ -1003,7 +1037,9 @@ export interface FileRouteTypes {
     | '/vs'
     | '/work'
     | '/.well-known/api-catalog'
+    | '/.well-known/jwks.json'
     | '/.well-known/mcp.json'
+    | '/.well-known/oauth-authorization-server'
     | '/admin/leads'
     | '/admin/reviews'
     | '/badge/{$id}.svg'
@@ -1037,6 +1073,7 @@ export interface FileRouteTypes {
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
+    | '/api/public/oauth/token'
     | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
     | '/api/public/v1/docs'
@@ -1091,7 +1128,9 @@ export interface RootRouteChildren {
   VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
   DotwellKnownApiCatalogRoute: typeof DotwellKnownApiCatalogRoute
+  DotwellKnownJwksDotjsonRoute: typeof DotwellKnownJwksDotjsonRoute
   DotwellKnownMcpDotjsonRoute: typeof DotwellKnownMcpDotjsonRoute
+  DotwellKnownOauthAuthorizationServerRoute: typeof DotwellKnownOauthAuthorizationServerRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminReviewsRoute: typeof AdminReviewsRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -1110,6 +1149,7 @@ export interface RootRouteChildren {
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
   ApiPublicHooksRunScheduledScansRoute: typeof ApiPublicHooksRunScheduledScansRoute
+  ApiPublicOauthTokenRoute: typeof ApiPublicOauthTokenRoute
   ApiPublicStatsOverviewRoute: typeof ApiPublicStatsOverviewRoute
   ApiPublicV1AnalyzeRoute: typeof ApiPublicV1AnalyzeRoute
   ApiPublicV1DocsRoute: typeof ApiPublicV1DocsRoute
@@ -1509,11 +1549,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/oauth-authorization-server': {
+      id: '/.well-known/oauth-authorization-server'
+      path: '/.well-known/oauth-authorization-server'
+      fullPath: '/.well-known/oauth-authorization-server'
+      preLoaderRoute: typeof DotwellKnownOauthAuthorizationServerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.well-known/mcp.json': {
       id: '/.well-known/mcp.json'
       path: '/.well-known/mcp.json'
       fullPath: '/.well-known/mcp.json'
       preLoaderRoute: typeof DotwellKnownMcpDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/jwks.json': {
+      id: '/.well-known/jwks.json'
+      path: '/.well-known/jwks.json'
+      fullPath: '/.well-known/jwks.json'
+      preLoaderRoute: typeof DotwellKnownJwksDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.well-known/api-catalog': {
@@ -1698,6 +1752,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicStatsOverviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/oauth/token': {
+      id: '/api/public/oauth/token'
+      path: '/api/public/oauth/token'
+      fullPath: '/api/public/oauth/token'
+      preLoaderRoute: typeof ApiPublicOauthTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/run-scheduled-scans': {
       id: '/api/public/hooks/run-scheduled-scans'
       path: '/api/public/hooks/run-scheduled-scans'
@@ -1867,7 +1928,10 @@ const rootRouteChildren: RootRouteChildren = {
   VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,
   DotwellKnownApiCatalogRoute: DotwellKnownApiCatalogRoute,
+  DotwellKnownJwksDotjsonRoute: DotwellKnownJwksDotjsonRoute,
   DotwellKnownMcpDotjsonRoute: DotwellKnownMcpDotjsonRoute,
+  DotwellKnownOauthAuthorizationServerRoute:
+    DotwellKnownOauthAuthorizationServerRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminReviewsRoute: AdminReviewsRoute,
   BlogSlugRoute: BlogSlugRoute,
@@ -1889,6 +1953,7 @@ const rootRouteChildren: RootRouteChildren = {
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
   ApiPublicHooksRunScheduledScansRoute: ApiPublicHooksRunScheduledScansRoute,
+  ApiPublicOauthTokenRoute: ApiPublicOauthTokenRoute,
   ApiPublicStatsOverviewRoute: ApiPublicStatsOverviewRoute,
   ApiPublicV1AnalyzeRoute: ApiPublicV1AnalyzeRoute,
   ApiPublicV1DocsRoute: ApiPublicV1DocsRoute,
@@ -1910,13 +1975,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

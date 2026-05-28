@@ -514,11 +514,20 @@ export const scanUrl = createServerFn({ method: "POST" })
         summary: "MCP card, Link header, markdown negotiation, and Content Signals make a site agent-native, not just AI-friendly.",
         details: protocolDetails,
       },
+      {
+        key: "agent_auth",
+        label: "Agent Auth (bonus)",
+        score: agentAuthScore,
+        status: statusFor(agentAuthScore),
+        summary: "auth.md + OAuth discovery let agents self-register without a human in the loop. Mirrors isitagentready.com checks. Bonus dimension — not weighted into overall.",
+        details: agentAuthDetails,
+      },
     ];
 
-    // Weighted overall — geo-standard@2026.06 rubric.
+    // Weighted overall — geo-standard@2026.07 rubric. Agent Auth is a bonus
+    // dimension and is intentionally excluded from the weighted overall.
     // semantic 20 · jsonld 20 · llms 15 · citability 15 · speed 15 · protocol 15
-    const weights: Record<ScanMetricKey, number> = {
+    const weights: Record<Exclude<ScanMetricKey, "agent_auth">, number> = {
       semantic: 0.2,
       jsonld: 0.2,
       llms: 0.15,
@@ -526,7 +535,11 @@ export const scanUrl = createServerFn({ method: "POST" })
       speed: 0.15,
       protocol: 0.15,
     };
-    const overall = clamp(metrics.reduce((s, m) => s + m.score * weights[m.key], 0));
+    const overall = clamp(
+      metrics
+        .filter((m): m is ScanMetric & { key: Exclude<ScanMetricKey, "agent_auth"> } => m.key !== "agent_auth")
+        .reduce((s, m) => s + m.score * weights[m.key], 0),
+    );
     log.push(`→ done · agent_readability_score = ${overall}`);
 
     // Persist to history (fire-and-forget — never fail the user-facing scan).

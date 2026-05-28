@@ -19,15 +19,13 @@ export const Route = createFileRoute("/leaderboard")({
   validateSearch: searchSchema,
   component: LeaderboardPage,
   head: () => {
-    const top = getLeaderboard().slice(0, 5).map((e) => e.name).join(", ");
     return {
       meta: [
         { title: `Agent Readability Leaderboard — ${LEADERBOARD.length} AI Sites | Grow` },
         {
           name: "description",
           content:
-            `Public benchmark ranking ${LEADERBOARD.length} AI companies across infra, models, agents, and dev tools on how well ChatGPT, Perplexity, and Claude can read and cite their sites. Top 5: ` +
-            top + ".",
+            `Public benchmark ranking ${LEADERBOARD.length} AI companies on how well ChatGPT, Perplexity, and Claude read and cite their sites.`,
         },
         { property: "og:title", content: `Agent Readability Leaderboard — ${LEADERBOARD.length} AI Sites` },
         {
@@ -136,7 +134,8 @@ function LeaderboardPage() {
         </section>
 
         {/* Filter tabs */}
-        <section className="border-b border-border bg-card/40 sticky top-0 z-10 backdrop-blur">
+        <section aria-labelledby="leaderboard-filter-heading" className="border-b border-border bg-card/40 sticky top-0 z-10 backdrop-blur">
+          <h2 id="leaderboard-filter-heading" className="sr-only">Filter leaderboard by category</h2>
           <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center gap-2">
             <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mr-2">
               // Filter:
@@ -156,8 +155,9 @@ function LeaderboardPage() {
         </section>
 
         {/* Table */}
-        <section>
+        <section aria-labelledby="leaderboard-ranking-heading">
           <div className="max-w-7xl mx-auto px-6 py-12 md:py-20">
+            <h2 id="leaderboard-ranking-heading" className="sr-only">Ranked AI sites by agent readability score</h2>
             <div className="border border-border bg-card overflow-hidden">
               <div className="hidden md:grid grid-cols-12 gap-4 px-5 py-3 border-b border-border bg-muted/30 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                 <div className="col-span-1">Rank</div>

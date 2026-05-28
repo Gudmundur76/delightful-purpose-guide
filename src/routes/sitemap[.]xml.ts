@@ -48,20 +48,24 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/status", lastmod: today, changefreq: "weekly", priority: "0.4" },
           { path: "/llms", lastmod: today, changefreq: "monthly", priority: "0.4" },
           { path: "/unsubscribe", lastmod: today, changefreq: "yearly", priority: "0.3" },
-          { path: "/blog", lastmod: today, changefreq: "weekly", priority: "0.9" },
           { path: "/rss.xml", lastmod: today, changefreq: "weekly", priority: "0.5" },
           { path: "/leaderboard", lastmod: today, changefreq: "weekly", priority: "0.9" },
           { path: "/vs", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/playbook", lastmod: today, changefreq: "monthly", priority: "0.8" },
-          { path: "/guide/generative-engine-optimization", lastmod: today, changefreq: "monthly", priority: "0.9" },
-          { path: "/api/public/stats/overview", lastmod: today, changefreq: "hourly", priority: "0.5" },
           { path: "/outreach", lastmod: today, changefreq: "monthly", priority: "0.6" },
-          ...getAllComparisons().map<SitemapEntry>((c) => ({
-            path: `/vs/${c.slug}`,
-            lastmod: today,
-            changefreq: "monthly",
-            priority: "0.8",
-          })),
+          { path: "/sop", lastmod: today, changefreq: "monthly", priority: "0.5" },
+          { path: "/auth.md", lastmod: today, changefreq: "monthly", priority: "0.3" },
+          { path: "/llms-full.txt", lastmod: today, changefreq: "weekly", priority: "0.4" },
+          { path: "/.well-known/api-catalog", lastmod: today, changefreq: "monthly", priority: "0.3" },
+          { path: "/.well-known/http-message-signatures-directory", lastmod: today, changefreq: "monthly", priority: "0.3" },
+          ...getAllComparisons()
+            .filter((c) => c.slug !== "webflow" && c.slug !== "framer")
+            .map<SitemapEntry>((c) => ({
+              path: `/vs/${c.slug}`,
+              lastmod: today,
+              changefreq: "monthly",
+              priority: "0.8",
+            })),
           ...posts.map<SitemapEntry>((p) => ({
             path: `/blog/${p.slug}`,
             lastmod: p.publishedAt,

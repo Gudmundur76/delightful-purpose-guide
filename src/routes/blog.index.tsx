@@ -104,10 +104,11 @@ function BlogIndex() {
         </div>
       </section>
 
-      <section>
+      <section aria-labelledby="blog-posts-heading">
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid lg:grid-cols-12 gap-12">
           {/* Cards */}
           <div className="lg:col-span-8 grid gap-6">
+            <h2 id="blog-posts-heading" className="sr-only">Latest articles</h2>
             {posts.map((post) => (
               <PostCard key={post.slug} post={post} />
             ))}
@@ -192,11 +193,16 @@ function BlogIndex() {
                 fluff, no sponsors.
               </p>
               <div className="flex flex-col gap-2">
+                <label htmlFor="newsletter-email" className="sr-only">
+                  Email address
+                </label>
                 <input
+                  id="newsletter-email"
                   type="email"
                   name="email"
                   required
                   placeholder="you@startup.com"
+                  aria-label="Email address"
                   className="bg-card border border-border px-3 py-2 text-sm font-mono focus:outline-none focus:border-accent transition-colors"
                 />
                 <button

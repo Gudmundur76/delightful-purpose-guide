@@ -17,12 +17,17 @@ export function MiniChecker() {
   return (
     <form onSubmit={handleSubmit} className="mt-8 max-w-md">
       <div className="flex flex-col sm:flex-row gap-2">
+        <label htmlFor="mini-checker-url" className="sr-only">
+          Website URL to scan
+        </label>
         <input
+          id="mini-checker-url"
           type="text"
           inputMode="url"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="https://yoursite.com"
+          aria-label="Website URL to scan"
           required
           className="flex-1 rounded-md border border-border bg-card px-4 py-3 font-mono text-sm outline-none focus:border-accent transition-colors"
         />

@@ -29,6 +29,25 @@ export const Route = createFileRoute("/blog/")({
         href: "https://grow.contact/blog/rss.xml",
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          name: "Grow — Journal",
+          url: "https://grow.contact/blog",
+          description:
+            "Field notes on shipping agent-native websites: structured data, llms.txt, and design that gets cited by LLMs.",
+          blogPost: getAllPosts().map((p) => ({
+            "@type": "BlogPosting",
+            headline: p.title,
+            url: `https://grow.contact/blog/${p.slug}`,
+            datePublished: p.publishedAt,
+          })),
+        }),
+      },
+    ],
   }),
 });
 

@@ -6,12 +6,16 @@ export interface BlogPost {
   title: string;
   description: string; // used as meta description + listing excerpt
   publishedAt: string; // ISO date
+  updatedAt?: string; // ISO date — falls back to publishedAt if absent
   readingMinutes: number;
   tags: string[];
   // Body is plain HTML-ish JSX. Keep it simple — paragraphs as strings, with
   // optional headings prefixed by "## " and lists prefixed by "- ".
   body: string;
 }
+
+// Bumped whenever the long-form library is reviewed for accuracy.
+export const POSTS_REVIEWED_AT = "2026-05-28";
 
 export const POSTS: BlogPost[] = [
   {

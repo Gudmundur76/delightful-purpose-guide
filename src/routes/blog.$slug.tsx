@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getPost, getAllPosts } from "@/lib/blog/posts";
+import { getPost, getAllPosts, POSTS_REVIEWED_AT } from "@/lib/blog/posts";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
@@ -48,6 +48,7 @@ export const Route = createFileRoute("/blog/$slug")({
     }
     const { post } = loaderData;
     const url = `https://grow.contact/blog/${post.slug}`;
+    const updatedAt = post.updatedAt ?? POSTS_REVIEWED_AT;
     return {
       meta: [
         { title: post.title.length > 55 ? post.title : `${post.title} — Grow` },
@@ -57,6 +58,7 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:url", content: url },
         { property: "og:type", content: "article" },
         { property: "article:published_time", content: post.publishedAt },
+        { property: "article:modified_time", content: updatedAt },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [
@@ -68,7 +70,7 @@ export const Route = createFileRoute("/blog/$slug")({
             headline: post.title,
             description: post.description,
             datePublished: post.publishedAt,
-            dateModified: post.publishedAt,
+            dateModified: updatedAt,
             author: { "@type": "Person", name: "Grow Editorial", url: "https://grow.contact/" },
             publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
             mainEntityOfPage: url,
@@ -161,7 +163,7 @@ function PostPage() {
             <h1 className="mt-8 text-4xl md:text-6xl font-extrabold tracking-tighter uppercase leading-[0.95]">
               {post.title}
             </h1>
-            <div className="mt-8 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            <div className="mt-8 font-mono text-xs uppercase tracking-widest text-muted-foreground flex flex-wrap gap-x-3 gap-y-1 items-center">
               <time dateTime={post.publishedAt}>
                 {new Date(post.publishedAt).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -169,8 +171,19 @@ function PostPage() {
                   day: "numeric",
                 })}
               </time>
-              <span className="mx-2">·</span>
+              <span>·</span>
               <span>{post.readingMinutes} min read</span>
+              <span>·</span>
+              <span>
+                Last updated{" "}
+                <time dateTime={post.updatedAt ?? POSTS_REVIEWED_AT}>
+                  {new Date(post.updatedAt ?? POSTS_REVIEWED_AT).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+              </span>
             </div>
           </div>
         </header>

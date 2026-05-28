@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
+const PLAYBOOK_PUBLISHED_AT = "2026-05-21";
+const PLAYBOOK_UPDATED_AT = "2026-05-28";
+
 export const Route = createFileRoute("/playbook")({
   head: () => ({
     meta: [
@@ -16,6 +19,8 @@ export const Route = createFileRoute("/playbook")({
       },
       { property: "og:url", content: "https://grow.contact/playbook" },
       { property: "og:type", content: "article" },
+      { property: "article:published_time", content: PLAYBOOK_PUBLISHED_AT },
+      { property: "article:modified_time", content: PLAYBOOK_UPDATED_AT },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/playbook" }],
     scripts: [
@@ -25,9 +30,11 @@ export const Route = createFileRoute("/playbook")({
           "@context": "https://schema.org",
           "@type": "Article",
           headline: "The 12-Week Agent-Native SEO Playbook",
-          author: { "@type": "Organization", name: "Grow" },
-          publisher: { "@type": "Organization", name: "Grow" },
-          datePublished: "2026-05-21",
+          author: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
+          publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
+          datePublished: PLAYBOOK_PUBLISHED_AT,
+          dateModified: PLAYBOOK_UPDATED_AT,
+          mainEntityOfPage: "https://grow.contact/playbook",
           description:
             "12-week content calendar for AI startups targeting LLM citation.",
         }),
@@ -193,6 +200,29 @@ function PlaybookPage() {
             week, one channel push, one keyword — sequenced for compounding citation in ChatGPT,
             Perplexity, and Claude.
           </p>
+          <div className="mt-6 font-mono text-xs uppercase tracking-widest text-muted-foreground flex flex-wrap gap-x-3 gap-y-1">
+            <span>
+              Published{" "}
+              <time dateTime={PLAYBOOK_PUBLISHED_AT}>
+                {new Date(PLAYBOOK_PUBLISHED_AT).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+            </span>
+            <span>·</span>
+            <span>
+              Last updated{" "}
+              <time dateTime={PLAYBOOK_UPDATED_AT}>
+                {new Date(PLAYBOOK_UPDATED_AT).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+            </span>
+          </div>
         </div>
 
         <div className="rounded-xl border border-border bg-card overflow-hidden mb-12">

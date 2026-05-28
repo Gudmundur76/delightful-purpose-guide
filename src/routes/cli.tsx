@@ -14,7 +14,7 @@ export const Route = createFileRoute("/cli")({
       {
         property: "og:description",
         content:
-          "npx @grow-contact/cli check <url> — Lighthouse for AI agents. 6 signals, 0–100, CI-ready.",
+          "npx @grow-contact/cli check <url> — Lighthouse for AI agents. 5 signals, 0–100, CI-ready.",
       },
       { property: "og:url", content: "https://grow.contact/cli" },
       { property: "og:type", content: "website" },
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/cli")({
           applicationCategory: "DeveloperApplication",
           operatingSystem: "Linux, macOS, Windows",
           description:
-            "Command-line scanner that scores any URL against the Grow GEO Standard (6 signals, 0–100) for AI agent readability.",
+            "Command-line scanner that scores any URL against the Grow GEO Standard (5 signals, 0–100) for AI agent readability.",
           url: "https://grow.contact/cli",
           softwareVersion: "0.1.0",
           downloadUrl: "https://www.npmjs.com/package/@grow-contact/cli",
@@ -69,7 +69,7 @@ function CliPage() {
         </h1>
         <p className="text-lg text-muted-foreground">
           A zero-dependency Node CLI that scores any URL against the Grow GEO Standard —
-          the same six signals as the public scanner at{" "}
+          the same five signals as the public scanner at{" "}
           <Link to="/check" className="underline">/check</Link>. Pipe it into CI, gate
           deploys on agent readability, ship with confidence.
         </p>
@@ -90,8 +90,7 @@ function CliPage() {
   ● llms txt              80 · /llms.txt found, missing 2 routes
   ● citability            85 · First 60 words answer the page's implicit question
   ● speed                 92 · TTFB 180ms, HTML 240KB
-  ● protocol discovery    78 · No Link header advertising llms.txt
-      ↳ Add: Link: </llms.txt>; rel="llms"`}</Code>
+      ↳ Tip: Add a Link: </llms.txt>; rel="llms" header for faster discovery`}</Code>
       </section>
 
       <section className="mb-12">
@@ -135,7 +134,7 @@ grow check https://example.com`}</Code>
         <h2 className="mb-3 text-xl font-semibold">Why a CLI</h2>
         <ul className="list-inside list-disc space-y-2 text-muted-foreground">
           <li>Same six signals as the public scanner — no second rubric to learn.</li>
-          <li>Works in any CI runner with Node 18+. No browser, no Docker.</li>
+          <li>Same five signals as the public scanner — no second rubric to learn.</li>
           <li>MIT, zero deps, ~250 LOC. Audit it in a coffee break.</li>
           <li>When the score is low, a 48-hour fix is one click away at <Link to="/pricing" className="underline">/pricing</Link>.</li>
         </ul>

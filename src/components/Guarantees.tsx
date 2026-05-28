@@ -9,9 +9,9 @@ type Promise = {
 
 const PROMISES: Promise[] = [
   {
-    title: "Agent Score 80+",
+    title: "Agent Score 100/100",
     detail:
-      "If your delivered site scores below 80 on our Agent Readability Checker, we fix it free — until it passes.",
+      "Every site we ship scores 100/100 on the grow.contact /check scanner at delivery. If it doesn't, you don't pay.",
     proofLabel: "Run the checker",
     proofHref: "/check",
   },

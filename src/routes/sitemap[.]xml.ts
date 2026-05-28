@@ -7,6 +7,7 @@ import { CRAWLERS } from "@/lib/crawlers/data";
 import { PLAYBOOKS } from "@/lib/playbooks/data";
 import { getFeaturedPairsWithEntries } from "@/lib/compare/data";
 import { getAllDataDrops } from "@/lib/data-drops/data";
+import { LEADERBOARD } from "@/lib/leaderboard/entries";
 
 
 
@@ -124,7 +125,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/.well-known/jwks.json", lastmod: today, changefreq: "monthly", priority: "0.3" },
           { path: "/.well-known/mcp.json", lastmod: today, changefreq: "monthly", priority: "0.3" },
           { path: "/.well-known/oauth-authorization-server", lastmod: today, changefreq: "monthly", priority: "0.3" },
-          { path: "/.well-known/oauth-protected-resource", lastmod: today, changefreq: "monthly", priority: "0.3" },
           ...getAllComparisons()
             .filter((c) => c.slug !== "webflow" && c.slug !== "framer")
             .map<SitemapEntry>((c) => ({
@@ -138,6 +138,12 @@ export const Route = createFileRoute("/sitemap.xml")({
             lastmod: p.publishedAt,
             changefreq: "monthly",
             priority: "0.7",
+          })),
+          ...LEADERBOARD.map<SitemapEntry>((e) => ({
+            path: `/verify/${e.domain}`,
+            lastmod: today,
+            changefreq: "weekly",
+            priority: "0.6",
           })),
         ];
 

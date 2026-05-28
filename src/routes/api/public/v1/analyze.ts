@@ -21,6 +21,7 @@ const SIGNAL_WEIGHTS: Record<ScanMetricKey, number> = {
   citability: 15,
   speed: 15,
   protocol: 15,
+  agent_auth: 0, // bonus dimension — surfaced but excluded from overall score
 };
 
 const SIGNAL_KEY_MAP: Record<ScanMetricKey, string> = {
@@ -30,6 +31,7 @@ const SIGNAL_KEY_MAP: Record<ScanMetricKey, string> = {
   citability: "citability",
   speed: "speed",
   protocol: "protocol_discovery",
+  agent_auth: "agent_auth",
 };
 
 function gradeFor(score: number): "A" | "B" | "C" | "D" | "F" {

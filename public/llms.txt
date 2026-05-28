@@ -15,6 +15,9 @@ grow.contact is not affiliated with grow.com (a B2B sales platform). This is gro
 - [Leaderboard methodology](https://grow.contact/leaderboard/methodology): Scoring weights, pass thresholds, refresh cadence, dataset license (CC BY 4.0), and citable headline statistics.
 - [Leaderboard JSON API](https://grow.contact/api/public/leaderboard.json): Full dataset as JSON. CORS-open, CC BY 4.0. Includes headline_stats with quotable percentages for journalists and analysts.
 - [Journal](https://grow.contact/blog): GEO guides, agent-native web patterns, and AI citation research.
+- [GEO Glossary](https://grow.contact/glossary): Canonical definitions for the terms shaping agent-native web — llms.txt, MCP, JSON-LD, OAI-SearchBot, Information Gain, Citability, and more. DefinedTerm JSON-LD on every entry.
+- [AI Crawler Reference](https://grow.contact/crawlers): Per-bot reference for every major AI crawler (OAI-SearchBot, PerplexityBot, ClaudeBot, GPTBot, Google-Extended, bingbot, FacebookBot). User-agents, IP ranges, robots.txt recommendations, and citation impact.
+
 
 ## Tools
 

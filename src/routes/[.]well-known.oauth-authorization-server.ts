@@ -24,7 +24,7 @@ const metadata = {
   mcp_server_metadata: `${ISSUER}/.well-known/mcp.json`,
   // Auth.md agent-registration discovery
   agent_auth: {
-    skill: "https://isitagentready.com/.well-known/agent-skills/auth-md/SKILL.md",
+    skill: `${ISSUER}/auth.md`,
     register_uri: `${ISSUER}/contact`,
     identity_types_supported: ["anonymous"],
     anonymous: {

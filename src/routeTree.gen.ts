@@ -47,6 +47,7 @@ import { Route as ContentIndexRouteImport } from './routes/content.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
+import { Route as LeaderboardMethodologyRouteImport } from './routes/leaderboard.methodology'
 import { Route as HistoryHostRouteImport } from './routes/history.$host'
 import { Route as GuideGenerativeEngineOptimizationRouteImport } from './routes/guide.generative-engine-optimization'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
@@ -293,6 +294,11 @@ const VerifyIdRoute = VerifyIdRouteImport.update({
   id: '/verify/$id',
   path: '/verify/$id',
   getParentRoute: () => rootRouteImport,
+} as any)
+const LeaderboardMethodologyRoute = LeaderboardMethodologyRouteImport.update({
+  id: '/methodology',
+  path: '/methodology',
+  getParentRoute: () => LeaderboardRoute,
 } as any)
 const HistoryHostRoute = HistoryHostRouteImport.update({
   id: '/history/$host',
@@ -606,7 +612,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRouteWithChildren
   '/faq': typeof FaqRoute
   '/integrations': typeof IntegrationsRoute
-  '/leaderboard': typeof LeaderboardRoute
+  '/leaderboard': typeof LeaderboardRouteWithChildren
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
@@ -650,6 +656,7 @@ export interface FileRoutesByFullPath {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
+  '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
@@ -700,7 +707,7 @@ export interface FileRoutesByTo {
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
   '/integrations': typeof IntegrationsRoute
-  '/leaderboard': typeof LeaderboardRoute
+  '/leaderboard': typeof LeaderboardRouteWithChildren
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
@@ -744,6 +751,7 @@ export interface FileRoutesByTo {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
+  '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog': typeof BlogIndexRoute
@@ -797,7 +805,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRouteWithChildren
   '/faq': typeof FaqRoute
   '/integrations': typeof IntegrationsRoute
-  '/leaderboard': typeof LeaderboardRoute
+  '/leaderboard': typeof LeaderboardRouteWithChildren
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
@@ -841,6 +849,7 @@ export interface FileRoutesById {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
+  '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
@@ -939,6 +948,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/guide/generative-engine-optimization'
     | '/history/$host'
+    | '/leaderboard/methodology'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
@@ -1033,6 +1043,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/guide/generative-engine-optimization'
     | '/history/$host'
+    | '/leaderboard/methodology'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog'
@@ -1129,6 +1140,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/guide/generative-engine-optimization'
     | '/history/$host'
+    | '/leaderboard/methodology'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
@@ -1182,7 +1194,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRouteWithChildren
   FaqRoute: typeof FaqRoute
   IntegrationsRoute: typeof IntegrationsRoute
-  LeaderboardRoute: typeof LeaderboardRoute
+  LeaderboardRoute: typeof LeaderboardRouteWithChildren
   LlmsRoute: typeof LlmsRoute
   LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
   LoginRoute: typeof LoginRoute
@@ -1515,6 +1527,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/verify/$id'
       preLoaderRoute: typeof VerifyIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/leaderboard/methodology': {
+      id: '/leaderboard/methodology'
+      path: '/methodology'
+      fullPath: '/leaderboard/methodology'
+      preLoaderRoute: typeof LeaderboardMethodologyRouteImport
+      parentRoute: typeof LeaderboardRoute
     }
     '/history/$host': {
       id: '/history/$host'
@@ -1994,6 +2013,18 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface LeaderboardRouteChildren {
+  LeaderboardMethodologyRoute: typeof LeaderboardMethodologyRoute
+}
+
+const LeaderboardRouteChildren: LeaderboardRouteChildren = {
+  LeaderboardMethodologyRoute: LeaderboardMethodologyRoute,
+}
+
+const LeaderboardRouteWithChildren = LeaderboardRoute._addFileChildren(
+  LeaderboardRouteChildren,
+)
+
 interface VsRouteChildren {
   VsCompetitorRoute: typeof VsCompetitorRoute
 }
@@ -2041,7 +2072,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRouteWithChildren,
   FaqRoute: FaqRoute,
   IntegrationsRoute: IntegrationsRoute,
-  LeaderboardRoute: LeaderboardRoute,
+  LeaderboardRoute: LeaderboardRouteWithChildren,
   LlmsRoute: LlmsRoute,
   LlmsFullDottxtRoute: LlmsFullDottxtRoute,
   LoginRoute: LoginRoute,

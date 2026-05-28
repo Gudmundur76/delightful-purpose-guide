@@ -7,12 +7,20 @@ import {
   type LeaderboardCategory,
   getLeaderboard,
 } from "@/lib/leaderboard/entries";
+import {
+  computeHeadlineStats,
+  failsSignal,
+  SIGNAL_LABEL,
+  type SignalKey,
+} from "@/lib/leaderboard/stats";
 import { z } from "zod";
 
 const CATEGORIES: LeaderboardCategory[] = ["infra", "models", "agents", "devtools"];
+const SIGNAL_KEYS: SignalKey[] = ["semantic", "jsonLd", "llmsTxt", "citability", "speed"];
 
 const searchSchema = z.object({
   cat: z.enum(["all", "infra", "models", "agents", "devtools"]).catch("all"),
+  fail: z.enum(["none", "semantic", "jsonLd", "llmsTxt", "citability", "speed"]).catch("none"),
 });
 
 export const Route = createFileRoute("/leaderboard")({

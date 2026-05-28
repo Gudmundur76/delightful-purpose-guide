@@ -158,6 +158,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
+      {
+        rel: "alternate",
+        type: "application/rss+xml",
+        title: "grow.contact — Journal",
+        href: "https://grow.contact/rss.xml",
+      },
     ],
     scripts: [
       {

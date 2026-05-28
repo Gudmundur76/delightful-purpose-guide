@@ -109,17 +109,24 @@ export default {
       //    Also attach the agent-protocol Link header on every HTML response.
       const ct = normalized.headers.get("content-type") ?? "";
       const isHtml = ct.includes("text/html");
-      const shouldOverrideHomepageCache =
+      // Edge-cache HTML on every public GET so AI crawlers and repeat
+      // visitors get sub-200ms TTFB instead of paying SSR on every hit.
+      const shouldOverrideCache =
         request.method === "GET" &&
         normalized.status === 200 &&
-        url.pathname === "/" &&
-        isHtml;
+        isHtml &&
+        !url.pathname.startsWith("/dashboard") &&
+        !url.pathname.startsWith("/admin") &&
+        !url.pathname.startsWith("/checkout") &&
+        !url.pathname.startsWith("/content") &&
+        !url.pathname.startsWith("/login") &&
+        !url.pathname.startsWith("/api/");
 
-      if (isHtml || shouldOverrideHomepageCache) {
+      if (isHtml) {
         const headers = new Headers(normalized.headers);
         // Advertise discovery surfaces (llms.txt, OpenAPI, MCP) on every page.
         if (!headers.has("link")) headers.set("link", buildLinkHeader());
-        if (shouldOverrideHomepageCache) {
+        if (shouldOverrideCache) {
           headers.set(
             "cache-control",
             "public, max-age=0, s-maxage=300, stale-while-revalidate=600",

@@ -12,18 +12,25 @@ grow.contact is not affiliated with grow.com (a B2B sales platform). This is gro
 - [Work](https://grow.contact/work): Client case studies with before/after agent-readability scores.
 - [Pricing](https://grow.contact/pricing): Fixed pricing — Starter $2,400 (1 page, 48 hours), Growth $4,800 (up to 5 pages).
 - [Leaderboard](https://grow.contact/leaderboard): AI-readability scores for 30 live AI company websites.
-- [Journal](https://grow.contact/journal): GEO guides, agent-native web patterns, and AI citation research.
+- [Journal](https://grow.contact/blog): GEO guides, agent-native web patterns, and AI citation research.
 
 ## Tools
 
 - [Agent Readability Check](https://grow.contact/check): Free URL scanner. Scores any site across Semantic HTML, JSON-LD, llms.txt, Citability, Page Speed, and Protocol Discovery. No signup required.
 - [grow CLI](https://grow.contact/cli): Zero-dep Node CLI (`npx @grow-contact/cli check <url>`). Same six-signal score as the web scanner, CI-friendly `--fail-under` flag. MIT licensed.
 
-## Technical
+## Full Content
 
 - [llms-full.txt](https://grow.contact/llms-full.txt): Full site content in markdown for agents requiring complete context.
+
+## Feeds
+
+- [RSS feed](https://grow.contact/rss.xml): Blog posts, playbook entries, and case studies in RSS 2.0 format.
+
+## Technical
+
 - [sitemap.xml](https://grow.contact/sitemap.xml): Full XML sitemap.
-- [robots.txt](https://grow.contact/robots.txt): AI crawler allow-list (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended all explicitly allowed).
+- [robots.txt](https://grow.contact/robots.txt): AI crawler allow-list (Googlebot, OAI-SearchBot, PerplexityBot, ClaudeBot, bingbot, FacebookBot all explicitly allowed).
 
 ## Licensing
 

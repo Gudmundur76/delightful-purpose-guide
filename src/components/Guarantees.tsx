@@ -9,7 +9,6 @@ type Promise = {
 
 const PROMISES: Promise[] = [
   {
-  {
     title: "Agent Score 100/100",
     detail:
       "Every site we ship scores 100/100 on the grow.contact /check scanner at delivery. If it doesn't, you don't pay.",

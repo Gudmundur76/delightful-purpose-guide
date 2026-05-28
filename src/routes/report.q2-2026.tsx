@@ -3,10 +3,13 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { computeHeadlineStats } from "@/lib/leaderboard/stats";
 import { LEADERBOARD, CATEGORY_LABELS } from "@/lib/leaderboard/entries";
+import { AUTHORS, DEFAULT_AUTHOR_SLUG, personJsonLd } from "@/lib/authors/data";
 
 const PAGE_URL = "https://grow.contact/report/q2-2026";
+const PDF_URL = "https://grow.contact/report/q2-2026.pdf";
 const PUBLISHED = "2026-05-28";
 const REPORT_TITLE = "State of the Agent-Readable Web — Q2 2026";
+const AUTHOR = AUTHORS.find((a) => a.slug === DEFAULT_AUTHOR_SLUG)!;
 
 export const Route = createFileRoute("/report/q2-2026")({
   component: ReportPage,
@@ -41,14 +44,23 @@ export const Route = createFileRoute("/report/q2-2026")({
                 dateModified: PUBLISHED,
                 inLanguage: "en",
                 url: PAGE_URL,
-                author: { "@type": "Organization", name: "grow.contact", url: "https://grow.contact" },
+                author: personJsonLd(AUTHOR),
                 publisher: { "@type": "Organization", name: "grow.contact", url: "https://grow.contact" },
                 isBasedOn: "https://grow.contact/leaderboard",
                 license: "https://creativecommons.org/licenses/by/4.0/",
                 about: "Agent-readability and AI citation rates across the AI industry",
                 abstract: description,
                 citation: s.citable_headlines,
+                encoding: {
+                  "@type": "MediaObject",
+                  encodingFormat: "application/pdf",
+                  contentUrl: PDF_URL,
+                },
               }),
+            },
+            {
+              type: "application/ld+json",
+              children: JSON.stringify(personJsonLd(AUTHOR)),
             },
             {
               type: "application/ld+json",
@@ -96,7 +108,10 @@ function ReportPage() {
 
         <header className="mb-12 pb-8 border-b border-border">
           <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">
-            // Quarterly Report · Published {PUBLISHED}
+            // Quarterly Report · Published {PUBLISHED} · By{" "}
+            <Link to="/about/author/$slug" params={{ slug: AUTHOR.slug }} className="hover:text-foreground underline-offset-2 hover:underline">
+              {AUTHOR.name}
+            </Link>
           </p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
             State of the Agent-Readable Web
@@ -110,6 +125,13 @@ function ReportPage() {
             engines cite by name.
           </p>
           <div className="mt-6 flex flex-wrap gap-3 text-xs font-mono">
+            <a
+              href={PDF_URL}
+              className="border border-accent bg-accent/10 px-3 py-1.5 text-accent hover:bg-accent/20"
+              download
+            >
+              Download PDF →
+            </a>
             <Link to="/report/methodology" className="border border-border px-3 py-1.5 hover:border-accent">
               Methodology →
             </Link>

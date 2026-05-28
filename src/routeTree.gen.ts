@@ -55,6 +55,7 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
+import { Route as ReportQ22026DotpdfRouteImport } from './routes/report.q2-2026[.]pdf'
 import { Route as ReportQ22026RouteImport } from './routes/report.q2-2026'
 import { Route as ReportPressRouteImport } from './routes/report.press'
 import { Route as ReportMethodologyRouteImport } from './routes/report.methodology'
@@ -96,6 +97,7 @@ import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicLeaderboardDotjsonRouteImport } from './routes/api/public/leaderboard[.]json'
 import { Route as ApiPublicAgentActionRouteImport } from './routes/api/public/agent-action'
+import { Route as AboutAuthorSlugRouteImport } from './routes/about.author.$slug'
 import { Route as DotwellKnownMcpServerCardDotjsonRouteImport } from './routes/[.]well-known.mcp.server-card[.]json'
 import { Route as DotwellKnownAgentSkillsIndexDotjsonRouteImport } from './routes/[.]well-known.agent-skills.index[.]json'
 import { Route as DotwellKnownAgentSkillsGrowGeoScanDotmdRouteImport } from './routes/[.]well-known.agent-skills.grow-geo-scan[.]md'
@@ -118,6 +120,7 @@ import { Route as ApiPublicStatsOverviewRouteImport } from './routes/api/public/
 import { Route as ApiPublicOauthTokenRouteImport } from './routes/api/public/oauth/token'
 import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/api/public/hooks/run-scheduled-scans'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
+import { Route as ApiPublicWidgetChartSlugDotsvgRouteImport } from './routes/api/public/widget/chart.$slug[.]svg'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
 
@@ -351,6 +354,11 @@ const ToolsRobotsCheckerRoute = ToolsRobotsCheckerRouteImport.update({
   path: '/tools/robots-checker',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReportQ22026DotpdfRoute = ReportQ22026DotpdfRouteImport.update({
+  id: '/report/q2-2026.pdf',
+  path: '/report/q2-2026.pdf',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReportQ22026Route = ReportQ22026RouteImport.update({
   id: '/report/q2-2026',
   path: '/report/q2-2026',
@@ -562,6 +570,11 @@ const ApiPublicAgentActionRoute = ApiPublicAgentActionRouteImport.update({
   path: '/api/public/agent-action',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutAuthorSlugRoute = AboutAuthorSlugRouteImport.update({
+  id: '/about/author/$slug',
+  path: '/about/author/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DotwellKnownMcpServerCardDotjsonRoute =
   DotwellKnownMcpServerCardDotjsonRouteImport.update({
     id: '/.well-known/mcp/server-card.json',
@@ -683,6 +696,12 @@ const ApiPublicHooksRescanLeaderboardRoute =
     path: '/api/public/hooks/rescan-leaderboard',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicWidgetChartSlugDotsvgRoute =
+  ApiPublicWidgetChartSlugDotsvgRouteImport.update({
+    id: '/api/public/widget/chart/$slug.svg',
+    path: '/api/public/widget/chart/$slug.svg',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicV1PostsSlugRoute = ApiPublicV1PostsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -768,6 +787,7 @@ export interface FileRoutesByFullPath {
   '/report/methodology': typeof ReportMethodologyRoute
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
+  '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -777,6 +797,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
+  '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -806,6 +827,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/': typeof ApiPublicV1IndexRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
+  '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -879,6 +901,7 @@ export interface FileRoutesByTo {
   '/report/methodology': typeof ReportMethodologyRoute
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
+  '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -888,6 +911,7 @@ export interface FileRoutesByTo {
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
+  '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -917,6 +941,7 @@ export interface FileRoutesByTo {
   '/api/public/v1': typeof ApiPublicV1IndexRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
+  '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -993,6 +1018,7 @@ export interface FileRoutesById {
   '/report/methodology': typeof ReportMethodologyRoute
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
+  '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -1002,6 +1028,7 @@ export interface FileRoutesById {
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
+  '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -1031,6 +1058,7 @@ export interface FileRoutesById {
   '/api/public/v1/': typeof ApiPublicV1IndexRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
+  '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -1108,6 +1136,7 @@ export interface FileRouteTypes {
     | '/report/methodology'
     | '/report/press'
     | '/report/q2-2026'
+    | '/report/q2-2026.pdf'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1117,6 +1146,7 @@ export interface FileRouteTypes {
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
+    | '/about/author/$slug'
     | '/api/public/agent-action'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
@@ -1146,6 +1176,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
+    | '/api/public/widget/chart/$slug.svg'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1219,6 +1250,7 @@ export interface FileRouteTypes {
     | '/report/methodology'
     | '/report/press'
     | '/report/q2-2026'
+    | '/report/q2-2026.pdf'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1228,6 +1260,7 @@ export interface FileRouteTypes {
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
+    | '/about/author/$slug'
     | '/api/public/agent-action'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
@@ -1257,6 +1290,7 @@ export interface FileRouteTypes {
     | '/api/public/v1'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
+    | '/api/public/widget/chart/$slug.svg'
   id:
     | '__root__'
     | '/'
@@ -1332,6 +1366,7 @@ export interface FileRouteTypes {
     | '/report/methodology'
     | '/report/press'
     | '/report/q2-2026'
+    | '/report/q2-2026.pdf'
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1341,6 +1376,7 @@ export interface FileRouteTypes {
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
+    | '/about/author/$slug'
     | '/api/public/agent-action'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
@@ -1370,6 +1406,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
+    | '/api/public/widget/chart/$slug.svg'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1429,12 +1466,14 @@ export interface RootRouteChildren {
   ReportMethodologyRoute: typeof ReportMethodologyRoute
   ReportPressRoute: typeof ReportPressRoute
   ReportQ22026Route: typeof ReportQ22026Route
+  ReportQ22026DotpdfRoute: typeof ReportQ22026DotpdfRoute
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   DotwellKnownAgentSkillsIndexDotjsonRoute: typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   DotwellKnownMcpServerCardDotjsonRoute: typeof DotwellKnownMcpServerCardDotjsonRoute
+  AboutAuthorSlugRoute: typeof AboutAuthorSlugRoute
   ApiPublicAgentActionRoute: typeof ApiPublicAgentActionRoute
   ApiPublicLeaderboardDotjsonRoute: typeof ApiPublicLeaderboardDotjsonRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
@@ -1461,6 +1500,7 @@ export interface RootRouteChildren {
   LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
   ApiPublicV1IndexRoute: typeof ApiPublicV1IndexRoute
   ApiPublicV1AdminTableRoute: typeof ApiPublicV1AdminTableRoute
+  ApiPublicWidgetChartSlugDotsvgRoute: typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1787,6 +1827,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsRobotsCheckerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/report/q2-2026.pdf': {
+      id: '/report/q2-2026.pdf'
+      path: '/report/q2-2026.pdf'
+      fullPath: '/report/q2-2026.pdf'
+      preLoaderRoute: typeof ReportQ22026DotpdfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/report/q2-2026': {
       id: '/report/q2-2026'
       path: '/report/q2-2026'
@@ -2074,6 +2121,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicAgentActionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/author/$slug': {
+      id: '/about/author/$slug'
+      path: '/about/author/$slug'
+      fullPath: '/about/author/$slug'
+      preLoaderRoute: typeof AboutAuthorSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.well-known/mcp/server-card.json': {
       id: '/.well-known/mcp/server-card.json'
       path: '/.well-known/mcp/server-card.json'
@@ -2226,6 +2280,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/hooks/rescan-leaderboard'
       fullPath: '/api/public/hooks/rescan-leaderboard'
       preLoaderRoute: typeof ApiPublicHooksRescanLeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/widget/chart/$slug.svg': {
+      id: '/api/public/widget/chart/$slug.svg'
+      path: '/api/public/widget/chart/$slug.svg'
+      fullPath: '/api/public/widget/chart/$slug.svg'
+      preLoaderRoute: typeof ApiPublicWidgetChartSlugDotsvgRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/v1/posts/$slug': {
@@ -2493,6 +2554,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReportMethodologyRoute: ReportMethodologyRoute,
   ReportPressRoute: ReportPressRoute,
   ReportQ22026Route: ReportQ22026Route,
+  ReportQ22026DotpdfRoute: ReportQ22026DotpdfRoute,
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
@@ -2501,6 +2563,7 @@ const rootRouteChildren: RootRouteChildren = {
   DotwellKnownAgentSkillsIndexDotjsonRoute:
     DotwellKnownAgentSkillsIndexDotjsonRoute,
   DotwellKnownMcpServerCardDotjsonRoute: DotwellKnownMcpServerCardDotjsonRoute,
+  AboutAuthorSlugRoute: AboutAuthorSlugRoute,
   ApiPublicAgentActionRoute: ApiPublicAgentActionRoute,
   ApiPublicLeaderboardDotjsonRoute: ApiPublicLeaderboardDotjsonRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
@@ -2527,6 +2590,7 @@ const rootRouteChildren: RootRouteChildren = {
   LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
   ApiPublicV1IndexRoute: ApiPublicV1IndexRoute,
   ApiPublicV1AdminTableRoute: ApiPublicV1AdminTableRoute,
+  ApiPublicWidgetChartSlugDotsvgRoute: ApiPublicWidgetChartSlugDotsvgRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

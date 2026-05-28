@@ -23,9 +23,9 @@ export function ScoreSparkline({ points, width = 600, height = 120 }: Props) {
   return (
     <div className="w-full">
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto" preserveAspectRatio="none">
-        <path d={area} fill="hsl(var(--accent) / 0.15)" />
-        <path d={d} fill="none" stroke="hsl(var(--accent))" strokeWidth="2" />
-        <circle cx={xs[xs.length - 1]} cy={ys[ys.length - 1]} r="3" fill="hsl(var(--accent))" />
+        <path d={area} fill="color-mix(in oklab, var(--accent) 18%, transparent)" />
+        <path d={d} fill="none" stroke="var(--accent)" strokeWidth="2" />
+        <circle cx={xs[xs.length - 1]} cy={ys[ys.length - 1]} r="3" fill="var(--accent)" />
       </svg>
       <div className="flex justify-between font-mono text-[10px] text-muted-foreground mt-2">
         <span>{points[0].day}</span>

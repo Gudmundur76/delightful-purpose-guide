@@ -15,6 +15,10 @@ interface PersistArgs {
     protocol?: number;
   };
   source?: string;
+  /** Optional: client this scan belongs to (enables per-client Composio triggers). */
+  clientId?: string | null;
+  /** Optional: lead email tied to this scan (for low-score follow-up). */
+  leadEmail?: string | null;
 }
 
 export async function persistScan(args: PersistArgs): Promise<void> {
@@ -24,8 +28,25 @@ export async function persistScan(args: PersistArgs): Promise<void> {
   } catch {
     host = args.url.slice(0, 253);
   }
+
+  // Look up the previous overall for this host so we can detect score drops.
+  let prevOverall: number | null = null;
+  try {
+    const { data: prev } = await supabaseAdmin
+      .from("scans")
+      .select("overall")
+      .eq("host", host)
+      .order("scanned_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    prevOverall = (prev as { overall?: number } | null)?.overall ?? null;
+  } catch {
+    prevOverall = null;
+  }
+
+  const finalUrl = (args.finalUrl || args.url).slice(0, 2048);
   const { error } = await supabaseAdmin.from("scans").insert({
-    url: (args.finalUrl || args.url).slice(0, 2048),
+    url: finalUrl,
     host,
     overall: args.overall,
     semantic: args.scores.semantic,
@@ -35,9 +56,36 @@ export async function persistScan(args: PersistArgs): Promise<void> {
     speed: args.scores.speed,
     protocol: args.scores.protocol ?? null,
     source: args.source ?? "check",
+    client_id: args.clientId ?? null,
   });
   if (error) {
     console.error("persistScan failed", error);
+    return;
+  }
+
+  // Composio triggers — fire-and-forget, never throw.
+  if (args.clientId) {
+    try {
+      const triggers = await import("@/lib/composio/triggers.server");
+      await Promise.allSettled([
+        triggers.onLowScoreScan({
+          clientId: args.clientId,
+          leadEmail: args.leadEmail ?? null,
+          url: finalUrl,
+          overall: args.overall,
+        }),
+        prevOverall !== null
+          ? triggers.onScoreDrop({
+              clientId: args.clientId,
+              url: finalUrl,
+              prevOverall,
+              newOverall: args.overall,
+            })
+          : Promise.resolve(),
+      ]);
+    } catch (e) {
+      console.error("composio scan triggers failed", e);
+    }
   }
 }
 

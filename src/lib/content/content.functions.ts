@@ -173,6 +173,33 @@ export const setDraftStatusFn = createServerFn({ method: "POST" })
     }
     const { error } = await supabase.from("content_drafts").update(patch as never).eq("id", data.id);
     if (error) throw new Error(error.message);
+
+    // Composio: when a draft flips to "published", draft LinkedIn posts for
+    // every client with LinkedIn connected.
+    if (data.status === "published") {
+      try {
+        const { data: draft } = await supabase
+          .from("content_drafts")
+          .select("title, brief_id")
+          .eq("id", data.id)
+          .maybeSingle();
+        const title = (draft as { title?: string } | null)?.title ?? "New post";
+        const briefId = (draft as { brief_id?: string } | null)?.brief_id ?? null;
+        let slug = data.id;
+        if (briefId) {
+          const { data: brief } = await supabase
+            .from("content_briefs")
+            .select("site")
+            .eq("id", briefId)
+            .maybeSingle();
+          slug = (brief as { site?: string } | null)?.site ?? data.id;
+        }
+        const triggers = await import("@/lib/composio/triggers.server");
+        await triggers.onPostPublished({ title, slug, excerpt: null });
+      } catch (e) {
+        console.error("composio onPostPublished failed", e);
+      }
+    }
     return { ok: true };
   });
 

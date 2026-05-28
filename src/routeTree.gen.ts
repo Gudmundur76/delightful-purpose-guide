@@ -29,6 +29,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
 import { Route as LlmsRouteImport } from './routes/llms'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
+import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CookiesRouteImport } from './routes/cookies'
@@ -75,6 +76,7 @@ import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
 import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicLeaderboardDotjsonRouteImport } from './routes/api/public/leaderboard[.]json'
+import { Route as ApiPublicAgentActionRouteImport } from './routes/api/public/agent-action'
 import { Route as DotwellKnownMcpServerCardDotjsonRouteImport } from './routes/[.]well-known.mcp.server-card[.]json'
 import { Route as DotwellKnownAgentSkillsIndexDotjsonRouteImport } from './routes/[.]well-known.agent-skills.index[.]json'
 import { Route as DotwellKnownAgentSkillsGrowGeoScanDotmdRouteImport } from './routes/[.]well-known.agent-skills.grow-geo-scan[.]md'
@@ -198,6 +200,11 @@ const LlmsRoute = LlmsRouteImport.update({
 const LeaderboardRoute = LeaderboardRouteImport.update({
   id: '/leaderboard',
   path: '/leaderboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IntegrationsRoute = IntegrationsRouteImport.update({
+  id: '/integrations',
+  path: '/integrations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -436,6 +443,11 @@ const ApiPublicLeaderboardDotjsonRoute =
     path: '/api/public/leaderboard.json',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicAgentActionRoute = ApiPublicAgentActionRouteImport.update({
+  id: '/api/public/agent-action',
+  path: '/api/public/agent-action',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DotwellKnownMcpServerCardDotjsonRoute =
   DotwellKnownMcpServerCardDotjsonRouteImport.update({
     id: '/.well-known/mcp/server-card.json',
@@ -581,6 +593,7 @@ export interface FileRoutesByFullPath {
   '/cookies': typeof CookiesRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/faq': typeof FaqRoute
+  '/integrations': typeof IntegrationsRoute
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
@@ -632,6 +645,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
+  '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -671,6 +685,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/faq': typeof FaqRoute
+  '/integrations': typeof IntegrationsRoute
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
@@ -722,6 +737,7 @@ export interface FileRoutesByTo {
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
+  '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -764,6 +780,7 @@ export interface FileRoutesById {
   '/cookies': typeof CookiesRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/faq': typeof FaqRoute
+  '/integrations': typeof IntegrationsRoute
   '/leaderboard': typeof LeaderboardRoute
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
@@ -815,6 +832,7 @@ export interface FileRoutesById {
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
+  '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -858,6 +876,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/dashboard'
     | '/faq'
+    | '/integrations'
     | '/leaderboard'
     | '/llms'
     | '/llms-full.txt'
@@ -909,6 +928,7 @@ export interface FileRouteTypes {
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
+    | '/api/public/agent-action'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -948,6 +968,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cookies'
     | '/faq'
+    | '/integrations'
     | '/leaderboard'
     | '/llms'
     | '/llms-full.txt'
@@ -999,6 +1020,7 @@ export interface FileRouteTypes {
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
+    | '/api/public/agent-action'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -1040,6 +1062,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/dashboard'
     | '/faq'
+    | '/integrations'
     | '/leaderboard'
     | '/llms'
     | '/llms-full.txt'
@@ -1091,6 +1114,7 @@ export interface FileRouteTypes {
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
+    | '/api/public/agent-action'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -1133,6 +1157,7 @@ export interface RootRouteChildren {
   CookiesRoute: typeof CookiesRoute
   DashboardRoute: typeof DashboardRouteWithChildren
   FaqRoute: typeof FaqRoute
+  IntegrationsRoute: typeof IntegrationsRoute
   LeaderboardRoute: typeof LeaderboardRoute
   LlmsRoute: typeof LlmsRoute
   LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
@@ -1170,6 +1195,7 @@ export interface RootRouteChildren {
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   DotwellKnownAgentSkillsIndexDotjsonRoute: typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   DotwellKnownMcpServerCardDotjsonRoute: typeof DotwellKnownMcpServerCardDotjsonRoute
+  ApiPublicAgentActionRoute: typeof ApiPublicAgentActionRoute
   ApiPublicLeaderboardDotjsonRoute: typeof ApiPublicLeaderboardDotjsonRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicMcpRoute: typeof ApiPublicMcpRoute
@@ -1337,6 +1363,13 @@ declare module '@tanstack/react-router' {
       path: '/leaderboard'
       fullPath: '/leaderboard'
       preLoaderRoute: typeof LeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/integrations': {
+      id: '/integrations'
+      path: '/integrations'
+      fullPath: '/integrations'
+      preLoaderRoute: typeof IntegrationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -1661,6 +1694,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicLeaderboardDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/agent-action': {
+      id: '/api/public/agent-action'
+      path: '/api/public/agent-action'
+      fullPath: '/api/public/agent-action'
+      preLoaderRoute: typeof ApiPublicAgentActionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.well-known/mcp/server-card.json': {
       id: '/.well-known/mcp/server-card.json'
       path: '/.well-known/mcp/server-card.json'
@@ -1949,6 +1989,7 @@ const rootRouteChildren: RootRouteChildren = {
   CookiesRoute: CookiesRoute,
   DashboardRoute: DashboardRouteWithChildren,
   FaqRoute: FaqRoute,
+  IntegrationsRoute: IntegrationsRoute,
   LeaderboardRoute: LeaderboardRoute,
   LlmsRoute: LlmsRoute,
   LlmsFullDottxtRoute: LlmsFullDottxtRoute,
@@ -1992,6 +2033,7 @@ const rootRouteChildren: RootRouteChildren = {
   DotwellKnownAgentSkillsIndexDotjsonRoute:
     DotwellKnownAgentSkillsIndexDotjsonRoute,
   DotwellKnownMcpServerCardDotjsonRoute: DotwellKnownMcpServerCardDotjsonRoute,
+  ApiPublicAgentActionRoute: ApiPublicAgentActionRoute,
   ApiPublicLeaderboardDotjsonRoute: ApiPublicLeaderboardDotjsonRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicMcpRoute: ApiPublicMcpRoute,
@@ -2021,13 +2063,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

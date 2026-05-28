@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { TierCheckoutDialog } from "@/components/TierCheckoutDialog";
 import type { TierKey } from "@/lib/paypal/tier-checkout.functions";
 
@@ -68,7 +68,10 @@ export function SmartContactForm() {
   const [error, setError] = useState<string | null>(null);
   const [leadId, setLeadId] = useState<string | null>(null);
   const [checkoutTier, setCheckoutTier] = useState<TierKey | null>(null);
-
+  const urlId = useId();
+  const nameId = useId();
+  const emailId = useId();
+  const notesId = useId();
   const host = useMemo(() => normalizeUrl(data.url), [data.url]);
 
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) =>
@@ -143,8 +146,9 @@ export function SmartContactForm() {
       <div className="p-6 md:p-8 space-y-6">
         {step === 0 && (
           <div className="space-y-4">
-            <Label>// Company URL</Label>
+            <Label htmlFor={urlId}>// Company URL</Label>
             <input
+              id={urlId}
               autoFocus
               type="text"
               value={data.url}
@@ -210,16 +214,16 @@ export function SmartContactForm() {
         {step === 3 && (
           <div className="space-y-4">
             <div>
-              <Label>// Name</Label>
-              <input type="text" value={data.name} onChange={(e) => set("name", e.target.value)} className={inputCls} maxLength={100} />
+              <Label htmlFor={nameId}>// Name</Label>
+              <input id={nameId} type="text" value={data.name} onChange={(e) => set("name", e.target.value)} className={inputCls} maxLength={100} />
             </div>
             <div>
-              <Label>// Email</Label>
-              <input type="email" value={data.email} onChange={(e) => set("email", e.target.value)} className={inputCls} maxLength={255} />
+              <Label htmlFor={emailId}>// Email</Label>
+              <input id={emailId} type="email" value={data.email} onChange={(e) => set("email", e.target.value)} className={inputCls} maxLength={255} />
             </div>
             <div>
-              <Label>// Notes (optional)</Label>
-              <textarea value={data.notes} onChange={(e) => set("notes", e.target.value)} rows={3} maxLength={1000} className={`${inputCls} resize-none`} />
+              <Label htmlFor={notesId}>// Notes (optional)</Label>
+              <textarea id={notesId} value={data.notes} onChange={(e) => set("notes", e.target.value)} rows={3} maxLength={1000} className={`${inputCls} resize-none`} />
             </div>
             {error && <p className="font-mono text-xs text-destructive">! {error}</p>}
           </div>
@@ -337,9 +341,9 @@ export function SmartContactForm() {
 const inputCls =
   "w-full bg-background border border-border px-4 py-3 font-mono text-sm focus:outline-none focus:border-accent transition-colors";
 
-function Label({ children }: { children: React.ReactNode }) {
+function Label({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) {
   return (
-    <label className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+    <label htmlFor={htmlFor} className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
       {children}
     </label>
   );

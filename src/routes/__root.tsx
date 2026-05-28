@@ -232,6 +232,7 @@ function RootComponent() {
       <CartProvider>
         <Outlet />
         <CookieConsent />
+        <WebMcpProvider />
       </CartProvider>
     </QueryClientProvider>
   );

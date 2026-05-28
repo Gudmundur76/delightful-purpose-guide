@@ -25,6 +25,7 @@ import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PlaybooksRouteImport } from './routes/playbooks'
 import { Route as PlaybookRouteImport } from './routes/playbook'
 import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as LoginRouteImport } from './routes/login'
@@ -51,6 +52,7 @@ import { Route as ContentIndexRouteImport } from './routes/content.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
+import { Route as PlaybooksSlugRouteImport } from './routes/playbooks.$slug'
 import { Route as LeaderboardMethodologyRouteImport } from './routes/leaderboard.methodology'
 import { Route as HistoryHostRouteImport } from './routes/history.$host'
 import { Route as GuideGenerativeEngineOptimizationRouteImport } from './routes/guide.generative-engine-optimization'
@@ -191,6 +193,11 @@ const PricingRoute = PricingRouteImport.update({
   path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlaybooksRoute = PlaybooksRouteImport.update({
+  id: '/playbooks',
+  path: '/playbooks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlaybookRoute = PlaybookRouteImport.update({
   id: '/playbook',
   path: '/playbook',
@@ -320,6 +327,11 @@ const VerifyIdRoute = VerifyIdRouteImport.update({
   id: '/verify/$id',
   path: '/verify/$id',
   getParentRoute: () => rootRouteImport,
+} as any)
+const PlaybooksSlugRoute = PlaybooksSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => PlaybooksRoute,
 } as any)
 const LeaderboardMethodologyRoute = LeaderboardMethodologyRouteImport.update({
   id: '/methodology',
@@ -656,6 +668,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
+  '/playbooks': typeof PlaybooksRouteWithChildren
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
@@ -699,6 +712,7 @@ export interface FileRoutesByFullPath {
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
+  '/playbooks/$slug': typeof PlaybooksSlugRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
@@ -757,6 +771,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
+  '/playbooks': typeof PlaybooksRouteWithChildren
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
@@ -800,6 +815,7 @@ export interface FileRoutesByTo {
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
+  '/playbooks/$slug': typeof PlaybooksSlugRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog': typeof BlogIndexRoute
@@ -861,6 +877,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
+  '/playbooks': typeof PlaybooksRouteWithChildren
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/process': typeof ProcessRoute
@@ -904,6 +921,7 @@ export interface FileRoutesById {
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
+  '/playbooks/$slug': typeof PlaybooksSlugRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
@@ -966,6 +984,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/outreach'
     | '/playbook'
+    | '/playbooks'
     | '/pricing'
     | '/privacy'
     | '/process'
@@ -1009,6 +1028,7 @@ export interface FileRouteTypes {
     | '/guide/generative-engine-optimization'
     | '/history/$host'
     | '/leaderboard/methodology'
+    | '/playbooks/$slug'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
@@ -1067,6 +1087,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/outreach'
     | '/playbook'
+    | '/playbooks'
     | '/pricing'
     | '/privacy'
     | '/process'
@@ -1110,6 +1131,7 @@ export interface FileRouteTypes {
     | '/guide/generative-engine-optimization'
     | '/history/$host'
     | '/leaderboard/methodology'
+    | '/playbooks/$slug'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog'
@@ -1170,6 +1192,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/outreach'
     | '/playbook'
+    | '/playbooks'
     | '/pricing'
     | '/privacy'
     | '/process'
@@ -1213,6 +1236,7 @@ export interface FileRouteTypes {
     | '/guide/generative-engine-optimization'
     | '/history/$host'
     | '/leaderboard/methodology'
+    | '/playbooks/$slug'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
@@ -1274,6 +1298,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   OutreachRoute: typeof OutreachRoute
   PlaybookRoute: typeof PlaybookRoute
+  PlaybooksRoute: typeof PlaybooksRouteWithChildren
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   ProcessRoute: typeof ProcessRoute
@@ -1448,6 +1473,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/playbooks': {
+      id: '/playbooks'
+      path: '/playbooks'
+      fullPath: '/playbooks'
+      preLoaderRoute: typeof PlaybooksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/playbook': {
@@ -1631,6 +1663,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/verify/$id'
       preLoaderRoute: typeof VerifyIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/playbooks/$slug': {
+      id: '/playbooks/$slug'
+      path: '/$slug'
+      fullPath: '/playbooks/$slug'
+      preLoaderRoute: typeof PlaybooksSlugRouteImport
+      parentRoute: typeof PlaybooksRoute
     }
     '/leaderboard/methodology': {
       id: '/leaderboard/methodology'
@@ -2167,6 +2206,18 @@ const LeaderboardRouteWithChildren = LeaderboardRoute._addFileChildren(
   LeaderboardRouteChildren,
 )
 
+interface PlaybooksRouteChildren {
+  PlaybooksSlugRoute: typeof PlaybooksSlugRoute
+}
+
+const PlaybooksRouteChildren: PlaybooksRouteChildren = {
+  PlaybooksSlugRoute: PlaybooksSlugRoute,
+}
+
+const PlaybooksRouteWithChildren = PlaybooksRoute._addFileChildren(
+  PlaybooksRouteChildren,
+)
+
 interface VsRouteChildren {
   VsCompetitorRoute: typeof VsCompetitorRoute
 }
@@ -2222,6 +2273,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   OutreachRoute: OutreachRoute,
   PlaybookRoute: PlaybookRoute,
+  PlaybooksRoute: PlaybooksRouteWithChildren,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   ProcessRoute: ProcessRoute,

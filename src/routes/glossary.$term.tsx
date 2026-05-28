@@ -79,7 +79,7 @@ export const Route = createFileRoute("/glossary/$term")({
 });
 
 function GlossaryTermPage() {
-function GlossaryTermPage() {
+
   const { term } = Route.useLoaderData() as { term: NonNullable<ReturnType<typeof getGlossaryTerm>> };
   const relatedSlugs: string[] = term.related ?? [];
   const related = relatedSlugs

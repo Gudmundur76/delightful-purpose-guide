@@ -21,6 +21,12 @@ export const Route = createFileRoute("/playbook")({
       { property: "og:type", content: "article" },
       { property: "article:published_time", content: PLAYBOOK_PUBLISHED_AT },
       { property: "article:modified_time", content: PLAYBOOK_UPDATED_AT },
+      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=The%2012-Week%20Agent-Native%20SEO%20Playbook%20%E2%80%94%20Grow&sub=Our%2012-week%20content%20calendar%20for%20AI%20startups%3A%20the%20exact%20keywords%2C%20post%20titles%2C%20and%20channel%20plays%20we%20use%20to%20earn%20LLM%20citations%20from%20ChatGPT%2C%20Perplexity%2C%20and%20Claude." },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "The 12-Week Agent-Native SEO Playbook — Grow" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=The%2012-Week%20Agent-Native%20SEO%20Playbook%20%E2%80%94%20Grow&sub=Our%2012-week%20content%20calendar%20for%20AI%20startups%3A%20the%20exact%20keywords%2C%20post%20titles%2C%20and%20channel%20plays%20we%20use%20to%20earn%20LLM%20citations%20from%20ChatGPT%2C%20Perplexity%2C%20and%20Claude." },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/playbook" }],
     scripts: [

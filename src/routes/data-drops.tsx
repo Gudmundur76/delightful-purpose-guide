@@ -17,7 +17,13 @@ export const Route = createFileRoute("/data-drops")({
         { property: "og:title", content: "Data Drops — Monthly Agent-Readability Findings" },
         { property: "og:description", content: "One stat. One chart. One methodology link. Monthly. CC BY 4.0." },
         { property: "og:url", content: PAGE_URL },
-      ],
+      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Data%20Drops%20%E2%80%94%20Monthly%20Agent-Readability%20Findings%20%7C%20Grow&sub=Monthly%20single-stat%20findings%20from%20the%20open%20Agent%20Readability%20Leaderboard.%20%24%7Bcount%7D%20drops%20published.%20Citable%2C%20CC%20BY%204.0%2C%20RSS-enabled." },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Data Drops — Monthly Agent-Readability Findings | Grow" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Data%20Drops%20%E2%80%94%20Monthly%20Agent-Readability%20Findings%20%7C%20Grow&sub=Monthly%20single-stat%20findings%20from%20the%20open%20Agent%20Readability%20Leaderboard.%20%24%7Bcount%7D%20drops%20published.%20Citable%2C%20CC%20BY%204.0%2C%20RSS-enabled." },
+    ],
       links: [{ rel: "canonical", href: PAGE_URL }],
       scripts: [
         {

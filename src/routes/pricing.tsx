@@ -13,6 +13,12 @@ export const Route = createFileRoute("/pricing")({
       { property: "og:title", content: "Pricing — Grow" },
       { property: "og:description", content: "Transparent fixed-price tiers and technical specifications." },
       { property: "og:url", content: "https://grow.contact/pricing" },
+      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Pricing%20%E2%80%94%20Grow&sub=Fixed-price%20tiers%20for%20agent-native%20marketing%20sites.%20No%20hourly%20surprises." },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Pricing — Grow" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Pricing%20%E2%80%94%20Grow&sub=Fixed-price%20tiers%20for%20agent-native%20marketing%20sites.%20No%20hourly%20surprises." },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/pricing" }],
     scripts: [

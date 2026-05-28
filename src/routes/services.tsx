@@ -13,6 +13,12 @@ export const Route = createFileRoute("/services")({
       { property: "og:title", content: "Services — Grow" },
       { property: "og:description", content: "Launch pages, marketing sites, and devtool hubs built agent-native — in 48 hours." },
       { property: "og:url", content: "https://grow.contact/services" },
+      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Services%20%E2%80%94%20Grow&sub=Agent-native%20marketing%20sites%2C%20launch%20pages%2C%20and%20devtool%20hubs.%20Custom-coded%2C%20LLM-readable%2C%20fixed%20price." },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Services — Grow" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Services%20%E2%80%94%20Grow&sub=Agent-native%20marketing%20sites%2C%20launch%20pages%2C%20and%20devtool%20hubs.%20Custom-coded%2C%20LLM-readable%2C%20fixed%20price." },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/services" }],
     scripts: [

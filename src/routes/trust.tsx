@@ -26,6 +26,12 @@ export const Route = createFileRoute("/trust")({
           "Founder-led agent-native web agency. 100/100 guarantee, open scoring methodology, public dataset. Here's what stands behind the work.",
       },
       { property: "og:url", content: PAGE_URL },
+      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Trust%20%26%20Guarantees%20%E2%80%94%20Who's%20behind%20grow.contact%20%7C%20Grow&sub=The%20people%2C%20guarantees%2C%20methodology%2C%20and%20receipts%20behind%20grow.contact.%20100%2F100%20agent-readability%20guarantee%20or%20your%20money%20back.%20Public%20scoring%20methodology.%20Founder-led." },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Trust & Guarantees — Who's behind grow.contact | Grow" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=Trust%20%26%20Guarantees%20%E2%80%94%20Who's%20behind%20grow.contact%20%7C%20Grow&sub=The%20people%2C%20guarantees%2C%20methodology%2C%20and%20receipts%20behind%20grow.contact.%20100%2F100%20agent-readability%20guarantee%20or%20your%20money%20back.%20Public%20scoring%20methodology.%20Founder-led." },
     ],
     links: [{ rel: "canonical", href: PAGE_URL }],
     scripts: [

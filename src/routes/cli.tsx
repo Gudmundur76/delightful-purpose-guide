@@ -19,6 +19,12 @@ export const Route = createFileRoute("/cli")({
       { property: "og:url", content: "https://grow.contact/cli" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=grow%20CLI%20%E2%80%94%20Agent-Readiness%20Scanner%20for%20Your%20Terminal&sub=Score%20any%20URL%20against%20the%20Grow%20GEO%20Standard%20from%20your%20terminal.%20Zero-dep%20Node%20CLI%2C%20CI-friendly%20--fail-under%20flag%2C%20free%20with%20an%20API%20key.%20npx%20%40grow-contact%2Fcli%20check%20%3Curl%3E." },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "grow CLI — Agent-Readiness Scanner for Your Terminal" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=grow%20CLI%20%E2%80%94%20Agent-Readiness%20Scanner%20for%20Your%20Terminal&sub=Score%20any%20URL%20against%20the%20Grow%20GEO%20Standard%20from%20your%20terminal.%20Zero-dep%20Node%20CLI%2C%20CI-friendly%20--fail-under%20flag%2C%20free%20with%20an%20API%20key.%20npx%20%40grow-contact%2Fcli%20check%20%3Curl%3E." },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/cli" }],
     scripts: [

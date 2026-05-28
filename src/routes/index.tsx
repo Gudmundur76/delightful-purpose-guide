@@ -50,7 +50,12 @@ export const Route = createFileRoute("/")({
     return { faqData, homeContent };
   },
 
-  head: () => ({
+  head: () => {
+    const ogUrl =
+      "https://grow.contact/api/public/widget/og.svg?kicker=Grow" +
+      "&title=" + encodeURIComponent("Agent-Native Websites for AI startups & devtools") +
+      "&sub=" + encodeURIComponent("Custom-coded, LLM-readable, live in 48 hours — fixed price.");
+    return {
     meta: [
       {
         property: "og:description",
@@ -58,7 +63,14 @@ export const Route = createFileRoute("/")({
           "Marketing sites built for the agent era: structured data, llms.txt, MCP-ready docs. For AI/ML startups, agent platforms, and devtools. 48 hours, fixed price.",
       },
       { property: "og:url", content: "https://grow.contact/" },
+      { property: "og:image", content: ogUrl },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Grow — Agent-Native Websites" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: ogUrl },
     ],
+
     links: [
       { rel: "canonical", href: "https://grow.contact/" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -96,7 +108,9 @@ export const Route = createFileRoute("/")({
         }),
       },
     ],
-  }),
+    };
+  },
+
 });
 
 function Index() {

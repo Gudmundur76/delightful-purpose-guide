@@ -20,6 +20,12 @@ export const Route = createFileRoute("/playground")({
       { property: "og:description", content: DESC },
       { property: "og:url", content: URL },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=MCP%20Playground%20%E2%80%94%2090%2B%20agent-native%20tools&sub=Run%20grow.contact's%20MCP%20tools%20in%20the%20browser.%20Scan%20any%20URL%2C%20validate%20JSON-LD%2C%20check%20llms.txt%2C%20fetch%20the%20GEO%20standard%20%E2%80%94%20then%20copy%20the%20install%20snippet%20for%20Claude%2C%20ChatGPT%2C%20n8n%2C%20or%20cURL." },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "MCP Playground — 90+ agent-native tools" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://grow.contact/api/public/widget/og.svg?kicker=Grow&title=MCP%20Playground%20%E2%80%94%2090%2B%20agent-native%20tools&sub=Run%20grow.contact's%20MCP%20tools%20in%20the%20browser.%20Scan%20any%20URL%2C%20validate%20JSON-LD%2C%20check%20llms.txt%2C%20fetch%20the%20GEO%20standard%20%E2%80%94%20then%20copy%20the%20install%20snippet%20for%20Claude%2C%20ChatGPT%2C%20n8n%2C%20or%20cURL." },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

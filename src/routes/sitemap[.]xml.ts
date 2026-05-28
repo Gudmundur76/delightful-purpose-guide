@@ -58,6 +58,10 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/llms-full.txt", lastmod: today, changefreq: "weekly", priority: "0.4" },
           { path: "/.well-known/api-catalog", lastmod: today, changefreq: "monthly", priority: "0.3" },
           { path: "/.well-known/http-message-signatures-directory", lastmod: today, changefreq: "monthly", priority: "0.3" },
+          { path: "/.well-known/jwks.json", lastmod: today, changefreq: "monthly", priority: "0.3" },
+          { path: "/.well-known/mcp.json", lastmod: today, changefreq: "monthly", priority: "0.3" },
+          { path: "/.well-known/oauth-authorization-server", lastmod: today, changefreq: "monthly", priority: "0.3" },
+          { path: "/.well-known/oauth-protected-resource", lastmod: today, changefreq: "monthly", priority: "0.3" },
           ...getAllComparisons()
             .filter((c) => c.slug !== "webflow" && c.slug !== "framer")
             .map<SitemapEntry>((c) => ({

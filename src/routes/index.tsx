@@ -75,13 +75,6 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@graph": [
             {
-              "@type": "Organization",
-              name: "Grow",
-              url: "https://grow.contact/",
-              description:
-                "Productized web design agency. Custom-coded websites shipped in 48 hours.",
-            },
-            {
               "@type": "WebSite",
               name: "Grow",
               url: "https://grow.contact/",

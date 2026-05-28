@@ -47,7 +47,6 @@ const linkset = {
           type: "text/html",
         },
       ],
-      ],
     },
     {
       anchor: `${BASE}/api/public/oauth/token`,

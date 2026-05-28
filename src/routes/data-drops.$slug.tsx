@@ -2,6 +2,9 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getDataDrop, getAllDataDrops } from "@/lib/data-drops/data";
+import { AUTHORS, DEFAULT_AUTHOR_SLUG, personJsonLd } from "@/lib/authors/data";
+
+const AUTHOR = AUTHORS.find((a) => a.slug === DEFAULT_AUTHOR_SLUG)!;
 
 export const Route = createFileRoute("/data-drops/$slug")({
   component: DataDropPage,

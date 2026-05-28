@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { z } from "zod";
-import { getScanDiff } from "@/lib/check/history.functions";
+import { getScanDiff, type DiffMetric } from "@/lib/check/history.functions";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
@@ -74,7 +74,7 @@ function DiffPage() {
               What changed
             </div>
             <ul className="space-y-2">
-              {summary.map((s, i) => (
+              {summary.map((s: string, i: number) => (
                 <li key={i} className="text-sm">
                   {s}
                 </li>
@@ -94,7 +94,7 @@ function DiffPage() {
               </tr>
             </thead>
             <tbody>
-              {metrics.map((m) => {
+              {metrics.map((m: DiffMetric) => {
                 const tone =
                   m.delta > 0 ? "text-accent" : m.delta < 0 ? "text-red-500" : "text-muted-foreground";
                 const sign = m.delta > 0 ? "+" : "";

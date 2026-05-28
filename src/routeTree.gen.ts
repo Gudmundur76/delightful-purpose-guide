@@ -47,6 +47,7 @@ import { Route as ContentIndexRouteImport } from './routes/content.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
+import { Route as HistoryHostRouteImport } from './routes/history.$host'
 import { Route as GuideGenerativeEngineOptimizationRouteImport } from './routes/guide.generative-engine-optimization'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as DashboardScanRouteImport } from './routes/dashboard.scan'
@@ -71,6 +72,7 @@ import { Route as DotwellKnownJwksDotjsonRouteImport } from './routes/[.]well-kn
 import { Route as DotwellKnownHttpMessageSignaturesDirectoryRouteImport } from './routes/[.]well-known.http-message-signatures-directory'
 import { Route as DotwellKnownApiCatalogRouteImport } from './routes/[.]well-known.api-catalog'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as HistoryHostDiffRouteImport } from './routes/history.$host.diff'
 import { Route as ContentDraftsIdRouteImport } from './routes/content.drafts.$id'
 import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
 import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
@@ -292,6 +294,11 @@ const VerifyIdRoute = VerifyIdRouteImport.update({
   path: '/verify/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HistoryHostRoute = HistoryHostRouteImport.update({
+  id: '/history/$host',
+  path: '/history/$host',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GuideGenerativeEngineOptimizationRoute =
   GuideGenerativeEngineOptimizationRouteImport.update({
     id: '/guide/generative-engine-optimization',
@@ -416,6 +423,11 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryHostDiffRoute = HistoryHostDiffRouteImport.update({
+  id: '/diff',
+  path: '/diff',
+  getParentRoute: () => HistoryHostRoute,
 } as any)
 const ContentDraftsIdRoute = ContentDraftsIdRouteImport.update({
   id: '/$id',
@@ -637,6 +649,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/scan': typeof DashboardScanRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
+  '/history/$host': typeof HistoryHostRouteWithChildren
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
@@ -651,6 +664,7 @@ export interface FileRoutesByFullPath {
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
+  '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
@@ -729,6 +743,7 @@ export interface FileRoutesByTo {
   '/dashboard/scan': typeof DashboardScanRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
+  '/history/$host': typeof HistoryHostRouteWithChildren
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog': typeof BlogIndexRoute
@@ -743,6 +758,7 @@ export interface FileRoutesByTo {
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
+  '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
@@ -824,6 +840,7 @@ export interface FileRoutesById {
   '/dashboard/scan': typeof DashboardScanRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
+  '/history/$host': typeof HistoryHostRouteWithChildren
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/blog/': typeof BlogIndexRoute
@@ -838,6 +855,7 @@ export interface FileRoutesById {
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
+  '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
@@ -920,6 +938,7 @@ export interface FileRouteTypes {
     | '/dashboard/scan'
     | '/email/unsubscribe'
     | '/guide/generative-engine-optimization'
+    | '/history/$host'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
@@ -934,6 +953,7 @@ export interface FileRouteTypes {
     | '/api/public/mcp'
     | '/api/public/ping'
     | '/content/drafts/$id'
+    | '/history/$host/diff'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
@@ -1012,6 +1032,7 @@ export interface FileRouteTypes {
     | '/dashboard/scan'
     | '/email/unsubscribe'
     | '/guide/generative-engine-optimization'
+    | '/history/$host'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog'
@@ -1026,6 +1047,7 @@ export interface FileRouteTypes {
     | '/api/public/mcp'
     | '/api/public/ping'
     | '/content/drafts/$id'
+    | '/history/$host/diff'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
@@ -1106,6 +1128,7 @@ export interface FileRouteTypes {
     | '/dashboard/scan'
     | '/email/unsubscribe'
     | '/guide/generative-engine-optimization'
+    | '/history/$host'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/blog/'
@@ -1120,6 +1143,7 @@ export interface FileRouteTypes {
     | '/api/public/mcp'
     | '/api/public/ping'
     | '/content/drafts/$id'
+    | '/history/$host/diff'
     | '/lovable/email/suppression'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
@@ -1190,6 +1214,7 @@ export interface RootRouteChildren {
   BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   GuideGenerativeEngineOptimizationRoute: typeof GuideGenerativeEngineOptimizationRoute
+  HistoryHostRoute: typeof HistoryHostRouteWithChildren
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
@@ -1491,6 +1516,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/history/$host': {
+      id: '/history/$host'
+      path: '/history/$host'
+      fullPath: '/history/$host'
+      preLoaderRoute: typeof HistoryHostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guide/generative-engine-optimization': {
       id: '/guide/generative-engine-optimization'
       path: '/guide/generative-engine-optimization'
@@ -1658,6 +1690,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/lovable/email/suppression'
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/history/$host/diff': {
+      id: '/history/$host/diff'
+      path: '/diff'
+      fullPath: '/history/$host/diff'
+      preLoaderRoute: typeof HistoryHostDiffRouteImport
+      parentRoute: typeof HistoryHostRoute
     }
     '/content/drafts/$id': {
       id: '/content/drafts/$id'
@@ -1965,6 +2004,18 @@ const VsRouteChildren: VsRouteChildren = {
 
 const VsRouteWithChildren = VsRoute._addFileChildren(VsRouteChildren)
 
+interface HistoryHostRouteChildren {
+  HistoryHostDiffRoute: typeof HistoryHostDiffRoute
+}
+
+const HistoryHostRouteChildren: HistoryHostRouteChildren = {
+  HistoryHostDiffRoute: HistoryHostDiffRoute,
+}
+
+const HistoryHostRouteWithChildren = HistoryHostRoute._addFileChildren(
+  HistoryHostRouteChildren,
+)
+
 interface ApiPublicV1PostsRouteChildren {
   ApiPublicV1PostsSlugRoute: typeof ApiPublicV1PostsSlugRoute
 }
@@ -2026,6 +2077,7 @@ const rootRouteChildren: RootRouteChildren = {
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   GuideGenerativeEngineOptimizationRoute:
     GuideGenerativeEngineOptimizationRoute,
+  HistoryHostRoute: HistoryHostRouteWithChildren,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute:

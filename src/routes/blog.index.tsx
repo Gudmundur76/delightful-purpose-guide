@@ -193,11 +193,16 @@ function BlogIndex() {
                 fluff, no sponsors.
               </p>
               <div className="flex flex-col gap-2">
+                <label htmlFor="newsletter-email" className="sr-only">
+                  Email address
+                </label>
                 <input
+                  id="newsletter-email"
                   type="email"
                   name="email"
                   required
                   placeholder="you@startup.com"
+                  aria-label="Email address"
                   className="bg-card border border-border px-3 py-2 text-sm font-mono focus:outline-none focus:border-accent transition-colors"
                 />
                 <button

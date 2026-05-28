@@ -79,13 +79,16 @@ function tier(score: number) {
 }
 
 function LeaderboardPage() {
-  const { cat } = Route.useSearch();
+  const { cat, fail } = Route.useSearch();
   const activeCategory = cat === "all" ? undefined : cat;
-  const rows = getLeaderboard(activeCategory);
+  const failSignal: SignalKey | undefined = fail === "none" ? undefined : (fail as SignalKey);
+  let rows = getLeaderboard(activeCategory);
+  if (failSignal) rows = rows.filter((r) => failsSignal(r, failSignal));
   const allRows = getLeaderboard();
   const avg = Math.round(rows.reduce((s, r) => s + r.score, 0) / Math.max(1, rows.length));
   const agentNative = rows.filter((r) => r.score >= 85).length;
   const opaque = rows.filter((r) => r.score < 55).length;
+  const headline = computeHeadlineStats();
 
   const counts: Record<string, number> = {
     all: allRows.length,
@@ -136,31 +139,80 @@ function LeaderboardPage() {
               >
                 GET /api/public/leaderboard.json
               </a>
+              <Link
+                to="/leaderboard/methodology"
+                className="border border-border px-3 py-1.5 hover:border-accent hover:text-accent transition-colors uppercase tracking-widest"
+              >
+                Methodology →
+              </Link>
               <span className="uppercase tracking-widest">// CC BY 4.0 · re-scored weekly</span>
             </div>
           </div>
         </section>
 
-        {/* Filter tabs */}
-        <section aria-labelledby="leaderboard-filter-heading" className="border-b border-border bg-card/40 sticky top-0 z-10 backdrop-blur">
-          <h2 id="leaderboard-filter-heading" className="sr-only">Filter leaderboard by category</h2>
-          <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center gap-2">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mr-2">
-              // Filter:
-            </span>
-            <CategoryTab to="/leaderboard" search={{ cat: "all" as const }} active={cat === "all"} label="All" count={counts.all} />
-            {CATEGORIES.map((c) => (
-              <CategoryTab
-                key={c}
-                to="/leaderboard"
-                search={{ cat: c }}
-                active={cat === c}
-                label={CATEGORY_LABELS[c]}
-                count={counts[c]}
-              />
-            ))}
+        {/* Headline citable stats strip */}
+        <section
+          aria-labelledby="leaderboard-headlines"
+          className="border-b border-border bg-card/40"
+        >
+          <div className="max-w-7xl mx-auto px-6 py-10 md:py-14">
+            <h2
+              id="leaderboard-headlines"
+              className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-5"
+            >
+              // What the {LEADERBOARD.length}-site dataset shows · cite as grow.contact/leaderboard
+            </h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+              {headline.citable_headlines.map((h) => (
+                <li
+                  key={h}
+                  className="font-mono text-sm border-l-2 border-accent pl-4 py-1 text-foreground"
+                >
+                  {h}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
+
+        {/* Filter tabs */}
+        <section aria-labelledby="leaderboard-filter-heading" className="border-b border-border bg-card/40 sticky top-0 z-10 backdrop-blur">
+          <h2 id="leaderboard-filter-heading" className="sr-only">Filter leaderboard by category or signal failure</h2>
+          <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mr-2">
+                // Category:
+              </span>
+              <CategoryTab to="/leaderboard" search={{ cat: "all" as const, fail }} active={cat === "all"} label="All" count={counts.all} />
+              {CATEGORIES.map((c) => (
+                <CategoryTab
+                  key={c}
+                  to="/leaderboard"
+                  search={{ cat: c, fail }}
+                  active={cat === c}
+                  label={CATEGORY_LABELS[c]}
+                  count={counts[c]}
+                />
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mr-2">
+                // Failing signal:
+              </span>
+              <FailTab to="/leaderboard" search={{ cat, fail: "none" as const }} active={fail === "none"} label="Any" />
+              {SIGNAL_KEYS.map((s) => (
+                <FailTab
+                  key={s}
+                  to="/leaderboard"
+                  search={{ cat, fail: s }}
+                  active={fail === s}
+                  label={SIGNAL_LABEL[s]}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
 
         {/* Table */}
         <section aria-labelledby="leaderboard-ranking-heading">

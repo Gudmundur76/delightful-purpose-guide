@@ -2,10 +2,12 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StandardMarkdown } from "@/components/StandardMarkdown";
+import { ogImageMeta } from "@/lib/seo/og";
 import {
   getStandardVersion,
   STANDARD_LICENSE,
 } from "@/lib/standard/data";
+
 
 export const Route = createFileRoute("/standard/$version")({
   loader: ({ params }) => {

@@ -139,6 +139,7 @@ function CheckPage() {
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://your-site.com"
+              aria-label="Website URL to audit"
               disabled={phase === "loading"}
               className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
             />

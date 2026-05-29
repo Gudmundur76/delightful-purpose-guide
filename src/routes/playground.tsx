@@ -112,6 +112,26 @@ function PlaygroundPage() {
           </div>
         </section>
 
+        <section className="border-b border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+            <header className="mb-8">
+              <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                01b · Agentic playground
+              </div>
+              <h2 className="mt-2 font-extrabold uppercase tracking-tighter text-3xl sm:text-4xl">
+                Call any MCP tool
+              </h2>
+              <p className="mt-2 text-muted-foreground max-w-2xl">
+                Browser-native JSON-RPC runner. Paste your{" "}
+                <code className="font-mono text-xs">MCP_SECRET</code> once, pick a tool,
+                edit the arguments, and watch the live response. Same wire format Claude
+                and ChatGPT use over <code className="font-mono text-xs">/api/public/mcp</code>.
+              </p>
+            </header>
+            <McpRunner />
+          </div>
+        </section>
+
         <section className="border-b border-border bg-card/20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
             <header className="mb-8">

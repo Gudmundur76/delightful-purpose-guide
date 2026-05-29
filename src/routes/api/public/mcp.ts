@@ -59,6 +59,7 @@ import { revenueStatsAliasTool } from "@/lib/mcp/tools/revenue-stats";
 import { checkAuthoritySignalsTool } from "@/lib/mcp/tools/authority-signals";
 import { predictCitationsTool } from "@/lib/mcp/tools/predict-citations";
 import { getEngineRecommendationsTool } from "@/lib/mcp/tools/engine-recommendations";
+import { getCompanyProfileTool } from "@/lib/mcp/tools/company-profile";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",
@@ -168,6 +169,7 @@ const mcp = createMcpServer({
     checkAuthoritySignalsTool,
     predictCitationsTool,
     getEngineRecommendationsTool,
+    getCompanyProfileTool,
   ],
 });
 

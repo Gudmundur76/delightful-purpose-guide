@@ -53,6 +53,7 @@ import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as AuthDotmdRouteImport } from './routes/auth[.]md'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DataIndexRouteImport } from './routes/data.index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as ContentIndexRouteImport } from './routes/content.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
@@ -140,6 +141,9 @@ import { Route as ApiPublicDataClaimsDotjsonRouteImport } from './routes/api/pub
 import { Route as ApiPublicWidgetChartSlugDotsvgRouteImport } from './routes/api/public/widget/chart.$slug[.]svg'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
+import { Route as ApiPublicDataSchemasStatsDotschemaDotjsonRouteImport } from './routes/api/public/data.schemas.stats[.]schema[.]json'
+import { Route as ApiPublicDataSchemasLeaderboardDotschemaDotjsonRouteImport } from './routes/api/public/data.schemas.leaderboard[.]schema[.]json'
+import { Route as ApiPublicDataSchemasClaimsDotschemaDotjsonRouteImport } from './routes/api/public/data.schemas.claims[.]schema[.]json'
 
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
@@ -359,6 +363,11 @@ const ApiDocsRoute = ApiDocsRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataIndexRoute = DataIndexRouteImport.update({
+  id: '/data/',
+  path: '/data/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
@@ -820,6 +829,24 @@ const ApiPublicV1AdminTableRoute = ApiPublicV1AdminTableRouteImport.update({
   path: '/api/public/v1/admin/$table',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicDataSchemasStatsDotschemaDotjsonRoute =
+  ApiPublicDataSchemasStatsDotschemaDotjsonRouteImport.update({
+    id: '/api/public/data/schemas/stats.schema.json',
+    path: '/api/public/data/schemas/stats.schema.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute =
+  ApiPublicDataSchemasLeaderboardDotschemaDotjsonRouteImport.update({
+    id: '/api/public/data/schemas/leaderboard.schema.json',
+    path: '/api/public/data/schemas/leaderboard.schema.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicDataSchemasClaimsDotschemaDotjsonRoute =
+  ApiPublicDataSchemasClaimsDotschemaDotjsonRouteImport.update({
+    id: '/api/public/data/schemas/claims.schema.json',
+    path: '/api/public/data/schemas/claims.schema.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -911,6 +938,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/data/': typeof DataIndexRoute
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -950,6 +978,9 @@ export interface FileRoutesByFullPath {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/api/public/v1/': typeof ApiPublicV1IndexRoute
+  '/api/public/data/schemas/claims.schema.json': typeof ApiPublicDataSchemasClaimsDotschemaDotjsonRoute
+  '/api/public/data/schemas/leaderboard.schema.json': typeof ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute
+  '/api/public/data/schemas/stats.schema.json': typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
@@ -1042,6 +1073,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/content': typeof ContentIndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/data': typeof DataIndexRoute
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -1081,6 +1113,9 @@ export interface FileRoutesByTo {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/api/public/v1': typeof ApiPublicV1IndexRoute
+  '/api/public/data/schemas/claims.schema.json': typeof ApiPublicDataSchemasClaimsDotschemaDotjsonRoute
+  '/api/public/data/schemas/leaderboard.schema.json': typeof ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute
+  '/api/public/data/schemas/stats.schema.json': typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
@@ -1176,6 +1211,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/data/': typeof DataIndexRoute
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -1215,6 +1251,9 @@ export interface FileRoutesById {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/api/public/v1/': typeof ApiPublicV1IndexRoute
+  '/api/public/data/schemas/claims.schema.json': typeof ApiPublicDataSchemasClaimsDotschemaDotjsonRoute
+  '/api/public/data/schemas/leaderboard.schema.json': typeof ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute
+  '/api/public/data/schemas/stats.schema.json': typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
@@ -1311,6 +1350,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/content/'
     | '/dashboard/'
+    | '/data/'
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
@@ -1350,6 +1390,9 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/api/public/v1/'
+    | '/api/public/data/schemas/claims.schema.json'
+    | '/api/public/data/schemas/leaderboard.schema.json'
+    | '/api/public/data/schemas/stats.schema.json'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
     | '/api/public/widget/chart/$slug.svg'
@@ -1442,6 +1485,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/content'
     | '/dashboard'
+    | '/data'
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
@@ -1481,6 +1525,9 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/api/public/v1'
+    | '/api/public/data/schemas/claims.schema.json'
+    | '/api/public/data/schemas/leaderboard.schema.json'
+    | '/api/public/data/schemas/stats.schema.json'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
     | '/api/public/widget/chart/$slug.svg'
@@ -1575,6 +1622,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/content/'
     | '/dashboard/'
+    | '/data/'
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
@@ -1614,6 +1662,9 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/api/public/v1/'
+    | '/api/public/data/schemas/claims.schema.json'
+    | '/api/public/data/schemas/leaderboard.schema.json'
+    | '/api/public/data/schemas/stats.schema.json'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
     | '/api/public/widget/chart/$slug.svg'
@@ -1685,6 +1736,7 @@ export interface RootRouteChildren {
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  DataIndexRoute: typeof DataIndexRoute
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   DotwellKnownAgentSkillsIndexDotjsonRoute: typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   DotwellKnownMcpServerCardDotjsonRoute: typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -1722,6 +1774,9 @@ export interface RootRouteChildren {
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
   LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
   ApiPublicV1IndexRoute: typeof ApiPublicV1IndexRoute
+  ApiPublicDataSchemasClaimsDotschemaDotjsonRoute: typeof ApiPublicDataSchemasClaimsDotschemaDotjsonRoute
+  ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute: typeof ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute
+  ApiPublicDataSchemasStatsDotschemaDotjsonRoute: typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   ApiPublicV1AdminTableRoute: typeof ApiPublicV1AdminTableRoute
   ApiPublicWidgetChartSlugDotsvgRoute: typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
@@ -2034,6 +2089,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data/': {
+      id: '/data/'
+      path: '/data'
+      fullPath: '/data/'
+      preLoaderRoute: typeof DataIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/': {
@@ -2645,6 +2707,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1AdminTableRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/data/schemas/stats.schema.json': {
+      id: '/api/public/data/schemas/stats.schema.json'
+      path: '/api/public/data/schemas/stats.schema.json'
+      fullPath: '/api/public/data/schemas/stats.schema.json'
+      preLoaderRoute: typeof ApiPublicDataSchemasStatsDotschemaDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/data/schemas/leaderboard.schema.json': {
+      id: '/api/public/data/schemas/leaderboard.schema.json'
+      path: '/api/public/data/schemas/leaderboard.schema.json'
+      fullPath: '/api/public/data/schemas/leaderboard.schema.json'
+      preLoaderRoute: typeof ApiPublicDataSchemasLeaderboardDotschemaDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/data/schemas/claims.schema.json': {
+      id: '/api/public/data/schemas/claims.schema.json'
+      path: '/api/public/data/schemas/claims.schema.json'
+      fullPath: '/api/public/data/schemas/claims.schema.json'
+      preLoaderRoute: typeof ApiPublicDataSchemasClaimsDotschemaDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -2924,6 +3007,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
+  DataIndexRoute: DataIndexRoute,
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute:
     DotwellKnownAgentSkillsGrowGeoScanDotmdRoute,
   DotwellKnownAgentSkillsIndexDotjsonRoute:
@@ -2963,6 +3047,12 @@ const rootRouteChildren: RootRouteChildren = {
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
   LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
   ApiPublicV1IndexRoute: ApiPublicV1IndexRoute,
+  ApiPublicDataSchemasClaimsDotschemaDotjsonRoute:
+    ApiPublicDataSchemasClaimsDotschemaDotjsonRoute,
+  ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute:
+    ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute,
+  ApiPublicDataSchemasStatsDotschemaDotjsonRoute:
+    ApiPublicDataSchemasStatsDotschemaDotjsonRoute,
   ApiPublicV1AdminTableRoute: ApiPublicV1AdminTableRoute,
   ApiPublicWidgetChartSlugDotsvgRoute: ApiPublicWidgetChartSlugDotsvgRoute,
 }

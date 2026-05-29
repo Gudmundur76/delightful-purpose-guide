@@ -2,6 +2,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { computeHeadlineStats } from "@/lib/leaderboard/stats";
 import { LEADERBOARD } from "@/lib/leaderboard/entries";
+import { STATS_SCHEMA_URL } from "@/lib/seo/dataset-schemas";
 
 export const Route = createFileRoute("/api/public/data/stats.json")({
   server: {
@@ -9,6 +10,7 @@ export const Route = createFileRoute("/api/public/data/stats.json")({
       GET: async () => {
         const stats = computeHeadlineStats();
         const body = {
+          $schema: STATS_SCHEMA_URL,
           generated_at: new Date().toISOString(),
           date_modified: new Date().toISOString().slice(0, 10),
           standard: "geo-standard@2026.07",

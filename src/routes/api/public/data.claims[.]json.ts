@@ -2,7 +2,6 @@
 // the site resolves here as JSON, addressable by fragment id (e.g. #home-stat-83).
 import { createFileRoute } from "@tanstack/react-router";
 import { CLAIMS_REGISTRY, CLAIMS_DATE_MODIFIED } from "@/lib/seo/claims-registry";
-import { CLAIMS_REGISTRY, CLAIMS_DATE_MODIFIED } from "@/lib/seo/claims-registry";
 import { CLAIMS_SCHEMA_URL } from "@/lib/seo/dataset-schemas";
 
 export const Route = createFileRoute("/api/public/data/claims.json")({
@@ -21,6 +20,8 @@ export const Route = createFileRoute("/api/public/data/claims.json")({
           count: CLAIMS_REGISTRY.length,
           claims: CLAIMS_REGISTRY,
         };
+        return new Response(JSON.stringify(body, null, 2), {
+          status: 200,
           headers: {
             "Content-Type": "application/json; charset=utf-8",
             "Access-Control-Allow-Origin": "*",

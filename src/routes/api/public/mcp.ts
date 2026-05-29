@@ -60,6 +60,9 @@ import { checkAuthoritySignalsTool } from "@/lib/mcp/tools/authority-signals";
 import { predictCitationsTool } from "@/lib/mcp/tools/predict-citations";
 import { getEngineRecommendationsTool } from "@/lib/mcp/tools/engine-recommendations";
 import { getCompanyProfileTool } from "@/lib/mcp/tools/company-profile";
+import { autoFixSchemaTool } from "@/lib/mcp/tools/auto-fix/schema";
+import { autoFixLlmsTxtTool } from "@/lib/mcp/tools/auto-fix/llms-txt";
+import { autoFixRobotsTxtTool } from "@/lib/mcp/tools/auto-fix/robots-txt";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",

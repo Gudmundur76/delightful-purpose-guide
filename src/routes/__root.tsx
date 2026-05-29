@@ -158,6 +158,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
+      // Typography: Inter for UI, Fira Code (with ligatures) for the dev/agent-native voice.
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Fira+Code:wght@400;500;600&display=swap",
+      },
       {
         rel: "alternate",
         type: "application/rss+xml",
@@ -165,6 +172,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://grow.contact/rss.xml",
       },
     ],
+
     scripts: [
       {
         type: "application/ld+json",

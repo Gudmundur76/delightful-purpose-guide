@@ -5,6 +5,17 @@ import { parsePairSlug, findEntry, getFeaturedPairsWithEntries } from "@/lib/com
 import type { LeaderboardEntry } from "@/lib/leaderboard/entries";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+} from "recharts";
+
 
 export const Route = createFileRoute("/compare/$pair")({
   loader: ({ params }) => {
@@ -155,7 +166,49 @@ function Bar({ label, a, b, max }: { label: string; a: number; b: number; max: n
   );
 }
 
+function MetricRow({ label, a, b, max }: { label: string; a: number; b: number; max: number }) {
+  const gap = a - b;
+  const gapStr = gap === 0 ? "—" : gap > 0 ? `+${gap}` : `${gap}`;
+  const gapColor = gap === 0 ? "text-muted-foreground" : gap > 0 ? "text-emerald-400" : "text-rose-400";
+  return (
+    <tr className="border-t border-border">
+      <td className="px-4 py-2 text-foreground">{label}</td>
+      <td className="px-4 py-2 text-right">{a}</td>
+      <td className="px-4 py-2 text-right">{b}</td>
+      <td className={`px-4 py-2 text-right ${gapColor}`}>{gapStr}</td>
+      <td className="px-4 py-2 text-right text-muted-foreground">{max}</td>
+    </tr>
+  );
+}
+
+function RadarCompare({ a, b }: { a: LeaderboardEntry; b: LeaderboardEntry }) {
+  // Normalize each signal to 0-100 so the radar is comparable across different max weights
+  const data = [
+    { signal: "Semantic", [a.name]: (a.semantic / 25) * 100, [b.name]: (b.semantic / 25) * 100 },
+    { signal: "JSON-LD", [a.name]: (a.jsonLd / 20) * 100, [b.name]: (b.jsonLd / 20) * 100 },
+    { signal: "llms.txt", [a.name]: (a.llmsTxt / 15) * 100, [b.name]: (b.llmsTxt / 15) * 100 },
+    { signal: "Citability", [a.name]: (a.citability / 20) * 100, [b.name]: (b.citability / 20) * 100 },
+    { signal: "Speed", [a.name]: (a.speed / 20) * 100, [b.name]: (b.speed / 20) * 100 },
+  ];
+  return (
+    <div style={{ width: "100%", height: 360 }}>
+      <ResponsiveContainer>
+        <RadarChart data={data} outerRadius="75%">
+          <PolarGrid stroke="hsl(var(--border))" />
+          <PolarAngleAxis dataKey="signal" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
+          <PolarRadiusAxis angle={90} domain={[0, 100]} tick={false} axisLine={false} />
+          <Tooltip contentStyle={{ background: "hsl(var(--background))", border: "1px solid hsl(var(--border))", fontSize: 12 }} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Radar name={a.name} dataKey={a.name} stroke="hsl(var(--accent))" fill="hsl(var(--accent))" fillOpacity={0.35} />
+          <Radar name={b.name} dataKey={b.name} stroke="hsl(var(--foreground))" fill="hsl(var(--foreground))" fillOpacity={0.18} />
+        </RadarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
 function Side({ e, lead }: { e: LeaderboardEntry; lead: boolean }) {
+
   return (
     <div className={`border ${lead ? "border-emerald-500/40 bg-emerald-500/5" : "border-border"} p-6`}>
       <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
@@ -219,6 +272,13 @@ function ComparePage() {
           </div>
 
           <h2 className="font-mono text-xs uppercase tracking-widest text-accent mb-6 border-b border-border pb-3">
+            // Six-signal radar
+          </h2>
+          <div className="border border-border bg-muted/10 p-4 mb-12">
+            <RadarCompare a={a} b={b} />
+          </div>
+
+          <h2 className="font-mono text-xs uppercase tracking-widest text-accent mb-6 border-b border-border pb-3">
             // Signal breakdown
           </h2>
           <div className="mb-12">
@@ -228,6 +288,46 @@ function ComparePage() {
             <Bar label="Citability" a={a.citability} b={b.citability} max={20} />
             <Bar label="Speed" a={a.speed} b={b.speed} max={20} />
           </div>
+
+          <h2 className="font-mono text-xs uppercase tracking-widest text-accent mb-6 border-b border-border pb-3">
+            // Full metrics table
+          </h2>
+          <div className="overflow-x-auto mb-12 border border-border">
+            <table className="w-full text-sm">
+              <thead className="bg-muted/30 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                <tr>
+                  <th className="text-left px-4 py-3">Metric</th>
+                  <th className="text-right px-4 py-3">{a.name}</th>
+                  <th className="text-right px-4 py-3">{b.name}</th>
+                  <th className="text-right px-4 py-3">Gap</th>
+                  <th className="text-right px-4 py-3">Max</th>
+                </tr>
+              </thead>
+              <tbody className="font-mono text-xs">
+                <MetricRow label="Overall CCS" a={a.score} b={b.score} max={100} />
+                <MetricRow label="Semantic HTML" a={a.semantic} b={b.semantic} max={25} />
+                <MetricRow label="JSON-LD" a={a.jsonLd} b={b.jsonLd} max={20} />
+                <MetricRow label="llms.txt" a={a.llmsTxt} b={b.llmsTxt} max={15} />
+                <MetricRow label="Citability" a={a.citability} b={b.citability} max={20} />
+                <MetricRow label="Speed" a={a.speed} b={b.speed} max={20} />
+              </tbody>
+            </table>
+            <div className="bg-muted/20 px-4 py-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground flex flex-wrap gap-3 justify-between">
+              <span>Deep-link: grow.contact/compare/{a.domain.replace(/\./g, "-")}-vs-{b.domain.replace(/\./g, "-")}</span>
+              <button
+                type="button"
+                onClick={() => {
+                  if (typeof navigator !== "undefined") {
+                    void navigator.clipboard?.writeText(window.location.href);
+                  }
+                }}
+                className="text-accent hover:text-foreground transition-colors"
+              >
+                Copy link
+              </button>
+            </div>
+          </div>
+
 
           <section className="border border-border bg-muted/20 p-6 mb-12">
             <h2 className="font-mono text-xs uppercase tracking-widest text-accent mb-4">

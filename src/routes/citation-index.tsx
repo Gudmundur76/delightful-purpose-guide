@@ -5,6 +5,7 @@ import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { getCitationIndex } from "@/lib/leaderboard/companies.functions";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ogImageMeta } from "@/lib/seo/og";
 
 const citationIndexQuery = queryOptions({
   queryKey: ["citation-index"],

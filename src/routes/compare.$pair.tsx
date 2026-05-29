@@ -230,6 +230,13 @@ function ComparePage() {
           </div>
 
           <h2 className="font-mono text-xs uppercase tracking-widest text-accent mb-6 border-b border-border pb-3">
+            // Six-signal radar
+          </h2>
+          <div className="border border-border bg-muted/10 p-4 mb-12">
+            <RadarCompare a={a} b={b} />
+          </div>
+
+          <h2 className="font-mono text-xs uppercase tracking-widest text-accent mb-6 border-b border-border pb-3">
             // Signal breakdown
           </h2>
           <div className="mb-12">
@@ -239,6 +246,46 @@ function ComparePage() {
             <Bar label="Citability" a={a.citability} b={b.citability} max={20} />
             <Bar label="Speed" a={a.speed} b={b.speed} max={20} />
           </div>
+
+          <h2 className="font-mono text-xs uppercase tracking-widest text-accent mb-6 border-b border-border pb-3">
+            // Full metrics table
+          </h2>
+          <div className="overflow-x-auto mb-12 border border-border">
+            <table className="w-full text-sm">
+              <thead className="bg-muted/30 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                <tr>
+                  <th className="text-left px-4 py-3">Metric</th>
+                  <th className="text-right px-4 py-3">{a.name}</th>
+                  <th className="text-right px-4 py-3">{b.name}</th>
+                  <th className="text-right px-4 py-3">Gap</th>
+                  <th className="text-right px-4 py-3">Max</th>
+                </tr>
+              </thead>
+              <tbody className="font-mono text-xs">
+                <MetricRow label="Overall CCS" a={a.score} b={b.score} max={100} />
+                <MetricRow label="Semantic HTML" a={a.semantic} b={b.semantic} max={25} />
+                <MetricRow label="JSON-LD" a={a.jsonLd} b={b.jsonLd} max={20} />
+                <MetricRow label="llms.txt" a={a.llmsTxt} b={b.llmsTxt} max={15} />
+                <MetricRow label="Citability" a={a.citability} b={b.citability} max={20} />
+                <MetricRow label="Speed" a={a.speed} b={b.speed} max={20} />
+              </tbody>
+            </table>
+            <div className="bg-muted/20 px-4 py-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground flex flex-wrap gap-3 justify-between">
+              <span>Deep-link: grow.contact/compare/{a.domain.replace(/\./g, "-")}-vs-{b.domain.replace(/\./g, "-")}</span>
+              <button
+                type="button"
+                onClick={() => {
+                  if (typeof navigator !== "undefined") {
+                    void navigator.clipboard?.writeText(window.location.href);
+                  }
+                }}
+                className="text-accent hover:text-foreground transition-colors"
+              >
+                Copy link
+              </button>
+            </div>
+          </div>
+
 
           <section className="border border-border bg-muted/20 p-6 mb-12">
             <h2 className="font-mono text-xs uppercase tracking-widest text-accent mb-4">

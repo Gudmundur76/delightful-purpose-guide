@@ -69,8 +69,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/stats", lastmod: today, changefreq: "weekly", priority: "0.9" },
           { path: "/trust", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/leaderboard", lastmod: today, changefreq: "weekly", priority: "0.9" },
-          { path: "/admin/leads", lastmod: today, changefreq: "monthly", priority: "0.3" },
-          { path: "/admin/reviews", lastmod: today, changefreq: "monthly", priority: "0.3" },
           { path: "/playground", lastmod: today, changefreq: "weekly", priority: "0.9" },
           { path: "/extension", lastmod: today, changefreq: "monthly", priority: "0.9" },
           { path: "/v-score", lastmod: today, changefreq: "monthly", priority: "0.8" },
@@ -121,8 +119,6 @@ export const Route = createFileRoute("/sitemap.xml")({
             changefreq: "monthly",
             priority: "0.7",
           })),
-          { path: "/sop", lastmod: today, changefreq: "monthly", priority: "0.5" },
-
           { path: "/sop", lastmod: today, changefreq: "monthly", priority: "0.5" },
           { path: "/auth.md", lastmod: today, changefreq: "monthly", priority: "0.3" },
           { path: "/llms-full.txt", lastmod: today, changefreq: "weekly", priority: "0.4" },

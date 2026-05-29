@@ -82,11 +82,13 @@ import { Route as GlossaryTermRouteImport } from './routes/glossary.$term'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as DataLlmsDottxtRouteImport } from './routes/data.llms[.]txt'
 import { Route as DataDropsSlugRouteImport } from './routes/data-drops.$slug'
+import { Route as DashboardSitesRouteImport } from './routes/dashboard.sites'
 import { Route as DashboardScanRouteImport } from './routes/dashboard.scan'
 import { Route as DashboardReviewsRouteImport } from './routes/dashboard.reviews'
 import { Route as DashboardPublishRouteImport } from './routes/dashboard.publish'
 import { Route as DashboardCitationRouteImport } from './routes/dashboard.citation'
 import { Route as DashboardBadgeRouteImport } from './routes/dashboard.badge'
+import { Route as DashboardAutoFixesRouteImport } from './routes/dashboard.auto-fixes'
 import { Route as CrawlersBotRouteImport } from './routes/crawlers.$bot'
 import { Route as ContentDraftsRouteImport } from './routes/content.drafts'
 import { Route as ContentCalendarRouteImport } from './routes/content.calendar'
@@ -112,6 +114,7 @@ import { Route as HistoryHostDiffRouteImport } from './routes/history.$host.diff
 import { Route as DataQ22026StatsDotjsonRouteImport } from './routes/data.q2-2026.stats[.]json'
 import { Route as DataQ22026LeaderboardDotjsonRouteImport } from './routes/data.q2-2026.leaderboard[.]json'
 import { Route as DataQ22026ClaimsDotjsonRouteImport } from './routes/data.q2-2026.claims[.]json'
+import { Route as DashboardSitesDomainRouteImport } from './routes/dashboard.sites.$domain'
 import { Route as ContentDraftsIdRouteImport } from './routes/content.drafts.$id'
 import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
 import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
@@ -154,6 +157,7 @@ import { Route as ApiPublicHooksCaptureCitationsRouteImport } from './routes/api
 import { Route as ApiPublicDataStatsDotjsonRouteImport } from './routes/api/public/data.stats[.]json'
 import { Route as ApiPublicDataLeaderboardDotjsonRouteImport } from './routes/api/public/data.leaderboard[.]json'
 import { Route as ApiPublicDataClaimsDotjsonRouteImport } from './routes/api/public/data.claims[.]json'
+import { Route as ApiPublicAdminPlatformRouteImport } from './routes/api/public/admin/platform'
 import { Route as ApiPublicWidgetChartSlugDotsvgRouteImport } from './routes/api/public/widget/chart.$slug[.]svg'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1CompaniesDomainRouteImport } from './routes/api/public/v1/companies.$domain'
@@ -529,6 +533,11 @@ const DataDropsSlugRoute = DataDropsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => DataDropsRoute,
 } as any)
+const DashboardSitesRoute = DashboardSitesRouteImport.update({
+  id: '/sites',
+  path: '/sites',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardScanRoute = DashboardScanRouteImport.update({
   id: '/scan',
   path: '/scan',
@@ -552,6 +561,11 @@ const DashboardCitationRoute = DashboardCitationRouteImport.update({
 const DashboardBadgeRoute = DashboardBadgeRouteImport.update({
   id: '/badge',
   path: '/badge',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAutoFixesRoute = DashboardAutoFixesRouteImport.update({
+  id: '/auto-fixes',
+  path: '/auto-fixes',
   getParentRoute: () => DashboardRoute,
 } as any)
 const CrawlersBotRoute = CrawlersBotRouteImport.update({
@@ -683,6 +697,11 @@ const DataQ22026ClaimsDotjsonRoute = DataQ22026ClaimsDotjsonRouteImport.update({
   id: '/data/q2-2026/claims.json',
   path: '/data/q2-2026/claims.json',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardSitesDomainRoute = DashboardSitesDomainRouteImport.update({
+  id: '/$domain',
+  path: '/$domain',
+  getParentRoute: () => DashboardSitesRoute,
 } as any)
 const ContentDraftsIdRoute = ContentDraftsIdRouteImport.update({
   id: '/$id',
@@ -915,6 +934,11 @@ const ApiPublicDataClaimsDotjsonRoute =
     path: '/api/public/data/claims.json',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicAdminPlatformRoute = ApiPublicAdminPlatformRouteImport.update({
+  id: '/api/public/admin/platform',
+  path: '/api/public/admin/platform',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicWidgetChartSlugDotsvgRoute =
   ApiPublicWidgetChartSlugDotsvgRouteImport.update({
     id: '/api/public/widget/chart/$slug.svg',
@@ -1026,11 +1050,13 @@ export interface FileRoutesByFullPath {
   '/content/calendar': typeof ContentCalendarRoute
   '/content/drafts': typeof ContentDraftsRouteWithChildren
   '/crawlers/$bot': typeof CrawlersBotRoute
+  '/dashboard/auto-fixes': typeof DashboardAutoFixesRoute
   '/dashboard/badge': typeof DashboardBadgeRoute
   '/dashboard/citation': typeof DashboardCitationRoute
   '/dashboard/publish': typeof DashboardPublishRoute
   '/dashboard/reviews': typeof DashboardReviewsRoute
   '/dashboard/scan': typeof DashboardScanRoute
+  '/dashboard/sites': typeof DashboardSitesRouteWithChildren
   '/data-drops/$slug': typeof DataDropsSlugRoute
   '/data/llms.txt': typeof DataLlmsDottxtRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -1065,11 +1091,13 @@ export interface FileRoutesByFullPath {
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
+  '/dashboard/sites/$domain': typeof DashboardSitesDomainRoute
   '/data/q2-2026/claims.json': typeof DataQ22026ClaimsDotjsonRoute
   '/data/q2-2026/leaderboard.json': typeof DataQ22026LeaderboardDotjsonRoute
   '/data/q2-2026/stats.json': typeof DataQ22026StatsDotjsonRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/admin/platform': typeof ApiPublicAdminPlatformRoute
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
@@ -1177,11 +1205,13 @@ export interface FileRoutesByTo {
   '/content/calendar': typeof ContentCalendarRoute
   '/content/drafts': typeof ContentDraftsRouteWithChildren
   '/crawlers/$bot': typeof CrawlersBotRoute
+  '/dashboard/auto-fixes': typeof DashboardAutoFixesRoute
   '/dashboard/badge': typeof DashboardBadgeRoute
   '/dashboard/citation': typeof DashboardCitationRoute
   '/dashboard/publish': typeof DashboardPublishRoute
   '/dashboard/reviews': typeof DashboardReviewsRoute
   '/dashboard/scan': typeof DashboardScanRoute
+  '/dashboard/sites': typeof DashboardSitesRouteWithChildren
   '/data-drops/$slug': typeof DataDropsSlugRoute
   '/data/llms.txt': typeof DataLlmsDottxtRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -1216,11 +1246,13 @@ export interface FileRoutesByTo {
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
+  '/dashboard/sites/$domain': typeof DashboardSitesDomainRoute
   '/data/q2-2026/claims.json': typeof DataQ22026ClaimsDotjsonRoute
   '/data/q2-2026/leaderboard.json': typeof DataQ22026LeaderboardDotjsonRoute
   '/data/q2-2026/stats.json': typeof DataQ22026StatsDotjsonRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/admin/platform': typeof ApiPublicAdminPlatformRoute
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
@@ -1332,11 +1364,13 @@ export interface FileRoutesById {
   '/content/calendar': typeof ContentCalendarRoute
   '/content/drafts': typeof ContentDraftsRouteWithChildren
   '/crawlers/$bot': typeof CrawlersBotRoute
+  '/dashboard/auto-fixes': typeof DashboardAutoFixesRoute
   '/dashboard/badge': typeof DashboardBadgeRoute
   '/dashboard/citation': typeof DashboardCitationRoute
   '/dashboard/publish': typeof DashboardPublishRoute
   '/dashboard/reviews': typeof DashboardReviewsRoute
   '/dashboard/scan': typeof DashboardScanRoute
+  '/dashboard/sites': typeof DashboardSitesRouteWithChildren
   '/data-drops/$slug': typeof DataDropsSlugRoute
   '/data/llms.txt': typeof DataLlmsDottxtRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -1371,11 +1405,13 @@ export interface FileRoutesById {
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
+  '/dashboard/sites/$domain': typeof DashboardSitesDomainRoute
   '/data/q2-2026/claims.json': typeof DataQ22026ClaimsDotjsonRoute
   '/data/q2-2026/leaderboard.json': typeof DataQ22026LeaderboardDotjsonRoute
   '/data/q2-2026/stats.json': typeof DataQ22026StatsDotjsonRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/admin/platform': typeof ApiPublicAdminPlatformRoute
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
@@ -1488,11 +1524,13 @@ export interface FileRouteTypes {
     | '/content/calendar'
     | '/content/drafts'
     | '/crawlers/$bot'
+    | '/dashboard/auto-fixes'
     | '/dashboard/badge'
     | '/dashboard/citation'
     | '/dashboard/publish'
     | '/dashboard/reviews'
     | '/dashboard/scan'
+    | '/dashboard/sites'
     | '/data-drops/$slug'
     | '/data/llms.txt'
     | '/email/unsubscribe'
@@ -1527,11 +1565,13 @@ export interface FileRouteTypes {
     | '/api/public/mcp'
     | '/api/public/ping'
     | '/content/drafts/$id'
+    | '/dashboard/sites/$domain'
     | '/data/q2-2026/claims.json'
     | '/data/q2-2026/leaderboard.json'
     | '/data/q2-2026/stats.json'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/api/public/admin/platform'
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
@@ -1639,11 +1679,13 @@ export interface FileRouteTypes {
     | '/content/calendar'
     | '/content/drafts'
     | '/crawlers/$bot'
+    | '/dashboard/auto-fixes'
     | '/dashboard/badge'
     | '/dashboard/citation'
     | '/dashboard/publish'
     | '/dashboard/reviews'
     | '/dashboard/scan'
+    | '/dashboard/sites'
     | '/data-drops/$slug'
     | '/data/llms.txt'
     | '/email/unsubscribe'
@@ -1678,11 +1720,13 @@ export interface FileRouteTypes {
     | '/api/public/mcp'
     | '/api/public/ping'
     | '/content/drafts/$id'
+    | '/dashboard/sites/$domain'
     | '/data/q2-2026/claims.json'
     | '/data/q2-2026/leaderboard.json'
     | '/data/q2-2026/stats.json'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/api/public/admin/platform'
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
@@ -1793,11 +1837,13 @@ export interface FileRouteTypes {
     | '/content/calendar'
     | '/content/drafts'
     | '/crawlers/$bot'
+    | '/dashboard/auto-fixes'
     | '/dashboard/badge'
     | '/dashboard/citation'
     | '/dashboard/publish'
     | '/dashboard/reviews'
     | '/dashboard/scan'
+    | '/dashboard/sites'
     | '/data-drops/$slug'
     | '/data/llms.txt'
     | '/email/unsubscribe'
@@ -1832,11 +1878,13 @@ export interface FileRouteTypes {
     | '/api/public/mcp'
     | '/api/public/ping'
     | '/content/drafts/$id'
+    | '/dashboard/sites/$domain'
     | '/data/q2-2026/claims.json'
     | '/data/q2-2026/leaderboard.json'
     | '/data/q2-2026/stats.json'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/api/public/admin/platform'
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
@@ -1963,6 +2011,7 @@ export interface RootRouteChildren {
   DataQ22026LeaderboardDotjsonRoute: typeof DataQ22026LeaderboardDotjsonRoute
   DataQ22026StatsDotjsonRoute: typeof DataQ22026StatsDotjsonRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicAdminPlatformRoute: typeof ApiPublicAdminPlatformRoute
   ApiPublicDataClaimsDotjsonRoute: typeof ApiPublicDataClaimsDotjsonRoute
   ApiPublicDataLeaderboardDotjsonRoute: typeof ApiPublicDataLeaderboardDotjsonRoute
   ApiPublicDataStatsDotjsonRoute: typeof ApiPublicDataStatsDotjsonRoute
@@ -2516,6 +2565,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DataDropsSlugRouteImport
       parentRoute: typeof DataDropsRoute
     }
+    '/dashboard/sites': {
+      id: '/dashboard/sites'
+      path: '/sites'
+      fullPath: '/dashboard/sites'
+      preLoaderRoute: typeof DashboardSitesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/scan': {
       id: '/dashboard/scan'
       path: '/scan'
@@ -2549,6 +2605,13 @@ declare module '@tanstack/react-router' {
       path: '/badge'
       fullPath: '/dashboard/badge'
       preLoaderRoute: typeof DashboardBadgeRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/auto-fixes': {
+      id: '/dashboard/auto-fixes'
+      path: '/auto-fixes'
+      fullPath: '/dashboard/auto-fixes'
+      preLoaderRoute: typeof DashboardAutoFixesRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/crawlers/$bot': {
@@ -2725,6 +2788,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/data/q2-2026/claims.json'
       preLoaderRoute: typeof DataQ22026ClaimsDotjsonRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/sites/$domain': {
+      id: '/dashboard/sites/$domain'
+      path: '/$domain'
+      fullPath: '/dashboard/sites/$domain'
+      preLoaderRoute: typeof DashboardSitesDomainRouteImport
+      parentRoute: typeof DashboardSitesRoute
     }
     '/content/drafts/$id': {
       id: '/content/drafts/$id'
@@ -3020,6 +3090,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicDataClaimsDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/admin/platform': {
+      id: '/api/public/admin/platform'
+      path: '/api/public/admin/platform'
+      fullPath: '/api/public/admin/platform'
+      preLoaderRoute: typeof ApiPublicAdminPlatformRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/widget/chart/$slug.svg': {
       id: '/api/public/widget/chart/$slug.svg'
       path: '/api/public/widget/chart/$slug.svg'
@@ -3170,21 +3247,37 @@ const CrawlersRouteWithChildren = CrawlersRoute._addFileChildren(
   CrawlersRouteChildren,
 )
 
+interface DashboardSitesRouteChildren {
+  DashboardSitesDomainRoute: typeof DashboardSitesDomainRoute
+}
+
+const DashboardSitesRouteChildren: DashboardSitesRouteChildren = {
+  DashboardSitesDomainRoute: DashboardSitesDomainRoute,
+}
+
+const DashboardSitesRouteWithChildren = DashboardSitesRoute._addFileChildren(
+  DashboardSitesRouteChildren,
+)
+
 interface DashboardRouteChildren {
+  DashboardAutoFixesRoute: typeof DashboardAutoFixesRoute
   DashboardBadgeRoute: typeof DashboardBadgeRoute
   DashboardCitationRoute: typeof DashboardCitationRoute
   DashboardPublishRoute: typeof DashboardPublishRoute
   DashboardReviewsRoute: typeof DashboardReviewsRoute
   DashboardScanRoute: typeof DashboardScanRoute
+  DashboardSitesRoute: typeof DashboardSitesRouteWithChildren
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAutoFixesRoute: DashboardAutoFixesRoute,
   DashboardBadgeRoute: DashboardBadgeRoute,
   DashboardCitationRoute: DashboardCitationRoute,
   DashboardPublishRoute: DashboardPublishRoute,
   DashboardReviewsRoute: DashboardReviewsRoute,
   DashboardScanRoute: DashboardScanRoute,
+  DashboardSitesRoute: DashboardSitesRouteWithChildren,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
@@ -3383,6 +3476,7 @@ const rootRouteChildren: RootRouteChildren = {
   DataQ22026LeaderboardDotjsonRoute: DataQ22026LeaderboardDotjsonRoute,
   DataQ22026StatsDotjsonRoute: DataQ22026StatsDotjsonRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicAdminPlatformRoute: ApiPublicAdminPlatformRoute,
   ApiPublicDataClaimsDotjsonRoute: ApiPublicDataClaimsDotjsonRoute,
   ApiPublicDataLeaderboardDotjsonRoute: ApiPublicDataLeaderboardDotjsonRoute,
   ApiPublicDataStatsDotjsonRoute: ApiPublicDataStatsDotjsonRoute,
@@ -3429,13 +3523,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

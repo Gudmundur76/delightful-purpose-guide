@@ -135,10 +135,28 @@ export const Route = createFileRoute("/")({
                 { "@type": "Offer", name: "Growth", price: "4800", priceCurrency: "USD", url: "https://grow.contact/pricing" },
               ],
             },
+            {
+              "@type": "WebPage",
+              "@id": "https://grow.contact/#webpage",
+              url: "https://grow.contact/",
+              name: "Grow — Agent-Native Web Agency",
+              dateModified: HOME_DATE_MODIFIED,
+              mentions: HOME_CLAIMS.map((c) =>
+                verifiableClaim({
+                  id: c.id,
+                  value: c.value,
+                  label: c.label,
+                  citation: claimCitation(c.id),
+                  dateModified: HOME_DATE_MODIFIED,
+                  unitCode: c.value.endsWith("%") ? "P1" : undefined,
+                }),
+              ),
+            },
           ],
         }),
       },
     ],
+
     };
   },
 

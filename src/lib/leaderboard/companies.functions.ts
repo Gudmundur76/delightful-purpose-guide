@@ -23,7 +23,8 @@ export type CitationIndexRow = {
 
 export const getCitationIndex = createServerFn({ method: "GET" }).handler(
   async (): Promise<{ rows: CitationIndexRow[]; generated_at: string }> => {
-    const [companies, scores, history] = await Promise.all([
+    const since24h = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const [companies, scores, history, events24h] = await Promise.all([
       supabaseAdmin.from("companies").select("domain,name,category,logo_url"),
       supabaseAdmin
         .from("company_scores")
@@ -35,6 +36,11 @@ export const getCitationIndex = createServerFn({ method: "GET" }).handler(
           "domain,total_citations,perplexity_share,chatgpt_share,claude_share,google_aio_share,volatility,month",
         )
         .order("month", { ascending: false }),
+      supabaseAdmin
+        .from("citation_events")
+        .select("domain_queried")
+        .eq("domain_was_cited", true)
+        .gte("queried_at", since24h),
     ]);
 
     if (companies.error) throw new Error(companies.error.message);

@@ -66,6 +66,7 @@ import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as VerifierSearchRouteImport } from './routes/verifier.search'
+import { Route as VerifierLeaderboardRouteImport } from './routes/verifier.leaderboard'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
 import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
 import { Route as StandardLlmsDottxtRouteImport } from './routes/standard.llms[.]txt'
@@ -442,6 +443,11 @@ const VerifyIdRoute = VerifyIdRouteImport.update({
 const VerifierSearchRoute = VerifierSearchRouteImport.update({
   id: '/verifier/search',
   path: '/verifier/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifierLeaderboardRoute = VerifierLeaderboardRouteImport.update({
+  id: '/verifier/leaderboard',
+  path: '/verifier/leaderboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsRobotsCheckerRoute = ToolsRobotsCheckerRouteImport.update({
@@ -1027,6 +1033,7 @@ export interface FileRoutesByFullPath {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
+  '/verifier/leaderboard': typeof VerifierLeaderboardRoute
   '/verifier/search': typeof VerifierSearchRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -1175,6 +1182,7 @@ export interface FileRoutesByTo {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
+  '/verifier/leaderboard': typeof VerifierLeaderboardRoute
   '/verifier/search': typeof VerifierSearchRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -1327,6 +1335,7 @@ export interface FileRoutesById {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
+  '/verifier/leaderboard': typeof VerifierLeaderboardRoute
   '/verifier/search': typeof VerifierSearchRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
@@ -1480,6 +1489,7 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/tools/robots-checker'
+    | '/verifier/leaderboard'
     | '/verifier/search'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1628,6 +1638,7 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/tools/robots-checker'
+    | '/verifier/leaderboard'
     | '/verifier/search'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1779,6 +1790,7 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/tools/robots-checker'
+    | '/verifier/leaderboard'
     | '/verifier/search'
     | '/verify/$id'
     | '/vs/$competitor'
@@ -1908,6 +1920,7 @@ export interface RootRouteChildren {
   ReportQ22026Route: typeof ReportQ22026Route
   ReportQ22026DotpdfRoute: typeof ReportQ22026DotpdfRoute
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
+  VerifierLeaderboardRoute: typeof VerifierLeaderboardRoute
   VerifierSearchRoute: typeof VerifierSearchRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -2361,6 +2374,13 @@ declare module '@tanstack/react-router' {
       path: '/verifier/search'
       fullPath: '/verifier/search'
       preLoaderRoute: typeof VerifierSearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verifier/leaderboard': {
+      id: '/verifier/leaderboard'
+      path: '/verifier/leaderboard'
+      fullPath: '/verifier/leaderboard'
+      preLoaderRoute: typeof VerifierLeaderboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/robots-checker': {
@@ -3302,6 +3322,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReportQ22026Route: ReportQ22026Route,
   ReportQ22026DotpdfRoute: ReportQ22026DotpdfRoute,
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
+  VerifierLeaderboardRoute: VerifierLeaderboardRoute,
   VerifierSearchRoute: VerifierSearchRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SourceSyncIndicator } from "@/components/SourceSyncIndicator";
 import { ogImageMeta } from "@/lib/seo/og";
 
 // /trust — the E-E-A-T anchor page. One URL that consolidates every
@@ -322,6 +323,49 @@ function TrustPage() {
             </div>
           </div>
         </section>
+
+
+        <section className="border-b border-border">
+          <div className="max-w-7xl mx-auto px-6 py-16">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">
+              // agent-verifiable standard v2.1
+            </p>
+            <h2 className="text-2xl font-extrabold tracking-tighter uppercase mb-2">
+              Web → JSON-LD → GitHub, in one hop
+            </h2>
+            <p className="text-sm text-muted-foreground max-w-2xl mb-6 leading-relaxed">
+              Every verifiable claim on this site carries a <code className="font-mono">sameAs</code>{" "}
+              link to the exact source file in the commit that built this page.
+              Agents can resolve a rendered number back to raw source without
+              scraping. Score the loop yourself at{" "}
+              <Link to="/v-score" className="text-accent underline">
+                /v-score
+              </Link>
+              .
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <SourceSyncIndicator variant="card" />
+              <Link
+                to="/v-score"
+                className="block border border-border bg-card p-5 hover:border-accent transition-colors no-underline"
+              >
+                <div className="font-mono text-[10px] uppercase tracking-widest text-accent">
+                  // v-score dashboard
+                </div>
+                <div className="mt-3 font-mono text-sm text-foreground">
+                  0–100 composite agent-verifiability score
+                </div>
+                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                  Claims-linked · Source-handshake · Schemas-valid ·
+                  Discovery-reachable · Information-gain. Derived programmatically
+                  from this repository on every build.
+                </p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+
 
         <section>
           <div className="max-w-4xl mx-auto px-6 py-20 text-center">

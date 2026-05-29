@@ -31,7 +31,8 @@
   --color-ring: var(--ring);
 
   --font-display: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-mono: 'Fira Code', 'JetBrains Mono', ui-monospace, monospace;
+
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -14,11 +14,11 @@
 // Then embed the returned object inside a page's JSON-LD `mentions` or
 // `about` array, and wrap the visible value in `<span id="stat-83">83%</span>`.
 
-const DATA_BASE = "https://grow.contact/api/public/data";
 import { sourceSameAs } from "@/lib/seo/trust-handshake";
 
 const DATA_BASE = "https://grow.contact/api/public/data";
 const ARCHIVE_BASE = "https://grow.contact/data";
+
 
 export type VerifiableClaimInput = {
   /** DOM id used by the visible <span id="..."> wrapper. Must match the JSON fragment. */

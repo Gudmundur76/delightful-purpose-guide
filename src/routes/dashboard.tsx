@@ -14,6 +14,8 @@ export const Route = createFileRoute("/dashboard")({
 
 const TABS = [
   { to: "/dashboard", label: "OVERVIEW", exact: true },
+  { to: "/dashboard/sites", label: "SITES", exact: false },
+  { to: "/dashboard/auto-fixes", label: "AUTO-FIXES", exact: false },
   { to: "/dashboard/citation", label: "CITATION", exact: false },
   { to: "/dashboard/scan", label: "SCAN", exact: false },
   { to: "/dashboard/publish", label: "PUBLISH", exact: false },

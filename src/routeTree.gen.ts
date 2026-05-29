@@ -33,6 +33,7 @@ import { Route as PlaygroundRouteImport } from './routes/playground'
 import { Route as PlaybooksRouteImport } from './routes/playbooks'
 import { Route as PlaybookRouteImport } from './routes/playbook'
 import { Route as OutreachRouteImport } from './routes/outreach'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
 import { Route as LlmsRouteImport } from './routes/llms'
@@ -275,6 +276,11 @@ const PlaybookRoute = PlaybookRouteImport.update({
 const OutreachRoute = OutreachRouteImport.update({
   id: '/outreach',
   path: '/outreach',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -949,6 +955,7 @@ export interface FileRoutesByFullPath {
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
+  '/mcp': typeof McpRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
   '/playbooks': typeof PlaybooksRouteWithChildren
@@ -1095,6 +1102,7 @@ export interface FileRoutesByTo {
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
+  '/mcp': typeof McpRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
   '/playbooks': typeof PlaybooksRouteWithChildren
@@ -1245,6 +1253,7 @@ export interface FileRoutesById {
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
+  '/mcp': typeof McpRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
   '/playbooks': typeof PlaybooksRouteWithChildren
@@ -1396,6 +1405,7 @@ export interface FileRouteTypes {
     | '/llms'
     | '/llms-full.txt'
     | '/login'
+    | '/mcp'
     | '/outreach'
     | '/playbook'
     | '/playbooks'
@@ -1542,6 +1552,7 @@ export interface FileRouteTypes {
     | '/llms'
     | '/llms-full.txt'
     | '/login'
+    | '/mcp'
     | '/outreach'
     | '/playbook'
     | '/playbooks'
@@ -1691,6 +1702,7 @@ export interface FileRouteTypes {
     | '/llms'
     | '/llms-full.txt'
     | '/login'
+    | '/mcp'
     | '/outreach'
     | '/playbook'
     | '/playbooks'
@@ -1841,6 +1853,7 @@ export interface RootRouteChildren {
   LlmsRoute: typeof LlmsRoute
   LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
   LoginRoute: typeof LoginRoute
+  McpRoute: typeof McpRoute
   OutreachRoute: typeof OutreachRoute
   PlaybookRoute: typeof PlaybookRoute
   PlaybooksRoute: typeof PlaybooksRouteWithChildren
@@ -2104,6 +2117,13 @@ declare module '@tanstack/react-router' {
       path: '/outreach'
       fullPath: '/outreach'
       preLoaderRoute: typeof OutreachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -3215,6 +3235,7 @@ const rootRouteChildren: RootRouteChildren = {
   LlmsRoute: LlmsRoute,
   LlmsFullDottxtRoute: LlmsFullDottxtRoute,
   LoginRoute: LoginRoute,
+  McpRoute: McpRoute,
   OutreachRoute: OutreachRoute,
   PlaybookRoute: PlaybookRoute,
   PlaybooksRoute: PlaybooksRouteWithChildren,
@@ -3322,13 +3343,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

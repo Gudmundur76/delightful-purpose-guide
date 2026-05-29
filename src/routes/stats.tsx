@@ -7,6 +7,8 @@ import { ogImageMeta } from "@/lib/seo/og";
 import { VerifiabilityBadge } from "@/components/VerifiabilityBadge";
 import { LiveSignal } from "@/components/LiveSignal";
 import { verifiableClaim, claimCitation, DATA_URLS } from "@/lib/seo/verifiable";
+import { StatCard, type StatCardProps } from "@/components/StatCard";
+
 
 // "State of the Agent-Readable Web" — a permanent, citable stats page.
 // Every stat has a stable anchor (#missing-llms-txt, #weak-jsonld, …) so

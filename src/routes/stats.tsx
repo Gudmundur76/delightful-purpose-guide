@@ -4,6 +4,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { computeHeadlineStats } from "@/lib/leaderboard/stats";
 import { LEADERBOARD } from "@/lib/leaderboard/entries";
 import { ogImageMeta } from "@/lib/seo/og";
+import { VerifiabilityBadge } from "@/components/VerifiabilityBadge";
+import { LiveSignal } from "@/components/LiveSignal";
+import { verifiableClaim, claimCitation, DATA_URLS } from "@/lib/seo/verifiable";
 
 // "State of the Agent-Readable Web" — a permanent, citable stats page.
 // Every stat has a stable anchor (#missing-llms-txt, #weak-jsonld, …) so
@@ -13,6 +16,62 @@ import { ogImageMeta } from "@/lib/seo/og";
 
 const PAGE_URL = "https://grow.contact/stats";
 const TODAY = new Date().toISOString().slice(0, 10);
+
+type StatId =
+  | "missing-llms-txt"
+  | "weak-jsonld"
+  | "opaque"
+  | "agent-native"
+  | "slow-ttfb"
+  | "weak-semantic";
+
+function buildStatDefs(s: ReturnType<typeof computeHeadlineStats>, sample: number) {
+  return [
+    {
+      id: "missing-llms-txt" as StatId,
+      value: `${s.missing_llms_txt_pct}%`,
+      label: "Missing llms.txt",
+      blurb: `${s.missing_llms_txt_pct}% of the top ${sample} AI companies have no llms.txt or one too thin for inference. This is the single cheapest agent-readability fix — and most of the industry still skips it.`,
+      cite: `${s.missing_llms_txt_pct}% of the top ${sample} AI companies are missing or under-serving llms.txt.`,
+    },
+    {
+      id: "weak-jsonld" as StatId,
+      value: `${s.weak_jsonld_pct}%`,
+      label: "Weak JSON-LD",
+      blurb: `${s.weak_jsonld_pct}% ship insufficient structured data for reliable AI citation. ChatGPT, Perplexity, and Google AI Overviews lean on JSON-LD to know who, what, and how much.`,
+      cite: `${s.weak_jsonld_pct}% of top AI companies ship insufficient JSON-LD for reliable AI citation.`,
+    },
+    {
+      id: "opaque" as StatId,
+      value: `${s.opaque_pct}%`,
+      label: "Opaque to AI engines",
+      blurb: `${s.opaque_pct}% of the sample score below 55/100 — effectively invisible to ChatGPT, Perplexity, and Claude live search. Most are fixable in a single sprint.`,
+      cite: `${s.opaque_pct}% of top AI companies are effectively opaque (score <55/100) to ChatGPT, Perplexity, and Claude.`,
+    },
+    {
+      id: "agent-native" as StatId,
+      value: `${s.agent_native_pct}%`,
+      label: "Clear the agent-native bar",
+      blurb: `Only ${s.agent_native_pct}% of the sample clear 85/100 — the bar where a site is reliably cited across all four major AI search engines.`,
+      cite: `Only ${s.agent_native_pct}% of top AI companies clear the agent-native bar (score ≥85/100).`,
+    },
+    {
+      id: "slow-ttfb" as StatId,
+      value: `${s.slow_pct}%`,
+      label: "Fail the speed threshold",
+      blurb: `${s.slow_pct}% of sites are slow enough that AI crawlers (which timeout in 1–5s) skip them outright. The penalty isn't a ranking drop — it's silence.`,
+      cite: `${s.slow_pct}% of top AI companies fail the first-byte speed threshold AI crawlers time out against.`,
+    },
+    {
+      id: "weak-semantic" as StatId,
+      value: `${s.weak_semantic_pct}%`,
+      label: "Weak semantic HTML",
+      blurb: `${s.weak_semantic_pct}% miss core landmark elements (<main>, <article>, <nav>) AI scrapers use to extract content reliably. Cheap to fix; rarely audited.`,
+      cite: `${s.weak_semantic_pct}% of top AI companies ship HTML without the semantic landmarks AI scrapers rely on.`,
+    },
+  ];
+}
+
 
 export const Route = createFileRoute("/stats")({
   component: StatsPage,

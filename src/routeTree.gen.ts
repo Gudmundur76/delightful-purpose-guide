@@ -60,6 +60,7 @@ import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
 import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
+import { Route as StandardLlmsDottxtRouteImport } from './routes/standard.llms[.]txt'
 import { Route as StandardVersionRouteImport } from './routes/standard.$version'
 import { Route as ReportQ22026DotpdfRouteImport } from './routes/report.q2-2026[.]pdf'
 import { Route as ReportQ22026RouteImport } from './routes/report.q2-2026'
@@ -67,10 +68,12 @@ import { Route as ReportPressRouteImport } from './routes/report.press'
 import { Route as ReportMethodologyRouteImport } from './routes/report.methodology'
 import { Route as PlaybooksSlugRouteImport } from './routes/playbooks.$slug'
 import { Route as LeaderboardMethodologyRouteImport } from './routes/leaderboard.methodology'
+import { Route as LeaderboardLlmsDottxtRouteImport } from './routes/leaderboard.llms[.]txt'
 import { Route as HistoryHostRouteImport } from './routes/history.$host'
 import { Route as GuideGenerativeEngineOptimizationRouteImport } from './routes/guide.generative-engine-optimization'
 import { Route as GlossaryTermRouteImport } from './routes/glossary.$term'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
+import { Route as DataLlmsDottxtRouteImport } from './routes/data.llms[.]txt'
 import { Route as DataDropsSlugRouteImport } from './routes/data-drops.$slug'
 import { Route as DashboardScanRouteImport } from './routes/dashboard.scan'
 import { Route as DashboardReviewsRouteImport } from './routes/dashboard.reviews'
@@ -388,6 +391,11 @@ const StandardChar123versionChar125DotmdRoute =
     path: '/{$version}.md',
     getParentRoute: () => StandardRoute,
   } as any)
+const StandardLlmsDottxtRoute = StandardLlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
+  getParentRoute: () => StandardRoute,
+} as any)
 const StandardVersionRoute = StandardVersionRouteImport.update({
   id: '/$version',
   path: '/$version',
@@ -423,6 +431,11 @@ const LeaderboardMethodologyRoute = LeaderboardMethodologyRouteImport.update({
   path: '/methodology',
   getParentRoute: () => LeaderboardRoute,
 } as any)
+const LeaderboardLlmsDottxtRoute = LeaderboardLlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
+  getParentRoute: () => LeaderboardRoute,
+} as any)
 const HistoryHostRoute = HistoryHostRouteImport.update({
   id: '/history/$host',
   path: '/history/$host',
@@ -442,6 +455,11 @@ const GlossaryTermRoute = GlossaryTermRouteImport.update({
 const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   id: '/email/unsubscribe',
   path: '/email/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataLlmsDottxtRoute = DataLlmsDottxtRouteImport.update({
+  id: '/data/llms.txt',
+  path: '/data/llms.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DataDropsSlugRoute = DataDropsSlugRouteImport.update({
@@ -832,10 +850,12 @@ export interface FileRoutesByFullPath {
   '/dashboard/reviews': typeof DashboardReviewsRoute
   '/dashboard/scan': typeof DashboardScanRoute
   '/data-drops/$slug': typeof DataDropsSlugRoute
+  '/data/llms.txt': typeof DataLlmsDottxtRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/glossary/$term': typeof GlossaryTermRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
+  '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
   '/report/methodology': typeof ReportMethodologyRoute
@@ -843,6 +863,7 @@ export interface FileRoutesByFullPath {
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
   '/standard/$version': typeof StandardVersionRoute
+  '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
@@ -954,10 +975,12 @@ export interface FileRoutesByTo {
   '/dashboard/reviews': typeof DashboardReviewsRoute
   '/dashboard/scan': typeof DashboardScanRoute
   '/data-drops/$slug': typeof DataDropsSlugRoute
+  '/data/llms.txt': typeof DataLlmsDottxtRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/glossary/$term': typeof GlossaryTermRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
+  '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
   '/report/methodology': typeof ReportMethodologyRoute
@@ -965,6 +988,7 @@ export interface FileRoutesByTo {
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
   '/standard/$version': typeof StandardVersionRoute
+  '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
@@ -1079,10 +1103,12 @@ export interface FileRoutesById {
   '/dashboard/reviews': typeof DashboardReviewsRoute
   '/dashboard/scan': typeof DashboardScanRoute
   '/data-drops/$slug': typeof DataDropsSlugRoute
+  '/data/llms.txt': typeof DataLlmsDottxtRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/glossary/$term': typeof GlossaryTermRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
+  '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
   '/report/methodology': typeof ReportMethodologyRoute
@@ -1090,6 +1116,7 @@ export interface FileRoutesById {
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
   '/standard/$version': typeof StandardVersionRoute
+  '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
@@ -1205,10 +1232,12 @@ export interface FileRouteTypes {
     | '/dashboard/reviews'
     | '/dashboard/scan'
     | '/data-drops/$slug'
+    | '/data/llms.txt'
     | '/email/unsubscribe'
     | '/glossary/$term'
     | '/guide/generative-engine-optimization'
     | '/history/$host'
+    | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
     | '/playbooks/$slug'
     | '/report/methodology'
@@ -1216,6 +1245,7 @@ export interface FileRouteTypes {
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
     | '/standard/$version'
+    | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/tools/robots-checker'
     | '/verify/$id'
@@ -1327,10 +1357,12 @@ export interface FileRouteTypes {
     | '/dashboard/reviews'
     | '/dashboard/scan'
     | '/data-drops/$slug'
+    | '/data/llms.txt'
     | '/email/unsubscribe'
     | '/glossary/$term'
     | '/guide/generative-engine-optimization'
     | '/history/$host'
+    | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
     | '/playbooks/$slug'
     | '/report/methodology'
@@ -1338,6 +1370,7 @@ export interface FileRouteTypes {
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
     | '/standard/$version'
+    | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/tools/robots-checker'
     | '/verify/$id'
@@ -1451,10 +1484,12 @@ export interface FileRouteTypes {
     | '/dashboard/reviews'
     | '/dashboard/scan'
     | '/data-drops/$slug'
+    | '/data/llms.txt'
     | '/email/unsubscribe'
     | '/glossary/$term'
     | '/guide/generative-engine-optimization'
     | '/history/$host'
+    | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
     | '/playbooks/$slug'
     | '/report/methodology'
@@ -1462,6 +1497,7 @@ export interface FileRouteTypes {
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
     | '/standard/$version'
+    | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/tools/robots-checker'
     | '/verify/$id'
@@ -1562,6 +1598,7 @@ export interface RootRouteChildren {
   AdminReviewsRoute: typeof AdminReviewsRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
+  DataLlmsDottxtRoute: typeof DataLlmsDottxtRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   GuideGenerativeEngineOptimizationRoute: typeof GuideGenerativeEngineOptimizationRoute
   HistoryHostRoute: typeof HistoryHostRouteWithChildren
@@ -1966,6 +2003,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StandardChar123versionChar125DotmdRouteImport
       parentRoute: typeof StandardRoute
     }
+    '/standard/llms.txt': {
+      id: '/standard/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/standard/llms.txt'
+      preLoaderRoute: typeof StandardLlmsDottxtRouteImport
+      parentRoute: typeof StandardRoute
+    }
     '/standard/$version': {
       id: '/standard/$version'
       path: '/$version'
@@ -2015,6 +2059,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeaderboardMethodologyRouteImport
       parentRoute: typeof LeaderboardRoute
     }
+    '/leaderboard/llms.txt': {
+      id: '/leaderboard/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/leaderboard/llms.txt'
+      preLoaderRoute: typeof LeaderboardLlmsDottxtRouteImport
+      parentRoute: typeof LeaderboardRoute
+    }
     '/history/$host': {
       id: '/history/$host'
       path: '/history/$host'
@@ -2041,6 +2092,13 @@ declare module '@tanstack/react-router' {
       path: '/email/unsubscribe'
       fullPath: '/email/unsubscribe'
       preLoaderRoute: typeof EmailUnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data/llms.txt': {
+      id: '/data/llms.txt'
+      path: '/data/llms.txt'
+      fullPath: '/data/llms.txt'
+      preLoaderRoute: typeof DataLlmsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/data-drops/$slug': {
@@ -2597,10 +2655,12 @@ const GlossaryRouteWithChildren = GlossaryRoute._addFileChildren(
 )
 
 interface LeaderboardRouteChildren {
+  LeaderboardLlmsDottxtRoute: typeof LeaderboardLlmsDottxtRoute
   LeaderboardMethodologyRoute: typeof LeaderboardMethodologyRoute
 }
 
 const LeaderboardRouteChildren: LeaderboardRouteChildren = {
+  LeaderboardLlmsDottxtRoute: LeaderboardLlmsDottxtRoute,
   LeaderboardMethodologyRoute: LeaderboardMethodologyRoute,
 }
 
@@ -2622,11 +2682,13 @@ const PlaybooksRouteWithChildren = PlaybooksRoute._addFileChildren(
 
 interface StandardRouteChildren {
   StandardVersionRoute: typeof StandardVersionRoute
+  StandardLlmsDottxtRoute: typeof StandardLlmsDottxtRoute
   StandardChar123versionChar125DotmdRoute: typeof StandardChar123versionChar125DotmdRoute
 }
 
 const StandardRouteChildren: StandardRouteChildren = {
   StandardVersionRoute: StandardVersionRoute,
+  StandardLlmsDottxtRoute: StandardLlmsDottxtRoute,
   StandardChar123versionChar125DotmdRoute:
     StandardChar123versionChar125DotmdRoute,
 }
@@ -2726,6 +2788,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminReviewsRoute: AdminReviewsRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogRssDotxmlRoute: BlogRssDotxmlRoute,
+  DataLlmsDottxtRoute: DataLlmsDottxtRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   GuideGenerativeEngineOptimizationRoute:
     GuideGenerativeEngineOptimizationRoute,

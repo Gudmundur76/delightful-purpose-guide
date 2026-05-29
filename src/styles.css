@@ -31,7 +31,8 @@
   --color-ring: var(--ring);
 
   --font-display: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-mono: 'Fira Code', 'JetBrains Mono', ui-monospace, monospace;
+
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -218,3 +219,9 @@ body {
 }
 .standard-prose td { color: var(--muted-foreground); }
 
+
+/* Enable Fira Code ligatures wherever font-mono is applied. */
+.font-mono, code, kbd, pre, samp {
+  font-feature-settings: "calt" 1, "ss01" 1, "ss02" 1, "ss03" 1, "zero" 1;
+  font-variant-ligatures: contextual;
+}

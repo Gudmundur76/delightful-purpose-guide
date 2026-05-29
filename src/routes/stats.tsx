@@ -78,9 +78,22 @@ export const Route = createFileRoute("/stats")({
   loader: () => ({ stats: computeHeadlineStats(), sample: LEADERBOARD.length }),
   head: ({ loaderData }) => {
     const s = loaderData?.stats;
+    const sample = loaderData?.sample ?? 0;
     const description = s
       ? `${s.missing_llms_txt_pct}% of ${s.total} top AI companies are missing llms.txt. ${s.opaque_pct}% score below 55 — effectively opaque to ChatGPT, Perplexity, and Claude. Open dataset, CC BY 4.0.`
       : "Quotable stats on the state of the agent-readable web. Open dataset, CC BY 4.0.";
+    const claimMentions = s
+      ? buildStatDefs(s, sample).map((d) =>
+          verifiableClaim({
+            id: d.id,
+            value: d.value,
+            label: d.label,
+            citation: claimCitation(d.id),
+            dateModified: TODAY,
+            unitCode: "P1",
+          }),
+        )
+      : [];
     return {
       meta: [
         { title: "State of the Agent-Readable Web — Citable Stats | Grow" },
@@ -112,11 +125,24 @@ export const Route = createFileRoute("/stats")({
                   {
                     "@type": "DataDownload",
                     encodingFormat: "application/json",
-                    contentUrl: "https://grow.contact/api/public/leaderboard.json",
+                    contentUrl: DATA_URLS.liveLeaderboard,
+                  },
+                  {
+                    "@type": "DataDownload",
+                    encodingFormat: "application/json",
+                    contentUrl: DATA_URLS.liveStats,
+                    name: "Headline statistics (live)",
+                  },
+                  {
+                    "@type": "DataDownload",
+                    encodingFormat: "application/json",
+                    contentUrl: DATA_URLS.liveClaims,
+                    name: "Verifiable claims (live)",
                   },
                 ],
                 dateModified: TODAY,
                 variableMeasured: s.citable_headlines,
+                mentions: claimMentions,
               }),
             },
           ]
@@ -124,6 +150,51 @@ export const Route = createFileRoute("/stats")({
     };
   },
 });
+
+interface StatCardProps {
+  id: string;
+  value: string;
+  label: string;
+  blurb: string;
+  cite: string;
+}
+
+function StatCard({ id, value, label, blurb, cite }: StatCardProps) {
+  const citation = claimCitation(id);
+  return (
+    <article
+      id={id}
+      className="scroll-mt-24 border border-border bg-card p-6 flex flex-col gap-3"
+    >
+      <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
+        // {label}
+      </p>
+      <p className="text-5xl sm:text-6xl font-extrabold tracking-tighter tabular-nums text-foreground">
+        <VerifiabilityBadge id={`${id}-value`} citation={citation} dateModified={TODAY}>
+          {value}
+        </VerifiabilityBadge>
+      </p>
+      <p className="text-sm text-muted-foreground leading-relaxed">{blurb}</p>
+      <details className="mt-2 border-t border-border pt-3">
+        <summary className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground cursor-pointer hover:text-foreground">
+          Cite this stat
+        </summary>
+        <pre className="mt-2 text-[11px] bg-muted/30 border border-border p-3 overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed text-foreground/80">
+{cite}
+{`\nSource: grow.contact/stats#${id} (CC BY 4.0)`}
+{`\nVerifiable claim: ${citation}`}
+        </pre>
+        <a
+          href={`${PAGE_URL}#${id}`}
+          className="mt-2 inline-block font-mono text-[10px] uppercase tracking-widest text-accent hover:underline"
+        >
+          Permalink ↗
+        </a>
+      </details>
+    </article>
+  );
+}
+
 
 interface StatCardProps {
   id: string;

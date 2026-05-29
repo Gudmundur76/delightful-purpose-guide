@@ -201,9 +201,9 @@ function LeaderboardPage() {
 
   function toggleSort(key: SortKey) {
     if (sort === key) {
-      navigate({ search: (s) => ({ ...s, dir: dir === "asc" ? "desc" : "asc" }) });
+      navigate({ search: { cat, sort, dir: dir === "asc" ? "desc" : "asc" } });
     } else {
-      navigate({ search: (s) => ({ ...s, sort: key, dir: "desc" }) });
+      navigate({ search: { cat, sort: key, dir: "desc" } });
     }
   }
 

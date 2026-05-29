@@ -25,6 +25,11 @@ export const Route = createFileRoute("/research")({
           "Quarterly report, monthly citation index, playbooks, data drops, glossary.",
       },
       { property: "og:type", content: "website" },
+      ...ogImageMeta({
+        title: "Research — Citation Intelligence | grow.contact",
+        kicker: "Research",
+        sub: "Quarterly report, citation index, playbooks, data drops, glossary.",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/research" }],
     scripts: [

@@ -27,7 +27,7 @@ const MonitorAlertEmail = ({ url, previousScore, newScore, delta }: Props) => {
   return (
     <Html lang="en" dir="ltr">
       <Head />
-      <Preview>Score drop detected on {url}</Preview>
+      <Preview>Score drop detected on {url ?? "your site"}</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={mono}>// {SITE_NAME}_ / monitor</Text>

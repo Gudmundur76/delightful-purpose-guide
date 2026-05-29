@@ -87,7 +87,11 @@ async function handleEvent(evt: {
     return;
   }
 
-  const patch: Record<string, any> = {};
+  const patch: {
+    status?: string;
+    cancelled_at?: string | null;
+    current_period_end?: string | null;
+  } = {};
   switch (type) {
     case "BILLING.SUBSCRIPTION.ACTIVATED":
     case "BILLING.SUBSCRIPTION.UPDATED":

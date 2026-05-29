@@ -126,7 +126,10 @@ export const Route = createFileRoute("/api/public/hooks/capture-citations")({
           return Response.json({ ok: true, processed: 0, message: "no domains" });
         }
 
-        const events: Array<Record<string, unknown>> = [];
+        type CitationEventInsert = Parameters<
+          ReturnType<typeof supabaseAdmin.from<"citation_events">>["insert"]
+        >[0] extends Array<infer T> ? T : never;
+        const events: CitationEventInsert[] = [];
         let okCount = 0;
         let errCount = 0;
 

@@ -5,6 +5,8 @@ import { computeHeadlineStats } from "@/lib/leaderboard/stats";
 import { LEADERBOARD, CATEGORY_LABELS } from "@/lib/leaderboard/entries";
 import { AUTHORS, DEFAULT_AUTHOR_SLUG, personJsonLd } from "@/lib/authors/data";
 import { VerifiabilityBadge } from "@/components/VerifiabilityBadge";
+import { CitationSnippet } from "@/components/CitationSnippet";
+import { InformationGainIndicator } from "@/components/InformationGainIndicator";
 import { verifiableClaim, claimCitation, DATA_URLS } from "@/lib/seo/verifiable";
 
 const PAGE_URL = "https://grow.contact/report/q2-2026";
@@ -165,7 +167,27 @@ function ReportPage() {
               Monthly drops →
             </Link>
           </div>
+          <div className="mt-5">
+            <InformationGainIndicator
+              value={47}
+              measuredAt={PUBLISHED}
+              query="state of the agent-readable web 2026"
+            />
+          </div>
         </header>
+
+        <CitationSnippet
+          className="mb-12"
+          citation={{
+            authors: [AUTHOR.name, "grow.contact"],
+            year: 2026,
+            title: REPORT_TITLE,
+            publisher: "grow.contact",
+            url: PAGE_URL,
+            accessed: PUBLISHED,
+            key: "grow-q2-2026",
+          }}
+        />
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Six headline findings</h2>

@@ -32,15 +32,15 @@ export async function getUserPlan(userId: string): Promise<PlanRow> {
   return plan as PlanRow;
 }
 
-export async function getUsage(userId: string): Promise<{ used: number; period: string }> {
-  const period = periodKey();
+export async function getUsage(userId: string): Promise<{ used: number; period_month: string }> {
+  const period_month = periodKey();
   const { data } = await supabaseAdmin
     .from("scan_quota_usage")
     .select("scans_used")
     .eq("user_id", userId)
-    .eq("period", period)
+    .eq("period_month", period_month)
     .maybeSingle();
-  return { used: (data as { scans_used?: number } | null)?.scans_used ?? 0, period };
+  return { used: (data as { scans_used?: number } | null)?.scans_used ?? 0, period_month };
 }
 
 /** Atomically increment usage and return remaining. Throws if quota exceeded. */
@@ -50,13 +50,13 @@ export async function consumeQuota(userId: string): Promise<{
   remaining: number;
 }> {
   const plan = await getUserPlan(userId);
-  const period = periodKey();
+  const period_month = periodKey();
 
   const { data: existing } = await supabaseAdmin
     .from("scan_quota_usage")
     .select("scans_used")
     .eq("user_id", userId)
-    .eq("period", period)
+    .eq("period_month", period_month)
     .maybeSingle();
 
   const used = (existing as { scans_used?: number } | null)?.scans_used ?? 0;
@@ -69,11 +69,11 @@ export async function consumeQuota(userId: string): Promise<{
       .from("scan_quota_usage")
       .update({ scans_used: used + 1 })
       .eq("user_id", userId)
-      .eq("period", period);
+      .eq("period_month", period_month);
   } else {
     await supabaseAdmin
       .from("scan_quota_usage")
-      .insert({ user_id: userId, period, scans_used: 1 });
+      .insert({ user_id: userId, period_month, scans_used: 1 });
   }
   return { plan, used: used + 1, remaining: plan.monthly_scan_quota - (used + 1) };
 }

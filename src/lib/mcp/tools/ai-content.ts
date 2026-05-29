@@ -13,7 +13,7 @@ const MODELS = [
 export const aiCompleteTool = defineTool({
   name: "ai_complete",
   description:
-    "Generate text via the Lovable AI Gateway (no extra API key required). Use for content drafts, summaries, tagline ideas. Returns the assistant message.",
+    "Generate text via the internal AI gateway (no extra API key required). Use for content drafts, summaries, tagline ideas. Returns the assistant message.",
   parameters: z.object({
     prompt: z.string().min(1).max(8000),
     system: z.string().max(2000).optional(),

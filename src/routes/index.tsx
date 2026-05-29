@@ -206,11 +206,16 @@ function Index() {
                 <p className="font-mono text-accent text-xs mb-6 uppercase tracking-[0.2em]">
                   {heroEyebrow}
                 </p>
-                <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-balance leading-[0.95] mb-8">
+                <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-balance leading-[0.95] mb-6">
                   {heroHeadlinePrefix} <span className="text-muted-foreground">{heroHeadlineHuman}</span>
                   <br />
                   {heroHeadlineParsed} <span className="italic text-accent">{heroHeadlineAgents}</span>
                 </h1>
+                <p className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground mb-8 max-w-xl">
+                  Built by <span className="text-foreground">Gudmundur Eyberg Kristjansson</span>, systems architect, Reykjavík — author of the{" "}
+                  <Link to="/standard" className="text-accent hover:underline">Agent-Native Web Standard</Link>{" "}
+                  (geo-standard@2026.07) and operator of the public <Link to="/check" className="text-accent hover:underline">/check</Link> scanner. 2,400+ pages audited, 4,800+ fixes shipped.
+                </p>
                 <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6 max-w-xl">
                   {heroSubheadline}
                 </p>

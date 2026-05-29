@@ -100,7 +100,7 @@ export const TOOLS: ToolMeta[] = [
   { name: "ai_complete", description: "One-shot LLM completion.", category: "AI & Generation" },
   { name: "ai_complete_with_context", description: "Completion with tool-fetched context.", category: "AI & Generation" },
   { name: "draft_blog_post", description: "Generate a full blog post draft.", category: "AI & Generation", mutates: true },
-  { name: "generate_image", description: "Text-to-image via Lovable AI.", category: "AI & Generation" },
+  { name: "generate_image", description: "Text-to-image via Gemini image models.", category: "AI & Generation" },
   { name: "generate_outreach_email", description: "Draft an outreach email.", category: "AI & Generation" },
 
   // Admin & Ops

@@ -4,7 +4,7 @@ import { z } from "zod";
 export const generateImageTool = defineTool({
   name: "generate_image",
   description:
-    "Generate an image via Lovable AI Gateway (Gemini image models). Returns base64 PNG data URL. Use for hero art, og:image, blog covers.",
+    "Generate an image via the internal AI gateway (Gemini image models). Returns base64 PNG data URL. Use for hero art, og:image, blog covers.",
   parameters: z.object({
     prompt: z.string().min(3).max(2000),
     model: z

@@ -59,12 +59,14 @@ export function verifiableClaim(input: VerifiableClaimInput) {
   };
 }
 
+export type StatisticalVariableInput = {
   id: string;
   name: string;
   description: string;
   measurementMethod?: string;
   unitCode?: string;
 };
+
 
 export function statisticalVariable(input: StatisticalVariableInput) {
   return {

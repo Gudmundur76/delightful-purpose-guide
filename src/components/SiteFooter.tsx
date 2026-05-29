@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { openCookieSettings } from "@/components/CookieConsent";
+import { SourceSyncIndicator } from "@/components/SourceSyncIndicator";
+
 
 export function SiteFooter() {
   return (

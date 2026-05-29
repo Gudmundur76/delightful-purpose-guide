@@ -55,6 +55,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
       "https://grow.contact/#home-stat-83",
       "https://grow.contact/#home-stat-83-prose",
     ],
+    source_files: [
+      { path: "src/lib/seo/claims-registry.ts", description: "Authoritative claim record" },
+      { path: "src/routes/index.tsx", description: "Visible rendering site" },
+    ],
   },
   {
     id: "home-stat-73",
@@ -65,6 +69,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: "2026-05-28",
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/#home-stat-73"],
+    source_files: [
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+      { path: "src/lib/leaderboard/stats.ts", description: "Aggregation logic" },
+    ],
   },
   {
     id: "home-stat-527",
@@ -78,6 +86,9 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
       "https://grow.contact/#home-stat-527",
       "https://grow.contact/#home-stat-527-prose",
     ],
+    source_files: [
+      { path: "src/lib/seo/claims-registry.ts", description: "Authoritative claim record" },
+    ],
   },
   {
     id: "home-stat-48",
@@ -88,6 +99,9 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: "2025-11-15",
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/#home-stat-48"],
+    source_files: [
+      { path: "src/lib/seo/claims-registry.ts", description: "Authoritative claim record" },
+    ],
   },
   {
     id: "home-stat-4x",
@@ -98,6 +112,9 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: "2026-05-28",
     unit: "RATIO",
     page_anchors: ["https://grow.contact/#home-stat-4x"],
+    source_files: [
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
   // /stats page — derived live from the leaderboard. The value here is a
   // pointer; the live `/api/public/data/stats.json` carries the actual figures.
@@ -110,6 +127,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: CLAIMS_DATE_MODIFIED,
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/stats#missing-llms-txt"],
+    source_files: [
+      { path: "src/lib/leaderboard/stats.ts", description: "computeHeadlineStats()" },
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
   {
     id: "weak-jsonld",
@@ -120,6 +141,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: CLAIMS_DATE_MODIFIED,
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/stats#weak-jsonld"],
+    source_files: [
+      { path: "src/lib/leaderboard/stats.ts", description: "computeHeadlineStats()" },
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
   {
     id: "opaque",
@@ -130,6 +155,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: CLAIMS_DATE_MODIFIED,
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/stats#opaque"],
+    source_files: [
+      { path: "src/lib/leaderboard/stats.ts", description: "computeHeadlineStats()" },
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
   {
     id: "agent-native",
@@ -140,6 +169,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: CLAIMS_DATE_MODIFIED,
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/stats#agent-native"],
+    source_files: [
+      { path: "src/lib/leaderboard/stats.ts", description: "computeHeadlineStats()" },
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
   {
     id: "slow-ttfb",
@@ -150,6 +183,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: CLAIMS_DATE_MODIFIED,
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/stats#slow-ttfb"],
+    source_files: [
+      { path: "src/lib/leaderboard/stats.ts", description: "computeHeadlineStats()" },
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
   {
     id: "weak-semantic",
@@ -160,5 +197,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: CLAIMS_DATE_MODIFIED,
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/stats#weak-semantic"],
+    source_files: [
+      { path: "src/lib/leaderboard/stats.ts", description: "computeHeadlineStats()" },
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
 ];
+

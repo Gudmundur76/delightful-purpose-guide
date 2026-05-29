@@ -459,9 +459,9 @@ function SignalCard({ label, value, description }: { label: string; value: numbe
 
 function VolatilityBadge({ volatility }: { volatility: "stable" | "rising" | "falling" }) {
   const styles = {
-    rising: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
-    falling: "border-rose-500/30 bg-rose-500/10 text-rose-400",
-    stable: "border-zinc-500/30 bg-zinc-500/10 text-zinc-400",
+    rising: "border-emerald-500/40 bg-emerald-500/15 text-emerald-300",
+    falling: "border-rose-500/40 bg-rose-500/15 text-rose-300",
+    stable: "border-zinc-400/40 bg-zinc-500/15 text-zinc-200",
   } as const;
   const Icon = volatility === "rising" ? TrendingUp : volatility === "falling" ? TrendingDown : Minus;
   return (

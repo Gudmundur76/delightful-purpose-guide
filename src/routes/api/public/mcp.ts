@@ -169,6 +169,7 @@ const mcp = createMcpServer({
     checkAuthoritySignalsTool,
     predictCitationsTool,
     getEngineRecommendationsTool,
+    getCompanyProfileTool,
   ],
 });
 

@@ -11,9 +11,8 @@
 // To swap repos: edit GITHUB_REPO. To pin a specific commit (e.g. release tag),
 // set VITE_BUILD_SHA at build time and it will replace `main` in every link.
 
-export const GITHUB_REPO = "grow-contact/grow" as const;
+export const GITHUB_REPO = "Gudmundur76/delightful-purpose-guide" as const;
 export const GITHUB_REPO_URL = `https://github.com/${GITHUB_REPO}` as const;
-
 /** Short ref used in source URLs. Falls back to "main" when no build SHA is injected. */
 export const BUILD_REF: string =
   (typeof import.meta !== "undefined" &&

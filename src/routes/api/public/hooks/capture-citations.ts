@@ -60,32 +60,41 @@ function extractCitations(text: string, target: string) {
 
 async function callEngine(model: string, prompt: string) {
   const started = Date.now();
-  const res = await fetch(GATEWAY_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.LOVABLE_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model,
-      messages: [{ role: "user", content: prompt }],
-    }),
-  });
-  const latency = Date.now() - started;
-  if (!res.ok) {
-    return { ok: false as const, latency, status: res.status, error: await res.text() };
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), CALL_TIMEOUT_MS);
+  try {
+    const res = await fetch(GATEWAY_URL, {
+      method: "POST",
+      signal: ctrl.signal,
+      headers: {
+        Authorization: `Bearer ${process.env.LOVABLE_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model,
+        messages: [{ role: "user", content: prompt }],
+      }),
+    });
+    const latency = Date.now() - started;
+    if (!res.ok) {
+      return { ok: false as const, latency, status: res.status, error: await res.text() };
+    }
+    const data = (await res.json()) as {
+      choices?: Array<{ message?: { content?: string } }>;
+      usage?: { prompt_tokens?: number; completion_tokens?: number };
+    };
+    return {
+      ok: true as const,
+      latency,
+      text: data.choices?.[0]?.message?.content ?? "",
+      tokens_in: data.usage?.prompt_tokens ?? null,
+      tokens_out: data.usage?.completion_tokens ?? null,
+    };
+  } catch (e) {
+    return { ok: false as const, latency: Date.now() - started, status: 0, error: (e as Error).message || "fetch failed" };
+  } finally {
+    clearTimeout(timer);
   }
-  const data = (await res.json()) as {
-    choices?: Array<{ message?: { content?: string } }>;
-    usage?: { prompt_tokens?: number; completion_tokens?: number };
-  };
-  return {
-    ok: true as const,
-    latency,
-    text: data.choices?.[0]?.message?.content ?? "",
-    tokens_in: data.usage?.prompt_tokens ?? null,
-    tokens_out: data.usage?.completion_tokens ?? null,
-  };
 }
 
 export const Route = createFileRoute("/api/public/hooks/capture-citations")({

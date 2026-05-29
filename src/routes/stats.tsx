@@ -210,9 +210,13 @@ function StatsPage() {
       <main className="bg-background text-foreground">
         <section className="border-b border-border">
           <div className="max-w-7xl mx-auto px-6 py-20">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">
-              // grow.contact / stats · updated {TODAY}
-            </p>
+            <div className="mb-4 flex flex-wrap items-center gap-3">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
+                // grow.contact / stats
+              </p>
+              <LiveSignal dateModified={TODAY} />
+            </div>
+
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase max-w-4xl">
               The State of the Agent-Readable Web
             </h1>

@@ -10,15 +10,14 @@ export type ScoreBreakdown = {
   overall_ccs: number;
   citation_probability: number;
   authority: number;
-  citability: number;
-  freshness: number;
-  semantic_structure: number;
-  schema_richness: number;
-  comparison_density: number;
-  qa_density: number;
-  expert_signals: number;
+  verifiability: number;
+  precedent: number;
+  commentary: number;
+  information_gain: number;
+  canonical: number;
   scan_date: string;
 };
+
 
 export type HistoryPoint = {
   month: string;

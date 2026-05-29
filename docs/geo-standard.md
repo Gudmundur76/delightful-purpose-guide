@@ -1,7 +1,7 @@
 # The Grow GEO Standard
-
-**Version:** 1.0 — 2026-05-22
+**Version:** 1.1 — 2026-07-15 (`geo-standard@2026.07`)
 **Owner:** Grow (grow.contact)
+**Status:** Acceptance criteria for every Tier 01 / Tier 02 delivery.
 **Status:** Acceptance criteria for every Tier 01 / Tier 02 delivery.
 
 This document is the engineering contract. A site is not "done" until it passes

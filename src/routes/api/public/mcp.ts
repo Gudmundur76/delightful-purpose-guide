@@ -56,6 +56,9 @@ import { updateClientTool, deleteLeadTool, deleteScanTool } from "@/lib/mcp/tool
 import { listContentEditsTool, revertContentEditTool } from "@/lib/mcp/tools/content-edits";
 import { getDashboardStatsTool } from "@/lib/mcp/tools/dashboard-stats";
 import { revenueStatsAliasTool } from "@/lib/mcp/tools/revenue-stats";
+import { checkAuthoritySignalsTool } from "@/lib/mcp/tools/authority-signals";
+import { predictCitationsTool } from "@/lib/mcp/tools/predict-citations";
+import { getEngineRecommendationsTool } from "@/lib/mcp/tools/engine-recommendations";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",

@@ -245,6 +245,7 @@ function LeaderboardPage() {
         r.chatgpt_share,
         r.claude_share,
         r.google_aio_share,
+        r.citations_24h,
         r.volatility,
       ].join(","),
     );

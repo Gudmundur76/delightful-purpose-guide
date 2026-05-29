@@ -142,6 +142,7 @@ import { Route as ApiPublicV1BulkSeedRouteImport } from './routes/api/public/v1/
 import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/analyze'
 import { Route as ApiPublicStatsOverviewRouteImport } from './routes/api/public/stats/overview'
 import { Route as ApiPublicOauthTokenRouteImport } from './routes/api/public/oauth/token'
+import { Route as ApiPublicInjectTokenRouteImport } from './routes/api/public/inject.$token'
 import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/api/public/hooks/run-scheduled-scans'
 import { Route as ApiPublicHooksRunMonitoredSitesRouteImport } from './routes/api/public/hooks/run-monitored-sites'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
@@ -843,6 +844,11 @@ const ApiPublicOauthTokenRoute = ApiPublicOauthTokenRouteImport.update({
   path: '/api/public/oauth/token',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicInjectTokenRoute = ApiPublicInjectTokenRouteImport.update({
+  id: '/api/public/inject/$token',
+  path: '/api/public/inject/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicHooksRunScheduledScansRoute =
   ApiPublicHooksRunScheduledScansRouteImport.update({
     id: '/api/public/hooks/run-scheduled-scans',
@@ -1075,6 +1081,7 @@ export interface FileRoutesByFullPath {
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
+  '/api/public/inject/$token': typeof ApiPublicInjectTokenRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
@@ -1225,6 +1232,7 @@ export interface FileRoutesByTo {
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
+  '/api/public/inject/$token': typeof ApiPublicInjectTokenRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
@@ -1379,6 +1387,7 @@ export interface FileRoutesById {
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
+  '/api/public/inject/$token': typeof ApiPublicInjectTokenRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
@@ -1534,6 +1543,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
+    | '/api/public/inject/$token'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
@@ -1684,6 +1694,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
+    | '/api/public/inject/$token'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
@@ -1837,6 +1848,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
+    | '/api/public/inject/$token'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
@@ -1962,6 +1974,7 @@ export interface RootRouteChildren {
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
   ApiPublicHooksRunMonitoredSitesRoute: typeof ApiPublicHooksRunMonitoredSitesRoute
   ApiPublicHooksRunScheduledScansRoute: typeof ApiPublicHooksRunScheduledScansRoute
+  ApiPublicInjectTokenRoute: typeof ApiPublicInjectTokenRoute
   ApiPublicOauthTokenRoute: typeof ApiPublicOauthTokenRoute
   ApiPublicStatsOverviewRoute: typeof ApiPublicStatsOverviewRoute
   ApiPublicV1AnalyzeRoute: typeof ApiPublicV1AnalyzeRoute
@@ -2923,6 +2936,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicOauthTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/inject/$token': {
+      id: '/api/public/inject/$token'
+      path: '/api/public/inject/$token'
+      fullPath: '/api/public/inject/$token'
+      preLoaderRoute: typeof ApiPublicInjectTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/run-scheduled-scans': {
       id: '/api/public/hooks/run-scheduled-scans'
       path: '/api/public/hooks/run-scheduled-scans'
@@ -3375,6 +3395,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
   ApiPublicHooksRunMonitoredSitesRoute: ApiPublicHooksRunMonitoredSitesRoute,
   ApiPublicHooksRunScheduledScansRoute: ApiPublicHooksRunScheduledScansRoute,
+  ApiPublicInjectTokenRoute: ApiPublicInjectTokenRoute,
   ApiPublicOauthTokenRoute: ApiPublicOauthTokenRoute,
   ApiPublicStatsOverviewRoute: ApiPublicStatsOverviewRoute,
   ApiPublicV1AnalyzeRoute: ApiPublicV1AnalyzeRoute,

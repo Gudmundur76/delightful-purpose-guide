@@ -874,6 +874,194 @@ export type Database = {
         }
         Relationships: []
       }
+      intervention_audit: {
+        Row: {
+          actor_label: string | null
+          actor_user_id: string | null
+          created_at: string
+          from_status: Database["public"]["Enums"]["intervention_status"] | null
+          id: number
+          intervention_id: string
+          notes: string | null
+          to_status: Database["public"]["Enums"]["intervention_status"]
+        }
+        Insert: {
+          actor_label?: string | null
+          actor_user_id?: string | null
+          created_at?: string
+          from_status?:
+            | Database["public"]["Enums"]["intervention_status"]
+            | null
+          id?: number
+          intervention_id: string
+          notes?: string | null
+          to_status: Database["public"]["Enums"]["intervention_status"]
+        }
+        Update: {
+          actor_label?: string | null
+          actor_user_id?: string | null
+          created_at?: string
+          from_status?:
+            | Database["public"]["Enums"]["intervention_status"]
+            | null
+          id?: number
+          intervention_id?: string
+          notes?: string | null
+          to_status?: Database["public"]["Enums"]["intervention_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "intervention_audit_intervention_id_fkey"
+            columns: ["intervention_id"]
+            isOneToOne: false
+            referencedRelation: "interventions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      intervention_deliveries: {
+        Row: {
+          delivered_at: string
+          delivery_method: Database["public"]["Enums"]["intervention_delivery_method"]
+          id: number
+          intervention_id: string | null
+          ip: string | null
+          site_id: string
+          user_agent: string | null
+        }
+        Insert: {
+          delivered_at?: string
+          delivery_method: Database["public"]["Enums"]["intervention_delivery_method"]
+          id?: number
+          intervention_id?: string | null
+          ip?: string | null
+          site_id: string
+          user_agent?: string | null
+        }
+        Update: {
+          delivered_at?: string
+          delivery_method?: Database["public"]["Enums"]["intervention_delivery_method"]
+          id?: number
+          intervention_id?: string | null
+          ip?: string | null
+          site_id?: string
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "intervention_deliveries_intervention_id_fkey"
+            columns: ["intervention_id"]
+            isOneToOne: false
+            referencedRelation: "interventions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "intervention_deliveries_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "intervention_sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      intervention_sites: {
+        Row: {
+          auto_fire_enabled: boolean
+          created_at: string
+          domain: string
+          id: string
+          install_token: string
+          notify_email: string | null
+          owner_user_id: string
+          updated_at: string
+          wp_api_key: string | null
+        }
+        Insert: {
+          auto_fire_enabled?: boolean
+          created_at?: string
+          domain: string
+          id?: string
+          install_token?: string
+          notify_email?: string | null
+          owner_user_id: string
+          updated_at?: string
+          wp_api_key?: string | null
+        }
+        Update: {
+          auto_fire_enabled?: boolean
+          created_at?: string
+          domain?: string
+          id?: string
+          install_token?: string
+          notify_email?: string | null
+          owner_user_id?: string
+          updated_at?: string
+          wp_api_key?: string | null
+        }
+        Relationships: []
+      }
+      interventions: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          ccs_after: number | null
+          ccs_before: number | null
+          created_at: string
+          id: string
+          kind: Database["public"]["Enums"]["intervention_kind"]
+          payload: Json
+          preview_text: string | null
+          rejection_reason: string | null
+          site_id: string
+          status: Database["public"]["Enums"]["intervention_status"]
+          triggered_by: Database["public"]["Enums"]["intervention_trigger"]
+          updated_at: string
+          went_live_at: string | null
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          ccs_after?: number | null
+          ccs_before?: number | null
+          created_at?: string
+          id?: string
+          kind: Database["public"]["Enums"]["intervention_kind"]
+          payload?: Json
+          preview_text?: string | null
+          rejection_reason?: string | null
+          site_id: string
+          status?: Database["public"]["Enums"]["intervention_status"]
+          triggered_by?: Database["public"]["Enums"]["intervention_trigger"]
+          updated_at?: string
+          went_live_at?: string | null
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          ccs_after?: number | null
+          ccs_before?: number | null
+          created_at?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["intervention_kind"]
+          payload?: Json
+          preview_text?: string | null
+          rejection_reason?: string | null
+          site_id?: string
+          status?: Database["public"]["Enums"]["intervention_status"]
+          triggered_by?: Database["public"]["Enums"]["intervention_trigger"]
+          updated_at?: string
+          went_live_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "interventions_site_id_fkey"
+            columns: ["site_id"]
+            isOneToOne: false
+            referencedRelation: "intervention_sites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       leads: {
         Row: {
           auto_replied_at: string | null
@@ -1623,6 +1811,15 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      intervention_delivery_method: "snippet" | "wp_plugin" | "llms_txt_proxy"
+      intervention_kind: "schema" | "llms_txt" | "robots_txt"
+      intervention_status:
+        | "drafted"
+        | "approved"
+        | "live"
+        | "rejected"
+        | "superseded"
+      intervention_trigger: "auto_ccs_drop" | "manual" | "scheduled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1751,6 +1948,16 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      intervention_delivery_method: ["snippet", "wp_plugin", "llms_txt_proxy"],
+      intervention_kind: ["schema", "llms_txt", "robots_txt"],
+      intervention_status: [
+        "drafted",
+        "approved",
+        "live",
+        "rejected",
+        "superseded",
+      ],
+      intervention_trigger: ["auto_ccs_drop", "manual", "scheduled"],
     },
   },
 } as const

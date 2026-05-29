@@ -1,74 +1,88 @@
-# Citation Intelligence Platform — Phased Rebuild
+# Auto-Fix Intervention Layer
 
-The brief lists Next.js/Clerk/Stripe/Upstash. This project runs on **TanStack Start + Lovable Cloud (Supabase) + PayPal**, already deployed at grow.contact with `/leaderboard`, `/verify/$id`, `/check`, `/compare`, `/playbooks`, `/api-docs`, and a working scanner + monitoring + billing stack. The rebuild adapts the spec to that stack — no framework swap.
+Closes the loop: Scanner diagnoses → Auto-fix drafts → Customer approves → Snippet delivers → Loop validates.
 
-Shipping happens in 5 phases across multiple turns. Each phase is independently shippable (build passes, no regressions).
+## What ships
 
----
+### 1. Database (one migration)
 
-## Phase 1 — Data model + ingest (this turn)
+Four tables under `public`:
 
-New tables in Lovable Cloud (Supabase):
+- **`intervention_sites`** — one row per customer domain. Holds `install_token` (uuid, used in snippet URL), `wp_api_key` (nullable, for plugin), `auto_fire_enabled` (bool), `owner_user_id`.
+- **`interventions`** — one row per drafted fix. Columns: `site_id`, `kind` (`schema` | `llms_txt` | `robots_txt`), `status` (`drafted` | `approved` | `live` | `rejected` | `superseded`), `payload` (jsonb — the JSON-LD block, llms.txt body, or robots diff), `triggered_by` (`auto_ccs_drop` | `manual` | `scheduled`), `ccs_before`, `ccs_after`, `approved_by`, `approved_at`, `went_live_at`.
+- **`intervention_deliveries`** — log of every snippet fetch + plugin pull. `site_id`, `intervention_id`, `delivery_method` (`snippet` | `wp_plugin`), `user_agent`, `ip`, `delivered_at`.
+- **`intervention_audit`** — append-only log of state changes for trust/compliance.
 
-- `companies` — domain (pk), name, category, logo_url, github_url, g2_url, stackoverflow_tag, claimed_by_user_id
-- `company_scores` — domain, scan_date, overall_ccs, canonical, precedent, authority, verifiability, commentary, information_gain, citation_probability
-- `citations` — domain, ai_engine (perplexity/chatgpt/claude/google_aio), query_category, query_text, cited_url, position, cited_at, confidence
-- `citation_history` — domain, month, total_citations, perplexity_share, chatgpt_share, claude_share, google_aio_share, volatility (stable/rising/falling)
-- `authority_signals` — domain, scan_date, g2_reviews, github_stars, stackoverflow_questions, news_mentions, reddit_mentions, backlinks
-- `content_analysis` — domain, scan_date, factual_density, freshness_days, expert_signals, qa_blocks, comparison_tables, video_count
-- `certifications` — domain, user_id, status, issued_at, expires_at, badge_url
+All RLS-enabled, scoped to `owner_user_id` via `auth.uid()`. Service role for the public delivery endpoint and cron.
 
-All with explicit GRANTs, RLS scoped (public SELECT on companies/scores/citations/history; authenticated for claims; service_role for writes). Seed ~60 companies derived from the existing `LEADERBOARD` static data so the new tables aren't empty.
+### 2. Three auto-fix MCP tools
 
-## Phase 2 — Leaderboard upgrade
+In `src/lib/mcp/tools/auto-fix/`:
 
-Rebuild `/leaderboard` as a filterable, sortable table reading from the new tables:
+- **`auto_fix_schema`** — input `{ domain, page_url?, dry_run? }`. Crawls via Firecrawl, extracts Q/A pairs via Lovable AI (`google/gemini-3-flash-preview`, structured output), emits FAQPage + Product JSON-LD, writes a `drafted` row to `interventions`. Returns `{ intervention_id, preview, install_snippet }`.
+- **`auto_fix_llms_txt`** — input `{ domain }`. Reuses existing `generateLlmsTxtTool` + `siteUrlsTool`, ranks top 20 routes by scan score, drafts intervention.
+- **`auto_fix_robots_txt`** — input `{ domain }`. Fetches current robots.txt, diffs against grow-standard §4 matrix (the 6 search/citation bots: Googlebot, OAI-SearchBot, PerplexityBot, ClaudeBot, bingbot, FacebookBot), drafts intervention with the recommended block.
 
-- Category filter tabs (Infra/Models/Agents/DevTools/Data/Security/Robotics/Biotech)
-- Sortable columns: Company, Category, CCS, Citation Probability, 30d Citations, Perplexity %, ChatGPT %, Claude %, Google AIO %, Last Scan
-- 30-day sparkline per row (reuse `ScoreSparkline`)
-- Volatility badge (Stable/Rising/Falling)
-- Live search, compare-checkbox (2–4 rows), CSV/JSON export (free=top100, Pro=full via existing quota)
-- Stats bar + "Featured analysis" card
-- FAQ JSON-LD block at the bottom
+All three are wired into `src/routes/api/public/mcp.ts`.
 
-## Phase 3 — Verify page rebuild
+### 3. Approval queue
 
-`/verify/$id` becomes a Wikipedia-style profile:
+- **Server fn `approveIntervention({ id })`** — auth-required, flips `drafted → approved`, sets `went_live_at = now()`. Snippet endpoint serves only `approved` interventions.
+- **Server fn `rejectIntervention({ id, reason })`** — flips `drafted → rejected`.
+- **Server fn `listPendingInterventions()`** — returns the user's drafted queue with `payload` for preview.
+- **UI**: new route `src/routes/dashboard.interventions.tsx` — table of pending drafts with Preview (renders JSON-LD or diff) and Approve/Reject buttons. Linked from existing dashboard.
 
-- Hero infobox (logo, domain, category, CCS big, citation probability %, 30d citations, volatility)
-- 90-day multi-line history chart
-- 6 signal cards (canonical / precedent / authority / verifiability / commentary / information gain)
-- Citation analysis: top queries, platform breakdown bar, "competitors cited more often" table
-- Content quality block (factual density, freshness, third-party validation counts)
-- Q&A block (5 questions, FAQ schema)
-- Comparison table vs top 2 competitors
-- "Claim this profile" + "Compare" + "Improve" CTAs
-- Article + FAQPage + BreadcrumbList JSON-LD
+### 4. Snippet delivery
 
-## Phase 4 — New pages
+- **Public route `src/routes/api/public/inject/[$token][.]js.ts`** — returns a self-executing JS payload that injects approved interventions into `<head>`:
+  - JSON-LD: appends `<script type="application/ld+json">` blocks
+  - llms.txt: not applicable client-side; the snippet only logs an analytics ping (the actual llms.txt is served from our hosted endpoint customers proxy to)
+  - robots.txt: not applicable client-side; surfaced via dashboard for manual paste OR WP plugin
+  - Logs to `intervention_deliveries`
+  - Aggressive cache headers (`max-age=300, stale-while-revalidate=3600`)
+- **Public route `src/routes/api/public/inject/[$token].llms[.]txt.ts`** — serves the approved llms.txt body so customers can simply 301/proxy `/llms.txt` to us.
 
-- `/citation-index` — monthly report, ranked list with movers, per-month archive, RSS
-- `/compare` upgrade — radar chart + full metrics table + deep-link
-- `/playbooks` — 7 new entries from the brief, AED structure + FAQ schema
-- `/api-docs` upgrade — interactive Stripe-style explorer with cURL/Python/JS samples
-- `/certification` upgrade — 3-step flow (verify domain → audit CCS>75 → PayPal) using existing PayPal stack
-- `/research` hub — index of report + data drops + playbooks + glossary
+### 5. WordPress plugin scaffold
 
-## Phase 5 — Crawler/citation ingest
+New directory `wp-plugin/grow-auto-fix/`:
 
-- `src/lib/citations/ingest.server.ts` — server-only helpers to upsert citations + recompute citation_probability + roll up `citation_history` monthly
-- `/api/public/hooks/citation-import` — signed webhook for batch citation imports
-- Cron entry to recompute volatility nightly
+- `grow-auto-fix.php` — plugin header, settings page (paste install token), hooks `wp_head` to inject schema, registers cron to pull updates every 6h.
+- `README.md` with install instructions.
+- Plugin calls `/api/public/inject/{token}/manifest.json` to get the current approved bundle, applies via filters (`robots_txt` filter for robots, virtual `/llms.txt` rewrite, `wp_head` for JSON-LD).
+- Not auto-published; downloadable zip from `/dashboard/interventions` page.
+
+### 6. Auto-fire trigger (closed loop)
+
+- Extend existing `capture-citations` cron path: after each capture, if a site's 24h CCS drops >5pts vs prior period, enqueue an `auto_*` MCP call via a new helper `src/lib/interventions/auto-fire.server.ts`.
+- Auto-fired interventions land in `interventions` as `drafted` with `triggered_by = 'auto_ccs_drop'`. Customer still approves before going live (per the answered design decision).
+- Email notification via existing template registry: "3 fixes are ready to approve."
+
+## What does NOT ship in this pass
+
+- DNS proxy / hosted-site mode (Path D) — deferred.
+- Auto-publish without approval — deferred until trust pattern is validated.
+- Schema injection for non-FAQ/Product types (HowTo, Article, BreadcrumbList) — v1 covers the two highest-impact types; others added once usage data justifies.
+- Plugins for Shopify/Webflow — WP only in v1.
 
 ## Technical notes
 
-- Stack stays TanStack Start + Lovable Cloud + PayPal (NOT Next/Clerk/Stripe). Auth = existing Supabase auth + Google. Charts = Recharts (already installed). Caching = Lovable Cloud's existing edge cache; no Upstash.
-- Every new public-schema table gets GRANT + RLS in the same migration.
-- Reads from public verify/leaderboard pages use `createServerFn` + `supabaseAdmin` with explicit safe-column projection (not broad anon SELECT) — public route loaders cannot use `requireSupabaseAuth`.
-- All new routes get per-route `head()` with title/description/og:* and JSON-LD where applicable; canonical only on leaves.
-- og:image only on leaves with a meaningful image.
+- AI calls use Lovable AI Gateway (`LOVABLE_API_KEY` already provisioned). Default model `google/gemini-3-flash-preview` per current guidance.
+- Crawling uses existing Firecrawl integration (already wired in `src/lib/intelligence/company.functions.ts` patterns).
+- All server-side logic in `createServerFn` per modern stack rules. Snippet delivery in `src/routes/api/public/` per public-API conventions.
+- MCP tools follow existing pattern in `src/lib/mcp/tools/` and register in `src/routes/api/public/mcp.ts`.
+- One additional pricing surface: `dashboard.interventions` is the upsell page — free tier shows drafted fixes, paid tier ($99/mo) unlocks Approve + snippet delivery.
 
-## Confirmation needed before Phase 1
+## Out-of-scope cleanup
 
-Phase 1 creates 7 new tables in your production Lovable Cloud DB and seeds them from `src/lib/leaderboard/entries.ts`. Approving this plan starts the Phase 1 migration immediately; subsequent phases happen on follow-up turns so you can review between each.
+Pre-existing hydration warning on `/` (geo-standard version string) is unrelated to this work; will resolve on next published build.
+
+## Order I'll build
+
+1. Migration (tables + RLS + grants)
+2. Three MCP tools + register
+3. Snippet delivery route + llms.txt route
+4. Approval server fns + dashboard route
+5. Auto-fire hook in cron
+6. WP plugin scaffold + zip download
+
+Approve and I'll start with the migration.

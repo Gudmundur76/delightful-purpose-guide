@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.log_intervention_status_change() FROM PUBLIC, anon, authenticated;

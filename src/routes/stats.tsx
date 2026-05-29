@@ -151,7 +151,6 @@ export const Route = createFileRoute("/stats")({
   },
 });
 
-import { StatCard, type StatCardProps } from "@/components/StatCard";
 
 
 function StatsPage() {

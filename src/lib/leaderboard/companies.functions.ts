@@ -18,6 +18,7 @@ export type CitationIndexRow = {
   claude_share: number;
   google_aio_share: number;
   volatility: "stable" | "rising" | "falling";
+  citations_24h: number;
 };
 
 export const getCitationIndex = createServerFn({ method: "GET" }).handler(

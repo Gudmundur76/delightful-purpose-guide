@@ -1562,6 +1562,30 @@ export type Database = {
           },
         ]
       }
+      citation_counts_24h: {
+        Row: {
+          avg_latency_ms: number | null
+          cited_events: number | null
+          domain: string | null
+          engine: string | null
+          events: number | null
+          failed_events: number | null
+          last_queried_at: string | null
+        }
+        Relationships: []
+      }
+      response_changes_24h: {
+        Row: {
+          distinct_responses: number | null
+          domain: string | null
+          engine: string | null
+          events: number | null
+          first_queried_at: string | null
+          last_queried_at: string | null
+          prompt_template_id: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       delete_email: {

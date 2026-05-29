@@ -67,9 +67,9 @@ export function archiveLeaderboard() {
 
 export function archiveStats() {
   return {
-  return {
     $schema: STATS_SCHEMA_URL,
     frozen: true,
+    archive: ARCHIVE_KEY,
     as_of: ARCHIVE_PUBLISHED,
     standard: "geo-standard@2026.07",
     license: "https://creativecommons.org/licenses/by/4.0/",
@@ -83,16 +83,17 @@ export function archiveStats() {
 
 export function archiveClaims() {
   return {
-    frozen: true,
-  return {
     $schema: CLAIMS_SCHEMA_URL,
     frozen: true,
+    archive: ARCHIVE_KEY,
+    as_of: ARCHIVE_PUBLISHED,
     standard: "geo-standard@2026.07",
     license: "https://creativecommons.org/licenses/by/4.0/",
     attribution: `grow.contact verifiable-claims registry — ${ARCHIVE_LABEL} snapshot (CC BY 4.0)`,
-    docs: "https://grow.contact/standard",
+    docs: "https://grow.contact/data",
     live_url: "https://grow.contact/api/public/data/claims.json",
     count: CLAIMS_REGISTRY.length,
     claims: CLAIMS_REGISTRY,
   };
 }
+

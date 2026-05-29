@@ -9,7 +9,7 @@ import { createHash } from "crypto";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import type { Database } from "@/integrations/supabase/types";
 
-const BATCH_SIZE = 10;
+const BATCH_SIZE = 5;
 const GATEWAY_URL = "https://ai.gateway.lovable.dev/v1/chat/completions";
 
 const ENGINES = [

@@ -214,7 +214,8 @@ function StatsPage() {
               <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
                 // grow.contact / stats
               </p>
-              <LiveSignal dateModified={TODAY} />
+              <LiveSignal timestamp={TODAY} />
+
             </div>
 
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase max-w-4xl">

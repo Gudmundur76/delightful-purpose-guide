@@ -6,6 +6,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PLAYBOOKS } from "@/lib/playbooks/data";
 import { DATA_DROPS } from "@/lib/data-drops/data";
 import { GLOSSARY } from "@/lib/glossary/data";
+import { ogImageMeta } from "@/lib/seo/og";
 
 export const Route = createFileRoute("/research")({
   component: ResearchHub,

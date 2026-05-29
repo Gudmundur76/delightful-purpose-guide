@@ -23,6 +23,7 @@ import { Route as SopRouteImport } from './routes/sop'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
+import { Route as ResearchRouteImport } from './routes/research'
 import { Route as RefundRouteImport } from './routes/refund'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ProcessRouteImport } from './routes/process'
@@ -222,6 +223,11 @@ const ServicesRoute = ServicesRouteImport.update({
 const RssDotxmlRoute = RssDotxmlRouteImport.update({
   id: '/rss.xml',
   path: '/rss.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResearchRoute = ResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RefundRoute = RefundRouteImport.update({
@@ -938,6 +944,7 @@ export interface FileRoutesByFullPath {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
+  '/research': typeof ResearchRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1081,6 +1088,7 @@ export interface FileRoutesByTo {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
+  '/research': typeof ResearchRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1228,6 +1236,7 @@ export interface FileRoutesById {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
+  '/research': typeof ResearchRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1376,6 +1385,7 @@ export interface FileRouteTypes {
     | '/process'
     | '/products'
     | '/refund'
+    | '/research'
     | '/rss.xml'
     | '/services'
     | '/sitemap.xml'
@@ -1519,6 +1529,7 @@ export interface FileRouteTypes {
     | '/process'
     | '/products'
     | '/refund'
+    | '/research'
     | '/rss.xml'
     | '/services'
     | '/sitemap.xml'
@@ -1665,6 +1676,7 @@ export interface FileRouteTypes {
     | '/process'
     | '/products'
     | '/refund'
+    | '/research'
     | '/rss.xml'
     | '/services'
     | '/sitemap.xml'
@@ -1812,6 +1824,7 @@ export interface RootRouteChildren {
   ProcessRoute: typeof ProcessRoute
   ProductsRoute: typeof ProductsRoute
   RefundRoute: typeof RefundRoute
+  ResearchRoute: typeof ResearchRoute
   RssDotxmlRoute: typeof RssDotxmlRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -1993,6 +2006,13 @@ declare module '@tanstack/react-router' {
       path: '/rss.xml'
       fullPath: '/rss.xml'
       preLoaderRoute: typeof RssDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/research': {
+      id: '/research'
+      path: '/research'
+      fullPath: '/research'
+      preLoaderRoute: typeof ResearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/refund': {
@@ -3162,6 +3182,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProcessRoute: ProcessRoute,
   ProductsRoute: ProductsRoute,
   RefundRoute: RefundRoute,
+  ResearchRoute: ResearchRoute,
   RssDotxmlRoute: RssDotxmlRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

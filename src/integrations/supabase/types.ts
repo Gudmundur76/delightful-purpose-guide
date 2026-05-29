@@ -1440,7 +1440,50 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      certifications_public: {
+        Row: {
+          badge_url: string | null
+          created_at: string | null
+          domain: string | null
+          expires_at: string | null
+          id: string | null
+          issued_at: string | null
+          status: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          badge_url?: string | null
+          created_at?: string | null
+          domain?: string | null
+          expires_at?: string | null
+          id?: string | null
+          issued_at?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          badge_url?: string | null
+          created_at?: string | null
+          domain?: string | null
+          expires_at?: string | null
+          id?: string | null
+          issued_at?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "certifications_domain_fkey"
+            columns: ["domain"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["domain"]
+          },
+        ]
+      }
     }
     Functions: {
       delete_email: {

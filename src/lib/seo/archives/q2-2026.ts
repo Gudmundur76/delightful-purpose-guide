@@ -30,6 +30,7 @@ export function archiveLeaderboard() {
   const stats = computeHeadlineStats();
   const rows = getLeaderboard();
   return {
+    $schema: LEADERBOARD_SCHEMA_URL,
     frozen: true,
     archive: ARCHIVE_KEY,
     as_of: ARCHIVE_PUBLISHED,
@@ -66,8 +67,9 @@ export function archiveLeaderboard() {
 
 export function archiveStats() {
   return {
+  return {
+    $schema: STATS_SCHEMA_URL,
     frozen: true,
-    archive: ARCHIVE_KEY,
     as_of: ARCHIVE_PUBLISHED,
     standard: "geo-standard@2026.07",
     license: "https://creativecommons.org/licenses/by/4.0/",
@@ -82,8 +84,9 @@ export function archiveStats() {
 export function archiveClaims() {
   return {
     frozen: true,
-    archive: ARCHIVE_KEY,
-    as_of: ARCHIVE_PUBLISHED,
+  return {
+    $schema: CLAIMS_SCHEMA_URL,
+    frozen: true,
     standard: "geo-standard@2026.07",
     license: "https://creativecommons.org/licenses/by/4.0/",
     attribution: `grow.contact verifiable-claims registry — ${ARCHIVE_LABEL} snapshot (CC BY 4.0)`,

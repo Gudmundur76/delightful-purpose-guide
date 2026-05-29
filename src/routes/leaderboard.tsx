@@ -483,7 +483,7 @@ function LeaderboardPage() {
                   })}
                   {filtered.length === 0 ? (
                     <tr>
-                      <td colSpan={12} className="px-3 py-12 text-center text-muted-foreground font-mono text-xs">
+                      <td colSpan={13} className="px-3 py-12 text-center text-muted-foreground font-mono text-xs">
                         // No companies match the current filters.
                       </td>
                     </tr>

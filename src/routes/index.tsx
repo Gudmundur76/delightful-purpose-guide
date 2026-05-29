@@ -460,7 +460,8 @@ function Index() {
 
               <p>For AI/ML startups, agent platforms, and developer tool companies — the companies grow.contact serves — this matters more than it does for any other category. Your buyers are technical founders who use Perplexity to research alternatives before they ever visit your site. They use Claude to analyze your documentation before they sign up for a trial. They ask ChatGPT to compare your pricing against competitors.</p>
               <p className="text-foreground font-bold">If your site is not agent-readable, you are invisible to the entire top of the funnel.</p>
-              <p>The Princeton GEO Framework (Aggarwal et al., 2023) — the foundational academic paper on Generative Engine Optimization — identified the specific content signals that correlate with AI citation rates. Statistics addition: +40%. Source citation: +30–35%. Expert quotes: +30%. These are measured correlations across thousands of queries.</p>
+              <p>Pages over 20,000 characters receive <strong className="text-foreground"><VerifiabilityBadge id="home-stat-4x" citation={claimCitation("home-stat-4x")} dateModified={HOME_DATE_MODIFIED}>4.3 times more AI citations</VerifiabilityBadge></strong> than thin pages. Most marketing sites are under 3,000 characters per page. The gap is structural, not cosmetic.</p>
+
               <p>Pages over 20,000 characters receive <strong className="text-foreground">4.3 times more AI citations</strong> than thin pages. Most marketing sites are under 3,000 characters per page. The gap is structural, not cosmetic.</p>
               <p className="text-foreground"><strong>grow.contact fixes the structural gap. In 48 hours. At a fixed price.</strong></p>
             </div>

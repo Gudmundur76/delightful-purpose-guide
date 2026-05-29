@@ -177,9 +177,11 @@ function LeaderboardPage() {
           </div>
         </section>
 
-        </section>
-
         {/* Headline citable stats strip */}
+        <section
+          aria-labelledby="leaderboard-headlines"
+          className="border-b border-border bg-card/40"
+        >
         <section
           aria-labelledby="leaderboard-headlines"
           className="border-b border-border bg-card/40"

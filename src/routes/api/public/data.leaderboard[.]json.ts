@@ -9,6 +9,7 @@ import {
   getLeaderboard,
 } from "@/lib/leaderboard/entries";
 import { computeHeadlineStats } from "@/lib/leaderboard/stats";
+import { LEADERBOARD_SCHEMA_URL } from "@/lib/seo/dataset-schemas";
 
 const VALID: LeaderboardCategory[] = ["infra", "models", "agents", "devtools"];
 
@@ -28,6 +29,7 @@ export const Route = createFileRoute("/api/public/data/leaderboard.json")({
         const rows = getLeaderboard(category).slice(0, limit);
 
         const body = {
+          $schema: LEADERBOARD_SCHEMA_URL,
           generated_at: new Date().toISOString(),
           date_modified: new Date().toISOString().slice(0, 10),
           standard: "geo-standard@2026.07",

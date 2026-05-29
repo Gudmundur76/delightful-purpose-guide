@@ -12,6 +12,11 @@ import {
   getLeaderboard,
 } from "@/lib/leaderboard/entries";
 import { CLAIMS_REGISTRY } from "@/lib/seo/claims-registry";
+import {
+  CLAIMS_SCHEMA_URL,
+  LEADERBOARD_SCHEMA_URL,
+  STATS_SCHEMA_URL,
+} from "@/lib/seo/dataset-schemas";
 
 export const ARCHIVE_KEY = "q2-2026";
 export const ARCHIVE_PUBLISHED = "2026-05-28";

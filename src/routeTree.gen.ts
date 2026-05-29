@@ -140,6 +140,9 @@ import { Route as ApiPublicDataClaimsDotjsonRouteImport } from './routes/api/pub
 import { Route as ApiPublicWidgetChartSlugDotsvgRouteImport } from './routes/api/public/widget/chart.$slug[.]svg'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
+import { Route as ApiPublicDataSchemasStatsDotschemaDotjsonRouteImport } from './routes/api/public/data.schemas.stats[.]schema[.]json'
+import { Route as ApiPublicDataSchemasLeaderboardDotschemaDotjsonRouteImport } from './routes/api/public/data.schemas.leaderboard[.]schema[.]json'
+import { Route as ApiPublicDataSchemasClaimsDotschemaDotjsonRouteImport } from './routes/api/public/data.schemas.claims[.]schema[.]json'
 
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
@@ -820,6 +823,24 @@ const ApiPublicV1AdminTableRoute = ApiPublicV1AdminTableRouteImport.update({
   path: '/api/public/v1/admin/$table',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicDataSchemasStatsDotschemaDotjsonRoute =
+  ApiPublicDataSchemasStatsDotschemaDotjsonRouteImport.update({
+    id: '/api/public/data/schemas/stats.schema.json',
+    path: '/api/public/data/schemas/stats.schema.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute =
+  ApiPublicDataSchemasLeaderboardDotschemaDotjsonRouteImport.update({
+    id: '/api/public/data/schemas/leaderboard.schema.json',
+    path: '/api/public/data/schemas/leaderboard.schema.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicDataSchemasClaimsDotschemaDotjsonRoute =
+  ApiPublicDataSchemasClaimsDotschemaDotjsonRouteImport.update({
+    id: '/api/public/data/schemas/claims.schema.json',
+    path: '/api/public/data/schemas/claims.schema.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -950,6 +971,9 @@ export interface FileRoutesByFullPath {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/api/public/v1/': typeof ApiPublicV1IndexRoute
+  '/api/public/data/schemas/claims.schema.json': typeof ApiPublicDataSchemasClaimsDotschemaDotjsonRoute
+  '/api/public/data/schemas/leaderboard.schema.json': typeof ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute
+  '/api/public/data/schemas/stats.schema.json': typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
@@ -1081,6 +1105,9 @@ export interface FileRoutesByTo {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/api/public/v1': typeof ApiPublicV1IndexRoute
+  '/api/public/data/schemas/claims.schema.json': typeof ApiPublicDataSchemasClaimsDotschemaDotjsonRoute
+  '/api/public/data/schemas/leaderboard.schema.json': typeof ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute
+  '/api/public/data/schemas/stats.schema.json': typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
@@ -1215,6 +1242,9 @@ export interface FileRoutesById {
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
   '/api/public/v1/': typeof ApiPublicV1IndexRoute
+  '/api/public/data/schemas/claims.schema.json': typeof ApiPublicDataSchemasClaimsDotschemaDotjsonRoute
+  '/api/public/data/schemas/leaderboard.schema.json': typeof ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute
+  '/api/public/data/schemas/stats.schema.json': typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
@@ -1350,6 +1380,9 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/api/public/v1/'
+    | '/api/public/data/schemas/claims.schema.json'
+    | '/api/public/data/schemas/leaderboard.schema.json'
+    | '/api/public/data/schemas/stats.schema.json'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
     | '/api/public/widget/chart/$slug.svg'
@@ -1481,6 +1514,9 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/api/public/v1'
+    | '/api/public/data/schemas/claims.schema.json'
+    | '/api/public/data/schemas/leaderboard.schema.json'
+    | '/api/public/data/schemas/stats.schema.json'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
     | '/api/public/widget/chart/$slug.svg'
@@ -1614,6 +1650,9 @@ export interface FileRouteTypes {
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
     | '/api/public/v1/'
+    | '/api/public/data/schemas/claims.schema.json'
+    | '/api/public/data/schemas/leaderboard.schema.json'
+    | '/api/public/data/schemas/stats.schema.json'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/posts/$slug'
     | '/api/public/widget/chart/$slug.svg'
@@ -1722,6 +1761,9 @@ export interface RootRouteChildren {
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
   LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
   ApiPublicV1IndexRoute: typeof ApiPublicV1IndexRoute
+  ApiPublicDataSchemasClaimsDotschemaDotjsonRoute: typeof ApiPublicDataSchemasClaimsDotschemaDotjsonRoute
+  ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute: typeof ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute
+  ApiPublicDataSchemasStatsDotschemaDotjsonRoute: typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   ApiPublicV1AdminTableRoute: typeof ApiPublicV1AdminTableRoute
   ApiPublicWidgetChartSlugDotsvgRoute: typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
@@ -2645,6 +2687,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1AdminTableRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/data/schemas/stats.schema.json': {
+      id: '/api/public/data/schemas/stats.schema.json'
+      path: '/api/public/data/schemas/stats.schema.json'
+      fullPath: '/api/public/data/schemas/stats.schema.json'
+      preLoaderRoute: typeof ApiPublicDataSchemasStatsDotschemaDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/data/schemas/leaderboard.schema.json': {
+      id: '/api/public/data/schemas/leaderboard.schema.json'
+      path: '/api/public/data/schemas/leaderboard.schema.json'
+      fullPath: '/api/public/data/schemas/leaderboard.schema.json'
+      preLoaderRoute: typeof ApiPublicDataSchemasLeaderboardDotschemaDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/data/schemas/claims.schema.json': {
+      id: '/api/public/data/schemas/claims.schema.json'
+      path: '/api/public/data/schemas/claims.schema.json'
+      fullPath: '/api/public/data/schemas/claims.schema.json'
+      preLoaderRoute: typeof ApiPublicDataSchemasClaimsDotschemaDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -2963,6 +3026,12 @@ const rootRouteChildren: RootRouteChildren = {
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
   LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
   ApiPublicV1IndexRoute: ApiPublicV1IndexRoute,
+  ApiPublicDataSchemasClaimsDotschemaDotjsonRoute:
+    ApiPublicDataSchemasClaimsDotschemaDotjsonRoute,
+  ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute:
+    ApiPublicDataSchemasLeaderboardDotschemaDotjsonRoute,
+  ApiPublicDataSchemasStatsDotschemaDotjsonRoute:
+    ApiPublicDataSchemasStatsDotschemaDotjsonRoute,
   ApiPublicV1AdminTableRoute: ApiPublicV1AdminTableRoute,
   ApiPublicWidgetChartSlugDotsvgRoute: ApiPublicWidgetChartSlugDotsvgRoute,
 }

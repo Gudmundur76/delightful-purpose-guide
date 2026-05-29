@@ -229,6 +229,7 @@ function LeaderboardPage() {
       "chatgpt_share",
       "claude_share",
       "google_aio_share",
+      "citations_24h",
       "volatility",
     ].join(",");
     const lines = filtered.map((r) =>

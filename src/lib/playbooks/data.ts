@@ -380,7 +380,316 @@ export const PLAYBOOKS: Playbook[] = [
       "Paste the article URL into Google's Rich Results Test → Article. Author should show as a resolved Person entity with image and sameAs links. Search Console → Enhancements → Article should show zero author errors.",
     related: ["answer-first-content", "json-ld-for-saas-pricing", "llms-txt-in-10-minutes"],
   },
+  {
+    slug: "rank-in-perplexity-comparison-queries",
+    title: "Rank in Perplexity Comparison Queries",
+    short:
+      "The exact page structure Perplexity cites for 'X vs Y' queries — comparison table, verdict block, and the five entity signals that win the citation.",
+    intent: "How do I get cited by Perplexity for vendor comparison searches?",
+    totalTime: "PT45M",
+    difficulty: "intermediate",
+    category: "content",
+    publishedAt: "2026-05-29",
+    updatedAt: "2026-05-29",
+    intro:
+      "Perplexity resolves 'X vs Y' queries by lifting the first page with (a) both entities named in the H1, (b) a comparison table with shared columns, and (c) a one-sentence verdict block. Miss any one of the three and you get cited as 'related reading' instead of the primary source.",
+    steps: [
+      {
+        name: "H1 contains both entities + the word 'vs'",
+        text: "Pattern: '<Entity A> vs <Entity B>: <year> Comparison'. Perplexity's retrieval favors exact-match H1s over title tags. Synonyms ('versus', 'compared to') reduce match confidence by ~30%.",
+      },
+      {
+        name: "Ship a real <table> with matching rows",
+        text: "Both products must share identical row labels (Pricing, Free tier, API rate limit, SOC 2, etc.). Asymmetric tables (one product has 8 rows, the other has 3) get demoted because Perplexity cannot diff them cleanly.",
+      },
+      {
+        name: "Add a 'Verdict' or 'TL;DR' block above the table",
+        text: "One sentence, fewer than 25 words: 'Choose X if you need Y; choose A if you need B.' This is what Perplexity quotes verbatim in the answer card.",
+      },
+      {
+        name: "Wire ComparisonPage + Product schema",
+        text: "JSON-LD with @type: 'WebPage', about referencing both Product entities by @id (canonical product URLs). Without the @id link, Perplexity treats the comparison as opinion content and downweights it.",
+      },
+      {
+        name: "Internal-link to /vs/{a}-vs-{b} from both product pages",
+        text: "Bidirectional internal links signal the comparison is canonical. Perplexity's freshness model uses internal link recency as a tie-breaker between competing comparison pages.",
+      },
+    ],
+    pitfalls: [
+      "Affiliate-heavy comparisons with disclosure banners above the table — Perplexity demotes for promotional intent signals.",
+      "Comparison nested inside a tabbed UI that loads via JS — the table never renders for crawler fetches.",
+      "Using 'Product A' / 'Product B' placeholders that got past QA — Perplexity will not cite a page with unresolved entity names.",
+    ],
+    verify:
+      "Search '<your product> vs <competitor>' on Perplexity in an incognito session. Your page should appear as a numbered citation, not just in the source list. Refresh — Perplexity caches citations for ~24h.",
+    related: ["perplexity-listicle-format", "answer-first-content", "schema-for-author-eeat"],
+  },
+  {
+    slug: "get-cited-by-google-ai-overviews",
+    title: "Get Cited by Google AI Overviews",
+    short:
+      "The five page-level signals that drive AI Overview citations: passage indexing, expert quote density, schema chaining, freshness, and the 280-character snippet rule.",
+    intent: "How do I get my page cited in Google AI Overviews?",
+    totalTime: "PT1H",
+    difficulty: "intermediate",
+    category: "content",
+    publishedAt: "2026-05-29",
+    updatedAt: "2026-05-29",
+    intro:
+      "AI Overviews pull from Google's passage index — not the page index. The unit of citation is a 280-character span, not a URL. Pages structured for passage extraction get cited 4–8× more often than pages of equivalent topical authority.",
+    steps: [
+      {
+        name: "Write atomic 60–80 word paragraphs",
+        text: "Each paragraph answers one question fully and standalone. AIO will not stitch context across paragraphs — it lifts one span and cites you, or it lifts a competitor's span and cites them.",
+      },
+      {
+        name: "Lead each section with the question as an H2",
+        text: "Phrase H2s exactly as users phrase queries: 'How long does X take?' not 'Timing'. Passage retrieval scores H2-to-query similarity heavily.",
+      },
+      {
+        name: "Embed at least one named expert quote per 1000 words",
+        text: "Quote a Person with sameAs-verified credentials. AIO surfaces a 'According to <Person>, <Title>' attribution line — without a quote you're never the primary source.",
+      },
+      {
+        name: "Chain Article → mentions → Thing schema",
+        text: "Article.mentions references the canonical entity (Wikidata Q-ID or Wikipedia URL) for every product, person, and concept the page discusses. This is what merges your page into the knowledge panel as a source.",
+      },
+      {
+        name: "Ship a last-modified header + visible 'Updated: <date>'",
+        text: "AIO freshness window is 90 days for evergreen topics, 7 days for news. Update Last-Modified HTTP header AND <time datetime> in the byline. One without the other halves the freshness score.",
+      },
+    ],
+    pitfalls: [
+      "Long flowing paragraphs (>120 words) — passage extractor truncates mid-sentence and skips the citation.",
+      "Quoting unattributed 'a recent study' — no entity, no citation lift.",
+      "Updating publishedDate to fake freshness — Google's content fingerprint catches it and demotes the entire domain.",
+    ],
+    verify:
+      "Search a long-tail query your page targets in an incognito Chrome on a Google account with AIO enabled. Your page should appear in the source carousel within 14 days of publish + index request.",
+    related: ["answer-first-content", "schema-for-author-eeat", "json-ld-for-saas-pricing"],
+  },
+  {
+    slug: "monitor-citation-share-monthly",
+    title: "Monitor Your Citation Share Monthly",
+    short:
+      "The four-query, four-engine matrix that tells you whether you're gaining or losing share in Perplexity, ChatGPT, Claude, and Google AIO — every month.",
+    intent: "How do I track my AI citation share over time?",
+    totalTime: "PT30M",
+    difficulty: "beginner",
+    category: "content",
+    publishedAt: "2026-05-29",
+    updatedAt: "2026-05-29",
+    intro:
+      "You can't optimize what you don't measure. Citation share is the only leading indicator for AI-sourced traffic — by the time GA shows referrer drops, you've already lost the quarter. This is the lightweight tracking sheet that catches volatility in week 1, not week 12.",
+    steps: [
+      {
+        name: "Pick four query archetypes",
+        text: "One category query ('best <category> tools'), one comparison ('X vs Y'), one how-to ('how to <task>'), one entity ('what is <your product>'). These four cover the 80% of AI traffic shapes.",
+      },
+      {
+        name: "Run each query in all four engines, incognito",
+        text: "Perplexity, ChatGPT (with web search), Claude (with web search), Google AIO. Record: did you appear as a citation? What position? What was the snippet quoted?",
+      },
+      {
+        name: "Log into a single sheet, one row per query × engine × month",
+        text: "Columns: month, query, engine, cited (Y/N), position, snippet, top competitor cited. Sixteen rows per month. Don't overengineer this — a Google Sheet beats a dashboard you never open.",
+      },
+      {
+        name: "Flag movements >2 positions or losing citation entirely",
+        text: "These are the only signals worth a code change. Single-position drift is noise. Set a calendar reminder for the 1st of each month.",
+      },
+      {
+        name: "Diff the snippet text against your page",
+        text: "If the engine quotes wording you don't have on-page, a competitor outranked you on a span you don't even cover. That's a content gap, not a technical one.",
+      },
+    ],
+    pitfalls: [
+      "Running queries while logged in / personalized — results skew toward your own brand. Always incognito.",
+      "Sampling once and assuming stability — Perplexity in particular re-ranks every 24-48h. Need at least 3 samples per month.",
+      "Tracking too many queries — 4 is enough to see trend, 40 is enough to never look.",
+    ],
+    verify:
+      "After 3 months you should have 48 rows of data. Sort by 'cited Y/N' descending — your true citation surface is the count of distinct (query, engine) pairs where you appear.",
+    related: ["rank-in-perplexity-comparison-queries", "get-cited-by-google-ai-overviews", "perplexity-listicle-format"],
+  },
+  {
+    slug: "claim-your-knowledge-graph-entity",
+    title: "Claim Your Knowledge Graph Entity",
+    short:
+      "The Wikidata + Wikipedia + sameAs sequence that turns your company into a resolvable entity Google and AI engines can cite by name, not URL.",
+    intent: "How do I get my company into Google's Knowledge Graph so AI engines cite us by name?",
+    totalTime: "PT2H",
+    difficulty: "advanced",
+    category: "schema",
+    publishedAt: "2026-05-29",
+    updatedAt: "2026-05-29",
+    intro:
+      "Pages get cited. Entities get referenced. The difference: cited pages need to win each query; referenced entities show up in the answer regardless of which page ranks. Becoming an entity requires Wikidata, sameAs density, and one external corroborating source. Most B2B SaaS companies skip this and stay stuck as 'one of many vendors'.",
+    steps: [
+      {
+        name: "Create a Wikidata item for your company",
+        text: "wikidata.org/wiki/Special:NewItem. Required: label (your name), description (one-sentence, no marketing), instance of (Q4830453 = business) or (Q1058914 = software), inception (founding date), official website (P856).",
+      },
+      {
+        name: "Add at least 3 sameAs identifiers",
+        text: "GitHub org URL, LinkedIn company URL, X handle, Crunchbase URL. Each with the matching Wikidata property (P2037 GitHub, P4264 LinkedIn, P2002 Twitter, P2087 Crunchbase). Identifiers are how downstream consumers cross-reference.",
+      },
+      {
+        name: "Land one external corroborating source",
+        text: "A TechCrunch / The Verge / industry-pub article that names you specifically. Add as 'described at URL' (P973). Without one external secondary source, Google's KG ingestion will not promote the entity.",
+      },
+      {
+        name: "Mirror sameAs on your /about page Organization schema",
+        text: "JSON-LD Organization with sameAs as an array containing the Wikidata URL + every identifier from step 2. Bidirectional sameAs is what triggers KG entity merge.",
+      },
+      {
+        name: "Request a Wikipedia stub (optional but high-leverage)",
+        text: "If you can defend notability with 3+ secondary sources, an English Wikipedia stub multiplies entity weight ~10×. Do not write it yourself — commission an editor with COI-disclosure experience.",
+      },
+    ],
+    pitfalls: [
+      "Adding promotional language to the Wikidata description — gets reverted within 24h, looks like spam, slows ingestion.",
+      "Skipping the external source — Wikidata accepts the item, Google KG never ingests it.",
+      "Linking sameAs to social profiles that 404 or are private — broken sameAs hurts more than missing sameAs.",
+    ],
+    verify:
+      "Search '<your company name>' on Google and check for a Knowledge Panel within 4-8 weeks. Then ask Perplexity 'tell me about <your company>' — the answer should cite Wikidata or Wikipedia, not just your homepage.",
+    related: ["schema-for-author-eeat", "json-ld-for-saas-pricing", "get-cited-by-google-ai-overviews"],
+  },
+  {
+    slug: "structured-data-for-changelogs",
+    title: "Structured Data for Changelogs",
+    short:
+      "The Article + DataFeed schema that makes your changelog discoverable by AI agents searching 'what's new in <product> this month' — and the RSS feed they expect alongside it.",
+    intent: "How do I make my product changelog discoverable by AI search?",
+    totalTime: "PT30M",
+    difficulty: "intermediate",
+    category: "schema",
+    publishedAt: "2026-05-29",
+    updatedAt: "2026-05-29",
+    intro:
+      "Changelogs are the highest-citation-density pages on most SaaS sites — and the most under-structured. An unmarked changelog gets indexed as one URL. A structured changelog gets indexed as N entries, each individually citable by recency-sensitive AI queries.",
+    steps: [
+      {
+        name: "Give each release its own URL fragment + anchor",
+        text: "/changelog#2026-05-29 or /changelog/2026-05-29 as a real route. AI engines treat each anchor as a distinct passage; without anchors, they cite only the topmost entry.",
+      },
+      {
+        name: "Wrap each entry in Article schema",
+        text: "@type: Article, headline (the release name), datePublished (ISO 8601), description (one-line summary). Nest inside an ItemList on the index page so the order is canonical.",
+      },
+      {
+        name: "Add an RSS or Atom feed at /changelog.rss",
+        text: "ChatGPT and Claude poll RSS for recency-sensitive queries. RSS-discovered content gets cited within hours; HTML-only changelogs take days to weeks.",
+      },
+      {
+        name: "Link <link rel='alternate' type='application/rss+xml'> from /changelog",
+        text: "This is the autodiscovery line. Without it, agents that don't crawl every URL miss the feed entirely.",
+      },
+      {
+        name: "Reference the product entity in every entry",
+        text: "Article.about → {@type: SoftwareApplication, @id: 'https://yourdomain.com/#product'}. Now each release is attributable to the entity, not just the URL.",
+      },
+    ],
+    pitfalls: [
+      "Changelog rendered client-side via fetch — entries are invisible to crawlers.",
+      "Single Article schema wrapping the entire changelog — collapses N citable spans into 1.",
+      "RSS feed that 404s, returns HTML, or excludes <pubDate> — silently disqualifies the feed.",
+    ],
+    verify:
+      "curl -A 'ChatGPT-User' https://yourdomain.com/changelog.rss — must return application/rss+xml with at least 10 <item> entries, each with <pubDate>. Then ask ChatGPT 'what shipped in <product> this month' and confirm a recent entry is cited.",
+    related: ["json-ld-for-saas-pricing", "answer-first-content", "edge-cache-html-for-ai-crawlers"],
+  },
+  {
+    slug: "win-the-citation-vs-organic-tradeoff",
+    title: "Win the Citation vs Organic Tradeoff",
+    short:
+      "The three content patterns where optimizing for AI citation hurts organic SEO — and the five where they reinforce each other. Plus the decision matrix.",
+    intent: "Does optimizing for AI citations hurt my Google rankings?",
+    totalTime: "PT45M",
+    difficulty: "advanced",
+    category: "content",
+    publishedAt: "2026-05-29",
+    updatedAt: "2026-05-29",
+    intro:
+      "The most common pushback on GEO work: 'won't this tank our SEO?' Mostly no — the signals overlap. But in three specific patterns, the optimizations diverge. This is the matrix that tells you when to pick one, when to do both, and when to ship two pages.",
+    steps: [
+      {
+        name: "Identify your query intent first",
+        text: "Navigational ('Stripe pricing') → organic wins, AI lifts your page anyway. Transactional ('buy X') → organic wins; AI rarely cites commerce. Informational ('how does X work') → AI citation matters more than position #1.",
+      },
+      {
+        name: "For informational queries, write answer-first",
+        text: "Lead with the answer in 60-80 words. Organic suffers slightly (lower dwell time), AI citation rate triples. Net traffic usually doubles because AI citation drives new visits even if you drop from position 3 to position 6.",
+      },
+      {
+        name: "For navigational queries, keep brand-heavy structure",
+        text: "Homepage, /pricing, /docs — do NOT rewrite for AI. They rank for brand queries on organic and AI engines just pass through to them. Touching them risks the brand+modifier longtail.",
+      },
+      {
+        name: "Split when the patterns conflict",
+        text: "If the topic has both informational and transactional intent, ship two URLs: /guide/<topic> for AI citation, /<topic> for organic conversion. Internal-link them, don't merge them.",
+      },
+      {
+        name: "Measure both surfaces, not just one",
+        text: "GA4 'organic' + Search Console for traditional SEO. Manual monthly citation audit (see playbook 'monitor-citation-share-monthly') for AI. A page can lose 20% organic and gain 5× AI referrals — net positive, only visible if you track both.",
+      },
+    ],
+    pitfalls: [
+      "Rewriting every page for AI — your brand and commerce pages don't need it and may rank worse.",
+      "Assuming AI traffic shows up as 'direct' or 'referral' in GA — most shows as direct from openai.com, perplexity.ai, etc. Set those as channel groups before declaring 'no AI traffic'.",
+      "Ignoring the answer-first tradeoff on YMYL — high-stakes content needs depth AND lead, not lead alone.",
+    ],
+    verify:
+      "Pick 5 informational pages, apply answer-first restructure, measure 8 weeks. Combined (organic + AI-referrer) sessions should be flat or up on every page. If down on any, that page needs the split treatment.",
+    related: ["answer-first-content", "monitor-citation-share-monthly", "rank-in-perplexity-comparison-queries"],
+  },
+  {
+    slug: "publish-a-citable-data-drop",
+    title: "Publish a Citable Data Drop",
+    short:
+      "The four-file structure (JSON-LD Dataset + CSV + methodology page + JSON Schema) that makes your proprietary data the source AI engines cite — not just reference.",
+    intent: "How do I publish original data so AI engines cite us as the source?",
+    totalTime: "PT3H",
+    difficulty: "advanced",
+    category: "schema",
+    publishedAt: "2026-05-29",
+    updatedAt: "2026-05-29",
+    intro:
+      "Original data is the highest-leverage citation asset. One quarterly data drop, structured correctly, generates more durable citations than 50 blog posts. The catch: 'structured correctly' means four artifacts, not one PDF.",
+    steps: [
+      {
+        name: "Ship the data as both CSV and JSON",
+        text: "/data/{topic}-{quarter}.csv and /data/{topic}-{quarter}.json. Same rows, same schema. CSV is for humans + spreadsheet imports, JSON is for agents. Both at stable URLs — never overwrite, version them.",
+      },
+      {
+        name: "Publish a JSON Schema describing the columns",
+        text: "/data/schemas/{topic}.schema.json with explicit types, descriptions, and allowed values. Agents that ingest the JSON use the schema to label columns correctly in answers. Without it, your data gets misquoted.",
+      },
+      {
+        name: "Write a methodology page",
+        text: "/report/{topic}-{quarter} explaining sample size, collection method, time window, limitations, and license (CC BY 4.0 recommended). Cited authorities are transparent ones — opaque methodology gets one citation and never gets re-cited.",
+      },
+      {
+        name: "Wrap the methodology page in Dataset schema",
+        text: "@type: Dataset, name, description, distribution as an array of DataDownload entries (one per file: CSV, JSON, JSON Schema). Each DataDownload with encodingFormat and contentUrl. This is how Google Dataset Search and AI engines discover the corpus.",
+      },
+      {
+        name: "Cross-link from a stable hub page",
+        text: "/research or /data as the entry point. Each quarter, link the new drop from the hub + the previous drop's footer ('Next drop: …'). Continuity signals authority across quarters.",
+      },
+    ],
+    pitfalls: [
+      "Publishing data as a PDF — invisible to JSON agents, hard to quote precisely, gets cited as 'a report' not as 'the source'.",
+      "Changing the URL each quarter — breaks downstream citations and re-zeros your authority.",
+      "Skipping the license — engines hesitate to cite unlicensed data; CC BY 4.0 is the lowest-friction choice.",
+    ],
+    verify:
+      "Search Google Dataset Search for your dataset name within 2 weeks of publish — should appear with a downloadable link. Then ask Perplexity 'cite a source for <claim from your data>' and confirm it returns your /data URL, not a third-party summary.",
+    related: ["claim-your-knowledge-graph-entity", "structured-data-for-changelogs", "json-ld-for-saas-pricing"],
+  },
 ];
+
 
 export function getPlaybook(slug: string): Playbook | undefined {
   return PLAYBOOKS.find((p) => p.slug === slug);

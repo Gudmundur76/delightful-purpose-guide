@@ -70,24 +70,28 @@ export function SiteFooter() {
         </div>
         <div className="mt-6 pt-6 border-t border-border flex flex-col md:flex-row gap-4 md:items-center md:justify-between font-mono text-[10px] text-muted-foreground uppercase">
           <span>&copy; 2026 GROW STUDIO</span>
-          <a
-            href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fgrow.contact"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Lighthouse performance audit on PageSpeed Insights"
-            className="group inline-flex items-center gap-2 border border-emerald-500/40 bg-emerald-500/5 px-3 py-1.5 hover:border-emerald-500 transition-colors"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-            </span>
-            <span className="text-emerald-400">Lighthouse</span>
-            <span className="text-emerald-400 font-bold">98</span>
-            <span className="text-muted-foreground">/ 100</span>
-            <span className="text-muted-foreground opacity-70 group-hover:opacity-100">↗</span>
-          </a>
+          <div className="flex flex-wrap gap-2 items-center">
+            <SourceSyncIndicator />
+            <a
+              href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fgrow.contact"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Lighthouse performance audit on PageSpeed Insights"
+              className="group inline-flex items-center gap-2 border border-emerald-500/40 bg-emerald-500/5 px-3 py-1.5 hover:border-emerald-500 transition-colors"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              <span className="text-emerald-400">Lighthouse</span>
+              <span className="text-emerald-400 font-bold">98</span>
+              <span className="text-muted-foreground">/ 100</span>
+              <span className="text-muted-foreground opacity-70 group-hover:opacity-100">↗</span>
+            </a>
+          </div>
           <span>Powering 48H Innovation</span>
         </div>
+
       </div>
     </footer>
   );

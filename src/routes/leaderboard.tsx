@@ -182,10 +182,6 @@ function LeaderboardPage() {
           aria-labelledby="leaderboard-headlines"
           className="border-b border-border bg-card/40"
         >
-        <section
-          aria-labelledby="leaderboard-headlines"
-          className="border-b border-border bg-card/40"
-        >
           <div className="max-w-7xl mx-auto px-6 py-10 md:py-14">
             <h2
               id="leaderboard-headlines"

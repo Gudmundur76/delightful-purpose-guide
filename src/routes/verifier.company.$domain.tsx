@@ -139,32 +139,32 @@ function CompanyPage() {
           <div className="h-48 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={p.score_history} margin={{ top: 8, right: 8, left: -16, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.4} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.4} />
                 <XAxis
                   dataKey="date"
-                  tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
-                  stroke="hsl(var(--border))"
+                  tick={{ fontSize: 11, fill: "var(--muted-foreground)" }}
+                  stroke="var(--border)"
                 />
                 <YAxis
                   domain={[0, 100]}
-                  tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
-                  stroke="hsl(var(--border))"
+                  tick={{ fontSize: 11, fill: "var(--muted-foreground)" }}
+                  stroke="var(--border)"
                 />
                 <Tooltip
                   contentStyle={{
-                    background: "hsl(var(--card))",
-                    border: "1px solid hsl(var(--border))",
+                    background: "var(--card)",
+                    border: "1px solid var(--border)",
                     borderRadius: 8,
                     fontSize: 12,
                   }}
-                  labelStyle={{ color: "hsl(var(--muted-foreground))" }}
+                  labelStyle={{ color: "var(--muted-foreground)" }}
                 />
                 <Line
                   type="monotone"
                   dataKey="score"
-                  stroke="hsl(var(--accent))"
+                  stroke="var(--accent)"
                   strokeWidth={2}
-                  dot={{ r: 3, fill: "hsl(var(--accent))" }}
+                  dot={{ r: 3, fill: "var(--accent)" }}
                   activeDot={{ r: 5 }}
                 />
               </LineChart>

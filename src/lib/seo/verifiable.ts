@@ -14,8 +14,11 @@
 // Then embed the returned object inside a page's JSON-LD `mentions` or
 // `about` array, and wrap the visible value in `<span id="stat-83">83%</span>`.
 
+import { sourceSameAs } from "@/lib/seo/trust-handshake";
+
 const DATA_BASE = "https://grow.contact/api/public/data";
 const ARCHIVE_BASE = "https://grow.contact/data";
+
 
 export type VerifiableClaimInput = {
   /** DOM id used by the visible <span id="..."> wrapper. Must match the JSON fragment. */
@@ -30,17 +33,21 @@ export type VerifiableClaimInput = {
   dateModified: string;
   /** Optional unit (e.g. "PERCENT", "USD"). */
   unitCode?: string;
+  /** Source files in the public repo that produce/back this claim (Trust Handshake). */
+  sourceFiles?: Array<{ path: string; lines?: string }>;
 };
 
 /** A schema.org Claim + nested Observation referencing a citation URL. */
 export function verifiableClaim(input: VerifiableClaimInput) {
   const citation = input.citation ?? `${DATA_BASE}/claims.json#${input.id}`;
+  const sameAs = sourceSameAs(input.sourceFiles);
   return {
     "@type": "Claim",
     "@id": `#${input.id}`,
     claimReviewed: input.label,
     text: `${input.label}: ${input.value}`,
     citation,
+    ...(sameAs ? { sameAs } : {}),
     dateModified: input.dateModified,
     appearance: {
       "@type": "Observation",
@@ -59,6 +66,7 @@ export type StatisticalVariableInput = {
   measurementMethod?: string;
   unitCode?: string;
 };
+
 
 export function statisticalVariable(input: StatisticalVariableInput) {
   return {

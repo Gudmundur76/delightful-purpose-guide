@@ -1,6 +1,19 @@
 // Central registry of verifiable claims exposed via /api/public/data/claims.json
 // Every visible <VerifiabilityBadge id="..."> on the site should resolve to a
 // claim in this registry. New claims are appended; existing ids are stable.
+//
+// Trust Handshake (v2.1): each claim may carry `source_files` pointing at the
+// exact paths in the public repo that produce or back the value. These are
+// rendered as GitHub blob URLs in the JSON-LD `sameAs` array and surfaced in
+// the claims JSON so agents can verify Web → JSON-LD → Source in one hop.
+
+import { sourceUrl } from "@/lib/seo/trust-handshake";
+
+export type ClaimSourceFile = {
+  path: string;
+  lines?: string;
+  description?: string;
+};
 
 export type ClaimRecord = {
   id: string;
@@ -12,9 +25,22 @@ export type ClaimRecord = {
   date_observed: string;
   unit?: string;
   page_anchors: string[]; // permalinks where this claim is rendered
+  source_files?: ClaimSourceFile[]; // repo paths backing this claim
+  same_as?: string[]; // resolved GitHub blob URLs (computed at serialize time)
 };
 
 export const CLAIMS_DATE_MODIFIED = "2026-05-29";
+
+/** Resolve `source_files` into absolute GitHub blob URLs for the current build ref. */
+export function withSameAs(claim: ClaimRecord): ClaimRecord {
+  if (!claim.source_files || claim.source_files.length === 0) return claim;
+  return {
+    ...claim,
+    same_as: claim.source_files.map((f) => sourceUrl(f.path, f.lines)),
+  };
+}
+
+
 
 export const CLAIMS_REGISTRY: ClaimRecord[] = [
   {
@@ -29,6 +55,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
       "https://grow.contact/#home-stat-83",
       "https://grow.contact/#home-stat-83-prose",
     ],
+    source_files: [
+      { path: "src/lib/seo/claims-registry.ts", description: "Authoritative claim record" },
+      { path: "src/routes/index.tsx", description: "Visible rendering site" },
+    ],
   },
   {
     id: "home-stat-73",
@@ -39,6 +69,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: "2026-05-28",
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/#home-stat-73"],
+    source_files: [
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+      { path: "src/lib/leaderboard/stats.ts", description: "Aggregation logic" },
+    ],
   },
   {
     id: "home-stat-527",
@@ -52,6 +86,9 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
       "https://grow.contact/#home-stat-527",
       "https://grow.contact/#home-stat-527-prose",
     ],
+    source_files: [
+      { path: "src/lib/seo/claims-registry.ts", description: "Authoritative claim record" },
+    ],
   },
   {
     id: "home-stat-48",
@@ -62,6 +99,9 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: "2025-11-15",
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/#home-stat-48"],
+    source_files: [
+      { path: "src/lib/seo/claims-registry.ts", description: "Authoritative claim record" },
+    ],
   },
   {
     id: "home-stat-4x",
@@ -72,6 +112,9 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: "2026-05-28",
     unit: "RATIO",
     page_anchors: ["https://grow.contact/#home-stat-4x"],
+    source_files: [
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
   // /stats page — derived live from the leaderboard. The value here is a
   // pointer; the live `/api/public/data/stats.json` carries the actual figures.
@@ -84,6 +127,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: CLAIMS_DATE_MODIFIED,
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/stats#missing-llms-txt"],
+    source_files: [
+      { path: "src/lib/leaderboard/stats.ts", description: "computeHeadlineStats()" },
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
   {
     id: "weak-jsonld",
@@ -94,6 +141,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: CLAIMS_DATE_MODIFIED,
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/stats#weak-jsonld"],
+    source_files: [
+      { path: "src/lib/leaderboard/stats.ts", description: "computeHeadlineStats()" },
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
   {
     id: "opaque",
@@ -104,6 +155,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: CLAIMS_DATE_MODIFIED,
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/stats#opaque"],
+    source_files: [
+      { path: "src/lib/leaderboard/stats.ts", description: "computeHeadlineStats()" },
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
   {
     id: "agent-native",
@@ -114,6 +169,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: CLAIMS_DATE_MODIFIED,
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/stats#agent-native"],
+    source_files: [
+      { path: "src/lib/leaderboard/stats.ts", description: "computeHeadlineStats()" },
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
   {
     id: "slow-ttfb",
@@ -124,6 +183,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: CLAIMS_DATE_MODIFIED,
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/stats#slow-ttfb"],
+    source_files: [
+      { path: "src/lib/leaderboard/stats.ts", description: "computeHeadlineStats()" },
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
   {
     id: "weak-semantic",
@@ -134,5 +197,10 @@ export const CLAIMS_REGISTRY: ClaimRecord[] = [
     date_observed: CLAIMS_DATE_MODIFIED,
     unit: "PERCENT",
     page_anchors: ["https://grow.contact/stats#weak-semantic"],
+    source_files: [
+      { path: "src/lib/leaderboard/stats.ts", description: "computeHeadlineStats()" },
+      { path: "src/lib/leaderboard/entries.ts", description: "Underlying dataset" },
+    ],
   },
 ];
+

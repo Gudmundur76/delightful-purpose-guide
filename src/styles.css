@@ -219,3 +219,9 @@ body {
 }
 .standard-prose td { color: var(--muted-foreground); }
 
+
+/* Enable Fira Code ligatures wherever font-mono is applied. */
+.font-mono, code, kbd, pre, samp {
+  font-feature-settings: "calt" 1, "ss01" 1, "ss02" 1, "ss03" 1, "zero" 1;
+  font-variant-ligatures: contextual;
+}

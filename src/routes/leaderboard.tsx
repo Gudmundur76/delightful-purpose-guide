@@ -406,6 +406,7 @@ function LeaderboardPage() {
                     <SortableTh label="GPT %" k="chatgpt_share" sort={sort} dir={dir} onClick={toggleSort} align="right" />
                     <SortableTh label="Claude %" k="claude_share" sort={sort} dir={dir} onClick={toggleSort} align="right" />
                     <SortableTh label="AIO %" k="google_aio_share" sort={sort} dir={dir} onClick={toggleSort} align="right" />
+                    <SortableTh label="24h cites" k="citations_24h" sort={sort} dir={dir} onClick={toggleSort} align="right" />
                     <th className="px-3 py-3 text-left">Trend</th>
                   </tr>
                 </thead>

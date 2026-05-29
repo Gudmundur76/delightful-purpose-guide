@@ -57,6 +57,7 @@ import { Route as AuthDotmdRouteImport } from './routes/auth[.]md'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VerifierIndexRouteImport } from './routes/verifier.index'
 import { Route as DataIndexRouteImport } from './routes/data.index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as ContentIndexRouteImport } from './routes/content.index'
@@ -64,6 +65,9 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
+import { Route as VerifierSearchRouteImport } from './routes/verifier.search'
+import { Route as VerifierLeaderboardRouteImport } from './routes/verifier.leaderboard'
+import { Route as VerifierContradictionsRouteImport } from './routes/verifier.contradictions'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
 import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
 import { Route as StandardLlmsDottxtRouteImport } from './routes/standard.llms[.]txt'
@@ -397,6 +401,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VerifierIndexRoute = VerifierIndexRouteImport.update({
+  id: '/verifier/',
+  path: '/verifier/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DataIndexRoute = DataIndexRouteImport.update({
   id: '/data/',
   path: '/data/',
@@ -430,6 +439,21 @@ const VsCompetitorRoute = VsCompetitorRouteImport.update({
 const VerifyIdRoute = VerifyIdRouteImport.update({
   id: '/verify/$id',
   path: '/verify/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifierSearchRoute = VerifierSearchRouteImport.update({
+  id: '/verifier/search',
+  path: '/verifier/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifierLeaderboardRoute = VerifierLeaderboardRouteImport.update({
+  id: '/verifier/leaderboard',
+  path: '/verifier/leaderboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifierContradictionsRoute = VerifierContradictionsRouteImport.update({
+  id: '/verifier/contradictions',
+  path: '/verifier/contradictions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsRobotsCheckerRoute = ToolsRobotsCheckerRouteImport.update({
@@ -1015,6 +1039,9 @@ export interface FileRoutesByFullPath {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
+  '/verifier/contradictions': typeof VerifierContradictionsRoute
+  '/verifier/leaderboard': typeof VerifierLeaderboardRoute
+  '/verifier/search': typeof VerifierSearchRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/app/': typeof AppIndexRoute
@@ -1022,6 +1049,7 @@ export interface FileRoutesByFullPath {
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/data/': typeof DataIndexRoute
+  '/verifier/': typeof VerifierIndexRoute
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -1161,6 +1189,9 @@ export interface FileRoutesByTo {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
+  '/verifier/contradictions': typeof VerifierContradictionsRoute
+  '/verifier/leaderboard': typeof VerifierLeaderboardRoute
+  '/verifier/search': typeof VerifierSearchRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/app': typeof AppIndexRoute
@@ -1168,6 +1199,7 @@ export interface FileRoutesByTo {
   '/content': typeof ContentIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/data': typeof DataIndexRoute
+  '/verifier': typeof VerifierIndexRoute
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -1311,6 +1343,9 @@ export interface FileRoutesById {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
+  '/verifier/contradictions': typeof VerifierContradictionsRoute
+  '/verifier/leaderboard': typeof VerifierLeaderboardRoute
+  '/verifier/search': typeof VerifierSearchRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/app/': typeof AppIndexRoute
@@ -1318,6 +1353,7 @@ export interface FileRoutesById {
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/data/': typeof DataIndexRoute
+  '/verifier/': typeof VerifierIndexRoute
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -1462,6 +1498,9 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/tools/robots-checker'
+    | '/verifier/contradictions'
+    | '/verifier/leaderboard'
+    | '/verifier/search'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/app/'
@@ -1469,6 +1508,7 @@ export interface FileRouteTypes {
     | '/content/'
     | '/dashboard/'
     | '/data/'
+    | '/verifier/'
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
@@ -1608,6 +1648,9 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/tools/robots-checker'
+    | '/verifier/contradictions'
+    | '/verifier/leaderboard'
+    | '/verifier/search'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/app'
@@ -1615,6 +1658,7 @@ export interface FileRouteTypes {
     | '/content'
     | '/dashboard'
     | '/data'
+    | '/verifier'
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
@@ -1757,6 +1801,9 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/tools/robots-checker'
+    | '/verifier/contradictions'
+    | '/verifier/leaderboard'
+    | '/verifier/search'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/app/'
@@ -1764,6 +1811,7 @@ export interface FileRouteTypes {
     | '/content/'
     | '/dashboard/'
     | '/data/'
+    | '/verifier/'
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
@@ -1884,9 +1932,13 @@ export interface RootRouteChildren {
   ReportQ22026Route: typeof ReportQ22026Route
   ReportQ22026DotpdfRoute: typeof ReportQ22026DotpdfRoute
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
+  VerifierContradictionsRoute: typeof VerifierContradictionsRoute
+  VerifierLeaderboardRoute: typeof VerifierLeaderboardRoute
+  VerifierSearchRoute: typeof VerifierSearchRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
   DataIndexRoute: typeof DataIndexRoute
+  VerifierIndexRoute: typeof VerifierIndexRoute
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   DotwellKnownAgentSkillsIndexDotjsonRoute: typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   DotwellKnownMcpServerCardDotjsonRoute: typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -2274,6 +2326,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/verifier/': {
+      id: '/verifier/'
+      path: '/verifier'
+      fullPath: '/verifier/'
+      preLoaderRoute: typeof VerifierIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/data/': {
       id: '/data/'
       path: '/data'
@@ -2321,6 +2380,27 @@ declare module '@tanstack/react-router' {
       path: '/verify/$id'
       fullPath: '/verify/$id'
       preLoaderRoute: typeof VerifyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verifier/search': {
+      id: '/verifier/search'
+      path: '/verifier/search'
+      fullPath: '/verifier/search'
+      preLoaderRoute: typeof VerifierSearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verifier/leaderboard': {
+      id: '/verifier/leaderboard'
+      path: '/verifier/leaderboard'
+      fullPath: '/verifier/leaderboard'
+      preLoaderRoute: typeof VerifierLeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verifier/contradictions': {
+      id: '/verifier/contradictions'
+      path: '/verifier/contradictions'
+      fullPath: '/verifier/contradictions'
+      preLoaderRoute: typeof VerifierContradictionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/robots-checker': {
@@ -3262,9 +3342,13 @@ const rootRouteChildren: RootRouteChildren = {
   ReportQ22026Route: ReportQ22026Route,
   ReportQ22026DotpdfRoute: ReportQ22026DotpdfRoute,
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
+  VerifierContradictionsRoute: VerifierContradictionsRoute,
+  VerifierLeaderboardRoute: VerifierLeaderboardRoute,
+  VerifierSearchRoute: VerifierSearchRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
   DataIndexRoute: DataIndexRoute,
+  VerifierIndexRoute: VerifierIndexRoute,
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute:
     DotwellKnownAgentSkillsGrowGeoScanDotmdRoute,
   DotwellKnownAgentSkillsIndexDotjsonRoute:
@@ -3322,13 +3406,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

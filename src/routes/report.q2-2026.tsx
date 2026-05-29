@@ -60,6 +60,15 @@ export const Route = createFileRoute("/report/q2-2026")({
                   encodingFormat: "application/pdf",
                   contentUrl: PDF_URL,
                 },
+                mentions: s.citable_headlines.map((line: string, i: number) =>
+                  verifiableClaim({
+                    id: `report-q2-2026-finding-${i + 1}`,
+                    value: line,
+                    label: `Q2 2026 headline finding #${i + 1}`,
+                    citation: claimCitation(`report-q2-2026-finding-${i + 1}`, ARCHIVE_KEY),
+                    dateModified: PUBLISHED,
+                  }),
+                ),
               }),
             },
             {
@@ -80,7 +89,13 @@ export const Route = createFileRoute("/report/q2-2026")({
                   {
                     "@type": "DataDownload",
                     encodingFormat: "application/json",
-                    contentUrl: "https://grow.contact/api/public/leaderboard.json",
+                    contentUrl: DATA_URLS.liveLeaderboard,
+                  },
+                  {
+                    "@type": "DataDownload",
+                    encodingFormat: "application/json",
+                    contentUrl: `${DATA_URLS.archiveQ2_2026}/leaderboard.json`,
+                    name: "Q2 2026 archive snapshot",
                   },
                 ],
                 dateModified: PUBLISHED,
@@ -88,6 +103,7 @@ export const Route = createFileRoute("/report/q2-2026")({
             },
           ]
         : [],
+
     };
   },
 });

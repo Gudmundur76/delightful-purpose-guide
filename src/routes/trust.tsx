@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SourceSyncIndicator } from "@/components/SourceSyncIndicator";
 import { ogImageMeta } from "@/lib/seo/og";
 
 // /trust — the E-E-A-T anchor page. One URL that consolidates every

@@ -23,7 +23,8 @@ const ALLOWED_TABLES = new Set<string>([
   "suppressed_emails",
 ]);
 
-type AnyQuery = ReturnType<typeof supabaseAdmin.from>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyQuery = any;
 
 function applyFilters(q: any, url: URL) {
   const reserved = new Set(["select", "limit", "order", "offset"]);

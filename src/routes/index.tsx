@@ -16,6 +16,39 @@ import { MiniChecker } from "@/components/MiniChecker";
 import { getFaqItemsFn, getPageContentFn } from "@/lib/site/content.functions";
 import { getOverviewStats } from "@/lib/check/stats.functions";
 import { ogImageMeta } from "@/lib/seo/og";
+import { VerifiabilityBadge } from "@/components/VerifiabilityBadge";
+import { verifiableClaim, claimCitation } from "@/lib/seo/verifiable";
+
+const HOME_DATE_MODIFIED = "2026-05-29";
+
+const HOME_CLAIMS = [
+  {
+    id: "home-stat-83",
+    value: "83%",
+    label: "Share of AI Overview citations from pages outside the organic top 10",
+  },
+  {
+    id: "home-stat-73",
+    value: "73%",
+    label: "Sites silently excluded from AI citations due to fixable technical issues",
+  },
+  {
+    id: "home-stat-527",
+    value: "527%",
+    label: "Year-over-year growth in AI-referred sessions (early 2025)",
+  },
+  {
+    id: "home-stat-48",
+    value: "48%",
+    label: "Share of all queries that trigger a Google AI Overview",
+  },
+  {
+    id: "home-stat-4x",
+    value: "4.3×",
+    label: "AI-citation lift for pages over 20,000 characters vs thin pages",
+  },
+] as const;
+
 
 
 

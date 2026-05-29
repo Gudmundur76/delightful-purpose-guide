@@ -5,6 +5,7 @@ import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { getCitationIndex } from "@/lib/leaderboard/companies.functions";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ogImageMeta } from "@/lib/seo/og";
 
 const citationIndexQuery = queryOptions({
   queryKey: ["citation-index"],
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/citation-index")({
         { property: "og:description", content: desc },
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
+        ...ogImageMeta({ title, kicker: "Citation Index", sub: desc }),
       ],
       links: [
         { rel: "canonical", href: "https://grow.contact/citation-index" },

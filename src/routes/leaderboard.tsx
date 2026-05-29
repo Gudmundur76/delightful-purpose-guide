@@ -369,13 +369,12 @@ function LeaderboardPage() {
                 className="flex-1 min-w-[200px] bg-background border border-border px-3 py-1.5 font-mono text-xs focus:border-accent outline-none"
               />
               {compare.length >= 2 ? (
-                <Link
-                  to="/compare"
-                  search={{ domains: compare.join(",") }}
+                <a
+                  href={`/compare?domains=${encodeURIComponent(compare.join(","))}`}
                   className="border border-accent text-accent px-3 py-1.5 font-mono text-xs uppercase tracking-widest hover:bg-accent hover:text-accent-foreground transition-colors"
                 >
                   Compare {compare.length} →
-                </Link>
+                </a>
               ) : (
                 <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                   // Pick 2–4 rows to compare

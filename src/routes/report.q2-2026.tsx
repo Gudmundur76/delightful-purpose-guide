@@ -170,12 +170,21 @@ function ReportPage() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Six headline findings</h2>
           <ol className="space-y-4 list-decimal list-inside">
-            {stats.citable_headlines.map((line: string, i: number) => (
+            {stats.citable_headlines.map((line: string, i: number) => {
+              const claimId = `report-q2-2026-finding-${i + 1}`;
+              return (
+                <li key={i} id={claimId} className="text-base leading-relaxed pl-2 scroll-mt-24">
+                  <VerifiabilityBadge
+                    id={`${claimId}-value`}
+                    citation={claimCitation(claimId, ARCHIVE_KEY)}
+                    dateModified={PUBLISHED}
+                  >
+                    <span className="font-medium">{line}</span>
+                  </VerifiabilityBadge>
+                </li>
+              );
+            })}
 
-              <li key={i} className="text-base leading-relaxed pl-2">
-                <span className="font-medium">{line}</span>
-              </li>
-            ))}
           </ol>
         </section>
 

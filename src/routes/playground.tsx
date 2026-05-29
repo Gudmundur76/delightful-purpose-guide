@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ToolCatalog } from "@/components/playground/ToolCatalog";
 import { ScanRunner } from "@/components/playground/ScanRunner";
+import { McpRunner } from "@/components/playground/McpRunner";
 import { InstallSnippets } from "@/components/playground/InstallSnippets";
 import { TOOLS } from "@/lib/playground/catalog";
 import { ogImageMeta } from "@/lib/seo/og";

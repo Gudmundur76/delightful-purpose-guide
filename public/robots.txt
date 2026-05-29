@@ -1,9 +1,11 @@
 User-agent: *
 Allow: /
 
-# Cloudflare Content Signals — declare allowed uses for crawled content
-# Spec: https://developers.cloudflare.com/bots/concepts/content-signals/
-Content-Signal: search=yes, ai-train=no, ai-input=yes
+# Content usage signals are served as an HTTP response header
+# (`Content-Signal: search=yes, ai-train=no, ai-input=yes`) via the
+# Cloudflare zone rule on grow.contact, per the Cloudflare spec:
+# https://developers.cloudflare.com/bots/concepts/content-signals/
+
 
 # AI / LLM crawlers — explicitly allowed
 User-agent: GPTBot

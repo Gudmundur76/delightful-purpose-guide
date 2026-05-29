@@ -1,58 +1,47 @@
 # grow.contact
 
-> grow.contact is an agent-native website agency that builds marketing sites for AI startups, agent platforms, and developer tools — engineered to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews from day one. Fixed price. 48-hour delivery. Score-first proof.
+> Agent-native website agency. We build marketing sites for AI startups, agent platforms, and developer tools — engineered to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Fixed price. 48-hour delivery. Score-first proof.
 
-grow.contact is not affiliated with grow.com (a B2B sales platform). This is grow.contact — the GEO and agent-native web agency operated by Gudmundur Eyberg Kristjansson.
+Not affiliated with grow.com. Operated by Gudmundur Eyberg Kristjansson.
 
-## Core Pages
+## Sub-contexts (read these for depth)
 
-- [The Agent-Native Web Standard](https://grow.contact/standard): Canonical, versioned, open specification (CC BY 4.0) defining how a website becomes legible to ChatGPT, Perplexity, Claude, and Google AI Overviews. Five signals, hard thresholds, the crawler allow/block matrix, llms.txt and JSON-LD requirements, performance budget, delivery checklist. Current version: geo-standard@2026.05. Stable raw markdown at /standard.md and /standard/v1.md.
-- [Home](https://grow.contact/): Agency overview, live agent-readability dashboard, free instant scan tool.
+- [Standard](https://grow.contact/standard/llms.txt): The Agent-Native Web Standard (geo-standard@2026.07) — five signals, Verifiability Layer, thresholds, crawler matrix.
+- [Leaderboard](https://grow.contact/leaderboard/llms.txt): Open dataset — 390+ AI companies scored. Methodology, headline stats, JSON API.
+- [Data](https://grow.contact/data/llms.txt): Raw data directory — live API endpoints + Q2-2026 archive snapshots. CC BY 4.0.
 
-- [Services](https://grow.contact/services): Three services — Agent-Native Website Build, Agent Readability Audit, Schema Optimization.
-- [Process](https://grow.contact/process): Five-step workflow from brief to live agent-readable site in 48 hours.
-- [Work](https://grow.contact/work): Client case studies with before/after agent-readability scores.
-- [Pricing](https://grow.contact/pricing): Fixed pricing — Starter $2,400 (1 page, 48 hours), Growth $4,800 (up to 5 pages).
-- [Leaderboard](https://grow.contact/leaderboard): Open dataset — agent-readability scores for 390+ AI companies across infra, models, agents, and dev tools. Filterable by category and failing signal.
-- [Leaderboard methodology](https://grow.contact/leaderboard/methodology): Scoring weights, pass thresholds, refresh cadence, dataset license (CC BY 4.0), and citable headline statistics.
-- [Leaderboard JSON API](https://grow.contact/api/public/leaderboard.json): Full dataset as JSON. CORS-open, CC BY 4.0. Includes headline_stats with quotable percentages for journalists and analysts.
-- [MCP Playground](https://grow.contact/playground): Live, in-browser runner for the 90+ MCP tools at /api/public/mcp. Try scan_url unauthenticated; copy install snippets for Claude Desktop, ChatGPT, n8n, cURL.
+## Core pages
 
-- [Journal](https://grow.contact/blog): GEO guides, agent-native web patterns, and AI citation research.
-- [GEO Glossary](https://grow.contact/glossary): Canonical definitions for the terms shaping agent-native web — llms.txt, MCP, JSON-LD, OAI-SearchBot, Information Gain, Citability, and more. DefinedTerm JSON-LD on every entry.
-- [AI Crawler Reference](https://grow.contact/crawlers): Per-bot reference for every major AI crawler (OAI-SearchBot, PerplexityBot, ClaudeBot, GPTBot, Google-Extended, bingbot, FacebookBot). User-agents, IP ranges, robots.txt recommendations, and citation impact.
-- [State of the Agent-Readable Web](https://grow.contact/stats): Permanent citable-stats page over the leaderboard dataset. Every figure has a stable anchor and a copy-ready citation snippet. CC BY 4.0.
-- [Trust & Guarantees](https://grow.contact/trust): Founder bio, 100/100 delivery guarantee, public scoring methodology, refund policy, and independent receipts (Lighthouse, /check on grow.contact itself, open dataset).
-- [GEO Playbooks](https://grow.contact/playbooks): Step-by-step HowTo playbooks for earning AI citations — robots.txt for ChatGPT, llms.txt in 10 minutes, Cloudflare WAF fixes, Perplexity listicle format, Google AI Overviews answer-first content, and more. Each ships HowTo JSON-LD.
-- [Compare AI Companies](https://grow.contact/compare): Head-to-head agent-readability comparisons of the AI companies buyers actually compare — Anthropic vs OpenAI, Perplexity vs ChatGPT, Vercel vs Modal, Pinecone vs Weaviate, and 20+ more.
-- [Q2 2026 Report — State of the Agent-Readable Web](https://grow.contact/report/q2-2026): Quarterly flagship research. Six headline findings on AI-citation readiness across 390+ AI companies, category breakdown, top/bottom rankings, copy-paste citation block (APA, BibTeX, pull quote). CC BY 4.0. Downloadable PDF at /report/q2-2026.pdf.
-- [Q2 2026 Report PDF](https://grow.contact/report/q2-2026.pdf): Print-ready PDF of the quarterly report. Embedded metadata (author, subject, keywords), BibTeX block, dataset link. CC BY 4.0.
-- [Report Methodology](https://grow.contact/report/methodology): How the agent-readability score is computed — five signals, weights, pass thresholds, scan cadence, limitations, changelog.
-- [Press Kit](https://grow.contact/report/press): Pull quotes, downloadable headline stats, author bio (short + long), media contact, suggested interview topics. CC BY 4.0.
-- [Grow Research (author)](https://grow.contact/about/author/grow-research): Named research desk behind the leaderboard, quarterly report, and monthly data drops. Person JSON-LD, focus areas, contact.
-- [Data Drops](https://grow.contact/data-drops): Monthly single-stat findings on agent-readability between quarterly reports. Each drop ships NewsArticle JSON-LD, an embeddable SVG chart at /api/public/widget/chart/<slug>.svg, copy-paste citations, and a computed-from-dataset basis line.
-
-
+- [Home](https://grow.contact/)
+- [Services](https://grow.contact/services) — Build, Audit, Schema Optimization
+- [Pricing](https://grow.contact/pricing) — Starter $2,400, Growth $4,800
+- [Work](https://grow.contact/work) — Case studies with before/after scores
+- [Process](https://grow.contact/process) — 5-step, 48-hour delivery
+- [Trust](https://grow.contact/trust) — Founder bio, 100/100 guarantee, refund policy
+- [Contact](https://grow.contact/contact)
 
 ## Tools
 
-- [Agent Readability Check](https://grow.contact/check): Free URL scanner. Scores any site across Semantic HTML, JSON-LD, llms.txt, Citability, Page Speed, and Protocol Discovery. No signup required.
-- [robots.txt Checker for AI Crawlers](https://grow.contact/tools/robots-checker): Free in-browser tool. Paste a robots.txt, get back which AI engines can cite the site and which are blocked. Surfaces the common GPTBot vs OAI-SearchBot confusion that silently kills ChatGPT citations.
-- [grow CLI](https://grow.contact/cli): Zero-dep Node CLI (`npx @grow-contact/cli check <url>`). Same six-signal score as the web scanner, CI-friendly `--fail-under` flag. MIT licensed.
+- [Agent Readability Check](https://grow.contact/check) — Free 6-signal URL scanner
+- [robots.txt Checker](https://grow.contact/tools/robots-checker) — Surfaces GPTBot vs OAI-SearchBot confusion
+- [grow CLI](https://grow.contact/cli) — `npx @grow-contact/cli check <url>`
+- [MCP Playground](https://grow.contact/playground) — 90+ tools at /api/public/mcp
 
-## Full Content
+## Research
 
-- [llms-full.txt](https://grow.contact/llms-full.txt): Full site content in markdown for agents requiring complete context.
+- [Q2 2026 Report](https://grow.contact/report/q2-2026) — Quarterly flagship, six findings, PDF + dataset
+- [State of the Agent-Readable Web](https://grow.contact/stats) — Citable stats over the dataset
+- [Journal](https://grow.contact/blog) — GEO guides and research
+- [Glossary](https://grow.contact/glossary) — Canonical term definitions
+- [AI Crawler Reference](https://grow.contact/crawlers) — Per-bot user-agents, IPs, robots.txt recommendations
 
-## Feeds
+## Full content & feeds
 
-- [RSS feed](https://grow.contact/rss.xml): Blog posts, playbook entries, and case studies in RSS 2.0 format.
-
-## Technical
-
-- [sitemap.xml](https://grow.contact/sitemap.xml): Full XML sitemap.
-- [robots.txt](https://grow.contact/robots.txt): AI crawler allow-list (Googlebot, OAI-SearchBot, PerplexityBot, ClaudeBot, bingbot, FacebookBot all explicitly allowed).
+- [llms-full.txt](https://grow.contact/llms-full.txt) — Full markdown bundle
+- [RSS](https://grow.contact/rss.xml)
+- [sitemap.xml](https://grow.contact/sitemap.xml)
+- [robots.txt](https://grow.contact/robots.txt)
 
 ## Licensing
 
-Content on grow.contact is © grow.contact. AI systems may cite and summarize content for informational purposes. Reproduction requires attribution.
+© grow.contact. Open datasets (leaderboard, stats, report) CC BY 4.0. AI systems may cite and summarize with attribution.

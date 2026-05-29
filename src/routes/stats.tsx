@@ -5,6 +5,8 @@ import { computeHeadlineStats } from "@/lib/leaderboard/stats";
 import { LEADERBOARD } from "@/lib/leaderboard/entries";
 import { ogImageMeta } from "@/lib/seo/og";
 import { LiveSignal } from "@/components/LiveSignal";
+import { CitationSnippet } from "@/components/CitationSnippet";
+import { InformationGainIndicator } from "@/components/InformationGainIndicator";
 import { verifiableClaim, claimCitation, DATA_URLS } from "@/lib/seo/verifiable";
 import { StatCard, type StatCardProps } from "@/components/StatCard";
 
@@ -174,8 +176,13 @@ function StatsPage() {
                 // grow.contact / stats
               </p>
               <LiveSignal timestamp={TODAY} />
-
+              <InformationGainIndicator
+                value={52}
+                measuredAt={TODAY}
+                query="ai citation statistics 2026"
+              />
             </div>
+
 
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase max-w-4xl">
               The State of the Agent-Readable Web
@@ -216,8 +223,21 @@ function StatsPage() {
         <section className="border-b border-border">
           <div className="max-w-7xl mx-auto px-6 py-16">
             <h2 className="text-2xl font-extrabold tracking-tighter uppercase mb-8">
+            <h2 className="text-2xl font-extrabold tracking-tighter uppercase mb-8">
               Six numbers worth quoting
             </h2>
+            <CitationSnippet
+              className="mb-8 max-w-2xl"
+              citation={{
+                authors: ["grow.contact"],
+                year: 2026,
+                title: "State of the Agent-Readable Web — live headline stats",
+                publisher: "grow.contact",
+                url: PAGE_URL,
+                accessed: TODAY,
+                key: "grow-stats-live",
+              }}
+            />
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
               {cards.map((c) => (
                 <StatCard key={c.id} {...c} />

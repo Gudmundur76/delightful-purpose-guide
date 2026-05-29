@@ -5,6 +5,17 @@ import { parsePairSlug, findEntry, getFeaturedPairsWithEntries } from "@/lib/com
 import type { LeaderboardEntry } from "@/lib/leaderboard/entries";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+} from "recharts";
+
 
 export const Route = createFileRoute("/compare/$pair")({
   loader: ({ params }) => {

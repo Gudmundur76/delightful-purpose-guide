@@ -4,7 +4,6 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { computeHeadlineStats } from "@/lib/leaderboard/stats";
 import { LEADERBOARD } from "@/lib/leaderboard/entries";
 import { ogImageMeta } from "@/lib/seo/og";
-import { VerifiabilityBadge } from "@/components/VerifiabilityBadge";
 import { LiveSignal } from "@/components/LiveSignal";
 import { verifiableClaim, claimCitation, DATA_URLS } from "@/lib/seo/verifiable";
 import { StatCard, type StatCardProps } from "@/components/StatCard";

@@ -199,6 +199,18 @@ function LeaderboardPage() {
                 </li>
               ))}
             </ul>
+            <CitationSnippet
+              className="mt-8 max-w-2xl"
+              citation={{
+                authors: ["grow.contact"],
+                year: 2026,
+                title: `Agent Readability Leaderboard (${LEADERBOARD.length} AI companies)`,
+                publisher: "grow.contact",
+                url: "https://grow.contact/leaderboard",
+                accessed: new Date().toISOString().slice(0, 10),
+                key: "grow-leaderboard",
+              }}
+            />
           </div>
         </section>
 

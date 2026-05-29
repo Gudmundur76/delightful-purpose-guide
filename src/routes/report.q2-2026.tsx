@@ -4,12 +4,16 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { computeHeadlineStats } from "@/lib/leaderboard/stats";
 import { LEADERBOARD, CATEGORY_LABELS } from "@/lib/leaderboard/entries";
 import { AUTHORS, DEFAULT_AUTHOR_SLUG, personJsonLd } from "@/lib/authors/data";
+import { VerifiabilityBadge } from "@/components/VerifiabilityBadge";
+import { verifiableClaim, claimCitation, DATA_URLS } from "@/lib/seo/verifiable";
 
 const PAGE_URL = "https://grow.contact/report/q2-2026";
 const PDF_URL = "https://grow.contact/report/q2-2026.pdf";
 const PUBLISHED = "2026-05-28";
 const REPORT_TITLE = "State of the Agent-Readable Web — Q2 2026";
 const AUTHOR = AUTHORS.find((a) => a.slug === DEFAULT_AUTHOR_SLUG)!;
+const ARCHIVE_KEY = "q2-2026";
+
 
 export const Route = createFileRoute("/report/q2-2026")({
   component: ReportPage,
@@ -56,6 +60,15 @@ export const Route = createFileRoute("/report/q2-2026")({
                   encodingFormat: "application/pdf",
                   contentUrl: PDF_URL,
                 },
+                mentions: s.citable_headlines.map((line: string, i: number) =>
+                  verifiableClaim({
+                    id: `report-q2-2026-finding-${i + 1}`,
+                    value: line,
+                    label: `Q2 2026 headline finding #${i + 1}`,
+                    citation: claimCitation(`report-q2-2026-finding-${i + 1}`, ARCHIVE_KEY),
+                    dateModified: PUBLISHED,
+                  }),
+                ),
               }),
             },
             {
@@ -76,7 +89,13 @@ export const Route = createFileRoute("/report/q2-2026")({
                   {
                     "@type": "DataDownload",
                     encodingFormat: "application/json",
-                    contentUrl: "https://grow.contact/api/public/leaderboard.json",
+                    contentUrl: DATA_URLS.liveLeaderboard,
+                  },
+                  {
+                    "@type": "DataDownload",
+                    encodingFormat: "application/json",
+                    contentUrl: `${DATA_URLS.archiveQ2_2026}/leaderboard.json`,
+                    name: "Q2 2026 archive snapshot",
                   },
                 ],
                 dateModified: PUBLISHED,
@@ -84,6 +103,7 @@ export const Route = createFileRoute("/report/q2-2026")({
             },
           ]
         : [],
+
     };
   },
 });
@@ -150,12 +170,21 @@ function ReportPage() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Six headline findings</h2>
           <ol className="space-y-4 list-decimal list-inside">
-            {stats.citable_headlines.map((line: string, i: number) => (
+            {stats.citable_headlines.map((line: string, i: number) => {
+              const claimId = `report-q2-2026-finding-${i + 1}`;
+              return (
+                <li key={i} id={claimId} className="text-base leading-relaxed pl-2 scroll-mt-24">
+                  <VerifiabilityBadge
+                    id={`${claimId}-value`}
+                    citation={claimCitation(claimId, ARCHIVE_KEY)}
+                    dateModified={PUBLISHED}
+                  >
+                    <span className="font-medium">{line}</span>
+                  </VerifiabilityBadge>
+                </li>
+              );
+            })}
 
-              <li key={i} className="text-base leading-relaxed pl-2">
-                <span className="font-medium">{line}</span>
-              </li>
-            ))}
           </ol>
         </section>
 

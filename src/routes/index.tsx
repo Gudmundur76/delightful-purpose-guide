@@ -16,6 +16,39 @@ import { MiniChecker } from "@/components/MiniChecker";
 import { getFaqItemsFn, getPageContentFn } from "@/lib/site/content.functions";
 import { getOverviewStats } from "@/lib/check/stats.functions";
 import { ogImageMeta } from "@/lib/seo/og";
+import { VerifiabilityBadge } from "@/components/VerifiabilityBadge";
+import { verifiableClaim, claimCitation } from "@/lib/seo/verifiable";
+
+const HOME_DATE_MODIFIED = "2026-05-29";
+
+const HOME_CLAIMS = [
+  {
+    id: "home-stat-83",
+    value: "83%",
+    label: "Share of AI Overview citations from pages outside the organic top 10",
+  },
+  {
+    id: "home-stat-73",
+    value: "73%",
+    label: "Sites silently excluded from AI citations due to fixable technical issues",
+  },
+  {
+    id: "home-stat-527",
+    value: "527%",
+    label: "Year-over-year growth in AI-referred sessions (early 2025)",
+  },
+  {
+    id: "home-stat-48",
+    value: "48%",
+    label: "Share of all queries that trigger a Google AI Overview",
+  },
+  {
+    id: "home-stat-4x",
+    value: "4.3×",
+    label: "AI-citation lift for pages over 20,000 characters vs thin pages",
+  },
+] as const;
+
 
 
 
@@ -102,10 +135,28 @@ export const Route = createFileRoute("/")({
                 { "@type": "Offer", name: "Growth", price: "4800", priceCurrency: "USD", url: "https://grow.contact/pricing" },
               ],
             },
+            {
+              "@type": "WebPage",
+              "@id": "https://grow.contact/#webpage",
+              url: "https://grow.contact/",
+              name: "Grow — Agent-Native Web Agency",
+              dateModified: HOME_DATE_MODIFIED,
+              mentions: HOME_CLAIMS.map((c) =>
+                verifiableClaim({
+                  id: c.id,
+                  value: c.value,
+                  label: c.label,
+                  citation: claimCitation(c.id),
+                  dateModified: HOME_DATE_MODIFIED,
+                  unitCode: c.value.endsWith("%") ? "P1" : undefined,
+                }),
+              ),
+            },
           ],
         }),
       },
     ],
+
     };
   },
 
@@ -170,10 +221,17 @@ function Index() {
                 </p>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-10 max-w-xl">
                   Why now:{" "}
-                  <a href="https://allbusinessrealm.com/index.php/2026/04/30/the-83-rule-why-ai-overviews-skip-the-top-10-and-where-small-sites-are-quietly-winning/" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">83% of AI Overview citations come from pages outside the organic top 10</a>,{" "}
-                  <a href="https://grow.contact/check" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">73% of sites are silently excluded from AI citations due to fixable technical issues</a>, and{" "}
-                  <a href="https://searchengineland.com/ai-traffic-up-seo-rewritten-459954" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">AI-referred sessions jumped 527% year-over-year in early 2025</a>.
+                  <a href="https://allbusinessrealm.com/index.php/2026/04/30/the-83-rule-why-ai-overviews-skip-the-top-10-and-where-small-sites-are-quietly-winning/" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">
+                    <VerifiabilityBadge id="home-stat-83" citation={claimCitation("home-stat-83")} dateModified={HOME_DATE_MODIFIED} showBadge={false}>83%</VerifiabilityBadge> of AI Overview citations come from pages outside the organic top 10
+                  </a>,{" "}
+                  <a href="https://grow.contact/check" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">
+                    <VerifiabilityBadge id="home-stat-73" citation={claimCitation("home-stat-73")} dateModified={HOME_DATE_MODIFIED} showBadge={false}>73%</VerifiabilityBadge> of sites are silently excluded from AI citations due to fixable technical issues
+                  </a>, and{" "}
+                  <a href="https://searchengineland.com/ai-traffic-up-seo-rewritten-459954" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">
+                    AI-referred sessions jumped <VerifiabilityBadge id="home-stat-527" citation={claimCitation("home-stat-527")} dateModified={HOME_DATE_MODIFIED} showBadge={false}>527%</VerifiabilityBadge> year-over-year in early 2025
+                  </a>.
                 </p>
+
                 <div className="flex flex-wrap gap-4 items-center">
                   <Link
                     to="/contact"
@@ -396,12 +454,14 @@ function Index() {
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase mb-10">The Shift Is Measurable</h2>
             <div className="space-y-5 text-muted-foreground text-base leading-relaxed">
               <p>The shift from search to AI answer engines is not a prediction. It is a measurement.</p>
-              <p><strong className="text-foreground">Google AI Overviews now trigger on approximately 48% of all queries.</strong> The share of queries that generate an AI-synthesized answer — rather than a traditional list of blue links — crossed the majority threshold for technology and software categories in late 2025.</p>
-              <p><strong className="text-foreground">AI-referred sessions jumped 527% year-over-year in early 2025.</strong> That is not a rounding error. That is a structural shift in how buyers find vendors.</p>
-              <p><strong className="text-foreground">83% of AI Overview citations come from pages outside the organic top 10.</strong> Domain authority, the metric that SEO agencies have sold for 20 years, does not predict AI citations. Structured data, semantic clarity, statistical density, and content length do.</p>
+              <p><strong className="text-foreground">Google AI Overviews now trigger on approximately <VerifiabilityBadge id="home-stat-48" citation={claimCitation("home-stat-48")} dateModified={HOME_DATE_MODIFIED}>48%</VerifiabilityBadge> of all queries.</strong> The share of queries that generate an AI-synthesized answer — rather than a traditional list of blue links — crossed the majority threshold for technology and software categories in late 2025.</p>
+              <p><strong className="text-foreground">AI-referred sessions jumped <VerifiabilityBadge id="home-stat-527-prose" citation={claimCitation("home-stat-527")} dateModified={HOME_DATE_MODIFIED}>527%</VerifiabilityBadge> year-over-year in early 2025.</strong> That is not a rounding error. That is a structural shift in how buyers find vendors.</p>
+              <p><strong className="text-foreground"><VerifiabilityBadge id="home-stat-83-prose" citation={claimCitation("home-stat-83")} dateModified={HOME_DATE_MODIFIED}>83%</VerifiabilityBadge> of AI Overview citations come from pages outside the organic top 10.</strong> Domain authority, the metric that SEO agencies have sold for 20 years, does not predict AI citations. Structured data, semantic clarity, statistical density, and content length do.</p>
+
               <p>For AI/ML startups, agent platforms, and developer tool companies — the companies grow.contact serves — this matters more than it does for any other category. Your buyers are technical founders who use Perplexity to research alternatives before they ever visit your site. They use Claude to analyze your documentation before they sign up for a trial. They ask ChatGPT to compare your pricing against competitors.</p>
               <p className="text-foreground font-bold">If your site is not agent-readable, you are invisible to the entire top of the funnel.</p>
-              <p>The Princeton GEO Framework (Aggarwal et al., 2023) — the foundational academic paper on Generative Engine Optimization — identified the specific content signals that correlate with AI citation rates. Statistics addition: +40%. Source citation: +30–35%. Expert quotes: +30%. These are measured correlations across thousands of queries.</p>
+              <p>Pages over 20,000 characters receive <strong className="text-foreground"><VerifiabilityBadge id="home-stat-4x" citation={claimCitation("home-stat-4x")} dateModified={HOME_DATE_MODIFIED}>4.3 times more AI citations</VerifiabilityBadge></strong> than thin pages. Most marketing sites are under 3,000 characters per page. The gap is structural, not cosmetic.</p>
+
               <p>Pages over 20,000 characters receive <strong className="text-foreground">4.3 times more AI citations</strong> than thin pages. Most marketing sites are under 3,000 characters per page. The gap is structural, not cosmetic.</p>
               <p className="text-foreground"><strong>grow.contact fixes the structural gap. In 48 hours. At a fixed price.</strong></p>
             </div>

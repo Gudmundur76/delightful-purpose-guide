@@ -4,6 +4,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { computeHeadlineStats } from "@/lib/leaderboard/stats";
 import { LEADERBOARD } from "@/lib/leaderboard/entries";
 import { ogImageMeta } from "@/lib/seo/og";
+import { VerifiabilityBadge } from "@/components/VerifiabilityBadge";
+import { LiveSignal } from "@/components/LiveSignal";
+import { verifiableClaim, claimCitation, DATA_URLS } from "@/lib/seo/verifiable";
 
 // "State of the Agent-Readable Web" — a permanent, citable stats page.
 // Every stat has a stable anchor (#missing-llms-txt, #weak-jsonld, …) so
@@ -14,14 +17,83 @@ import { ogImageMeta } from "@/lib/seo/og";
 const PAGE_URL = "https://grow.contact/stats";
 const TODAY = new Date().toISOString().slice(0, 10);
 
+type StatId =
+  | "missing-llms-txt"
+  | "weak-jsonld"
+  | "opaque"
+  | "agent-native"
+  | "slow-ttfb"
+  | "weak-semantic";
+
+function buildStatDefs(s: ReturnType<typeof computeHeadlineStats>, sample: number) {
+  return [
+    {
+      id: "missing-llms-txt" as StatId,
+      value: `${s.missing_llms_txt_pct}%`,
+      label: "Missing llms.txt",
+      blurb: `${s.missing_llms_txt_pct}% of the top ${sample} AI companies have no llms.txt or one too thin for inference. This is the single cheapest agent-readability fix — and most of the industry still skips it.`,
+      cite: `${s.missing_llms_txt_pct}% of the top ${sample} AI companies are missing or under-serving llms.txt.`,
+    },
+    {
+      id: "weak-jsonld" as StatId,
+      value: `${s.weak_jsonld_pct}%`,
+      label: "Weak JSON-LD",
+      blurb: `${s.weak_jsonld_pct}% ship insufficient structured data for reliable AI citation. ChatGPT, Perplexity, and Google AI Overviews lean on JSON-LD to know who, what, and how much.`,
+      cite: `${s.weak_jsonld_pct}% of top AI companies ship insufficient JSON-LD for reliable AI citation.`,
+    },
+    {
+      id: "opaque" as StatId,
+      value: `${s.opaque_pct}%`,
+      label: "Opaque to AI engines",
+      blurb: `${s.opaque_pct}% of the sample score below 55/100 — effectively invisible to ChatGPT, Perplexity, and Claude live search. Most are fixable in a single sprint.`,
+      cite: `${s.opaque_pct}% of top AI companies are effectively opaque (score <55/100) to ChatGPT, Perplexity, and Claude.`,
+    },
+    {
+      id: "agent-native" as StatId,
+      value: `${s.agent_native_pct}%`,
+      label: "Clear the agent-native bar",
+      blurb: `Only ${s.agent_native_pct}% of the sample clear 85/100 — the bar where a site is reliably cited across all four major AI search engines.`,
+      cite: `Only ${s.agent_native_pct}% of top AI companies clear the agent-native bar (score ≥85/100).`,
+    },
+    {
+      id: "slow-ttfb" as StatId,
+      value: `${s.slow_pct}%`,
+      label: "Fail the speed threshold",
+      blurb: `${s.slow_pct}% of sites are slow enough that AI crawlers (which timeout in 1–5s) skip them outright. The penalty isn't a ranking drop — it's silence.`,
+      cite: `${s.slow_pct}% of top AI companies fail the first-byte speed threshold AI crawlers time out against.`,
+    },
+    {
+      id: "weak-semantic" as StatId,
+      value: `${s.weak_semantic_pct}%`,
+      label: "Weak semantic HTML",
+      blurb: `${s.weak_semantic_pct}% miss core landmark elements (<main>, <article>, <nav>) AI scrapers use to extract content reliably. Cheap to fix; rarely audited.`,
+      cite: `${s.weak_semantic_pct}% of top AI companies ship HTML without the semantic landmarks AI scrapers rely on.`,
+    },
+  ];
+}
+
+
 export const Route = createFileRoute("/stats")({
   component: StatsPage,
   loader: () => ({ stats: computeHeadlineStats(), sample: LEADERBOARD.length }),
   head: ({ loaderData }) => {
     const s = loaderData?.stats;
+    const sample = loaderData?.sample ?? 0;
     const description = s
       ? `${s.missing_llms_txt_pct}% of ${s.total} top AI companies are missing llms.txt. ${s.opaque_pct}% score below 55 — effectively opaque to ChatGPT, Perplexity, and Claude. Open dataset, CC BY 4.0.`
       : "Quotable stats on the state of the agent-readable web. Open dataset, CC BY 4.0.";
+    const claimMentions = s
+      ? buildStatDefs(s, sample).map((d) =>
+          verifiableClaim({
+            id: d.id,
+            value: d.value,
+            label: d.label,
+            citation: claimCitation(d.id),
+            dateModified: TODAY,
+            unitCode: "P1",
+          }),
+        )
+      : [];
     return {
       meta: [
         { title: "State of the Agent-Readable Web — Citable Stats | Grow" },
@@ -53,11 +125,24 @@ export const Route = createFileRoute("/stats")({
                   {
                     "@type": "DataDownload",
                     encodingFormat: "application/json",
-                    contentUrl: "https://grow.contact/api/public/leaderboard.json",
+                    contentUrl: DATA_URLS.liveLeaderboard,
+                  },
+                  {
+                    "@type": "DataDownload",
+                    encodingFormat: "application/json",
+                    contentUrl: DATA_URLS.liveStats,
+                    name: "Headline statistics (live)",
+                  },
+                  {
+                    "@type": "DataDownload",
+                    encodingFormat: "application/json",
+                    contentUrl: DATA_URLS.liveClaims,
+                    name: "Verifiable claims (live)",
                   },
                 ],
                 dateModified: TODAY,
                 variableMeasured: s.citable_headlines,
+                mentions: claimMentions,
               }),
             },
           ]
@@ -75,6 +160,7 @@ interface StatCardProps {
 }
 
 function StatCard({ id, value, label, blurb, cite }: StatCardProps) {
+  const citation = claimCitation(id);
   return (
     <article
       id={id}
@@ -84,7 +170,9 @@ function StatCard({ id, value, label, blurb, cite }: StatCardProps) {
         // {label}
       </p>
       <p className="text-5xl sm:text-6xl font-extrabold tracking-tighter tabular-nums text-foreground">
-        {value}
+        <VerifiabilityBadge id={`${id}-value`} citation={citation} dateModified={TODAY}>
+          {value}
+        </VerifiabilityBadge>
       </p>
       <p className="text-sm text-muted-foreground leading-relaxed">{blurb}</p>
       <details className="mt-2 border-t border-border pt-3">
@@ -94,6 +182,7 @@ function StatCard({ id, value, label, blurb, cite }: StatCardProps) {
         <pre className="mt-2 text-[11px] bg-muted/30 border border-border p-3 overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed text-foreground/80">
 {cite}
 {`\nSource: grow.contact/stats#${id} (CC BY 4.0)`}
+{`\nVerifiable claim: ${citation}`}
         </pre>
         <a
           href={`${PAGE_URL}#${id}`}
@@ -112,50 +201,8 @@ function StatsPage() {
     sample: number;
   };
 
-  const cards: StatCardProps[] = [
-    {
-      id: "missing-llms-txt",
-      value: `${s.missing_llms_txt_pct}%`,
-      label: "Missing llms.txt",
-      blurb: `${s.missing_llms_txt_pct}% of the top ${sample} AI companies have no llms.txt or one too thin for inference. This is the single cheapest agent-readability fix — and most of the industry still skips it.`,
-      cite: `${s.missing_llms_txt_pct}% of the top ${sample} AI companies are missing or under-serving llms.txt.`,
-    },
-    {
-      id: "weak-jsonld",
-      value: `${s.weak_jsonld_pct}%`,
-      label: "Weak JSON-LD",
-      blurb: `${s.weak_jsonld_pct}% ship insufficient structured data for reliable AI citation. ChatGPT, Perplexity, and Google AI Overviews lean on JSON-LD to know who, what, and how much.`,
-      cite: `${s.weak_jsonld_pct}% of top AI companies ship insufficient JSON-LD for reliable AI citation.`,
-    },
-    {
-      id: "opaque",
-      value: `${s.opaque_pct}%`,
-      label: "Opaque to AI engines",
-      blurb: `${s.opaque_pct}% of the sample score below 55/100 — effectively invisible to ChatGPT, Perplexity, and Claude live search. Most are fixable in a single sprint.`,
-      cite: `${s.opaque_pct}% of top AI companies are effectively opaque (score <55/100) to ChatGPT, Perplexity, and Claude.`,
-    },
-    {
-      id: "agent-native",
-      value: `${s.agent_native_pct}%`,
-      label: "Clear the agent-native bar",
-      blurb: `Only ${s.agent_native_pct}% of the sample clear 85/100 — the bar where a site is reliably cited across all four major AI search engines.`,
-      cite: `Only ${s.agent_native_pct}% of top AI companies clear the agent-native bar (score ≥85/100).`,
-    },
-    {
-      id: "slow-ttfb",
-      value: `${s.slow_pct}%`,
-      label: "Fail the speed threshold",
-      blurb: `${s.slow_pct}% of sites are slow enough that AI crawlers (which timeout in 1–5s) skip them outright. The penalty isn't a ranking drop — it's silence.`,
-      cite: `${s.slow_pct}% of top AI companies fail the first-byte speed threshold AI crawlers time out against.`,
-    },
-    {
-      id: "weak-semantic",
-      value: `${s.weak_semantic_pct}%`,
-      label: "Weak semantic HTML",
-      blurb: `${s.weak_semantic_pct}% miss core landmark elements (<main>, <article>, <nav>) AI scrapers use to extract content reliably. Cheap to fix; rarely audited.`,
-      cite: `${s.weak_semantic_pct}% of top AI companies ship HTML without the semantic landmarks AI scrapers rely on.`,
-    },
-  ];
+  const cards: StatCardProps[] = buildStatDefs(s, sample);
+
 
   return (
     <>
@@ -163,9 +210,14 @@ function StatsPage() {
       <main className="bg-background text-foreground">
         <section className="border-b border-border">
           <div className="max-w-7xl mx-auto px-6 py-20">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">
-              // grow.contact / stats · updated {TODAY}
-            </p>
+            <div className="mb-4 flex flex-wrap items-center gap-3">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
+                // grow.contact / stats
+              </p>
+              <LiveSignal timestamp={TODAY} />
+
+            </div>
+
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase max-w-4xl">
               The State of the Agent-Readable Web
             </h1>

@@ -3,7 +3,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
-import { hashApiKey } from "@/lib/monitoring/api-keys.functions";
+import { hashApiKey } from "@/lib/monitoring/hash.server";
 import { consumeQuota } from "@/lib/monitoring/quota.server";
 import { scanUrl } from "@/lib/check/scan.functions";
 import { CORS_HEADERS, JSON_HEADERS, optionsResponse } from "@/lib/api/auth";

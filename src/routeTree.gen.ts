@@ -52,12 +52,14 @@ import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckRouteImport } from './routes/check'
 import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as AuthDotmdRouteImport } from './routes/auth[.]md'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DataIndexRouteImport } from './routes/data.index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as ContentIndexRouteImport } from './routes/content.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
@@ -92,6 +94,8 @@ import { Route as CheckReportRouteImport } from './routes/check.report'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
+import { Route as AppBillingRouteImport } from './routes/app.billing'
+import { Route as AppApiKeysRouteImport } from './routes/app.api-keys'
 import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as DotwellKnownOauthProtectedResourceRouteImport } from './routes/[.]well-known.oauth-protected-resource'
@@ -125,6 +129,7 @@ import { Route as ApiPublicWidgetOgDotsvgRouteImport } from './routes/api/public
 import { Route as ApiPublicWidgetEmbedDotjsRouteImport } from './routes/api/public/widget/embed[.]js'
 import { Route as ApiPublicWidgetBadgeDotsvgRouteImport } from './routes/api/public/widget/badge[.]svg'
 import { Route as ApiPublicV1SpecsRouteImport } from './routes/api/public/v1/specs'
+import { Route as ApiPublicV1ScanRouteImport } from './routes/api/public/v1/scan'
 import { Route as ApiPublicV1ReadinessRouteImport } from './routes/api/public/v1/readiness'
 import { Route as ApiPublicV1PostsRouteImport } from './routes/api/public/v1/posts'
 import { Route as ApiPublicV1OpenapiDotjsonRouteImport } from './routes/api/public/v1/openapi[.]json'
@@ -134,6 +139,7 @@ import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/a
 import { Route as ApiPublicStatsOverviewRouteImport } from './routes/api/public/stats/overview'
 import { Route as ApiPublicOauthTokenRouteImport } from './routes/api/public/oauth/token'
 import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/api/public/hooks/run-scheduled-scans'
+import { Route as ApiPublicHooksRunMonitoredSitesRouteImport } from './routes/api/public/hooks/run-monitored-sites'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
 import { Route as ApiPublicHooksGenerateDraftsRouteImport } from './routes/api/public/hooks/generate-drafts'
 import { Route as ApiPublicDataStatsDotjsonRouteImport } from './routes/api/public/data.stats[.]json'
@@ -361,6 +367,11 @@ const AuthDotmdRoute = AuthDotmdRouteImport.update({
   path: '/auth.md',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiDocsRoute = ApiDocsRouteImport.update({
   id: '/api-docs',
   path: '/api-docs',
@@ -390,6 +401,11 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
 } as any)
 const VsCompetitorRoute = VsCompetitorRouteImport.update({
   id: '/$competitor',
@@ -564,6 +580,16 @@ const BadgeChar123idChar125DotsvgRoute =
     path: '/{$id}.svg',
     getParentRoute: () => BadgeRoute,
   } as any)
+const AppBillingRoute = AppBillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppApiKeysRoute = AppApiKeysRouteImport.update({
+  id: '/api-keys',
+  path: '/api-keys',
+  getParentRoute: () => AppRoute,
+} as any)
 const AdminReviewsRoute = AdminReviewsRouteImport.update({
   id: '/admin/reviews',
   path: '/admin/reviews',
@@ -742,6 +768,11 @@ const ApiPublicV1SpecsRoute = ApiPublicV1SpecsRouteImport.update({
   path: '/api/public/v1/specs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicV1ScanRoute = ApiPublicV1ScanRouteImport.update({
+  id: '/api/public/v1/scan',
+  path: '/api/public/v1/scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicV1ReadinessRoute = ApiPublicV1ReadinessRouteImport.update({
   id: '/api/public/v1/readiness',
   path: '/api/public/v1/readiness',
@@ -787,6 +818,12 @@ const ApiPublicHooksRunScheduledScansRoute =
   ApiPublicHooksRunScheduledScansRouteImport.update({
     id: '/api/public/hooks/run-scheduled-scans',
     path: '/api/public/hooks/run-scheduled-scans',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksRunMonitoredSitesRoute =
+  ApiPublicHooksRunMonitoredSitesRouteImport.update({
+    id: '/api/public/hooks/run-monitored-sites',
+    path: '/api/public/hooks/run-monitored-sites',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicHooksRescanLeaderboardRoute =
@@ -857,6 +894,7 @@ const ApiPublicDataSchemasClaimsDotschemaDotjsonRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api-docs': typeof ApiDocsRoute
+  '/app': typeof AppRouteWithChildren
   '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
@@ -908,6 +946,8 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof DotwellKnownOauthProtectedResourceRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
+  '/app/api-keys': typeof AppApiKeysRoute
+  '/app/billing': typeof AppBillingRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
@@ -942,6 +982,7 @@ export interface FileRoutesByFullPath {
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
+  '/app/': typeof AppIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -966,6 +1007,7 @@ export interface FileRoutesByFullPath {
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
@@ -975,6 +1017,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/scan': typeof ApiPublicV1ScanRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
@@ -1044,6 +1087,8 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof DotwellKnownOauthProtectedResourceRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
+  '/app/api-keys': typeof AppApiKeysRoute
+  '/app/billing': typeof AppBillingRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
@@ -1078,6 +1123,7 @@ export interface FileRoutesByTo {
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
+  '/app': typeof AppIndexRoute
   '/blog': typeof BlogIndexRoute
   '/content': typeof ContentIndexRoute
   '/dashboard': typeof DashboardIndexRoute
@@ -1102,6 +1148,7 @@ export interface FileRoutesByTo {
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
@@ -1111,6 +1158,7 @@ export interface FileRoutesByTo {
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/scan': typeof ApiPublicV1ScanRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
@@ -1132,6 +1180,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api-docs': typeof ApiDocsRoute
+  '/app': typeof AppRouteWithChildren
   '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
@@ -1183,6 +1232,8 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof DotwellKnownOauthProtectedResourceRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
+  '/app/api-keys': typeof AppApiKeysRoute
+  '/app/billing': typeof AppBillingRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
@@ -1217,6 +1268,7 @@ export interface FileRoutesById {
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
+  '/app/': typeof AppIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -1241,6 +1293,7 @@ export interface FileRoutesById {
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
@@ -1250,6 +1303,7 @@ export interface FileRoutesById {
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/scan': typeof ApiPublicV1ScanRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
@@ -1272,6 +1326,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/api-docs'
+    | '/app'
     | '/auth.md'
     | '/badge'
     | '/check'
@@ -1323,6 +1378,8 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/leads'
     | '/admin/reviews'
+    | '/app/api-keys'
+    | '/app/billing'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
@@ -1357,6 +1414,7 @@ export interface FileRouteTypes {
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
+    | '/app/'
     | '/blog/'
     | '/content/'
     | '/dashboard/'
@@ -1381,6 +1439,7 @@ export interface FileRouteTypes {
     | '/api/public/data/stats.json'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
@@ -1390,6 +1449,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
     | '/api/public/v1/readiness'
+    | '/api/public/v1/scan'
     | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
@@ -1459,6 +1519,8 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/leads'
     | '/admin/reviews'
+    | '/app/api-keys'
+    | '/app/billing'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
@@ -1493,6 +1555,7 @@ export interface FileRouteTypes {
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
+    | '/app'
     | '/blog'
     | '/content'
     | '/dashboard'
@@ -1517,6 +1580,7 @@ export interface FileRouteTypes {
     | '/api/public/data/stats.json'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
@@ -1526,6 +1590,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
     | '/api/public/v1/readiness'
+    | '/api/public/v1/scan'
     | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
@@ -1546,6 +1611,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/api-docs'
+    | '/app'
     | '/auth.md'
     | '/badge'
     | '/check'
@@ -1597,6 +1663,8 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/leads'
     | '/admin/reviews'
+    | '/app/api-keys'
+    | '/app/billing'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
@@ -1631,6 +1699,7 @@ export interface FileRouteTypes {
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
+    | '/app/'
     | '/blog/'
     | '/content/'
     | '/dashboard/'
@@ -1655,6 +1724,7 @@ export interface FileRouteTypes {
     | '/api/public/data/stats.json'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
@@ -1664,6 +1734,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
     | '/api/public/v1/readiness'
+    | '/api/public/v1/scan'
     | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
@@ -1685,6 +1756,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiDocsRoute: typeof ApiDocsRoute
+  AppRoute: typeof AppRouteWithChildren
   AuthDotmdRoute: typeof AuthDotmdRoute
   BadgeRoute: typeof BadgeRouteWithChildren
   CheckRoute: typeof CheckRouteWithChildren
@@ -1768,6 +1840,7 @@ export interface RootRouteChildren {
   ApiPublicDataStatsDotjsonRoute: typeof ApiPublicDataStatsDotjsonRoute
   ApiPublicHooksGenerateDraftsRoute: typeof ApiPublicHooksGenerateDraftsRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
+  ApiPublicHooksRunMonitoredSitesRoute: typeof ApiPublicHooksRunMonitoredSitesRoute
   ApiPublicHooksRunScheduledScansRoute: typeof ApiPublicHooksRunScheduledScansRoute
   ApiPublicOauthTokenRoute: typeof ApiPublicOauthTokenRoute
   ApiPublicStatsOverviewRoute: typeof ApiPublicStatsOverviewRoute
@@ -1777,6 +1850,7 @@ export interface RootRouteChildren {
   ApiPublicV1OpenapiDotjsonRoute: typeof ApiPublicV1OpenapiDotjsonRoute
   ApiPublicV1PostsRoute: typeof ApiPublicV1PostsRouteWithChildren
   ApiPublicV1ReadinessRoute: typeof ApiPublicV1ReadinessRoute
+  ApiPublicV1ScanRoute: typeof ApiPublicV1ScanRoute
   ApiPublicV1SpecsRoute: typeof ApiPublicV1SpecsRoute
   ApiPublicWidgetBadgeDotsvgRoute: typeof ApiPublicWidgetBadgeDotsvgRoute
   ApiPublicWidgetEmbedDotjsRoute: typeof ApiPublicWidgetEmbedDotjsRoute
@@ -2097,6 +2171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthDotmdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api-docs': {
       id: '/api-docs'
       path: '/api-docs'
@@ -2138,6 +2219,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/'
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
     }
     '/vs/$competitor': {
       id: '/vs/$competitor'
@@ -2377,6 +2465,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BadgeChar123idChar125DotsvgRouteImport
       parentRoute: typeof BadgeRoute
     }
+    '/app/billing': {
+      id: '/app/billing'
+      path: '/billing'
+      fullPath: '/app/billing'
+      preLoaderRoute: typeof AppBillingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/api-keys': {
+      id: '/app/api-keys'
+      path: '/api-keys'
+      fullPath: '/app/api-keys'
+      preLoaderRoute: typeof AppApiKeysRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/admin/reviews': {
       id: '/admin/reviews'
       path: '/admin/reviews'
@@ -2608,6 +2710,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1SpecsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/scan': {
+      id: '/api/public/v1/scan'
+      path: '/api/public/v1/scan'
+      fullPath: '/api/public/v1/scan'
+      preLoaderRoute: typeof ApiPublicV1ScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/readiness': {
       id: '/api/public/v1/readiness'
       path: '/api/public/v1/readiness'
@@ -2669,6 +2778,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/hooks/run-scheduled-scans'
       fullPath: '/api/public/hooks/run-scheduled-scans'
       preLoaderRoute: typeof ApiPublicHooksRunScheduledScansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/run-monitored-sites': {
+      id: '/api/public/hooks/run-monitored-sites'
+      path: '/api/public/hooks/run-monitored-sites'
+      fullPath: '/api/public/hooks/run-monitored-sites'
+      preLoaderRoute: typeof ApiPublicHooksRunMonitoredSitesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/hooks/rescan-leaderboard': {
@@ -2750,6 +2866,20 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AppRouteChildren {
+  AppApiKeysRoute: typeof AppApiKeysRoute
+  AppBillingRoute: typeof AppBillingRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppApiKeysRoute: AppApiKeysRoute,
+  AppBillingRoute: AppBillingRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface BadgeRouteChildren {
   BadgeChar123idChar125DotsvgRoute: typeof BadgeChar123idChar125DotsvgRoute
@@ -2960,6 +3090,7 @@ const ApiPublicV1PostsRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiDocsRoute: ApiDocsRoute,
+  AppRoute: AppRouteWithChildren,
   AuthDotmdRoute: AuthDotmdRoute,
   BadgeRoute: BadgeRouteWithChildren,
   CheckRoute: CheckRouteWithChildren,
@@ -3049,6 +3180,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicDataStatsDotjsonRoute: ApiPublicDataStatsDotjsonRoute,
   ApiPublicHooksGenerateDraftsRoute: ApiPublicHooksGenerateDraftsRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
+  ApiPublicHooksRunMonitoredSitesRoute: ApiPublicHooksRunMonitoredSitesRoute,
   ApiPublicHooksRunScheduledScansRoute: ApiPublicHooksRunScheduledScansRoute,
   ApiPublicOauthTokenRoute: ApiPublicOauthTokenRoute,
   ApiPublicStatsOverviewRoute: ApiPublicStatsOverviewRoute,
@@ -3058,6 +3190,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicV1OpenapiDotjsonRoute: ApiPublicV1OpenapiDotjsonRoute,
   ApiPublicV1PostsRoute: ApiPublicV1PostsRouteWithChildren,
   ApiPublicV1ReadinessRoute: ApiPublicV1ReadinessRoute,
+  ApiPublicV1ScanRoute: ApiPublicV1ScanRoute,
   ApiPublicV1SpecsRoute: ApiPublicV1SpecsRoute,
   ApiPublicWidgetBadgeDotsvgRoute: ApiPublicWidgetBadgeDotsvgRoute,
   ApiPublicWidgetEmbedDotjsRoute: ApiPublicWidgetEmbedDotjsRoute,

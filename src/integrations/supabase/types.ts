@@ -47,6 +47,66 @@ export type Database = {
         }
         Relationships: []
       }
+      api_keys: {
+        Row: {
+          created_at: string
+          id: string
+          key_hash: string
+          key_prefix: string
+          last_used_at: string | null
+          name: string
+          revoked_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          key_hash: string
+          key_prefix: string
+          last_used_at?: string | null
+          name: string
+          revoked_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          key_hash?: string
+          key_prefix?: string
+          last_used_at?: string | null
+          name?: string
+          revoked_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      api_request_log: {
+        Row: {
+          api_key_id: string | null
+          created_at: string
+          endpoint: string
+          id: number
+          status: number | null
+          user_id: string | null
+        }
+        Insert: {
+          api_key_id?: string | null
+          created_at?: string
+          endpoint: string
+          id?: number
+          status?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          api_key_id?: string | null
+          created_at?: string
+          endpoint?: string
+          id?: number
+          status?: number | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       blog_posts: {
         Row: {
           body: string
@@ -472,6 +532,51 @@ export type Database = {
         }
         Relationships: []
       }
+      monitored_sites: {
+        Row: {
+          alert_email: string | null
+          alert_threshold: number
+          alert_webhook_url: string | null
+          created_at: string
+          id: string
+          label: string | null
+          last_scanned_at: string | null
+          last_score: number | null
+          paused: boolean
+          updated_at: string
+          url: string
+          user_id: string
+        }
+        Insert: {
+          alert_email?: string | null
+          alert_threshold?: number
+          alert_webhook_url?: string | null
+          created_at?: string
+          id?: string
+          label?: string | null
+          last_scanned_at?: string | null
+          last_score?: number | null
+          paused?: boolean
+          updated_at?: string
+          url: string
+          user_id: string
+        }
+        Update: {
+          alert_email?: string | null
+          alert_threshold?: number
+          alert_webhook_url?: string | null
+          created_at?: string
+          id?: string
+          label?: string | null
+          last_scanned_at?: string | null
+          last_score?: number | null
+          paused?: boolean
+          updated_at?: string
+          url?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           capture_payload: Json | null
@@ -741,6 +846,27 @@ export type Database = {
         }
         Relationships: []
       }
+      scan_quota_usage: {
+        Row: {
+          period_month: string
+          scans_used: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          period_month: string
+          scans_used?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          period_month?: string
+          scans_used?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       scans: {
         Row: {
           citability: number
@@ -868,6 +994,89 @@ export type Database = {
           value?: string
         }
         Relationships: []
+      }
+      subscription_plans: {
+        Row: {
+          created_at: string
+          currency: string
+          features: Json
+          id: string
+          max_sites: number
+          monthly_scan_quota: number
+          name: string
+          paypal_plan_id: string | null
+          price_cents: number
+          scan_interval: string
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          features?: Json
+          id: string
+          max_sites: number
+          monthly_scan_quota: number
+          name: string
+          paypal_plan_id?: string | null
+          price_cents?: number
+          scan_interval: string
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          features?: Json
+          id?: string
+          max_sites?: number
+          monthly_scan_quota?: number
+          name?: string
+          paypal_plan_id?: string | null
+          price_cents?: number
+          scan_interval?: string
+        }
+        Relationships: []
+      }
+      subscriptions: {
+        Row: {
+          cancelled_at: string | null
+          created_at: string
+          current_period_end: string | null
+          id: string
+          paypal_subscription_id: string | null
+          plan_id: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cancelled_at?: string | null
+          created_at?: string
+          current_period_end?: string | null
+          id?: string
+          paypal_subscription_id?: string | null
+          plan_id: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cancelled_at?: string | null
+          created_at?: string
+          current_period_end?: string | null
+          id?: string
+          paypal_subscription_id?: string | null
+          plan_id?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_plans"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       suppressed_emails: {
         Row: {

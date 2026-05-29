@@ -1,0 +1,2 @@
+UPDATE public.subscription_plans SET paypal_plan_id = 'P-03B53016AU171741XNIMWURI' WHERE id = 'pro';
+UPDATE public.subscription_plans SET paypal_plan_id = 'P-1WW75510H7285071HNIMWURI' WHERE id = 'team';

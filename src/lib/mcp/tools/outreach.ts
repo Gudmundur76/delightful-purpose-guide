@@ -5,7 +5,7 @@ import { generateOutreach } from "@/lib/outreach/generate.functions";
 export const generateOutreachTool = defineTool({
   name: "generate_outreach_email",
   description:
-    "Generate a personalized B2B cold-email pitch for a prospect based on a live GEO scan of their URL. Returns subject + body powered by Lovable AI.",
+    "Generate a personalized B2B cold-email pitch for a prospect based on a live GEO scan of their URL. Returns subject + body powered by Gemini.",
   parameters: z.object({
     url: z.string().min(3).max(2048),
     senderName: z.string().min(1).max(120),

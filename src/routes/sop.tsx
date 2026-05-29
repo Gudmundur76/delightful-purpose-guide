@@ -255,7 +255,7 @@ Build (48h) → QA → Deliver → Polish (4h) → Handover → 14-day Warranty`
               ["Leads, orders, scans", "Supabase (leads, orders, scans)"],
               ["Payments", "PayPal — /checkout"],
               ["Calls", "Cal.com — cal.com/grow-contact/intro"],
-              ["Email", "Server routes under /lovable/email/*"],
+              ["Email", "Internal email service (transactional + auth)"],
               ["Internal templates", "grow-template-tier-{01|02|03} repos"],
               ["Site QA", "/check + Lighthouse CI"],
               ["Deploys", "Client hosting; we hold no prod secrets"],

@@ -1,6 +1,19 @@
 // Central registry of verifiable claims exposed via /api/public/data/claims.json
 // Every visible <VerifiabilityBadge id="..."> on the site should resolve to a
 // claim in this registry. New claims are appended; existing ids are stable.
+//
+// Trust Handshake (v2.1): each claim may carry `source_files` pointing at the
+// exact paths in the public repo that produce or back the value. These are
+// rendered as GitHub blob URLs in the JSON-LD `sameAs` array and surfaced in
+// the claims JSON so agents can verify Web → JSON-LD → Source in one hop.
+
+import { sourceUrl } from "@/lib/seo/trust-handshake";
+
+export type ClaimSourceFile = {
+  path: string;
+  lines?: string;
+  description?: string;
+};
 
 export type ClaimRecord = {
   id: string;
@@ -12,9 +25,22 @@ export type ClaimRecord = {
   date_observed: string;
   unit?: string;
   page_anchors: string[]; // permalinks where this claim is rendered
+  source_files?: ClaimSourceFile[]; // repo paths backing this claim
+  same_as?: string[]; // resolved GitHub blob URLs (computed at serialize time)
 };
 
 export const CLAIMS_DATE_MODIFIED = "2026-05-29";
+
+/** Resolve `source_files` into absolute GitHub blob URLs for the current build ref. */
+export function withSameAs(claim: ClaimRecord): ClaimRecord {
+  if (!claim.source_files || claim.source_files.length === 0) return claim;
+  return {
+    ...claim,
+    same_as: claim.source_files.map((f) => sourceUrl(f.path, f.lines)),
+  };
+}
+
+
 
 export const CLAIMS_REGISTRY: ClaimRecord[] = [
   {

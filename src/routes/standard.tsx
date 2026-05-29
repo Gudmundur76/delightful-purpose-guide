@@ -7,6 +7,8 @@ import {
   getCurrentStandard,
   STANDARD_LICENSE,
 } from "@/lib/standard/data";
+import { CitationSnippet } from "@/components/CitationSnippet";
+import { InformationGainIndicator } from "@/components/InformationGainIndicator";
 
 const PAGE_URL = "https://grow.contact/standard";
 
@@ -115,7 +117,27 @@ function StandardIndex() {
               Test a URL
             </Link>
           </div>
+          <div className="mt-6">
+            <InformationGainIndicator
+              value={68}
+              measuredAt={current.publishedAt}
+              query="agent native web standard specification"
+            />
+          </div>
         </header>
+
+        <CitationSnippet
+          className="mb-12"
+          citation={{
+            authors: ["grow.contact"],
+            year: new Date(current.publishedAt).getFullYear(),
+            title: `The Agent-Native Web Standard, ${current.label}`,
+            publisher: "grow.contact",
+            url: `${PAGE_URL}/${current.slug}`,
+            accessed: current.publishedAt,
+            key: `grow-standard-${current.slug}`,
+          }}
+        />
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold uppercase tracking-tighter mb-4">

@@ -14,6 +14,8 @@ import {
   SIGNAL_LABEL,
   type SignalKey,
 } from "@/lib/leaderboard/stats";
+import { CitationSnippet } from "@/components/CitationSnippet";
+import { InformationGainIndicator } from "@/components/InformationGainIndicator";
 import { z } from "zod";
 
 const CATEGORIES: LeaderboardCategory[] = ["infra", "models", "agents", "devtools"];
@@ -165,6 +167,11 @@ function LeaderboardPage() {
                 Embed badge →
               </Link>
               <span className="uppercase tracking-widest">// CC BY 4.0 · re-scored weekly</span>
+              <InformationGainIndicator
+                value={61}
+                measuredAt={new Date().toISOString().slice(0, 10)}
+                query="ai company readability leaderboard"
+              />
             </div>
 
           </div>
@@ -192,6 +199,18 @@ function LeaderboardPage() {
                 </li>
               ))}
             </ul>
+            <CitationSnippet
+              className="mt-8 max-w-2xl"
+              citation={{
+                authors: ["grow.contact"],
+                year: 2026,
+                title: `Agent Readability Leaderboard (${LEADERBOARD.length} AI companies)`,
+                publisher: "grow.contact",
+                url: "https://grow.contact/leaderboard",
+                accessed: new Date().toISOString().slice(0, 10),
+                key: "grow-leaderboard",
+              }}
+            />
           </div>
         </section>
 

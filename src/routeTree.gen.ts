@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as VsRouteImport } from './routes/vs'
+import { Route as VScoreRouteImport } from './routes/v-score'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as TrustRouteImport } from './routes/trust'
 import { Route as TermsRouteImport } from './routes/terms'
@@ -153,6 +154,11 @@ const WorkRoute = WorkRouteImport.update({
 const VsRoute = VsRouteImport.update({
   id: '/vs',
   path: '/vs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VScoreRoute = VScoreRouteImport.update({
+  id: '/v-score',
+  path: '/v-score',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UnsubscribeRoute = UnsubscribeRouteImport.update({
@@ -891,6 +897,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/trust': typeof TrustRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/v-score': typeof VScoreRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
@@ -1026,6 +1033,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/trust': typeof TrustRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/v-score': typeof VScoreRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
@@ -1164,6 +1172,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/trust': typeof TrustRoute
   '/unsubscribe': typeof UnsubscribeRoute
+  '/v-score': typeof VScoreRoute
   '/vs': typeof VsRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
@@ -1303,6 +1312,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/trust'
     | '/unsubscribe'
+    | '/v-score'
     | '/vs'
     | '/work'
     | '/.well-known/api-catalog'
@@ -1438,6 +1448,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/trust'
     | '/unsubscribe'
+    | '/v-score'
     | '/vs'
     | '/work'
     | '/.well-known/api-catalog'
@@ -1575,6 +1586,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/trust'
     | '/unsubscribe'
+    | '/v-score'
     | '/vs'
     | '/work'
     | '/.well-known/api-catalog'
@@ -1713,6 +1725,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   TrustRoute: typeof TrustRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
+  VScoreRoute: typeof VScoreRoute
   VsRoute: typeof VsRouteWithChildren
   WorkRoute: typeof WorkRoute
   DotwellKnownApiCatalogRoute: typeof DotwellKnownApiCatalogRoute
@@ -1795,6 +1808,13 @@ declare module '@tanstack/react-router' {
       path: '/vs'
       fullPath: '/vs'
       preLoaderRoute: typeof VsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v-score': {
+      id: '/v-score'
+      path: '/v-score'
+      fullPath: '/v-score'
+      preLoaderRoute: typeof VScoreRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/unsubscribe': {
@@ -2980,6 +3000,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   TrustRoute: TrustRoute,
   UnsubscribeRoute: UnsubscribeRoute,
+  VScoreRoute: VScoreRoute,
   VsRoute: VsRouteWithChildren,
   WorkRoute: WorkRoute,
   DotwellKnownApiCatalogRoute: DotwellKnownApiCatalogRoute,

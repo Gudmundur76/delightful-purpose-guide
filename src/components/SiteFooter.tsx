@@ -30,6 +30,7 @@ export function SiteFooter() {
               <li><Link to="/tools/robots-checker" className="hover:text-foreground transition-colors">robots.txt Checker</Link></li>
               <li><Link to="/stats" className="hover:text-foreground transition-colors">State of the Web</Link></li>
               <li><Link to="/report/q2-2026" className="hover:text-foreground transition-colors">Q2 2026 Report</Link></li>
+              <li><Link to="/v-score" className="hover:text-foreground transition-colors">V-Score</Link></li>
               <li><Link to="/data-drops" className="hover:text-foreground transition-colors">Data Drops</Link></li>
               <li><Link to="/trust" className="hover:text-foreground transition-colors">Trust & Guarantees</Link></li>
 

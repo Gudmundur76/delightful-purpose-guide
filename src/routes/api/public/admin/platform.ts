@@ -83,7 +83,8 @@ async function handle(body: Action) {
     case "update_site": {
       const { data, error } = await supabaseAdmin
         .from("intervention_sites")
-        .update(body.patch)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .update(body.patch as any)
         .eq("id", body.id)
         .select("*")
         .single();
@@ -126,8 +127,8 @@ async function handle(body: Action) {
         .select("id, site_id, kind, status, triggered_by, ccs_before, ccs_after, preview_text, created_at, intervention_sites!inner(domain)")
         .order("created_at", { ascending: false })
         .limit(200);
-      if (body.status) q = q.eq("status", body.status);
-      if (body.kind) q = q.eq("kind", body.kind);
+      if (body.status) q = q.eq("status", body.status as "drafted" | "approved" | "live" | "rejected" | "superseded");
+      if (body.kind) q = q.eq("kind", body.kind as "schema" | "llms_txt" | "robots_txt");
       if (body.site_id) q = q.eq("site_id", body.site_id);
       const { data, error } = await q;
       if (error) return json({ error: error.message }, 500);

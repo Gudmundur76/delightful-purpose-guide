@@ -154,6 +154,7 @@ import { Route as ApiPublicHooksCaptureCitationsRouteImport } from './routes/api
 import { Route as ApiPublicDataStatsDotjsonRouteImport } from './routes/api/public/data.stats[.]json'
 import { Route as ApiPublicDataLeaderboardDotjsonRouteImport } from './routes/api/public/data.leaderboard[.]json'
 import { Route as ApiPublicDataClaimsDotjsonRouteImport } from './routes/api/public/data.claims[.]json'
+import { Route as ApiPublicAdminPlatformRouteImport } from './routes/api/public/admin/platform'
 import { Route as ApiPublicWidgetChartSlugDotsvgRouteImport } from './routes/api/public/widget/chart.$slug[.]svg'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1CompaniesDomainRouteImport } from './routes/api/public/v1/companies.$domain'
@@ -915,6 +916,11 @@ const ApiPublicDataClaimsDotjsonRoute =
     path: '/api/public/data/claims.json',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicAdminPlatformRoute = ApiPublicAdminPlatformRouteImport.update({
+  id: '/api/public/admin/platform',
+  path: '/api/public/admin/platform',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicWidgetChartSlugDotsvgRoute =
   ApiPublicWidgetChartSlugDotsvgRouteImport.update({
     id: '/api/public/widget/chart/$slug.svg',
@@ -1070,6 +1076,7 @@ export interface FileRoutesByFullPath {
   '/data/q2-2026/stats.json': typeof DataQ22026StatsDotjsonRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/admin/platform': typeof ApiPublicAdminPlatformRoute
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
@@ -1221,6 +1228,7 @@ export interface FileRoutesByTo {
   '/data/q2-2026/stats.json': typeof DataQ22026StatsDotjsonRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/admin/platform': typeof ApiPublicAdminPlatformRoute
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
@@ -1376,6 +1384,7 @@ export interface FileRoutesById {
   '/data/q2-2026/stats.json': typeof DataQ22026StatsDotjsonRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/admin/platform': typeof ApiPublicAdminPlatformRoute
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
@@ -1532,6 +1541,7 @@ export interface FileRouteTypes {
     | '/data/q2-2026/stats.json'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/api/public/admin/platform'
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
@@ -1683,6 +1693,7 @@ export interface FileRouteTypes {
     | '/data/q2-2026/stats.json'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/api/public/admin/platform'
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
@@ -1837,6 +1848,7 @@ export interface FileRouteTypes {
     | '/data/q2-2026/stats.json'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/api/public/admin/platform'
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
@@ -1963,6 +1975,7 @@ export interface RootRouteChildren {
   DataQ22026LeaderboardDotjsonRoute: typeof DataQ22026LeaderboardDotjsonRoute
   DataQ22026StatsDotjsonRoute: typeof DataQ22026StatsDotjsonRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicAdminPlatformRoute: typeof ApiPublicAdminPlatformRoute
   ApiPublicDataClaimsDotjsonRoute: typeof ApiPublicDataClaimsDotjsonRoute
   ApiPublicDataLeaderboardDotjsonRoute: typeof ApiPublicDataLeaderboardDotjsonRoute
   ApiPublicDataStatsDotjsonRoute: typeof ApiPublicDataStatsDotjsonRoute
@@ -3020,6 +3033,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicDataClaimsDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/admin/platform': {
+      id: '/api/public/admin/platform'
+      path: '/api/public/admin/platform'
+      fullPath: '/api/public/admin/platform'
+      preLoaderRoute: typeof ApiPublicAdminPlatformRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/widget/chart/$slug.svg': {
       id: '/api/public/widget/chart/$slug.svg'
       path: '/api/public/widget/chart/$slug.svg'
@@ -3383,6 +3403,7 @@ const rootRouteChildren: RootRouteChildren = {
   DataQ22026LeaderboardDotjsonRoute: DataQ22026LeaderboardDotjsonRoute,
   DataQ22026StatsDotjsonRoute: DataQ22026StatsDotjsonRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicAdminPlatformRoute: ApiPublicAdminPlatformRoute,
   ApiPublicDataClaimsDotjsonRoute: ApiPublicDataClaimsDotjsonRoute,
   ApiPublicDataLeaderboardDotjsonRoute: ApiPublicDataLeaderboardDotjsonRoute,
   ApiPublicDataStatsDotjsonRoute: ApiPublicDataStatsDotjsonRoute,

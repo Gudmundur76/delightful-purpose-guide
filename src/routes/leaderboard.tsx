@@ -466,6 +466,13 @@ function LeaderboardPage() {
                         <td className="px-3 py-3 text-right font-mono text-xs tabular-nums text-muted-foreground">
                           {row.google_aio_share.toFixed(1)}
                         </td>
+                        <td className="px-3 py-3 text-right font-mono text-xs tabular-nums">
+                          {row.citations_24h > 0 ? (
+                            <span className="text-accent font-bold">{row.citations_24h}</span>
+                          ) : (
+                            <span className="text-muted-foreground">0</span>
+                          )}
+                        </td>
                         <td className="px-3 py-3">
                           <span className={`font-mono text-[10px] tracking-widest px-2 py-0.5 border ${v.className}`}>
                             {v.label}

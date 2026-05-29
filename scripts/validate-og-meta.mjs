@@ -19,6 +19,7 @@ const EXEMPT_PATTERNS = [
   // Admin / authenticated dashboards
   /^admin\./,
   /^dashboard(\.|$)/,
+  /^app(\.|$)/,
   /^content(\.|$)/,
   /^history\./,
   /^outreach(\.|$)/,

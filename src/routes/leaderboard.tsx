@@ -14,6 +14,8 @@ import {
   SIGNAL_LABEL,
   type SignalKey,
 } from "@/lib/leaderboard/stats";
+import { CitationSnippet } from "@/components/CitationSnippet";
+import { InformationGainIndicator } from "@/components/InformationGainIndicator";
 import { z } from "zod";
 
 const CATEGORIES: LeaderboardCategory[] = ["infra", "models", "agents", "devtools"];
@@ -165,9 +167,16 @@ function LeaderboardPage() {
                 Embed badge →
               </Link>
               <span className="uppercase tracking-widest">// CC BY 4.0 · re-scored weekly</span>
+              <InformationGainIndicator
+                value={61}
+                measuredAt={new Date().toISOString().slice(0, 10)}
+                query="ai company readability leaderboard"
+              />
             </div>
 
           </div>
+        </section>
+
         </section>
 
         {/* Headline citable stats strip */}

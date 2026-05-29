@@ -120,8 +120,6 @@ export const Route = createFileRoute("/sitemap.xml")({
             priority: "0.7",
           })),
           { path: "/sop", lastmod: today, changefreq: "monthly", priority: "0.5" },
-
-          { path: "/sop", lastmod: today, changefreq: "monthly", priority: "0.5" },
           { path: "/auth.md", lastmod: today, changefreq: "monthly", priority: "0.3" },
           { path: "/llms-full.txt", lastmod: today, changefreq: "weekly", priority: "0.4" },
           { path: "/.well-known/api-catalog", lastmod: today, changefreq: "monthly", priority: "0.3" },

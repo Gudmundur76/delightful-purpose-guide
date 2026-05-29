@@ -167,7 +167,7 @@ export const Route = createFileRoute("/api/public/hooks/capture-citations")({
           };
           if (!result.ok) {
             errCount++;
-            events.push({ ...base, error: `HTTP ${result.status}: ${String(result.error).slice(0, 500)}` });
+            events.push({ ...base, domain_was_cited: false, error: `HTTP ${result.status}: ${String(result.error).slice(0, 500)}` });
             return;
           }
           const parsed = extractCitations(result.text, t.domain);

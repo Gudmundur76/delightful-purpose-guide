@@ -110,6 +110,7 @@ import { Route as DotwellKnownMcpDotjsonRouteImport } from './routes/[.]well-kno
 import { Route as DotwellKnownJwksDotjsonRouteImport } from './routes/[.]well-known.jwks[.]json'
 import { Route as DotwellKnownHttpMessageSignaturesDirectoryRouteImport } from './routes/[.]well-known.http-message-signatures-directory'
 import { Route as DotwellKnownApiCatalogRouteImport } from './routes/[.]well-known.api-catalog'
+import { Route as VerifierCompanyDomainRouteImport } from './routes/verifier.company.$domain'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as HistoryHostDiffRouteImport } from './routes/history.$host.diff'
 import { Route as DataQ22026StatsDotjsonRouteImport } from './routes/data.q2-2026.stats[.]json'
@@ -672,6 +673,11 @@ const DotwellKnownApiCatalogRoute = DotwellKnownApiCatalogRouteImport.update({
   path: '/.well-known/api-catalog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VerifierCompanyDomainRoute = VerifierCompanyDomainRouteImport.update({
+  id: '/verifier/company/$domain',
+  path: '/verifier/company/$domain',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
@@ -1065,6 +1071,7 @@ export interface FileRoutesByFullPath {
   '/data/q2-2026/stats.json': typeof DataQ22026StatsDotjsonRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/verifier/company/$domain': typeof VerifierCompanyDomainRoute
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
@@ -1215,6 +1222,7 @@ export interface FileRoutesByTo {
   '/data/q2-2026/stats.json': typeof DataQ22026StatsDotjsonRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/verifier/company/$domain': typeof VerifierCompanyDomainRoute
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
@@ -1369,6 +1377,7 @@ export interface FileRoutesById {
   '/data/q2-2026/stats.json': typeof DataQ22026StatsDotjsonRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/verifier/company/$domain': typeof VerifierCompanyDomainRoute
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
@@ -1524,6 +1533,7 @@ export interface FileRouteTypes {
     | '/data/q2-2026/stats.json'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/verifier/company/$domain'
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
@@ -1674,6 +1684,7 @@ export interface FileRouteTypes {
     | '/data/q2-2026/stats.json'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/verifier/company/$domain'
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
@@ -1827,6 +1838,7 @@ export interface FileRouteTypes {
     | '/data/q2-2026/stats.json'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/verifier/company/$domain'
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
@@ -1952,6 +1964,7 @@ export interface RootRouteChildren {
   DataQ22026LeaderboardDotjsonRoute: typeof DataQ22026LeaderboardDotjsonRoute
   DataQ22026StatsDotjsonRoute: typeof DataQ22026StatsDotjsonRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  VerifierCompanyDomainRoute: typeof VerifierCompanyDomainRoute
   ApiPublicDataClaimsDotjsonRoute: typeof ApiPublicDataClaimsDotjsonRoute
   ApiPublicDataLeaderboardDotjsonRoute: typeof ApiPublicDataLeaderboardDotjsonRoute
   ApiPublicDataStatsDotjsonRoute: typeof ApiPublicDataStatsDotjsonRoute
@@ -2697,6 +2710,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotwellKnownApiCatalogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/verifier/company/$domain': {
+      id: '/verifier/company/$domain'
+      path: '/verifier/company/$domain'
+      fullPath: '/verifier/company/$domain'
+      preLoaderRoute: typeof VerifierCompanyDomainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/suppression': {
       id: '/lovable/email/suppression'
       path: '/lovable/email/suppression'
@@ -3364,6 +3384,7 @@ const rootRouteChildren: RootRouteChildren = {
   DataQ22026LeaderboardDotjsonRoute: DataQ22026LeaderboardDotjsonRoute,
   DataQ22026StatsDotjsonRoute: DataQ22026StatsDotjsonRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  VerifierCompanyDomainRoute: VerifierCompanyDomainRoute,
   ApiPublicDataClaimsDotjsonRoute: ApiPublicDataClaimsDotjsonRoute,
   ApiPublicDataLeaderboardDotjsonRoute: ApiPublicDataLeaderboardDotjsonRoute,
   ApiPublicDataStatsDotjsonRoute: ApiPublicDataStatsDotjsonRoute,

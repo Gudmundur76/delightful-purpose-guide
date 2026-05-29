@@ -223,7 +223,6 @@ function StatsPage() {
         <section className="border-b border-border">
           <div className="max-w-7xl mx-auto px-6 py-16">
             <h2 className="text-2xl font-extrabold tracking-tighter uppercase mb-8">
-            <h2 className="text-2xl font-extrabold tracking-tighter uppercase mb-8">
               Six numbers worth quoting
             </h2>
             <CitationSnippet

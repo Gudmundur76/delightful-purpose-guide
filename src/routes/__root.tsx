@@ -142,7 +142,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "google-site-verification", content: "HbTX1qSEq9ZU_E2EVtzo_mw84F9k2TnNr6uPAatkNYQ" },
       { title: "Grow — Agent-Native Websites for AI startups & devtools" },
-      { name: "description", content: "Grow ships agent-native marketing sites for AI/ML startups, agent platforms, and developer tools. Custom-coded, LLM-readable, live in 48 hours — fixed price." },
+      { name: "description", content: "Agent-native marketing sites for AI/ML startups, agent platforms, and devtools. Custom-coded, LLM-readable, live in 48 hours — fixed price." },
       { name: "author", content: "Grow" },
       { property: "og:title", content: "Grow — Agent-Native Websites for AI startups & devtools" },
       { property: "og:description", content: "Marketing sites for AI/ML startups, agent platforms, and devtools. Structured for humans, parseable by LLMs. 48 hours, fixed price." },

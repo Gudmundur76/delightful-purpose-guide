@@ -88,11 +88,15 @@ export const Route = createFileRoute("/")({
   head: () => {
     return {
     meta: [
+      { name: "description", content: "Agent-native marketing sites for AI/ML startups, agent platforms, and devtools. Structured data, llms.txt, MCP-ready docs — shipped in 48 hours, fixed price." },
+      { property: "og:title", content: "Grow — Agent-Native Websites for AI Startups & Devtools" },
       {
         property: "og:description",
         content:
           "Marketing sites built for the agent era: structured data, llms.txt, MCP-ready docs. For AI/ML startups, agent platforms, and devtools. 48 hours, fixed price.",
       },
+      { name: "twitter:title", content: "Grow — Agent-Native Websites for AI Startups & Devtools" },
+      { name: "twitter:description", content: "Marketing sites built for the agent era: structured data, llms.txt, MCP-ready docs. 48 hours, fixed price." },
       { property: "og:url", content: "https://grow.contact/" },
       ...ogImageMeta({
         title: "Agent-Native Websites for AI startups & devtools",

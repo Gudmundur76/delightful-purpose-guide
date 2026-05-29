@@ -134,9 +134,9 @@ export function TechSpecs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 sm:mb-10">
           <div>
-            <h4 className="font-mono text-xs uppercase text-accent mb-3">
+            <p className="font-mono text-xs uppercase text-accent mb-3">
               // Technical Specifications
-            </h4>
+            </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tighter uppercase">
               Inspect the output
             </h2>

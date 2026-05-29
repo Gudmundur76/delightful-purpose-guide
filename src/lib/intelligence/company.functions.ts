@@ -99,12 +99,13 @@ export const getCompanyIntelligence = createServerFn({ method: "GET" })
         supabaseAdmin
           .from("company_scores")
           .select(
-            "overall_ccs,citation_probability,authority,citability,freshness,semantic_structure,schema_richness,comparison_density,qa_density,expert_signals,scan_date",
+            "overall_ccs,citation_probability,authority,verifiability,precedent,commentary,information_gain,canonical,scan_date",
           )
           .eq("domain", data.domain)
           .order("scan_date", { ascending: false })
           .limit(1)
           .maybeSingle(),
+
         supabaseAdmin
           .from("citation_history")
           .select(

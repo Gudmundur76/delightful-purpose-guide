@@ -36,20 +36,11 @@ async function fireAlert(site: {
       console.error("[monitor] webhook alert failed", (e as Error).message);
     }
   }
-  // Email handled via existing internal email queue if configured.
   if (site.alert_email) {
-    try {
-      const { sendInternalEmail } = await import("@/lib/email/send-internal");
-      await sendInternalEmail({
-        to: site.alert_email,
-        subject: `Grow alert: ${site.url} dropped ${prev - next} points`,
-        text:
-          `Your monitored site ${site.url} dropped from ${prev} to ${next} ` +
-          `(delta ${prev - next}). View report: https://grow.contact/check?url=${encodeURIComponent(site.url)}`,
-      });
-    } catch (e) {
-      console.error("[monitor] email alert failed", (e as Error).message);
-    }
+    // Email alerts: enqueue via the transactional registry when a
+    // "monitor-alert" template is added. Webhook delivery is the
+    // primary channel for now.
+    console.log(`[monitor] alert (email pending): ${site.alert_email} ${site.url} ${prev}->${next}`);
   }
 }
 

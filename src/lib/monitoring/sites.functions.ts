@@ -20,7 +20,7 @@ export const listMonitoredSites = createServerFn({ method: "GET" })
     return {
       sites: sites ?? [],
       plan,
-      usage: { used: usage.used, period: usage.period, limit: plan.monthly_scan_quota },
+      usage: { used: usage.used, period: usage.period_month, limit: plan.monthly_scan_quota },
     };
   });
 

@@ -33,6 +33,7 @@ const SORT_KEYS = [
   "chatgpt_share",
   "claude_share",
   "google_aio_share",
+  "citations_24h",
 ] as const;
 type SortKey = (typeof SORT_KEYS)[number];
 

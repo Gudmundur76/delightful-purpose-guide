@@ -80,6 +80,11 @@ export const getCitationIndex = createServerFn({ method: "GET" }).handler(
       }
     }
 
+    const citations24hCount = new Map<string, number>();
+    for (const e of events24h.data ?? []) {
+      citations24hCount.set(e.domain_queried, (citations24hCount.get(e.domain_queried) ?? 0) + 1);
+    }
+
     const rows: CitationIndexRow[] = (companies.data ?? []).map((c) => {
       const s = latestScore.get(c.domain);
       const h = latestHistory.get(c.domain);
@@ -96,6 +101,7 @@ export const getCitationIndex = createServerFn({ method: "GET" }).handler(
         claude_share: h?.claude_share ?? 0,
         google_aio_share: h?.google_aio_share ?? 0,
         volatility: h?.volatility ?? "stable",
+        citations_24h: citations24hCount.get(c.domain) ?? 0,
       };
     });
 

@@ -547,7 +547,7 @@ function CategoryTab({
   return (
     <Link
       to="/leaderboard"
-      search={(s) => ({ ...s, cat })}
+      search={(prev: { cat: string; sort: SortKey; dir: "asc" | "desc" }) => ({ ...prev, cat })}
       className={`px-3 py-1.5 font-mono text-xs uppercase tracking-widest border transition-colors ${
         active
           ? "bg-accent text-accent-foreground border-accent"

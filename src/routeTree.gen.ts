@@ -149,6 +149,7 @@ import { Route as ApiPublicHooksPaypalSubscriptionRouteImport } from './routes/a
 import { Route as ApiPublicHooksGenerateDraftsRouteImport } from './routes/api/public/hooks/generate-drafts'
 import { Route as ApiPublicHooksCitationVolatilityRollupRouteImport } from './routes/api/public/hooks/citation-volatility-rollup'
 import { Route as ApiPublicHooksCitationImportRouteImport } from './routes/api/public/hooks/citation-import'
+import { Route as ApiPublicHooksCaptureCitationsRouteImport } from './routes/api/public/hooks/capture-citations'
 import { Route as ApiPublicDataStatsDotjsonRouteImport } from './routes/api/public/data.stats[.]json'
 import { Route as ApiPublicDataLeaderboardDotjsonRouteImport } from './routes/api/public/data.leaderboard[.]json'
 import { Route as ApiPublicDataClaimsDotjsonRouteImport } from './routes/api/public/data.claims[.]json'
@@ -884,6 +885,12 @@ const ApiPublicHooksCitationImportRoute =
     path: '/api/public/hooks/citation-import',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicHooksCaptureCitationsRoute =
+  ApiPublicHooksCaptureCitationsRouteImport.update({
+    id: '/api/public/hooks/capture-citations',
+    path: '/api/public/hooks/capture-citations',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicDataStatsDotjsonRoute =
   ApiPublicDataStatsDotjsonRouteImport.update({
     id: '/api/public/data/stats.json',
@@ -1060,6 +1067,7 @@ export interface FileRoutesByFullPath {
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
+  '/api/public/hooks/capture-citations': typeof ApiPublicHooksCaptureCitationsRoute
   '/api/public/hooks/citation-import': typeof ApiPublicHooksCitationImportRoute
   '/api/public/hooks/citation-volatility-rollup': typeof ApiPublicHooksCitationVolatilityRollupRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
@@ -1209,6 +1217,7 @@ export interface FileRoutesByTo {
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
+  '/api/public/hooks/capture-citations': typeof ApiPublicHooksCaptureCitationsRoute
   '/api/public/hooks/citation-import': typeof ApiPublicHooksCitationImportRoute
   '/api/public/hooks/citation-volatility-rollup': typeof ApiPublicHooksCitationVolatilityRollupRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
@@ -1362,6 +1371,7 @@ export interface FileRoutesById {
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
+  '/api/public/hooks/capture-citations': typeof ApiPublicHooksCaptureCitationsRoute
   '/api/public/hooks/citation-import': typeof ApiPublicHooksCitationImportRoute
   '/api/public/hooks/citation-volatility-rollup': typeof ApiPublicHooksCitationVolatilityRollupRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
@@ -1516,6 +1526,7 @@ export interface FileRouteTypes {
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
+    | '/api/public/hooks/capture-citations'
     | '/api/public/hooks/citation-import'
     | '/api/public/hooks/citation-volatility-rollup'
     | '/api/public/hooks/generate-drafts'
@@ -1665,6 +1676,7 @@ export interface FileRouteTypes {
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
+    | '/api/public/hooks/capture-citations'
     | '/api/public/hooks/citation-import'
     | '/api/public/hooks/citation-volatility-rollup'
     | '/api/public/hooks/generate-drafts'
@@ -1817,6 +1829,7 @@ export interface FileRouteTypes {
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
+    | '/api/public/hooks/capture-citations'
     | '/api/public/hooks/citation-import'
     | '/api/public/hooks/citation-volatility-rollup'
     | '/api/public/hooks/generate-drafts'
@@ -1941,6 +1954,7 @@ export interface RootRouteChildren {
   ApiPublicDataClaimsDotjsonRoute: typeof ApiPublicDataClaimsDotjsonRoute
   ApiPublicDataLeaderboardDotjsonRoute: typeof ApiPublicDataLeaderboardDotjsonRoute
   ApiPublicDataStatsDotjsonRoute: typeof ApiPublicDataStatsDotjsonRoute
+  ApiPublicHooksCaptureCitationsRoute: typeof ApiPublicHooksCaptureCitationsRoute
   ApiPublicHooksCitationImportRoute: typeof ApiPublicHooksCitationImportRoute
   ApiPublicHooksCitationVolatilityRollupRoute: typeof ApiPublicHooksCitationVolatilityRollupRoute
   ApiPublicHooksGenerateDraftsRoute: typeof ApiPublicHooksGenerateDraftsRoute
@@ -2958,6 +2972,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksCitationImportRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/capture-citations': {
+      id: '/api/public/hooks/capture-citations'
+      path: '/api/public/hooks/capture-citations'
+      fullPath: '/api/public/hooks/capture-citations'
+      preLoaderRoute: typeof ApiPublicHooksCaptureCitationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/data/stats.json': {
       id: '/api/public/data/stats.json'
       path: '/api/public/data/stats.json'
@@ -3345,6 +3366,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicDataClaimsDotjsonRoute: ApiPublicDataClaimsDotjsonRoute,
   ApiPublicDataLeaderboardDotjsonRoute: ApiPublicDataLeaderboardDotjsonRoute,
   ApiPublicDataStatsDotjsonRoute: ApiPublicDataStatsDotjsonRoute,
+  ApiPublicHooksCaptureCitationsRoute: ApiPublicHooksCaptureCitationsRoute,
   ApiPublicHooksCitationImportRoute: ApiPublicHooksCitationImportRoute,
   ApiPublicHooksCitationVolatilityRollupRoute:
     ApiPublicHooksCitationVolatilityRollupRoute,

@@ -18,11 +18,13 @@ export type CitationIndexRow = {
   claude_share: number;
   google_aio_share: number;
   volatility: "stable" | "rising" | "falling";
+  citations_24h: number;
 };
 
 export const getCitationIndex = createServerFn({ method: "GET" }).handler(
   async (): Promise<{ rows: CitationIndexRow[]; generated_at: string }> => {
-    const [companies, scores, history] = await Promise.all([
+    const since24h = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const [companies, scores, history, events24h] = await Promise.all([
       supabaseAdmin.from("companies").select("domain,name,category,logo_url"),
       supabaseAdmin
         .from("company_scores")
@@ -34,6 +36,11 @@ export const getCitationIndex = createServerFn({ method: "GET" }).handler(
           "domain,total_citations,perplexity_share,chatgpt_share,claude_share,google_aio_share,volatility,month",
         )
         .order("month", { ascending: false }),
+      supabaseAdmin
+        .from("citation_events")
+        .select("domain_queried")
+        .eq("domain_was_cited", true)
+        .gte("queried_at", since24h),
     ]);
 
     if (companies.error) throw new Error(companies.error.message);
@@ -73,6 +80,11 @@ export const getCitationIndex = createServerFn({ method: "GET" }).handler(
       }
     }
 
+    const citations24hCount = new Map<string, number>();
+    for (const e of events24h.data ?? []) {
+      citations24hCount.set(e.domain_queried, (citations24hCount.get(e.domain_queried) ?? 0) + 1);
+    }
+
     const rows: CitationIndexRow[] = (companies.data ?? []).map((c) => {
       const s = latestScore.get(c.domain);
       const h = latestHistory.get(c.domain);
@@ -89,6 +101,7 @@ export const getCitationIndex = createServerFn({ method: "GET" }).handler(
         claude_share: h?.claude_share ?? 0,
         google_aio_share: h?.google_aio_share ?? 0,
         volatility: h?.volatility ?? "stable",
+        citations_24h: citations24hCount.get(c.domain) ?? 0,
       };
     });
 

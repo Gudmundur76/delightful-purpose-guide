@@ -33,6 +33,7 @@ const SORT_KEYS = [
   "chatgpt_share",
   "claude_share",
   "google_aio_share",
+  "citations_24h",
 ] as const;
 type SortKey = (typeof SORT_KEYS)[number];
 
@@ -228,6 +229,7 @@ function LeaderboardPage() {
       "chatgpt_share",
       "claude_share",
       "google_aio_share",
+      "citations_24h",
       "volatility",
     ].join(",");
     const lines = filtered.map((r) =>
@@ -243,6 +245,7 @@ function LeaderboardPage() {
         r.chatgpt_share,
         r.claude_share,
         r.google_aio_share,
+        r.citations_24h,
         r.volatility,
       ].join(","),
     );
@@ -405,6 +408,7 @@ function LeaderboardPage() {
                     <SortableTh label="GPT %" k="chatgpt_share" sort={sort} dir={dir} onClick={toggleSort} align="right" />
                     <SortableTh label="Claude %" k="claude_share" sort={sort} dir={dir} onClick={toggleSort} align="right" />
                     <SortableTh label="AIO %" k="google_aio_share" sort={sort} dir={dir} onClick={toggleSort} align="right" />
+                    <SortableTh label="24h cites" k="citations_24h" sort={sort} dir={dir} onClick={toggleSort} align="right" />
                     <th className="px-3 py-3 text-left">Trend</th>
                   </tr>
                 </thead>
@@ -464,6 +468,13 @@ function LeaderboardPage() {
                         <td className="px-3 py-3 text-right font-mono text-xs tabular-nums text-muted-foreground">
                           {row.google_aio_share.toFixed(1)}
                         </td>
+                        <td className="px-3 py-3 text-right font-mono text-xs tabular-nums">
+                          {row.citations_24h > 0 ? (
+                            <span className="text-accent font-bold">{row.citations_24h}</span>
+                          ) : (
+                            <span className="text-muted-foreground">0</span>
+                          )}
+                        </td>
                         <td className="px-3 py-3">
                           <span className={`font-mono text-[10px] tracking-widest px-2 py-0.5 border ${v.className}`}>
                             {v.label}
@@ -474,7 +485,7 @@ function LeaderboardPage() {
                   })}
                   {filtered.length === 0 ? (
                     <tr>
-                      <td colSpan={12} className="px-3 py-12 text-center text-muted-foreground font-mono text-xs">
+                      <td colSpan={13} className="px-3 py-12 text-center text-muted-foreground font-mono text-xs">
                         // No companies match the current filters.
                       </td>
                     </tr>

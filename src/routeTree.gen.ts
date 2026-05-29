@@ -57,6 +57,7 @@ import { Route as AuthDotmdRouteImport } from './routes/auth[.]md'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VerifierIndexRouteImport } from './routes/verifier.index'
 import { Route as DataIndexRouteImport } from './routes/data.index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as ContentIndexRouteImport } from './routes/content.index'
@@ -395,6 +396,11 @@ const ApiDocsRoute = ApiDocsRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifierIndexRoute = VerifierIndexRouteImport.update({
+  id: '/verifier/',
+  path: '/verifier/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DataIndexRoute = DataIndexRouteImport.update({
@@ -1022,6 +1028,7 @@ export interface FileRoutesByFullPath {
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/data/': typeof DataIndexRoute
+  '/verifier/': typeof VerifierIndexRoute
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -1168,6 +1175,7 @@ export interface FileRoutesByTo {
   '/content': typeof ContentIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/data': typeof DataIndexRoute
+  '/verifier': typeof VerifierIndexRoute
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -1318,6 +1326,7 @@ export interface FileRoutesById {
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/data/': typeof DataIndexRoute
+  '/verifier/': typeof VerifierIndexRoute
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -1469,6 +1478,7 @@ export interface FileRouteTypes {
     | '/content/'
     | '/dashboard/'
     | '/data/'
+    | '/verifier/'
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
@@ -1615,6 +1625,7 @@ export interface FileRouteTypes {
     | '/content'
     | '/dashboard'
     | '/data'
+    | '/verifier'
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
@@ -1764,6 +1775,7 @@ export interface FileRouteTypes {
     | '/content/'
     | '/dashboard/'
     | '/data/'
+    | '/verifier/'
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
@@ -1887,6 +1899,7 @@ export interface RootRouteChildren {
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
   DataIndexRoute: typeof DataIndexRoute
+  VerifierIndexRoute: typeof VerifierIndexRoute
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   DotwellKnownAgentSkillsIndexDotjsonRoute: typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   DotwellKnownMcpServerCardDotjsonRoute: typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -2272,6 +2285,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verifier/': {
+      id: '/verifier/'
+      path: '/verifier'
+      fullPath: '/verifier/'
+      preLoaderRoute: typeof VerifierIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/data/': {
@@ -3265,6 +3285,7 @@ const rootRouteChildren: RootRouteChildren = {
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
   DataIndexRoute: DataIndexRoute,
+  VerifierIndexRoute: VerifierIndexRoute,
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute:
     DotwellKnownAgentSkillsGrowGeoScanDotmdRoute,
   DotwellKnownAgentSkillsIndexDotjsonRoute:

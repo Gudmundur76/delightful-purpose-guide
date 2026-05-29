@@ -4,12 +4,16 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { computeHeadlineStats } from "@/lib/leaderboard/stats";
 import { LEADERBOARD, CATEGORY_LABELS } from "@/lib/leaderboard/entries";
 import { AUTHORS, DEFAULT_AUTHOR_SLUG, personJsonLd } from "@/lib/authors/data";
+import { VerifiabilityBadge } from "@/components/VerifiabilityBadge";
+import { verifiableClaim, claimCitation, DATA_URLS } from "@/lib/seo/verifiable";
 
 const PAGE_URL = "https://grow.contact/report/q2-2026";
 const PDF_URL = "https://grow.contact/report/q2-2026.pdf";
 const PUBLISHED = "2026-05-28";
 const REPORT_TITLE = "State of the Agent-Readable Web — Q2 2026";
 const AUTHOR = AUTHORS.find((a) => a.slug === DEFAULT_AUTHOR_SLUG)!;
+const ARCHIVE_KEY = "q2-2026";
+
 
 export const Route = createFileRoute("/report/q2-2026")({
   component: ReportPage,

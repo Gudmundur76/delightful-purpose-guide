@@ -48,6 +48,7 @@ import { Route as ContentRouteImport } from './routes/content'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as CliRouteImport } from './routes/cli'
+import { Route as CitationIndexRouteImport } from './routes/citation-index'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckRouteImport } from './routes/check'
 import { Route as BadgeRouteImport } from './routes/badge'
@@ -346,6 +347,11 @@ const CompareRoute = CompareRouteImport.update({
 const CliRoute = CliRouteImport.update({
   id: '/cli',
   path: '/cli',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CitationIndexRoute = CitationIndexRouteImport.update({
+  id: '/citation-index',
+  path: '/citation-index',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -906,6 +912,7 @@ export interface FileRoutesByFullPath {
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
+  '/citation-index': typeof CitationIndexRoute
   '/cli': typeof CliRoute
   '/compare': typeof CompareRouteWithChildren
   '/contact': typeof ContactRoute
@@ -1050,6 +1057,7 @@ export interface FileRoutesByTo {
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
+  '/citation-index': typeof CitationIndexRoute
   '/cli': typeof CliRoute
   '/compare': typeof CompareRouteWithChildren
   '/contact': typeof ContactRoute
@@ -1194,6 +1202,7 @@ export interface FileRoutesById {
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
   '/checkout': typeof CheckoutRouteWithChildren
+  '/citation-index': typeof CitationIndexRoute
   '/cli': typeof CliRoute
   '/compare': typeof CompareRouteWithChildren
   '/contact': typeof ContactRoute
@@ -1341,6 +1350,7 @@ export interface FileRouteTypes {
     | '/badge'
     | '/check'
     | '/checkout'
+    | '/citation-index'
     | '/cli'
     | '/compare'
     | '/contact'
@@ -1485,6 +1495,7 @@ export interface FileRouteTypes {
     | '/badge'
     | '/check'
     | '/checkout'
+    | '/citation-index'
     | '/cli'
     | '/compare'
     | '/contact'
@@ -1628,6 +1639,7 @@ export interface FileRouteTypes {
     | '/badge'
     | '/check'
     | '/checkout'
+    | '/citation-index'
     | '/cli'
     | '/compare'
     | '/contact'
@@ -1774,6 +1786,7 @@ export interface RootRouteChildren {
   BadgeRoute: typeof BadgeRouteWithChildren
   CheckRoute: typeof CheckRouteWithChildren
   CheckoutRoute: typeof CheckoutRouteWithChildren
+  CitationIndexRoute: typeof CitationIndexRoute
   CliRoute: typeof CliRoute
   CompareRoute: typeof CompareRouteWithChildren
   ContactRoute: typeof ContactRoute
@@ -2155,6 +2168,13 @@ declare module '@tanstack/react-router' {
       path: '/cli'
       fullPath: '/cli'
       preLoaderRoute: typeof CliRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/citation-index': {
+      id: '/citation-index'
+      path: '/citation-index'
+      fullPath: '/citation-index'
+      preLoaderRoute: typeof CitationIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -3116,6 +3136,7 @@ const rootRouteChildren: RootRouteChildren = {
   BadgeRoute: BadgeRouteWithChildren,
   CheckRoute: CheckRouteWithChildren,
   CheckoutRoute: CheckoutRouteWithChildren,
+  CitationIndexRoute: CitationIndexRoute,
   CliRoute: CliRoute,
   CompareRoute: CompareRouteWithChildren,
   ContactRoute: ContactRoute,

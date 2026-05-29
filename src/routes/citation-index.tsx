@@ -27,6 +27,7 @@ export const Route = createFileRoute("/citation-index")({
         { property: "og:description", content: desc },
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
+        ...ogImageMeta({ title, kicker: "Citation Index", sub: desc }),
       ],
       links: [
         { rel: "canonical", href: "https://grow.contact/citation-index" },

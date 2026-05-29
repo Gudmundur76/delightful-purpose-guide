@@ -2,6 +2,7 @@
 // drop alerts to email/webhook when score drops by alert_threshold or more.
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { scanUrl } from "@/lib/check/scan.functions";
+import { sendTransactionalEmailInternal } from "@/lib/email/send-internal";
 
 function intervalMs(interval: string): number {
   switch (interval) {
@@ -37,10 +38,21 @@ async function fireAlert(site: {
     }
   }
   if (site.alert_email) {
-    // Email alerts: enqueue via the transactional registry when a
-    // "monitor-alert" template is added. Webhook delivery is the
-    // primary channel for now.
-    console.log(`[monitor] alert (email pending): ${site.alert_email} ${site.url} ${prev}->${next}`);
+    try {
+      await sendTransactionalEmailInternal({
+        templateName: "monitor-alert",
+        recipientEmail: site.alert_email,
+        templateData: {
+          url: site.url,
+          previousScore: prev,
+          newScore: next,
+          delta: prev - next,
+        },
+        idempotencyKey: `monitor-${site.url}-${prev}-${next}-${Math.floor(Date.now() / 60000)}`,
+      });
+    } catch (e) {
+      console.error("[monitor] email alert failed", (e as Error).message);
+    }
   }
 }
 

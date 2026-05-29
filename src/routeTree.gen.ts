@@ -100,6 +100,9 @@ import { Route as DotwellKnownHttpMessageSignaturesDirectoryRouteImport } from '
 import { Route as DotwellKnownApiCatalogRouteImport } from './routes/[.]well-known.api-catalog'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as HistoryHostDiffRouteImport } from './routes/history.$host.diff'
+import { Route as DataQ22026StatsDotjsonRouteImport } from './routes/data.q2-2026.stats[.]json'
+import { Route as DataQ22026LeaderboardDotjsonRouteImport } from './routes/data.q2-2026.leaderboard[.]json'
+import { Route as DataQ22026ClaimsDotjsonRouteImport } from './routes/data.q2-2026.claims[.]json'
 import { Route as ContentDraftsIdRouteImport } from './routes/content.drafts.$id'
 import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
 import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
@@ -131,6 +134,9 @@ import { Route as ApiPublicOauthTokenRouteImport } from './routes/api/public/oau
 import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/api/public/hooks/run-scheduled-scans'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
 import { Route as ApiPublicHooksGenerateDraftsRouteImport } from './routes/api/public/hooks/generate-drafts'
+import { Route as ApiPublicDataStatsDotjsonRouteImport } from './routes/api/public/data.stats[.]json'
+import { Route as ApiPublicDataLeaderboardDotjsonRouteImport } from './routes/api/public/data.leaderboard[.]json'
+import { Route as ApiPublicDataClaimsDotjsonRouteImport } from './routes/api/public/data.claims[.]json'
 import { Route as ApiPublicWidgetChartSlugDotsvgRouteImport } from './routes/api/public/widget/chart.$slug[.]svg'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
@@ -596,6 +602,22 @@ const HistoryHostDiffRoute = HistoryHostDiffRouteImport.update({
   path: '/diff',
   getParentRoute: () => HistoryHostRoute,
 } as any)
+const DataQ22026StatsDotjsonRoute = DataQ22026StatsDotjsonRouteImport.update({
+  id: '/data/q2-2026/stats.json',
+  path: '/data/q2-2026/stats.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataQ22026LeaderboardDotjsonRoute =
+  DataQ22026LeaderboardDotjsonRouteImport.update({
+    id: '/data/q2-2026/leaderboard.json',
+    path: '/data/q2-2026/leaderboard.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DataQ22026ClaimsDotjsonRoute = DataQ22026ClaimsDotjsonRouteImport.update({
+  id: '/data/q2-2026/claims.json',
+  path: '/data/q2-2026/claims.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContentDraftsIdRoute = ContentDraftsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -764,6 +786,24 @@ const ApiPublicHooksGenerateDraftsRoute =
     path: '/api/public/hooks/generate-drafts',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicDataStatsDotjsonRoute =
+  ApiPublicDataStatsDotjsonRouteImport.update({
+    id: '/api/public/data/stats.json',
+    path: '/api/public/data/stats.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicDataLeaderboardDotjsonRoute =
+  ApiPublicDataLeaderboardDotjsonRouteImport.update({
+    id: '/api/public/data/leaderboard.json',
+    path: '/api/public/data/leaderboard.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicDataClaimsDotjsonRoute =
+  ApiPublicDataClaimsDotjsonRouteImport.update({
+    id: '/api/public/data/claims.json',
+    path: '/api/public/data/claims.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicWidgetChartSlugDotsvgRoute =
   ApiPublicWidgetChartSlugDotsvgRouteImport.update({
     id: '/api/public/widget/chart/$slug.svg',
@@ -881,8 +921,14 @@ export interface FileRoutesByFullPath {
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
+  '/data/q2-2026/claims.json': typeof DataQ22026ClaimsDotjsonRoute
+  '/data/q2-2026/leaderboard.json': typeof DataQ22026LeaderboardDotjsonRoute
+  '/data/q2-2026/stats.json': typeof DataQ22026StatsDotjsonRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
+  '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
+  '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
@@ -1006,8 +1052,14 @@ export interface FileRoutesByTo {
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
+  '/data/q2-2026/claims.json': typeof DataQ22026ClaimsDotjsonRoute
+  '/data/q2-2026/leaderboard.json': typeof DataQ22026LeaderboardDotjsonRoute
+  '/data/q2-2026/stats.json': typeof DataQ22026StatsDotjsonRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
+  '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
+  '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
@@ -1134,8 +1186,14 @@ export interface FileRoutesById {
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
+  '/data/q2-2026/claims.json': typeof DataQ22026ClaimsDotjsonRoute
+  '/data/q2-2026/leaderboard.json': typeof DataQ22026LeaderboardDotjsonRoute
+  '/data/q2-2026/stats.json': typeof DataQ22026StatsDotjsonRoute
   '/history/$host/diff': typeof HistoryHostDiffRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
+  '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
+  '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
@@ -1263,8 +1321,14 @@ export interface FileRouteTypes {
     | '/api/public/mcp'
     | '/api/public/ping'
     | '/content/drafts/$id'
+    | '/data/q2-2026/claims.json'
+    | '/data/q2-2026/leaderboard.json'
+    | '/data/q2-2026/stats.json'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/api/public/data/claims.json'
+    | '/api/public/data/leaderboard.json'
+    | '/api/public/data/stats.json'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
@@ -1388,8 +1452,14 @@ export interface FileRouteTypes {
     | '/api/public/mcp'
     | '/api/public/ping'
     | '/content/drafts/$id'
+    | '/data/q2-2026/claims.json'
+    | '/data/q2-2026/leaderboard.json'
+    | '/data/q2-2026/stats.json'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/api/public/data/claims.json'
+    | '/api/public/data/leaderboard.json'
+    | '/api/public/data/stats.json'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
@@ -1515,8 +1585,14 @@ export interface FileRouteTypes {
     | '/api/public/mcp'
     | '/api/public/ping'
     | '/content/drafts/$id'
+    | '/data/q2-2026/claims.json'
+    | '/data/q2-2026/leaderboard.json'
+    | '/data/q2-2026/stats.json'
     | '/history/$host/diff'
     | '/lovable/email/suppression'
+    | '/api/public/data/claims.json'
+    | '/api/public/data/leaderboard.json'
+    | '/api/public/data/stats.json'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-scheduled-scans'
@@ -1618,7 +1694,13 @@ export interface RootRouteChildren {
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicMcpRoute: typeof ApiPublicMcpRoute
   ApiPublicPingRoute: typeof ApiPublicPingRoute
+  DataQ22026ClaimsDotjsonRoute: typeof DataQ22026ClaimsDotjsonRoute
+  DataQ22026LeaderboardDotjsonRoute: typeof DataQ22026LeaderboardDotjsonRoute
+  DataQ22026StatsDotjsonRoute: typeof DataQ22026StatsDotjsonRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicDataClaimsDotjsonRoute: typeof ApiPublicDataClaimsDotjsonRoute
+  ApiPublicDataLeaderboardDotjsonRoute: typeof ApiPublicDataLeaderboardDotjsonRoute
+  ApiPublicDataStatsDotjsonRoute: typeof ApiPublicDataStatsDotjsonRoute
   ApiPublicHooksGenerateDraftsRoute: typeof ApiPublicHooksGenerateDraftsRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
   ApiPublicHooksRunScheduledScansRoute: typeof ApiPublicHooksRunScheduledScansRoute
@@ -2283,6 +2365,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HistoryHostDiffRouteImport
       parentRoute: typeof HistoryHostRoute
     }
+    '/data/q2-2026/stats.json': {
+      id: '/data/q2-2026/stats.json'
+      path: '/data/q2-2026/stats.json'
+      fullPath: '/data/q2-2026/stats.json'
+      preLoaderRoute: typeof DataQ22026StatsDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data/q2-2026/leaderboard.json': {
+      id: '/data/q2-2026/leaderboard.json'
+      path: '/data/q2-2026/leaderboard.json'
+      fullPath: '/data/q2-2026/leaderboard.json'
+      preLoaderRoute: typeof DataQ22026LeaderboardDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data/q2-2026/claims.json': {
+      id: '/data/q2-2026/claims.json'
+      path: '/data/q2-2026/claims.json'
+      fullPath: '/data/q2-2026/claims.json'
+      preLoaderRoute: typeof DataQ22026ClaimsDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/content/drafts/$id': {
       id: '/content/drafts/$id'
       path: '/$id'
@@ -2498,6 +2601,27 @@ declare module '@tanstack/react-router' {
       path: '/api/public/hooks/generate-drafts'
       fullPath: '/api/public/hooks/generate-drafts'
       preLoaderRoute: typeof ApiPublicHooksGenerateDraftsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/data/stats.json': {
+      id: '/api/public/data/stats.json'
+      path: '/api/public/data/stats.json'
+      fullPath: '/api/public/data/stats.json'
+      preLoaderRoute: typeof ApiPublicDataStatsDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/data/leaderboard.json': {
+      id: '/api/public/data/leaderboard.json'
+      path: '/api/public/data/leaderboard.json'
+      fullPath: '/api/public/data/leaderboard.json'
+      preLoaderRoute: typeof ApiPublicDataLeaderboardDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/data/claims.json': {
+      id: '/api/public/data/claims.json'
+      path: '/api/public/data/claims.json'
+      fullPath: '/api/public/data/claims.json'
+      preLoaderRoute: typeof ApiPublicDataClaimsDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/widget/chart/$slug.svg': {
@@ -2811,7 +2935,13 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicMcpRoute: ApiPublicMcpRoute,
   ApiPublicPingRoute: ApiPublicPingRoute,
+  DataQ22026ClaimsDotjsonRoute: DataQ22026ClaimsDotjsonRoute,
+  DataQ22026LeaderboardDotjsonRoute: DataQ22026LeaderboardDotjsonRoute,
+  DataQ22026StatsDotjsonRoute: DataQ22026StatsDotjsonRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicDataClaimsDotjsonRoute: ApiPublicDataClaimsDotjsonRoute,
+  ApiPublicDataLeaderboardDotjsonRoute: ApiPublicDataLeaderboardDotjsonRoute,
+  ApiPublicDataStatsDotjsonRoute: ApiPublicDataStatsDotjsonRoute,
   ApiPublicHooksGenerateDraftsRoute: ApiPublicHooksGenerateDraftsRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
   ApiPublicHooksRunScheduledScansRoute: ApiPublicHooksRunScheduledScansRoute,

@@ -125,6 +125,7 @@ import { Route as ApiPublicWidgetOgDotsvgRouteImport } from './routes/api/public
 import { Route as ApiPublicWidgetEmbedDotjsRouteImport } from './routes/api/public/widget/embed[.]js'
 import { Route as ApiPublicWidgetBadgeDotsvgRouteImport } from './routes/api/public/widget/badge[.]svg'
 import { Route as ApiPublicV1SpecsRouteImport } from './routes/api/public/v1/specs'
+import { Route as ApiPublicV1ScanRouteImport } from './routes/api/public/v1/scan'
 import { Route as ApiPublicV1ReadinessRouteImport } from './routes/api/public/v1/readiness'
 import { Route as ApiPublicV1PostsRouteImport } from './routes/api/public/v1/posts'
 import { Route as ApiPublicV1OpenapiDotjsonRouteImport } from './routes/api/public/v1/openapi[.]json'
@@ -134,6 +135,7 @@ import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/a
 import { Route as ApiPublicStatsOverviewRouteImport } from './routes/api/public/stats/overview'
 import { Route as ApiPublicOauthTokenRouteImport } from './routes/api/public/oauth/token'
 import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/api/public/hooks/run-scheduled-scans'
+import { Route as ApiPublicHooksRunMonitoredSitesRouteImport } from './routes/api/public/hooks/run-monitored-sites'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
 import { Route as ApiPublicHooksGenerateDraftsRouteImport } from './routes/api/public/hooks/generate-drafts'
 import { Route as ApiPublicDataStatsDotjsonRouteImport } from './routes/api/public/data.stats[.]json'
@@ -742,6 +744,11 @@ const ApiPublicV1SpecsRoute = ApiPublicV1SpecsRouteImport.update({
   path: '/api/public/v1/specs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicV1ScanRoute = ApiPublicV1ScanRouteImport.update({
+  id: '/api/public/v1/scan',
+  path: '/api/public/v1/scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicV1ReadinessRoute = ApiPublicV1ReadinessRouteImport.update({
   id: '/api/public/v1/readiness',
   path: '/api/public/v1/readiness',
@@ -787,6 +794,12 @@ const ApiPublicHooksRunScheduledScansRoute =
   ApiPublicHooksRunScheduledScansRouteImport.update({
     id: '/api/public/hooks/run-scheduled-scans',
     path: '/api/public/hooks/run-scheduled-scans',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksRunMonitoredSitesRoute =
+  ApiPublicHooksRunMonitoredSitesRouteImport.update({
+    id: '/api/public/hooks/run-monitored-sites',
+    path: '/api/public/hooks/run-monitored-sites',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicHooksRescanLeaderboardRoute =
@@ -966,6 +979,7 @@ export interface FileRoutesByFullPath {
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
@@ -975,6 +989,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/scan': typeof ApiPublicV1ScanRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
@@ -1102,6 +1117,7 @@ export interface FileRoutesByTo {
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
@@ -1111,6 +1127,7 @@ export interface FileRoutesByTo {
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/scan': typeof ApiPublicV1ScanRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
@@ -1241,6 +1258,7 @@ export interface FileRoutesById {
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
+  '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
@@ -1250,6 +1268,7 @@ export interface FileRoutesById {
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
   '/api/public/v1/posts': typeof ApiPublicV1PostsRouteWithChildren
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
+  '/api/public/v1/scan': typeof ApiPublicV1ScanRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
@@ -1381,6 +1400,7 @@ export interface FileRouteTypes {
     | '/api/public/data/stats.json'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
@@ -1390,6 +1410,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
     | '/api/public/v1/readiness'
+    | '/api/public/v1/scan'
     | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
@@ -1517,6 +1538,7 @@ export interface FileRouteTypes {
     | '/api/public/data/stats.json'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
@@ -1526,6 +1548,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
     | '/api/public/v1/readiness'
+    | '/api/public/v1/scan'
     | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
@@ -1655,6 +1678,7 @@ export interface FileRouteTypes {
     | '/api/public/data/stats.json'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/rescan-leaderboard'
+    | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
@@ -1664,6 +1688,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/openapi.json'
     | '/api/public/v1/posts'
     | '/api/public/v1/readiness'
+    | '/api/public/v1/scan'
     | '/api/public/v1/specs'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
@@ -1768,6 +1793,7 @@ export interface RootRouteChildren {
   ApiPublicDataStatsDotjsonRoute: typeof ApiPublicDataStatsDotjsonRoute
   ApiPublicHooksGenerateDraftsRoute: typeof ApiPublicHooksGenerateDraftsRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
+  ApiPublicHooksRunMonitoredSitesRoute: typeof ApiPublicHooksRunMonitoredSitesRoute
   ApiPublicHooksRunScheduledScansRoute: typeof ApiPublicHooksRunScheduledScansRoute
   ApiPublicOauthTokenRoute: typeof ApiPublicOauthTokenRoute
   ApiPublicStatsOverviewRoute: typeof ApiPublicStatsOverviewRoute
@@ -1777,6 +1803,7 @@ export interface RootRouteChildren {
   ApiPublicV1OpenapiDotjsonRoute: typeof ApiPublicV1OpenapiDotjsonRoute
   ApiPublicV1PostsRoute: typeof ApiPublicV1PostsRouteWithChildren
   ApiPublicV1ReadinessRoute: typeof ApiPublicV1ReadinessRoute
+  ApiPublicV1ScanRoute: typeof ApiPublicV1ScanRoute
   ApiPublicV1SpecsRoute: typeof ApiPublicV1SpecsRoute
   ApiPublicWidgetBadgeDotsvgRoute: typeof ApiPublicWidgetBadgeDotsvgRoute
   ApiPublicWidgetEmbedDotjsRoute: typeof ApiPublicWidgetEmbedDotjsRoute
@@ -2608,6 +2635,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1SpecsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/scan': {
+      id: '/api/public/v1/scan'
+      path: '/api/public/v1/scan'
+      fullPath: '/api/public/v1/scan'
+      preLoaderRoute: typeof ApiPublicV1ScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/readiness': {
       id: '/api/public/v1/readiness'
       path: '/api/public/v1/readiness'
@@ -2669,6 +2703,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/hooks/run-scheduled-scans'
       fullPath: '/api/public/hooks/run-scheduled-scans'
       preLoaderRoute: typeof ApiPublicHooksRunScheduledScansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/run-monitored-sites': {
+      id: '/api/public/hooks/run-monitored-sites'
+      path: '/api/public/hooks/run-monitored-sites'
+      fullPath: '/api/public/hooks/run-monitored-sites'
+      preLoaderRoute: typeof ApiPublicHooksRunMonitoredSitesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/hooks/rescan-leaderboard': {
@@ -3049,6 +3090,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicDataStatsDotjsonRoute: ApiPublicDataStatsDotjsonRoute,
   ApiPublicHooksGenerateDraftsRoute: ApiPublicHooksGenerateDraftsRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
+  ApiPublicHooksRunMonitoredSitesRoute: ApiPublicHooksRunMonitoredSitesRoute,
   ApiPublicHooksRunScheduledScansRoute: ApiPublicHooksRunScheduledScansRoute,
   ApiPublicOauthTokenRoute: ApiPublicOauthTokenRoute,
   ApiPublicStatsOverviewRoute: ApiPublicStatsOverviewRoute,
@@ -3058,6 +3100,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicV1OpenapiDotjsonRoute: ApiPublicV1OpenapiDotjsonRoute,
   ApiPublicV1PostsRoute: ApiPublicV1PostsRouteWithChildren,
   ApiPublicV1ReadinessRoute: ApiPublicV1ReadinessRoute,
+  ApiPublicV1ScanRoute: ApiPublicV1ScanRoute,
   ApiPublicV1SpecsRoute: ApiPublicV1SpecsRoute,
   ApiPublicWidgetBadgeDotsvgRoute: ApiPublicWidgetBadgeDotsvgRoute,
   ApiPublicWidgetEmbedDotjsRoute: ApiPublicWidgetEmbedDotjsRoute,

@@ -128,49 +128,52 @@ export const Route = createFileRoute("/api/public/hooks/capture-citations")({
         }
 
         type CitationEventInsert = Database["public"]["Tables"]["citation_events"]["Insert"];
-        const events: CitationEventInsert[] = [];
-        let okCount = 0;
-        let errCount = 0;
 
+        // Fan out all (domain × engine × prompt) calls in parallel.
+        // Workers handle 40+ concurrent subrequests fine; sequential blew the wall-time budget.
+        const tasks: Array<{ domain: string; engine: string; model: string; promptId: string; promptText: string }> = [];
         for (const { domain } of domains) {
           for (const { engine, model } of ENGINES) {
             for (const prompt of PROMPTS) {
-              const promptText = prompt.build(domain);
-              const result = await callEngine(model, promptText);
-              if (!result.ok) {
-                errCount++;
-                events.push({
-                  domain_queried: domain,
-                  engine,
-                  model_version: model,
-                  prompt_template_id: prompt.id,
-                  prompt_text: promptText,
-                  latency_ms: result.latency,
-                  error: `HTTP ${result.status}: ${String(result.error).slice(0, 500)}`,
-                });
-                continue;
-              }
-              const parsed = extractCitations(result.text, domain);
-              okCount++;
-              events.push({
-                domain_queried: domain,
-                engine,
-                model_version: model,
-                prompt_template_id: prompt.id,
-                prompt_text: promptText,
-                response_text: result.text,
-                response_hash: createHash("sha256").update(result.text).digest("hex"),
-                cited_domains: parsed.cited_domains,
-                cited_urls: parsed.cited_urls,
-                domain_was_cited: parsed.domain_was_cited,
-                cited_position: parsed.cited_position,
-                latency_ms: result.latency,
-                tokens_in: result.tokens_in,
-                tokens_out: result.tokens_out,
-              });
+              tasks.push({ domain, engine, model, promptId: prompt.id, promptText: prompt.build(domain) });
             }
           }
         }
+
+        const results = await Promise.all(tasks.map((t) => callEngine(t.model, t.promptText)));
+
+        const events: CitationEventInsert[] = [];
+        let okCount = 0;
+        let errCount = 0;
+        results.forEach((result, i) => {
+          const t = tasks[i];
+          const base = {
+            domain_queried: t.domain,
+            engine: t.engine,
+            model_version: t.model,
+            prompt_template_id: t.promptId,
+            prompt_text: t.promptText,
+            latency_ms: result.latency,
+          };
+          if (!result.ok) {
+            errCount++;
+            events.push({ ...base, error: `HTTP ${result.status}: ${String(result.error).slice(0, 500)}` });
+            return;
+          }
+          const parsed = extractCitations(result.text, t.domain);
+          okCount++;
+          events.push({
+            ...base,
+            response_text: result.text,
+            response_hash: createHash("sha256").update(result.text).digest("hex"),
+            cited_domains: parsed.cited_domains,
+            cited_urls: parsed.cited_urls,
+            domain_was_cited: parsed.domain_was_cited,
+            cited_position: parsed.cited_position,
+            tokens_in: result.tokens_in,
+            tokens_out: result.tokens_out,
+          });
+        });
 
         if (events.length > 0) {
           const { error } = await supabaseAdmin.from("citation_events").insert(events);

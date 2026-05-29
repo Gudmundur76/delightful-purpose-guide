@@ -96,7 +96,6 @@ const DATASETS = [
 
 export const Route = createFileRoute("/data/")({
   head: () => ({
-  head: () => ({
     meta: [
       { title: "Public data API — grow.contact Verifiability Layer" },
       {
@@ -115,11 +114,10 @@ export const Route = createFileRoute("/data/")({
         kicker: "Verifiability Layer",
         sub: "Open JSON endpoints + schemas, CC BY 4.0",
       }),
-      { rel: "canonical", href: "https://grow.contact/data" },
     ],
+    links: [{ rel: "canonical", href: "https://grow.contact/data" }],
   }),
 
-  }),
   component: DataDocsPage,
 });
 

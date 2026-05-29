@@ -145,6 +145,8 @@ import { Route as ApiPublicHooksRunMonitoredSitesRouteImport } from './routes/ap
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
 import { Route as ApiPublicHooksPaypalSubscriptionRouteImport } from './routes/api/public/hooks/paypal-subscription'
 import { Route as ApiPublicHooksGenerateDraftsRouteImport } from './routes/api/public/hooks/generate-drafts'
+import { Route as ApiPublicHooksCitationVolatilityRollupRouteImport } from './routes/api/public/hooks/citation-volatility-rollup'
+import { Route as ApiPublicHooksCitationImportRouteImport } from './routes/api/public/hooks/citation-import'
 import { Route as ApiPublicDataStatsDotjsonRouteImport } from './routes/api/public/data.stats[.]json'
 import { Route as ApiPublicDataLeaderboardDotjsonRouteImport } from './routes/api/public/data.leaderboard[.]json'
 import { Route as ApiPublicDataClaimsDotjsonRouteImport } from './routes/api/public/data.claims[.]json'
@@ -857,6 +859,18 @@ const ApiPublicHooksGenerateDraftsRoute =
     path: '/api/public/hooks/generate-drafts',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicHooksCitationVolatilityRollupRoute =
+  ApiPublicHooksCitationVolatilityRollupRouteImport.update({
+    id: '/api/public/hooks/citation-volatility-rollup',
+    path: '/api/public/hooks/citation-volatility-rollup',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksCitationImportRoute =
+  ApiPublicHooksCitationImportRouteImport.update({
+    id: '/api/public/hooks/citation-import',
+    path: '/api/public/hooks/citation-import',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicDataStatsDotjsonRoute =
   ApiPublicDataStatsDotjsonRouteImport.update({
     id: '/api/public/data/stats.json',
@@ -1026,6 +1040,8 @@ export interface FileRoutesByFullPath {
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
+  '/api/public/hooks/citation-import': typeof ApiPublicHooksCitationImportRoute
+  '/api/public/hooks/citation-volatility-rollup': typeof ApiPublicHooksCitationVolatilityRollupRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/paypal-subscription': typeof ApiPublicHooksPaypalSubscriptionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -1170,6 +1186,8 @@ export interface FileRoutesByTo {
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
+  '/api/public/hooks/citation-import': typeof ApiPublicHooksCitationImportRoute
+  '/api/public/hooks/citation-volatility-rollup': typeof ApiPublicHooksCitationVolatilityRollupRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/paypal-subscription': typeof ApiPublicHooksPaypalSubscriptionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -1318,6 +1336,8 @@ export interface FileRoutesById {
   '/api/public/data/claims.json': typeof ApiPublicDataClaimsDotjsonRoute
   '/api/public/data/leaderboard.json': typeof ApiPublicDataLeaderboardDotjsonRoute
   '/api/public/data/stats.json': typeof ApiPublicDataStatsDotjsonRoute
+  '/api/public/hooks/citation-import': typeof ApiPublicHooksCitationImportRoute
+  '/api/public/hooks/citation-volatility-rollup': typeof ApiPublicHooksCitationVolatilityRollupRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/paypal-subscription': typeof ApiPublicHooksPaypalSubscriptionRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
@@ -1467,6 +1487,8 @@ export interface FileRouteTypes {
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
+    | '/api/public/hooks/citation-import'
+    | '/api/public/hooks/citation-volatility-rollup'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/paypal-subscription'
     | '/api/public/hooks/rescan-leaderboard'
@@ -1611,6 +1633,8 @@ export interface FileRouteTypes {
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
+    | '/api/public/hooks/citation-import'
+    | '/api/public/hooks/citation-volatility-rollup'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/paypal-subscription'
     | '/api/public/hooks/rescan-leaderboard'
@@ -1758,6 +1782,8 @@ export interface FileRouteTypes {
     | '/api/public/data/claims.json'
     | '/api/public/data/leaderboard.json'
     | '/api/public/data/stats.json'
+    | '/api/public/hooks/citation-import'
+    | '/api/public/hooks/citation-volatility-rollup'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/paypal-subscription'
     | '/api/public/hooks/rescan-leaderboard'
@@ -1877,6 +1903,8 @@ export interface RootRouteChildren {
   ApiPublicDataClaimsDotjsonRoute: typeof ApiPublicDataClaimsDotjsonRoute
   ApiPublicDataLeaderboardDotjsonRoute: typeof ApiPublicDataLeaderboardDotjsonRoute
   ApiPublicDataStatsDotjsonRoute: typeof ApiPublicDataStatsDotjsonRoute
+  ApiPublicHooksCitationImportRoute: typeof ApiPublicHooksCitationImportRoute
+  ApiPublicHooksCitationVolatilityRollupRoute: typeof ApiPublicHooksCitationVolatilityRollupRoute
   ApiPublicHooksGenerateDraftsRoute: typeof ApiPublicHooksGenerateDraftsRoute
   ApiPublicHooksPaypalSubscriptionRoute: typeof ApiPublicHooksPaypalSubscriptionRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
@@ -2862,6 +2890,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksGenerateDraftsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/citation-volatility-rollup': {
+      id: '/api/public/hooks/citation-volatility-rollup'
+      path: '/api/public/hooks/citation-volatility-rollup'
+      fullPath: '/api/public/hooks/citation-volatility-rollup'
+      preLoaderRoute: typeof ApiPublicHooksCitationVolatilityRollupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/citation-import': {
+      id: '/api/public/hooks/citation-import'
+      path: '/api/public/hooks/citation-import'
+      fullPath: '/api/public/hooks/citation-import'
+      preLoaderRoute: typeof ApiPublicHooksCitationImportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/data/stats.json': {
       id: '/api/public/data/stats.json'
       path: '/api/public/data/stats.json'
@@ -3241,6 +3283,9 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicDataClaimsDotjsonRoute: ApiPublicDataClaimsDotjsonRoute,
   ApiPublicDataLeaderboardDotjsonRoute: ApiPublicDataLeaderboardDotjsonRoute,
   ApiPublicDataStatsDotjsonRoute: ApiPublicDataStatsDotjsonRoute,
+  ApiPublicHooksCitationImportRoute: ApiPublicHooksCitationImportRoute,
+  ApiPublicHooksCitationVolatilityRollupRoute:
+    ApiPublicHooksCitationVolatilityRollupRoute,
   ApiPublicHooksGenerateDraftsRoute: ApiPublicHooksGenerateDraftsRoute,
   ApiPublicHooksPaypalSubscriptionRoute: ApiPublicHooksPaypalSubscriptionRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,

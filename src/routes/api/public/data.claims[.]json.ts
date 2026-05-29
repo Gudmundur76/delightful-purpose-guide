@@ -29,7 +29,6 @@ export const Route = createFileRoute("/api/public/data/claims.json")({
           claims,
         };
 
-        };
         return new Response(JSON.stringify(body, null, 2), {
           status: 200,
           headers: {

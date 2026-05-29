@@ -1,154 +1,64 @@
-# Build Plans — All Three Tracks
 
-Sequenced for compounding leverage. Track 1 ships this week (pure exposure of existing infra), Track 2 runs continuously starting now, Track 3 is a standalone deliverable in month 2.
+# Agent-Verifiable Standard — Implementation Plan
 
----
+Scope confirmed: **all four scope items** + **both data sources** (live API + Q2-2026 archive). Given the surface area (~40+ files), I'll ship in 6 sequenced phases so each one is verifiable before the next.
 
-## Track 1 — Public Playground + Leaderboard (this week)
+## Phase 1 — Spec & primitives (foundation)
 
-### 1A. `/playground` (or `/mcp`)
+- Bump `docs/geo-standard.md` → **v1.1 (geo-standard@2026.07)**: add §14 "Verifiability Layer" (Structural Authority, Information Gain, Citation Loop, Freshness Decay, Trust Handshake).
+- Create `src/lib/seo/verifiable.ts` — helpers:
+  - `verifiableClaim({ id, value, citation, dateModified })` → JSON-LD `Claim` + `StatisticalVariable` / `Observation` builders
+  - `datasetSchema({ name, url, dateModified, distribution })`
+  - `sectionAria(id)` → returns `{ "aria-labelledby": id }` ergonomic helper
+- Create `src/components/VerifiabilityBadge.tsx`, `src/components/CitationSnippet.tsx` (APA + BibTeX one-click copy), `src/components/InformationGainIndicator.tsx`, `src/components/LiveSignal.tsx` (header "Last scan: Xm ago" wrapped in `<time datetime>`).
 
-**Goal:** Turn the invisible 90+ tool MCP into a sales weapon. Visitors run real tools in-browser, watch JSON-RPC stream, copy install snippets.
+## Phase 2 — Hierarchical llms.txt
 
-**Routes**
-- `src/routes/playground.tsx` — main page, route head + JSON-LD `SoftwareApplication`
-- `src/routes/playground.$tool.tsx` — deep link per tool (e.g. `/playground/scan_url`)
+- Trim `public/llms.txt` to **Intent + High-level navigation** (target <2k chars).
+- Keep `src/routes/llms-full[.]txt.ts` as the full-context dump.
+- New sub-context routes:
+  - `src/routes/standard.llms[.]txt.ts`
+  - `src/routes/leaderboard.llms[.]txt.ts`
+  - `src/routes/data.llms[.]txt.ts` (indexes the raw `/data/*.json` files)
+- Root `/llms.txt` links to all three sub-contexts.
 
-**Components** (`src/components/playground/`)
-- `ToolCatalog.tsx` — left rail, grouped by category (Scan, Blog, Leads, Stats, AI, …), search box, count badge
-- `ToolRunner.tsx` — center pane: JSON-schema-driven form built from each tool's Zod schema, "Run" button
-- `RequestStream.tsx` — right pane: split view showing outgoing JSON-RPC request + streaming response with syntax highlight
-- `InstallSnippets.tsx` — tabs for Claude Desktop config, ChatGPT custom GPT, cURL, n8n, raw `mcp.json`. Each tab has copy-to-clipboard
+## Phase 3 — Raw data directory (live + archive)
 
-**Server**
-- New serverFn `listMcpTools` in `src/lib/mcp/catalog.functions.ts` — returns `{ name, description, category, inputSchema }[]` derived from the existing tool registry (re-export the metadata, do NOT duplicate)
-- Reuse existing `POST /api/public/mcp` for execution. For unauth public access, gate to a curated **read-only / safe** subset: `scan_url`, `validate_jsonld`, `check_llms_txt`, `extract_meta_tags`, `fetch_url`, `get_geo_standard`, `site_info`, `health_check`, `ping`. Mutating tools (`create_*`, `update_*`, `delete_*`, `grant_role`, `send_*`) require an OAuth token — show a "Sign in to run" CTA
-- Rate limit: 10 runs/min/IP via existing `src/lib/api/rate-limit.ts`
+- **Live** (server routes, generated from DB):
+  - `src/routes/api/public/data/leaderboard[.]json.ts` — current top entries with `dateModified`
+  - `src/routes/api/public/data/stats[.]json.ts` — scan totals, citation rate, etc.
+  - `src/routes/api/public/data/claims[.]json.ts` — every headline claim with `id`, `value`, `source`, `dateModified`
+- **Archive** (static snapshots):
+  - `public/data/q2-2026/leaderboard.json`, `stats.json`, `claims.json` — frozen Q2-2026 numbers cited from the report
+- Each file emits `Cache-Control: public, max-age=300, s-maxage=3600` and `Last-Modified` header.
 
-**Telemetry**
-- Log each playground run to `playground_runs` table (tool name, success, ms, ip-hash) so we can publish "top 5 most-tried tools" social proof
+## Phase 4 — Citation-loop wiring on key pages
 
-**Nav**
-- Add `Playground` link to header between `Check` and `Leaderboard`
-- Add `<a href="/playground">` from `/check` result page ("Want to run the same scan via API or MCP? Try the playground")
+Surgical edits to these high-claim routes:
+- `src/routes/index.tsx` — wrap headline stats ("83%", "73%", "+527%") in `<span id="stat-83">` etc., add VerifiabilityBadge, emit nested JSON-LD with `verifiableClaim` linking to `/api/public/data/claims.json#stat-83`.
+- `src/routes/leaderboard.tsx` — add `Dataset` schema with `distribution` pointing to live + archive JSON, LiveSignal in header, `dateModified` everywhere.
+- `src/routes/stats.tsx` — same treatment for site-wide stats.
+- `src/routes/report.q2-2026.tsx` — citation snippet block (APA + BibTeX) + dataset link to archive snapshot.
+- `src/routes/about.author.$slug.tsx` — `Person` schema with `sameAs` (LinkedIn / GitHub / ORCID).
 
----
+## Phase 5 — Semantic landmark + aria sweep
 
-### 1B. Public `/leaderboard`
+Across every page route in `src/routes/`:
+- Ensure each top-level wrapper is `<main>`, each major block is `<section aria-labelledby="...-heading">` with its `<h2 id="...-heading">`.
+- One `<h1>` per page, identical string to `JSON-LD.name`.
+- Lighter automated pass: build a small script `scripts/check-landmarks.mjs` that flags routes missing `<main>` or with multiple `<h1>`s.
 
-**Goal:** Viral hook. Top 100 agent-native sites by GEO score, weekly auto-refresh, badge embed per entry.
+## Phase 6 — Polish & verify
 
-**Routes**
-- `src/routes/leaderboard.tsx` already exists — audit and upgrade
-- `src/routes/leaderboard.$slug.tsx` — per-entry detail page (score breakdown, history sparkline, badge embed code, "Rescan" button)
-- `src/routes/leaderboard.methodology.tsx` — verify present, link from header
+- Add `<meta name="generator" content="geo-standard@2026.07">` in `__root.tsx`.
+- Update `scripts/validate-og-meta.mjs` → also validate aria-labelledby + h1↔JSON-LD parity.
+- Re-run `/check` after publish; expect Verifiability sub-score to surface.
 
-**Data**
-- Use existing `leaderboard.json` endpoint + `submit_to_leaderboard` tool
-- Cron: extend `/api/public/hooks/run-scheduled-scans` to rescan every leaderboard entry weekly. Store score history in `leaderboard_scores` (slug, scanned_at, total, semantic, jsonld, llms, cite, speed)
+## Out-of-scope (call out)
 
-**UI**
-- Table: rank, site, score (color-graded), category, last scan, "+/-" delta, badge button
-- Filters: category, score range, country
-- Public submit form ("Add your site") → triggers a fresh scan → if score ≥60, auto-listed
-
-**Head/SEO**
-- Per-entry head with `Article` + `Review` JSON-LD
-- Sitemap: include every leaderboard slug (update `src/routes/sitemap[.]xml.ts`)
-
-**Backlink loop**
-- Each detail page shows the embed snippet for `<img src="/api/public/widget/badge.svg?slug=...">` with prominent copy
-- Linkback verification: when a scan detects the badge img referencing grow.contact, mark entry `verified=true` and pin to top of its tier
-
----
-
-## Track 2 — Content Engine Activation (continuous, starts now)
-
-**Goal:** Run the engine you already built. AirOps wins on volume, not capability.
-
-### 2A. Topic & calendar infrastructure
-
-- New table `content_calendar` (slug, topic, target_keyword, intent [informational/comparison/glossary], status, due_at, published_url, scan_score)
-- Admin UI at `/admin/content` listing the calendar with bulk actions: "Generate draft", "Approve", "Publish", "Rescan"
-- Seed with 50 topics across four buckets:
-  - **Glossary** (15): "What is GEO?", "What is llms.txt?", "What is MCP?", "What is AEO?", "Agent-native website", "JSON-LD for AI", "Citability score", "Schema.org for LLMs", …
-  - **Playbooks** (15): "How to write llms.txt", "Pass the GEO check in 30 min", "Robots.txt matrix for AI crawlers", "Per-route head/meta for TanStack", "JSON-LD by page type", …
-  - **Comparisons** (10): "AirOps vs Grow", "Profound vs Grow", "Athena vs Grow", "Surfer SEO vs Grow", "GEO vs AEO vs SEO", …
-  - **Case-study templates** (10): "How [client] hit 100/100 GEO", populated as real clients ship
-
-### 2B. Generation pipeline
-
-- Reuse `draft_blog_post` → `ai_complete_with_context` (with `get_geo_standard` + `check_llms_txt` results as context) → `create_blog_post` → human review → `publish_blog_post`
-- Cron: nightly job picks the next 2 calendar items where `status = todo`, generates drafts, sets `status = needs_review`
-- Quality gate: every draft auto-runs through the `/check` scanner on a preview URL before allowing publish; reject if score <90
-
-### 2C. Surface the output
-
-- `/blog` index already exists — upgrade with category tabs (Glossary / Playbooks / Compare / Case Studies), JSON-LD `Blog` + per-post `Article`
-- `/glossary` route generated from posts tagged `glossary`, alphabetical, each term gets a `DefinedTerm` JSON-LD
-- `/compare/[a]-vs-[b]` route pattern with `ComparisonTable` JSON-LD
-- Add posts to sitemap dynamically (loader-driven)
-- RSS already at `/rss.xml` — verify it picks up new posts
-
-**Volume target:** 50 posts in 30 days, then 4/week steady-state.
+- I am **not** running a real "Information Gain vs top-10 SERPs" comparison — that needs Semrush queries and a separate background job. The `InformationGainIndicator` component will show a *stamped* value from `claims.json` (manually curated, refreshed quarterly). Want the live comparator job too? Say so and I'll add a Phase 7.
+- I'm **not** redesigning the visual theme — the existing dark/mono direction already matches `ui_ux_directives.theme`.
 
 ---
 
-## Track 3 — Browser Extension (month 2)
-
-**Goal:** Viral discovery surface. Show GEO score on any site, drive installs from Chrome Store.
-
-### 3A. MV3 extension scaffold
-
-- New dir `extension/` (per chrome-extension knowledge)
-- `manifest.json` — MV3, permissions: `activeTab`, `storage`, host permissions for `https://*/*`
-- `popup.html` + `popup.tsx` — score gauge, 5 sub-scores, top 3 fixes, "Open full report" → `https://grow.contact/check?url=<current>`
-- `background.js` — service worker, listens to `chrome.action.onClicked`, calls `POST https://grow.contact/api/public/v1/analyze` with the current tab URL
-- `content.js` — optional badge injection into top-right of page (toggle in popup settings)
-
-### 3B. API surface
-
-- Reuse existing `/api/public/v1/analyze` — no new endpoint needed
-- Add `X-Source: chrome-extension` header for analytics segmentation
-- Rate limit: 60 scans/hour/install (track by anon install_id stored in `chrome.storage.local`)
-
-### 3C. Distribution
-
-- Package via `nix run nixpkgs#zip` (per chrome-extension knowledge), serve `/grow-geo.zip` from `public/`
-- Landing page `/extension` with install CTA (fetch+blob download for preview, real Chrome Web Store link once published)
-- Promote: header badge ("Get the extension"), every `/check` result page ("Get one-click scans everywhere"), every blog post footer
-- Submit to Chrome Web Store + Firefox Add-ons + Edge Add-ons (same MV3 build works for all Chromium browsers)
-
-### 3D. Growth loop
-
-- Extension popup includes "Add this site to the leaderboard" → one-click submit, drives Track 1B
-- After 10 scans, prompt user to leave a Chrome Store review
-- Weekly digest email (opt-in): "Top 10 most-scanned sites this week from extension users"
-
----
-
-## Sequencing & dependencies
-
-```text
-Week 1  ┃ Track 1A (Playground)        ┃ Track 2A (calendar seed)
-Week 2  ┃ Track 1B (Leaderboard)       ┃ Track 2B (generation cron live)
-Week 3  ┃ —                            ┃ Track 2C (glossary/compare routes)
-Week 4  ┃ Track 3A+B (extension MVP)   ┃ Track 2 steady-state
-Week 5  ┃ Track 3C (store submission)  ┃
-Week 6  ┃ Track 3D (growth loop)       ┃
-```
-
-Track 1 must ship before Track 3 — extension links back to playground + leaderboard. Track 2 runs in parallel from day 1; content fills the routes Track 1 creates.
-
-## Technical notes
-
-- All new routes follow the `grow-geo-recipe` skill: per-route head/meta, JSON-LD by type, canonical on leaves, og:image only at leaves, sitemap updated
-- Playground tool runner uses the existing MCP endpoint over `fetch` with `Accept: application/json, text/event-stream` (per mcp-servers knowledge) — no new transport
-- Leaderboard rescan reuses existing `run_due_scheduled_scans` infra, just adds a new scheduled_scan row per entry
-- Content engine writes to existing `blog_posts` table — no schema change beyond `content_calendar`
-- Extension calls only the already-public `/api/public/v1/analyze` — zero new auth surface
-
-## Out of scope (parked for later)
-
-- MCP-as-a-Service per client (track 6 in your message) — needs multi-tenant scoping work, defer to month 3
-- Public directory/marketplace (track 7) — emerges naturally from a populated leaderboard + glossary; revisit once those have content
+If this plan looks right, reply **"go"** and I'll execute Phase 1 → 6 across the next turns (one phase per turn so you can review). If you want to drop or reorder phases, say which.

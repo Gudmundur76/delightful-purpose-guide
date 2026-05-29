@@ -1,7 +1,7 @@
 # The Grow GEO Standard
-
-**Version:** 1.0 — 2026-05-22
+**Version:** 1.1 — 2026-07-15 (`geo-standard@2026.07`)
 **Owner:** Grow (grow.contact)
+**Status:** Acceptance criteria for every Tier 01 / Tier 02 delivery.
 **Status:** Acceptance criteria for every Tier 01 / Tier 02 delivery.
 
 This document is the engineering contract. A site is not "done" until it passes
@@ -238,3 +238,96 @@ Review quarterly. Bump version on any threshold change. Old sites grandfather
 to their delivery-time version unless on a retainer.
 
 - **v1.0 (2026-05-22)** — initial publication
+- **v1.1 (2026-07-15)** — added §14 Verifiability Layer (Structural Authority, Information Gain, Citation Loop, Freshness Decay, Trust Handshake). Bumps stamp to `geo-standard@2026.07`.
+
+---
+
+## 14. Verifiability Layer (v1.1, 2026-07-15)
+
+The 2026 GEO shift is from **"agent-readable"** to **"agent-verifiable."**
+Being parsed is no longer enough; being trusted as a primary source requires
+machine-checkable provenance for every quantitative claim. The five
+sub-signals below are MUST for any page that asserts a stat, ranking, or
+date-sensitive fact.
+
+### 14.1 Structural Authority
+
+Semantic landmarks MUST match the JSON-LD `mainEntity` 1:1.
+
+- Every page renders exactly one `<h1>`; its text string is identical to
+  the page's primary JSON-LD `name` / `headline` property.
+- Every major block is `<section aria-labelledby="...-heading">` with a
+  matching `<h2 id="...-heading">`.
+- Why: Gemini's "Hallucination Filter" downranks pages where the visible
+  heading and the structured-data label disagree.
+
+### 14.2 Information Gain
+
+Every page MUST carry >20% unique factual tokens vs the top 10 SERP
+results for its target query.
+
+- Curated baseline: ship a per-page `informationGain` integer in the page's
+  JSON-LD (custom property under `additionalProperty`) and visibly display
+  it via `<InformationGainIndicator value={…} />`.
+- Refresh quarterly via a Semrush + SERP diff job (see Phase 7 backlog).
+- Why: triggers OpenAI's "Niche Information" priority rule.
+
+### 14.3 Citation Loop
+
+Every factual claim in visible UI MUST have:
+
+1. An `id` attribute on the claim element (e.g. `<span id="stat-83">83%</span>`).
+2. A matching `verifiableClaim` object in JSON-LD with a `citation`
+   property pointing to the raw JSON dataset, fragment-addressed:
+   `https://grow.contact/api/public/data/claims.json#stat-83`.
+3. A `dateModified` on that claim object.
+
+Why: lets Perplexity move from "cite" to "verify," which is now a top-tier
+ranking signal.
+
+### 14.4 Freshness Decay
+
+Every `Dataset` and headline-stat block MUST expose `dateModified` AND a
+machine-parseable "Last Verified" timestamp in the rendered HTML
+(`<time datetime="...">` inside the `<LiveSignal />` component).
+
+- Stale threshold: any data >90 days old is flagged in the UI and downranked
+  by Gemini's freshness signal.
+- Hard rule: dynamic pages (`/leaderboard`, `/stats`) MUST stamp the
+  current scan/refresh time in both JSON-LD and visible chrome.
+
+### 14.5 Trust Handshake
+
+`Person` schema on author/about pages MUST include `sameAs` entries
+pointing to verified third-party profiles — LinkedIn, GitHub, ORCID, or
+equivalent. A `Person` without `sameAs` is treated as unverified by Claude
+and Gemini's entity graphs.
+
+### Hierarchical `llms.txt` (v1.1 requirement)
+
+The flat `/llms.txt` is replaced by a hierarchy:
+
+- `/llms.txt` — Intent + high-level navigation only (target <2 KB)
+- `/llms-full.txt` — full markdown context dump
+- `/<section>/llms.txt` — per-section sub-contexts (e.g.
+  `/standard/llms.txt`, `/leaderboard/llms.txt`, `/data/llms.txt`)
+
+Why: high-end reasoning agents (Perplexity Sonar Pro, GPT-5) prioritize
+token efficiency. A flat, long context file burns the agent's window on
+navigation rather than information gain.
+
+### Raw data directory (v1.1 requirement)
+
+Every site MUST expose `/api/public/data/*.json` (live) and
+`/data/<archive>/*.json` (snapshot) with:
+
+- `Content-Type: application/json`
+- `Cache-Control: public, max-age=300, s-maxage=3600`
+- `Last-Modified` header set to the data's `dateModified`
+- A `/data/llms.txt` index listing every dataset and its citation ID
+
+### Stamping
+
+Bumps `<meta name="generator" content="geo-standard@2026.07">` (in
+`__root.tsx`). Sites delivered before 2026-07-15 grandfather to v1.0
+unless on a retainer.

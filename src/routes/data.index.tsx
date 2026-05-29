@@ -6,6 +6,8 @@ import {
   STATS_SCHEMA_URL,
   LEADERBOARD_SCHEMA_URL,
 } from "@/lib/seo/dataset-schemas";
+import { ogImageMeta } from "@/lib/seo/og";
+
 
 const DATASETS = [
   {

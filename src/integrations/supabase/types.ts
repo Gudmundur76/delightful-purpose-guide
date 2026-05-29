@@ -107,6 +107,50 @@ export type Database = {
         }
         Relationships: []
       }
+      authority_signals: {
+        Row: {
+          backlinks: number | null
+          domain: string
+          g2_reviews: number | null
+          github_stars: number | null
+          id: string
+          news_mentions: number | null
+          reddit_mentions: number | null
+          scan_date: string
+          stackoverflow_questions: number | null
+        }
+        Insert: {
+          backlinks?: number | null
+          domain: string
+          g2_reviews?: number | null
+          github_stars?: number | null
+          id?: string
+          news_mentions?: number | null
+          reddit_mentions?: number | null
+          scan_date?: string
+          stackoverflow_questions?: number | null
+        }
+        Update: {
+          backlinks?: number | null
+          domain?: string
+          g2_reviews?: number | null
+          github_stars?: number | null
+          id?: string
+          news_mentions?: number | null
+          reddit_mentions?: number | null
+          scan_date?: string
+          stackoverflow_questions?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "authority_signals_domain_fkey"
+            columns: ["domain"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["domain"]
+          },
+        ]
+      }
       blog_posts: {
         Row: {
           body: string
@@ -148,6 +192,141 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      certifications: {
+        Row: {
+          badge_url: string | null
+          created_at: string
+          domain: string
+          expires_at: string | null
+          id: string
+          issued_at: string | null
+          paypal_subscription_id: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          badge_url?: string | null
+          created_at?: string
+          domain: string
+          expires_at?: string | null
+          id?: string
+          issued_at?: string | null
+          paypal_subscription_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          badge_url?: string | null
+          created_at?: string
+          domain?: string
+          expires_at?: string | null
+          id?: string
+          issued_at?: string | null
+          paypal_subscription_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "certifications_domain_fkey"
+            columns: ["domain"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["domain"]
+          },
+        ]
+      }
+      citation_history: {
+        Row: {
+          chatgpt_share: number
+          claude_share: number
+          domain: string
+          google_aio_share: number
+          id: string
+          month: string
+          perplexity_share: number
+          total_citations: number
+          volatility: string
+        }
+        Insert: {
+          chatgpt_share?: number
+          claude_share?: number
+          domain: string
+          google_aio_share?: number
+          id?: string
+          month: string
+          perplexity_share?: number
+          total_citations?: number
+          volatility?: string
+        }
+        Update: {
+          chatgpt_share?: number
+          claude_share?: number
+          domain?: string
+          google_aio_share?: number
+          id?: string
+          month?: string
+          perplexity_share?: number
+          total_citations?: number
+          volatility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "citation_history_domain_fkey"
+            columns: ["domain"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["domain"]
+          },
+        ]
+      }
+      citations: {
+        Row: {
+          ai_engine: string
+          cited_at: string
+          cited_url: string | null
+          confidence: number | null
+          domain: string
+          id: string
+          position: number | null
+          query_category: string | null
+          query_text: string | null
+        }
+        Insert: {
+          ai_engine: string
+          cited_at?: string
+          cited_url?: string | null
+          confidence?: number | null
+          domain: string
+          id?: string
+          position?: number | null
+          query_category?: string | null
+          query_text?: string | null
+        }
+        Update: {
+          ai_engine?: string
+          cited_at?: string
+          cited_url?: string | null
+          confidence?: number | null
+          domain?: string
+          id?: string
+          position?: number | null
+          query_category?: string | null
+          query_text?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "citations_domain_fkey"
+            columns: ["domain"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["domain"]
+          },
+        ]
       }
       client_integrations: {
         Row: {
@@ -217,6 +396,142 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      companies: {
+        Row: {
+          category: string
+          claimed_by_user_id: string | null
+          created_at: string
+          description: string | null
+          domain: string
+          g2_url: string | null
+          github_url: string | null
+          logo_url: string | null
+          name: string
+          stackoverflow_tag: string | null
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          claimed_by_user_id?: string | null
+          created_at?: string
+          description?: string | null
+          domain: string
+          g2_url?: string | null
+          github_url?: string | null
+          logo_url?: string | null
+          name: string
+          stackoverflow_tag?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          claimed_by_user_id?: string | null
+          created_at?: string
+          description?: string | null
+          domain?: string
+          g2_url?: string | null
+          github_url?: string | null
+          logo_url?: string | null
+          name?: string
+          stackoverflow_tag?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      company_scores: {
+        Row: {
+          authority: number
+          canonical: number
+          citation_probability: number
+          commentary: number
+          domain: string
+          id: string
+          information_gain: number
+          overall_ccs: number
+          precedent: number
+          scan_date: string
+          verifiability: number
+        }
+        Insert: {
+          authority?: number
+          canonical?: number
+          citation_probability?: number
+          commentary?: number
+          domain: string
+          id?: string
+          information_gain?: number
+          overall_ccs: number
+          precedent?: number
+          scan_date?: string
+          verifiability?: number
+        }
+        Update: {
+          authority?: number
+          canonical?: number
+          citation_probability?: number
+          commentary?: number
+          domain?: string
+          id?: string
+          information_gain?: number
+          overall_ccs?: number
+          precedent?: number
+          scan_date?: string
+          verifiability?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "company_scores_domain_fkey"
+            columns: ["domain"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["domain"]
+          },
+        ]
+      }
+      content_analysis: {
+        Row: {
+          comparison_tables: number | null
+          domain: string
+          expert_signals: number | null
+          factual_density: number | null
+          freshness_days: number | null
+          id: string
+          qa_blocks: number | null
+          scan_date: string
+          video_count: number | null
+        }
+        Insert: {
+          comparison_tables?: number | null
+          domain: string
+          expert_signals?: number | null
+          factual_density?: number | null
+          freshness_days?: number | null
+          id?: string
+          qa_blocks?: number | null
+          scan_date?: string
+          video_count?: number | null
+        }
+        Update: {
+          comparison_tables?: number | null
+          domain?: string
+          expert_signals?: number | null
+          factual_density?: number | null
+          freshness_days?: number | null
+          id?: string
+          qa_blocks?: number | null
+          scan_date?: string
+          video_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "content_analysis_domain_fkey"
+            columns: ["domain"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["domain"]
+          },
+        ]
       }
       content_briefs: {
         Row: {

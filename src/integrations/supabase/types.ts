@@ -240,6 +240,84 @@ export type Database = {
           },
         ]
       }
+      citation_capture_cursor: {
+        Row: {
+          id: number
+          last_domain: string | null
+          last_run_at: string | null
+        }
+        Insert: {
+          id?: number
+          last_domain?: string | null
+          last_run_at?: string | null
+        }
+        Update: {
+          id?: number
+          last_domain?: string | null
+          last_run_at?: string | null
+        }
+        Relationships: []
+      }
+      citation_events: {
+        Row: {
+          cited_domains: string[] | null
+          cited_position: number | null
+          cited_urls: string[] | null
+          domain_queried: string
+          domain_was_cited: boolean
+          engine: string
+          error: string | null
+          id: string
+          latency_ms: number | null
+          model_version: string
+          prompt_template_id: string
+          prompt_text: string
+          queried_at: string
+          response_hash: string | null
+          response_text: string | null
+          tokens_in: number | null
+          tokens_out: number | null
+        }
+        Insert: {
+          cited_domains?: string[] | null
+          cited_position?: number | null
+          cited_urls?: string[] | null
+          domain_queried: string
+          domain_was_cited?: boolean
+          engine: string
+          error?: string | null
+          id?: string
+          latency_ms?: number | null
+          model_version: string
+          prompt_template_id: string
+          prompt_text: string
+          queried_at?: string
+          response_hash?: string | null
+          response_text?: string | null
+          tokens_in?: number | null
+          tokens_out?: number | null
+        }
+        Update: {
+          cited_domains?: string[] | null
+          cited_position?: number | null
+          cited_urls?: string[] | null
+          domain_queried?: string
+          domain_was_cited?: boolean
+          engine?: string
+          error?: string | null
+          id?: string
+          latency_ms?: number | null
+          model_version?: string
+          prompt_template_id?: string
+          prompt_text?: string
+          queried_at?: string
+          response_hash?: string | null
+          response_text?: string | null
+          tokens_in?: number | null
+          tokens_out?: number | null
+        }
+        Relationships: []
+      }
       citation_history: {
         Row: {
           chatgpt_share: number

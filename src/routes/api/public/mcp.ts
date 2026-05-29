@@ -164,6 +164,10 @@ const mcp = createMcpServer({
     revertContentEditTool,
     getDashboardStatsTool,
     revenueStatsAliasTool,
+    // v2.1 — citation prediction
+    checkAuthoritySignalsTool,
+    predictCitationsTool,
+    getEngineRecommendationsTool,
   ],
 });
 

@@ -65,7 +65,7 @@ export async function draftIntervention(opts: {
       site_id: opts.siteId,
       kind: opts.kind,
       status: "drafted",
-      payload: opts.payload,
+      payload: opts.payload as never,
       preview_text: opts.previewText ?? null,
       triggered_by: opts.triggeredBy,
       ccs_before: opts.ccsBefore ?? null,

@@ -21,6 +21,15 @@ const ALLOWED_TABLES = new Set<string>([
   "email_send_state",
   "email_unsubscribe_tokens",
   "suppressed_emails",
+  // Verification / citation infrastructure (read-heavy from agents)
+  "citation_events",
+  "citation_capture_cursor",
+  "citation_history",
+  "citations",
+  "companies",
+  "company_scores",
+  "authority_signals",
+  "content_analysis",
 ]);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

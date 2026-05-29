@@ -6,6 +6,8 @@ import {
   STATS_SCHEMA_URL,
   LEADERBOARD_SCHEMA_URL,
 } from "@/lib/seo/dataset-schemas";
+import { ogImageMeta } from "@/lib/seo/og";
+
 
 const DATASETS = [
   {
@@ -107,9 +109,15 @@ export const Route = createFileRoute("/data/")({
         content:
           "Three live JSON endpoints plus frozen Q2 2026 archives, each backed by a JSON Schema. Licensed CC BY 4.0.",
       },
-      { rel: "canonical", href: "https://grow.contact/data" },
+      ...ogImageMeta({
+        title: "Public data API",
+        kicker: "Verifiability Layer",
+        sub: "Open JSON endpoints + schemas, CC BY 4.0",
+      }),
     ],
+    links: [{ rel: "canonical", href: "https://grow.contact/data" }],
   }),
+
   component: DataDocsPage,
 });
 

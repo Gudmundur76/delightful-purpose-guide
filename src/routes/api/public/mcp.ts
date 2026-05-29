@@ -173,6 +173,10 @@ const mcp = createMcpServer({
     predictCitationsTool,
     getEngineRecommendationsTool,
     getCompanyProfileTool,
+    // v2.2 — auto-fix intervention layer
+    autoFixSchemaTool,
+    autoFixLlmsTxtTool,
+    autoFixRobotsTxtTool,
   ],
 });
 

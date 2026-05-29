@@ -967,34 +967,46 @@ export type Database = {
       intervention_sites: {
         Row: {
           auto_fire_enabled: boolean
+          ccs_score: number | null
           created_at: string
           domain: string
           id: string
           install_token: string
+          last_auto_fix_at: string | null
           notify_email: string | null
-          owner_user_id: string
+          owner_user_id: string | null
+          plan: string
+          status: string
           updated_at: string
           wp_api_key: string | null
         }
         Insert: {
           auto_fire_enabled?: boolean
+          ccs_score?: number | null
           created_at?: string
           domain: string
           id?: string
           install_token?: string
+          last_auto_fix_at?: string | null
           notify_email?: string | null
-          owner_user_id: string
+          owner_user_id?: string | null
+          plan?: string
+          status?: string
           updated_at?: string
           wp_api_key?: string | null
         }
         Update: {
           auto_fire_enabled?: boolean
+          ccs_score?: number | null
           created_at?: string
           domain?: string
           id?: string
           install_token?: string
+          last_auto_fix_at?: string | null
           notify_email?: string | null
-          owner_user_id?: string
+          owner_user_id?: string | null
+          plan?: string
+          status?: string
           updated_at?: string
           wp_api_key?: string | null
         }

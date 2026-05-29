@@ -67,6 +67,7 @@ import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as VerifierSearchRouteImport } from './routes/verifier.search'
 import { Route as VerifierLeaderboardRouteImport } from './routes/verifier.leaderboard'
+import { Route as VerifierContradictionsRouteImport } from './routes/verifier.contradictions'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
 import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
 import { Route as StandardLlmsDottxtRouteImport } from './routes/standard.llms[.]txt'
@@ -448,6 +449,11 @@ const VerifierSearchRoute = VerifierSearchRouteImport.update({
 const VerifierLeaderboardRoute = VerifierLeaderboardRouteImport.update({
   id: '/verifier/leaderboard',
   path: '/verifier/leaderboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifierContradictionsRoute = VerifierContradictionsRouteImport.update({
+  id: '/verifier/contradictions',
+  path: '/verifier/contradictions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsRobotsCheckerRoute = ToolsRobotsCheckerRouteImport.update({
@@ -1033,6 +1039,7 @@ export interface FileRoutesByFullPath {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
+  '/verifier/contradictions': typeof VerifierContradictionsRoute
   '/verifier/leaderboard': typeof VerifierLeaderboardRoute
   '/verifier/search': typeof VerifierSearchRoute
   '/verify/$id': typeof VerifyIdRoute
@@ -1182,6 +1189,7 @@ export interface FileRoutesByTo {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
+  '/verifier/contradictions': typeof VerifierContradictionsRoute
   '/verifier/leaderboard': typeof VerifierLeaderboardRoute
   '/verifier/search': typeof VerifierSearchRoute
   '/verify/$id': typeof VerifyIdRoute
@@ -1335,6 +1343,7 @@ export interface FileRoutesById {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
+  '/verifier/contradictions': typeof VerifierContradictionsRoute
   '/verifier/leaderboard': typeof VerifierLeaderboardRoute
   '/verifier/search': typeof VerifierSearchRoute
   '/verify/$id': typeof VerifyIdRoute
@@ -1489,6 +1498,7 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/tools/robots-checker'
+    | '/verifier/contradictions'
     | '/verifier/leaderboard'
     | '/verifier/search'
     | '/verify/$id'
@@ -1638,6 +1648,7 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/tools/robots-checker'
+    | '/verifier/contradictions'
     | '/verifier/leaderboard'
     | '/verifier/search'
     | '/verify/$id'
@@ -1790,6 +1801,7 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/tools/robots-checker'
+    | '/verifier/contradictions'
     | '/verifier/leaderboard'
     | '/verifier/search'
     | '/verify/$id'
@@ -1920,6 +1932,7 @@ export interface RootRouteChildren {
   ReportQ22026Route: typeof ReportQ22026Route
   ReportQ22026DotpdfRoute: typeof ReportQ22026DotpdfRoute
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
+  VerifierContradictionsRoute: typeof VerifierContradictionsRoute
   VerifierLeaderboardRoute: typeof VerifierLeaderboardRoute
   VerifierSearchRoute: typeof VerifierSearchRoute
   VerifyIdRoute: typeof VerifyIdRoute
@@ -2381,6 +2394,13 @@ declare module '@tanstack/react-router' {
       path: '/verifier/leaderboard'
       fullPath: '/verifier/leaderboard'
       preLoaderRoute: typeof VerifierLeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verifier/contradictions': {
+      id: '/verifier/contradictions'
+      path: '/verifier/contradictions'
+      fullPath: '/verifier/contradictions'
+      preLoaderRoute: typeof VerifierContradictionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/robots-checker': {
@@ -3322,6 +3342,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReportQ22026Route: ReportQ22026Route,
   ReportQ22026DotpdfRoute: ReportQ22026DotpdfRoute,
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
+  VerifierContradictionsRoute: VerifierContradictionsRoute,
   VerifierLeaderboardRoute: VerifierLeaderboardRoute,
   VerifierSearchRoute: VerifierSearchRoute,
   VerifyIdRoute: VerifyIdRoute,

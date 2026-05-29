@@ -141,6 +141,41 @@ function PricingPage() {
           </div>
         </section>
 
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+          <div className="mb-10">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">// MONITORING</p>
+            <h2 className="font-extrabold uppercase tracking-tighter text-3xl sm:text-4xl">Continuous GEO monitoring</h2>
+            <p className="mt-3 text-muted-foreground max-w-2xl">
+              Track agent-readability of your sites over time. Get alerted when scores drop. Public REST API + webhooks.
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-3">
+            {[
+              { id: "free", name: "Free", price: "$0", quota: "20 scans / mo", sites: "1 site", cadence: "weekly" },
+              { id: "pro", name: "Pro", price: "$29", quota: "500 scans / mo", sites: "10 sites", cadence: "daily" },
+              { id: "team", name: "Team", price: "$99", quota: "2,500 scans / mo", sites: "50 sites", cadence: "hourly" },
+            ].map((p) => (
+              <div key={p.id} className="border border-border bg-card p-6 flex flex-col">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-accent">// {p.id}</p>
+                <h3 className="font-extrabold uppercase tracking-tighter text-2xl mt-2">{p.name}</h3>
+                <p className="text-3xl font-bold mt-2">{p.price}<span className="text-sm text-muted-foreground">/mo</span></p>
+                <ul className="mt-4 space-y-1 font-mono text-xs text-muted-foreground flex-1">
+                  <li>{p.quota}</li>
+                  <li>{p.sites}</li>
+                  <li>Cadence: {p.cadence}</li>
+                  <li>API + webhook alerts</li>
+                </ul>
+                <a
+                  href={p.id === "free" ? "/login" : "/app/billing"}
+                  className="mt-6 inline-block text-center bg-accent text-accent-foreground font-bold uppercase tracking-tighter py-3"
+                >
+                  {p.id === "free" ? "Start free" : "Subscribe"}
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <TechSpecs />
       </main>
       <SiteFooter />

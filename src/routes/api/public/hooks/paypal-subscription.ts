@@ -34,8 +34,8 @@ async function paypalToken(): Promise<string> {
 async function verifySignature(request: Request, body: string): Promise<boolean> {
   const webhookId = process.env.PAYPAL_WEBHOOK_ID;
   if (!webhookId) {
-    console.warn("[paypal-webhook] PAYPAL_WEBHOOK_ID not set — skipping verification");
-    return true;
+    console.error("[paypal-webhook] PAYPAL_WEBHOOK_ID not configured — rejecting webhook");
+    return false;
   }
   const headers = request.headers;
   const required = [

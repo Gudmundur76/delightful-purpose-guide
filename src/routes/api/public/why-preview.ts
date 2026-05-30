@@ -114,14 +114,9 @@ export const Route = createFileRoute("/api/public/why-preview")({
         const category = (companyRes.data as { category: string } | null)?.category ?? null;
         const citations24h = (citesRes.data ?? []).filter((c) => (c as { domain_was_cited: boolean }).domain_was_cited).length;
 
-        // Real category average from company_scores
+        // Real category average from company_scores (peers in same category)
         let categoryAvg: number | null = null;
         if (category) {
-          const { data: avgRow } = await supabaseAdmin.rpc("noop_fallback" as never).then(
-            () => ({ data: null as { avg: number } | null }),
-            () => ({ data: null as { avg: number } | null }),
-          );
-          // RPC isn't defined; use raw query via from() aggregate
           const { data: peers } = await supabaseAdmin
             .from("companies")
             .select("domain")
@@ -136,7 +131,6 @@ export const Route = createFileRoute("/api/public/why-preview")({
             const vals = (peerScores ?? []).map((r) => (r as { overall_ccs: number }).overall_ccs).filter((n) => n != null);
             if (vals.length) categoryAvg = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
           }
-          void avgRow;
         }
 
         const ccs = score?.overall_ccs ?? site?.ccs_score ?? null;

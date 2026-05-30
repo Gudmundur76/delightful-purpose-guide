@@ -1774,6 +1774,39 @@ export type Database = {
         }
         Relationships: []
       }
+      citation_events_24h_by_domain: {
+        Row: {
+          avg_latency_ms: number | null
+          cited_events: number | null
+          cited_pct: number | null
+          domain: string | null
+          engines_seen: number | null
+          first_event: string | null
+          last_event: string | null
+          total_events: number | null
+        }
+        Relationships: []
+      }
+      citation_events_24h_by_engine: {
+        Row: {
+          avg_latency_ms: number | null
+          cited_events: number | null
+          cited_pct: number | null
+          engine: string | null
+          total_events: number | null
+          unique_domains: number | null
+        }
+        Relationships: []
+      }
+      citation_events_daily_14d: {
+        Row: {
+          cited_events: number | null
+          day: string | null
+          engine: string | null
+          total_events: number | null
+        }
+        Relationships: []
+      }
       response_changes_24h: {
         Row: {
           distinct_responses: number | null

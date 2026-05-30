@@ -539,6 +539,7 @@ function LeaderboardPage() {
                 </tbody>
               </table>
             </div>
+            </TooltipProvider>
 
             <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
               // Citation Probability blends CCS sub-scores (canonical, precedent,

@@ -5,17 +5,16 @@ export const Route = createFileRoute("/api/public/hooks/run-monitored-sites")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        // Accept the anon publishable key (cron pattern) OR CRON_SECRET.
+        const expected = process.env.CRON_SECRET;
+        if (!expected) {
+          return new Response("Server misconfigured", { status: 500 });
+        }
         const provided =
-          request.headers.get("apikey") ??
           request.headers.get("x-cron-secret") ??
+          request.headers.get("authorization")?.replace(/^Bearer\s+/i, "") ??
           "";
-        const expected = [
-          process.env.SUPABASE_PUBLISHABLE_KEY,
-          process.env.CRON_SECRET,
-        ].filter(Boolean) as string[];
-        if (!expected.includes(provided)) {
-          return new Response("Unauthorized", { status: 401 });
+        if (provided !== expected) {
+          return new Response("Forbidden", { status: 403 });
         }
         try {
           const result = await runDueMonitoredSites(25);

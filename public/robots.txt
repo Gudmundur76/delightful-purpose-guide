@@ -7,24 +7,29 @@ Allow: /
 # https://developers.cloudflare.com/bots/concepts/content-signals/
 
 
-# AI / LLM crawlers — explicitly allowed
+# AI / LLM crawlers — explicitly allowed, with a polite crawl-delay
+# for the high-value citation engines we actively want to be discovered by.
 User-agent: GPTBot
 Allow: /
 
 User-agent: OAI-SearchBot
 Allow: /
+Crawl-delay: 1
 
 User-agent: ChatGPT-User
 Allow: /
+Crawl-delay: 1
 
 User-agent: PerplexityBot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Perplexity-User
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Claude-Web
 Allow: /
@@ -48,3 +53,6 @@ User-agent: bingbot
 Allow: /
 
 Sitemap: https://grow.contact/sitemap.xml
+Sitemap: https://grow.contact/blog/rss.xml
+Sitemap: https://grow.contact/research/rss.xml
+Sitemap: https://grow.contact/leaderboard/rss.xml

@@ -395,6 +395,20 @@ function LeaderboardPage() {
                 />
               ))}
             </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mr-2">
+                // Trend:
+              </span>
+              {VOL_KEYS.map((k) => (
+                <VolTab
+                  key={k}
+                  vol={k}
+                  active={vol === k}
+                  label={k === "all" ? "All" : k === "rising" ? "↑ Rising" : k === "falling" ? "↓ Falling" : "→ Stable"}
+                  count={volCounts[k]}
+                />
+              ))}
+            </div>
             <div className="flex flex-wrap items-center gap-3">
               <input
                 type="search"
@@ -423,8 +437,15 @@ function LeaderboardPage() {
         <section aria-labelledby="ranking-heading">
           <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
             <h2 id="ranking-heading" className="sr-only">
-              Ranked AI companies by citation probability
+              Ranked AI companies by Citation Corpus Score
             </h2>
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+              // Scores shown are Citation Corpus Score (CCS).{" "}
+              <Link to="/leaderboard/methodology" className="text-accent hover:underline">
+                Learn more →
+              </Link>
+            </p>
+            <TooltipProvider delayDuration={150}>
             <div className="border border-border bg-card overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
@@ -433,14 +454,15 @@ function LeaderboardPage() {
                     <th className="px-3 py-3 text-left w-8"></th>
                     <SortableTh label="Company" k="name" sort={sort} dir={dir} onClick={toggleSort} />
                     <SortableTh label="Category" k="category" sort={sort} dir={dir} onClick={toggleSort} />
-                    <SortableTh label="CCS" k="overall_ccs" sort={sort} dir={dir} onClick={toggleSort} align="right" />
+                    <SortableTh label="CCS" k="overall_ccs" sort={sort} dir={dir} onClick={toggleSort} align="right" tip={PILLAR_DESCRIPTIONS.overall_ccs} />
+                    <SortableTh label="Authority" k="authority" sort={sort} dir={dir} onClick={toggleSort} align="right" tip={PILLAR_DESCRIPTIONS.authority} />
+                    <SortableTh label="Verify" k="verifiability" sort={sort} dir={dir} onClick={toggleSort} align="right" tip={PILLAR_DESCRIPTIONS.verifiability} />
+                    <SortableTh label="Precedent" k="precedent" sort={sort} dir={dir} onClick={toggleSort} align="right" tip={PILLAR_DESCRIPTIONS.precedent} />
+                    <SortableTh label="Comment" k="commentary" sort={sort} dir={dir} onClick={toggleSort} align="right" tip={PILLAR_DESCRIPTIONS.commentary} />
+                    <SortableTh label="Info Gain" k="information_gain" sort={sort} dir={dir} onClick={toggleSort} align="right" tip={PILLAR_DESCRIPTIONS.information_gain} />
+                    <SortableTh label="Canonical" k="canonical" sort={sort} dir={dir} onClick={toggleSort} align="right" tip={PILLAR_DESCRIPTIONS.canonical} />
                     <SortableTh label="Cite Prob" k="citation_probability" sort={sort} dir={dir} onClick={toggleSort} align="right" />
-                    <SortableTh label="30d cites" k="total_citations" sort={sort} dir={dir} onClick={toggleSort} align="right" />
-                    <SortableTh label="Perp %" k="perplexity_share" sort={sort} dir={dir} onClick={toggleSort} align="right" />
-                    <SortableTh label="GPT %" k="chatgpt_share" sort={sort} dir={dir} onClick={toggleSort} align="right" />
-                    <SortableTh label="Claude %" k="claude_share" sort={sort} dir={dir} onClick={toggleSort} align="right" />
-                    <SortableTh label="AIO %" k="google_aio_share" sort={sort} dir={dir} onClick={toggleSort} align="right" />
-                    <SortableTh label="24h cites" k="citations_24h" sort={sort} dir={dir} onClick={toggleSort} align="right" />
+                    <SortableTh label="24h" k="citations_24h" sort={sort} dir={dir} onClick={toggleSort} align="right" />
                     <th className="px-3 py-3 text-left">Trend</th>
                   </tr>
                 </thead>
@@ -478,27 +500,18 @@ function LeaderboardPage() {
                           {CATEGORY_LABELS[row.category] ?? row.category}
                         </td>
                         <td className="px-3 py-3 text-right">
-                          <span className={`font-mono text-xs tabular-nums px-2 py-1 border ${t.className}`}>
+                          <span className={`inline-block font-mono text-lg font-extrabold tabular-nums px-3 py-1 border-2 ${t.className}`}>
                             {row.overall_ccs}
                           </span>
                         </td>
+                        <PillarCell value={row.authority} />
+                        <PillarCell value={row.verifiability} />
+                        <PillarCell value={row.precedent} />
+                        <PillarCell value={row.commentary} />
+                        <PillarCell value={row.information_gain} />
+                        <PillarCell value={row.canonical} />
                         <td className="px-3 py-3 text-right font-mono text-sm tabular-nums font-bold">
                           {row.citation_probability}%
-                        </td>
-                        <td className="px-3 py-3 text-right font-mono text-xs tabular-nums">
-                          {row.total_citations.toLocaleString()}
-                        </td>
-                        <td className="px-3 py-3 text-right font-mono text-xs tabular-nums text-muted-foreground">
-                          {row.perplexity_share.toFixed(1)}
-                        </td>
-                        <td className="px-3 py-3 text-right font-mono text-xs tabular-nums text-muted-foreground">
-                          {row.chatgpt_share.toFixed(1)}
-                        </td>
-                        <td className="px-3 py-3 text-right font-mono text-xs tabular-nums text-muted-foreground">
-                          {row.claude_share.toFixed(1)}
-                        </td>
-                        <td className="px-3 py-3 text-right font-mono text-xs tabular-nums text-muted-foreground">
-                          {row.google_aio_share.toFixed(1)}
                         </td>
                         <td className="px-3 py-3 text-right font-mono text-xs tabular-nums">
                           {row.citations_24h > 0 ? (
@@ -517,7 +530,8 @@ function LeaderboardPage() {
                   })}
                   {filtered.length === 0 ? (
                     <tr>
-                      <td colSpan={13} className="px-3 py-12 text-center text-muted-foreground font-mono text-xs">
+                      <td colSpan={14} className="px-3 py-12 text-center text-muted-foreground font-mono text-xs">
+
                         // No companies match the current filters.
                       </td>
                     </tr>

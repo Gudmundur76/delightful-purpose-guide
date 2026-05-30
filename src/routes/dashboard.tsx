@@ -5,7 +5,7 @@ import { getStoredSecret, setStoredSecret, clearStoredSecret } from "@/lib/dashb
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "// DASHBOARD · grow.contact" },
+      { title: "Dashboard — Grow" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),

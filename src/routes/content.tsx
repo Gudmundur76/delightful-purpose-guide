@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/content")({
   head: () => ({
     meta: [
-      { title: "// CONTENT · grow.contact" },
+      { title: "Content Workspace — Grow" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),

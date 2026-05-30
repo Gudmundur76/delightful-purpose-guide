@@ -84,7 +84,9 @@ import { Route as LeaderboardRssDotxmlRouteImport } from './routes/leaderboard/r
 import { Route as LeaderboardMethodologyRouteImport } from './routes/leaderboard.methodology'
 import { Route as LeaderboardLlmsDottxtRouteImport } from './routes/leaderboard.llms[.]txt'
 import { Route as HistoryHostRouteImport } from './routes/history.$host'
+import { Route as GuideLlmsTxtRouteImport } from './routes/guide.llms-txt'
 import { Route as GuideGenerativeEngineOptimizationRouteImport } from './routes/guide.generative-engine-optimization'
+import { Route as GuideAeoVsGeoVsSeoRouteImport } from './routes/guide.aeo-vs-geo-vs-seo'
 import { Route as GlossaryTermRouteImport } from './routes/glossary.$term'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as DataLlmsDottxtRouteImport } from './routes/data.llms[.]txt'
@@ -560,12 +562,22 @@ const HistoryHostRoute = HistoryHostRouteImport.update({
   path: '/history/$host',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuideLlmsTxtRoute = GuideLlmsTxtRouteImport.update({
+  id: '/guide/llms-txt',
+  path: '/guide/llms-txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GuideGenerativeEngineOptimizationRoute =
   GuideGenerativeEngineOptimizationRouteImport.update({
     id: '/guide/generative-engine-optimization',
     path: '/guide/generative-engine-optimization',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GuideAeoVsGeoVsSeoRoute = GuideAeoVsGeoVsSeoRouteImport.update({
+  id: '/guide/aeo-vs-geo-vs-seo',
+  path: '/guide/aeo-vs-geo-vs-seo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GlossaryTermRoute = GlossaryTermRouteImport.update({
   id: '/$term',
   path: '/$term',
@@ -1178,7 +1190,9 @@ export interface FileRoutesByFullPath {
   '/data/llms.txt': typeof DataLlmsDottxtRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/glossary/$term': typeof GlossaryTermRoute
+  '/guide/aeo-vs-geo-vs-seo': typeof GuideAeoVsGeoVsSeoRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
+  '/guide/llms-txt': typeof GuideLlmsTxtRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
@@ -1351,7 +1365,9 @@ export interface FileRoutesByTo {
   '/data/llms.txt': typeof DataLlmsDottxtRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/glossary/$term': typeof GlossaryTermRoute
+  '/guide/aeo-vs-geo-vs-seo': typeof GuideAeoVsGeoVsSeoRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
+  '/guide/llms-txt': typeof GuideLlmsTxtRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
@@ -1528,7 +1544,9 @@ export interface FileRoutesById {
   '/data/llms.txt': typeof DataLlmsDottxtRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/glossary/$term': typeof GlossaryTermRoute
+  '/guide/aeo-vs-geo-vs-seo': typeof GuideAeoVsGeoVsSeoRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
+  '/guide/llms-txt': typeof GuideLlmsTxtRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
@@ -1706,7 +1724,9 @@ export interface FileRouteTypes {
     | '/data/llms.txt'
     | '/email/unsubscribe'
     | '/glossary/$term'
+    | '/guide/aeo-vs-geo-vs-seo'
     | '/guide/generative-engine-optimization'
+    | '/guide/llms-txt'
     | '/history/$host'
     | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
@@ -1879,7 +1899,9 @@ export interface FileRouteTypes {
     | '/data/llms.txt'
     | '/email/unsubscribe'
     | '/glossary/$term'
+    | '/guide/aeo-vs-geo-vs-seo'
     | '/guide/generative-engine-optimization'
+    | '/guide/llms-txt'
     | '/history/$host'
     | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
@@ -2055,7 +2077,9 @@ export interface FileRouteTypes {
     | '/data/llms.txt'
     | '/email/unsubscribe'
     | '/glossary/$term'
+    | '/guide/aeo-vs-geo-vs-seo'
     | '/guide/generative-engine-optimization'
+    | '/guide/llms-txt'
     | '/history/$host'
     | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
@@ -2213,7 +2237,9 @@ export interface RootRouteChildren {
   CiteDomainRoute: typeof CiteDomainRoute
   DataLlmsDottxtRoute: typeof DataLlmsDottxtRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
+  GuideAeoVsGeoVsSeoRoute: typeof GuideAeoVsGeoVsSeoRoute
   GuideGenerativeEngineOptimizationRoute: typeof GuideGenerativeEngineOptimizationRoute
+  GuideLlmsTxtRoute: typeof GuideLlmsTxtRoute
   HistoryHostRoute: typeof HistoryHostRouteWithChildren
   ReportMethodologyRoute: typeof ReportMethodologyRoute
   ReportPressRoute: typeof ReportPressRoute
@@ -2814,11 +2840,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HistoryHostRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guide/llms-txt': {
+      id: '/guide/llms-txt'
+      path: '/guide/llms-txt'
+      fullPath: '/guide/llms-txt'
+      preLoaderRoute: typeof GuideLlmsTxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guide/generative-engine-optimization': {
       id: '/guide/generative-engine-optimization'
       path: '/guide/generative-engine-optimization'
       fullPath: '/guide/generative-engine-optimization'
       preLoaderRoute: typeof GuideGenerativeEngineOptimizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guide/aeo-vs-geo-vs-seo': {
+      id: '/guide/aeo-vs-geo-vs-seo'
+      path: '/guide/aeo-vs-geo-vs-seo'
+      fullPath: '/guide/aeo-vs-geo-vs-seo'
+      preLoaderRoute: typeof GuideAeoVsGeoVsSeoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/glossary/$term': {
@@ -3840,8 +3880,10 @@ const rootRouteChildren: RootRouteChildren = {
   CiteDomainRoute: CiteDomainRoute,
   DataLlmsDottxtRoute: DataLlmsDottxtRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
+  GuideAeoVsGeoVsSeoRoute: GuideAeoVsGeoVsSeoRoute,
   GuideGenerativeEngineOptimizationRoute:
     GuideGenerativeEngineOptimizationRoute,
+  GuideLlmsTxtRoute: GuideLlmsTxtRoute,
   HistoryHostRoute: HistoryHostRouteWithChildren,
   ReportMethodologyRoute: ReportMethodologyRoute,
   ReportPressRoute: ReportPressRoute,
@@ -3925,13 +3967,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

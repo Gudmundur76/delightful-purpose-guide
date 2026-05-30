@@ -8,9 +8,9 @@ import { InstallSnippets } from "@/components/playground/InstallSnippets";
 import { TOOLS } from "@/lib/playground/catalog";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const TITLE = "MCP Playground — 90+ agent-native tools";
+const TITLE = "AEO Tool & LLM SEO Checker — grow.contact Playground";
 const DESC =
-  "Run grow.contact's MCP tools in the browser. Scan any URL, validate JSON-LD, check llms.txt, fetch the GEO standard — then copy the install snippet for Claude, ChatGPT, n8n, or cURL.";
+  "Free AEO tool and LLM SEO checker: scan any URL for ChatGPT, Perplexity, Claude, and Google AI Overviews readiness. Run 90+ MCP tools in the browser — validate JSON-LD, llms.txt, semantic HTML, and edge caching.";
 const URL = "https://grow.contact/playground";
 
 export const Route = createFileRoute("/playground")({
@@ -23,9 +23,9 @@ export const Route = createFileRoute("/playground")({
       { property: "og:url", content: URL },
       { property: "og:type", content: "website" },
       ...ogImageMeta({
-        title: "MCP Playground — 90+ agent-native tools",
-        kicker: "Grow",
-        sub: "Run grow.contact's MCP tools in the browser. Scan any URL, validate JSON-LD, check llms.txt, fetch the GEO standard — then copy the install snippet for Claude, ChatGPT, n8n, or cURL.",
+        title: "AEO Tool & LLM SEO Checker",
+        kicker: "Grow Playground",
+        sub: "Scan any URL for ChatGPT, Perplexity, Claude, and Google AI Overviews readiness. 90+ MCP tools in the browser.",
       }),
     ],
     links: [{ rel: "canonical", href: URL }],

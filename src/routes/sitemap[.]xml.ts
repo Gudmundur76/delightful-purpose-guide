@@ -77,6 +77,9 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/research", lastmod: today, changefreq: "monthly", priority: "0.7" },
           { path: "/for-analysts", lastmod: today, changefreq: "monthly", priority: "0.7" },
           { path: "/why", lastmod: today, changefreq: "monthly", priority: "0.7" },
+          { path: "/guide/generative-engine-optimization", lastmod: today, changefreq: "monthly", priority: "0.9" },
+          { path: "/guide/aeo-vs-geo-vs-seo", lastmod: today, changefreq: "monthly", priority: "0.8" },
+          { path: "/guide/llms-txt", lastmod: today, changefreq: "monthly", priority: "0.8" },
 
 
 

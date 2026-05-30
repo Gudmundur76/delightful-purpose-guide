@@ -5,11 +5,11 @@ import { ArrowRight, Check } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
 
 const URL = "https://grow.contact/guide/generative-engine-optimization";
-const TITLE = "Generative Engine Optimization: The 2026 Guide (GEO)";
+const TITLE = "GEO vs SEO: What Is Generative Engine Optimization? (2026 Guide)";
 const DESCRIPTION =
-  "Generative Engine Optimization (GEO) is the practice of structuring a website so large language models cite it in answers. This guide is the working standard: definitions, technical checklist, per-engine playbook, and how to measure it.";
+  "What is generative engine optimization (GEO)? How GEO differs from SEO and AEO, why 83% of AI citations come from outside the organic top 10, and the technical checklist to get cited by ChatGPT, Perplexity, Claude, and Google AI Overviews.";
 const PUBLISHED = "2026-05-24";
-const UPDATED = "2026-05-24";
+const UPDATED = "2026-05-30";
 
 const TOC = [
   { id: "what-is-geo", label: "What GEO is (and isn't)" },
@@ -26,8 +26,32 @@ const TOC = [
 
 const FAQS: { q: string; a: string }[] = [
   {
-    q: "What is Generative Engine Optimization in one sentence?",
-    a: "GEO is the practice of structuring a website's markup, content, and crawlability so generative AI engines like ChatGPT, Perplexity, Google AI Overviews, Claude, and Gemini cite it by name when answering user questions.",
+    q: "What is generative engine optimization?",
+    a: "Generative engine optimization (GEO) is the practice of structuring a website's markup, content, and crawlability so generative AI engines — ChatGPT, Perplexity, Google AI Overviews, Claude, and Gemini — cite it by name when answering user questions. Unlike classic SEO, the goal is not to rank in a list of blue links but to be quoted inside the generated answer itself.",
+  },
+  {
+    q: "GEO vs SEO: what's the difference?",
+    a: "SEO optimizes for a ranked list of 10 blue links read by humans. GEO optimizes for being quoted inside a generated answer read by an AI. SEO rewards backlinks, keywords, and CTR; GEO rewards semantic HTML, JSON-LD, llms.txt, edge-cached SSR, and front-loaded factual claims. 83% of AI citations come from outside the organic top 10, so high SEO rank does not guarantee GEO performance.",
+  },
+  {
+    q: "AEO vs SEO: what's the difference?",
+    a: "Answer engine optimization (AEO) is the subset of SEO aimed at being chosen as the direct answer in a featured snippet, voice assistant, or AI answer box. SEO covers the full ranked results page; AEO only cares about position zero. AEO predates GEO and overlaps with it heavily — both reward FAQ schema, concise answer-first paragraphs, and clear entity markup.",
+  },
+  {
+    q: "How does generative engine optimization work?",
+    a: "Generative engines fetch web pages through dedicated crawlers (OAI-SearchBot, PerplexityBot, ClaudeBot, Googlebot), parse the HTML without executing JavaScript, extract entities from JSON-LD and semantic markup, and then quote front-loaded factual claims when composing answers. GEO works by making every layer of that pipeline succeed: allow the bots in robots.txt, render content server-side, embed typed schema.org entities, and write the answer in the first 50–70 words.",
+  },
+  {
+    q: "Is answer engine optimization and generative engine optimization the same?",
+    a: "No, but they overlap. AEO is about being chosen as the single answer in featured snippets, voice search, and AI answer boxes — its origin is Google's results page. GEO is broader and newer: it covers being cited inside any generative AI answer (ChatGPT, Perplexity, Claude, Gemini), where multiple sources are quoted and there is no ranked list at all. Pages optimized for GEO usually win AEO too, but not the reverse.",
+  },
+  {
+    q: "What are the best answer engine optimization techniques in 2025–2026?",
+    a: "Five techniques win most: (1) answer-first paragraphs in the first 50–70 words, (2) FAQPage JSON-LD on Q&A blocks, (3) listicle structure with stable headings for Perplexity, (4) freshness signals (datePublished, dateModified) updated quarterly for Gemini, and (5) edge-cached SSR with TTFB under 200ms so crawlers do not time out. Schema.org Organization and BreadcrumbList raise entity confidence across every engine.",
+  },
+  {
+    q: "How can businesses improve answer engine optimization in 2026?",
+    a: "Audit four things first: (1) robots.txt allows OAI-SearchBot, PerplexityBot, ClaudeBot, and Googlebot — blocking GPTBot does not affect citations, (2) every public page renders content server-side without JavaScript, (3) JSON-LD validates as Organization, Product, Article, or FAQPage as appropriate, (4) the first paragraph of each page answers the implicit question with numbers, dates, and named entities. Most reachability problems fix in a day; content rewrites take a quarter.",
   },
   {
     q: "Is GEO different from SEO?",

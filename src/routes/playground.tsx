@@ -8,9 +8,9 @@ import { InstallSnippets } from "@/components/playground/InstallSnippets";
 import { TOOLS } from "@/lib/playground/catalog";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const TITLE = "MCP Playground — 90+ agent-native tools";
+const TITLE = "AEO Tool & LLM SEO Checker — grow.contact Playground";
 const DESC =
-  "Run grow.contact's MCP tools in the browser. Scan any URL, validate JSON-LD, check llms.txt, fetch the GEO standard — then copy the install snippet for Claude, ChatGPT, n8n, or cURL.";
+  "Free AEO tool and LLM SEO checker: scan any URL for ChatGPT, Perplexity, Claude, and Google AI Overviews readiness. Run 90+ MCP tools in the browser — validate JSON-LD, llms.txt, semantic HTML, and edge caching.";
 const URL = "https://grow.contact/playground";
 
 export const Route = createFileRoute("/playground")({

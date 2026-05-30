@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { ogImageMeta } from "@/lib/seo/og";
 
 const searchSchema = z.object({
   q: z.string().optional(),
@@ -27,6 +28,11 @@ export const Route = createFileRoute("/cite/")({
         content:
           "Search a live index of citations from ChatGPT, Perplexity, Claude, and Google AI Overviews.",
       },
+      ...ogImageMeta({
+        title: "cite.grow",
+        kicker: "AI Citation Index",
+        sub: "Who do AI search engines actually cite?",
+      }),
     ],
   }),
   component: CiteIndex,

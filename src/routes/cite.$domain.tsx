@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ogImageMeta } from "@/lib/seo/og";
 
 export const Route = createFileRoute("/cite/$domain")({
   head: ({ params }) => ({
@@ -17,6 +18,11 @@ export const Route = createFileRoute("/cite/$domain")({
         property: "og:description",
         content: `How often AI search engines cite ${params.domain}, broken down by engine.`,
       },
+      ...ogImageMeta({
+        title: params.domain,
+        kicker: "AI Citation Profile",
+        sub: `How often AI engines cite ${params.domain}`,
+      }),
     ],
   }),
   component: CiteProfile,

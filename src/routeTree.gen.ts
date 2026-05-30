@@ -42,6 +42,7 @@ import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as GlossaryRouteImport } from './routes/glossary'
 import { Route as ForAnalystsRouteImport } from './routes/for-analysts'
+import { Route as ForAgentsRouteImport } from './routes/for-agents'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ExtensionRouteImport } from './routes/extension'
 import { Route as DataDropsRouteImport } from './routes/data-drops'
@@ -346,6 +347,11 @@ const GlossaryRoute = GlossaryRouteImport.update({
 const ForAnalystsRoute = ForAnalystsRouteImport.update({
   id: '/for-analysts',
   path: '/for-analysts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForAgentsRoute = ForAgentsRouteImport.update({
+  id: '/for-agents',
+  path: '/for-agents',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -1105,6 +1111,7 @@ export interface FileRoutesByFullPath {
   '/data-drops': typeof DataDropsRouteWithChildren
   '/extension': typeof ExtensionRoute
   '/faq': typeof FaqRoute
+  '/for-agents': typeof ForAgentsRoute
   '/for-analysts': typeof ForAnalystsRoute
   '/glossary': typeof GlossaryRouteWithChildren
   '/integrations': typeof IntegrationsRoute
@@ -1277,6 +1284,7 @@ export interface FileRoutesByTo {
   '/data-drops': typeof DataDropsRouteWithChildren
   '/extension': typeof ExtensionRoute
   '/faq': typeof FaqRoute
+  '/for-agents': typeof ForAgentsRoute
   '/for-analysts': typeof ForAnalystsRoute
   '/glossary': typeof GlossaryRouteWithChildren
   '/integrations': typeof IntegrationsRoute
@@ -1453,6 +1461,7 @@ export interface FileRoutesById {
   '/data-drops': typeof DataDropsRouteWithChildren
   '/extension': typeof ExtensionRoute
   '/faq': typeof FaqRoute
+  '/for-agents': typeof ForAgentsRoute
   '/for-analysts': typeof ForAnalystsRoute
   '/glossary': typeof GlossaryRouteWithChildren
   '/integrations': typeof IntegrationsRoute
@@ -1630,6 +1639,7 @@ export interface FileRouteTypes {
     | '/data-drops'
     | '/extension'
     | '/faq'
+    | '/for-agents'
     | '/for-analysts'
     | '/glossary'
     | '/integrations'
@@ -1802,6 +1812,7 @@ export interface FileRouteTypes {
     | '/data-drops'
     | '/extension'
     | '/faq'
+    | '/for-agents'
     | '/for-analysts'
     | '/glossary'
     | '/integrations'
@@ -1977,6 +1988,7 @@ export interface FileRouteTypes {
     | '/data-drops'
     | '/extension'
     | '/faq'
+    | '/for-agents'
     | '/for-analysts'
     | '/glossary'
     | '/integrations'
@@ -2153,6 +2165,7 @@ export interface RootRouteChildren {
   DataDropsRoute: typeof DataDropsRouteWithChildren
   ExtensionRoute: typeof ExtensionRoute
   FaqRoute: typeof FaqRoute
+  ForAgentsRoute: typeof ForAgentsRoute
   ForAnalystsRoute: typeof ForAnalystsRoute
   GlossaryRoute: typeof GlossaryRouteWithChildren
   IntegrationsRoute: typeof IntegrationsRoute
@@ -2505,6 +2518,13 @@ declare module '@tanstack/react-router' {
       path: '/for-analysts'
       fullPath: '/for-analysts'
       preLoaderRoute: typeof ForAnalystsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-agents': {
+      id: '/for-agents'
+      path: '/for-agents'
+      fullPath: '/for-agents'
+      preLoaderRoute: typeof ForAgentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -3769,6 +3789,7 @@ const rootRouteChildren: RootRouteChildren = {
   DataDropsRoute: DataDropsRouteWithChildren,
   ExtensionRoute: ExtensionRoute,
   FaqRoute: FaqRoute,
+  ForAgentsRoute: ForAgentsRoute,
   ForAnalystsRoute: ForAnalystsRoute,
   GlossaryRoute: GlossaryRouteWithChildren,
   IntegrationsRoute: IntegrationsRoute,
@@ -3904,13 +3925,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -60,10 +60,10 @@ const VOL_KEYS = ["all", "rising", "falling", "stable"] as const;
 type VolKey = (typeof VOL_KEYS)[number];
 
 const searchSchema = z.object({
-  cat: z.string().catch("all"),
-  vol: z.enum(VOL_KEYS).catch("all"),
-  sort: z.enum(SORT_KEYS).catch("overall_ccs"),
-  dir: z.enum(["asc", "desc"]).catch("desc"),
+  cat: z.string().optional().catch("all"),
+  vol: z.enum(VOL_KEYS).optional().catch("all"),
+  sort: z.enum(SORT_KEYS).optional().catch("overall_ccs"),
+  dir: z.enum(["asc", "desc"]).optional().catch("desc"),
 });
 
 const citationIndexQuery = queryOptions({

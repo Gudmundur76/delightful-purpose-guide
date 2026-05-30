@@ -33,7 +33,8 @@ export const Route = createFileRoute("/api/public/v1/research/{$slug}.json")({
 
         // 1. Quarterly report
         if (slug === ARCHIVE_KEY) {
-          const stats = archiveStats();
+          const archive = archiveStats();
+          const stats = archive.stats;
           return json({
             type: "report",
             title: `${ARCHIVE_LABEL} Agent-Readability Report`,

@@ -212,6 +212,42 @@ function PlaygroundPage() {
                   Site index for LLM training & retrieval
                 </div>
               </a>
+              <Link
+                to="/guide/generative-engine-optimization"
+                className="block p-5 border border-border hover:border-accent transition-colors"
+              >
+                <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+                  Guide
+                </div>
+                <div className="font-bold text-foreground">GEO vs SEO</div>
+                <div className="mt-2 text-muted-foreground text-[11px]">
+                  What moves AI citations and how it differs from traditional SEO
+                </div>
+              </Link>
+              <Link
+                to="/guide/aeo-vs-geo-vs-seo"
+                className="block p-5 border border-border hover:border-accent transition-colors"
+              >
+                <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+                  Guide
+                </div>
+                <div className="font-bold text-foreground">AEO vs GEO vs SEO</div>
+                <div className="mt-2 text-muted-foreground text-[11px]">
+                  Side-by-side comparison of the three optimization disciplines
+                </div>
+              </Link>
+              <Link
+                to="/guide/llms-txt"
+                className="block p-5 border border-border hover:border-accent transition-colors"
+              >
+                <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+                  Guide
+                </div>
+                <div className="font-bold text-foreground">llms.txt Spec</div>
+                <div className="mt-2 text-muted-foreground text-[11px]">
+                  Complete spec, examples, and validation instructions
+                </div>
+              </Link>
             </div>
           </div>
         </section>

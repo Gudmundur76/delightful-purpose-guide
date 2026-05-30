@@ -101,10 +101,14 @@ export const Route = createFileRoute("/api/public/hooks/capture-citations")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        // Accept either: cron's x-cron-secret OR apikey header (anon key)
         const expected = process.env.CRON_SECRET;
-        if (!expected) return new Response("Server misconfigured", { status: 500 });
         const provided = request.headers.get("x-cron-secret");
-        if (provided !== expected) return new Response("Forbidden", { status: 403 });
+        const apikey = request.headers.get("apikey");
+        const anon = process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY;
+        const okSecret = expected && provided === expected;
+        const okApikey = anon && apikey === anon;
+        if (!okSecret && !okApikey) return new Response("Forbidden", { status: 403 });
         if (!process.env.LOVABLE_API_KEY) {
           return new Response("LOVABLE_API_KEY missing", { status: 500 });
         }

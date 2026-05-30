@@ -174,6 +174,7 @@ import { Route as ApiPublicDataLeaderboardDotjsonRouteImport } from './routes/ap
 import { Route as ApiPublicDataClaimsDotjsonRouteImport } from './routes/api/public/data.claims[.]json'
 import { Route as ApiPublicAdminPlatformRouteImport } from './routes/api/public/admin/platform'
 import { Route as ApiPublicWidgetChartSlugDotsvgRouteImport } from './routes/api/public/widget/chart.$slug[.]svg'
+import { Route as ApiPublicV1ResearchSlugDotjsonRouteImport } from './routes/api/public/v1/research.$slug[.]json'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
 import { Route as ApiPublicV1CompaniesDomainRouteImport } from './routes/api/public/v1/companies.$domain'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
@@ -1037,6 +1038,12 @@ const ApiPublicWidgetChartSlugDotsvgRoute =
     path: '/api/public/widget/chart/$slug.svg',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicV1ResearchSlugDotjsonRoute =
+  ApiPublicV1ResearchSlugDotjsonRouteImport.update({
+    id: '/api/public/v1/research/$slug.json',
+    path: '/api/public/v1/research/$slug.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicV1PostsSlugRoute = ApiPublicV1PostsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -1243,6 +1250,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/companies/$domain': typeof ApiPublicV1CompaniesDomainRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
+  '/api/public/v1/research/$slug.json': typeof ApiPublicV1ResearchSlugDotjsonRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 export interface FileRoutesByTo {
@@ -1413,6 +1421,7 @@ export interface FileRoutesByTo {
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/companies/$domain': typeof ApiPublicV1CompaniesDomainRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
+  '/api/public/v1/research/$slug.json': typeof ApiPublicV1ResearchSlugDotjsonRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 export interface FileRoutesById {
@@ -1587,6 +1596,7 @@ export interface FileRoutesById {
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/companies/$domain': typeof ApiPublicV1CompaniesDomainRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
+  '/api/public/v1/research/$slug.json': typeof ApiPublicV1ResearchSlugDotjsonRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 export interface FileRouteTypes {
@@ -1762,6 +1772,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/companies/$domain'
     | '/api/public/v1/posts/$slug'
+    | '/api/public/v1/research/$slug.json'
     | '/api/public/widget/chart/$slug.svg'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -1932,6 +1943,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/companies/$domain'
     | '/api/public/v1/posts/$slug'
+    | '/api/public/v1/research/$slug.json'
     | '/api/public/widget/chart/$slug.svg'
   id:
     | '__root__'
@@ -2105,6 +2117,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/companies/$domain'
     | '/api/public/v1/posts/$slug'
+    | '/api/public/v1/research/$slug.json'
     | '/api/public/widget/chart/$slug.svg'
   fileRoutesById: FileRoutesById
 }
@@ -2243,6 +2256,7 @@ export interface RootRouteChildren {
   ApiPublicDataSchemasStatsDotschemaDotjsonRoute: typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   ApiPublicV1AdminTableRoute: typeof ApiPublicV1AdminTableRoute
   ApiPublicV1CompaniesDomainRoute: typeof ApiPublicV1CompaniesDomainRoute
+  ApiPublicV1ResearchSlugDotjsonRoute: typeof ApiPublicV1ResearchSlugDotjsonRoute
   ApiPublicWidgetChartSlugDotsvgRoute: typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 
@@ -3403,6 +3417,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWidgetChartSlugDotsvgRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/research/$slug.json': {
+      id: '/api/public/v1/research/$slug.json'
+      path: '/api/public/v1/research/$slug.json'
+      fullPath: '/api/public/v1/research/$slug.json'
+      preLoaderRoute: typeof ApiPublicV1ResearchSlugDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/posts/$slug': {
       id: '/api/public/v1/posts/$slug'
       path: '/$slug'
@@ -3853,6 +3874,7 @@ const rootRouteChildren: RootRouteChildren = {
     ApiPublicDataSchemasStatsDotschemaDotjsonRoute,
   ApiPublicV1AdminTableRoute: ApiPublicV1AdminTableRoute,
   ApiPublicV1CompaniesDomainRoute: ApiPublicV1CompaniesDomainRoute,
+  ApiPublicV1ResearchSlugDotjsonRoute: ApiPublicV1ResearchSlugDotjsonRoute,
   ApiPublicWidgetChartSlugDotsvgRoute: ApiPublicWidgetChartSlugDotsvgRoute,
 }
 export const routeTree = rootRouteImport

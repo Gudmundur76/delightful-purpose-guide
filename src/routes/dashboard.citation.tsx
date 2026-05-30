@@ -180,7 +180,102 @@ const SEVERITY_STYLES: Record<DisagreementRow["severity"], string> = {
   low: "border-border bg-card/40 text-muted-foreground",
 };
 
+type PlatformCrawlRow = {
+  referrer_domain: string;
+  crawls_24h: number;
+  unique_paths: number;
+  last_seen: string;
+  top_path: string | null;
+};
+
+function IntelligencePlatforms() {
+  const [rows, setRows] = useState<PlatformCrawlRow[] | null>(null);
+  const [err, setErr] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  async function load() {
+    setLoading(true);
+    setErr(null);
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data, error } = await (supabase as any)
+        .from("platform_crawls_24h")
+        .select("*");
+      if (error) throw error;
+      setRows((data as PlatformCrawlRow[]) ?? []);
+    } catch (ex) {
+      setErr(ex instanceof Error ? ex.message : String(ex));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    load();
+    const id = setInterval(load, 60_000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <section className="border border-border p-6 bg-card/40">
+      <div className="flex items-baseline justify-between mb-4">
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-widest text-accent mb-1">
+            // intelligence-platforms@24h
+          </div>
+          <h2 className="font-bold text-xl tracking-tight">
+            Who's crawling grow.contact
+          </h2>
+        </div>
+        <button
+          onClick={load}
+          className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground"
+        >
+          {loading ? "loading…" : "refresh"}
+        </button>
+      </div>
+
+      {err && (
+        <p className="font-mono text-xs text-destructive">!! {err}</p>
+      )}
+
+      {!err && rows && rows.length === 0 && (
+        <p className="font-mono text-xs text-muted-foreground">
+          // no tracked platform crawls in the last 24h
+        </p>
+      )}
+
+      {rows && rows.length > 0 && (
+        <div className="divide-y divide-border">
+          {rows.map((r) => (
+            <div
+              key={r.referrer_domain}
+              className="flex items-center justify-between py-3 gap-4"
+            >
+              <div className="min-w-0">
+                <p className="font-semibold">{r.referrer_domain}</p>
+                <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                  {r.crawls_24h} crawls · {r.unique_paths} paths
+                </p>
+              </div>
+              <div className="text-right min-w-0">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                  top path
+                </p>
+                <p className="font-mono text-xs truncate max-w-[280px]">
+                  {r.top_path ?? "—"}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
 function Contradictions() {
+
   const [rows, setRows] = useState<DisagreementRow[] | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);

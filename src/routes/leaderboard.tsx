@@ -177,7 +177,7 @@ function volatilityBadge(v: CitationIndexRow["volatility"]) {
 }
 
 function LeaderboardPage() {
-  const { cat, vol, sort, dir } = Route.useSearch();
+  const { cat = "all", vol = "all", sort = "overall_ccs", dir = "desc" } = Route.useSearch();
   const navigate = Route.useNavigate();
   const { data } = useSuspenseQuery(citationIndexQuery);
   const allRows = data.rows;

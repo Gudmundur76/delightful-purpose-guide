@@ -160,6 +160,7 @@ import { Route as ApiPublicInjectTokenRouteImport } from './routes/api/public/in
 import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/api/public/hooks/run-scheduled-scans'
 import { Route as ApiPublicHooksRunMonitoredSitesRouteImport } from './routes/api/public/hooks/run-monitored-sites'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
+import { Route as ApiPublicHooksRefreshScoresRouteImport } from './routes/api/public/hooks/refresh-scores'
 import { Route as ApiPublicHooksPaypalSubscriptionRouteImport } from './routes/api/public/hooks/paypal-subscription'
 import { Route as ApiPublicHooksGenerateDraftsRouteImport } from './routes/api/public/hooks/generate-drafts'
 import { Route as ApiPublicHooksCitationVolatilityRollupRouteImport } from './routes/api/public/hooks/citation-volatility-rollup'
@@ -953,6 +954,12 @@ const ApiPublicHooksRescanLeaderboardRoute =
     path: '/api/public/hooks/rescan-leaderboard',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicHooksRefreshScoresRoute =
+  ApiPublicHooksRefreshScoresRouteImport.update({
+    id: '/api/public/hooks/refresh-scores',
+    path: '/api/public/hooks/refresh-scores',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksPaypalSubscriptionRoute =
   ApiPublicHooksPaypalSubscriptionRouteImport.update({
     id: '/api/public/hooks/paypal-subscription',
@@ -1182,6 +1189,7 @@ export interface FileRoutesByFullPath {
   '/api/public/hooks/citation-volatility-rollup': typeof ApiPublicHooksCitationVolatilityRollupRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/paypal-subscription': typeof ApiPublicHooksPaypalSubscriptionRoute
+  '/api/public/hooks/refresh-scores': typeof ApiPublicHooksRefreshScoresRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
@@ -1348,6 +1356,7 @@ export interface FileRoutesByTo {
   '/api/public/hooks/citation-volatility-rollup': typeof ApiPublicHooksCitationVolatilityRollupRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/paypal-subscription': typeof ApiPublicHooksPaypalSubscriptionRoute
+  '/api/public/hooks/refresh-scores': typeof ApiPublicHooksRefreshScoresRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
@@ -1518,6 +1527,7 @@ export interface FileRoutesById {
   '/api/public/hooks/citation-volatility-rollup': typeof ApiPublicHooksCitationVolatilityRollupRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
   '/api/public/hooks/paypal-subscription': typeof ApiPublicHooksPaypalSubscriptionRoute
+  '/api/public/hooks/refresh-scores': typeof ApiPublicHooksRefreshScoresRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
@@ -1689,6 +1699,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/citation-volatility-rollup'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/paypal-subscription'
+    | '/api/public/hooks/refresh-scores'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
@@ -1855,6 +1866,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/citation-volatility-rollup'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/paypal-subscription'
+    | '/api/public/hooks/refresh-scores'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
@@ -2024,6 +2036,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/citation-volatility-rollup'
     | '/api/public/hooks/generate-drafts'
     | '/api/public/hooks/paypal-subscription'
+    | '/api/public/hooks/refresh-scores'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
@@ -2161,6 +2174,7 @@ export interface RootRouteChildren {
   ApiPublicHooksCitationVolatilityRollupRoute: typeof ApiPublicHooksCitationVolatilityRollupRoute
   ApiPublicHooksGenerateDraftsRoute: typeof ApiPublicHooksGenerateDraftsRoute
   ApiPublicHooksPaypalSubscriptionRoute: typeof ApiPublicHooksPaypalSubscriptionRoute
+  ApiPublicHooksRefreshScoresRoute: typeof ApiPublicHooksRefreshScoresRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
   ApiPublicHooksRunMonitoredSitesRoute: typeof ApiPublicHooksRunMonitoredSitesRoute
   ApiPublicHooksRunScheduledScansRoute: typeof ApiPublicHooksRunScheduledScansRoute
@@ -3254,6 +3268,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksRescanLeaderboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/refresh-scores': {
+      id: '/api/public/hooks/refresh-scores'
+      path: '/api/public/hooks/refresh-scores'
+      fullPath: '/api/public/hooks/refresh-scores'
+      preLoaderRoute: typeof ApiPublicHooksRefreshScoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/paypal-subscription': {
       id: '/api/public/hooks/paypal-subscription'
       path: '/api/public/hooks/paypal-subscription'
@@ -3724,6 +3745,7 @@ const rootRouteChildren: RootRouteChildren = {
     ApiPublicHooksCitationVolatilityRollupRoute,
   ApiPublicHooksGenerateDraftsRoute: ApiPublicHooksGenerateDraftsRoute,
   ApiPublicHooksPaypalSubscriptionRoute: ApiPublicHooksPaypalSubscriptionRoute,
+  ApiPublicHooksRefreshScoresRoute: ApiPublicHooksRefreshScoresRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
   ApiPublicHooksRunMonitoredSitesRoute: ApiPublicHooksRunMonitoredSitesRoute,
   ApiPublicHooksRunScheduledScansRoute: ApiPublicHooksRunScheduledScansRoute,
@@ -3763,13 +3785,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -79,6 +79,7 @@ import { Route as ReportQ22026RouteImport } from './routes/report.q2-2026'
 import { Route as ReportPressRouteImport } from './routes/report.press'
 import { Route as ReportMethodologyRouteImport } from './routes/report.methodology'
 import { Route as PlaybooksSlugRouteImport } from './routes/playbooks.$slug'
+import { Route as LeaderboardRssDotxmlRouteImport } from './routes/leaderboard/rss[.]xml'
 import { Route as LeaderboardMethodologyRouteImport } from './routes/leaderboard.methodology'
 import { Route as LeaderboardLlmsDottxtRouteImport } from './routes/leaderboard.llms[.]txt'
 import { Route as HistoryHostRouteImport } from './routes/history.$host'
@@ -530,6 +531,11 @@ const PlaybooksSlugRoute = PlaybooksSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => PlaybooksRoute,
+} as any)
+const LeaderboardRssDotxmlRoute = LeaderboardRssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
+  getParentRoute: () => LeaderboardRoute,
 } as any)
 const LeaderboardMethodologyRoute = LeaderboardMethodologyRouteImport.update({
   id: '/methodology',
@@ -1155,6 +1161,7 @@ export interface FileRoutesByFullPath {
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
+  '/leaderboard/rss.xml': typeof LeaderboardRssDotxmlRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
   '/report/methodology': typeof ReportMethodologyRoute
   '/report/press': typeof ReportPressRoute
@@ -1324,6 +1331,7 @@ export interface FileRoutesByTo {
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
+  '/leaderboard/rss.xml': typeof LeaderboardRssDotxmlRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
   '/report/methodology': typeof ReportMethodologyRoute
   '/report/press': typeof ReportPressRoute
@@ -1497,6 +1505,7 @@ export interface FileRoutesById {
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
+  '/leaderboard/rss.xml': typeof LeaderboardRssDotxmlRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
   '/report/methodology': typeof ReportMethodologyRoute
   '/report/press': typeof ReportPressRoute
@@ -1671,6 +1680,7 @@ export interface FileRouteTypes {
     | '/history/$host'
     | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
+    | '/leaderboard/rss.xml'
     | '/playbooks/$slug'
     | '/report/methodology'
     | '/report/press'
@@ -1840,6 +1850,7 @@ export interface FileRouteTypes {
     | '/history/$host'
     | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
+    | '/leaderboard/rss.xml'
     | '/playbooks/$slug'
     | '/report/methodology'
     | '/report/press'
@@ -2012,6 +2023,7 @@ export interface FileRouteTypes {
     | '/history/$host'
     | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
+    | '/leaderboard/rss.xml'
     | '/playbooks/$slug'
     | '/report/methodology'
     | '/report/press'
@@ -2725,6 +2737,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/playbooks/$slug'
       preLoaderRoute: typeof PlaybooksSlugRouteImport
       parentRoute: typeof PlaybooksRoute
+    }
+    '/leaderboard/rss.xml': {
+      id: '/leaderboard/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/leaderboard/rss.xml'
+      preLoaderRoute: typeof LeaderboardRssDotxmlRouteImport
+      parentRoute: typeof LeaderboardRoute
     }
     '/leaderboard/methodology': {
       id: '/leaderboard/methodology'
@@ -3592,11 +3611,13 @@ const GlossaryRouteWithChildren = GlossaryRoute._addFileChildren(
 interface LeaderboardRouteChildren {
   LeaderboardLlmsDottxtRoute: typeof LeaderboardLlmsDottxtRoute
   LeaderboardMethodologyRoute: typeof LeaderboardMethodologyRoute
+  LeaderboardRssDotxmlRoute: typeof LeaderboardRssDotxmlRoute
 }
 
 const LeaderboardRouteChildren: LeaderboardRouteChildren = {
   LeaderboardLlmsDottxtRoute: LeaderboardLlmsDottxtRoute,
   LeaderboardMethodologyRoute: LeaderboardMethodologyRoute,
+  LeaderboardRssDotxmlRoute: LeaderboardRssDotxmlRoute,
 }
 
 const LeaderboardRouteWithChildren = LeaderboardRoute._addFileChildren(

@@ -60,6 +60,7 @@ import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as AuthDotmdRouteImport } from './routes/auth[.]md'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
+import { Route as AknRouteImport } from './routes/akn'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DataIndexRouteImport } from './routes/data.index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
@@ -150,6 +151,7 @@ import { Route as ApiPublicWpPluginTokenRouteImport } from './routes/api/public/
 import { Route as ApiPublicWidgetOgDotsvgRouteImport } from './routes/api/public/widget/og[.]svg'
 import { Route as ApiPublicWidgetEmbedDotjsRouteImport } from './routes/api/public/widget/embed[.]js'
 import { Route as ApiPublicWidgetBadgeDotsvgRouteImport } from './routes/api/public/widget/badge[.]svg'
+import { Route as ApiPublicV1VerifyRouteImport } from './routes/api/public/v1/verify'
 import { Route as ApiPublicV1SpecsRouteImport } from './routes/api/public/v1/specs'
 import { Route as ApiPublicV1ScanRouteImport } from './routes/api/public/v1/scan'
 import { Route as ApiPublicV1ReadinessRouteImport } from './routes/api/public/v1/readiness'
@@ -157,6 +159,7 @@ import { Route as ApiPublicV1PostsRouteImport } from './routes/api/public/v1/pos
 import { Route as ApiPublicV1OpenapiDotjsonRouteImport } from './routes/api/public/v1/openapi[.]json'
 import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/leads'
 import { Route as ApiPublicV1DocsRouteImport } from './routes/api/public/v1/docs'
+import { Route as ApiPublicV1ContextRouteImport } from './routes/api/public/v1/context'
 import { Route as ApiPublicV1BulkSeedRouteImport } from './routes/api/public/v1/bulk-seed'
 import { Route as ApiPublicV1ApiKeyRequestsRouteImport } from './routes/api/public/v1/api-key-requests'
 import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/analyze'
@@ -439,6 +442,11 @@ const AppRoute = AppRouteImport.update({
 const ApiDocsRoute = ApiDocsRouteImport.update({
   id: '/api-docs',
   path: '/api-docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AknRoute = AknRouteImport.update({
+  id: '/akn',
+  path: '/akn',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -907,6 +915,11 @@ const ApiPublicWidgetBadgeDotsvgRoute =
     path: '/api/public/widget/badge.svg',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicV1VerifyRoute = ApiPublicV1VerifyRouteImport.update({
+  id: '/api/public/v1/verify',
+  path: '/api/public/v1/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicV1SpecsRoute = ApiPublicV1SpecsRouteImport.update({
   id: '/api/public/v1/specs',
   path: '/api/public/v1/specs',
@@ -941,6 +954,11 @@ const ApiPublicV1LeadsRoute = ApiPublicV1LeadsRouteImport.update({
 const ApiPublicV1DocsRoute = ApiPublicV1DocsRouteImport.update({
   id: '/api/public/v1/docs',
   path: '/api/public/v1/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1ContextRoute = ApiPublicV1ContextRouteImport.update({
+  id: '/api/public/v1/context',
+  path: '/api/public/v1/context',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicV1BulkSeedRoute = ApiPublicV1BulkSeedRouteImport.update({
@@ -1106,6 +1124,7 @@ const ApiPublicDataSchemasClaimsDotschemaDotjsonRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/akn': typeof AknRoute
   '/api-docs': typeof ApiDocsRoute
   '/app': typeof AppRouteWithChildren
   '/auth.md': typeof AuthDotmdRoute
@@ -1255,6 +1274,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/api-key-requests': typeof ApiPublicV1ApiKeyRequestsRoute
   '/api/public/v1/bulk-seed': typeof ApiPublicV1BulkSeedRoute
+  '/api/public/v1/context': typeof ApiPublicV1ContextRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
@@ -1262,6 +1282,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
   '/api/public/v1/scan': typeof ApiPublicV1ScanRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
+  '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
@@ -1284,6 +1305,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/akn': typeof AknRoute
   '/api-docs': typeof ApiDocsRoute
   '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
@@ -1430,6 +1452,7 @@ export interface FileRoutesByTo {
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/api-key-requests': typeof ApiPublicV1ApiKeyRequestsRoute
   '/api/public/v1/bulk-seed': typeof ApiPublicV1BulkSeedRoute
+  '/api/public/v1/context': typeof ApiPublicV1ContextRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
@@ -1437,6 +1460,7 @@ export interface FileRoutesByTo {
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
   '/api/public/v1/scan': typeof ApiPublicV1ScanRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
+  '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
@@ -1460,6 +1484,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/akn': typeof AknRoute
   '/api-docs': typeof ApiDocsRoute
   '/app': typeof AppRouteWithChildren
   '/auth.md': typeof AuthDotmdRoute
@@ -1609,6 +1634,7 @@ export interface FileRoutesById {
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/api-key-requests': typeof ApiPublicV1ApiKeyRequestsRoute
   '/api/public/v1/bulk-seed': typeof ApiPublicV1BulkSeedRoute
+  '/api/public/v1/context': typeof ApiPublicV1ContextRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
@@ -1616,6 +1642,7 @@ export interface FileRoutesById {
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
   '/api/public/v1/scan': typeof ApiPublicV1ScanRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
+  '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
@@ -1640,6 +1667,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/akn'
     | '/api-docs'
     | '/app'
     | '/auth.md'
@@ -1789,6 +1817,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/analyze'
     | '/api/public/v1/api-key-requests'
     | '/api/public/v1/bulk-seed'
+    | '/api/public/v1/context'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
@@ -1796,6 +1825,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/readiness'
     | '/api/public/v1/scan'
     | '/api/public/v1/specs'
+    | '/api/public/v1/verify'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
@@ -1818,6 +1848,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/akn'
     | '/api-docs'
     | '/auth.md'
     | '/badge'
@@ -1964,6 +1995,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/analyze'
     | '/api/public/v1/api-key-requests'
     | '/api/public/v1/bulk-seed'
+    | '/api/public/v1/context'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
@@ -1971,6 +2003,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/readiness'
     | '/api/public/v1/scan'
     | '/api/public/v1/specs'
+    | '/api/public/v1/verify'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
@@ -1993,6 +2026,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/akn'
     | '/api-docs'
     | '/app'
     | '/auth.md'
@@ -2142,6 +2176,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/analyze'
     | '/api/public/v1/api-key-requests'
     | '/api/public/v1/bulk-seed'
+    | '/api/public/v1/context'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
@@ -2149,6 +2184,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/readiness'
     | '/api/public/v1/scan'
     | '/api/public/v1/specs'
+    | '/api/public/v1/verify'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
@@ -2172,6 +2208,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AknRoute: typeof AknRoute
   ApiDocsRoute: typeof ApiDocsRoute
   AppRoute: typeof AppRouteWithChildren
   AuthDotmdRoute: typeof AuthDotmdRoute
@@ -2286,6 +2323,7 @@ export interface RootRouteChildren {
   ApiPublicV1AnalyzeRoute: typeof ApiPublicV1AnalyzeRoute
   ApiPublicV1ApiKeyRequestsRoute: typeof ApiPublicV1ApiKeyRequestsRoute
   ApiPublicV1BulkSeedRoute: typeof ApiPublicV1BulkSeedRoute
+  ApiPublicV1ContextRoute: typeof ApiPublicV1ContextRoute
   ApiPublicV1DocsRoute: typeof ApiPublicV1DocsRoute
   ApiPublicV1LeadsRoute: typeof ApiPublicV1LeadsRoute
   ApiPublicV1OpenapiDotjsonRoute: typeof ApiPublicV1OpenapiDotjsonRoute
@@ -2293,6 +2331,7 @@ export interface RootRouteChildren {
   ApiPublicV1ReadinessRoute: typeof ApiPublicV1ReadinessRoute
   ApiPublicV1ScanRoute: typeof ApiPublicV1ScanRoute
   ApiPublicV1SpecsRoute: typeof ApiPublicV1SpecsRoute
+  ApiPublicV1VerifyRoute: typeof ApiPublicV1VerifyRoute
   ApiPublicWidgetBadgeDotsvgRoute: typeof ApiPublicWidgetBadgeDotsvgRoute
   ApiPublicWidgetEmbedDotjsRoute: typeof ApiPublicWidgetEmbedDotjsRoute
   ApiPublicWidgetOgDotsvgRoute: typeof ApiPublicWidgetOgDotsvgRoute
@@ -2670,6 +2709,13 @@ declare module '@tanstack/react-router' {
       path: '/api-docs'
       fullPath: '/api-docs'
       preLoaderRoute: typeof ApiDocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/akn': {
+      id: '/akn'
+      path: '/akn'
+      fullPath: '/akn'
+      preLoaderRoute: typeof AknRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -3302,6 +3348,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWidgetBadgeDotsvgRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/verify': {
+      id: '/api/public/v1/verify'
+      path: '/api/public/v1/verify'
+      fullPath: '/api/public/v1/verify'
+      preLoaderRoute: typeof ApiPublicV1VerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/specs': {
       id: '/api/public/v1/specs'
       path: '/api/public/v1/specs'
@@ -3349,6 +3402,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/v1/docs'
       fullPath: '/api/public/v1/docs'
       preLoaderRoute: typeof ApiPublicV1DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/context': {
+      id: '/api/public/v1/context'
+      path: '/api/public/v1/context'
+      fullPath: '/api/public/v1/context'
+      preLoaderRoute: typeof ApiPublicV1ContextRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/v1/bulk-seed': {
@@ -3812,6 +3872,7 @@ const ApiPublicV1PostsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AknRoute: AknRoute,
   ApiDocsRoute: ApiDocsRoute,
   AppRoute: AppRouteWithChildren,
   AuthDotmdRoute: AuthDotmdRoute,
@@ -3933,6 +3994,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicV1AnalyzeRoute: ApiPublicV1AnalyzeRoute,
   ApiPublicV1ApiKeyRequestsRoute: ApiPublicV1ApiKeyRequestsRoute,
   ApiPublicV1BulkSeedRoute: ApiPublicV1BulkSeedRoute,
+  ApiPublicV1ContextRoute: ApiPublicV1ContextRoute,
   ApiPublicV1DocsRoute: ApiPublicV1DocsRoute,
   ApiPublicV1LeadsRoute: ApiPublicV1LeadsRoute,
   ApiPublicV1OpenapiDotjsonRoute: ApiPublicV1OpenapiDotjsonRoute,
@@ -3940,6 +4002,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicV1ReadinessRoute: ApiPublicV1ReadinessRoute,
   ApiPublicV1ScanRoute: ApiPublicV1ScanRoute,
   ApiPublicV1SpecsRoute: ApiPublicV1SpecsRoute,
+  ApiPublicV1VerifyRoute: ApiPublicV1VerifyRoute,
   ApiPublicWidgetBadgeDotsvgRoute: ApiPublicWidgetBadgeDotsvgRoute,
   ApiPublicWidgetEmbedDotjsRoute: ApiPublicWidgetEmbedDotjsRoute,
   ApiPublicWidgetOgDotsvgRoute: ApiPublicWidgetOgDotsvgRoute,

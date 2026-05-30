@@ -62,6 +62,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DataIndexRouteImport } from './routes/data.index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as ContentIndexRouteImport } from './routes/content.index'
+import { Route as CiteIndexRouteImport } from './routes/cite.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as WhyDomainRouteImport } from './routes/why.$domain'
@@ -96,6 +97,7 @@ import { Route as ContentDraftsRouteImport } from './routes/content.drafts'
 import { Route as ContentCalendarRouteImport } from './routes/content.calendar'
 import { Route as ContentBriefsRouteImport } from './routes/content.briefs'
 import { Route as ComparePairRouteImport } from './routes/compare.$pair'
+import { Route as CiteDomainRouteImport } from './routes/cite.$domain'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as CheckReportRouteImport } from './routes/check.report'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
@@ -437,6 +439,11 @@ const ContentIndexRoute = ContentIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ContentRoute,
 } as any)
+const CiteIndexRoute = CiteIndexRouteImport.update({
+  id: '/cite/',
+  path: '/cite/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -608,6 +615,11 @@ const ComparePairRoute = ComparePairRouteImport.update({
   id: '/$pair',
   path: '/$pair',
   getParentRoute: () => CompareRoute,
+} as any)
+const CiteDomainRoute = CiteDomainRouteImport.update({
+  id: '/cite/$domain',
+  path: '/cite/$domain',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
   id: '/success',
@@ -1082,6 +1094,7 @@ export interface FileRoutesByFullPath {
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/cite/$domain': typeof CiteDomainRoute
   '/compare/$pair': typeof ComparePairRoute
   '/content/briefs': typeof ContentBriefsRoute
   '/content/calendar': typeof ContentCalendarRoute
@@ -1116,6 +1129,7 @@ export interface FileRoutesByFullPath {
   '/why/$domain': typeof WhyDomainRoute
   '/app/': typeof AppIndexRoute
   '/blog/': typeof BlogIndexRoute
+  '/cite/': typeof CiteIndexRoute
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/data/': typeof DataIndexRoute
@@ -1243,6 +1257,7 @@ export interface FileRoutesByTo {
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/cite/$domain': typeof CiteDomainRoute
   '/compare/$pair': typeof ComparePairRoute
   '/content/briefs': typeof ContentBriefsRoute
   '/content/calendar': typeof ContentCalendarRoute
@@ -1277,6 +1292,7 @@ export interface FileRoutesByTo {
   '/why/$domain': typeof WhyDomainRoute
   '/app': typeof AppIndexRoute
   '/blog': typeof BlogIndexRoute
+  '/cite': typeof CiteIndexRoute
   '/content': typeof ContentIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/data': typeof DataIndexRoute
@@ -1408,6 +1424,7 @@ export interface FileRoutesById {
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
   '/checkout/success': typeof CheckoutSuccessRoute
+  '/cite/$domain': typeof CiteDomainRoute
   '/compare/$pair': typeof ComparePairRoute
   '/content/briefs': typeof ContentBriefsRoute
   '/content/calendar': typeof ContentCalendarRoute
@@ -1442,6 +1459,7 @@ export interface FileRoutesById {
   '/why/$domain': typeof WhyDomainRoute
   '/app/': typeof AppIndexRoute
   '/blog/': typeof BlogIndexRoute
+  '/cite/': typeof CiteIndexRoute
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/data/': typeof DataIndexRoute
@@ -1574,6 +1592,7 @@ export interface FileRouteTypes {
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
+    | '/cite/$domain'
     | '/compare/$pair'
     | '/content/briefs'
     | '/content/calendar'
@@ -1608,6 +1627,7 @@ export interface FileRouteTypes {
     | '/why/$domain'
     | '/app/'
     | '/blog/'
+    | '/cite/'
     | '/content/'
     | '/dashboard/'
     | '/data/'
@@ -1735,6 +1755,7 @@ export interface FileRouteTypes {
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
+    | '/cite/$domain'
     | '/compare/$pair'
     | '/content/briefs'
     | '/content/calendar'
@@ -1769,6 +1790,7 @@ export interface FileRouteTypes {
     | '/why/$domain'
     | '/app'
     | '/blog'
+    | '/cite'
     | '/content'
     | '/dashboard'
     | '/data'
@@ -1899,6 +1921,7 @@ export interface FileRouteTypes {
     | '/blog/rss.xml'
     | '/check/report'
     | '/checkout/success'
+    | '/cite/$domain'
     | '/compare/$pair'
     | '/content/briefs'
     | '/content/calendar'
@@ -1933,6 +1956,7 @@ export interface FileRouteTypes {
     | '/why/$domain'
     | '/app/'
     | '/blog/'
+    | '/cite/'
     | '/content/'
     | '/dashboard/'
     | '/data/'
@@ -2059,6 +2083,7 @@ export interface RootRouteChildren {
   AdminReviewsRoute: typeof AdminReviewsRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
+  CiteDomainRoute: typeof CiteDomainRoute
   DataLlmsDottxtRoute: typeof DataLlmsDottxtRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   GuideGenerativeEngineOptimizationRoute: typeof GuideGenerativeEngineOptimizationRoute
@@ -2070,6 +2095,7 @@ export interface RootRouteChildren {
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  CiteIndexRoute: typeof CiteIndexRoute
   DataIndexRoute: typeof DataIndexRoute
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   DotwellKnownAgentSkillsIndexDotjsonRoute: typeof DotwellKnownAgentSkillsIndexDotjsonRoute
@@ -2502,6 +2528,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContentIndexRouteImport
       parentRoute: typeof ContentRoute
     }
+    '/cite/': {
+      id: '/cite/'
+      path: '/cite'
+      fullPath: '/cite/'
+      preLoaderRoute: typeof CiteIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -2739,6 +2772,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/compare/$pair'
       preLoaderRoute: typeof ComparePairRouteImport
       parentRoute: typeof CompareRoute
+    }
+    '/cite/$domain': {
+      id: '/cite/$domain'
+      path: '/cite/$domain'
+      fullPath: '/cite/$domain'
+      preLoaderRoute: typeof CiteDomainRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/checkout/success': {
       id: '/checkout/success'
@@ -3578,6 +3618,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminReviewsRoute: AdminReviewsRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogRssDotxmlRoute: BlogRssDotxmlRoute,
+  CiteDomainRoute: CiteDomainRoute,
   DataLlmsDottxtRoute: DataLlmsDottxtRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   GuideGenerativeEngineOptimizationRoute:
@@ -3590,6 +3631,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
+  CiteIndexRoute: CiteIndexRoute,
   DataIndexRoute: DataIndexRoute,
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute:
     DotwellKnownAgentSkillsGrowGeoScanDotmdRoute,
@@ -3657,13 +3699,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

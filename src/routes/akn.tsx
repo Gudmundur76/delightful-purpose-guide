@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
+import { ogImageMeta } from "@/lib/seo/og";
 
 type Triple = {
   s: string;
@@ -27,7 +28,13 @@ export const Route = createFileRoute("/akn")({
         content:
           "Headless agentic protocol v4.0. RAG-optimized context, semantic triples, and an MCP server for OpenAI Operator, Perplexity Sonar, and Claude.",
       },
+      ...ogImageMeta({
+        title: "Agentic Knowledge Node",
+        kicker: "grow.contact",
+        sub: "Headless agentic protocol v4.0 — verifiable fact graph + MCP for autonomous agents.",
+      }),
     ],
+    links: [{ rel: "canonical", href: "https://grow.contact/akn" }],
   }),
   component: AknPage,
 });

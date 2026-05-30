@@ -1,7 +1,7 @@
 // Server fn returning the live Citation Intelligence dataset for the
-// /leaderboard page — joins companies + latest company_scores + latest
-// citation_history. Public read; uses supabaseAdmin with explicit safe-column
-// projection (public route loader cannot use requireSupabaseAuth).
+// /leaderboard page — joins companies + latest company_scores (CCS sub-pillars)
+// + latest citation_history. Public read; uses supabaseAdmin with explicit
+// safe-column projection (public route loader cannot use requireSupabaseAuth).
 import { createServerFn } from "@tanstack/react-start";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
@@ -11,6 +11,13 @@ export type CitationIndexRow = {
   category: string;
   logo_url: string | null;
   overall_ccs: number;
+  // CCS pillars (0-100)
+  authority: number;
+  verifiability: number;
+  precedent: number;
+  commentary: number;
+  information_gain: number;
+  canonical: number;
   citation_probability: number;
   total_citations: number;
   perplexity_share: number;
@@ -28,7 +35,9 @@ export const getCitationIndex = createServerFn({ method: "GET" }).handler(
       supabaseAdmin.from("companies").select("domain,name,category,logo_url"),
       supabaseAdmin
         .from("company_scores")
-        .select("domain,overall_ccs,citation_probability,scan_date")
+        .select(
+          "domain,overall_ccs,citation_probability,authority,verifiability,precedent,commentary,information_gain,canonical,scan_date",
+        )
         .order("scan_date", { ascending: false }),
       supabaseAdmin
         .from("citation_history")
@@ -45,12 +54,29 @@ export const getCitationIndex = createServerFn({ method: "GET" }).handler(
 
     if (companies.error) throw new Error(companies.error.message);
 
-    const latestScore = new Map<string, { overall_ccs: number; citation_probability: number }>();
+    type LatestScore = Pick<
+      CitationIndexRow,
+      | "overall_ccs"
+      | "citation_probability"
+      | "authority"
+      | "verifiability"
+      | "precedent"
+      | "commentary"
+      | "information_gain"
+      | "canonical"
+    >;
+    const latestScore = new Map<string, LatestScore>();
     for (const s of scores.data ?? []) {
       if (!latestScore.has(s.domain)) {
         latestScore.set(s.domain, {
           overall_ccs: s.overall_ccs ?? 0,
           citation_probability: s.citation_probability ?? 0,
+          authority: s.authority ?? 0,
+          verifiability: s.verifiability ?? 0,
+          precedent: s.precedent ?? 0,
+          commentary: s.commentary ?? 0,
+          information_gain: s.information_gain ?? 0,
+          canonical: s.canonical ?? 0,
         });
       }
     }
@@ -94,6 +120,12 @@ export const getCitationIndex = createServerFn({ method: "GET" }).handler(
         category: c.category,
         logo_url: c.logo_url ?? null,
         overall_ccs: s?.overall_ccs ?? 0,
+        authority: s?.authority ?? 0,
+        verifiability: s?.verifiability ?? 0,
+        precedent: s?.precedent ?? 0,
+        commentary: s?.commentary ?? 0,
+        information_gain: s?.information_gain ?? 0,
+        canonical: s?.canonical ?? 0,
         citation_probability: s?.citation_probability ?? 0,
         total_citations: h?.total_citations ?? 0,
         perplexity_share: h?.perplexity_share ?? 0,
@@ -105,7 +137,7 @@ export const getCitationIndex = createServerFn({ method: "GET" }).handler(
       };
     });
 
-    rows.sort((a, b) => b.citation_probability - a.citation_probability || b.overall_ccs - a.overall_ccs);
+    rows.sort((a, b) => b.overall_ccs - a.overall_ccs || b.citation_probability - a.citation_probability);
 
     return { rows, generated_at: new Date().toISOString() };
   },

@@ -7,6 +7,12 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
 import { CitationSnippet } from "@/components/CitationSnippet";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
   getCitationIndex,
   type CitationIndexRow,
 } from "@/lib/leaderboard/companies.functions";
@@ -20,6 +26,18 @@ const CATEGORY_LABELS: Record<string, string> = {
   security: "Security",
   robotics: "Robotics",
   biotech: "Biotech",
+  observability: "Observability",
+};
+
+const PILLAR_DESCRIPTIONS: Record<string, string> = {
+  authority: "Authority: GitHub stars, G2 reviews, news mentions, Stack Overflow presence.",
+  verifiability: "Verifiability: Source attribution, methodology disclosure, reproducibility.",
+  precedent: "Precedent: Historical citation frequency across Perplexity, ChatGPT, and Claude.",
+  commentary: "Commentary: How often research and third parties reference this company.",
+  information_gain: "Information Gain: Proprietary data, original research, unique stats.",
+  canonical: "Canonical: Technical parseability — semantic HTML, JSON-LD, llms.txt, speed.",
+  overall_ccs:
+    "Citation Corpus Score: weighted blend of all six pillars. The headline number AI search engines optimize for.",
 };
 
 const SORT_KEYS = [
@@ -27,19 +45,24 @@ const SORT_KEYS = [
   "name",
   "category",
   "overall_ccs",
+  "authority",
+  "verifiability",
+  "precedent",
+  "commentary",
+  "information_gain",
+  "canonical",
   "citation_probability",
-  "total_citations",
-  "perplexity_share",
-  "chatgpt_share",
-  "claude_share",
-  "google_aio_share",
   "citations_24h",
 ] as const;
 type SortKey = (typeof SORT_KEYS)[number];
 
+const VOL_KEYS = ["all", "rising", "falling", "stable"] as const;
+type VolKey = (typeof VOL_KEYS)[number];
+
 const searchSchema = z.object({
   cat: z.string().catch("all"),
-  sort: z.enum(SORT_KEYS).catch("citation_probability"),
+  vol: z.enum(VOL_KEYS).catch("all"),
+  sort: z.enum(SORT_KEYS).catch("overall_ccs"),
   dir: z.enum(["asc", "desc"]).catch("desc"),
 });
 

@@ -1786,6 +1786,21 @@ export type Database = {
         }
         Relationships: []
       }
+      citation_disagreements_24h: {
+        Row: {
+          a_cites_target: boolean | null
+          b_cites_target: boolean | null
+          calculated_at: string | null
+          disagreement_pct: number | null
+          domain_queried: string | null
+          domains_a: string[] | null
+          domains_b: string[] | null
+          engine_a: string | null
+          engine_b: string | null
+          severity: string | null
+        }
+        Relationships: []
+      }
       citation_events_24h_by_domain: {
         Row: {
           avg_latency_ms: number | null

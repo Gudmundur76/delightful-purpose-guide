@@ -318,13 +318,14 @@ function EngineColumn({
     </div>
   );
 }
-
+type ModelResult = {
   model: string;
   mentioned: boolean;
   answer?: string;
   matches?: string[];
   error?: string;
 };
+
 
 type CitationResponse = {
   host: string;

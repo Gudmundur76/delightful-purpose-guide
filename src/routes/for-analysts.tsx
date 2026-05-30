@@ -19,7 +19,7 @@ export const Route = createFileRoute("/for-analysts")({
       { name: "description", content: DESC },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
-      ...ogImageMeta(),
+      ...ogImageMeta({ title: TITLE, description: DESC, kicker: "FOR ANALYSTS" }),
     ],
   }),
   component: ForAnalystsPage,

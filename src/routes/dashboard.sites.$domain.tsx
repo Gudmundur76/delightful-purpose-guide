@@ -140,10 +140,21 @@ function SiteDetail() {
             </button>
           </div>
           <div className="border border-border bg-card p-6">
-            <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">INSTALL TOKEN</div>
-            <code className="font-mono text-[10px] break-all text-foreground">{site.install_token}</code>
-            <div className="mt-3 font-mono text-[10px] text-muted-foreground">
-              snippet: <code>/api/public/inject/{site.install_token}.js</code>
+            <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">INSTALL</div>
+            <code className="font-mono text-[10px] break-all text-foreground block mb-3">{site.install_token}</code>
+            <div className="space-y-2 font-mono text-[10px] text-muted-foreground">
+              <div>
+                <span className="text-foreground">snippet:</span>{" "}
+                <code>&lt;script src="/api/public/inject/{site.install_token}.js" async&gt;&lt;/script&gt;</code>
+              </div>
+              <div>
+                <a
+                  href={`/api/public/wp-plugin/${site.install_token}.zip`}
+                  className="inline-block mt-2 border border-accent text-accent px-3 py-1.5 uppercase tracking-widest hover:bg-accent hover:text-accent-foreground transition-colors"
+                >
+                  ↓ Download WordPress plugin
+                </a>
+              </div>
             </div>
           </div>
         </div>

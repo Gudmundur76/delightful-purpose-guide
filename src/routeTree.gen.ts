@@ -131,6 +131,7 @@ import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/l
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as ApiPublicWpPluginTokenRouteImport } from './routes/api/public/wp-plugin.$token'
 import { Route as ApiPublicWidgetOgDotsvgRouteImport } from './routes/api/public/widget/og[.]svg'
 import { Route as ApiPublicWidgetEmbedDotjsRouteImport } from './routes/api/public/widget/embed[.]js'
 import { Route as ApiPublicWidgetBadgeDotsvgRouteImport } from './routes/api/public/widget/badge[.]svg'
@@ -790,6 +791,11 @@ const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   path: '/lovable/email/auth/preview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicWpPluginTokenRoute = ApiPublicWpPluginTokenRouteImport.update({
+  id: '/api/public/wp-plugin/$token',
+  path: '/api/public/wp-plugin/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicWidgetOgDotsvgRoute = ApiPublicWidgetOgDotsvgRouteImport.update({
   id: '/api/public/widget/og.svg',
   path: '/api/public/widget/og.svg',
@@ -1124,6 +1130,7 @@ export interface FileRoutesByFullPath {
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
+  '/api/public/wp-plugin/$token': typeof ApiPublicWpPluginTokenRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -1279,6 +1286,7 @@ export interface FileRoutesByTo {
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
+  '/api/public/wp-plugin/$token': typeof ApiPublicWpPluginTokenRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -1438,6 +1446,7 @@ export interface FileRoutesById {
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
+  '/api/public/wp-plugin/$token': typeof ApiPublicWpPluginTokenRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -1598,6 +1607,7 @@ export interface FileRouteTypes {
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
+    | '/api/public/wp-plugin/$token'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -1753,6 +1763,7 @@ export interface FileRouteTypes {
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
+    | '/api/public/wp-plugin/$token'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -1911,6 +1922,7 @@ export interface FileRouteTypes {
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
+    | '/api/public/wp-plugin/$token'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -2038,6 +2050,7 @@ export interface RootRouteChildren {
   ApiPublicWidgetBadgeDotsvgRoute: typeof ApiPublicWidgetBadgeDotsvgRoute
   ApiPublicWidgetEmbedDotjsRoute: typeof ApiPublicWidgetEmbedDotjsRoute
   ApiPublicWidgetOgDotsvgRoute: typeof ApiPublicWidgetOgDotsvgRoute
+  ApiPublicWpPluginTokenRoute: typeof ApiPublicWpPluginTokenRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -2908,6 +2921,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/wp-plugin/$token': {
+      id: '/api/public/wp-plugin/$token'
+      path: '/api/public/wp-plugin/$token'
+      fullPath: '/api/public/wp-plugin/$token'
+      preLoaderRoute: typeof ApiPublicWpPluginTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/widget/og.svg': {
       id: '/api/public/widget/og.svg'
       path: '/api/public/widget/og.svg'
@@ -3504,6 +3524,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicWidgetBadgeDotsvgRoute: ApiPublicWidgetBadgeDotsvgRoute,
   ApiPublicWidgetEmbedDotjsRoute: ApiPublicWidgetEmbedDotjsRoute,
   ApiPublicWidgetOgDotsvgRoute: ApiPublicWidgetOgDotsvgRoute,
+  ApiPublicWpPluginTokenRoute: ApiPublicWpPluginTokenRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,

@@ -1,10 +1,166 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { callTool } from "@/lib/dashboard/mcp-client";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/dashboard/citation")({
   component: CitationPage,
 });
+
+type EngineRow = {
+  engine: string;
+  total_events: number;
+  unique_domains: number;
+  cited_events: number;
+  cited_pct: number | null;
+  avg_latency_ms: number | null;
+};
+
+type DomainRow = {
+  domain: string;
+  total_events: number;
+  cited_events: number;
+  cited_pct: number | null;
+  engines_seen: number;
+  avg_latency_ms: number | null;
+  last_event: string;
+};
+
+function LoopActivity() {
+  const [engines, setEngines] = useState<EngineRow[] | null>(null);
+  const [domains, setDomains] = useState<DomainRow[] | null>(null);
+  const [err, setErr] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  async function load() {
+    setLoading(true);
+    setErr(null);
+    try {
+      const [e, d] = await Promise.all([
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (supabase as any).from("citation_events_24h_by_engine").select("*"),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (supabase as any)
+          .from("citation_events_24h_by_domain")
+          .select("*")
+          .order("total_events", { ascending: false })
+          .limit(10),
+      ]);
+      if (e.error) throw e.error;
+      if (d.error) throw d.error;
+      setEngines((e.data as EngineRow[]) ?? []);
+      setDomains((d.data as DomainRow[]) ?? []);
+    } catch (ex) {
+      setErr(ex instanceof Error ? ex.message : String(ex));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    load();
+    const t = setInterval(load, 60_000);
+    return () => clearInterval(t);
+  }, []);
+
+  const totalEvents = (engines ?? []).reduce((s, r) => s + (r.total_events ?? 0), 0);
+  const totalCited = (engines ?? []).reduce((s, r) => s + (r.cited_events ?? 0), 0);
+  const overallPct = totalEvents ? Math.round((totalCited / totalEvents) * 1000) / 10 : 0;
+
+  return (
+    <section className="space-y-4">
+      <div className="flex items-end justify-between">
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-widest text-accent mb-1">
+            // THE LOOP · LAST 24H
+          </div>
+          <h2 className="font-extrabold text-2xl uppercase tracking-tighter">
+            Live citation capture
+          </h2>
+        </div>
+        <button
+          type="button"
+          onClick={load}
+          className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors"
+        >
+          {loading ? "REFRESHING…" : "REFRESH →"}
+        </button>
+      </div>
+
+      {err && (
+        <div className="border border-destructive/40 bg-destructive/5 p-3 font-mono text-xs text-destructive">
+          {err}
+        </div>
+      )}
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <LoopStat label="EVENTS" value={totalEvents} />
+        <LoopStat label="CITED" value={totalCited} />
+        <LoopStat label="CITED %" value={`${overallPct}%`} />
+        <LoopStat label="ENGINES" value={engines?.length ?? 0} />
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="border border-border bg-card/40">
+          <div className="px-4 py-3 border-b border-border font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            // BY ENGINE
+          </div>
+          {(!engines || engines.length === 0) ? (
+            <div className="p-4 font-mono text-xs text-muted-foreground">
+              {loading ? "// LOADING…" : "// NO EVENTS IN LAST 24H"}
+            </div>
+          ) : (
+            <div className="divide-y divide-border">
+              {engines.map((r) => (
+                <div key={r.engine} className="px-4 py-3 flex items-center gap-3 font-mono text-xs">
+                  <span className="text-foreground min-w-[100px] truncate">{r.engine}</span>
+                  <span className="text-accent tabular-nums">{r.cited_events}/{r.total_events}</span>
+                  <span className="text-muted-foreground tabular-nums ml-auto">
+                    {r.cited_pct ?? 0}% · {r.avg_latency_ms ?? 0}ms
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="border border-border bg-card/40">
+          <div className="px-4 py-3 border-b border-border font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            // TOP DOMAINS
+          </div>
+          {(!domains || domains.length === 0) ? (
+            <div className="p-4 font-mono text-xs text-muted-foreground">
+              {loading ? "// LOADING…" : "// NO DOMAINS YET"}
+            </div>
+          ) : (
+            <div className="divide-y divide-border">
+              {domains.map((r) => (
+                <div key={r.domain} className="px-4 py-3 flex items-center gap-3 font-mono text-xs">
+                  <span className="text-foreground flex-1 truncate">{r.domain}</span>
+                  <span className="text-accent tabular-nums">{r.cited_events}/{r.total_events}</span>
+                  <span className="text-muted-foreground tabular-nums hidden sm:inline">
+                    {r.cited_pct ?? 0}%
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function LoopStat({ label, value }: { label: string; value: string | number }) {
+  return (
+    <div className="border border-border bg-card/40 p-3">
+      <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+        {label}
+      </div>
+      <div className="font-extrabold text-2xl tabular-nums mt-1">{value}</div>
+    </div>
+  );
+}
 
 type ModelResult = {
   model: string;
@@ -85,6 +241,8 @@ function CitationPage() {
 
   return (
     <div className="space-y-10">
+      <LoopActivity />
+
       <header>
         <div className="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">
           // AI CITATION MONITOR

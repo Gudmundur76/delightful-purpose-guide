@@ -221,6 +221,7 @@ function ResearchHub() {
               <Link
                 key={g.slug}
                 to="/glossary/$term"
+                params={{ term: g.slug }}
                 className="font-mono text-[11px] uppercase tracking-widest border border-border px-3 py-1.5 hover:border-accent hover:text-accent"
               >
                 {g.term}

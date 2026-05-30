@@ -142,7 +142,9 @@ function NotFoundView() {
 }
 
 function VerifyPage() {
-  const { intelligence, record } = Route.useLoaderData();
+  const data = Route.useLoaderData();
+  const intelligence = data?.intelligence;
+  const record = data?.record;
   if (intelligence) return <IntelligenceView intel={intelligence} />;
   if (record) return <ScanRecordView record={record} />;
   return <NotFoundView />;

@@ -490,7 +490,7 @@ function GeoGuidePage() {
                 <strong>Citation tracking tools.</strong> Profound, Peec, SE Visible, Rankscale,
                 LLMrefs, and GetCito poll a fixed prompt set across engines and report whether you were
                 cited. Useful for trend lines; only meaningful once the site is technically passing.
-                See our <Link to="/vs/profound" className="underline decoration-accent underline-offset-2">/vs/profound</Link> comparison.
+                See our <Link to="/vs/$competitor" params={{ competitor: "profound" }} className="underline decoration-accent underline-offset-2">/vs/profound</Link> comparison.
               </li>
               <li>
                 <strong>AI referral traffic in analytics.</strong> chatgpt.com, perplexity.ai,

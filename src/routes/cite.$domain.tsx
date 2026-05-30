@@ -189,6 +189,43 @@ function CiteProfile() {
           </section>
         )}
 
+        {pillars && (
+          <section className="mb-10">
+            <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-1">
+              Citation Corpus Score
+            </h2>
+            <div className="flex items-baseline gap-3 mb-4">
+              <div className="text-5xl font-extrabold tabular-nums">{pillars.overall_ccs}</div>
+              <div className="font-mono text-xs text-muted-foreground">
+                / 100 · scored {new Date(pillars.scan_date).toLocaleDateString()}
+              </div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {(
+                [
+                  ["Authority", pillars.authority],
+                  ["Verifiability", pillars.verifiability],
+                  ["Precedent", pillars.precedent],
+                  ["Commentary", pillars.commentary],
+                  ["Information gain", pillars.information_gain],
+                  ["Canonical", pillars.canonical],
+                ] as const
+              ).map(([label, v]) => (
+                <PillarBar key={label} label={label} value={v} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {history.length > 1 && (
+          <section className="mb-10">
+            <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4">
+              Citation trend · last {history.length} months
+            </h2>
+            <TrendBars points={history} />
+          </section>
+        )}
+
         <div className="mt-12 border border-border rounded-lg p-6 bg-muted/30 flex flex-wrap gap-3 items-center justify-between">
           <div>
             <div className="font-semibold mb-1">Why isn&apos;t this domain cited more?</div>
@@ -206,6 +243,45 @@ function CiteProfile() {
         </div>
       </main>
       <SiteFooter />
+    </div>
+  );
+}
+
+function PillarBar({ label, value }: { label: string; value: number }) {
+  const color =
+    value >= 80 ? "bg-emerald-500" : value >= 60 ? "bg-amber-500" : value >= 40 ? "bg-muted-foreground" : "bg-destructive";
+  return (
+    <div className="border border-border rounded p-3">
+      <div className="flex justify-between font-mono text-xs mb-2">
+        <span className="text-muted-foreground">{label}</span>
+        <span className="tabular-nums font-bold">{value}</span>
+      </div>
+      <div className="h-1.5 bg-muted rounded overflow-hidden">
+        <div className={`h-full ${color}`} style={{ width: `${value}%` }} />
+      </div>
+    </div>
+  );
+}
+
+function TrendBars({ points }: { points: HistoryPoint[] }) {
+  const max = Math.max(1, ...points.map((p) => p.total_citations));
+  return (
+    <div className="flex items-end gap-2 h-32 border-b border-border">
+      {points.map((p) => {
+        const h = Math.max(4, (p.total_citations / max) * 100);
+        return (
+          <div key={p.month} className="flex-1 flex flex-col items-center justify-end gap-1">
+            <div
+              className="w-full bg-accent rounded-t"
+              style={{ height: `${h}%` }}
+              title={`${p.month}: ${p.total_citations}`}
+            />
+            <div className="font-mono text-[9px] text-muted-foreground">
+              {p.month.slice(5, 7)}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

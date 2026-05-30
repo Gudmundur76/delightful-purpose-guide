@@ -327,7 +327,9 @@ function Index() {
               {[
                 { to: "/standard", kicker: "Standard", title: "Agent-Native Web Standard", body: "The six-layer technical spec every grow.contact build ships against." },
                 { to: "/crawlers", kicker: "Matrix", title: "8 AI Systems, 8 Crawlers", body: "How ChatGPT, Perplexity, Claude, Gemini, Copilot and others crawl and cite." },
-                { to: "/guide/generative-engine-optimization", kicker: "Guide", title: "Citation Factors", body: "What actually moves AI citations — with Princeton GEO data and source-cited stats." },
+                { to: "/guide/generative-engine-optimization", kicker: "Guide", title: "GEO vs SEO", body: "What is generative engine optimization, how it differs from SEO, and what moves AI citations." },
+                { to: "/guide/aeo-vs-geo-vs-seo", kicker: "Guide", title: "AEO vs GEO vs SEO", body: "Side-by-side comparison of answer engine, generative engine, and traditional search optimization." },
+                { to: "/guide/llms-txt", kicker: "Guide", title: "llms.txt Spec", body: "The complete specification with examples, common mistakes, and how to validate your file." },
                 { to: "/v-score", kicker: "Methodology", title: "How the Score Works", body: "Five weighted signals — semantic HTML, JSON-LD, llms.txt, citability, speed." },
                 { to: "/check", kicker: "Tool", title: "Free Site Scan", body: "Run the same scanner we use on every audit. Score in under 30 seconds." },
                 { to: "/leaderboard", kicker: "Data", title: "Q2 2026 Leaderboard", body: "Live scores for 2,400+ audited sites across AI, devtools, and agent platforms." },

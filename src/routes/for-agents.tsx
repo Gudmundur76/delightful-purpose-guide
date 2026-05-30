@@ -242,12 +242,9 @@ function ForAgentsPage() {
                   ))}
                 </ul>
                 <div className="mt-6 pt-6 border-t border-border">
-                  <Link
-                    to="/api/public/mcp"
-                    className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-tighter hover:text-accent transition-colors"
-                  >
-                    MCP Docs <ArrowRight className="w-4 h-4" />
-                  </Link>
+                  <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-tighter text-muted-foreground">
+                    MCP Server v2.0
+                  </span>
                 </div>
               </div>
 
@@ -425,12 +422,12 @@ function ForAgentsPage() {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://docs.grow.contact"
+                  <Link
+                    to="/playground"
                     className="text-sm text-muted-foreground hover:text-accent transition-colors"
                   >
-                    Developer Docs
-                  </a>
+                    Playground
+                  </Link>
                 </li>
               </ul>
             </div>

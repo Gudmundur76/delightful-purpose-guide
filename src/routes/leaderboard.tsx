@@ -604,7 +604,7 @@ function CategoryTab({
   return (
     <Link
       to="/leaderboard"
-      search={(prev: { cat: string; sort: SortKey; dir: "asc" | "desc" }) => ({ ...prev, cat })}
+      search={(prev: { cat: string; vol: VolKey; sort: SortKey; dir: "asc" | "desc" }) => ({ ...prev, cat })}
       className={`px-3 py-1.5 font-mono text-xs uppercase tracking-widest border transition-colors ${
         active
           ? "bg-accent text-accent-foreground border-accent"
@@ -616,6 +616,46 @@ function CategoryTab({
   );
 }
 
+function VolTab({
+  vol,
+  active,
+  label,
+  count,
+}: {
+  vol: VolKey;
+  active: boolean;
+  label: string;
+  count: number;
+}) {
+  return (
+    <Link
+      to="/leaderboard"
+      search={(prev: { cat: string; vol: VolKey; sort: SortKey; dir: "asc" | "desc" }) => ({ ...prev, vol })}
+      className={`px-3 py-1.5 font-mono text-xs uppercase tracking-widest border transition-colors ${
+        active
+          ? "bg-accent text-accent-foreground border-accent"
+          : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/40"
+      }`}
+    >
+      {label} <span className="tabular-nums opacity-70">({count})</span>
+    </Link>
+  );
+}
+
+function PillarCell({ value }: { value: number }) {
+  const color =
+    value >= 80
+      ? "text-accent"
+      : value >= 60
+        ? "text-foreground"
+        : value >= 40
+          ? "text-muted-foreground"
+          : "text-destructive";
+  return (
+    <td className={`px-3 py-3 text-right font-mono text-xs tabular-nums ${color}`}>{value}</td>
+  );
+}
+
 function SortableTh({
   label,
   k,
@@ -623,6 +663,7 @@ function SortableTh({
   dir,
   onClick,
   align = "left",
+  tip,
 }: {
   label: string;
   k: SortKey;
@@ -630,23 +671,35 @@ function SortableTh({
   dir: "asc" | "desc";
   onClick: (k: SortKey) => void;
   align?: "left" | "right";
+  tip?: string;
 }) {
   const active = sort === k;
+  const button = (
+    <button
+      type="button"
+      onClick={() => onClick(k)}
+      className={`font-mono text-[10px] uppercase tracking-widest transition-colors ${
+        active ? "text-accent" : "text-muted-foreground hover:text-foreground"
+      }`}
+    >
+      {label}
+      {active ? <span className="ml-1">{dir === "asc" ? "↑" : "↓"}</span> : null}
+    </button>
+  );
   return (
     <th className={`px-3 py-3 ${align === "right" ? "text-right" : "text-left"}`}>
-      <button
-        type="button"
-        onClick={() => onClick(k)}
-        className={`font-mono text-[10px] uppercase tracking-widest transition-colors ${
-          active ? "text-accent" : "text-muted-foreground hover:text-foreground"
-        }`}
-      >
-        {label}
-        {active ? <span className="ml-1">{dir === "asc" ? "↑" : "↓"}</span> : null}
-      </button>
+      {tip ? (
+        <Tooltip>
+          <TooltipTrigger asChild>{button}</TooltipTrigger>
+          <TooltipContent className="max-w-xs text-xs">{tip}</TooltipContent>
+        </Tooltip>
+      ) : (
+        button
+      )}
     </th>
   );
 }
+
 
 function StatCell({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (

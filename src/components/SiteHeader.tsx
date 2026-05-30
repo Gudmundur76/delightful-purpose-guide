@@ -12,6 +12,7 @@ const NAV = [
   { to: "/extension", label: "Extension", exact: false },
 
   { to: "/leaderboard", label: "Leaderboard", exact: false },
+  { to: "/research", label: "Research", exact: false },
   { to: "/blog", label: "Journal", exact: false },
 ] as const;
 

@@ -176,6 +176,7 @@ import { Route as ApiPublicAdminPlatformRouteImport } from './routes/api/public/
 import { Route as ApiPublicWidgetChartSlugDotsvgRouteImport } from './routes/api/public/widget/chart.$slug[.]svg'
 import { Route as ApiPublicV1ResearchChar123slugChar125DotjsonRouteImport } from './routes/api/public/v1/research.{$slug}[.]json'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
+import { Route as ApiPublicV1GlossaryChar123termChar125DotjsonRouteImport } from './routes/api/public/v1/glossary.{$term}[.]json'
 import { Route as ApiPublicV1CompaniesDomainRouteImport } from './routes/api/public/v1/companies.$domain'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
 import { Route as ApiPublicDataSchemasStatsDotschemaDotjsonRouteImport } from './routes/api/public/data.schemas.stats[.]schema[.]json'
@@ -1049,6 +1050,12 @@ const ApiPublicV1PostsSlugRoute = ApiPublicV1PostsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ApiPublicV1PostsRoute,
 } as any)
+const ApiPublicV1GlossaryChar123termChar125DotjsonRoute =
+  ApiPublicV1GlossaryChar123termChar125DotjsonRouteImport.update({
+    id: '/api/public/v1/glossary/{$term}.json',
+    path: '/api/public/v1/glossary/{$term}.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicV1CompaniesDomainRoute =
   ApiPublicV1CompaniesDomainRouteImport.update({
     id: '/api/public/v1/companies/$domain',
@@ -1249,6 +1256,7 @@ export interface FileRoutesByFullPath {
   '/api/public/data/schemas/stats.schema.json': typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/companies/$domain': typeof ApiPublicV1CompaniesDomainRoute
+  '/api/public/v1/glossary/{$term}.json': typeof ApiPublicV1GlossaryChar123termChar125DotjsonRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
   '/api/public/v1/research/{$slug}.json': typeof ApiPublicV1ResearchChar123slugChar125DotjsonRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
@@ -1420,6 +1428,7 @@ export interface FileRoutesByTo {
   '/api/public/data/schemas/stats.schema.json': typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/companies/$domain': typeof ApiPublicV1CompaniesDomainRoute
+  '/api/public/v1/glossary/{$term}.json': typeof ApiPublicV1GlossaryChar123termChar125DotjsonRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
   '/api/public/v1/research/{$slug}.json': typeof ApiPublicV1ResearchChar123slugChar125DotjsonRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
@@ -1595,6 +1604,7 @@ export interface FileRoutesById {
   '/api/public/data/schemas/stats.schema.json': typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/companies/$domain': typeof ApiPublicV1CompaniesDomainRoute
+  '/api/public/v1/glossary/{$term}.json': typeof ApiPublicV1GlossaryChar123termChar125DotjsonRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
   '/api/public/v1/research/{$slug}.json': typeof ApiPublicV1ResearchChar123slugChar125DotjsonRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
@@ -1771,6 +1781,7 @@ export interface FileRouteTypes {
     | '/api/public/data/schemas/stats.schema.json'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/companies/$domain'
+    | '/api/public/v1/glossary/{$term}.json'
     | '/api/public/v1/posts/$slug'
     | '/api/public/v1/research/{$slug}.json'
     | '/api/public/widget/chart/$slug.svg'
@@ -1942,6 +1953,7 @@ export interface FileRouteTypes {
     | '/api/public/data/schemas/stats.schema.json'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/companies/$domain'
+    | '/api/public/v1/glossary/{$term}.json'
     | '/api/public/v1/posts/$slug'
     | '/api/public/v1/research/{$slug}.json'
     | '/api/public/widget/chart/$slug.svg'
@@ -2116,6 +2128,7 @@ export interface FileRouteTypes {
     | '/api/public/data/schemas/stats.schema.json'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/companies/$domain'
+    | '/api/public/v1/glossary/{$term}.json'
     | '/api/public/v1/posts/$slug'
     | '/api/public/v1/research/{$slug}.json'
     | '/api/public/widget/chart/$slug.svg'
@@ -2256,6 +2269,7 @@ export interface RootRouteChildren {
   ApiPublicDataSchemasStatsDotschemaDotjsonRoute: typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   ApiPublicV1AdminTableRoute: typeof ApiPublicV1AdminTableRoute
   ApiPublicV1CompaniesDomainRoute: typeof ApiPublicV1CompaniesDomainRoute
+  ApiPublicV1GlossaryChar123termChar125DotjsonRoute: typeof ApiPublicV1GlossaryChar123termChar125DotjsonRoute
   ApiPublicV1ResearchChar123slugChar125DotjsonRoute: typeof ApiPublicV1ResearchChar123slugChar125DotjsonRoute
   ApiPublicWidgetChartSlugDotsvgRoute: typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
@@ -3431,6 +3445,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1PostsSlugRouteImport
       parentRoute: typeof ApiPublicV1PostsRoute
     }
+    '/api/public/v1/glossary/{$term}.json': {
+      id: '/api/public/v1/glossary/{$term}.json'
+      path: '/api/public/v1/glossary/{$term}.json'
+      fullPath: '/api/public/v1/glossary/{$term}.json'
+      preLoaderRoute: typeof ApiPublicV1GlossaryChar123termChar125DotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/companies/$domain': {
       id: '/api/public/v1/companies/$domain'
       path: '/api/public/v1/companies/$domain'
@@ -3874,6 +3895,8 @@ const rootRouteChildren: RootRouteChildren = {
     ApiPublicDataSchemasStatsDotschemaDotjsonRoute,
   ApiPublicV1AdminTableRoute: ApiPublicV1AdminTableRoute,
   ApiPublicV1CompaniesDomainRoute: ApiPublicV1CompaniesDomainRoute,
+  ApiPublicV1GlossaryChar123termChar125DotjsonRoute:
+    ApiPublicV1GlossaryChar123termChar125DotjsonRoute,
   ApiPublicV1ResearchChar123slugChar125DotjsonRoute:
     ApiPublicV1ResearchChar123slugChar125DotjsonRoute,
   ApiPublicWidgetChartSlugDotsvgRoute: ApiPublicWidgetChartSlugDotsvgRoute,

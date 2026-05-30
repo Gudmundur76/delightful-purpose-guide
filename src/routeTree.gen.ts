@@ -73,11 +73,13 @@ import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-ch
 import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
 import { Route as StandardLlmsDottxtRouteImport } from './routes/standard.llms[.]txt'
 import { Route as StandardVersionRouteImport } from './routes/standard.$version'
+import { Route as ResearchRssDotxmlRouteImport } from './routes/research/rss[.]xml'
 import { Route as ReportQ22026DotpdfRouteImport } from './routes/report.q2-2026[.]pdf'
 import { Route as ReportQ22026RouteImport } from './routes/report.q2-2026'
 import { Route as ReportPressRouteImport } from './routes/report.press'
 import { Route as ReportMethodologyRouteImport } from './routes/report.methodology'
 import { Route as PlaybooksSlugRouteImport } from './routes/playbooks.$slug'
+import { Route as LeaderboardRssDotxmlRouteImport } from './routes/leaderboard/rss[.]xml'
 import { Route as LeaderboardMethodologyRouteImport } from './routes/leaderboard.methodology'
 import { Route as LeaderboardLlmsDottxtRouteImport } from './routes/leaderboard.llms[.]txt'
 import { Route as HistoryHostRouteImport } from './routes/history.$host'
@@ -172,7 +174,9 @@ import { Route as ApiPublicDataLeaderboardDotjsonRouteImport } from './routes/ap
 import { Route as ApiPublicDataClaimsDotjsonRouteImport } from './routes/api/public/data.claims[.]json'
 import { Route as ApiPublicAdminPlatformRouteImport } from './routes/api/public/admin/platform'
 import { Route as ApiPublicWidgetChartSlugDotsvgRouteImport } from './routes/api/public/widget/chart.$slug[.]svg'
+import { Route as ApiPublicV1ResearchChar123slugChar125DotjsonRouteImport } from './routes/api/public/v1/research.{$slug}[.]json'
 import { Route as ApiPublicV1PostsSlugRouteImport } from './routes/api/public/v1/posts.$slug'
+import { Route as ApiPublicV1GlossaryChar123termChar125DotjsonRouteImport } from './routes/api/public/v1/glossary.{$term}[.]json'
 import { Route as ApiPublicV1CompaniesDomainRouteImport } from './routes/api/public/v1/companies.$domain'
 import { Route as ApiPublicV1AdminTableRouteImport } from './routes/api/public/v1/admin.$table'
 import { Route as ApiPublicDataSchemasStatsDotschemaDotjsonRouteImport } from './routes/api/public/data.schemas.stats[.]schema[.]json'
@@ -500,6 +504,11 @@ const StandardVersionRoute = StandardVersionRouteImport.update({
   path: '/$version',
   getParentRoute: () => StandardRoute,
 } as any)
+const ResearchRssDotxmlRoute = ResearchRssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
+  getParentRoute: () => ResearchRoute,
+} as any)
 const ReportQ22026DotpdfRoute = ReportQ22026DotpdfRouteImport.update({
   id: '/report/q2-2026.pdf',
   path: '/report/q2-2026.pdf',
@@ -524,6 +533,11 @@ const PlaybooksSlugRoute = PlaybooksSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => PlaybooksRoute,
+} as any)
+const LeaderboardRssDotxmlRoute = LeaderboardRssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
+  getParentRoute: () => LeaderboardRoute,
 } as any)
 const LeaderboardMethodologyRoute = LeaderboardMethodologyRouteImport.update({
   id: '/methodology',
@@ -1025,11 +1039,23 @@ const ApiPublicWidgetChartSlugDotsvgRoute =
     path: '/api/public/widget/chart/$slug.svg',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicV1ResearchChar123slugChar125DotjsonRoute =
+  ApiPublicV1ResearchChar123slugChar125DotjsonRouteImport.update({
+    id: '/api/public/v1/research/{$slug}.json',
+    path: '/api/public/v1/research/{$slug}.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicV1PostsSlugRoute = ApiPublicV1PostsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => ApiPublicV1PostsRoute,
 } as any)
+const ApiPublicV1GlossaryChar123termChar125DotjsonRoute =
+  ApiPublicV1GlossaryChar123termChar125DotjsonRouteImport.update({
+    id: '/api/public/v1/glossary/{$term}.json',
+    path: '/api/public/v1/glossary/{$term}.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicV1CompaniesDomainRoute =
   ApiPublicV1CompaniesDomainRouteImport.update({
     id: '/api/public/v1/companies/$domain',
@@ -1096,7 +1122,7 @@ export interface FileRoutesByFullPath {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
-  '/research': typeof ResearchRoute
+  '/research': typeof ResearchRouteWithChildren
   '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1149,11 +1175,13 @@ export interface FileRoutesByFullPath {
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
+  '/leaderboard/rss.xml': typeof LeaderboardRssDotxmlRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
   '/report/methodology': typeof ReportMethodologyRoute
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
+  '/research/rss.xml': typeof ResearchRssDotxmlRoute
   '/standard/$version': typeof StandardVersionRoute
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
@@ -1228,7 +1256,9 @@ export interface FileRoutesByFullPath {
   '/api/public/data/schemas/stats.schema.json': typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/companies/$domain': typeof ApiPublicV1CompaniesDomainRoute
+  '/api/public/v1/glossary/{$term}.json': typeof ApiPublicV1GlossaryChar123termChar125DotjsonRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
+  '/api/public/v1/research/{$slug}.json': typeof ApiPublicV1ResearchChar123slugChar125DotjsonRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 export interface FileRoutesByTo {
@@ -1264,7 +1294,7 @@ export interface FileRoutesByTo {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
-  '/research': typeof ResearchRoute
+  '/research': typeof ResearchRouteWithChildren
   '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1317,11 +1347,13 @@ export interface FileRoutesByTo {
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
+  '/leaderboard/rss.xml': typeof LeaderboardRssDotxmlRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
   '/report/methodology': typeof ReportMethodologyRoute
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
+  '/research/rss.xml': typeof ResearchRssDotxmlRoute
   '/standard/$version': typeof StandardVersionRoute
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
@@ -1396,7 +1428,9 @@ export interface FileRoutesByTo {
   '/api/public/data/schemas/stats.schema.json': typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/companies/$domain': typeof ApiPublicV1CompaniesDomainRoute
+  '/api/public/v1/glossary/{$term}.json': typeof ApiPublicV1GlossaryChar123termChar125DotjsonRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
+  '/api/public/v1/research/{$slug}.json': typeof ApiPublicV1ResearchChar123slugChar125DotjsonRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 export interface FileRoutesById {
@@ -1436,7 +1470,7 @@ export interface FileRoutesById {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
-  '/research': typeof ResearchRoute
+  '/research': typeof ResearchRouteWithChildren
   '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1489,11 +1523,13 @@ export interface FileRoutesById {
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
+  '/leaderboard/rss.xml': typeof LeaderboardRssDotxmlRoute
   '/playbooks/$slug': typeof PlaybooksSlugRoute
   '/report/methodology': typeof ReportMethodologyRoute
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
+  '/research/rss.xml': typeof ResearchRssDotxmlRoute
   '/standard/$version': typeof StandardVersionRoute
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
@@ -1568,7 +1604,9 @@ export interface FileRoutesById {
   '/api/public/data/schemas/stats.schema.json': typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   '/api/public/v1/admin/$table': typeof ApiPublicV1AdminTableRoute
   '/api/public/v1/companies/$domain': typeof ApiPublicV1CompaniesDomainRoute
+  '/api/public/v1/glossary/{$term}.json': typeof ApiPublicV1GlossaryChar123termChar125DotjsonRoute
   '/api/public/v1/posts/$slug': typeof ApiPublicV1PostsSlugRoute
+  '/api/public/v1/research/{$slug}.json': typeof ApiPublicV1ResearchChar123slugChar125DotjsonRoute
   '/api/public/widget/chart/$slug.svg': typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 export interface FileRouteTypes {
@@ -1662,11 +1700,13 @@ export interface FileRouteTypes {
     | '/history/$host'
     | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
+    | '/leaderboard/rss.xml'
     | '/playbooks/$slug'
     | '/report/methodology'
     | '/report/press'
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
+    | '/research/rss.xml'
     | '/standard/$version'
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
@@ -1741,7 +1781,9 @@ export interface FileRouteTypes {
     | '/api/public/data/schemas/stats.schema.json'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/companies/$domain'
+    | '/api/public/v1/glossary/{$term}.json'
     | '/api/public/v1/posts/$slug'
+    | '/api/public/v1/research/{$slug}.json'
     | '/api/public/widget/chart/$slug.svg'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -1830,11 +1872,13 @@ export interface FileRouteTypes {
     | '/history/$host'
     | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
+    | '/leaderboard/rss.xml'
     | '/playbooks/$slug'
     | '/report/methodology'
     | '/report/press'
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
+    | '/research/rss.xml'
     | '/standard/$version'
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
@@ -1909,7 +1953,9 @@ export interface FileRouteTypes {
     | '/api/public/data/schemas/stats.schema.json'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/companies/$domain'
+    | '/api/public/v1/glossary/{$term}.json'
     | '/api/public/v1/posts/$slug'
+    | '/api/public/v1/research/{$slug}.json'
     | '/api/public/widget/chart/$slug.svg'
   id:
     | '__root__'
@@ -2001,11 +2047,13 @@ export interface FileRouteTypes {
     | '/history/$host'
     | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
+    | '/leaderboard/rss.xml'
     | '/playbooks/$slug'
     | '/report/methodology'
     | '/report/press'
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
+    | '/research/rss.xml'
     | '/standard/$version'
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
@@ -2080,7 +2128,9 @@ export interface FileRouteTypes {
     | '/api/public/data/schemas/stats.schema.json'
     | '/api/public/v1/admin/$table'
     | '/api/public/v1/companies/$domain'
+    | '/api/public/v1/glossary/{$term}.json'
     | '/api/public/v1/posts/$slug'
+    | '/api/public/v1/research/{$slug}.json'
     | '/api/public/widget/chart/$slug.svg'
   fileRoutesById: FileRoutesById
 }
@@ -2120,7 +2170,7 @@ export interface RootRouteChildren {
   ProcessRoute: typeof ProcessRoute
   ProductsRoute: typeof ProductsRoute
   RefundRoute: typeof RefundRoute
-  ResearchRoute: typeof ResearchRoute
+  ResearchRoute: typeof ResearchRouteWithChildren
   RssDotxmlRoute: typeof RssDotxmlRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -2219,6 +2269,8 @@ export interface RootRouteChildren {
   ApiPublicDataSchemasStatsDotschemaDotjsonRoute: typeof ApiPublicDataSchemasStatsDotschemaDotjsonRoute
   ApiPublicV1AdminTableRoute: typeof ApiPublicV1AdminTableRoute
   ApiPublicV1CompaniesDomainRoute: typeof ApiPublicV1CompaniesDomainRoute
+  ApiPublicV1GlossaryChar123termChar125DotjsonRoute: typeof ApiPublicV1GlossaryChar123termChar125DotjsonRoute
+  ApiPublicV1ResearchChar123slugChar125DotjsonRoute: typeof ApiPublicV1ResearchChar123slugChar125DotjsonRoute
   ApiPublicWidgetChartSlugDotsvgRoute: typeof ApiPublicWidgetChartSlugDotsvgRoute
 }
 
@@ -2672,6 +2724,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StandardVersionRouteImport
       parentRoute: typeof StandardRoute
     }
+    '/research/rss.xml': {
+      id: '/research/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/research/rss.xml'
+      preLoaderRoute: typeof ResearchRssDotxmlRouteImport
+      parentRoute: typeof ResearchRoute
+    }
     '/report/q2-2026.pdf': {
       id: '/report/q2-2026.pdf'
       path: '/report/q2-2026.pdf'
@@ -2706,6 +2765,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/playbooks/$slug'
       preLoaderRoute: typeof PlaybooksSlugRouteImport
       parentRoute: typeof PlaybooksRoute
+    }
+    '/leaderboard/rss.xml': {
+      id: '/leaderboard/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/leaderboard/rss.xml'
+      preLoaderRoute: typeof LeaderboardRssDotxmlRouteImport
+      parentRoute: typeof LeaderboardRoute
     }
     '/leaderboard/methodology': {
       id: '/leaderboard/methodology'
@@ -3365,12 +3431,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWidgetChartSlugDotsvgRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/research/{$slug}.json': {
+      id: '/api/public/v1/research/{$slug}.json'
+      path: '/api/public/v1/research/{$slug}.json'
+      fullPath: '/api/public/v1/research/{$slug}.json'
+      preLoaderRoute: typeof ApiPublicV1ResearchChar123slugChar125DotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/posts/$slug': {
       id: '/api/public/v1/posts/$slug'
       path: '/$slug'
       fullPath: '/api/public/v1/posts/$slug'
       preLoaderRoute: typeof ApiPublicV1PostsSlugRouteImport
       parentRoute: typeof ApiPublicV1PostsRoute
+    }
+    '/api/public/v1/glossary/{$term}.json': {
+      id: '/api/public/v1/glossary/{$term}.json'
+      path: '/api/public/v1/glossary/{$term}.json'
+      fullPath: '/api/public/v1/glossary/{$term}.json'
+      preLoaderRoute: typeof ApiPublicV1GlossaryChar123termChar125DotjsonRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/v1/companies/$domain': {
       id: '/api/public/v1/companies/$domain'
@@ -3573,11 +3653,13 @@ const GlossaryRouteWithChildren = GlossaryRoute._addFileChildren(
 interface LeaderboardRouteChildren {
   LeaderboardLlmsDottxtRoute: typeof LeaderboardLlmsDottxtRoute
   LeaderboardMethodologyRoute: typeof LeaderboardMethodologyRoute
+  LeaderboardRssDotxmlRoute: typeof LeaderboardRssDotxmlRoute
 }
 
 const LeaderboardRouteChildren: LeaderboardRouteChildren = {
   LeaderboardLlmsDottxtRoute: LeaderboardLlmsDottxtRoute,
   LeaderboardMethodologyRoute: LeaderboardMethodologyRoute,
+  LeaderboardRssDotxmlRoute: LeaderboardRssDotxmlRoute,
 }
 
 const LeaderboardRouteWithChildren = LeaderboardRoute._addFileChildren(
@@ -3594,6 +3676,18 @@ const PlaybooksRouteChildren: PlaybooksRouteChildren = {
 
 const PlaybooksRouteWithChildren = PlaybooksRoute._addFileChildren(
   PlaybooksRouteChildren,
+)
+
+interface ResearchRouteChildren {
+  ResearchRssDotxmlRoute: typeof ResearchRssDotxmlRoute
+}
+
+const ResearchRouteChildren: ResearchRouteChildren = {
+  ResearchRssDotxmlRoute: ResearchRssDotxmlRoute,
+}
+
+const ResearchRouteWithChildren = ResearchRoute._addFileChildren(
+  ResearchRouteChildren,
 )
 
 interface StandardRouteChildren {
@@ -3692,7 +3786,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProcessRoute: ProcessRoute,
   ProductsRoute: ProductsRoute,
   RefundRoute: RefundRoute,
-  ResearchRoute: ResearchRoute,
+  ResearchRoute: ResearchRouteWithChildren,
   RssDotxmlRoute: RssDotxmlRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
@@ -3801,6 +3895,10 @@ const rootRouteChildren: RootRouteChildren = {
     ApiPublicDataSchemasStatsDotschemaDotjsonRoute,
   ApiPublicV1AdminTableRoute: ApiPublicV1AdminTableRoute,
   ApiPublicV1CompaniesDomainRoute: ApiPublicV1CompaniesDomainRoute,
+  ApiPublicV1GlossaryChar123termChar125DotjsonRoute:
+    ApiPublicV1GlossaryChar123termChar125DotjsonRoute,
+  ApiPublicV1ResearchChar123slugChar125DotjsonRoute:
+    ApiPublicV1ResearchChar123slugChar125DotjsonRoute,
   ApiPublicWidgetChartSlugDotsvgRoute: ApiPublicWidgetChartSlugDotsvgRoute,
 }
 export const routeTree = rootRouteImport

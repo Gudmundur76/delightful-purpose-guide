@@ -331,6 +331,7 @@ function Index() {
                 { to: "/v-score", kicker: "Methodology", title: "How the Score Works", body: "Five weighted signals — semantic HTML, JSON-LD, llms.txt, citability, speed." },
                 { to: "/check", kicker: "Tool", title: "Free Site Scan", body: "Run the same scanner we use on every audit. Score in under 30 seconds." },
                 { to: "/leaderboard", kicker: "Data", title: "Q2 2026 Leaderboard", body: "Live scores for 2,400+ audited sites across AI, devtools, and agent platforms." },
+                { to: "/research", kicker: "Research", title: "Reports, Data Drops & Playbooks", body: "Quarterly report, monthly citation index, data drops, playbooks, glossary — every citable artifact in one hub." },
               ].map((c) => (
                 <Link key={c.to} to={c.to} className="bg-background p-6 md:p-8 group hover:bg-card/40 transition-colors">
                   <p className="font-mono text-accent text-[11px] uppercase tracking-widest mb-3">// {c.kicker}</p>

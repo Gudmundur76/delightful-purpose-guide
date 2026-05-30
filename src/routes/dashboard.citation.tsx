@@ -241,7 +241,9 @@ function CitationPage() {
 
   return (
     <div className="space-y-10">
+      <Contradictions />
       <LoopActivity />
+
 
       <header>
         <div className="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">

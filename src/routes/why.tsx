@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ogImageMeta } from "@/lib/seo/og";
 
 export const Route = createFileRoute("/why")({
   component: WhyPage,
@@ -14,6 +15,7 @@ export const Route = createFileRoute("/why")({
       { name: "description", content: "Free diagnostic: find out why AI search engines ignore your site, and the 3 highest-impact fixes." },
       { property: "og:title", content: "Why doesn't ChatGPT cite you?" },
       { property: "og:description", content: "Free AI citation diagnostic for your domain." },
+      ...ogImageMeta({ title: "Why doesn't ChatGPT cite you?", kicker: "why.grow", sub: "Free AI citation diagnostic" }),
     ],
   }),
 });

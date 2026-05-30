@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ogImageMeta } from "@/lib/seo/og";
 
 export const Route = createFileRoute("/why/$domain")({
   component: WhyReportPage,
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/why/$domain")({
     meta: [
       { title: `Why isn't ${params.domain} cited by AI? — why.grow` },
       { name: "description", content: `Full AI citation diagnostic for ${params.domain}: authority, technical, content, engine breakdown, and ranked fixes.` },
+      ...ogImageMeta({ title: `Why isn't ${params.domain} cited?`, kicker: "why.grow report", sub: "AI citation diagnostic" }),
     ],
   }),
 });

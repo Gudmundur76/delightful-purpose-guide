@@ -177,7 +177,7 @@ function volatilityBadge(v: CitationIndexRow["volatility"]) {
 }
 
 function LeaderboardPage() {
-  const { cat, sort, dir } = Route.useSearch();
+  const { cat, vol, sort, dir } = Route.useSearch();
   const navigate = Route.useNavigate();
   const { data } = useSuspenseQuery(citationIndexQuery);
   const allRows = data.rows;
@@ -193,6 +193,7 @@ function LeaderboardPage() {
   const filtered = useMemo(() => {
     let rows = allRows;
     if (cat !== "all") rows = rows.filter((r) => r.category === cat);
+    if (vol !== "all") rows = rows.filter((r) => r.volatility === vol);
     const q = query.trim().toLowerCase();
     if (q) {
       rows = rows.filter(
@@ -209,7 +210,7 @@ function LeaderboardPage() {
       return dir === "asc" ? cmp : -cmp;
     });
     return ranked;
-  }, [allRows, cat, query, sort, dir]);
+  }, [allRows, cat, vol, query, sort, dir]);
 
   const avgCCS = Math.round(
     filtered.reduce((s, r) => s + r.overall_ccs, 0) / Math.max(1, filtered.length),
@@ -223,11 +224,19 @@ function LeaderboardPage() {
   const counts: Record<string, number> = { all: allRows.length };
   for (const c of categories) counts[c] = allRows.filter((r) => r.category === c).length;
 
+  const volCounts: Record<VolKey, number> = {
+    all: allRows.length,
+    rising: allRows.filter((r) => r.volatility === "rising").length,
+    falling: allRows.filter((r) => r.volatility === "falling").length,
+    stable: allRows.filter((r) => r.volatility === "stable").length,
+  };
+
   function toggleSort(key: SortKey) {
     if (sort === key) {
-      navigate({ search: { cat, sort, dir: dir === "asc" ? "desc" : "asc" } });
+      navigate({ search: { cat, vol, sort, dir: dir === "asc" ? "desc" : "asc" } });
     } else {
-      navigate({ search: { cat, sort: key, dir: "desc" } });
+      navigate({ search: { cat, vol, sort: key, dir: "desc" } });
+
     }
   }
 

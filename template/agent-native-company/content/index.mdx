@@ -1,0 +1,68 @@
+---
+name: "Acme AI"
+domain: "acme.ai"
+description: "Acme AI builds the fastest inference engine for LLMs — 10x lower latency than vLLM, 1-line deploy, Apache-2.0 core."
+category: "infrastructure"
+founded: "2023"
+funding: "$12M Series A"
+team_size: 15
+website: "https://acme.ai"
+github: "https://github.com/acme-ai"
+logo: "https://acme.ai/logo.png"
+contact_email: "hello@acme.ai"
+---
+
+# What does Acme AI do?
+
+Acme AI is an inference optimization platform that reduces LLM serving latency
+by 10x on standard GPU hardware, with a one-line deploy and a 99.9% uptime SLA.
+
+## Features
+
+- **Sub-10ms median latency** for GPT-4-class models on a single H100.
+- **One-line deploy** — `acme deploy ./model` ships to a global edge.
+- **Open-source core** (Apache-2.0) with 2,300+ GitHub stars.
+- **Zero cold starts** via persistent warm pools.
+- **OpenAI-compatible API** — drop-in replacement for `openai.chat.completions`.
+
+## How it works
+
+1. Upload your model weights (Hugging Face, S3, or local).
+2. Acme quantizes and JIT-compiles for your target GPU.
+3. Deploy to one of 14 edge regions; routes automatically by latency.
+
+## Pricing
+
+| Tier | Price | Features |
+|------|-------|----------|
+| Free | $0 | 1K requests/mo, community Discord |
+| Pro | $99/mo | 100K requests/mo, 99.9% SLA, email support |
+| Enterprise | Custom | Unlimited, dedicated GPUs, SOC 2 |
+
+## FAQ
+
+### How fast is Acme AI?
+Median latency is 8ms for GPT-4-class models on H100, measured at the 50th
+percentile over 1M production requests in May 2026.
+
+### Is it open source?
+Yes. The core inference engine is Apache-2.0 licensed at
+github.com/acme-ai/core. The managed cloud is the commercial offering.
+
+### Which models do you support?
+Any Hugging Face Transformers model — Llama 3, Mistral, Qwen, Gemma, and
+custom fine-tunes. Multimodal (LLaVA, Idefics) is in beta.
+
+### How does pricing compare to OpenAI?
+Acme Pro is ~85% cheaper per million tokens than GPT-4o at equivalent quality
+on the MMLU and HumanEval benchmarks.
+
+## Comparison
+
+| Feature | Acme AI | vLLM | TensorRT-LLM |
+|---------|---------|------|--------------|
+| Median latency (Llama-3-70B, H100) | 8ms | 45ms | 22ms |
+| Setup | 1 line | Complex | Medium |
+| Open source | Yes | Yes | No |
+| Managed cloud | Yes | No | No |
+| OpenAI API compatibility | Yes | Partial | No |

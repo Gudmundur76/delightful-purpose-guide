@@ -39,7 +39,7 @@ export const Route = createFileRoute("/api/public/wp-plugin/$token")({
         await supabaseAdmin.from("intervention_deliveries").insert({
           site_id: site.id,
           intervention_id: null,
-          delivery_method: "wp_plugin_download",
+          delivery_method: "wp_plugin",
         });
 
         return new Response(zip, {

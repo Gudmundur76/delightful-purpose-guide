@@ -7,11 +7,13 @@ on:
       - "src/routes/**"
       - "src/lib/seo/**"
       - "scripts/validate-og-meta.mjs"
+      - "scripts/report-og-meta.mjs"
   pull_request:
     paths:
       - "src/routes/**"
       - "src/lib/seo/**"
       - "scripts/validate-og-meta.mjs"
+      - "scripts/report-og-meta.mjs"
 
 jobs:
   validate:
@@ -23,3 +25,18 @@ jobs:
           node-version: "20"
       - name: Validate per-route og:image / twitter:image meta
         run: node scripts/validate-og-meta.mjs
+      - name: Generate og:image / twitter:image coverage report
+        if: always()
+        run: node scripts/report-og-meta.mjs
+      - name: Publish report to job summary
+        if: always()
+        run: cat og-meta-report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: og-meta-report
+          path: |
+            og-meta-report.md
+            og-meta-report.json
+          if-no-files-found: error

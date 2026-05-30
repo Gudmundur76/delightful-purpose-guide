@@ -23,7 +23,7 @@ function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body, null, 2), { status, headers: JSON_HEADERS });
 }
 
-export const Route = createFileRoute("/api/public/v1/research/$slug.json")({
+export const Route = createFileRoute("/api/public/v1/research/{$slug}.json")({
   server: {
     handlers: {
       OPTIONS: async () =>

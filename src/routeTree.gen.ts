@@ -108,6 +108,7 @@ import { Route as AppBillingRouteImport } from './routes/app.billing'
 import { Route as AppApiKeysRouteImport } from './routes/app.api-keys'
 import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminApiKeysRouteImport } from './routes/admin.api-keys'
 import { Route as DotwellKnownOauthProtectedResourceRouteImport } from './routes/[.]well-known.oauth-protected-resource'
 import { Route as DotwellKnownOauthAuthorizationServerRouteImport } from './routes/[.]well-known.oauth-authorization-server'
 import { Route as DotwellKnownMcpDotjsonRouteImport } from './routes/[.]well-known.mcp[.]json'
@@ -676,6 +677,11 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
   path: '/admin/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminApiKeysRoute = AdminApiKeysRouteImport.update({
+  id: '/admin/api-keys',
+  path: '/admin/api-keys',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DotwellKnownOauthProtectedResourceRoute =
   DotwellKnownOauthProtectedResourceRouteImport.update({
     id: '/.well-known/oauth-protected-resource',
@@ -1112,6 +1118,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
   '/.well-known/oauth-authorization-server': typeof DotwellKnownOauthAuthorizationServerRoute
   '/.well-known/oauth-protected-resource': typeof DotwellKnownOauthProtectedResourceRoute
+  '/admin/api-keys': typeof AdminApiKeysRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/app/api-keys': typeof AppApiKeysRoute
@@ -1279,6 +1286,7 @@ export interface FileRoutesByTo {
   '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
   '/.well-known/oauth-authorization-server': typeof DotwellKnownOauthAuthorizationServerRoute
   '/.well-known/oauth-protected-resource': typeof DotwellKnownOauthProtectedResourceRoute
+  '/admin/api-keys': typeof AdminApiKeysRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/app/api-keys': typeof AppApiKeysRoute
@@ -1450,6 +1458,7 @@ export interface FileRoutesById {
   '/.well-known/mcp.json': typeof DotwellKnownMcpDotjsonRoute
   '/.well-known/oauth-authorization-server': typeof DotwellKnownOauthAuthorizationServerRoute
   '/.well-known/oauth-protected-resource': typeof DotwellKnownOauthProtectedResourceRoute
+  '/admin/api-keys': typeof AdminApiKeysRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
   '/app/api-keys': typeof AppApiKeysRoute
@@ -1622,6 +1631,7 @@ export interface FileRouteTypes {
     | '/.well-known/mcp.json'
     | '/.well-known/oauth-authorization-server'
     | '/.well-known/oauth-protected-resource'
+    | '/admin/api-keys'
     | '/admin/leads'
     | '/admin/reviews'
     | '/app/api-keys'
@@ -1789,6 +1799,7 @@ export interface FileRouteTypes {
     | '/.well-known/mcp.json'
     | '/.well-known/oauth-authorization-server'
     | '/.well-known/oauth-protected-resource'
+    | '/admin/api-keys'
     | '/admin/leads'
     | '/admin/reviews'
     | '/app/api-keys'
@@ -1959,6 +1970,7 @@ export interface FileRouteTypes {
     | '/.well-known/mcp.json'
     | '/.well-known/oauth-authorization-server'
     | '/.well-known/oauth-protected-resource'
+    | '/admin/api-keys'
     | '/admin/leads'
     | '/admin/reviews'
     | '/app/api-keys'
@@ -2130,6 +2142,7 @@ export interface RootRouteChildren {
   DotwellKnownMcpDotjsonRoute: typeof DotwellKnownMcpDotjsonRoute
   DotwellKnownOauthAuthorizationServerRoute: typeof DotwellKnownOauthAuthorizationServerRoute
   DotwellKnownOauthProtectedResourceRoute: typeof DotwellKnownOauthProtectedResourceRoute
+  AdminApiKeysRoute: typeof AdminApiKeysRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminReviewsRoute: typeof AdminReviewsRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -2902,6 +2915,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/leads'
       fullPath: '/admin/leads'
       preLoaderRoute: typeof AdminLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/api-keys': {
+      id: '/admin/api-keys'
+      path: '/admin/api-keys'
+      fullPath: '/admin/api-keys'
+      preLoaderRoute: typeof AdminApiKeysRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.well-known/oauth-protected-resource': {
@@ -3697,6 +3717,7 @@ const rootRouteChildren: RootRouteChildren = {
     DotwellKnownOauthAuthorizationServerRoute,
   DotwellKnownOauthProtectedResourceRoute:
     DotwellKnownOauthProtectedResourceRoute,
+  AdminApiKeysRoute: AdminApiKeysRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminReviewsRoute: AdminReviewsRoute,
   BlogSlugRoute: BlogSlugRoute,

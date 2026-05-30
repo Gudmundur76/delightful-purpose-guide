@@ -150,6 +150,7 @@ import { Route as ApiPublicWpPluginTokenRouteImport } from './routes/api/public/
 import { Route as ApiPublicWidgetOgDotsvgRouteImport } from './routes/api/public/widget/og[.]svg'
 import { Route as ApiPublicWidgetEmbedDotjsRouteImport } from './routes/api/public/widget/embed[.]js'
 import { Route as ApiPublicWidgetBadgeDotsvgRouteImport } from './routes/api/public/widget/badge[.]svg'
+import { Route as ApiPublicV1VerifyRouteImport } from './routes/api/public/v1/verify'
 import { Route as ApiPublicV1SpecsRouteImport } from './routes/api/public/v1/specs'
 import { Route as ApiPublicV1ScanRouteImport } from './routes/api/public/v1/scan'
 import { Route as ApiPublicV1ReadinessRouteImport } from './routes/api/public/v1/readiness'
@@ -908,6 +909,11 @@ const ApiPublicWidgetBadgeDotsvgRoute =
     path: '/api/public/widget/badge.svg',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicV1VerifyRoute = ApiPublicV1VerifyRouteImport.update({
+  id: '/api/public/v1/verify',
+  path: '/api/public/v1/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicV1SpecsRoute = ApiPublicV1SpecsRouteImport.update({
   id: '/api/public/v1/specs',
   path: '/api/public/v1/specs',
@@ -1269,6 +1275,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
   '/api/public/v1/scan': typeof ApiPublicV1ScanRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
+  '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
@@ -1445,6 +1452,7 @@ export interface FileRoutesByTo {
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
   '/api/public/v1/scan': typeof ApiPublicV1ScanRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
+  '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
@@ -1625,6 +1633,7 @@ export interface FileRoutesById {
   '/api/public/v1/readiness': typeof ApiPublicV1ReadinessRoute
   '/api/public/v1/scan': typeof ApiPublicV1ScanRoute
   '/api/public/v1/specs': typeof ApiPublicV1SpecsRoute
+  '/api/public/v1/verify': typeof ApiPublicV1VerifyRoute
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
@@ -1806,6 +1815,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/readiness'
     | '/api/public/v1/scan'
     | '/api/public/v1/specs'
+    | '/api/public/v1/verify'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
@@ -1982,6 +1992,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/readiness'
     | '/api/public/v1/scan'
     | '/api/public/v1/specs'
+    | '/api/public/v1/verify'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
@@ -2161,6 +2172,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/readiness'
     | '/api/public/v1/scan'
     | '/api/public/v1/specs'
+    | '/api/public/v1/verify'
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
@@ -2306,6 +2318,7 @@ export interface RootRouteChildren {
   ApiPublicV1ReadinessRoute: typeof ApiPublicV1ReadinessRoute
   ApiPublicV1ScanRoute: typeof ApiPublicV1ScanRoute
   ApiPublicV1SpecsRoute: typeof ApiPublicV1SpecsRoute
+  ApiPublicV1VerifyRoute: typeof ApiPublicV1VerifyRoute
   ApiPublicWidgetBadgeDotsvgRoute: typeof ApiPublicWidgetBadgeDotsvgRoute
   ApiPublicWidgetEmbedDotjsRoute: typeof ApiPublicWidgetEmbedDotjsRoute
   ApiPublicWidgetOgDotsvgRoute: typeof ApiPublicWidgetOgDotsvgRoute
@@ -3315,6 +3328,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWidgetBadgeDotsvgRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/verify': {
+      id: '/api/public/v1/verify'
+      path: '/api/public/v1/verify'
+      fullPath: '/api/public/v1/verify'
+      preLoaderRoute: typeof ApiPublicV1VerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/specs': {
       id: '/api/public/v1/specs'
       path: '/api/public/v1/specs'
@@ -3961,6 +3981,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicV1ReadinessRoute: ApiPublicV1ReadinessRoute,
   ApiPublicV1ScanRoute: ApiPublicV1ScanRoute,
   ApiPublicV1SpecsRoute: ApiPublicV1SpecsRoute,
+  ApiPublicV1VerifyRoute: ApiPublicV1VerifyRoute,
   ApiPublicWidgetBadgeDotsvgRoute: ApiPublicWidgetBadgeDotsvgRoute,
   ApiPublicWidgetEmbedDotjsRoute: ApiPublicWidgetEmbedDotjsRoute,
   ApiPublicWidgetOgDotsvgRoute: ApiPublicWidgetOgDotsvgRoute,

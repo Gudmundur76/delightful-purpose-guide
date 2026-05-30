@@ -162,7 +162,163 @@ function LoopStat({ label, value }: { label: string; value: string | number }) {
   );
 }
 
-type ModelResult = {
+type DisagreementRow = {
+  domain_queried: string;
+  engine_a: string;
+  engine_b: string;
+  a_cites_target: boolean;
+  b_cites_target: boolean;
+  disagreement_pct: number;
+  domains_a: string[] | null;
+  domains_b: string[] | null;
+  severity: "high" | "medium" | "low";
+};
+
+const SEVERITY_STYLES: Record<DisagreementRow["severity"], string> = {
+  high: "border-destructive/60 bg-destructive/10 text-destructive",
+  medium: "border-accent/60 bg-accent/10 text-accent",
+  low: "border-border bg-card/40 text-muted-foreground",
+};
+
+function Contradictions() {
+  const [rows, setRows] = useState<DisagreementRow[] | null>(null);
+  const [err, setErr] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  async function load() {
+    setLoading(true);
+    setErr(null);
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data, error } = await (supabase as any)
+        .from("citation_disagreements_24h")
+        .select("*");
+      if (error) throw error;
+      setRows((data as DisagreementRow[]) ?? []);
+    } catch (ex) {
+      setErr(ex instanceof Error ? ex.message : String(ex));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    load();
+    const t = setInterval(load, 60_000);
+    return () => clearInterval(t);
+  }, []);
+
+  const highCount = (rows ?? []).filter((r) => r.severity === "high").length;
+
+  return (
+    <section className="space-y-4">
+      <div className="flex items-end justify-between">
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-widest text-destructive mb-1">
+            // CONTRADICTIONS · LAST 24H
+          </div>
+          <h2 className="font-extrabold text-2xl uppercase tracking-tighter">
+            When AI engines disagree
+          </h2>
+          <p className="font-mono text-[11px] text-muted-foreground mt-1">
+            {highCount > 0
+              ? `${highCount} HIGH-SEVERITY · one engine cites the target, the other doesn't`
+              : "// no high-severity contradictions"}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={load}
+          className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors"
+        >
+          {loading ? "REFRESHING…" : "REFRESH →"}
+        </button>
+      </div>
+
+      {err && (
+        <div className="border border-destructive/40 bg-destructive/5 p-3 font-mono text-xs text-destructive">
+          {err}
+        </div>
+      )}
+
+      {(!rows || rows.length === 0) ? (
+        <div className="border border-border bg-card/40 p-4 font-mono text-xs text-muted-foreground">
+          {loading ? "// LOADING…" : "// ENGINES AGREE — NO CONTRADICTIONS DETECTED"}
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {rows.map((r, i) => (
+            <ContradictionCard key={`${r.domain_queried}-${i}`} row={r} />
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function ContradictionCard({ row }: { row: DisagreementRow }) {
+  const sevClass = SEVERITY_STYLES[row.severity];
+  return (
+    <div className="border border-border bg-card/40">
+      <div className="px-4 py-3 border-b border-border flex items-center gap-3 flex-wrap">
+        <span className="font-mono text-sm font-bold text-foreground">{row.domain_queried}</span>
+        <span className={`font-mono text-[10px] uppercase tracking-widest px-2 py-1 border ${sevClass}`}>
+          {row.severity} · {row.disagreement_pct}% disagree
+        </span>
+        {row.a_cites_target !== row.b_cites_target && (
+          <span className="font-mono text-[10px] uppercase tracking-widest text-destructive ml-auto">
+            !! engines disagree on target
+          </span>
+        )}
+      </div>
+      <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border">
+        <EngineColumn engine={row.engine_a} cited={row.a_cites_target} domains={row.domains_a} />
+        <EngineColumn engine={row.engine_b} cited={row.b_cites_target} domains={row.domains_b} />
+      </div>
+    </div>
+  );
+}
+
+function EngineColumn({
+  engine,
+  cited,
+  domains,
+}: {
+  engine: string;
+  cited: boolean;
+  domains: string[] | null;
+}) {
+  return (
+    <div className="p-4 space-y-3">
+      <div className="flex items-center justify-between">
+        <span className="font-mono text-xs uppercase tracking-widest text-foreground">{engine}</span>
+        <span
+          className={`font-mono text-[10px] uppercase tracking-widest px-2 py-1 ${
+            cited
+              ? "bg-accent text-accent-foreground"
+              : "border border-destructive/40 text-destructive"
+          }`}
+        >
+          {cited ? "cited target" : "DID NOT cite target"}
+        </span>
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        {(domains ?? []).slice(0, 20).map((d, i) => (
+          <span
+            key={i}
+            className="font-mono text-[10px] border border-border px-1.5 py-0.5 text-muted-foreground"
+          >
+            {d}
+          </span>
+        ))}
+        {(domains ?? []).length === 0 && (
+          <span className="font-mono text-[10px] text-muted-foreground">// no domains cited</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
   model: string;
   mentioned: boolean;
   answer?: string;

@@ -157,6 +157,7 @@ import { Route as ApiPublicV1PostsRouteImport } from './routes/api/public/v1/pos
 import { Route as ApiPublicV1OpenapiDotjsonRouteImport } from './routes/api/public/v1/openapi[.]json'
 import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/leads'
 import { Route as ApiPublicV1DocsRouteImport } from './routes/api/public/v1/docs'
+import { Route as ApiPublicV1ContextRouteImport } from './routes/api/public/v1/context'
 import { Route as ApiPublicV1BulkSeedRouteImport } from './routes/api/public/v1/bulk-seed'
 import { Route as ApiPublicV1ApiKeyRequestsRouteImport } from './routes/api/public/v1/api-key-requests'
 import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/analyze'
@@ -943,6 +944,11 @@ const ApiPublicV1DocsRoute = ApiPublicV1DocsRouteImport.update({
   path: '/api/public/v1/docs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicV1ContextRoute = ApiPublicV1ContextRouteImport.update({
+  id: '/api/public/v1/context',
+  path: '/api/public/v1/context',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicV1BulkSeedRoute = ApiPublicV1BulkSeedRouteImport.update({
   id: '/api/public/v1/bulk-seed',
   path: '/api/public/v1/bulk-seed',
@@ -1255,6 +1261,7 @@ export interface FileRoutesByFullPath {
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/api-key-requests': typeof ApiPublicV1ApiKeyRequestsRoute
   '/api/public/v1/bulk-seed': typeof ApiPublicV1BulkSeedRoute
+  '/api/public/v1/context': typeof ApiPublicV1ContextRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
@@ -1430,6 +1437,7 @@ export interface FileRoutesByTo {
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/api-key-requests': typeof ApiPublicV1ApiKeyRequestsRoute
   '/api/public/v1/bulk-seed': typeof ApiPublicV1BulkSeedRoute
+  '/api/public/v1/context': typeof ApiPublicV1ContextRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
@@ -1609,6 +1617,7 @@ export interface FileRoutesById {
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
   '/api/public/v1/api-key-requests': typeof ApiPublicV1ApiKeyRequestsRoute
   '/api/public/v1/bulk-seed': typeof ApiPublicV1BulkSeedRoute
+  '/api/public/v1/context': typeof ApiPublicV1ContextRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
   '/api/public/v1/openapi.json': typeof ApiPublicV1OpenapiDotjsonRoute
@@ -1789,6 +1798,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/analyze'
     | '/api/public/v1/api-key-requests'
     | '/api/public/v1/bulk-seed'
+    | '/api/public/v1/context'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
@@ -1964,6 +1974,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/analyze'
     | '/api/public/v1/api-key-requests'
     | '/api/public/v1/bulk-seed'
+    | '/api/public/v1/context'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
@@ -2142,6 +2153,7 @@ export interface FileRouteTypes {
     | '/api/public/v1/analyze'
     | '/api/public/v1/api-key-requests'
     | '/api/public/v1/bulk-seed'
+    | '/api/public/v1/context'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
     | '/api/public/v1/openapi.json'
@@ -2286,6 +2298,7 @@ export interface RootRouteChildren {
   ApiPublicV1AnalyzeRoute: typeof ApiPublicV1AnalyzeRoute
   ApiPublicV1ApiKeyRequestsRoute: typeof ApiPublicV1ApiKeyRequestsRoute
   ApiPublicV1BulkSeedRoute: typeof ApiPublicV1BulkSeedRoute
+  ApiPublicV1ContextRoute: typeof ApiPublicV1ContextRoute
   ApiPublicV1DocsRoute: typeof ApiPublicV1DocsRoute
   ApiPublicV1LeadsRoute: typeof ApiPublicV1LeadsRoute
   ApiPublicV1OpenapiDotjsonRoute: typeof ApiPublicV1OpenapiDotjsonRoute
@@ -3351,6 +3364,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1DocsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/context': {
+      id: '/api/public/v1/context'
+      path: '/api/public/v1/context'
+      fullPath: '/api/public/v1/context'
+      preLoaderRoute: typeof ApiPublicV1ContextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/bulk-seed': {
       id: '/api/public/v1/bulk-seed'
       path: '/api/public/v1/bulk-seed'
@@ -3933,6 +3953,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicV1AnalyzeRoute: ApiPublicV1AnalyzeRoute,
   ApiPublicV1ApiKeyRequestsRoute: ApiPublicV1ApiKeyRequestsRoute,
   ApiPublicV1BulkSeedRoute: ApiPublicV1BulkSeedRoute,
+  ApiPublicV1ContextRoute: ApiPublicV1ContextRoute,
   ApiPublicV1DocsRoute: ApiPublicV1DocsRoute,
   ApiPublicV1LeadsRoute: ApiPublicV1LeadsRoute,
   ApiPublicV1OpenapiDotjsonRoute: ApiPublicV1OpenapiDotjsonRoute,

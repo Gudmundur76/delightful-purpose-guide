@@ -41,6 +41,7 @@ import { Route as LlmsRouteImport } from './routes/llms'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as GlossaryRouteImport } from './routes/glossary'
+import { Route as ForAnalystsRouteImport } from './routes/for-analysts'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ExtensionRouteImport } from './routes/extension'
 import { Route as DataDropsRouteImport } from './routes/data-drops'
@@ -151,6 +152,7 @@ import { Route as ApiPublicV1OpenapiDotjsonRouteImport } from './routes/api/publ
 import { Route as ApiPublicV1LeadsRouteImport } from './routes/api/public/v1/leads'
 import { Route as ApiPublicV1DocsRouteImport } from './routes/api/public/v1/docs'
 import { Route as ApiPublicV1BulkSeedRouteImport } from './routes/api/public/v1/bulk-seed'
+import { Route as ApiPublicV1ApiKeyRequestsRouteImport } from './routes/api/public/v1/api-key-requests'
 import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/analyze'
 import { Route as ApiPublicStatsOverviewRouteImport } from './routes/api/public/stats/overview'
 import { Route as ApiPublicOauthTokenRouteImport } from './routes/api/public/oauth/token'
@@ -333,6 +335,11 @@ const IntegrationsRoute = IntegrationsRouteImport.update({
 const GlossaryRoute = GlossaryRouteImport.update({
   id: '/glossary',
   path: '/glossary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForAnalystsRoute = ForAnalystsRouteImport.update({
+  id: '/for-analysts',
+  path: '/for-analysts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -902,6 +909,12 @@ const ApiPublicV1BulkSeedRoute = ApiPublicV1BulkSeedRouteImport.update({
   path: '/api/public/v1/bulk-seed',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicV1ApiKeyRequestsRoute =
+  ApiPublicV1ApiKeyRequestsRouteImport.update({
+    id: '/api/public/v1/api-key-requests',
+    path: '/api/public/v1/api-key-requests',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicV1AnalyzeRoute = ApiPublicV1AnalyzeRouteImport.update({
   id: '/api/public/v1/analyze',
   path: '/api/public/v1/analyze',
@@ -1053,6 +1066,7 @@ export interface FileRoutesByFullPath {
   '/data-drops': typeof DataDropsRouteWithChildren
   '/extension': typeof ExtensionRoute
   '/faq': typeof FaqRoute
+  '/for-analysts': typeof ForAnalystsRoute
   '/glossary': typeof GlossaryRouteWithChildren
   '/integrations': typeof IntegrationsRoute
   '/leaderboard': typeof LeaderboardRouteWithChildren
@@ -1175,6 +1189,7 @@ export interface FileRoutesByFullPath {
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
+  '/api/public/v1/api-key-requests': typeof ApiPublicV1ApiKeyRequestsRoute
   '/api/public/v1/bulk-seed': typeof ApiPublicV1BulkSeedRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
@@ -1217,6 +1232,7 @@ export interface FileRoutesByTo {
   '/data-drops': typeof DataDropsRouteWithChildren
   '/extension': typeof ExtensionRoute
   '/faq': typeof FaqRoute
+  '/for-analysts': typeof ForAnalystsRoute
   '/glossary': typeof GlossaryRouteWithChildren
   '/integrations': typeof IntegrationsRoute
   '/leaderboard': typeof LeaderboardRouteWithChildren
@@ -1339,6 +1355,7 @@ export interface FileRoutesByTo {
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
+  '/api/public/v1/api-key-requests': typeof ApiPublicV1ApiKeyRequestsRoute
   '/api/public/v1/bulk-seed': typeof ApiPublicV1BulkSeedRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
@@ -1385,6 +1402,7 @@ export interface FileRoutesById {
   '/data-drops': typeof DataDropsRouteWithChildren
   '/extension': typeof ExtensionRoute
   '/faq': typeof FaqRoute
+  '/for-analysts': typeof ForAnalystsRoute
   '/glossary': typeof GlossaryRouteWithChildren
   '/integrations': typeof IntegrationsRoute
   '/leaderboard': typeof LeaderboardRouteWithChildren
@@ -1507,6 +1525,7 @@ export interface FileRoutesById {
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
   '/api/public/v1/analyze': typeof ApiPublicV1AnalyzeRoute
+  '/api/public/v1/api-key-requests': typeof ApiPublicV1ApiKeyRequestsRoute
   '/api/public/v1/bulk-seed': typeof ApiPublicV1BulkSeedRoute
   '/api/public/v1/docs': typeof ApiPublicV1DocsRoute
   '/api/public/v1/leads': typeof ApiPublicV1LeadsRoute
@@ -1554,6 +1573,7 @@ export interface FileRouteTypes {
     | '/data-drops'
     | '/extension'
     | '/faq'
+    | '/for-analysts'
     | '/glossary'
     | '/integrations'
     | '/leaderboard'
@@ -1676,6 +1696,7 @@ export interface FileRouteTypes {
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
+    | '/api/public/v1/api-key-requests'
     | '/api/public/v1/bulk-seed'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
@@ -1718,6 +1739,7 @@ export interface FileRouteTypes {
     | '/data-drops'
     | '/extension'
     | '/faq'
+    | '/for-analysts'
     | '/glossary'
     | '/integrations'
     | '/leaderboard'
@@ -1840,6 +1862,7 @@ export interface FileRouteTypes {
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
+    | '/api/public/v1/api-key-requests'
     | '/api/public/v1/bulk-seed'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
@@ -1885,6 +1908,7 @@ export interface FileRouteTypes {
     | '/data-drops'
     | '/extension'
     | '/faq'
+    | '/for-analysts'
     | '/glossary'
     | '/integrations'
     | '/leaderboard'
@@ -2007,6 +2031,7 @@ export interface FileRouteTypes {
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
     | '/api/public/v1/analyze'
+    | '/api/public/v1/api-key-requests'
     | '/api/public/v1/bulk-seed'
     | '/api/public/v1/docs'
     | '/api/public/v1/leads'
@@ -2053,6 +2078,7 @@ export interface RootRouteChildren {
   DataDropsRoute: typeof DataDropsRouteWithChildren
   ExtensionRoute: typeof ExtensionRoute
   FaqRoute: typeof FaqRoute
+  ForAnalystsRoute: typeof ForAnalystsRoute
   GlossaryRoute: typeof GlossaryRouteWithChildren
   IntegrationsRoute: typeof IntegrationsRoute
   LeaderboardRoute: typeof LeaderboardRouteWithChildren
@@ -2142,6 +2168,7 @@ export interface RootRouteChildren {
   ApiPublicOauthTokenRoute: typeof ApiPublicOauthTokenRoute
   ApiPublicStatsOverviewRoute: typeof ApiPublicStatsOverviewRoute
   ApiPublicV1AnalyzeRoute: typeof ApiPublicV1AnalyzeRoute
+  ApiPublicV1ApiKeyRequestsRoute: typeof ApiPublicV1ApiKeyRequestsRoute
   ApiPublicV1BulkSeedRoute: typeof ApiPublicV1BulkSeedRoute
   ApiPublicV1DocsRoute: typeof ApiPublicV1DocsRoute
   ApiPublicV1LeadsRoute: typeof ApiPublicV1LeadsRoute
@@ -2392,6 +2419,13 @@ declare module '@tanstack/react-router' {
       path: '/glossary'
       fullPath: '/glossary'
       preLoaderRoute: typeof GlossaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-analysts': {
+      id: '/for-analysts'
+      path: '/for-analysts'
+      fullPath: '/for-analysts'
+      preLoaderRoute: typeof ForAnalystsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -3164,6 +3198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicV1BulkSeedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/api-key-requests': {
+      id: '/api/public/v1/api-key-requests'
+      path: '/api/public/v1/api-key-requests'
+      fullPath: '/api/public/v1/api-key-requests'
+      preLoaderRoute: typeof ApiPublicV1ApiKeyRequestsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/v1/analyze': {
       id: '/api/public/v1/analyze'
       path: '/api/public/v1/analyze'
@@ -3593,6 +3634,7 @@ const rootRouteChildren: RootRouteChildren = {
   DataDropsRoute: DataDropsRouteWithChildren,
   ExtensionRoute: ExtensionRoute,
   FaqRoute: FaqRoute,
+  ForAnalystsRoute: ForAnalystsRoute,
   GlossaryRoute: GlossaryRouteWithChildren,
   IntegrationsRoute: IntegrationsRoute,
   LeaderboardRoute: LeaderboardRouteWithChildren,
@@ -3689,6 +3731,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicOauthTokenRoute: ApiPublicOauthTokenRoute,
   ApiPublicStatsOverviewRoute: ApiPublicStatsOverviewRoute,
   ApiPublicV1AnalyzeRoute: ApiPublicV1AnalyzeRoute,
+  ApiPublicV1ApiKeyRequestsRoute: ApiPublicV1ApiKeyRequestsRoute,
   ApiPublicV1BulkSeedRoute: ApiPublicV1BulkSeedRoute,
   ApiPublicV1DocsRoute: ApiPublicV1DocsRoute,
   ApiPublicV1LeadsRoute: ApiPublicV1LeadsRoute,

@@ -47,6 +47,45 @@ export type Database = {
         }
         Relationships: []
       }
+      api_key_requests: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          company: string | null
+          created_at: string
+          email: string
+          id: string
+          notes: string | null
+          plan: string
+          status: string
+          use_case: string | null
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          company?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          notes?: string | null
+          plan: string
+          status?: string
+          use_case?: string | null
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          company?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          notes?: string | null
+          plan?: string
+          status?: string
+          use_case?: string | null
+        }
+        Relationships: []
+      }
       api_keys: {
         Row: {
           created_at: string
@@ -1271,6 +1310,33 @@ export type Database = {
           },
         ]
       }
+      platform_crawls: {
+        Row: {
+          crawled_at: string
+          crawled_path: string
+          id: number
+          ip_hash: string | null
+          referrer_domain: string
+          user_agent: string | null
+        }
+        Insert: {
+          crawled_at?: string
+          crawled_path: string
+          id?: number
+          ip_hash?: string | null
+          referrer_domain: string
+          user_agent?: string | null
+        }
+        Update: {
+          crawled_at?: string
+          crawled_path?: string
+          id?: number
+          ip_hash?: string | null
+          referrer_domain?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           active: boolean
@@ -1831,6 +1897,16 @@ export type Database = {
           day: string | null
           engine: string | null
           total_events: number | null
+        }
+        Relationships: []
+      }
+      platform_crawls_24h: {
+        Row: {
+          crawls_24h: number | null
+          last_seen: string | null
+          referrer_domain: string | null
+          top_path: string | null
+          unique_paths: number | null
         }
         Relationships: []
       }

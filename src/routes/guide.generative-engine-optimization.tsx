@@ -5,11 +5,11 @@ import { ArrowRight, Check } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
 
 const URL = "https://grow.contact/guide/generative-engine-optimization";
-const TITLE = "Generative Engine Optimization: The 2026 Guide (GEO)";
+const TITLE = "GEO vs SEO: What Is Generative Engine Optimization? (2026 Guide)";
 const DESCRIPTION =
-  "Generative Engine Optimization (GEO) is the practice of structuring a website so large language models cite it in answers. This guide is the working standard: definitions, technical checklist, per-engine playbook, and how to measure it.";
+  "What is generative engine optimization (GEO)? How GEO differs from SEO and AEO, why 83% of AI citations come from outside the organic top 10, and the technical checklist to get cited by ChatGPT, Perplexity, Claude, and Google AI Overviews.";
 const PUBLISHED = "2026-05-24";
-const UPDATED = "2026-05-24";
+const UPDATED = "2026-05-30";
 
 const TOC = [
   { id: "what-is-geo", label: "What GEO is (and isn't)" },

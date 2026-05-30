@@ -60,6 +60,7 @@ import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as AuthDotmdRouteImport } from './routes/auth[.]md'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
+import { Route as AknRouteImport } from './routes/akn'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DataIndexRouteImport } from './routes/data.index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
@@ -441,6 +442,11 @@ const AppRoute = AppRouteImport.update({
 const ApiDocsRoute = ApiDocsRouteImport.update({
   id: '/api-docs',
   path: '/api-docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AknRoute = AknRouteImport.update({
+  id: '/akn',
+  path: '/akn',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -1118,6 +1124,7 @@ const ApiPublicDataSchemasClaimsDotschemaDotjsonRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/akn': typeof AknRoute
   '/api-docs': typeof ApiDocsRoute
   '/app': typeof AppRouteWithChildren
   '/auth.md': typeof AuthDotmdRoute
@@ -1298,6 +1305,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/akn': typeof AknRoute
   '/api-docs': typeof ApiDocsRoute
   '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
@@ -1476,6 +1484,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/akn': typeof AknRoute
   '/api-docs': typeof ApiDocsRoute
   '/app': typeof AppRouteWithChildren
   '/auth.md': typeof AuthDotmdRoute
@@ -1658,6 +1667,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/akn'
     | '/api-docs'
     | '/app'
     | '/auth.md'
@@ -1838,6 +1848,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/akn'
     | '/api-docs'
     | '/auth.md'
     | '/badge'
@@ -2015,6 +2026,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/akn'
     | '/api-docs'
     | '/app'
     | '/auth.md'
@@ -2196,6 +2208,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AknRoute: typeof AknRoute
   ApiDocsRoute: typeof ApiDocsRoute
   AppRoute: typeof AppRouteWithChildren
   AuthDotmdRoute: typeof AuthDotmdRoute
@@ -2696,6 +2709,13 @@ declare module '@tanstack/react-router' {
       path: '/api-docs'
       fullPath: '/api-docs'
       preLoaderRoute: typeof ApiDocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/akn': {
+      id: '/akn'
+      path: '/akn'
+      fullPath: '/akn'
+      preLoaderRoute: typeof AknRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -3852,6 +3872,7 @@ const ApiPublicV1PostsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AknRoute: AknRoute,
   ApiDocsRoute: ApiDocsRoute,
   AppRoute: AppRouteWithChildren,
   AuthDotmdRoute: AuthDotmdRoute,

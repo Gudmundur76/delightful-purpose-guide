@@ -398,8 +398,11 @@ function CitationPage() {
 
   return (
     <div className="space-y-10">
+      <IntelligencePlatforms />
       <Contradictions />
       <LoopActivity />
+
+
 
 
       <header>

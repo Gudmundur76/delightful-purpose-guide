@@ -73,6 +73,7 @@ import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-ch
 import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
 import { Route as StandardLlmsDottxtRouteImport } from './routes/standard.llms[.]txt'
 import { Route as StandardVersionRouteImport } from './routes/standard.$version'
+import { Route as ResearchRssDotxmlRouteImport } from './routes/research/rss[.]xml'
 import { Route as ReportQ22026DotpdfRouteImport } from './routes/report.q2-2026[.]pdf'
 import { Route as ReportQ22026RouteImport } from './routes/report.q2-2026'
 import { Route as ReportPressRouteImport } from './routes/report.press'
@@ -499,6 +500,11 @@ const StandardVersionRoute = StandardVersionRouteImport.update({
   id: '/$version',
   path: '/$version',
   getParentRoute: () => StandardRoute,
+} as any)
+const ResearchRssDotxmlRoute = ResearchRssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
+  getParentRoute: () => ResearchRoute,
 } as any)
 const ReportQ22026DotpdfRoute = ReportQ22026DotpdfRouteImport.update({
   id: '/report/q2-2026.pdf',
@@ -1096,7 +1102,7 @@ export interface FileRoutesByFullPath {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
-  '/research': typeof ResearchRoute
+  '/research': typeof ResearchRouteWithChildren
   '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1154,6 +1160,7 @@ export interface FileRoutesByFullPath {
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
+  '/research/rss.xml': typeof ResearchRssDotxmlRoute
   '/standard/$version': typeof StandardVersionRoute
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
@@ -1264,7 +1271,7 @@ export interface FileRoutesByTo {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
-  '/research': typeof ResearchRoute
+  '/research': typeof ResearchRouteWithChildren
   '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1322,6 +1329,7 @@ export interface FileRoutesByTo {
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
+  '/research/rss.xml': typeof ResearchRssDotxmlRoute
   '/standard/$version': typeof StandardVersionRoute
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
@@ -1436,7 +1444,7 @@ export interface FileRoutesById {
   '/process': typeof ProcessRoute
   '/products': typeof ProductsRoute
   '/refund': typeof RefundRoute
-  '/research': typeof ResearchRoute
+  '/research': typeof ResearchRouteWithChildren
   '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1494,6 +1502,7 @@ export interface FileRoutesById {
   '/report/press': typeof ReportPressRoute
   '/report/q2-2026': typeof ReportQ22026Route
   '/report/q2-2026.pdf': typeof ReportQ22026DotpdfRoute
+  '/research/rss.xml': typeof ResearchRssDotxmlRoute
   '/standard/$version': typeof StandardVersionRoute
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
@@ -1667,6 +1676,7 @@ export interface FileRouteTypes {
     | '/report/press'
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
+    | '/research/rss.xml'
     | '/standard/$version'
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
@@ -1835,6 +1845,7 @@ export interface FileRouteTypes {
     | '/report/press'
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
+    | '/research/rss.xml'
     | '/standard/$version'
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
@@ -2006,6 +2017,7 @@ export interface FileRouteTypes {
     | '/report/press'
     | '/report/q2-2026'
     | '/report/q2-2026.pdf'
+    | '/research/rss.xml'
     | '/standard/$version'
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
@@ -2120,7 +2132,7 @@ export interface RootRouteChildren {
   ProcessRoute: typeof ProcessRoute
   ProductsRoute: typeof ProductsRoute
   RefundRoute: typeof RefundRoute
-  ResearchRoute: typeof ResearchRoute
+  ResearchRoute: typeof ResearchRouteWithChildren
   RssDotxmlRoute: typeof RssDotxmlRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -2671,6 +2683,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/standard/$version'
       preLoaderRoute: typeof StandardVersionRouteImport
       parentRoute: typeof StandardRoute
+    }
+    '/research/rss.xml': {
+      id: '/research/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/research/rss.xml'
+      preLoaderRoute: typeof ResearchRssDotxmlRouteImport
+      parentRoute: typeof ResearchRoute
     }
     '/report/q2-2026.pdf': {
       id: '/report/q2-2026.pdf'
@@ -3596,6 +3615,18 @@ const PlaybooksRouteWithChildren = PlaybooksRoute._addFileChildren(
   PlaybooksRouteChildren,
 )
 
+interface ResearchRouteChildren {
+  ResearchRssDotxmlRoute: typeof ResearchRssDotxmlRoute
+}
+
+const ResearchRouteChildren: ResearchRouteChildren = {
+  ResearchRssDotxmlRoute: ResearchRssDotxmlRoute,
+}
+
+const ResearchRouteWithChildren = ResearchRoute._addFileChildren(
+  ResearchRouteChildren,
+)
+
 interface StandardRouteChildren {
   StandardVersionRoute: typeof StandardVersionRoute
   StandardLlmsDottxtRoute: typeof StandardLlmsDottxtRoute
@@ -3692,7 +3723,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProcessRoute: ProcessRoute,
   ProductsRoute: ProductsRoute,
   RefundRoute: RefundRoute,
-  ResearchRoute: ResearchRoute,
+  ResearchRoute: ResearchRouteWithChildren,
   RssDotxmlRoute: RssDotxmlRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

@@ -39,10 +39,25 @@ type Summary = {
 
 type EngineRow = { engine: string; total: number; cited: number };
 
+type Pillars = {
+  authority: number;
+  verifiability: number;
+  precedent: number;
+  commentary: number;
+  information_gain: number;
+  canonical: number;
+  overall_ccs: number;
+  scan_date: string;
+};
+
+type HistoryPoint = { month: string; total_citations: number };
+
 function CiteProfile() {
   const { domain } = Route.useParams();
   const [summary, setSummary] = useState<Summary | null>(null);
   const [byEngine, setByEngine] = useState<EngineRow[]>([]);
+  const [pillars, setPillars] = useState<Pillars | null>(null);
+  const [history, setHistory] = useState<HistoryPoint[]>([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
 
@@ -52,7 +67,7 @@ function CiteProfile() {
       setLoading(true);
       setErr(null);
       try {
-        const [sumRes, evRes] = await Promise.all([
+        const [sumRes, evRes, scoresRes, histRes] = await Promise.all([
           supabase
             .from("citation_events_24h_by_domain")
             .select("*")
@@ -63,11 +78,28 @@ function CiteProfile() {
             .select("engine, domain_was_cited")
             .eq("domain_queried", domain)
             .gte("queried_at", new Date(Date.now() - 24 * 3600 * 1000).toISOString()),
+          supabase
+            .from("company_scores")
+            .select(
+              "authority,verifiability,precedent,commentary,information_gain,canonical,overall_ccs,scan_date",
+            )
+            .eq("domain", domain)
+            .order("scan_date", { ascending: false })
+            .limit(1)
+            .maybeSingle(),
+          supabase
+            .from("citation_history")
+            .select("month,total_citations")
+            .eq("domain", domain)
+            .order("month", { ascending: true })
+            .limit(12),
         ]);
         if (sumRes.error) throw sumRes.error;
         if (evRes.error) throw evRes.error;
         if (cancelled) return;
         setSummary(sumRes.data as Summary | null);
+        setPillars((scoresRes.data as Pillars | null) ?? null);
+        setHistory((histRes.data as HistoryPoint[] | null) ?? []);
         const agg = new Map<string, EngineRow>();
         for (const r of (evRes.data ?? []) as Array<{ engine: string; domain_was_cited: boolean }>) {
           const cur = agg.get(r.engine) ?? { engine: r.engine, total: 0, cited: 0 };

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkRouteImport } from './routes/work'
+import { Route as WhyRouteImport } from './routes/why'
 import { Route as VsRouteImport } from './routes/vs'
 import { Route as VScoreRouteImport } from './routes/v-score'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
@@ -63,6 +64,7 @@ import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as ContentIndexRouteImport } from './routes/content.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as WhyDomainRouteImport } from './routes/why.$domain'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
@@ -116,6 +118,9 @@ import { Route as DataQ22026LeaderboardDotjsonRouteImport } from './routes/data.
 import { Route as DataQ22026ClaimsDotjsonRouteImport } from './routes/data.q2-2026.claims[.]json'
 import { Route as DashboardSitesDomainRouteImport } from './routes/dashboard.sites.$domain'
 import { Route as ContentDraftsIdRouteImport } from './routes/content.drafts.$id'
+import { Route as ApiPublicWhyUnlockRouteImport } from './routes/api/public/why-unlock'
+import { Route as ApiPublicWhyReportRouteImport } from './routes/api/public/why-report'
+import { Route as ApiPublicWhyPreviewRouteImport } from './routes/api/public/why-preview'
 import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
 import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
@@ -170,6 +175,11 @@ import { Route as ApiPublicDataSchemasClaimsDotschemaDotjsonRouteImport } from '
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
   path: '/work',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WhyRoute = WhyRouteImport.update({
+  id: '/why',
+  path: '/why',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VsRoute = VsRouteImport.update({
@@ -436,6 +446,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AppRoute,
+} as any)
+const WhyDomainRoute = WhyDomainRouteImport.update({
+  id: '/$domain',
+  path: '/$domain',
+  getParentRoute: () => WhyRoute,
 } as any)
 const VsCompetitorRoute = VsCompetitorRouteImport.update({
   id: '/$competitor',
@@ -708,6 +723,21 @@ const ContentDraftsIdRoute = ContentDraftsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => ContentDraftsRoute,
+} as any)
+const ApiPublicWhyUnlockRoute = ApiPublicWhyUnlockRouteImport.update({
+  id: '/api/public/why-unlock',
+  path: '/api/public/why-unlock',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicWhyReportRoute = ApiPublicWhyReportRouteImport.update({
+  id: '/api/public/why-report',
+  path: '/api/public/why-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicWhyPreviewRoute = ApiPublicWhyPreviewRouteImport.update({
+  id: '/api/public/why-preview',
+  path: '/api/public/why-preview',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicPingRoute = ApiPublicPingRouteImport.update({
   id: '/api/public/ping',
@@ -1035,6 +1065,7 @@ export interface FileRoutesByFullPath {
   '/unsubscribe': typeof UnsubscribeRoute
   '/v-score': typeof VScoreRoute
   '/vs': typeof VsRouteWithChildren
+  '/why': typeof WhyRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
@@ -1082,6 +1113,7 @@ export interface FileRoutesByFullPath {
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
+  '/why/$domain': typeof WhyDomainRoute
   '/app/': typeof AppIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/content/': typeof ContentIndexRoute
@@ -1096,6 +1128,9 @@ export interface FileRoutesByFullPath {
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
+  '/api/public/why-preview': typeof ApiPublicWhyPreviewRoute
+  '/api/public/why-report': typeof ApiPublicWhyReportRoute
+  '/api/public/why-unlock': typeof ApiPublicWhyUnlockRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
   '/dashboard/sites/$domain': typeof DashboardSitesDomainRoute
   '/data/q2-2026/claims.json': typeof DataQ22026ClaimsDotjsonRoute
@@ -1191,6 +1226,7 @@ export interface FileRoutesByTo {
   '/unsubscribe': typeof UnsubscribeRoute
   '/v-score': typeof VScoreRoute
   '/vs': typeof VsRouteWithChildren
+  '/why': typeof WhyRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
@@ -1238,6 +1274,7 @@ export interface FileRoutesByTo {
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
+  '/why/$domain': typeof WhyDomainRoute
   '/app': typeof AppIndexRoute
   '/blog': typeof BlogIndexRoute
   '/content': typeof ContentIndexRoute
@@ -1252,6 +1289,9 @@ export interface FileRoutesByTo {
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
+  '/api/public/why-preview': typeof ApiPublicWhyPreviewRoute
+  '/api/public/why-report': typeof ApiPublicWhyReportRoute
+  '/api/public/why-unlock': typeof ApiPublicWhyUnlockRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
   '/dashboard/sites/$domain': typeof DashboardSitesDomainRoute
   '/data/q2-2026/claims.json': typeof DataQ22026ClaimsDotjsonRoute
@@ -1351,6 +1391,7 @@ export interface FileRoutesById {
   '/unsubscribe': typeof UnsubscribeRoute
   '/v-score': typeof VScoreRoute
   '/vs': typeof VsRouteWithChildren
+  '/why': typeof WhyRouteWithChildren
   '/work': typeof WorkRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
@@ -1398,6 +1439,7 @@ export interface FileRoutesById {
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
+  '/why/$domain': typeof WhyDomainRoute
   '/app/': typeof AppIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/content/': typeof ContentIndexRoute
@@ -1412,6 +1454,9 @@ export interface FileRoutesById {
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
   '/api/public/ping': typeof ApiPublicPingRoute
+  '/api/public/why-preview': typeof ApiPublicWhyPreviewRoute
+  '/api/public/why-report': typeof ApiPublicWhyReportRoute
+  '/api/public/why-unlock': typeof ApiPublicWhyUnlockRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
   '/dashboard/sites/$domain': typeof DashboardSitesDomainRoute
   '/data/q2-2026/claims.json': typeof DataQ22026ClaimsDotjsonRoute
@@ -1512,6 +1557,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/v-score'
     | '/vs'
+    | '/why'
     | '/work'
     | '/.well-known/api-catalog'
     | '/.well-known/http-message-signatures-directory'
@@ -1559,6 +1605,7 @@ export interface FileRouteTypes {
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
+    | '/why/$domain'
     | '/app/'
     | '/blog/'
     | '/content/'
@@ -1573,6 +1620,9 @@ export interface FileRouteTypes {
     | '/api/public/leads'
     | '/api/public/mcp'
     | '/api/public/ping'
+    | '/api/public/why-preview'
+    | '/api/public/why-report'
+    | '/api/public/why-unlock'
     | '/content/drafts/$id'
     | '/dashboard/sites/$domain'
     | '/data/q2-2026/claims.json'
@@ -1668,6 +1718,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/v-score'
     | '/vs'
+    | '/why'
     | '/work'
     | '/.well-known/api-catalog'
     | '/.well-known/http-message-signatures-directory'
@@ -1715,6 +1766,7 @@ export interface FileRouteTypes {
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
+    | '/why/$domain'
     | '/app'
     | '/blog'
     | '/content'
@@ -1729,6 +1781,9 @@ export interface FileRouteTypes {
     | '/api/public/leads'
     | '/api/public/mcp'
     | '/api/public/ping'
+    | '/api/public/why-preview'
+    | '/api/public/why-report'
+    | '/api/public/why-unlock'
     | '/content/drafts/$id'
     | '/dashboard/sites/$domain'
     | '/data/q2-2026/claims.json'
@@ -1827,6 +1882,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/v-score'
     | '/vs'
+    | '/why'
     | '/work'
     | '/.well-known/api-catalog'
     | '/.well-known/http-message-signatures-directory'
@@ -1874,6 +1930,7 @@ export interface FileRouteTypes {
     | '/tools/robots-checker'
     | '/verify/$id'
     | '/vs/$competitor'
+    | '/why/$domain'
     | '/app/'
     | '/blog/'
     | '/content/'
@@ -1888,6 +1945,9 @@ export interface FileRouteTypes {
     | '/api/public/leads'
     | '/api/public/mcp'
     | '/api/public/ping'
+    | '/api/public/why-preview'
+    | '/api/public/why-report'
+    | '/api/public/why-unlock'
     | '/content/drafts/$id'
     | '/dashboard/sites/$domain'
     | '/data/q2-2026/claims.json'
@@ -1987,6 +2047,7 @@ export interface RootRouteChildren {
   UnsubscribeRoute: typeof UnsubscribeRoute
   VScoreRoute: typeof VScoreRoute
   VsRoute: typeof VsRouteWithChildren
+  WhyRoute: typeof WhyRouteWithChildren
   WorkRoute: typeof WorkRoute
   DotwellKnownApiCatalogRoute: typeof DotwellKnownApiCatalogRoute
   DotwellKnownHttpMessageSignaturesDirectoryRoute: typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
@@ -2019,6 +2080,9 @@ export interface RootRouteChildren {
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicMcpRoute: typeof ApiPublicMcpRoute
   ApiPublicPingRoute: typeof ApiPublicPingRoute
+  ApiPublicWhyPreviewRoute: typeof ApiPublicWhyPreviewRoute
+  ApiPublicWhyReportRoute: typeof ApiPublicWhyReportRoute
+  ApiPublicWhyUnlockRoute: typeof ApiPublicWhyUnlockRoute
   DataQ22026ClaimsDotjsonRoute: typeof DataQ22026ClaimsDotjsonRoute
   DataQ22026LeaderboardDotjsonRoute: typeof DataQ22026LeaderboardDotjsonRoute
   DataQ22026StatsDotjsonRoute: typeof DataQ22026StatsDotjsonRoute
@@ -2072,6 +2136,13 @@ declare module '@tanstack/react-router' {
       path: '/work'
       fullPath: '/work'
       preLoaderRoute: typeof WorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/why': {
+      id: '/why'
+      path: '/why'
+      fullPath: '/why'
+      preLoaderRoute: typeof WhyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/vs': {
@@ -2445,6 +2516,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/why/$domain': {
+      id: '/why/$domain'
+      path: '/$domain'
+      fullPath: '/why/$domain'
+      preLoaderRoute: typeof WhyDomainRouteImport
+      parentRoute: typeof WhyRoute
+    }
     '/vs/$competitor': {
       id: '/vs/$competitor'
       path: '/$competitor'
@@ -2815,6 +2893,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/content/drafts/$id'
       preLoaderRoute: typeof ContentDraftsIdRouteImport
       parentRoute: typeof ContentDraftsRoute
+    }
+    '/api/public/why-unlock': {
+      id: '/api/public/why-unlock'
+      path: '/api/public/why-unlock'
+      fullPath: '/api/public/why-unlock'
+      preLoaderRoute: typeof ApiPublicWhyUnlockRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/why-report': {
+      id: '/api/public/why-report'
+      path: '/api/public/why-report'
+      fullPath: '/api/public/why-report'
+      preLoaderRoute: typeof ApiPublicWhyReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/why-preview': {
+      id: '/api/public/why-preview'
+      path: '/api/public/why-preview'
+      fullPath: '/api/public/why-preview'
+      preLoaderRoute: typeof ApiPublicWhyPreviewRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/ping': {
       id: '/api/public/ping'
@@ -3382,6 +3481,16 @@ const VsRouteChildren: VsRouteChildren = {
 
 const VsRouteWithChildren = VsRoute._addFileChildren(VsRouteChildren)
 
+interface WhyRouteChildren {
+  WhyDomainRoute: typeof WhyDomainRoute
+}
+
+const WhyRouteChildren: WhyRouteChildren = {
+  WhyDomainRoute: WhyDomainRoute,
+}
+
+const WhyRouteWithChildren = WhyRoute._addFileChildren(WhyRouteChildren)
+
 interface HistoryHostRouteChildren {
   HistoryHostDiffRoute: typeof HistoryHostDiffRoute
 }
@@ -3454,6 +3563,7 @@ const rootRouteChildren: RootRouteChildren = {
   UnsubscribeRoute: UnsubscribeRoute,
   VScoreRoute: VScoreRoute,
   VsRoute: VsRouteWithChildren,
+  WhyRoute: WhyRouteWithChildren,
   WorkRoute: WorkRoute,
   DotwellKnownApiCatalogRoute: DotwellKnownApiCatalogRoute,
   DotwellKnownHttpMessageSignaturesDirectoryRoute:
@@ -3492,6 +3602,9 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicMcpRoute: ApiPublicMcpRoute,
   ApiPublicPingRoute: ApiPublicPingRoute,
+  ApiPublicWhyPreviewRoute: ApiPublicWhyPreviewRoute,
+  ApiPublicWhyReportRoute: ApiPublicWhyReportRoute,
+  ApiPublicWhyUnlockRoute: ApiPublicWhyUnlockRoute,
   DataQ22026ClaimsDotjsonRoute: DataQ22026ClaimsDotjsonRoute,
   DataQ22026LeaderboardDotjsonRoute: DataQ22026LeaderboardDotjsonRoute,
   DataQ22026StatsDotjsonRoute: DataQ22026StatsDotjsonRoute,

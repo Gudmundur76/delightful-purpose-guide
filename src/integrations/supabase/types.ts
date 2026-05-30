@@ -968,6 +968,7 @@ export type Database = {
         Row: {
           auto_fire_enabled: boolean
           ccs_score: number | null
+          citation_gap: number | null
           created_at: string
           domain: string
           id: string
@@ -976,6 +977,9 @@ export type Database = {
           notify_email: string | null
           owner_user_id: string | null
           plan: string
+          report_email: string | null
+          report_unlocked: boolean
+          report_unlocked_at: string | null
           status: string
           updated_at: string
           wp_api_key: string | null
@@ -983,6 +987,7 @@ export type Database = {
         Insert: {
           auto_fire_enabled?: boolean
           ccs_score?: number | null
+          citation_gap?: number | null
           created_at?: string
           domain: string
           id?: string
@@ -991,6 +996,9 @@ export type Database = {
           notify_email?: string | null
           owner_user_id?: string | null
           plan?: string
+          report_email?: string | null
+          report_unlocked?: boolean
+          report_unlocked_at?: string | null
           status?: string
           updated_at?: string
           wp_api_key?: string | null
@@ -998,6 +1006,7 @@ export type Database = {
         Update: {
           auto_fire_enabled?: boolean
           ccs_score?: number | null
+          citation_gap?: number | null
           created_at?: string
           domain?: string
           id?: string
@@ -1006,6 +1015,9 @@ export type Database = {
           notify_email?: string | null
           owner_user_id?: string | null
           plan?: string
+          report_email?: string | null
+          report_unlocked?: boolean
+          report_unlocked_at?: string | null
           status?: string
           updated_at?: string
           wp_api_key?: string | null

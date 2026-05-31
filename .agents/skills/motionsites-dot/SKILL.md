@@ -1,6 +1,6 @@
 ---
 name: motionsites-dot
-description: Build a nostalgic, serene, and minimalist 'digital detox' aesthetic combining y2k era technology with organic nature hero section in the style of motionsites.ai's "Dot" template. Triggers on requests mentioning "Dot", "motionsites dot", or the combination "hero section + dot".
+description: "Build a nostalgic, serene, and minimalist 'digital detox' aesthetic combining y2k era technology with organic nature hero section in the style of motionsites.ai's \"Dot\" template. Triggers on requests mentioning \"Dot\", \"motionsites dot\", or the combination \"hero section + dot\"."
 ---
 
 # Dot (motionsites-inspired)

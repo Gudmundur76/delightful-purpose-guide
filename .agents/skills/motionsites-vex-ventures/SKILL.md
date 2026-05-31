@@ -1,6 +1,6 @@
 ---
 name: motionsites-vex-ventures
-description: Build a architectural, visionary, and grounded—blending organic beauty with professional corporate ambition hero section in the style of motionsites.ai's "VEX Ventures" template. Triggers on requests mentioning "VEX Ventures", "motionsites vex-ventures", or the combination "hero section + vex ventures".
+description: "Build a architectural, visionary, and grounded—blending organic beauty with professional corporate ambition hero section in the style of motionsites.ai's \"VEX Ventures\" template. Triggers on requests mentioning \"VEX Ventures\", \"motionsites vex-ventures\", or the combination \"hero section + vex ventures\"."
 ---
 
 # VEX Ventures (motionsites-inspired)

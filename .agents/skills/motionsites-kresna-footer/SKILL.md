@@ -1,6 +1,6 @@
 ---
 name: motionsites-kresna-footer
-description: Build a sophisticated and futuristic, blending high-tech ai aesthetics with approachable, humanistic handwritten accents footer section in the style of motionsites.ai's "Kresna Footer" template. Triggers on requests mentioning "Kresna Footer", "motionsites kresna-footer", or the combination "footer section + kresna footer".
+description: "Build a sophisticated and futuristic, blending high-tech ai aesthetics with approachable, humanistic handwritten accents footer section in the style of motionsites.ai's \"Kresna Footer\" template. Triggers on requests mentioning \"Kresna Footer\", \"motionsites kresna-footer\", or the combination \"footer section + kresna footer\"."
 ---
 
 # Kresna Footer (motionsites-inspired)

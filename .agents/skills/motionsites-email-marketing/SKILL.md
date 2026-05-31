@@ -1,6 +1,6 @@
 ---
 name: motionsites-email-marketing
-description: Build a celestial, aspirational, and high-tech with a premium academic undertone email marketing in the style of motionsites.ai's "Email Marketing" template. Triggers on requests mentioning "Email Marketing", "motionsites email-marketing", or the combination "email marketing + email marketing".
+description: "Build a celestial, aspirational, and high-tech with a premium academic undertone email marketing in the style of motionsites.ai's \"Email Marketing\" template. Triggers on requests mentioning \"Email Marketing\", \"motionsites email-marketing\", or the combination \"email marketing + email marketing\"."
 ---
 
 # Email Marketing (motionsites-inspired)

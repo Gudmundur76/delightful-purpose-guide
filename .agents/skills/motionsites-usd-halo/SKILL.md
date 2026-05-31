@@ -1,6 +1,6 @@
 ---
 name: motionsites-usd-halo
-description: Build a futuristic, authoritative, and cinematic with a high-tech corporate infrastructure aesthetic landing page in the style of motionsites.ai's "USD Halo" template. Triggers on requests mentioning "USD Halo", "motionsites usd-halo", or the combination "landing page + usd halo".
+description: "Build a futuristic, authoritative, and cinematic with a high-tech corporate infrastructure aesthetic landing page in the style of motionsites.ai's \"USD Halo\" template. Triggers on requests mentioning \"USD Halo\", \"motionsites usd-halo\", or the combination \"landing page + usd halo\"."
 ---
 
 # USD Halo (motionsites-inspired)

@@ -1,6 +1,6 @@
 ---
 name: motionsites-rivr
-description: Build a serene, high-end 'liquid luxury' aesthetic blending organic surrealism with clean fintech precision hero section in the style of motionsites.ai's "RIVR" template. Triggers on requests mentioning "RIVR", "motionsites rivr", or the combination "hero section + rivr".
+description: "Build a serene, high-end 'liquid luxury' aesthetic blending organic surrealism with clean fintech precision hero section in the style of motionsites.ai's \"RIVR\" template. Triggers on requests mentioning \"RIVR\", \"motionsites rivr\", or the combination \"hero section + rivr\"."
 ---
 
 # RIVR (motionsites-inspired)

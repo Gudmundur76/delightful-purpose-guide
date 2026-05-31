@@ -1,6 +1,6 @@
 ---
 name: motionsites-mythic-naturecore
-description: Build a mystical, ethereal, and immersive, blending ancient ruins with a sense of hidden, primordial nature landing page in the style of motionsites.ai's "Mythic Naturecore" template. Triggers on requests mentioning "Mythic Naturecore", "motionsites mythic-naturecore", or the combination "landing page + mythic naturecore".
+description: "Build a mystical, ethereal, and immersive, blending ancient ruins with a sense of hidden, primordial nature landing page in the style of motionsites.ai's \"Mythic Naturecore\" template. Triggers on requests mentioning \"Mythic Naturecore\", \"motionsites mythic-naturecore\", or the combination \"landing page + mythic naturecore\"."
 ---
 
 # Mythic Naturecore (motionsites-inspired)

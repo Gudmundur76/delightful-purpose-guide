@@ -1,6 +1,6 @@
 ---
 name: motionsites-cybersecurity-hero
-description: Build a techno-futuristic and secure, blending 'dark mode' sophistication with high-end saas precision hero in the style of motionsites.ai's "Cybersecurity Hero" template. Triggers on requests mentioning "Cybersecurity Hero", "motionsites cybersecurity-hero", or the combination "hero + cybersecurity hero".
+description: "Build a techno-futuristic and secure, blending 'dark mode' sophistication with high-end saas precision hero in the style of motionsites.ai's \"Cybersecurity Hero\" template. Triggers on requests mentioning \"Cybersecurity Hero\", \"motionsites cybersecurity-hero\", or the combination \"hero + cybersecurity hero\"."
 ---
 
 # Cybersecurity Hero (motionsites-inspired)

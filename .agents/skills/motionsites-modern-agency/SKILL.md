@@ -1,6 +1,6 @@
 ---
 name: motionsites-modern-agency
-description: Build a futuristic, high-end, and frictionless, blending neo-brutalist layouts with glossy 3d art agency in the style of motionsites.ai's "Modern Agency" template. Triggers on requests mentioning "Modern Agency", "motionsites modern-agency", or the combination "agency + modern agency".
+description: "Build a futuristic, high-end, and frictionless, blending neo-brutalist layouts with glossy 3d art agency in the style of motionsites.ai's \"Modern Agency\" template. Triggers on requests mentioning \"Modern Agency\", \"motionsites modern-agency\", or the combination \"agency + modern agency\"."
 ---
 
 # Modern Agency (motionsites-inspired)

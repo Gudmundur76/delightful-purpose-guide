@@ -1,6 +1,6 @@
 ---
 name: motionsites-3d-collectible-hero
-description: Build a playful, vibrant, and tactile; mimicking a high-end collectible toy gallery or digital showroom 3d website in the style of motionsites.ai's "3D Collectible Hero" template. Triggers on requests mentioning "3D Collectible Hero", "motionsites 3d-collectible-hero", or the combination "3d website + 3d collectible hero".
+description: "Build a playful, vibrant, and tactile; mimicking a high-end collectible toy gallery or digital showroom 3d website in the style of motionsites.ai's \"3D Collectible Hero\" template. Triggers on requests mentioning \"3D Collectible Hero\", \"motionsites 3d-collectible-hero\", or the combination \"3d website + 3d collectible hero\"."
 ---
 
 # 3D Collectible Hero (motionsites-inspired)

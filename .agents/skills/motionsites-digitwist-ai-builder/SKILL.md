@@ -1,6 +1,6 @@
 ---
 name: motionsites-digitwist-ai-builder
-description: Build a a premium, high-tech, and futuristic aesthetic that feels both mysterious and highly efficient saas in the style of motionsites.ai's "Digitwist AI Builder" template. Triggers on requests mentioning "Digitwist AI Builder", "motionsites digitwist-ai-builder", or the combination "saas + digitwist ai builder".
+description: "Build a a premium, high-tech, and futuristic aesthetic that feels both mysterious and highly efficient saas in the style of motionsites.ai's \"Digitwist AI Builder\" template. Triggers on requests mentioning \"Digitwist AI Builder\", \"motionsites digitwist-ai-builder\", or the combination \"saas + digitwist ai builder\"."
 ---
 
 # Digitwist AI Builder (motionsites-inspired)

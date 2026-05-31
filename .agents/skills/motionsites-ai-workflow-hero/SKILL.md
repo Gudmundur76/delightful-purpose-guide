@@ -1,6 +1,6 @@
 ---
 name: motionsites-ai-workflow-hero
-description: Build a ethereal and harmonious 'solarpunk' aesthetic that blends high-tech ai concepts with organic, monumental nature hero in the style of motionsites.ai's "AI Workflow Hero" template. Triggers on requests mentioning "AI Workflow Hero", "motionsites ai-workflow-hero", or the combination "hero + ai workflow hero".
+description: "Build a ethereal and harmonious 'solarpunk' aesthetic that blends high-tech ai concepts with organic, monumental nature hero in the style of motionsites.ai's \"AI Workflow Hero\" template. Triggers on requests mentioning \"AI Workflow Hero\", \"motionsites ai-workflow-hero\", or the combination \"hero + ai workflow hero\"."
 ---
 
 # AI Workflow Hero (motionsites-inspired)

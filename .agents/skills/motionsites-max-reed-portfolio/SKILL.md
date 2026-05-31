@@ -1,6 +1,6 @@
 ---
 name: motionsites-max-reed-portfolio
-description: Build a sophisticated, cinematic dark mode with a focus on high-end lighting, ethereal textures, and professional 'creative technologist' vibes features in the style of motionsites.ai's "Max Reed Portfolio" template. Triggers on requests mentioning "Max Reed Portfolio", "motionsites max-reed-portfolio", or the combination "features + max reed portfolio".
+description: "Build a sophisticated, cinematic dark mode with a focus on high-end lighting, ethereal textures, and professional 'creative technologist' vibes features in the style of motionsites.ai's \"Max Reed Portfolio\" template. Triggers on requests mentioning \"Max Reed Portfolio\", \"motionsites max-reed-portfolio\", or the combination \"features + max reed portfolio\"."
 ---
 
 # Max Reed Portfolio (motionsites-inspired)

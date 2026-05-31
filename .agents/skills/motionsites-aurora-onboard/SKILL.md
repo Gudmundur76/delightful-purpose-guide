@@ -1,6 +1,6 @@
 ---
 name: motionsites-aurora-onboard
-description: Build a sophisticated, high-tech minimalism with a celestial, premium 'pro-tool' atmosphere signup in the style of motionsites.ai's "Aurora Onboard" template. Triggers on requests mentioning "Aurora Onboard", "motionsites aurora-onboard", or the combination "signup + aurora onboard".
+description: "Build a sophisticated, high-tech minimalism with a celestial, premium 'pro-tool' atmosphere signup in the style of motionsites.ai's \"Aurora Onboard\" template. Triggers on requests mentioning \"Aurora Onboard\", \"motionsites aurora-onboard\", or the combination \"signup + aurora onboard\"."
 ---
 
 # Aurora Onboard (motionsites-inspired)

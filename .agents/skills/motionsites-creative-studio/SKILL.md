@@ -1,6 +1,6 @@
 ---
 name: motionsites-creative-studio
-description: Build a futuristic, high-end technical minimalism with a focused 'liquid chrome' aesthetic agency in the style of motionsites.ai's "Creative Studio" template. Triggers on requests mentioning "Creative Studio", "motionsites creative-studio", or the combination "agency + creative studio".
+description: "Build a futuristic, high-end technical minimalism with a focused 'liquid chrome' aesthetic agency in the style of motionsites.ai's \"Creative Studio\" template. Triggers on requests mentioning \"Creative Studio\", \"motionsites creative-studio\", or the combination \"agency + creative studio\"."
 ---
 
 # Creative Studio (motionsites-inspired)

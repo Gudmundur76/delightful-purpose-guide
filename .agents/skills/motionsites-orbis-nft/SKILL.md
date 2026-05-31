@@ -1,6 +1,6 @@
 ---
 name: motionsites-orbis-nft
-description: Build a a whimsical yet cinematic 'space-age kawaii' aesthetic that feels high-tech, immersive, and playful landing page in the style of motionsites.ai's "Orbis NFT" template. Triggers on requests mentioning "Orbis NFT", "motionsites orbis-nft", or the combination "landing page + orbis nft".
+description: "Build a a whimsical yet cinematic 'space-age kawaii' aesthetic that feels high-tech, immersive, and playful landing page in the style of motionsites.ai's \"Orbis NFT\" template. Triggers on requests mentioning \"Orbis NFT\", \"motionsites orbis-nft\", or the combination \"landing page + orbis nft\"."
 ---
 
 # Orbis NFT (motionsites-inspired)

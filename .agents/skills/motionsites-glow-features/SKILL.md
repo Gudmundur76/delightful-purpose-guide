@@ -1,6 +1,6 @@
 ---
 name: motionsites-glow-features
-description: Build a high-tech, premium neon-minimalism with a focused 'dark mode' aesthetic features section in the style of motionsites.ai's "Glow Features" template. Triggers on requests mentioning "Glow Features", "motionsites glow-features", or the combination "features section + glow features".
+description: "Build a high-tech, premium neon-minimalism with a focused 'dark mode' aesthetic features section in the style of motionsites.ai's \"Glow Features\" template. Triggers on requests mentioning \"Glow Features\", \"motionsites glow-features\", or the combination \"features section + glow features\"."
 ---
 
 # Glow Features (motionsites-inspired)

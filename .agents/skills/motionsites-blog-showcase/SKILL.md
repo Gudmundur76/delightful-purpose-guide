@@ -1,6 +1,6 @@
 ---
 name: motionsites-blog-showcase
-description: Build a polished, editorial, and technical, evoking a professional studio or high-end photography gear aesthetic blog in the style of motionsites.ai's "Blog Showcase" template. Triggers on requests mentioning "Blog Showcase", "motionsites blog-showcase", or the combination "blog + blog showcase".
+description: "Build a polished, editorial, and technical, evoking a professional studio or high-end photography gear aesthetic blog in the style of motionsites.ai's \"Blog Showcase\" template. Triggers on requests mentioning \"Blog Showcase\", \"motionsites blog-showcase\", or the combination \"blog + blog showcase\"."
 ---
 
 # Blog Showcase (motionsites-inspired)

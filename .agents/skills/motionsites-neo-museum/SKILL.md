@@ -1,6 +1,6 @@
 ---
 name: motionsites-neo-museum
-description: Build a a sophisticated fusion of scientific archival clarity and high-end tech-forward minimalism website in the style of motionsites.ai's "Neo Museum" template. Triggers on requests mentioning "Neo Museum", "motionsites neo-museum", or the combination "website + neo museum".
+description: "Build a a sophisticated fusion of scientific archival clarity and high-end tech-forward minimalism website in the style of motionsites.ai's \"Neo Museum\" template. Triggers on requests mentioning \"Neo Museum\", \"motionsites neo-museum\", or the combination \"website + neo museum\"."
 ---
 
 # Neo Museum (motionsites-inspired)

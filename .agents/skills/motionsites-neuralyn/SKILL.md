@@ -1,6 +1,6 @@
 ---
 name: motionsites-neuralyn
-description: Build a sophisticated, organic tech: a blend of high-end editorial typography and futuristic glass textures set against a haunting natural backdrop saas in the style of motionsites.ai's "Neuralyn" template. Triggers on requests mentioning "Neuralyn", "motionsites neuralyn", or the combination "saas + neuralyn".
+description: "Build a sophisticated, organic tech: a blend of high-end editorial typography and futuristic glass textures set against a haunting natural backdrop saas in the style of motionsites.ai's \"Neuralyn\" template. Triggers on requests mentioning \"Neuralyn\", \"motionsites neuralyn\", or the combination \"saas + neuralyn\"."
 ---
 
 # Neuralyn (motionsites-inspired)

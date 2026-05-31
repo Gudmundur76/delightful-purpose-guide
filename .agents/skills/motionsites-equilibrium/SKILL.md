@@ -1,6 +1,6 @@
 ---
 name: motionsites-equilibrium
-description: Build a a cinematic, mystical, and aspirational 'dark mode' aesthetic that feels both futuristic and humanistic hero in the style of motionsites.ai's "Equilibrium" template. Triggers on requests mentioning "Equilibrium", "motionsites equilibrium", or the combination "hero + equilibrium".
+description: "Build a a cinematic, mystical, and aspirational 'dark mode' aesthetic that feels both futuristic and humanistic hero in the style of motionsites.ai's \"Equilibrium\" template. Triggers on requests mentioning \"Equilibrium\", \"motionsites equilibrium\", or the combination \"hero + equilibrium\"."
 ---
 
 # Equilibrium (motionsites-inspired)

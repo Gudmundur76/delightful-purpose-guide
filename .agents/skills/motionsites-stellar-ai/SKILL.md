@@ -1,6 +1,6 @@
 ---
 name: motionsites-stellar-ai
-description: Build a ethereal, high-end tech professionalism with a serene, 'zen-ai' atmospheric quality hero section in the style of motionsites.ai's "Stellar AI" template. Triggers on requests mentioning "Stellar AI", "motionsites stellar-ai", or the combination "hero section + stellar ai".
+description: "Build a ethereal, high-end tech professionalism with a serene, 'zen-ai' atmospheric quality hero section in the style of motionsites.ai's \"Stellar AI\" template. Triggers on requests mentioning \"Stellar AI\", \"motionsites stellar-ai\", or the combination \"hero section + stellar ai\"."
 ---
 
 # Stellar AI (motionsites-inspired)

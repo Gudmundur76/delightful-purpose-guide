@@ -1,6 +1,6 @@
 ---
 name: motionsites-power-ai
-description: Build a futuristic, high-end techno-mysticism with a dark, immersive atmospheric quality hero section in the style of motionsites.ai's "Power AI" template. Triggers on requests mentioning "Power AI", "motionsites power-ai", or the combination "hero section + power ai".
+description: "Build a futuristic, high-end techno-mysticism with a dark, immersive atmospheric quality hero section in the style of motionsites.ai's \"Power AI\" template. Triggers on requests mentioning \"Power AI\", \"motionsites power-ai\", or the combination \"hero section + power ai\"."
 ---
 
 # Power AI (motionsites-inspired)

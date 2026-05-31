@@ -1,6 +1,6 @@
 ---
 name: motionsites-designpro-academy
-description: Build a futuristic, premium, and sophisticated with a heavy emphasis on depth and hyper-real glass textures hero section in the style of motionsites.ai's "DesignPro Academy" template. Triggers on requests mentioning "DesignPro Academy", "motionsites designpro-academy", or the combination "hero section + designpro academy".
+description: "Build a futuristic, premium, and sophisticated with a heavy emphasis on depth and hyper-real glass textures hero section in the style of motionsites.ai's \"DesignPro Academy\" template. Triggers on requests mentioning \"DesignPro Academy\", \"motionsites designpro-academy\", or the combination \"hero section + designpro academy\"."
 ---
 
 # DesignPro Academy (motionsites-inspired)

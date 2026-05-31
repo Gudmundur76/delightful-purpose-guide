@@ -1,6 +1,6 @@
 ---
 name: motionsites-vize-footer
-description: Build a soft, corporate-minimalist with a premium, airy aesthetic achieved through depth and subtle skeuomorphism footer section in the style of motionsites.ai's "Vize Footer" template. Triggers on requests mentioning "Vize Footer", "motionsites vize-footer", or the combination "footer section + vize footer".
+description: "Build a soft, corporate-minimalist with a premium, airy aesthetic achieved through depth and subtle skeuomorphism footer section in the style of motionsites.ai's \"Vize Footer\" template. Triggers on requests mentioning \"Vize Footer\", \"motionsites vize-footer\", or the combination \"footer section + vize footer\"."
 ---
 
 # Vize Footer (motionsites-inspired)

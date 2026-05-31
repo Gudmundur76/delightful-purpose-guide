@@ -1,6 +1,6 @@
 ---
 name: motionsites-3d-portfolio
-description: Build a dark, cinematic 3D portfolio landing page in the style of motionsites.ai's "3D Portfolio" template. Triggers on requests like "3D portfolio", "cinematic portfolio landing", "WebGL hero portfolio", "motionsites-style portfolio", or "dark 3D personal site". Use when the user wants a hero-dominant designer/developer portfolio with a 3D or pseudo-3D centerpiece, heavy typography, and slow ambient motion.
+description: "Build a dark, cinematic 3D portfolio landing page in the style of motionsites.ai's \"3D Portfolio\" template. Triggers on requests like \"3D portfolio\", \"cinematic portfolio landing\", \"WebGL hero portfolio\", \"motionsites-style portfolio\", or \"dark 3D personal site\". Use when the user wants a hero-dominant designer/developer portfolio with a 3D or pseudo-3D centerpiece, heavy typography, and slow ambient motion."
 ---
 
 # 3D Portfolio (motionsites-inspired)

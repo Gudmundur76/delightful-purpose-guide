@@ -1,6 +1,6 @@
 ---
 name: motionsites-prisma-creative-studio
-description: Build a cinematic, mysterious, and high-end creative, blending brutalist typography with dreamlike surrealist art landing page in the style of motionsites.ai's "Prisma Creative Studio" template. Triggers on requests mentioning "Prisma Creative Studio", "motionsites prisma-creative-studio", or the combination "landing page + prisma creative studio".
+description: "Build a cinematic, mysterious, and high-end creative, blending brutalist typography with dreamlike surrealist art landing page in the style of motionsites.ai's \"Prisma Creative Studio\" template. Triggers on requests mentioning \"Prisma Creative Studio\", \"motionsites prisma-creative-studio\", or the combination \"landing page + prisma creative studio\"."
 ---
 
 # Prisma Creative Studio (motionsites-inspired)

@@ -1,6 +1,6 @@
 ---
 name: motionsites-skyelite-private-jets
-description: Build a high-altitude luxury—sophisticated, exclusive, and technologically advanced with a calming, airy atmosphere landing page in the style of motionsites.ai's "SkyElite Private Jets" template. Triggers on requests mentioning "SkyElite Private Jets", "motionsites skyelite-private-jets", or the combination "landing page + skyelite private jets".
+description: "Build a high-altitude luxury—sophisticated, exclusive, and technologically advanced with a calming, airy atmosphere landing page in the style of motionsites.ai's \"SkyElite Private Jets\" template. Triggers on requests mentioning \"SkyElite Private Jets\", \"motionsites skyelite-private-jets\", or the combination \"landing page + skyelite private jets\"."
 ---
 
 # SkyElite Private Jets (motionsites-inspired)

@@ -1,6 +1,6 @@
 ---
 name: motionsites-sentinel-ai
-description: Build a technological, secure, and imposing; an 'industrial cyberpunk' aesthetic that emphasizes structural integrity and precision hero section in the style of motionsites.ai's "Sentinel AI" template. Triggers on requests mentioning "Sentinel AI", "motionsites sentinel-ai", or the combination "hero section + sentinel ai".
+description: "Build a technological, secure, and imposing; an 'industrial cyberpunk' aesthetic that emphasizes structural integrity and precision hero section in the style of motionsites.ai's \"Sentinel AI\" template. Triggers on requests mentioning \"Sentinel AI\", \"motionsites sentinel-ai\", or the combination \"hero section + sentinel ai\"."
 ---
 
 # Sentinel AI (motionsites-inspired)

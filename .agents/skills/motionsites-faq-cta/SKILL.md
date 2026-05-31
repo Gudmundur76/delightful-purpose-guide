@@ -1,6 +1,6 @@
 ---
 name: motionsites-faq-cta
-description: Build a techno-optimistic and accessible, blending soft organic gradients with clean, corporate-modern utility cta in the style of motionsites.ai's "FAQ CTA" template. Triggers on requests mentioning "FAQ CTA", "motionsites faq-cta", or the combination "cta + faq cta".
+description: "Build a techno-optimistic and accessible, blending soft organic gradients with clean, corporate-modern utility cta in the style of motionsites.ai's \"FAQ CTA\" template. Triggers on requests mentioning \"FAQ CTA\", \"motionsites faq-cta\", or the combination \"cta + faq cta\"."
 ---
 
 # FAQ CTA (motionsites-inspired)

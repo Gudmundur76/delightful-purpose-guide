@@ -1,6 +1,6 @@
 ---
 name: motionsites-prosthetics-hero
-description: Build a clinical, futuristic, and empathetic minimalism that emphasizes precision and human resilience hero in the style of motionsites.ai's "Prosthetics Hero" template. Triggers on requests mentioning "Prosthetics Hero", "motionsites prosthetics-hero", or the combination "hero + prosthetics hero".
+description: "Build a clinical, futuristic, and empathetic minimalism that emphasizes precision and human resilience hero in the style of motionsites.ai's \"Prosthetics Hero\" template. Triggers on requests mentioning \"Prosthetics Hero\", \"motionsites prosthetics-hero\", or the combination \"hero + prosthetics hero\"."
 ---
 
 # Prosthetics Hero (motionsites-inspired)

@@ -1,6 +1,6 @@
 ---
 name: motionsites-visual-hero
-description: Build a hyper-tactile organic futurism: a blend of high-end editorial sophistication and raw natural textures hero in the style of motionsites.ai's "Visual Hero" template. Triggers on requests mentioning "Visual Hero", "motionsites visual-hero", or the combination "hero + visual hero".
+description: "Build a hyper-tactile organic futurism: a blend of high-end editorial sophistication and raw natural textures hero in the style of motionsites.ai's \"Visual Hero\" template. Triggers on requests mentioning \"Visual Hero\", \"motionsites visual-hero\", or the combination \"hero + visual hero\"."
 ---
 
 # Visual Hero (motionsites-inspired)

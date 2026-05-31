@@ -1,6 +1,6 @@
 ---
 name: motionsites-retro-futurist
-description: Build a a sterile yet whimsical 'lo-fi hi-tech' aesthetic that blends 1980s corporate brutalism with modern minimalist elegance hero in the style of motionsites.ai's "Retro-Futurist" template. Triggers on requests mentioning "Retro-Futurist", "motionsites retro-futurist", or the combination "hero + retro-futurist".
+description: "Build a a sterile yet whimsical 'lo-fi hi-tech' aesthetic that blends 1980s corporate brutalism with modern minimalist elegance hero in the style of motionsites.ai's \"Retro-Futurist\" template. Triggers on requests mentioning \"Retro-Futurist\", \"motionsites retro-futurist\", or the combination \"hero + retro-futurist\"."
 ---
 
 # Retro-Futurist (motionsites-inspired)

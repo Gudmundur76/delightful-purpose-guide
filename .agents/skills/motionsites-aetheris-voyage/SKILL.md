@@ -1,6 +1,6 @@
 ---
 name: motionsites-aetheris-voyage
-description: Build a ethereal, high-end, and cosmic, blending futuristic aerospace innovation with a dreamy, organic luxury aesthetic hero section in the style of motionsites.ai's "Aetheris Voyage" template. Triggers on requests mentioning "Aetheris Voyage", "motionsites aetheris-voyage", or the combination "hero section + aetheris voyage".
+description: "Build a ethereal, high-end, and cosmic, blending futuristic aerospace innovation with a dreamy, organic luxury aesthetic hero section in the style of motionsites.ai's \"Aetheris Voyage\" template. Triggers on requests mentioning \"Aetheris Voyage\", \"motionsites aetheris-voyage\", or the combination \"hero section + aetheris voyage\"."
 ---
 
 # Aetheris Voyage (motionsites-inspired)

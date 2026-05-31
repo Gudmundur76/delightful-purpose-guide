@@ -1,6 +1,6 @@
 ---
 name: motionsites-portfolio-cosmic
-description: Build a ethereal, cinematic, and sophisticated, channeling a 'scholar-in-space' aesthetic portfolio in the style of motionsites.ai's "Portfolio Cosmic" template. Triggers on requests mentioning "Portfolio Cosmic", "motionsites portfolio-cosmic", or the combination "portfolio + portfolio cosmic".
+description: "Build a ethereal, cinematic, and sophisticated, channeling a 'scholar-in-space' aesthetic portfolio in the style of motionsites.ai's \"Portfolio Cosmic\" template. Triggers on requests mentioning \"Portfolio Cosmic\", \"motionsites portfolio-cosmic\", or the combination \"portfolio + portfolio cosmic\"."
 ---
 
 # Portfolio Cosmic (motionsites-inspired)

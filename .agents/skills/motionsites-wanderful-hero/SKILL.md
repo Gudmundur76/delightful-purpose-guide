@@ -1,6 +1,6 @@
 ---
 name: motionsites-wanderful-hero
-description: Build a atmospheric, transcendental, and sophisticated, evoking a sense of calm exploration and premium serenity travel in the style of motionsites.ai's "Wanderful Hero" template. Triggers on requests mentioning "Wanderful Hero", "motionsites wanderful-hero", or the combination "travel + wanderful hero".
+description: "Build a atmospheric, transcendental, and sophisticated, evoking a sense of calm exploration and premium serenity travel in the style of motionsites.ai's \"Wanderful Hero\" template. Triggers on requests mentioning \"Wanderful Hero\", \"motionsites wanderful-hero\", or the combination \"travel + wanderful hero\"."
 ---
 
 # Wanderful Hero (motionsites-inspired)

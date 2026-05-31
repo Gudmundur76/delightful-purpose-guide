@@ -1,6 +1,6 @@
 ---
 name: motionsites-codenest-coding-platform
-description: Build a cyber-noir and technical; a high-contrast 'hacker' aesthetic that feels precisely engineered and clandestine landing page in the style of motionsites.ai's "CodeNest Coding Platform" template. Triggers on requests mentioning "CodeNest Coding Platform", "motionsites codenest-coding-platform", or the combination "landing page + codenest coding platform".
+description: "Build a cyber-noir and technical; a high-contrast 'hacker' aesthetic that feels precisely engineered and clandestine landing page in the style of motionsites.ai's \"CodeNest Coding Platform\" template. Triggers on requests mentioning \"CodeNest Coding Platform\", \"motionsites codenest-coding-platform\", or the combination \"landing page + codenest coding platform\"."
 ---
 
 # CodeNest Coding Platform (motionsites-inspired)

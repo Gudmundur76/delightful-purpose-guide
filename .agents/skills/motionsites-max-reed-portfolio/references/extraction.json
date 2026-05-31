@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/hKCFPaFLC9Wgvyr01ztcjJBERpeuiJQDxZMmWaRDMUk8/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "typography": {
+      "display": "Degular or Inter, Semi-Bold with tight letter spacing for a modern, impactful header.",
+      "mono": "JetBrains Mono or SF Mono for labels, timestamps, and utility metadata.",
+      "body": "Inter or Helvetica Now, Regular for readability and clean professional tone."
+    },
+    "palette": [
+      "#0D0D0D",
+      "#1A1C1E",
+      "#33383C",
+      "#8E9196",
+      "#FFFFFF"
+    ],
+    "layout": "Asymmetric bento grid with three main columns. The left column is a tall vertical image feature, the middle is split into a small testimonial top and large metric bottom, and the right features a large image-led software stack and contact CTA.",
+    "centerpiece": "A dynamic bento-style grid featuring a primary vertical portrait card and a high-glow numeric data visualization metric.",
+    "motion": "Subtle parallax on image backgrounds within cards. Cards should feature a staggered 'fade-in and slide-up' entrance, and hover states should include a gentle scale-up (1.02x) with a soft outer glow.",
+    "mood": "Sophisticated, cinematic dark mode with a focus on high-end lighting, ethereal textures, and professional 'creative technologist' vibes.",
+    "guardrails": [
+      "Avoid heavy drop shadows; use subtle inner borders or 'glass' glows instead.",
+      "Do not use harsh 90-degree corners; radii should be generous (24px+).",
+      "Don't vary the gutter width; maintain a strict, consistent spacing between all grid modules.",
+      "Avoid pure white text for body copy; use muted greys to maintain the dark-mode atmosphere."
+    ]
+  }
+}

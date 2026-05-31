@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-vex-ventures-poster-WLKoWe6y.png",
+  "design": {
+    "motion": "Parallax scrolling on the background image for depth. Text elements should use a clipped reveal (rising from the bottom) with a sluggish, high-friction ease. Background clouds/water should have subtle continuous looping animation.",
+    "centerpiece": "A hyper-realistic, high-contrast cityscape photograph featuring a blend of lush greenery, a reflective river, and modern skyscrapers under a dramatic afternoon sky.",
+    "guardrails": [
+      "Don't use drop shadows on text; rely on background darkness for legibility.",
+      "Avoid saturated primary colors; keep the palette grounded in natural and metallic tones.",
+      "Never use Serif fonts; the brand must feel architectural and tech-forward.",
+      "Don't clutter the image with floating UI elements beyond essential navigation."
+    ],
+    "layout": "Full-bleed immersive background with an asymmetrical split: content is weighted to the bottom-left. A floating frosted-glass navigation bar sits at the top, while a bottom-right pill element anchors the page secondary information.",
+    "palette": [
+      "#0A0B0D",
+      "#FFFFFF",
+      "#CED4DA",
+      "#1A1D21",
+      "#F8F9FA"
+    ],
+    "mood": "Architectural, visionary, and grounded\u2014blending organic beauty with professional corporate ambition.",
+    "typography": {
+      "mono": "JetBrains Mono, Light (for small utility labels)",
+      "display": "Halyard Display, Sans-Serif Medium with tight letter-spacing",
+      "body": "Inter, Sans-Serif Regular"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/p2rqdIt93bi02G2oajLN9eOWifvK6xrBWDWy01yyypR5Q/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "palette": [
+      "#0C140D",
+      "#2D3B2E",
+      "#4B5D45",
+      "#7E8F72",
+      "#E8F2E1"
+    ],
+    "guardrails": [
+      "Avoid saturated or neon greens \u2014 keep the forest tones deep and earthy.",
+      "Do not use heavy drop shadows on UI elements; rely on glassmorphism and light strokes.",
+      "Avoid blocky or thick navigation bars; keep typography airy and minimal.",
+      "Don't use aggressive, bouncy animations; keep the pace slow and cinematic."
+    ],
+    "centerpiece": "A hyper-realistic stone archway overgrown with ivy, framing a dense forest illuminated by dramatic god-rays.",
+    "mood": "Mystical, ethereal, and immersive, blending ancient ruins with a sense of hidden, primordial nature.",
+    "typography": {
+      "mono": "JetBrains Mono, monospace regular uppercase",
+      "body": "Inter, sans-serif light",
+      "display": "Cormorant Garamond, serif medium-italic"
+    },
+    "motion": "Slow, drifting parallax on the background forest layers to create depth. Light rays should pulse or shimmer subtly, while text elements use a soft fade-in with a 0.5s stagger.",
+    "layout": "The design uses a 'container-within-a-container' approach with a floating, rounded-corner viewport centered over a full-bleed background. Navigation is split-aligned at the top of the inner frame, sandwiching a central star icon to create ritualistic symmetry."
+  }
+}

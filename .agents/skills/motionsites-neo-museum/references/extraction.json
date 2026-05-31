@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/rvV01To34SdNmXrjyPh7Wauq5I14M1YU005fldhLChTuA/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "mood": "A sophisticated fusion of scientific archival clarity and high-end tech-forward minimalism.",
+    "motion": "Slow-burn parallax on 3D objects that syncs with scroll depth. Buttons and UI elements utilize micro-scale springs and subtle opacity reveals to emphasize tactile quality.",
+    "guardrails": [
+      "Avoid overly heavy shadows or skeuomorphic containers for UI.",
+      "Do not use serif typefaces; stick to high-contrast grotesque sans.",
+      "Prevent text from overlapping 3D elements unless it utilizes a clear 'layered' parallax effect.",
+      "Ensure buttons never lose their rounded, pill-shaped geometry."
+    ],
+    "palette": [
+      "#FFFFFF",
+      "#F5F5F5",
+      "#252525",
+      "#000000",
+      "#A1A1A1"
+    ],
+    "layout": "Minimalist full-bleed sections with generous negative space. Content is centered vertically with a rhythmic use of macro-typography and small-scale functional UI elements (pills, icons).",
+    "typography": {
+      "display": "General Sans or Robust Sans-Serif, Semi-Bold, large-scale (macro).",
+      "mono": "JetBrains Mono or SF Mono for navigational labels and bracketed numbering.",
+      "body": "Inter or Helvetica Neue, Regular, tight tracking."
+    },
+    "centerpiece": "High-fidelity 3D skeletal assets with realistic textures contrasted against ultra-clean white backgrounds."
+  }
+}

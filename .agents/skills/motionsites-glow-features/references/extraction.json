@@ -1,0 +1,28 @@
+{
+  "source": "https://motionsites.ai/assets/features-glow-poster-CmUBaPAq.png",
+  "design": {
+    "palette": [
+      "#0A0A0A",
+      "#FFFFFF",
+      "#909090",
+      "#FF93A3",
+      "#77E4FF",
+      "#BD75FF"
+    ],
+    "mood": "High-tech, premium neon-minimalism with a focused 'dark mode' aesthetic.",
+    "typography": {
+      "mono": "Inter Medium, 12px, uppercase for labels (optional)",
+      "display": "Inter SemiBold, 22px, tight letter spacing, #FFFFFF color",
+      "body": "Inter Regular, 16px, 1.6 line-height, #909090 color"
+    },
+    "motion": "Hover-state activation where the glow intensity increases or changes hue. Smooth opacity fades for the outer halos on page load. Text and icons should have a slight upward slide or 'float' transition.",
+    "layout": "A horizontal three-column grid centered on a dark canvas. Each card uses a vertical stack with an icon at the top-left, a bold title in the middle-left, and descriptive body text at the bottom-left.",
+    "centerpiece": "Squircle-shaped feature cards with vibrant, outer glow halos and integrated line iconography.",
+    "guardrails": [
+      "Do not use sharp 90-degree corners; maintain high-radius squircles for the cards.",
+      "Avoid thin, harsh borders; the 'glow' must be a soft, wide-dispersion drop shadow or blur.",
+      "Do not mix solid colored backgrounds with the glow; the canvas must remain pitch black.",
+      "Avoid over-complicating the typography; keep it clean and Swiss-inspired."
+    ]
+  }
+}

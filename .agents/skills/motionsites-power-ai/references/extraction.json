@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-power-ai-poster-B5SetZ6G.png",
+  "design": {
+    "layout": "A centered hero composition with a top-aligned utility navigation. The content follows a strict vertical axis: large display headline, medium sub-headline, and an outlined pill-shaped CTA, with a logo marquee anchored at the very bottom.",
+    "typography": {
+      "body": "Inter, light sans-serif 16px/1.5",
+      "mono": "SF Mono, uppercase 12px for navigation and labels.",
+      "display": "Inter, medium sans-serif with tight tracking and a linear gradient mask on the 'AI' suffix."
+    },
+    "centerpiece": "A hyper-realistic 3D abstract of interlocking, tubular purple and blue glass-like coils that weave behind and around the central typography.",
+    "mood": "Futuristic, high-end techno-mysticism with a dark, immersive atmospheric quality.",
+    "motion": "Subtle parallax on the 3D coils that reacts to mouse movement. The 'AI' gradient in the headline should have a slow, shimmering horizontal pulse. The background elements should feel like they are slowly drifting in deep space.",
+    "guardrails": [
+      "Avoid using solid neon colors; stick to deep gradients and translucencies.",
+      "Do not use heavy font weights for body text; keep it light to maintain the ethereal feel.",
+      "Avoid harsh box shadows; use glows and internal lighting effects instead.",
+      "Do not clutter the background; the 3D 'noodles' should have enough negative space to breathe."
+    ],
+    "palette": [
+      "#020205",
+      "#1B1333",
+      "#4C358E",
+      "#8A76FF",
+      "#E0AAFF"
+    ]
+  }
+}

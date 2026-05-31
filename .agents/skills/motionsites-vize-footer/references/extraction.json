@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/footer-vize-poster-BRRRDP-A.png",
+  "design": {
+    "guardrails": [
+      "Do not use high-contrast borders; keep shadow transitions extremely soft.",
+      "Avoid sharp corners on the footer container; maintain a high border-radius (40px+).",
+      "Don't use pure black for text; stick to deep slate and muted greys for a premium feel.",
+      "Do not overcrowd the bottom legal row; keep utility links sparse and right-aligned."
+    ],
+    "typography": {
+      "body": "Inter, sans-serif regular",
+      "display": "Plus Jakarta Sans, sans-serif bold",
+      "mono": "Roboto Mono, monospace medium (labels)"
+    },
+    "mood": "Soft, corporate-minimalist with a premium, airy aesthetic achieved through depth and subtle skeuomorphism.",
+    "motion": "Staggered fade-in for link columns with a slow, parallax vertical drift for the large background watermark. Interactive elements like social icons use a gentle lift shadow on hover.",
+    "centerpiece": "Oversized, 3D soft-embossed branded watermark anchored at the bottom of the viewport.",
+    "layout": "A split-level card layout featuring a large rounded primary container for the brand bio and link columns, sitting atop a secondary full-width muted 'basement' for legal credits. The upper section uses a four-column grid distribution for links and brand identity.",
+    "palette": [
+      "#F0F2F5",
+      "#FFFFFF",
+      "#718096",
+      "#1A202C",
+      "#3182CE"
+    ]
+  }
+}

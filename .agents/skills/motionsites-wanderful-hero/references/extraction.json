@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/loU9GqELzagaHuXwR2ucJx02Fpy00LnEAsr4TAHnTriho/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "mood": "Atmospheric, transcendental, and sophisticated, evoking a sense of calm exploration and premium serenity.",
+    "centerpiece": "Cinematic full-bleed photography featuring a lone explorer in a misty, ethereal golden-hour landscape.",
+    "motion": "Parallax depth on the background image during scroll. Text elements should use a slow, staggered 'blur-to-clear' fade-in. Navigation pills should have a subtle liquid expansion on hover.",
+    "layout": "A balanced architectural stack centered vertically and horizontally. Navigation is housed in a pill-shaped glass container at the top, while the bottom section transitions into a dark vignette to ground the primary Call to Action.",
+    "typography": {
+      "body": "Inter or SF Pro Display, regular with tight leading.",
+      "mono": "IBM Plex Mono Bold, uppercase with wide tracking for legal/utility links.",
+      "display": "Ginto Nord or Helvetica Neue Medium with relaxed letter-spacing."
+    },
+    "palette": [
+      "#0A0D10",
+      "#1E3A4C",
+      "#C28E46",
+      "#FFFFFF",
+      "#E0F2F1"
+    ],
+    "guardrails": [
+      "Avoid sharp, high-contrast imagery; the focus is on soft, atmospheric diffusion.",
+      "Do not use heavy, opaque navigation bars; stick to glassmorphism or invisible containers.",
+      "Avoid standard sans-serifs with high x-heights; look for fonts with elegance and wider tracking.",
+      "Do not clutter the image with secondary icons or small graphics that break the immersion."
+    ]
+  }
+}

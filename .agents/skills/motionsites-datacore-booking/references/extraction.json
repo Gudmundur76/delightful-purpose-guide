@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-datacore-booking-poster-C4umG3DT.png",
+  "design": {
+    "guardrails": [
+      "Avoid flat, solid backgrounds; use textured gradients or film grain noise.",
+      "Do not use purely modern sans-serif for headlines; the distinct serif italic is crucial for the 'luxury tech' feel.",
+      "Prevent sharp corners on UI elements; use a minimum of 12px radius for containers and buttons.",
+      "Don't use high-saturation reds or greens; keep the palette limited to purples and deep charcoal."
+    ],
+    "centerpiece": "A mix of high-contrast serif typography and a glassmorphic product dashboard preview anchored at the bottom.",
+    "palette": [
+      "#08040A",
+      "#1A1424",
+      "#4F3B78",
+      "#9D72FF",
+      "#7C3AED"
+    ],
+    "layout": "A centered, top-heavy 'Hero-to-UI' transition. Elements flow from a centered navigation and headline down into a wide-angle, semi-transparent dashboard cutout that breaks the lower fold.",
+    "mood": "Sophisticated and atmospheric 'Cyber-Chic'\u2014blending high-end luxury editorial vibes with dark-mode SaaS functionality.",
+    "motion": "Subtle parallax on the glow background. Elements should fade in with a slight upward drift (Y-axis translate), while the primary CTA uses a soft scale-up on hover.",
+    "typography": {
+      "display": "Editorial New or Gazpacho, Serif with high-italic 'and' for rhythmic emphasis.",
+      "mono": "JetBrains Mono or SF Mono for small badges and labels.",
+      "body": "Inter or Geist Sans, light weight for high readability."
+    }
+  }
+}

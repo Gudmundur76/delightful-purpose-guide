@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-rivr-poster-XRJOK5Jz.png",
+  "design": {
+    "guardrails": [
+      "Avoid high-contrast black or vibrant neon colors.",
+      "Do not use sharp-cornered containers or harsh borders.",
+      "Avoid busy, textured backgrounds behind text; let the 3D depth provide the negative space.",
+      "Do not use heavy drop shadows on typography; stick to subtle glass-morphism."
+    ],
+    "palette": [
+      "#E2E8F0",
+      "#BCCCDC",
+      "#8E9AAF",
+      "#334155",
+      "#D4AF37"
+    ],
+    "motion": "Subtle floating/levitation for 3D elements. Text should use a soft 'blur-in' reveal. Secondary pods use a gentle parallax effect against the background as the user scrolls.",
+    "layout": "A centered vertical stack for the headline and sub-copy, framed by a floating navigation bar at the top and asymmetrical organic-shaped 'glass' pods in the bottom corners for secondary CTAs and stats.",
+    "typography": {
+      "body": "Inter or Helvetica Neue, Regular 400",
+      "display": "Inter, SemiBold 600 with tight letter-spacing",
+      "mono": "Roboto Mono or JetBrains Mono, Regular for small labels"
+    },
+    "mood": "Serene, high-end 'Liquid Luxury' aesthetic blending organic surrealism with clean fintech precision.",
+    "centerpiece": "A high-fidelity 3D surrealist landscape featuring plush bubble furniture, gold architectural rings, and a misty mountain lake setting."
+  }
+}

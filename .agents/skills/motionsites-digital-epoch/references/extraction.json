@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-digital-epoch-poster-Cnyom0By.png",
+  "design": {
+    "guardrails": [
+      "Avoid sharp corners; every container and the main frame must use high-radius rounding.",
+      "Do not use pure black text; stick to deep navy for high-contrast elements.",
+      "Avoid flat color backgrounds; use subtle gradients and light-refraction effects.",
+      "Don't overcrowd the layout; maintain significant white space around the copy block."
+    ],
+    "typography": {
+      "mono": "Space Mono, monospace (small caps) for utility labels",
+      "body": "Inter, sans-serif regular",
+      "display": "General Sans, sans-serif bold (low letter-spacing)"
+    },
+    "motion": "Subtle vertical floating (bobbing) on the 3D blue tile centerpiece. Soft fade-in reveal for the text block, and a low-frequency shimmer effect across the glass tile grid.",
+    "centerpiece": "A high-gloss 3D isometric blue tile floating above a grid of semi-transparent, frosted glass tiles.",
+    "layout": "A wide-frame hero section with a top-left-heavy typography cluster balanced by a right-aligned 3D graphic. A floating navigation pill is centered at the bottom of the hero, while a separate logo marquee sits underneath in rounded capsules.",
+    "mood": "Pristine, futuristic, and professional with a soft-tech aesthetic driven by skeuomorphic glass textures.",
+    "palette": [
+      "#F2F4F7",
+      "#FFFFFF",
+      "#D0D5DD",
+      "#0B1321",
+      "#2D5BFF"
+    ]
+  }
+}

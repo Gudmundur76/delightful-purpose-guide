@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-skyelite-poster-GHD3VPq4.png",
+  "design": {
+    "typography": {
+      "mono": "Roboto Mono, uppercase 0.1em tracking",
+      "display": "Plus Jakarta Sans, semi-bold with tight leading",
+      "body": "Inter, sans-serif regular"
+    },
+    "layout": "The section uses a centered vertical stack for the headline and CTA, overlaid on a full-bleed cinematic background. The navigation is spread horizontally across the top with a logo anchored top-left and menu items top-right.",
+    "motion": "Subtle parallax on the background image during scroll to simulate flight depth. The engine's orange glow should have a slow, pulsing bloom effect, while text elements fade in with a slight upward slide.",
+    "guardrails": [
+      "Do not use bright primary colors; keep the palette muted and corporate.",
+      "Avoid sharp corners on buttons; use high-pill rounding for a 'premium' feel.",
+      "Don't use overly thin font weights for body copy; ensure readability against photography.",
+      "Avoid cluttered navigation; use ample letter spacing and generous margins."
+    ],
+    "palette": [
+      "#F2F4F7",
+      "#667085",
+      "#1D2939",
+      "#FFFFFF",
+      "#FF8C00"
+    ],
+    "centerpiece": "A high-fidelity 3D render of a private jet engine in mid-flight, featuring glowing orange internal turbines contrasted against a matte charcoal fuselage.",
+    "mood": "High-altitude luxury\u2014sophisticated, exclusive, and technologically advanced with a calming, airy atmosphere."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-nexora-poster-CLY3ybj2.png",
+  "design": {
+    "typography": {
+      "body": "Inter, sans-serif regular",
+      "mono": "JetBrains Mono, monospace for badge labels and UI data",
+      "display": "Editorial New, serif light with selective italicization for emphasis"
+    },
+    "motion": "Subtle parallax on the background landscape during scroll. The dashboard UI should use a smooth spring-reveal from the bottom. Headline text utilizes staggered line-by-line fading.",
+    "guardrails": [
+      "Avoid flat, solid color backgrounds; must use organic, painterly textures.",
+      "Do not use standard sans-serif for headlines; it must be a high-contrast serif with italics.",
+      "Avoid sharp 90-degree corners on the UI mockup; use large, glassmorphic radiuses.",
+      "Don't use overly saturated primary colors for buttons; stick to deep carbon and soft neutrals."
+    ],
+    "layout": "A centered vertical stack starting with a pill-shaped badge, followed by a large typographic headline, subheadline, and dual CTA buttons. The bottom half is dominated by a floating glass-card dashboard that overlaps a detailed environmental illustration.",
+    "mood": "Sophisticated and serene 'Old World' meets 'Modern AI'\u2014specifically blending classical aesthetics with high-tech automation.",
+    "palette": [
+      "#FBFAF9",
+      "#737373",
+      "#E5E7EB",
+      "#5B62F0",
+      "#1A1A1A"
+    ],
+    "centerpiece": "High-fidelity dashboard UI overlaying a painterly, textured oil-paint style landscape background."
+  }
+}

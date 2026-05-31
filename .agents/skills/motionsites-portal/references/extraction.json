@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-portal-poster-CNSIA4kq.png",
+  "design": {
+    "motion": "Subtle parallax on the background image during scroll. Main headline uses a 'fade-in and slide-up' entrance, while the background mist should have a slow, rolling loop animation.",
+    "typography": {
+      "body": "Inter, sans-serif regular",
+      "mono": "Roboto Mono, monospace (for metadata/dates)",
+      "display": "Inter, sans-serif medium (tight tracking)"
+    },
+    "guardrails": [
+      "Don't use drop shadows on text; rely on the image's natural dark gradients for legibility.",
+      "Avoid harsh corners; all buttons and pills must use high-degree border-radius (stadium shape).",
+      "Don't crowd the center; maintain the vertical 'light path' created by the portal.",
+      "Avoid saturated primary colors; keep the UI elements monochrome to let the imagery dominate."
+    ],
+    "palette": [
+      "#0A0A0A",
+      "#1A1A1A",
+      "#FFFFFF",
+      "#E2E8F0",
+      "#FF6B35"
+    ],
+    "layout": "Full-screen immersive hero with a top-aligned glassmorphic navigation bar and bottom-weighted content stack. Text and CTA elements are anchored to the bottom third to maximize the visual impact of the landscape.",
+    "mood": "Epic, cinematic, and adventurous with a sense of mysterious grand-scale exploration.",
+    "centerpiece": "Cinematic landscape photography with a central monolithic 'portal' structure and high atmospheric fog/mist."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/QXSAAL9UTEAH3SoaMLIkSSb01m02TgV1qtSWjzPNO1pFY/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "guardrails": [
+      "Do not use harsh geometric shadows; stick to soft light diffusion.",
+      "Avoid high-contrast primary colors; use desaturated nebula tones.",
+      "Don't use thin, spidery fonts; keep the typography bold and grounded.",
+      "Avoid cluttered backgrounds; maintain a deep, dark atmospheric void."
+    ],
+    "layout": "A high-impact immersive canvas with a floating pill-shaped navigation bar centered at the top. The left-aligned typography creates a weighted balance against the right-aligned human hand and central glowing orb.",
+    "motion": "Slow, drifting ambient motion for the orb and cosmic dust layers. Subtle hover-triggered glass morphism shifts on the navigation bar and primary buttons using ease-in-out transitions.",
+    "centerpiece": "A hyper-realistic 3D glass orb refracting cosmic light, suspended above a detailed human hand to symbolize personal agency and universal connection.",
+    "palette": [
+      "#0B0D13",
+      "#232832",
+      "#4A78A0",
+      "#D98341",
+      "#FFFFFF"
+    ],
+    "typography": {
+      "body": "Inter, sans-serif regular with generous tracking",
+      "display": "Inter, sans-serif bold with tight leading and optical kerning",
+      "mono": "IBM Plex Mono, or similar geometric sans for small utility labels/captions"
+    },
+    "mood": "A cinematic, mystical, and aspirational 'dark mode' aesthetic that feels both futuristic and humanistic."
+  }
+}

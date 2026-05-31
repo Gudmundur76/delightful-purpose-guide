@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/tmh8pemc00LzWJuVgyll9RahISoCELfuCC4W4Gp8yBJs/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "palette": [
+      "#F8F8F8",
+      "#000000",
+      "#717171",
+      "#FFF0F5",
+      "#7A1B43"
+    ],
+    "mood": "Polished, editorial, and technical, evoking a professional studio or high-end photography gear aesthetic.",
+    "typography": {
+      "body": "Inter or Helvetica Neue, Regular 16px",
+      "display": "Lexend or Montserrat, Bold 42px with tight tracking (1.1 line height)",
+      "mono": "JetBrains Mono, 12px for meta data and credits"
+    },
+    "guardrails": [
+      "Do not use sharp 90-degree corners on the main container cards.",
+      "Do not include standard underline links; use pill-shaped tags only.",
+      "Avoid thin or serif fonts for headings\u2014stick to geometric sans-serif for a technical feel.",
+      "Never use more than three lines for secondary body descriptions in the hero section."
+    ],
+    "layout": "A split-screen hero section featuring a 50/50 image-to-text ratio, followed by a symmetrical 3-column grid for secondary articles. Content is housed in soft-rounded white containers on a light grey background to create a floating card effect.",
+    "motion": "Subtle hover scaling on card images and a reveal animation where viewfinder brackets expand from the center on page load. Button pills change opacity or shift hue slightly on hover.",
+    "centerpiece": "High-contrast abstract macro photography in landscape orientation with camera-viewfinder corner brackets."
+  }
+}

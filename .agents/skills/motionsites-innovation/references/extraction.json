@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-innovation-poster-B0t6ym_m.png",
+  "design": {
+    "centerpiece": "Cinematic AI-generated surrealist photography blending human figures with cosmic and organic nebulae.",
+    "mood": "Mystical, visionary, and intellectually sophisticated, blending cosmic wonder with high-end editorial tech.",
+    "typography": {
+      "mono": "JetBrains Mono, monospace light for captions and labels",
+      "display": "Editorial New, serif italic blended with Helvetica Now, sans-serif bold",
+      "body": "Inter, sans-serif regular"
+    },
+    "motion": "Parallax scrolling on background starfields to create depth. Smooth fade-in reveals for typography and glass-morphic cards. Subtle pulse or glow animations on CTA inputs.",
+    "layout": "A vertical scroller defined by high-contrast 'Dark Mode' sections with generous breathing room. Uses an asymmetrical grid where text blocks are often offset or justified against expansive, full-bleed cinematic imagery.",
+    "guardrails": [
+      "Avoid flat vector illustrations or stock corporate photography.",
+      "Do not use bright or high-contrast accent colors (stay within the dark cosmic spectrum).",
+      "Avoid heavy drop shadows; use glassmorphism and soft glows for depth instead.",
+      "Never use standard sans-serif weights for primary headlines; must use the serif italic contrast."
+    ],
+    "palette": [
+      "#000000",
+      "#0A0A0B",
+      "#1A1A1C",
+      "#E5E5E5",
+      "#F3E5AB"
+    ]
+  }
+}

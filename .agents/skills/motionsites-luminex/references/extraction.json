@@ -1,0 +1,26 @@
+{
+  "source": "https://motionsites.ai/assets/hero-luminex-poster-9lhDX6Fl.png",
+  "design": {
+    "layout": "Full-bleed immersive hero with a floating frosted glass navigation bar. Content is left-aligned in the bottom-left quadrant to balance the diagonal motion of the background graphics.",
+    "centerpiece": "Dynamic, flowing abstract light ribbons in deep teal and vibrant amber, creating a sense of energy and motion.",
+    "typography": {
+      "body": "Inter Regular, sans-serif with tight tracking and high line-height for readability.",
+      "mono": "SF Mono, uppercase for small labels or tertiary navigation elements.",
+      "display": "SF Pro Display Bold, sans-serif with -2% letter spacing and no paragraph breaks between sentences."
+    },
+    "palette": [
+      "#020408",
+      "#124469",
+      "#E08432",
+      "#FFFFFF"
+    ],
+    "mood": "A futuristic and ethereal 'Electric Nocturne' aesthetic that feels high-tech yet organic.",
+    "guardrails": [
+      "Avoid sharp or geometric shapes that interrupt the fluid light paths.",
+      "Do not use transparent buttons; maintain solid white for primary CTAs to ensure hero legibility.",
+      "Avoid heavy drop shadows on text; rely on the dark background for contrast.",
+      "Do not use multi-color gradients for typography."
+    ],
+    "motion": "Slow-moving, continuous wave-like undulations of the light ribbons. Subtle parallax effect where the background moves slower than the text horizontally on scroll."
+  }
+}

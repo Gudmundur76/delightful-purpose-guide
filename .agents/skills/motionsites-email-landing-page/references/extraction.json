@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/p2cKLBgPeQElq5VAKGkwX4PoTY01s01YOV111XWrnLn88/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "centerpiece": "A large, ethereal 3D silk or smoke-like plume with a vibrant blue-to-black gradient that weaves behind and through the typography.",
+    "motion": "Slow, rhythmic undulating motion for the 3D plume to create a sense of 'breathing' life. Text elements should use a staggered fade-in with a slight vertical slide upward from zero opacity.",
+    "mood": "High-end cosmic minimalism that feels both technologically advanced and calm.",
+    "typography": {
+      "mono": "JetBrains Mono, monospace light for utility labels",
+      "body": "Inter, sans-serif regular",
+      "display": "Inter, sans-serif bold with tight tracking"
+    },
+    "guardrails": [
+      "Avoid using standard 'neon' glows; prioritize smooth, organic gradients.",
+      "Do not use flat white backgrounds\u2014the deep obsidian base is essential for the depth effect.",
+      "Avoid heavy borders or high-contrast box shadows; let the material textures define the hierarchy.",
+      "Don't overuse the accent blue; keep it restricted to the 3D form and subtle text highlights."
+    ],
+    "layout": "A centered, vertical stack for the hero section with the headline occupying the upper-third, followed by a wide-format product interface reveal in the bottom half. Navigation is split between a top-center utility menu and a high-contrast top-right CTA.",
+    "palette": [
+      "#000000",
+      "#0A0A0A",
+      "#1E3A8A",
+      "#60A5FA",
+      "#FFFFFF"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/02UEPE3F00WgHUukugHlZDQfLYL7D691esS00MqeG02GYGQ/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "typography": {
+      "body": "Inter Sans, medium weight, 16px, tracking -0.01em",
+      "mono": "JetBrains Mono, 12px, uppercase, wide letter spacing",
+      "display": "Geist Sans or Semi-Bold Grotesk, 80px, tracking -0.04em, tight leading"
+    },
+    "centerpiece": "A horizontal node-and-connector network diagram featuring glowing circular icons linked by a vibrant laser-thin data line.",
+    "layout": "A vertically stacked composition featuring a minimal top navigation, a centered interactive diagram, and a wide-span headline anchored by a perspective grid 'floor'. Elements are arranged with generous negative space to emphasize depth and atmosphere.",
+    "palette": [
+      "#0A0A0C",
+      "#14141A",
+      "#2D2D3A",
+      "#A389D4",
+      "#FFFFFF"
+    ],
+    "mood": "Techno-futuristic and secure, blending 'dark mode' sophistication with high-end SaaS precision.",
+    "motion": "Subtle pulsing glows on the nodes and a 'flowing' light effect through the connector lines. The headline and background grid utilize a slow parallax upward scroll to create a sense of three-dimensional space.",
+    "guardrails": [
+      "Do not use bright or saturated secondary colors; keep it monochrome and violet.",
+      "Avoid heavy borders or solid boxes; use depth and glow to define shapes.",
+      "Don't use standard system fonts; stick to geometric grotesques with tight tracking.",
+      "Avoid sharp, high-contrast grid lines; keep the floor grid nearly transparent."
+    ]
+  }
+}

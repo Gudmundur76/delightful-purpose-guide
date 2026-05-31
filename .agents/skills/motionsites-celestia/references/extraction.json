@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-celestia-poster-DdQh9L5K.png",
+  "design": {
+    "typography": {
+      "body": "Inter or Geist Sans, Regular 14px",
+      "display": "PP Editorial New, Serif Light 80px",
+      "mono": "JetBrains Mono, Medium 11px uppercase with high tracking"
+    },
+    "layout": "Full-bleed immersive background with a centered vertical stack for content. The navigation is housed in a floating pill-shaped container at the top center, mirroring the rounded decorative elements throughout.",
+    "motion": "Slow parallax on cloud layers to create depth. Text elements should use a gentle 'blur and fade-in' reveal as the page loads. Subtle twinkling animations on the star field.",
+    "guardrails": [
+      "Avoid using pure #000000; keep blacks deep but nuanced.",
+      "Do not use standard sans-serifs for the headline; it requires high-contrast serifs.",
+      "Prevent CTA buttons from having solid fills; keep them ephemeral and glass-like.",
+      "Avoid grid-heavy layouts; let the clouds dictate the negative space."
+    ],
+    "palette": [
+      "#0A0A0B",
+      "#1A1C1E",
+      "#4A4D52",
+      "#D1D5DB",
+      "#FFFFFF"
+    ],
+    "centerpiece": "Dramatic low-angle view of a stylized nocturnal sky filled with ink-wash cumulus clouds and starlight.",
+    "mood": "Sophisticated, ethereal, and high-tech with a nod to classical romanticism and Japanese charcoal illustration."
+  }
+}

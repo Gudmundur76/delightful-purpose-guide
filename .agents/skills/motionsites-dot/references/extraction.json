@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/dot-hero-B-QWkNdy.png",
+  "design": {
+    "layout": "A centered vertical stack beginning with a floating pill-shaped navigation bar. The content follows a classic inverted pyramid: large serif headline, medium sans-serif subhead, and a massive realistic object as the visual anchor.",
+    "palette": [
+      "#FFFFFF",
+      "#F8F9FA",
+      "#606060",
+      "#2196F3",
+      "#007AFF"
+    ],
+    "centerpiece": "A high-fidelity 3D rendering of a vintage white mobile phone (Nokia 3310 style) emerging from beach sand against a serene ocean backdrop.",
+    "typography": {
+      "body": "Inter or Helvetica Neue, Regular 16px",
+      "mono": "IBM Plex Mono or similar for the 'dot.' logo and UI details",
+      "display": "Instrument Serif or Editorial New, Regular 80px"
+    },
+    "mood": "Nostalgic, serene, and minimalist 'digital detox' aesthetic combining Y2K era technology with organic nature.",
+    "guardrails": [
+      "Avoid modern flat UI elements; use skeumorphic gradients for buttons.",
+      "Do not use sans-serif fonts for the main headline.",
+      "Avoid harsh, high-contrast black; use deep charcoal for text.",
+      "Don't crowd the top navigation; maintain a 100% width pill-shaped container."
+    ],
+    "motion": "Continuous gentle parallax on the background beach image vs. the stationary phone. The headline should employ a soft 'fade-in and slide-up' reveal to mimic a calming breath."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-asme-poster-G7m9uLxL.png",
+  "design": {
+    "palette": [
+      "#000000",
+      "#1A1A1A",
+      "#E6E6E6",
+      "#FFD700",
+      "#FFFFFF"
+    ],
+    "layout": "A vertically stacked, centrally aligned hero section with a fixed utility navigation bar. The content flows from a large serif headline into a pill-shaped input field, followed by a secondary CTA and a full-width immersive background image.",
+    "mood": "Intellectual, mysterious, and high-end tech-noir with a touch of organic surrealism.",
+    "typography": {
+      "display": "Newsreader or Editorial New, Medium 80px+",
+      "mono": "SF Mono or JetBrains Mono, 12px uppercase",
+      "body": "Inter or Geist Sans, Regular 14px-16px"
+    },
+    "guardrails": [
+      "Avoid using standard flat illustrations or corporate Memphis; stick to cinematic realism.",
+      "Do not use high-contrast vibrant colors; keep the palette muted and atmospheric.",
+      "Avoid heavy box shadows; use translucent borders and subtle glows instead.",
+      "Don't overcrowd the header; maintain wide letter spacing and high negative space."
+    ],
+    "motion": "Soft parallax on the background image during scroll. Text elements should use a gentle 'blur-in' fade with a slight upward slide, while the glowing rings in the image imply a slow, continuous rotational pulse.",
+    "centerpiece": "A cinematic, surrealist AI-generated image featuring a person at a laptop surrounded by glowing ethereal rings and yellow lilies."
+  }
+}

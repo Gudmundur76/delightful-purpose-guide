@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-taskly-poster-B5eMEGQS.png",
+  "design": {
+    "palette": [
+      "#FFFFFF",
+      "#F0F8FF",
+      "#000000",
+      "#FF914D",
+      "#5296EE"
+    ],
+    "centerpiece": "A large, organic 3D cerulean sphere with fluid, undulating indentations and a glossy, liquid-metal finish.",
+    "guardrails": [
+      "Do not use sharp-cornered containers or buttons.",
+      "Avoid high-contrast black backgrounds; stick to the soft blue luminosity.",
+      "Don't clutter the right side of the layout; let the 3D object breathe.",
+      "Avoid standard sans-serifs for the headline; use a font with high stroke contrast and tight tracking."
+    ],
+    "mood": "Futuristic, pristine, and high-tech with a focus on fluid productivity and premium soft-UI aesthetics.",
+    "layout": "An asymmetrical two-column composition with a floating glassmorphic navigation bar centered at the top. The left column holds tight-aligned copy and a call-to-action, while the right features a oversized 3D organic form that overlaps the white background and soft blue glows.",
+    "typography": {
+      "body": "Inter or Helvetica Neue, Regular, 18px / 1.5 line-height",
+      "mono": "JetBrains Mono, Medium, 12px for micro-copy and ratings",
+      "display": "General Sans or Satoshi, Semibold, 80px / 0.9 line-height with -2% letter spacing"
+    },
+    "motion": "The 3D sphere should feature a slow 'liquid' displacement animation. Typography and buttons should use a soft 'blur-in' reveal, while the navigation bar remains fixed with a subtle backdrop-filter blur."
+  }
+}

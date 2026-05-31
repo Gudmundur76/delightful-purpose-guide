@@ -135,7 +135,6 @@ import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
 import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicLeaderboardDotjsonRouteImport } from './routes/api/public/leaderboard[.]json'
-import { Route as ApiPublicEnvProbeRouteImport } from './routes/api/public/env-probe'
 import { Route as ApiPublicAgentActionRouteImport } from './routes/api/public/agent-action'
 import { Route as AboutAuthorSlugRouteImport } from './routes/about.author.$slug'
 import { Route as DotwellKnownMcpServerCardDotjsonRouteImport } from './routes/[.]well-known.mcp.server-card[.]json'
@@ -827,11 +826,6 @@ const ApiPublicLeaderboardDotjsonRoute =
     path: '/api/public/leaderboard.json',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicEnvProbeRoute = ApiPublicEnvProbeRouteImport.update({
-  id: '/api/public/env-probe',
-  path: '/api/public/env-probe',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiPublicAgentActionRoute = ApiPublicAgentActionRouteImport.update({
   id: '/api/public/agent-action',
   path: '/api/public/agent-action',
@@ -1240,7 +1234,6 @@ export interface FileRoutesByFullPath {
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
-  '/api/public/env-probe': typeof ApiPublicEnvProbeRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1418,7 +1411,6 @@ export interface FileRoutesByTo {
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
-  '/api/public/env-probe': typeof ApiPublicEnvProbeRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1600,7 +1592,6 @@ export interface FileRoutesById {
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
-  '/api/public/env-probe': typeof ApiPublicEnvProbeRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1783,7 +1774,6 @@ export interface FileRouteTypes {
     | '/.well-known/mcp/server-card.json'
     | '/about/author/$slug'
     | '/api/public/agent-action'
-    | '/api/public/env-probe'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -1961,7 +1951,6 @@ export interface FileRouteTypes {
     | '/.well-known/mcp/server-card.json'
     | '/about/author/$slug'
     | '/api/public/agent-action'
-    | '/api/public/env-probe'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -2142,7 +2131,6 @@ export interface FileRouteTypes {
     | '/.well-known/mcp/server-card.json'
     | '/about/author/$slug'
     | '/api/public/agent-action'
-    | '/api/public/env-probe'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -2292,7 +2280,6 @@ export interface RootRouteChildren {
   DotwellKnownMcpServerCardDotjsonRoute: typeof DotwellKnownMcpServerCardDotjsonRoute
   AboutAuthorSlugRoute: typeof AboutAuthorSlugRoute
   ApiPublicAgentActionRoute: typeof ApiPublicAgentActionRoute
-  ApiPublicEnvProbeRoute: typeof ApiPublicEnvProbeRoute
   ApiPublicLeaderboardDotjsonRoute: typeof ApiPublicLeaderboardDotjsonRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicMcpRoute: typeof ApiPublicMcpRoute
@@ -3236,13 +3223,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicLeaderboardDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/env-probe': {
-      id: '/api/public/env-probe'
-      path: '/api/public/env-probe'
-      fullPath: '/api/public/env-probe'
-      preLoaderRoute: typeof ApiPublicEnvProbeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/public/agent-action': {
       id: '/api/public/agent-action'
       path: '/api/public/agent-action'
@@ -3962,7 +3942,6 @@ const rootRouteChildren: RootRouteChildren = {
   DotwellKnownMcpServerCardDotjsonRoute: DotwellKnownMcpServerCardDotjsonRoute,
   AboutAuthorSlugRoute: AboutAuthorSlugRoute,
   ApiPublicAgentActionRoute: ApiPublicAgentActionRoute,
-  ApiPublicEnvProbeRoute: ApiPublicEnvProbeRoute,
   ApiPublicLeaderboardDotjsonRoute: ApiPublicLeaderboardDotjsonRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicMcpRoute: ApiPublicMcpRoute,

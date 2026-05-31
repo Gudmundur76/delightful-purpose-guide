@@ -116,7 +116,15 @@ function computePillars(
 export const Route = createFileRoute("/api/public/hooks/refresh-scores")({
   server: {
     handlers: {
-      POST: async () => {
+      POST: async ({ request }) => {
+        const expected = process.env.CRON_SECRET;
+        if (!expected) {
+          return new Response("Server misconfigured", { status: 500 });
+        }
+        const provided = request.headers.get("x-cron-secret");
+        if (!provided || provided !== expected) {
+          return new Response("Forbidden", { status: 403 });
+        }
         const scanDate = new Date().toISOString();
 
         // 1) Domains to score

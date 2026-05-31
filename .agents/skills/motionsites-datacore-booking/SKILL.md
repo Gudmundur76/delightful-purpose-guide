@@ -1,6 +1,6 @@
 ---
 name: motionsites-datacore-booking
-description: Build a sophisticated and atmospheric 'cyber-chic'—blending high-end luxury editorial vibes with dark-mode saas functionality saas in the style of motionsites.ai's "Datacore Booking" template. Triggers on requests mentioning "Datacore Booking", "motionsites datacore-booking", or the combination "saas + datacore booking".
+description: "Build a sophisticated and atmospheric 'cyber-chic'—blending high-end luxury editorial vibes with dark-mode saas functionality saas in the style of motionsites.ai's \"Datacore Booking\" template. Triggers on requests mentioning \"Datacore Booking\", \"motionsites datacore-booking\", or the combination \"saas + datacore booking\"."
 ---
 
 # Datacore Booking (motionsites-inspired)

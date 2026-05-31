@@ -1,6 +1,6 @@
 ---
 name: motionsites-lumina
-description: Build a ethereal, cinematic, and meditative, evoking a sense of cosmic discovery and high-end minimalism footer section in the style of motionsites.ai's "Lumina" template. Triggers on requests mentioning "Lumina", "motionsites lumina", or the combination "footer section + lumina".
+description: "Build a ethereal, cinematic, and meditative, evoking a sense of cosmic discovery and high-end minimalism footer section in the style of motionsites.ai's \"Lumina\" template. Triggers on requests mentioning \"Lumina\", \"motionsites lumina\", or the combination \"footer section + lumina\"."
 ---
 
 # Lumina (motionsites-inspired)

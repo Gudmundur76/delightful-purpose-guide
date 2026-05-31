@@ -1,6 +1,6 @@
 ---
 name: motionsites-bloom-ai
-description: Build a sophisticated 'bio-digital' futurism that blends organic planetary themes with high-end glassmorphism and editorial precision hero section in the style of motionsites.ai's "Bloom AI" template. Triggers on requests mentioning "Bloom AI", "motionsites bloom-ai", or the combination "hero section + bloom ai".
+description: "Build a sophisticated 'bio-digital' futurism that blends organic planetary themes with high-end glassmorphism and editorial precision hero section in the style of motionsites.ai's \"Bloom AI\" template. Triggers on requests mentioning \"Bloom AI\", \"motionsites bloom-ai\", or the combination \"hero section + bloom ai\"."
 ---
 
 # Bloom AI (motionsites-inspired)

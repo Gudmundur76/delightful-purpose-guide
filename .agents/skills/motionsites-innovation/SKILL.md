@@ -1,6 +1,6 @@
 ---
 name: motionsites-innovation
-description: Build a mystical, visionary, and intellectually sophisticated, blending cosmic wonder with high-end editorial tech landing page in the style of motionsites.ai's "Innovation" template. Triggers on requests mentioning "Innovation", "motionsites innovation", or the combination "landing page + innovation".
+description: "Build a mystical, visionary, and intellectually sophisticated, blending cosmic wonder with high-end editorial tech landing page in the style of motionsites.ai's \"Innovation\" template. Triggers on requests mentioning \"Innovation\", \"motionsites innovation\", or the combination \"landing page + innovation\"."
 ---
 
 # Innovation (motionsites-inspired)

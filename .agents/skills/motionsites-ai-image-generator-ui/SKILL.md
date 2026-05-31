@@ -1,6 +1,6 @@
 ---
 name: motionsites-ai-image-generator-ui
-description: Build a optimistic, airy, and high-tech minimalist with a 'soft-ui' or 'neo-skeuomorphic' softness ai in the style of motionsites.ai's "AI Image Generator UI" template. Triggers on requests mentioning "AI Image Generator UI", "motionsites ai-image-generator-ui", or the combination "ai + ai image generator ui".
+description: "Build a optimistic, airy, and high-tech minimalist with a 'soft-ui' or 'neo-skeuomorphic' softness ai in the style of motionsites.ai's \"AI Image Generator UI\" template. Triggers on requests mentioning \"AI Image Generator UI\", \"motionsites ai-image-generator-ui\", or the combination \"ai + ai image generator ui\"."
 ---
 
 # AI Image Generator UI (motionsites-inspired)

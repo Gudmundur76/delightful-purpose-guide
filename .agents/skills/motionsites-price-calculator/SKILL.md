@@ -1,6 +1,6 @@
 ---
 name: motionsites-price-calculator
-description: Build a high-end dark mode utility: professional, precise, and authoritative with a punch of vibrant urgency saas in the style of motionsites.ai's "Price Calculator" template. Triggers on requests mentioning "Price Calculator", "motionsites price-calculator", or the combination "saas + price calculator".
+description: "Build a high-end dark mode utility: professional, precise, and authoritative with a punch of vibrant urgency saas in the style of motionsites.ai's \"Price Calculator\" template. Triggers on requests mentioning \"Price Calculator\", \"motionsites price-calculator\", or the combination \"saas + price calculator\"."
 ---
 
 # Price Calculator (motionsites-inspired)

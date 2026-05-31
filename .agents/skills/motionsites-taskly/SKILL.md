@@ -1,6 +1,6 @@
 ---
 name: motionsites-taskly
-description: Build a futuristic, pristine, and high-tech with a focus on fluid productivity and premium soft-ui aesthetics hero section in the style of motionsites.ai's "Taskly" template. Triggers on requests mentioning "Taskly", "motionsites taskly", or the combination "hero section + taskly".
+description: "Build a futuristic, pristine, and high-tech with a focus on fluid productivity and premium soft-ui aesthetics hero section in the style of motionsites.ai's \"Taskly\" template. Triggers on requests mentioning \"Taskly\", \"motionsites taskly\", or the combination \"hero section + taskly\"."
 ---
 
 # Taskly (motionsites-inspired)

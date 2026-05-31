@@ -1,6 +1,6 @@
 ---
 name: motionsites-vaultshield
-description: Build a playful yet secure; a high-fidelity 'claymorphism' aesthetic that feels soft, futuristic, and premium hero in the style of motionsites.ai's "VaultShield" template. Triggers on requests mentioning "VaultShield", "motionsites vaultshield", or the combination "hero + vaultshield".
+description: "Build a playful yet secure; a high-fidelity 'claymorphism' aesthetic that feels soft, futuristic, and premium hero in the style of motionsites.ai's \"VaultShield\" template. Triggers on requests mentioning \"VaultShield\", \"motionsites vaultshield\", or the combination \"hero + vaultshield\"."
 ---
 
 # VaultShield (motionsites-inspired)

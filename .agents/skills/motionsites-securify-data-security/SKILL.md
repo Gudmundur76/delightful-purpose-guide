@@ -1,6 +1,6 @@
 ---
 name: motionsites-securify-data-security
-description: Build a high-energy, cinematic, and disruptive, blending extreme lifestyle imagery with a technical, data-centric overlay saas in the style of motionsites.ai's "Securify Data Security" template. Triggers on requests mentioning "Securify Data Security", "motionsites securify-data-security", or the combination "saas + securify data security".
+description: "Build a high-energy, cinematic, and disruptive, blending extreme lifestyle imagery with a technical, data-centric overlay saas in the style of motionsites.ai's \"Securify Data Security\" template. Triggers on requests mentioning \"Securify Data Security\", \"motionsites securify-data-security\", or the combination \"saas + securify data security\"."
 ---
 
 # Securify Data Security (motionsites-inspired)

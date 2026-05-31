@@ -1,6 +1,6 @@
 ---
 name: motionsites-luminex
-description: Build a a futuristic and ethereal 'electric nocturne' aesthetic that feels high-tech yet organic hero section in the style of motionsites.ai's "Luminex" template. Triggers on requests mentioning "Luminex", "motionsites luminex", or the combination "hero section + luminex".
+description: "Build a a futuristic and ethereal 'electric nocturne' aesthetic that feels high-tech yet organic hero section in the style of motionsites.ai's \"Luminex\" template. Triggers on requests mentioning \"Luminex\", \"motionsites luminex\", or the combination \"hero section + luminex\"."
 ---
 
 # Luminex (motionsites-inspired)

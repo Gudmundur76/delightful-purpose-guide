@@ -1,6 +1,6 @@
 ---
 name: motionsites-nexora-automation
-description: Build a sophisticated and serene 'old world' meets 'modern ai'—specifically blending classical aesthetics with high-tech automation saas in the style of motionsites.ai's "Nexora Automation" template. Triggers on requests mentioning "Nexora Automation", "motionsites nexora-automation", or the combination "saas + nexora automation".
+description: "Build a sophisticated and serene 'old world' meets 'modern ai'—specifically blending classical aesthetics with high-tech automation saas in the style of motionsites.ai's \"Nexora Automation\" template. Triggers on requests mentioning \"Nexora Automation\", \"motionsites nexora-automation\", or the combination \"saas + nexora automation\"."
 ---
 
 # Nexora Automation (motionsites-inspired)

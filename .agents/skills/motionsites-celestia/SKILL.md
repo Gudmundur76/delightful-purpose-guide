@@ -1,6 +1,6 @@
 ---
 name: motionsites-celestia
-description: Build a sophisticated, ethereal, and high-tech with a nod to classical romanticism and japanese charcoal illustration hero section in the style of motionsites.ai's "Celestia" template. Triggers on requests mentioning "Celestia", "motionsites celestia", or the combination "hero section + celestia".
+description: "Build a sophisticated, ethereal, and high-tech with a nod to classical romanticism and japanese charcoal illustration hero section in the style of motionsites.ai's \"Celestia\" template. Triggers on requests mentioning \"Celestia\", \"motionsites celestia\", or the combination \"hero section + celestia\"."
 ---
 
 # Celestia (motionsites-inspired)

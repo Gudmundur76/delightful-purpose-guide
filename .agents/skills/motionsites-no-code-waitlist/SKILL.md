@@ -1,6 +1,6 @@
 ---
 name: motionsites-no-code-waitlist
-description: Build a high-end, futuristic, and ethereal, blending 'tech-noir' vibes with academic elegance waitlist in the style of motionsites.ai's "No-Code Waitlist" template. Triggers on requests mentioning "No-Code Waitlist", "motionsites no-code-waitlist", or the combination "waitlist + no-code waitlist".
+description: "Build a high-end, futuristic, and ethereal, blending 'tech-noir' vibes with academic elegance waitlist in the style of motionsites.ai's \"No-Code Waitlist\" template. Triggers on requests mentioning \"No-Code Waitlist\", \"motionsites no-code-waitlist\", or the combination \"waitlist + no-code waitlist\"."
 ---
 
 # No-Code Waitlist (motionsites-inspired)

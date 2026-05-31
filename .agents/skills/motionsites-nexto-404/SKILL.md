@@ -1,6 +1,6 @@
 ---
 name: motionsites-nexto-404
-description: Build a playful tech-optimism with a clean, airy, and high-end futuristic aesthetic 404 in the style of motionsites.ai's "Nexto 404" template. Triggers on requests mentioning "Nexto 404", "motionsites nexto-404", or the combination "404 + nexto 404".
+description: "Build a playful tech-optimism with a clean, airy, and high-end futuristic aesthetic 404 in the style of motionsites.ai's \"Nexto 404\" template. Triggers on requests mentioning \"Nexto 404\", \"motionsites nexto-404\", or the combination \"404 + nexto 404\"."
 ---
 
 # Nexto 404 (motionsites-inspired)

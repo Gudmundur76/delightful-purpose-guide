@@ -1,6 +1,6 @@
 ---
 name: motionsites-haul
-description: Build a industrial-modern and professional with a warm, high-contrast energetic backdrop footer section in the style of motionsites.ai's "HAUL!" template. Triggers on requests mentioning "HAUL!", "motionsites haul", or the combination "footer section + haul!".
+description: "Build a industrial-modern and professional with a warm, high-contrast energetic backdrop footer section in the style of motionsites.ai's \"HAUL!\" template. Triggers on requests mentioning \"HAUL!\", \"motionsites haul\", or the combination \"footer section + haul!\"."
 ---
 
 # HAUL! (motionsites-inspired)

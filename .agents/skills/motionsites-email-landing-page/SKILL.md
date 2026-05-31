@@ -1,6 +1,6 @@
 ---
 name: motionsites-email-landing-page
-description: Build a high-end cosmic minimalism that feels both technologically advanced and calm landing page in the style of motionsites.ai's "Email Landing Page" template. Triggers on requests mentioning "Email Landing Page", "motionsites email-landing-page", or the combination "landing page + email landing page".
+description: "Build a high-end cosmic minimalism that feels both technologically advanced and calm landing page in the style of motionsites.ai's \"Email Landing Page\" template. Triggers on requests mentioning \"Email Landing Page\", \"motionsites email-landing-page\", or the combination \"landing page + email landing page\"."
 ---
 
 # Email Landing Page (motionsites-inspired)

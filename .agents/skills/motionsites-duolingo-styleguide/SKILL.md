@@ -1,6 +1,6 @@
 ---
 name: motionsites-duolingo-styleguide
-description: Build a playful, upbeat, and accessible educational gamification hero section in the style of motionsites.ai's "Duolingo Styleguide" template. Triggers on requests mentioning "Duolingo Styleguide", "motionsites duolingo-styleguide", or the combination "hero section + duolingo styleguide".
+description: "Build a playful, upbeat, and accessible educational gamification hero section in the style of motionsites.ai's \"Duolingo Styleguide\" template. Triggers on requests mentioning \"Duolingo Styleguide\", \"motionsites duolingo-styleguide\", or the combination \"hero section + duolingo styleguide\"."
 ---
 
 # Duolingo Styleguide (motionsites-inspired)

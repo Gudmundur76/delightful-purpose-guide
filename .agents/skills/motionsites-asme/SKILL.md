@@ -1,6 +1,6 @@
 ---
 name: motionsites-asme
-description: Build a intellectual, mysterious, and high-end tech-noir with a touch of organic surrealism hero section in the style of motionsites.ai's "Asme" template. Triggers on requests mentioning "Asme", "motionsites asme", or the combination "hero section + asme".
+description: "Build a intellectual, mysterious, and high-end tech-noir with a touch of organic surrealism hero section in the style of motionsites.ai's \"Asme\" template. Triggers on requests mentioning \"Asme\", \"motionsites asme\", or the combination \"hero section + asme\"."
 ---
 
 # Asme (motionsites-inspired)

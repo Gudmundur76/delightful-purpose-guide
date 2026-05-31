@@ -1,6 +1,6 @@
 ---
 name: motionsites-digital-epoch
-description: Build a pristine, futuristic, and professional with a soft-tech aesthetic driven by skeuomorphic glass textures hero section in the style of motionsites.ai's "Digital Epoch" template. Triggers on requests mentioning "Digital Epoch", "motionsites digital-epoch", or the combination "hero section + digital epoch".
+description: "Build a pristine, futuristic, and professional with a soft-tech aesthetic driven by skeuomorphic glass textures hero section in the style of motionsites.ai's \"Digital Epoch\" template. Triggers on requests mentioning \"Digital Epoch\", \"motionsites digital-epoch\", or the combination \"hero section + digital epoch\"."
 ---
 
 # Digital Epoch (motionsites-inspired)

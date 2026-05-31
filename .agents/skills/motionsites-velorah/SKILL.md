@@ -1,6 +1,6 @@
 ---
 name: motionsites-velorah
-description: Build a enchanting, ethereal, and intellectual; a blend of mystical surrealism and high-end boutique agency sophistication agency in the style of motionsites.ai's "Velorah" template. Triggers on requests mentioning "Velorah", "motionsites velorah", or the combination "agency + velorah".
+description: "Build a enchanting, ethereal, and intellectual; a blend of mystical surrealism and high-end boutique agency sophistication agency in the style of motionsites.ai's \"Velorah\" template. Triggers on requests mentioning \"Velorah\", \"motionsites velorah\", or the combination \"agency + velorah\"."
 ---
 
 # Velorah (motionsites-inspired)

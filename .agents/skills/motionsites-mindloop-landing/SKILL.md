@@ -1,6 +1,6 @@
 ---
 name: motionsites-mindloop-landing
-description: Build a ethereal, futuristic, and intellectually curious—merging high-tech precision with organic wonder landing page in the style of motionsites.ai's "Mindloop Landing" template. Triggers on requests mentioning "Mindloop Landing", "motionsites mindloop-landing", or the combination "landing page + mindloop landing".
+description: "Build a ethereal, futuristic, and intellectually curious—merging high-tech precision with organic wonder landing page in the style of motionsites.ai's \"Mindloop Landing\" template. Triggers on requests mentioning \"Mindloop Landing\", \"motionsites mindloop-landing\", or the combination \"landing page + mindloop landing\"."
 ---
 
 # Mindloop Landing (motionsites-inspired)

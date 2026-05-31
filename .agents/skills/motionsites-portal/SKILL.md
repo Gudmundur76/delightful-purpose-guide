@@ -1,6 +1,6 @@
 ---
 name: motionsites-portal
-description: Build a epic, cinematic, and adventurous with a sense of mysterious grand-scale exploration hero section in the style of motionsites.ai's "Portal" template. Triggers on requests mentioning "Portal", "motionsites portal", or the combination "hero section + portal".
+description: "Build a epic, cinematic, and adventurous with a sense of mysterious grand-scale exploration hero section in the style of motionsites.ai's \"Portal\" template. Triggers on requests mentioning \"Portal\", \"motionsites portal\", or the combination \"hero section + portal\"."
 ---
 
 # Portal (motionsites-inspired)

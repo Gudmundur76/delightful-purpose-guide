@@ -1,6 +1,6 @@
 ---
 name: motionsites-convix-software
-description: Build a optimistic, airy, and sophisticated, blending professional saas functionality with a dreamlike, natural aesthetic saas in the style of motionsites.ai's "Convix Software" template. Triggers on requests mentioning "Convix Software", "motionsites convix-software", or the combination "saas + convix software".
+description: "Build a optimistic, airy, and sophisticated, blending professional saas functionality with a dreamlike, natural aesthetic saas in the style of motionsites.ai's \"Convix Software\" template. Triggers on requests mentioning \"Convix Software\", \"motionsites convix-software\", or the combination \"saas + convix software\"."
 ---
 
 # Convix Software (motionsites-inspired)

@@ -1,6 +1,6 @@
 ---
 name: motionsites-transform-data
-description: Build a serene, futuristic, and sophisticated, blending high-tech ai utility with an expansive, organic natural environment hero section in the style of motionsites.ai's "Transform Data" template. Triggers on requests mentioning "Transform Data", "motionsites transform-data", or the combination "hero section + transform data".
+description: "Build a serene, futuristic, and sophisticated, blending high-tech ai utility with an expansive, organic natural environment hero section in the style of motionsites.ai's \"Transform Data\" template. Triggers on requests mentioning \"Transform Data\", \"motionsites transform-data\", or the combination \"hero section + transform data\"."
 ---
 
 # Transform Data (motionsites-inspired)

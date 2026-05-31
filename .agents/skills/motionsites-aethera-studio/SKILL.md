@@ -1,6 +1,6 @@
 ---
 name: motionsites-aethera-studio
-description: Build a serene, sophisticated, and timeless, blending classical editorial elegance with dreamlike digital art hero section in the style of motionsites.ai's "Aethera Studio" template. Triggers on requests mentioning "Aethera Studio", "motionsites aethera-studio", or the combination "hero section + aethera studio".
+description: "Build a serene, sophisticated, and timeless, blending classical editorial elegance with dreamlike digital art hero section in the style of motionsites.ai's \"Aethera Studio\" template. Triggers on requests mentioning \"Aethera Studio\", \"motionsites aethera-studio\", or the combination \"hero section + aethera studio\"."
 ---
 
 # Aethera Studio (motionsites-inspired)

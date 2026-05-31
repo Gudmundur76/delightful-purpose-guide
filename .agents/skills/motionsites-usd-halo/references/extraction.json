@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-nexacore-preview-DtWEu8_f.gif",
+  "design": {
+    "layout": "Centered vertical stack with a floating 'island' navigation bar at the top. The typographic content is anchored to the middle of the frame, layered over a deep-perspective 3D background.",
+    "palette": [
+      "#05050C",
+      "#1A1B3A",
+      "#2563EB",
+      "#A78BFA",
+      "#FFFFFF"
+    ],
+    "centerpiece": "An abstract, architectural 3D 'ribbed' structure behaving like a halo/portal with radial light dispersion.",
+    "typography": {
+      "display": "Plus Jakarta Sans, Bold 64px with tight tracking (-0.02em).",
+      "body": "Inter or similar high-legibility neo-grotesque, Regular 16px/1.6.",
+      "mono": "JetBrains Mono for auxiliary labels and eyebrow text."
+    },
+    "guardrails": [
+      "Avoid sharp, angular geometric containers for text; keep it floating.",
+      "Do not use flat solid colors for the background; must be a deep indigo gradient.",
+      "Avoid generic sans-serif fonts; use a typeface with high x-height and circular bowls.",
+      "Never use harsh white; opt for slightly blue-tinted grays for body text to maintain depth."
+    ],
+    "mood": "Futuristic, authoritative, and cinematic with a high-tech corporate infrastructure aesthetic.",
+    "motion": "Slow, rhythmic atmospheric pulsing of the radial light. Text elements should use a staggered 'blur-to-clear' fade in on scroll. Navigation bar should have a subtle frosted-glass expansion effect."
+  }
+}

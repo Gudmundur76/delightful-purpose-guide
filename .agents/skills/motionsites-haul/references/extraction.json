@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/footer-haul-poster-Do5X7frB.png",
+  "design": {
+    "mood": "Industrial-modern and professional with a warm, high-contrast energetic backdrop.",
+    "centerpiece": "Monochromatic orange industrial landscape with a semi-floating white card footer.",
+    "palette": [
+      "#FFFFFF",
+      "#F4F4F4",
+      "#6F7278",
+      "#212529",
+      "#FF6B00"
+    ],
+    "guardrails": [
+      "Do not use sharp 90-degree corners on the footer container.",
+      "Avoid heavy drop shadows; use subtle elevation or none at all.",
+      "Don't use color for link text; keep secondary text in neutral grays.",
+      "Avoid crowded link columns; prioritize breathable white space."
+    ],
+    "motion": "Staggered fade-in for link columns. The background image should employ a subtle parallax scroll or a slow zoom-in scale effect. Social icons use a slight lift on hover.",
+    "typography": {
+      "mono": "IBM Plex Mono, Medium (for uppercase labels)",
+      "display": "Plus Jakarta Sans, Sans-Serif ExtraBold",
+      "body": "Inter, Sans-Serif Regular"
+    },
+    "layout": "A two-tiered floating card with a horizontal divider. The top tier features a 4-column grid (Logo followed by 3 link columns), and the bottom tier contains legal copyright and a right-aligned social icon row."
+  }
+}

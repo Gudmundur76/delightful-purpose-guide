@@ -1,0 +1,27 @@
+{
+  "source": "https://res.cloudinary.com/dsdhxhhqh/image/upload/v1778835031/CleanShot_2026-05-15_at_15.46.24_2x_i163nd.png",
+  "design": {
+    "centerpiece": "A high-fidelity 3D metallic UFO floating in a central radial glow with whimsical 3D accent icons like clouds and hearts.",
+    "mood": "Playful tech-optimism with a clean, airy, and high-end futuristic aesthetic.",
+    "guardrails": [
+      "Do not use sharp corners on cards or buttons; everything must be hyper-rounded.",
+      "Avoid high-contrast borders; use subtle hairlines or soft shadows instead.",
+      "Don't use generic stock 3D; ensure assets have a consistent metallic and pearlescent texture.",
+      "Avoid heavy solid backgrounds; keep the canvas light and airy with depth."
+    ],
+    "palette": [
+      "#F9F9F9",
+      "#EBF0F5",
+      "#111111",
+      "#C499FF",
+      "#6D28D9"
+    ],
+    "typography": {
+      "display": "Plus Jakarta Sans, bold, tight kerning, with lowercase 'y' and 'g' descenders interlocking with text below.",
+      "body": "Inter or Hanken Grotesk, medium weight, 16px with tight letter spacing.",
+      "mono": "SF Mono or JetBrains Mono, used sparingly for inline tags."
+    },
+    "layout": "A centered radial composition anchored by concentric orbital lines. Content is stacked vertically, transitioning from typographic headlines to a central visual centerpiece, concluding with a stack of rounded navigation cards.",
+    "motion": "Subtle floating 'bob' for 3D elements (continuous). Orbital lines should rotate slowly at different speeds. Hover states on cards use a gentle lift and shadow expansion."
+  }
+}

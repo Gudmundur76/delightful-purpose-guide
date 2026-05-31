@@ -1,0 +1,28 @@
+{
+  "source": "https://motionsites.ai/assets/hero-transform-data-poster-DfsHSPMo.png",
+  "design": {
+    "palette": [
+      "#F7F8F7",
+      "#3D4D36",
+      "#61BF4F",
+      "#111111",
+      "#FFFFFF"
+    ],
+    "guardrails": [
+      "Avoid using harsh, opaque borders on the input card; keep it translucent.",
+      "Do not use high-saturation accent colors; stick to nature-inspired or neutral tones.",
+      "Don't crowd the top navigation; keep the links airy and centered.",
+      "Avoid standard 'Search' labels; use contextual AI-driven microcopy like 'Ask anything...'.",
+      "Do not use sharp corners; all UI containers must have a high border-radius (16px+)."
+    ],
+    "layout": "A centered vertical stack with a pill-shaped badge at the top, followed by a tight typographic heading. The focal point is a medium-width interactive card centered over a high-resolution landscape background.",
+    "motion": "Subtle parallax on the background landscape during scroll. UI elements utilize a gentle 'fade-in and slide-up' reveal with a long cubic-bezier easing for a premium feel.",
+    "typography": {
+      "body": "Inter, Sans-serif Regular",
+      "mono": "JetBrains Mono, Monospace Medium for status badges and counts",
+      "display": "Plus Jakarta Sans, Sans-serif Bold with tight letter-spacing"
+    },
+    "mood": "Serene, futuristic, and sophisticated, blending high-tech AI utility with an expansive, organic natural environment.",
+    "centerpiece": "A glassmorphic, floating AI input module with integrated action buttons, positioned over a cinematic aerial landscape."
+  }
+}

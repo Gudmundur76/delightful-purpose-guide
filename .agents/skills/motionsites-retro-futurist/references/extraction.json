@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/8v3ptTfh02ifW501AE0101Oc9likenmSljCmutT2xXSEzEk/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "guardrails": [
+      "Avoid high-contrast black; stick to deep charcoals to maintain the 'paper' feel.",
+      "Do not use drop shadows or heavy gradients on buttons; keep pills flat or with minimal borders.",
+      "Avoid standard sans-serifs; use fonts with tight kerning and distinctive ink-trap qualities.",
+      "Never use vibrant or neon colors; maintain a desaturated, archival palette."
+    ],
+    "typography": {
+      "display": "PP Neue Montreal, Semi-Bold. High x-height, tight leading.",
+      "mono": "JetBrains Mono or custom technical sans for small labels.",
+      "body": "Inter or Lab Grotesque, medium weight with tight tracking."
+    },
+    "motion": "Subtle micro-interactions like a custom oversized cursor that reacts to screen elements. Typography should use a soft 'fade-and-slide up' reveal, while the centerpiece remains static to ground the composition.",
+    "centerpiece": "A surreal, high-concept character portrait featuring a person in a grey wool blazer with a vintage computer terminal as a head.",
+    "layout": "A split vertical composition where the right side is anchored by a large-scale subject and the left contains a clustered grouping of typography and pill-shaped action buttons. The navigation is pinned to the top with wide letter-spacing.",
+    "mood": "A sterile yet whimsical 'Lo-Fi Hi-Tech' aesthetic that blends 1980s corporate brutalism with modern minimalist elegance.",
+    "palette": [
+      "#B8B8B0",
+      "#E5E5E0",
+      "#202020",
+      "#FFFFFF",
+      "#9A9A95"
+    ]
+  }
+}

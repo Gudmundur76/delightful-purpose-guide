@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-securify-poster-CrUPOWDv.png",
+  "design": {
+    "layout": "Asymmetrical hero composition where ultra-large display type occupies the foreground, middle-ground, and background layers of a full-screen image. The navigation is split into floating island components (logo, menu, CTA) at the top of the viewport.",
+    "palette": [
+      "#0A0B0D",
+      "#161719",
+      "#F2F2F2",
+      "#A1A1A1",
+      "#FFFFFF"
+    ],
+    "centerpiece": "Full-bleed dynamic action photography (snowboarding/extreme sport) integrated with massive, overlapping sans-serif typography.",
+    "motion": "Parallax layering where text moves at different speeds relative to the background person. Subtle pulse animations on the 'hairline' connectors for the data stats. Smooth expansion on the pill-shaped navigation items upon hover.",
+    "guardrails": [
+      "Do not use drop shadows on the large typography; maintain a crisp bleed against the image.",
+      "Avoid standard grid alignment for stats; scatter them with thin hair-line pointers to feel like HUD elements.",
+      "Don't use highly saturated accent colors that compete with the photography.",
+      "Avoid boxy navigation containers; keep the floating pill-shape aesthetic for the header."
+    ],
+    "typography": {
+      "body": "Inter, sans-serif regular",
+      "mono": "JetBrains Mono for numerical data and captions",
+      "display": "Plus Jakarta Sans, bold sans-serif with tight tracking"
+    },
+    "mood": "High-energy, cinematic, and disruptive, blending extreme lifestyle imagery with a technical, data-centric overlay."
+  }
+}

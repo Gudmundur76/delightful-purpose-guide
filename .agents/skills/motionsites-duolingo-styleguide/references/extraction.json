@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-duolingo-styleguide-poster-CPG13g3T.png",
+  "design": {
+    "motion": "Springy and bouncy transitions using elastic easings. Characters should have subtle floating idle animations while buttons utilize a 'press-down' effect that flattens the bottom shadow on click.",
+    "guardrails": [
+      "Avoid sharp corners; all containers and buttons must have a minimum 12px border radius.",
+      "Do not use thin or elegant serif fonts; the brand is exclusively chunky and friendly.",
+      "Avoid flat buttons; use the 'thick bottom' 3D shadow effect (2-4px inset) to signify interactivity.",
+      "Do not use gradients; stick to flat, high-contrast primitive colors for a game-like feel."
+    ],
+    "centerpiece": "Dynamic character-driven illustration group featuring 'Duo' the owl and various human avatars with rounded, geometric vector art styles.",
+    "typography": {
+      "body": "DIN Next Rounded, sans-serif medium",
+      "mono": "DIN Next Rounded, uppercase-bold for labels and metadata",
+      "display": "Feather Bold, rounded geometric sans-serif"
+    },
+    "mood": "Playful, upbeat, and accessible educational gamification.",
+    "palette": [
+      "#FFFFFF",
+      "#58CC02",
+      "#4B4B4B",
+      "#1CB0F6",
+      "#FFC800"
+    ],
+    "layout": "Two-column split hero layout with a high-density illustrative cluster on the left and center-aligned call-to-action stack on the right. A thin light gray hairline divider separates the hero from a structured grid of UI components below."
+  }
+}

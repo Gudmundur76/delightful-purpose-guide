@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-price-calculator-poster-DzoAr1AR.png",
+  "design": {
+    "layout": "The page features a centered headline and uppercase eyebrow followed by a large, two-column rounded container. The left column handles interactive inputs (radio buttons, sliders, checkboxes), while the right column acts as a summary panel containing stacked price cards.",
+    "palette": [
+      "#000000",
+      "#111111",
+      "#1A1A1A",
+      "#FFFFFF",
+      "#FF5C39"
+    ],
+    "typography": {
+      "mono": "JetBrains Mono, monospace regular",
+      "display": "SF Pro Display, sans-serif bold",
+      "body": "Inter, sans-serif medium"
+    },
+    "mood": "High-end dark mode utility: professional, precise, and authoritative with a punch of vibrant urgency.",
+    "guardrails": [
+      "Avoid adding distracting background patterns or illustrations; keep it pure pitch black.",
+      "Do not use borders around the input fields; prefer subtle dividers and whitespace.",
+      "Ensure the gradient CTA card is the brightest element on the page; don't dilute its impact with other gradients.",
+      "Avoid standard system fonts; stick to geometric sans-serifs for the premium tech look."
+    ],
+    "motion": "Subtle numeric rolling effect for the price totals as the user interacts with the form. Slider handles should have a slight elastic expansion on hover. Values should transition with a crisp fade and 50ms slide-up motion.",
+    "centerpiece": "Interactive calculator card with a dual-pane layout: a dark input form on the left and dynamic pricing results on the right."
+  }
+}

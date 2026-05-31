@@ -1,0 +1,26 @@
+{
+  "source": "https://image.mux.com/gUXSp2ByuPZuBqhtjly028le1RHgF3eqXHLUNZVbczgQ/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "layout": "A high-contrast vertical stack featuring a full-bleed hero with offset typography, followed by a staggered asymmetrical multi-column body grid for case studies and 'about' content. Modular sections are separated by significant white space or subtle off-grey background shifts.",
+    "mood": "Futuristic, high-end, and frictionless, blending neo-brutalist layouts with glossy 3D art.",
+    "motion": "Subtle parallax on background 3D elements against fixed typography. Text reveals should use a 'staggered slide-up and fade' rhythm on scroll, while primary capsules use a slow-pulsing scale effect.",
+    "centerpiece": "High-gloss 3D abstract fluid ribbon with metallic and iridescent textures.",
+    "palette": [
+      "#FFFFFF",
+      "#F5F5F5",
+      "#1A1A1A",
+      "#E85D33"
+    ],
+    "typography": {
+      "body": "Inter, sans-serif light",
+      "mono": "JetBrains Mono, regular (for captions and tags)",
+      "display": "General Sans, semibold with tight letter spacing"
+    },
+    "guardrails": [
+      "Avoid using standard sans-serifs for headlines; it must be a tight-kerning display face.",
+      "Do not use sharp-cornered buttons; stick to pill-shaped 'capsule' containers.",
+      "Never use drop shadows on text or UI elements; depth should come from the 3D backgrounds.",
+      "Avoid standard grid alignment; allow images and text blocks to stagger vertically."
+    ]
+  }
+}

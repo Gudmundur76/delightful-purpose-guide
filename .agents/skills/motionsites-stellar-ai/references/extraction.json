@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-stellar-ai-poster-BQJztWy-.png",
+  "design": {
+    "centerpiece": "Hyper-realistic 3D environmental render (Japanese garden aesthetic) with an integrated UI dashboard overlay.",
+    "mood": "Ethereal, high-end tech professionalism with a serene, 'Zen-AI' atmospheric quality.",
+    "palette": [
+      "#FFFFFF",
+      "#F7F7F7",
+      "#8E8EA0",
+      "#8A5CF5",
+      "#000000"
+    ],
+    "guardrails": [
+      "Do not use harsh 90-degree corners; everything should have a high-radius border curve.",
+      "Avoid overly saturated primary colors; stick to muted tones and grays for UI elements.",
+      "Never use drop shadows on text; depth should be created via layer stacking and background blur only.",
+      "Don't crowd the header; maintain generous whitespace between the logo and navigation links."
+    ],
+    "typography": {
+      "body": "Inter, sans-serif regular with tight tracking and 1.6 line-height.",
+      "mono": "JetBrains Mono, medium for small badges and technical labels.",
+      "display": "Inter, sans-serif semibold with 'optical' kerning and tight letter-spacing."
+    },
+    "motion": "Soft fade-in for the main headline with a slight upward drift. The floating UI cards within the centerpiece should feature a subtle, slow-looping Y-axis float to imply depth. Button hover states transition background color using a 0.3s ease-out.",
+    "layout": "Centered vertical stack consisting of a pill-shaped badge, a tight sans-serif headline, a CTA button, and a segmented control bar transitioning into a large-scale featured image. The image acts as an anchor for the page, containing floated UI cards to simulate interaction."
+  }
+}

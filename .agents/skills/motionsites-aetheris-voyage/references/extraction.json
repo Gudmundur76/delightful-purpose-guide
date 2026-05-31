@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-aetheris-voyage-poster-BOeMMDSw.png",
+  "design": {
+    "mood": "Ethereal, high-end, and cosmic, blending futuristic aerospace innovation with a dreamy, organic luxury aesthetic.",
+    "palette": [
+      "#0D0D0F/deep space black",
+      "#2A2A2E/dark slate grey",
+      "#D9AF72/gold dust lux",
+      "#949EBF/chromatic iris blue",
+      "#FFFFFF/stellar white"
+    ],
+    "layout": "Centered vertical stack with a floating navigation capsule at the top. The typography is layered over a large fluid centerpiece, followed by a secondary row of semi-transparent data cards and a bottom-aligned logo marquee.",
+    "typography": {
+      "mono": "JetBrains Mono, regular (used for metadata and small tags)",
+      "display": "PP Editorial New, serif italic light",
+      "body": "Inter, sans-serif regular with wide tracking"
+    },
+    "guardrails": [
+      "Avoid solid heavy borders; use thin 1px gradients or glows instead.",
+      "Do not use standard sans-serif for numbers; they must be high-contrast serif.",
+      "Don't allow the background to be pure black (#000); use a deep charcoal with noise.",
+      "Avoid aggressive hover states; transitions should be slow and fluid like liquid."
+    ],
+    "centerpiece": "An amorphous, iridescent glass-like sphere or 'bubble' containing a dark nebular interior with golden caustic reflections.",
+    "motion": "Continuous slow rotation and deformation of the central glass sphere. Text elements should use a soft 'blur-in' reveal with a slight Y-axis drift, mimicking the floating nature of space."
+  }
+}

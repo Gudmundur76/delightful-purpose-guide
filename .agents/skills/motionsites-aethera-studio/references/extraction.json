@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-aethera-poster-DB6AdF0M.png",
+  "design": {
+    "typography": {
+      "display": "Editorial New or Times New Roman, Light, 84px, -0.02em letter spacing",
+      "mono": "IBM Plex Mono, Medium, 12px uppercase for utility links",
+      "body": "Inter or Helvetica Neue, Regular, 16px, 1.6 line-height"
+    },
+    "mood": "Serene, sophisticated, and timeless, blending classical editorial elegance with dreamlike digital art.",
+    "palette": [
+      "#FFFFFF",
+      "#F8F9FA",
+      "#6B7280",
+      "#000000",
+      "#1A1A1A"
+    ],
+    "centerpiece": "A high-detail, ethereal pastoral landscape illustration featuring rolling green hills, a winding river, and distant blue mountains, positioned in the lower half of the frame.",
+    "motion": "Soft parallax on the landscape layers during scroll. Text elements should use a gentle 'blur-to-clear' fade-in reveal. The CTA buttons utilize a subtle scaling transition on hover.",
+    "layout": "Center-aligned vertical stack with a floating navigation bar. The headline dominates the top third, followed by a narrow paragraph and a pill-shaped CTA, with the image serving as a grounding floor for the composition.",
+    "guardrails": [
+      "Do not use hard shadows or high-contrast color blocks on text.",
+      "Avoid heavy geometric shapes; keep the interface secondary to the serif typography and organic imagery.",
+      "Do not crowd the landscape illustration with UI elements.",
+      "Avoid using vibrant or neon colors outside of the nature illustration."
+    ]
+  }
+}

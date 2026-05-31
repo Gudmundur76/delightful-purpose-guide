@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/F01M5JCF004R9SYNgG02wRlscqRn5tacvrc500Mgb2cKzBc/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "guardrails": [
+      "Avoid thin, high-contrast borders; use soft shadows and background colors for separation instead.",
+      "Do not use sharp 90-degree corners; everything must have a radius between 8px and 24px.",
+      "Avoid cluttered footers; use generous vertical white space and simple text lists.",
+      "Don't use flat colors for primary CTA backgrounds; use multi-stop gradients or glows."
+    ],
+    "motion": "Smooth height expansion for FAQ accordions using easing curves like cubic-bezier(0.4, 0, 0.2, 1). Elements should have subtle lift-on-hover effects using soft drop shadows. The mesh gradient should feature a slow, barely perceptible rotation/pulse.",
+    "typography": {
+      "display": "Inter or Satoshi, Semi-Bold 48px-56px with tight tracking (-2%)",
+      "body": "Inter or Helvetica Neue, Regular 14px-16px",
+      "mono": "SF Mono or JetBrains Mono, 12px for small metadata tags"
+    },
+    "centerpiece": "Large-scale mesh gradient card with centered typography and a high-contrast floating button.",
+    "palette": [
+      "#FFFFFF",
+      "#F8F9FA",
+      "#FF8A65",
+      "#FFD54F",
+      "#111111"
+    ],
+    "mood": "Techno-optimistic and accessible, blending soft organic gradients with clean, corporate-modern utility.",
+    "layout": "Two-column asymmetrical grid: a large 60/40 split where a vibrant CTA card sits on the left, balanced by a stacked accordion list on the right. The footer follows a classic four-column distribution with left-aligned brand info and right-aligned newsletter capture."
+  }
+}

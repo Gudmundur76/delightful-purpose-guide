@@ -1,0 +1,26 @@
+{
+  "source": "https://image.mux.com/802ps1LP2vYwpJjPj9DLdbaOAwDTG4UkLgPJOVZaR8N4/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "centerpiece": "A 3D abstract claymorphism factory machine with glass tubes, iridescent token-like coins flowing through a track, and a glowing purple core.",
+    "guardrails": [
+      "Avoid high-contrast black backgrounds; stick to warm grays.",
+      "Do not use sharp-cornered buttons or input fields.",
+      "Avoid flat 2D icons; everything should feel tactile, rounded, and shaded.",
+      "Don't let the text overlap the 3D assets on smaller viewports."
+    ],
+    "typography": {
+      "mono": "JetBrains Mono, monospace medium (for inline icons/labels)",
+      "body": "Inter, sans-serif regular",
+      "display": "Plus Jakarta Sans, sans-serif bold"
+    },
+    "motion": "Continuous slow-scrolling 3D tokens moving along the track. Smooth hover-state transitions on buttons that slightly increase saturation and scale. Subtle parallax on the headline as the user scrolls.",
+    "layout": "A two-column split with a left-aligned typography stack (headline, body, CTA) and a right-aligned 3D centerpiece that bleeds off the bottom right and top edges. The navigation bar spans the top with a central flex links and right-aligned pill buttons.",
+    "mood": "Playful yet secure; a high-fidelity 'Claymorphism' aesthetic that feels soft, futuristic, and premium.",
+    "palette": [
+      "#E7E4E1",
+      "#FFFFFF",
+      "#1A2533",
+      "#634EE3"
+    ]
+  }
+}

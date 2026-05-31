@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/i9kUFJpB6GrWoe2UXRZG4lIP02g00LGulS1GTVrMMwZI00/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "layout": "A centered 'floating' composition where a glass-morphic island navigation bar sits at the top. The headline is large and centered, partially obscured by the centerpiece which anchors the bottom two-thirds of the viewport, flanked by small secondary copy blocks.",
+    "palette": [
+      "#000000",
+      "#1A1A1A",
+      "#7C8D5F",
+      "#E9D8D2",
+      "#FFFFFF"
+    ],
+    "centerpiece": "A high-fidelity, photorealistic 3D render of organic matter (moss and crystals) that physically interacts with and overlaps the headline type.",
+    "mood": "Hyper-tactile organic futurism: a blend of high-end editorial sophistication and raw natural textures.",
+    "typography": {
+      "mono": "IBM Plex Mono, regular (for captions)",
+      "body": "Inter, sans-serif regular",
+      "display": "Editorial New, serif italic light"
+    },
+    "guardrails": [
+      "Avoid using hard-edged geometric shapes; keep the UI rounded and soft.",
+      "Do not hide the centerpiece behind the text; the text must weave 'under' parts of the image.",
+      "Don't use standard sans-serif for the headline; it must be a high-contrast serif.",
+      "Avoid bright, distracting background colors; the backdrop must remain a deep, dark void."
+    ],
+    "motion": "Subtle parallax on the centerpiece to create depth relative to the background. Headline text should have a soft blur-to-focus reveal on entry. Button hover states use a slow expansion of 'pill' width."
+  }
+}

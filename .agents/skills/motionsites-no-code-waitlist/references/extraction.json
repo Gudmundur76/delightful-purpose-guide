@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/iY611PYuZ02AKpIzYB4Q1BMpl7W2O3UwqjQm9p01xlmVg/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "mood": "High-end, futuristic, and ethereal, blending 'Tech-Noir' vibes with academic elegance.",
+    "motion": "Floating slow-parallax on the 3D background. UI elements should fade in with a slight upward stagger, while the cursor interaction on the input field triggers a subtle glow expansion.",
+    "typography": {
+      "body": "Inter, sans-serif medium",
+      "display": "Instrument Serif, serif regular",
+      "mono": "JetBrains Mono, monospace uppercase"
+    },
+    "guardrails": [
+      "Avoid generic sans-serif fonts for headings; the serif is vital for the premium feel.",
+      "Do not use solid white backgrounds or flat colors; depth is created through the dark, textured backdrop.",
+      "Avoid heavy borders; use thin, low-opacity glass-morphism effects for UI elements.",
+      "Don't crowd the centerpiece; allow the 3D art to bleed behind the text."
+    ],
+    "centerpiece": "High-fidelity 3D abstract fluid sculpture with iridescent glass and chrome textures.",
+    "layout": "Centric and immersive hero section with a floating 'pill-shaped' navigation bar. Elements are vertically stacked in the center with significant breathing room to emphasize the background art.",
+    "palette": [
+      "#000000",
+      "#1A1A2E",
+      "#5E5CE6",
+      "#A29BFE",
+      "#FFFFFF"
+    ]
+  }
+}

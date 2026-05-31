@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-neuralyn-poster-BrDgI9_4.png",
+  "design": {
+    "palette": [
+      "#000000",
+      "#1A1A1A",
+      "#A8A8A8",
+      "#D1D5DB",
+      "#F8CDD4"
+    ],
+    "mood": "Sophisticated, organic tech: a blend of high-end editorial typography and futuristic glass textures set against a haunting natural backdrop.",
+    "motion": "Reveal-heavy motion with soft parallax on the botanical background. Headlines should use a 'blur-in' and upward slide effect, while glass containers use a subtle shimmering hover state to emphasize transparency.",
+    "guardrails": [
+      "Avoid harsh primary colors; stick to the muted botanical-inspired palette.",
+      "Don't use solid backgrounds for containers; maintain a glassmorphic opacity of 20-30%.",
+      "Do not use standard sans-serif italics for emphasis; only apply the high-contrast serif italic for specific keywords.",
+      "Avoid sharp corners; all UI elements should have a radius between 8px and 24px."
+    ],
+    "centerpiece": "A glassmorphic SaaS dashboard floating in front of a dark, moody botanical macro photograph with deep bokeh.",
+    "typography": {
+      "display": "Plus Jakarta Sans bold for main stems with Editorial New italic for emphasized keywords.",
+      "mono": "SF Mono or JetBrains Mono for system labels and data timestamps.",
+      "body": "Inter, sans-serif medium weight for readability."
+    },
+    "layout": "A centered vertical hierarchy featuring a floating navigation bar, a high-impact typographic hero section, and a recessed glass container for the product preview. All elements are anchored against a full-width atmospheric background layer."
+  }
+}

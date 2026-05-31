@@ -1,0 +1,26 @@
+{
+  "source": "https://image.mux.com/ZbJ6QKnC012pbyMayZL5A00Le8Xx4UGCDk007lprB2LAb4/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "typography": {
+      "display": "Inter or SF Pro Display, Semi-Bold 600",
+      "mono": "JetBrains Mono or SF Mono, Medium 500 (for captions and tags)",
+      "body": "Inter or Helvetica Neue, Regular 400"
+    },
+    "palette": [
+      "#FFFFFF",
+      "#F2F2F2",
+      "#2B5EA7",
+      "#1A1A1A"
+    ],
+    "centerpiece": "High-contrast, 3D anatomical render (bionic hand) with soft contact shadows and a subtle reflective ground plane.",
+    "layout": "Asymmetrical hero with a top-centered floating pill navigation. The primary copy is bottom-left aligned using a tight typographic stack, balanced by a large-scale 3D object occupying the right two-thirds of the canvas.",
+    "motion": "Subtle floating inertia on the 3D centerpiece. Text elements should use a staggered 'blur-in' reveal from the bottom, while the navigation pill enters with a soft expansion from the center.",
+    "mood": "Clinical, futuristic, and empathetic minimalism that emphasizes precision and human resilience.",
+    "guardrails": [
+      "Avoid harsh solid backgrounds; use subtle gradients to imply depth.",
+      "Do not use serif fonts; stick to humanist or geometric sans-serifs for a clinical-tech feel.",
+      "Avoid bright, distracting background colors that compete with the 3D asset shadows.",
+      "Don't let the navigation pill exceed 50% of the viewport width."
+    ]
+  }
+}

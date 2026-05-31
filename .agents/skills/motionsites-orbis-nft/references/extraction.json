@@ -1,0 +1,26 @@
+{
+  "source": "https://motionsites.ai/assets/hero-orbis-nft-poster-Bfg-lWHl.png",
+  "design": {
+    "typography": {
+      "body": "Inter, sans-serif regular",
+      "mono": "JetBrains Mono, monospace regular",
+      "display": "League Gothic, sans-serif ultra-condensed uppercase"
+    },
+    "motion": "Continuous parallax on background star fields and floating planets. Subtle 'breathing' scale animations on the 3D character cards and smooth liquid-easing on the lime green handwriting reveals.",
+    "guardrails": [
+      "Avoid standard sans-serifs for headlines; must use condensed, heavy weights.",
+      "Do not use flat colors for large backgrounds; maintain subtle noise or deep gradients.",
+      "Avoid sharp corners on image containers; use ultra-wide border radii.",
+      "Never use neon green for body text; reserve it strictly for handwritten accents and highlights."
+    ],
+    "layout": "The layout uses a 'theatrical frame' approach with deep navy containers featuring large corner radii. Sections are delineated by massive, left-aligned condensed typography that partially overlaps 3D imagery, creating a sense of depth.",
+    "mood": "A whimsical yet cinematic 'Space-Age Kawaii' aesthetic that feels high-tech, immersive, and playful.",
+    "palette": [
+      "#020617",
+      "#1E293B",
+      "#FFFFFF",
+      "#A3E635"
+    ],
+    "centerpiece": "High-fidelity 3D character renders of bulbous, minimalist astronauts in surreal, bioluminescent extraterrestrial landscapes."
+  }
+}

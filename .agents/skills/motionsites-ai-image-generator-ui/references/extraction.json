@@ -1,0 +1,27 @@
+{
+  "source": "https://res.cloudinary.com/dsdhxhhqh/image/upload/v1778221760/CleanShot_2026-05-08_at_13.28.55_2x_swwnfd.png",
+  "design": {
+    "centerpiece": "A three-column grid of soft-shadowed cards featuring metaphorical UI abstracts (prompt bubbles, logic trees, and stylized folders) against candy-colored mesh gradients.",
+    "motion": "Elements should use gentle floating breath-like vertical loops. Cards should utilize a subtle scale-up on hover with a diffused shadow expansion, while internal gradient elements (mesh circles) should have slow, rotational color shifts.",
+    "typography": {
+      "mono": "JetBrains Mono, monospace medium (for labels)",
+      "body": "Inter, sans-serif regular",
+      "display": "Inter, sans-serif bold (tight letter-spacing)"
+    },
+    "layout": "A centered vertical stack beginning with a small, all-caps eyebrow tag, followed by a bold primary headline and a descriptive subheader. Below, a three-column card grid uses generous whitespace and large corner radii (approx 24-32px) to house feature illustrations and bold bottom-aligned labels.",
+    "palette": [
+      "#F8FAFC",
+      "#5A6B87",
+      "#FEF9C31A",
+      "#F472B633",
+      "#0F172A"
+    ],
+    "mood": "Optimistic, airy, and high-tech minimalist with a 'soft-UI' or 'neo-skeuomorphic' softness.",
+    "guardrails": [
+      "Avoid harsh, high-contrast borders or dark shadows; keep depth feeling like diffused 'glow' rather than physical weight.",
+      "Do not use solid flat backgrounds for the inner illustrations; always utilize mesh gradients or grid patterns.",
+      "Avoid heavy weighting on body text; keep supporting copy airy and centered.",
+      "Never use saturated primary colors; stick to the pastel, desaturated 'sorbet' palette."
+    ]
+  }
+}

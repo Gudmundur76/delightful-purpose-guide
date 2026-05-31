@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-sentinel-ai-poster-B7n15kua.png",
+  "design": {
+    "palette": [
+      "#0A0A0A",
+      "#1A1A1A",
+      "#FFFFFF",
+      "#333333",
+      "#00FF00"
+    ],
+    "mood": "Technological, secure, and imposing; an 'industrial cyberpunk' aesthetic that emphasizes structural integrity and precision.",
+    "motion": "Subtle parallax movement of the 3D cube background tied to mouse movement. Text elements should employ a 'staggered reveal' from bottom to top with a heavy easing function (e.g., cubic-bezier(0.16, 1, 0.3, 1)).",
+    "centerpiece": "A high-density 3D geometric grid of matte black extruded cubes with varying heights, creating a tactile, architectural backdrop.",
+    "guardrails": [
+      "Avoid high-gloss or reflective surfaces on the 3D cubes; maintain a matte/industrial finish.",
+      "Do not use gradients in the typography except for the core accent green.",
+      "Avoid rounded corners on buttons; keep a 4px to 6px radius for a technical feel.",
+      "Do not use thin or light font weights for headlines; maintain a heavy, authoritative presence."
+    ],
+    "typography": {
+      "display": "Montserrat, sans-serif Black (900 weight) uppercase",
+      "mono": "JetBrains Mono, monospace light for utility text/captions",
+      "body": "Inter, sans-serif regular"
+    },
+    "layout": "Full-bleed immersive hero with a top-aligned navigation bar featuring a boxed CTA. The text content is left-aligned in the lower-third, utilizing a vertical stack of headline, subheadline, and dual-action buttons."
+  }
+}

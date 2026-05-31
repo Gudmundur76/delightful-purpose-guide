@@ -1,0 +1,27 @@
+{
+  "source": "https://res.cloudinary.com/dsdhxhhqh/image/upload/v1778143525/CleanShot_2026-05-07_at_15.40.21_2x_kfgapx.png",
+  "design": {
+    "layout": "A dual-column landing split: the left 45% is a decorative hero panel with rounded corners and high-contrast branding, while the right 55% is a minimalist, dark-themed functional form centered vertically. Social auth buttons sit in a two-column grid above the main stacked form fields.",
+    "palette": [
+      "#000000",
+      "#1A1A1A",
+      "#5E42A6",
+      "#A392D6",
+      "#FFFFFF"
+    ],
+    "centerpiece": "Left-hand glassmorphic 'Roadmap' card featuring an organic, grainy violet-to-black radial gradient and a numbered vertical step indicator.",
+    "motion": "Subtle parallax on the grain texture of the gradient. Numbers in the left panel should pulse or glow when active, while form fields use a gentle fade-in on focus.",
+    "mood": "Sophisticated, high-tech minimalism with a celestial, premium 'pro-tool' atmosphere.",
+    "typography": {
+      "body": "Inter, system-ui Sanserif Thin/Medium",
+      "mono": "JetBrains Mono or SF Pro Mono for small captions and labels",
+      "display": "Inter SemiBold/Medium with tight tracking"
+    },
+    "guardrails": [
+      "Avoid sharp 90-degree corners on the left panel; maintain the high-radius 'squircle' felt.",
+      "Do not use pure white for input field text; use low-opacity grays for a 'ghosted' effect.",
+      "Ensure the noise/grain texture on the gradient is subtle and monochromatic, not multicolored digital noise.",
+      "Do not use borders on the primary CTA button; it should be a solid light fill."
+    ]
+  }
+}

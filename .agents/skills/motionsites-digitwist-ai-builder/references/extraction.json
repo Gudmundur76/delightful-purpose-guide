@@ -1,0 +1,26 @@
+{
+  "source": "https://motionsites.ai/assets/hero-digitwist-poster-DbmglO1A.png",
+  "design": {
+    "guardrails": [
+      "Avoid using flat, solid colored backgrounds; depth is essential.",
+      "Do not use harsh, square-cornered buttons; stick to high-pill radius rounded corners.",
+      "Avoid busy or textured overlays that might distract from the clean readability of the white typography.",
+      "Never use multiple bright accent colors; stick strictly to the blue/white/black palette."
+    ],
+    "centerpiece": "A dynamic vertical fin/slit background with a deep blue gradient that creates a sense of rhythmic depth and motion.",
+    "layout": "A centered hero composition with a top-aligned navigation bar. Typography is stacked vertically in the center, utilizing a heavy contrast in scale between headline and sub-headline, followed by twin CTA buttons.",
+    "typography": {
+      "display": "Instrument Serif, serif for emphasis and Inter, sans-serif bold for the main headline",
+      "body": "Inter, sans-serif light-weight",
+      "mono": "JetBrains Mono or similar clean monospace for small labels (if applicable)"
+    },
+    "motion": "Subtle parallax or horizontal shifting on the vertical fins to imply depth as the user moves their cursor. Text should utilize a clean, upward fade-in stagger animation upon page load.",
+    "mood": "A premium, high-tech, and futuristic aesthetic that feels both mysterious and highly efficient.",
+    "palette": [
+      "#000000",
+      "#001CBB",
+      "#FFFFFF",
+      "#2E5BFF"
+    ]
+  }
+}

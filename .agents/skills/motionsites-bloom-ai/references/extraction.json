@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-bloom-ai-poster-Bol1Pj7x.png",
+  "design": {
+    "centerpiece": "A high-fidelity 3D hyper-realistic green terrestrial planet set against a deep cosmic bokeh background, partially obscured by a translucent frosted glass card.",
+    "layout": "An asymmetric split-screen composition where the left third is a fixed frosted-glass vertical panel containing primary typography and CTAs, while the right two-thirds features a dynamic 3D focal point with floating glass informational tiles. The structure relies on nested rounded bento-style containers with thin luminous strokes.",
+    "motion": "Subtle parallax on the background planet layer relative to the floating glass tiles. Gentle pulse or 'breathing' glow on the primary logo/icon centerpiece. Smooth backdrop-filter transitions on hover for the interactive bento cards.",
+    "typography": {
+      "mono": "JetBrains Mono, medium for small labels and tags.",
+      "display": "PP Editorial New, serif italic blended with a clean Sans-Serif like Neue Montreal for contrast.",
+      "body": "Inter, sans-serif regular"
+    },
+    "mood": "Sophisticated 'Bio-Digital' futurism that blends organic planetary themes with high-end glassmorphism and editorial precision.",
+    "palette": [
+      "#00080B",
+      "#0A2A28",
+      "#3E7E73",
+      "#8DDFC5",
+      "#FFFFFF"
+    ],
+    "guardrails": [
+      "Avoid high-contrast pure white borders; use low-opacity strokes (10-20%) for glass effects.",
+      "Do not use sharp 90-degree corners; maintain a consistent large border-radius (30px+) for all containers.",
+      "Avoid flat colors; every surface should have a subtle radial or linear gradient to simulate light depth.",
+      "Do not over-saturate the greens; keep them in the emerald and seafoams range to maintain a premium 'tech-organic' feel."
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-prisma-poster-CH2WrOnW.png",
+  "design": {
+    "centerpiece": "Large-scale cinematic imagery featuring surreal, high-fidelity 3D environments with a 'floating' perspective.",
+    "mood": "Cinematic, mysterious, and high-end creative, blending brutalist typography with dreamlike surrealist art.",
+    "palette": [
+      "#0A0A0A",
+      "#1C1C1C",
+      "#D1D1C1",
+      "#6B6B5F",
+      "#FFFFFF"
+    ],
+    "guardrails": [
+      "Don't use vibrant or neon colors; keep the palette grounded in deep earth tones and shadows.",
+      "Avoid standard sans-serif weights for headlines; use ultra-heavy weights or expressive serifs.",
+      "Don't use harsh borders; use soft gradients and subtle translucency for containment.",
+      "Avoid fast or bouncy animations; maintain a slow, cinematic pace."
+    ],
+    "typography": {
+      "body": "Inter, sans-serif regular with tight tracking",
+      "display": "Calyx, serif italic mixed with Neue Haas Grotesk Bold",
+      "mono": "JetBrains Mono, small caps for navigational elements and labels"
+    },
+    "motion": "Slow parallax on background images and subtle fade-ins for text. Typography should use a 'letter-by-letter' reveal or a slow vertical slide to enhance the cinematic feeling.",
+    "layout": "The design uses a heavy-top composition with an oversized hero image followed by a centered typographic section and a structured feature grid. Content is grouped in dark, low-contrast modules with generous vertical spacing and centered alignments."
+  }
+}

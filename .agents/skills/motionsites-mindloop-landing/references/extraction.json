@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-mindloop-landing-poster-BbPiPxcA.png",
+  "design": {
+    "mood": "Ethereal, futuristic, and intellectually curious\u2014merging high-tech precision with organic wonder.",
+    "typography": {
+      "body": "Inter, sans-serif regular with tight tracking",
+      "mono": "JetBrains Mono, monospace for pills and micro-copy",
+      "display": "PP Neue Montreal, sans-serif medium mixed with Editorial New, serif italic for emphasis"
+    },
+    "guardrails": [
+      "Avoid flat vector illustrations; stick strictly to high-fidelity 3D renders.",
+      "Do not use harsh primary colors; keep the palette muted and atmospheric.",
+      "Avoid standard sans-serif italics; use high-contrast serif faces for emphasis only.",
+      "Don't overcrowd the layout; maintain generous vertical negative space between sections."
+    ],
+    "motion": "Slow, subtle parallax on the floating 3D islands to simulate weightlessness. Text elements should use a smooth 'blur-to-clear' fade-in combined with a slight upward drift during scroll reveals.",
+    "centerpiece": "A floating, hyper-realistic 3D diorama of a bioluminescent terrarium island set against a deep cosmic void.",
+    "palette": [
+      "#02050A",
+      "#10141D",
+      "#FFFFFF",
+      "#A5B4FC",
+      "#FBD38D"
+    ],
+    "layout": "Centered vertical stack with a fixed narrow-width container to maximize the peripheral space aesthetic. Sections are anchored by large-scale 3D assets that bleed out of their implied containers, creating a sense of depth and suspension."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source": "https://motionsites.ai/assets/hero-velorah-poster-mLkXfzr9.png",
+  "design": {
+    "guardrails": [
+      "Do not use standard geometric shapes; keep edges soft and atmospheric.",
+      "Avoid pure blacks or high-contrast white backgrounds; stick to the deep midnight blue.",
+      "Do not use sans-serif for headlines; the elegance relies on the serif contrast.",
+      "Avoid fast or jarring transitions; the brand is built on 'silence' and 'focus'."
+    ],
+    "palette": [
+      "#022A42",
+      "#0F4C75",
+      "#FDE68A",
+      "#E2E8F0",
+      "#FFFFFF"
+    ],
+    "typography": {
+      "display": "Cormorant Garamond or Editorial New, Light/Regular weight with italic accents.",
+      "body": "Inter or similar clean Geometric Sans-Serif, Regular weight, increased letter spacing.",
+      "mono": "Space Mono or any light-weight Monospace for navigation and small callouts."
+    },
+    "layout": "Centric and symmetrical composition with a floating navigation bar and a multi-level typographical hierarchy. Content is layered over a full-bleed immersive background image with significant negative space in the upper half.",
+    "mood": "Enchanting, ethereal, and intellectual; a blend of mystical surrealism and high-end boutique agency sophistication.",
+    "centerpiece": "Surrealist, high-grain cinematic photography featuring a glowing floral digital workspace under a vast starlit sky.",
+    "motion": "Subtle parallax on the background stars; text elements should fade and rise slowly from bottom to top (3-second duration). Hover states on buttons use a soft glow expansion rather than a color snap."
+  }
+}

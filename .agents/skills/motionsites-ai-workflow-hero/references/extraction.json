@@ -1,0 +1,27 @@
+{
+  "source": "https://image.mux.com/kQpiNEp6XDOf01rdRLjurjdEp2Crp1CbbGUMEfFBPbIg/thumbnail.webp?width=1200&time=2",
+  "design": {
+    "mood": "Ethereal and harmonious 'Solarpunk' aesthetic that blends high-tech AI concepts with organic, monumental nature.",
+    "layout": "Centrally focused atmospheric hero with a floating pill-shaped navigation bar. Typography is layered over the vertical center, with secondary copy and CTAs anchored to the bottom third of the frame.",
+    "centerpiece": "Atmospheric, hyper-realistic 3D landscape featuring a mossy stone arch bridge connecting two golden-lit cliffs above a sea of clouds.",
+    "motion": "Subtle parallax scrolling on the mountain layers combined with a persistent slow-drifting cloud mist overlay. Text elements should enter with a soft 'emerge' fade and slight upward drift.",
+    "guardrails": [
+      "Avoid high-contrast black/white; keep colors organic and muted.",
+      "Do not use harsh geometric shadows; rely on soft atmospheric glows.",
+      "Avoid tech-bro vibrant blues or neon accents.",
+      "Don't overcrowd the margins; maintain the airy 'over-the-clouds' breathing room."
+    ],
+    "palette": [
+      "#FDF5E6",
+      "#2D4F35",
+      "#789E7E",
+      "#D4AF37",
+      "#1A1A1A"
+    ],
+    "typography": {
+      "display": "Clash Display or Schibsted Grotesk, Medium with tight tracking",
+      "mono": "JetBrains Mono, Light for interface labels",
+      "body": "Geist Sans or Inter, Regular"
+    }
+  }
+}

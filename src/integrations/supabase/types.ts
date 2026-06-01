@@ -1013,6 +1013,10 @@ export type Database = {
           id: string
           install_token: string
           last_auto_fix_at: string | null
+          mcp_endpoint: string | null
+          mcp_last_seen_at: string | null
+          mcp_registered_at: string | null
+          mcp_tools_count: number | null
           notify_email: string | null
           owner_user_id: string | null
           plan: string
@@ -1032,6 +1036,10 @@ export type Database = {
           id?: string
           install_token?: string
           last_auto_fix_at?: string | null
+          mcp_endpoint?: string | null
+          mcp_last_seen_at?: string | null
+          mcp_registered_at?: string | null
+          mcp_tools_count?: number | null
           notify_email?: string | null
           owner_user_id?: string | null
           plan?: string
@@ -1051,6 +1059,10 @@ export type Database = {
           id?: string
           install_token?: string
           last_auto_fix_at?: string | null
+          mcp_endpoint?: string | null
+          mcp_last_seen_at?: string | null
+          mcp_registered_at?: string | null
+          mcp_tools_count?: number | null
           notify_email?: string | null
           owner_user_id?: string | null
           plan?: string

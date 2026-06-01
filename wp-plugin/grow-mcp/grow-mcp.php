@@ -244,6 +244,18 @@ function grow_mcp_tools() {
             'inputSchema' => ['type' => 'object', 'properties' => []],
             'auth' => 'read',
         ],
+        [
+            'name' => 'get_seo_meta',
+            'description' => 'Fetch SEO meta (title, meta description, canonical, og:*, twitter:*, robots, JSON-LD types) for a page or post by slug or ID. Pulls Yoast / Rank Math / SEOPress / AIOSEO values when present, otherwise falls back to WP defaults.',
+            'inputSchema' => [
+                'type' => 'object',
+                'properties' => [
+                    'slug' => ['type' => 'string'],
+                    'id'   => ['type' => 'integer'],
+                ],
+            ],
+            'auth' => 'read',
+        ],
     ];
 
     if (class_exists('WooCommerce')) {
@@ -429,6 +441,16 @@ function grow_mcp_run_tool($name, $args) {
                 'mcp_version' => GROW_MCP_VERSION,
             ];
         }
+        case 'get_seo_meta': {
+            $post = null;
+            if (!empty($args['id'])) $post = get_post(intval($args['id']));
+            elseif (!empty($args['slug'])) {
+                $found = get_posts(['name' => sanitize_title($args['slug']), 'post_type' => ['post', 'page'], 'post_status' => 'publish', 'posts_per_page' => 1]);
+                $post = $found[0] ?? null;
+            }
+            if (!$post || $post->post_status !== 'publish') return ['error' => 'not_found'];
+            return grow_mcp_get_seo_meta($post);
+        }
         case 'list_products': {
             if (!class_exists('WooCommerce')) return ['error' => 'woocommerce_not_active'];
             $limit = min(50, max(1, intval($args['limit'] ?? 20)));
@@ -462,6 +484,134 @@ function grow_mcp_run_tool($name, $args) {
         }
     }
     throw new Exception("Unhandled tool: $name");
+}
+
+/**
+ * Pull SEO meta for a post, preferring popular SEO plugins when present.
+ * Supports Yoast, Rank Math, SEOPress, All In One SEO. Falls back to WP defaults.
+ */
+function grow_mcp_get_seo_meta($post) {
+    $pid = $post->ID;
+    $permalink = get_permalink($post);
+
+    // Defaults from WP core
+    $title       = get_the_title($post) . ' – ' . get_bloginfo('name');
+    $description = wp_strip_all_tags(get_the_excerpt($post));
+    $canonical   = $permalink;
+    $robots      = null;
+    $source      = 'wp_core';
+
+    // Yoast SEO
+    if (defined('WPSEO_VERSION')) {
+        $source = 'yoast';
+        $y_title = get_post_meta($pid, '_yoast_wpseo_title', true);
+        $y_desc  = get_post_meta($pid, '_yoast_wpseo_metadesc', true);
+        $y_canon = get_post_meta($pid, '_yoast_wpseo_canonical', true);
+        $y_noindex = get_post_meta($pid, '_yoast_wpseo_meta-robots-noindex', true);
+        if ($y_title) $title = $y_title;
+        if ($y_desc)  $description = $y_desc;
+        if ($y_canon) $canonical = $y_canon;
+        if ($y_noindex === '1') $robots = 'noindex,follow';
+    }
+    // Rank Math
+    elseif (class_exists('RankMath')) {
+        $source = 'rank_math';
+        $r_title = get_post_meta($pid, 'rank_math_title', true);
+        $r_desc  = get_post_meta($pid, 'rank_math_description', true);
+        $r_canon = get_post_meta($pid, 'rank_math_canonical_url', true);
+        $r_robots = get_post_meta($pid, 'rank_math_robots', true);
+        if ($r_title) $title = $r_title;
+        if ($r_desc)  $description = $r_desc;
+        if ($r_canon) $canonical = $r_canon;
+        if (is_array($r_robots) && !empty($r_robots)) $robots = implode(',', $r_robots);
+    }
+    // SEOPress
+    elseif (defined('SEOPRESS_VERSION')) {
+        $source = 'seopress';
+        $s_title = get_post_meta($pid, '_seopress_titles_title', true);
+        $s_desc  = get_post_meta($pid, '_seopress_titles_desc', true);
+        $s_canon = get_post_meta($pid, '_seopress_robots_canonical', true);
+        if ($s_title) $title = $s_title;
+        if ($s_desc)  $description = $s_desc;
+        if ($s_canon) $canonical = $s_canon;
+    }
+    // All In One SEO
+    elseif (defined('AIOSEO_VERSION') || defined('AIOSEOP_VERSION')) {
+        $source = 'aioseo';
+        $a_title = get_post_meta($pid, '_aioseo_title', true) ?: get_post_meta($pid, '_aioseop_title', true);
+        $a_desc  = get_post_meta($pid, '_aioseo_description', true) ?: get_post_meta($pid, '_aioseop_description', true);
+        if ($a_title) $title = $a_title;
+        if ($a_desc)  $description = $a_desc;
+    }
+
+    // Render the actual rendered <head> so we can pick up og:* / twitter:* / JSON-LD
+    // that SEO plugins inject via wp_head filters.
+    $og = [];
+    $twitter = [];
+    $jsonld_types = [];
+    $rendered_title = null;
+
+    if (function_exists('curl_init') || ini_get('allow_url_fopen')) {
+        $resp = wp_remote_get($permalink, [
+            'timeout' => 6,
+            'redirection' => 3,
+            'headers' => ['User-Agent' => 'grow-mcp/' . GROW_MCP_VERSION],
+        ]);
+        if (!is_wp_error($resp) && wp_remote_retrieve_response_code($resp) === 200) {
+            $html = wp_remote_retrieve_body($resp);
+            if (preg_match('#<title[^>]*>([\s\S]*?)</title>#i', $html, $m)) {
+                $rendered_title = trim(html_entity_decode(strip_tags($m[1]), ENT_QUOTES, 'UTF-8'));
+            }
+            if (preg_match_all('#<meta[^>]+property=["\']og:([^"\']+)["\'][^>]+content=["\']([^"\']+)["\']#i', $html, $mm)) {
+                foreach ($mm[1] as $i => $k) $og[strtolower($k)] = html_entity_decode($mm[2][$i], ENT_QUOTES, 'UTF-8');
+            }
+            if (preg_match_all('#<meta[^>]+name=["\']twitter:([^"\']+)["\'][^>]+content=["\']([^"\']+)["\']#i', $html, $mm)) {
+                foreach ($mm[1] as $i => $k) $twitter[strtolower($k)] = html_entity_decode($mm[2][$i], ENT_QUOTES, 'UTF-8');
+            }
+            if (preg_match('#<link[^>]+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)["\']#i', $html, $m)) {
+                $canonical = $m[1];
+            }
+            if (preg_match('#<meta[^>]+name=["\']robots["\'][^>]+content=["\']([^"\']+)["\']#i', $html, $m)) {
+                $robots = $m[1];
+            }
+            if (preg_match('#<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']+)["\']#i', $html, $m)) {
+                if (!$description) $description = html_entity_decode($m[1], ENT_QUOTES, 'UTF-8');
+            }
+            if (preg_match_all('#<script[^>]+type=["\']application/ld\+json["\'][^>]*>([\s\S]*?)</script>#i', $html, $mm)) {
+                foreach ($mm[1] as $raw) {
+                    $parsed = json_decode(trim($raw), true);
+                    if (!is_array($parsed)) continue;
+                    $collect = function ($node) use (&$jsonld_types, &$collect) {
+                        if (isset($node['@type'])) {
+                            $t = $node['@type'];
+                            if (is_array($t)) foreach ($t as $x) $jsonld_types[] = $x;
+                            else $jsonld_types[] = $t;
+                        }
+                        if (isset($node['@graph']) && is_array($node['@graph'])) {
+                            foreach ($node['@graph'] as $sub) $collect($sub);
+                        }
+                    };
+                    $collect($parsed);
+                }
+                $jsonld_types = array_values(array_unique($jsonld_types));
+            }
+        }
+    }
+
+    return [
+        'id'           => $pid,
+        'permalink'    => $permalink,
+        'source'       => $source,
+        'title'        => $rendered_title ?: $title,
+        'description'  => $description,
+        'canonical'    => $canonical,
+        'robots'       => $robots,
+        'og'           => $og,
+        'twitter'      => $twitter,
+        'jsonld_types' => $jsonld_types,
+        'title_length' => mb_strlen($rendered_title ?: $title),
+        'description_length' => mb_strlen((string)$description),
+    ];
 }
 
 function grow_mcp_post_summary($p) {

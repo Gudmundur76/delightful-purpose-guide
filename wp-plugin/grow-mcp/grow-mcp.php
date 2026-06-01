@@ -97,9 +97,17 @@ function grow_mcp_settings_page() {
                         Enable <code>submit_lead</code> tool (creates a draft <code>mcp_lead</code> post)</label>
                     </td>
                 </tr>
+                <tr>
+                    <th><label for="grow_mcp_install_token">grow.contact install token</label></th>
+                    <td>
+                        <input name="grow_mcp_install_token" id="grow_mcp_install_token" type="text" class="regular-text code" value="<?php echo esc_attr(get_option('grow_mcp_install_token', '')); ?>" />
+                        <p class="description">UUID from your grow.contact dashboard. Used to register this site's MCP endpoint with the platform so it appears in the agent-readable directory.</p>
+                    </td>
+                </tr>
             </table>
             <?php submit_button(); ?>
         </form>
+
 
         <h2>Quick test</h2>
         <pre style="background:#1a1a1a;color:#e8e8e8;padding:12px;overflow:auto;">curl -X POST '<?php echo esc_html($mcp_url); ?>' \

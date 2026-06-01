@@ -16,6 +16,7 @@ if (!defined('ABSPATH')) exit;
 
 define('GROW_MCP_VERSION', '1.0.0');
 define('GROW_MCP_NAMESPACE', 'grow-mcp/v1');
+define('GROW_MCP_REGISTRY_URL', 'https://grow.contact/api/public/mcp-register');
 
 // -----------------------------------------------------------------------------
 // Settings page
@@ -26,9 +27,35 @@ add_action('admin_menu', function () {
 
 add_action('admin_init', function () {
     register_setting('grow_mcp', 'grow_mcp_token', ['type' => 'string', 'sanitize_callback' => 'sanitize_text_field', 'default' => '']);
+    register_setting('grow_mcp', 'grow_mcp_install_token', ['type' => 'string', 'sanitize_callback' => 'sanitize_text_field', 'default' => '']);
     register_setting('grow_mcp', 'grow_mcp_allow_anonymous', ['type' => 'boolean', 'default' => false]);
     register_setting('grow_mcp', 'grow_mcp_enable_lead_submit', ['type' => 'boolean', 'default' => true]);
 });
+
+// Auto-register the MCP endpoint with grow.contact whenever settings are saved
+// (and on plugin activation if an install token is already present).
+function grow_mcp_register_with_platform() {
+    $install_token = get_option('grow_mcp_install_token', '');
+    if (!$install_token) return;
+    $payload = [
+        'install_token' => $install_token,
+        'mcp_endpoint'  => rest_url(GROW_MCP_NAMESPACE . '/mcp'),
+        'discovery_url' => home_url('/.well-known/mcp.json'),
+        'site_url'      => home_url('/'),
+        'tools_count'   => count(grow_mcp_tools()),
+        'plugin_version' => GROW_MCP_VERSION,
+    ];
+    wp_remote_post(GROW_MCP_REGISTRY_URL, [
+        'timeout' => 8,
+        'blocking' => false,
+        'headers' => ['Content-Type' => 'application/json'],
+        'body' => wp_json_encode($payload),
+    ]);
+}
+add_action('update_option_grow_mcp_install_token', 'grow_mcp_register_with_platform', 10, 0);
+add_action('add_option_grow_mcp_install_token', 'grow_mcp_register_with_platform', 10, 0);
+register_activation_hook(__FILE__, 'grow_mcp_register_with_platform');
+
 
 function grow_mcp_settings_page() {
     if (!current_user_can('manage_options')) return;
@@ -70,9 +97,17 @@ function grow_mcp_settings_page() {
                         Enable <code>submit_lead</code> tool (creates a draft <code>mcp_lead</code> post)</label>
                     </td>
                 </tr>
+                <tr>
+                    <th><label for="grow_mcp_install_token">grow.contact install token</label></th>
+                    <td>
+                        <input name="grow_mcp_install_token" id="grow_mcp_install_token" type="text" class="regular-text code" value="<?php echo esc_attr(get_option('grow_mcp_install_token', '')); ?>" />
+                        <p class="description">UUID from your grow.contact dashboard. Used to register this site's MCP endpoint with the platform so it appears in the agent-readable directory.</p>
+                    </td>
+                </tr>
             </table>
             <?php submit_button(); ?>
         </form>
+
 
         <h2>Quick test</h2>
         <pre style="background:#1a1a1a;color:#e8e8e8;padding:12px;overflow:auto;">curl -X POST '<?php echo esc_html($mcp_url); ?>' \

@@ -63,6 +63,7 @@ import { getCompanyProfileTool } from "@/lib/mcp/tools/company-profile";
 import { autoFixSchemaTool } from "@/lib/mcp/tools/auto-fix/schema";
 import { autoFixLlmsTxtTool } from "@/lib/mcp/tools/auto-fix/llms-txt";
 import { autoFixRobotsTxtTool } from "@/lib/mcp/tools/auto-fix/robots-txt";
+import { listRegisteredMcpSitesTool } from "@/lib/mcp/tools/mcp-registry";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",
@@ -177,6 +178,7 @@ const mcp = createMcpServer({
     autoFixSchemaTool,
     autoFixLlmsTxtTool,
     autoFixRobotsTxtTool,
+    listRegisteredMcpSitesTool,
   ],
 });
 

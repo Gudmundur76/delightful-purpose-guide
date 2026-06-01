@@ -132,6 +132,7 @@ import { Route as ApiPublicWhyUnlockRouteImport } from './routes/api/public/why-
 import { Route as ApiPublicWhyReportRouteImport } from './routes/api/public/why-report'
 import { Route as ApiPublicWhyPreviewRouteImport } from './routes/api/public/why-preview'
 import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
+import { Route as ApiPublicMcpRegisterRouteImport } from './routes/api/public/mcp-register'
 import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicLeaderboardDotjsonRouteImport } from './routes/api/public/leaderboard[.]json'
@@ -810,6 +811,11 @@ const ApiPublicPingRoute = ApiPublicPingRouteImport.update({
   path: '/api/public/ping',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicMcpRegisterRoute = ApiPublicMcpRegisterRouteImport.update({
+  id: '/api/public/mcp-register',
+  path: '/api/public/mcp-register',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicMcpRoute = ApiPublicMcpRouteImport.update({
   id: '/api/public/mcp',
   path: '/api/public/mcp',
@@ -1237,6 +1243,7 @@ export interface FileRoutesByFullPath {
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
+  '/api/public/mcp-register': typeof ApiPublicMcpRegisterRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/api/public/why-preview': typeof ApiPublicWhyPreviewRoute
   '/api/public/why-report': typeof ApiPublicWhyReportRoute
@@ -1414,6 +1421,7 @@ export interface FileRoutesByTo {
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
+  '/api/public/mcp-register': typeof ApiPublicMcpRegisterRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/api/public/why-preview': typeof ApiPublicWhyPreviewRoute
   '/api/public/why-report': typeof ApiPublicWhyReportRoute
@@ -1595,6 +1603,7 @@ export interface FileRoutesById {
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
+  '/api/public/mcp-register': typeof ApiPublicMcpRegisterRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/api/public/why-preview': typeof ApiPublicWhyPreviewRoute
   '/api/public/why-report': typeof ApiPublicWhyReportRoute
@@ -1777,6 +1786,7 @@ export interface FileRouteTypes {
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
+    | '/api/public/mcp-register'
     | '/api/public/ping'
     | '/api/public/why-preview'
     | '/api/public/why-report'
@@ -1954,6 +1964,7 @@ export interface FileRouteTypes {
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
+    | '/api/public/mcp-register'
     | '/api/public/ping'
     | '/api/public/why-preview'
     | '/api/public/why-report'
@@ -2134,6 +2145,7 @@ export interface FileRouteTypes {
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
+    | '/api/public/mcp-register'
     | '/api/public/ping'
     | '/api/public/why-preview'
     | '/api/public/why-report'
@@ -2283,6 +2295,7 @@ export interface RootRouteChildren {
   ApiPublicLeaderboardDotjsonRoute: typeof ApiPublicLeaderboardDotjsonRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicMcpRoute: typeof ApiPublicMcpRoute
+  ApiPublicMcpRegisterRoute: typeof ApiPublicMcpRegisterRoute
   ApiPublicPingRoute: typeof ApiPublicPingRoute
   ApiPublicWhyPreviewRoute: typeof ApiPublicWhyPreviewRoute
   ApiPublicWhyReportRoute: typeof ApiPublicWhyReportRoute
@@ -3202,6 +3215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicPingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/mcp-register': {
+      id: '/api/public/mcp-register'
+      path: '/api/public/mcp-register'
+      fullPath: '/api/public/mcp-register'
+      preLoaderRoute: typeof ApiPublicMcpRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/mcp': {
       id: '/api/public/mcp'
       path: '/api/public/mcp'
@@ -3945,6 +3965,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicLeaderboardDotjsonRoute: ApiPublicLeaderboardDotjsonRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicMcpRoute: ApiPublicMcpRoute,
+  ApiPublicMcpRegisterRoute: ApiPublicMcpRegisterRoute,
   ApiPublicPingRoute: ApiPublicPingRoute,
   ApiPublicWhyPreviewRoute: ApiPublicWhyPreviewRoute,
   ApiPublicWhyReportRoute: ApiPublicWhyReportRoute,

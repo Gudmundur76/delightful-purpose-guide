@@ -441,6 +441,16 @@ function grow_mcp_run_tool($name, $args) {
                 'mcp_version' => GROW_MCP_VERSION,
             ];
         }
+        case 'get_seo_meta': {
+            $post = null;
+            if (!empty($args['id'])) $post = get_post(intval($args['id']));
+            elseif (!empty($args['slug'])) {
+                $found = get_posts(['name' => sanitize_title($args['slug']), 'post_type' => ['post', 'page'], 'post_status' => 'publish', 'posts_per_page' => 1]);
+                $post = $found[0] ?? null;
+            }
+            if (!$post || $post->post_status !== 'publish') return ['error' => 'not_found'];
+            return grow_mcp_get_seo_meta($post);
+        }
         case 'list_products': {
             if (!class_exists('WooCommerce')) return ['error' => 'woocommerce_not_active'];
             $limit = min(50, max(1, intval($args['limit'] ?? 20)));

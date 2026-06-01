@@ -178,6 +178,7 @@ const mcp = createMcpServer({
     autoFixSchemaTool,
     autoFixLlmsTxtTool,
     autoFixRobotsTxtTool,
+    listRegisteredMcpSitesTool,
   ],
 });
 

@@ -244,6 +244,18 @@ function grow_mcp_tools() {
             'inputSchema' => ['type' => 'object', 'properties' => []],
             'auth' => 'read',
         ],
+        [
+            'name' => 'get_seo_meta',
+            'description' => 'Fetch SEO meta (title, meta description, canonical, og:*, twitter:*, robots, JSON-LD types) for a page or post by slug or ID. Pulls Yoast / Rank Math / SEOPress / AIOSEO values when present, otherwise falls back to WP defaults.',
+            'inputSchema' => [
+                'type' => 'object',
+                'properties' => [
+                    'slug' => ['type' => 'string'],
+                    'id'   => ['type' => 'integer'],
+                ],
+            ],
+            'auth' => 'read',
+        ],
     ];
 
     if (class_exists('WooCommerce')) {

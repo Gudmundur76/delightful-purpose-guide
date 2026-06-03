@@ -1654,6 +1654,114 @@ export type Database = {
         }
         Relationships: []
       }
+      site_claim_contradictions: {
+        Row: {
+          claim_a_id: string
+          claim_b_id: string
+          created_at: string
+          detected_at: string
+          entity: string
+          host: string
+          id: string
+          rationale: string
+          resolved_at: string | null
+          severity: string
+        }
+        Insert: {
+          claim_a_id: string
+          claim_b_id: string
+          created_at?: string
+          detected_at?: string
+          entity: string
+          host: string
+          id?: string
+          rationale: string
+          resolved_at?: string | null
+          severity?: string
+        }
+        Update: {
+          claim_a_id?: string
+          claim_b_id?: string
+          created_at?: string
+          detected_at?: string
+          entity?: string
+          host?: string
+          id?: string
+          rationale?: string
+          resolved_at?: string | null
+          severity?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "site_claim_contradictions_claim_a_id_fkey"
+            columns: ["claim_a_id"]
+            isOneToOne: false
+            referencedRelation: "site_claims"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "site_claim_contradictions_claim_b_id_fkey"
+            columns: ["claim_b_id"]
+            isOneToOne: false
+            referencedRelation: "site_claims"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      site_claims: {
+        Row: {
+          claim_text: string
+          claim_type: string
+          created_at: string
+          entity: string
+          evidence_urls: Json
+          extracted_at: string
+          host: string
+          id: string
+          source_url: string
+          unit: string | null
+          updated_at: string
+          value: string | null
+          verdict: Database["public"]["Enums"]["claim_verdict"]
+          verdict_rationale: string | null
+          verified_at: string | null
+        }
+        Insert: {
+          claim_text: string
+          claim_type: string
+          created_at?: string
+          entity: string
+          evidence_urls?: Json
+          extracted_at?: string
+          host: string
+          id?: string
+          source_url: string
+          unit?: string | null
+          updated_at?: string
+          value?: string | null
+          verdict?: Database["public"]["Enums"]["claim_verdict"]
+          verdict_rationale?: string | null
+          verified_at?: string | null
+        }
+        Update: {
+          claim_text?: string
+          claim_type?: string
+          created_at?: string
+          entity?: string
+          evidence_urls?: Json
+          extracted_at?: string
+          host?: string
+          id?: string
+          source_url?: string
+          unit?: string | null
+          updated_at?: string
+          value?: string | null
+          verdict?: Database["public"]["Enums"]["claim_verdict"]
+          verdict_rationale?: string | null
+          verified_at?: string | null
+        }
+        Relationships: []
+      }
       site_content: {
         Row: {
           field: string
@@ -1971,6 +2079,15 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      claim_verdict:
+        | "supported"
+        | "partially_supported"
+        | "contradicted"
+        | "ambiguous"
+        | "insufficient_evidence"
+        | "out_of_scope"
+        | "needs_expert_review"
+        | "unverified"
       intervention_delivery_method: "snippet" | "wp_plugin" | "llms_txt_proxy"
       intervention_kind: "schema" | "llms_txt" | "robots_txt"
       intervention_status:
@@ -2108,6 +2225,16 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      claim_verdict: [
+        "supported",
+        "partially_supported",
+        "contradicted",
+        "ambiguous",
+        "insufficient_evidence",
+        "out_of_scope",
+        "needs_expert_review",
+        "unverified",
+      ],
       intervention_delivery_method: ["snippet", "wp_plugin", "llms_txt_proxy"],
       intervention_kind: ["schema", "llms_txt", "robots_txt"],
       intervention_status: [

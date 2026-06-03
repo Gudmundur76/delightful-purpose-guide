@@ -128,6 +128,7 @@ import { Route as DataQ22026LeaderboardDotjsonRouteImport } from './routes/data.
 import { Route as DataQ22026ClaimsDotjsonRouteImport } from './routes/data.q2-2026.claims[.]json'
 import { Route as DashboardSitesDomainRouteImport } from './routes/dashboard.sites.$domain'
 import { Route as ContentDraftsIdRouteImport } from './routes/content.drafts.$id'
+import { Route as BadgeClaimChar123idChar125DotsvgRouteImport } from './routes/badge.claim.{$id}[.]svg'
 import { Route as ApiPublicWhyUnlockRouteImport } from './routes/api/public/why-unlock'
 import { Route as ApiPublicWhyReportRouteImport } from './routes/api/public/why-report'
 import { Route as ApiPublicWhyPreviewRouteImport } from './routes/api/public/why-preview'
@@ -166,6 +167,7 @@ import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/a
 import { Route as ApiPublicStatsOverviewRouteImport } from './routes/api/public/stats/overview'
 import { Route as ApiPublicOauthTokenRouteImport } from './routes/api/public/oauth/token'
 import { Route as ApiPublicInjectTokenRouteImport } from './routes/api/public/inject.$token'
+import { Route as ApiPublicHooksVerifyClaimsRouteImport } from './routes/api/public/hooks/verify-claims'
 import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/api/public/hooks/run-scheduled-scans'
 import { Route as ApiPublicHooksRunMonitoredSitesRouteImport } from './routes/api/public/hooks/run-monitored-sites'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
@@ -791,6 +793,12 @@ const ContentDraftsIdRoute = ContentDraftsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => ContentDraftsRoute,
 } as any)
+const BadgeClaimChar123idChar125DotsvgRoute =
+  BadgeClaimChar123idChar125DotsvgRouteImport.update({
+    id: '/claim/{$id}.svg',
+    path: '/claim/{$id}.svg',
+    getParentRoute: () => BadgeRoute,
+  } as any)
 const ApiPublicWhyUnlockRoute = ApiPublicWhyUnlockRouteImport.update({
   id: '/api/public/why-unlock',
   path: '/api/public/why-unlock',
@@ -992,6 +1000,12 @@ const ApiPublicInjectTokenRoute = ApiPublicInjectTokenRouteImport.update({
   path: '/api/public/inject/$token',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHooksVerifyClaimsRoute =
+  ApiPublicHooksVerifyClaimsRouteImport.update({
+    id: '/api/public/hooks/verify-claims',
+    path: '/api/public/hooks/verify-claims',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksRunScheduledScansRoute =
   ApiPublicHooksRunScheduledScansRouteImport.update({
     id: '/api/public/hooks/run-scheduled-scans',
@@ -1248,6 +1262,7 @@ export interface FileRoutesByFullPath {
   '/api/public/why-preview': typeof ApiPublicWhyPreviewRoute
   '/api/public/why-report': typeof ApiPublicWhyReportRoute
   '/api/public/why-unlock': typeof ApiPublicWhyUnlockRoute
+  '/badge/claim/{$id}.svg': typeof BadgeClaimChar123idChar125DotsvgRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
   '/dashboard/sites/$domain': typeof DashboardSitesDomainRoute
   '/data/q2-2026/claims.json': typeof DataQ22026ClaimsDotjsonRoute
@@ -1268,6 +1283,7 @@ export interface FileRoutesByFullPath {
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
+  '/api/public/hooks/verify-claims': typeof ApiPublicHooksVerifyClaimsRoute
   '/api/public/inject/$token': typeof ApiPublicInjectTokenRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
@@ -1426,6 +1442,7 @@ export interface FileRoutesByTo {
   '/api/public/why-preview': typeof ApiPublicWhyPreviewRoute
   '/api/public/why-report': typeof ApiPublicWhyReportRoute
   '/api/public/why-unlock': typeof ApiPublicWhyUnlockRoute
+  '/badge/claim/{$id}.svg': typeof BadgeClaimChar123idChar125DotsvgRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
   '/dashboard/sites/$domain': typeof DashboardSitesDomainRoute
   '/data/q2-2026/claims.json': typeof DataQ22026ClaimsDotjsonRoute
@@ -1446,6 +1463,7 @@ export interface FileRoutesByTo {
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
+  '/api/public/hooks/verify-claims': typeof ApiPublicHooksVerifyClaimsRoute
   '/api/public/inject/$token': typeof ApiPublicInjectTokenRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
@@ -1608,6 +1626,7 @@ export interface FileRoutesById {
   '/api/public/why-preview': typeof ApiPublicWhyPreviewRoute
   '/api/public/why-report': typeof ApiPublicWhyReportRoute
   '/api/public/why-unlock': typeof ApiPublicWhyUnlockRoute
+  '/badge/claim/{$id}.svg': typeof BadgeClaimChar123idChar125DotsvgRoute
   '/content/drafts/$id': typeof ContentDraftsIdRoute
   '/dashboard/sites/$domain': typeof DashboardSitesDomainRoute
   '/data/q2-2026/claims.json': typeof DataQ22026ClaimsDotjsonRoute
@@ -1628,6 +1647,7 @@ export interface FileRoutesById {
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
+  '/api/public/hooks/verify-claims': typeof ApiPublicHooksVerifyClaimsRoute
   '/api/public/inject/$token': typeof ApiPublicInjectTokenRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
@@ -1791,6 +1811,7 @@ export interface FileRouteTypes {
     | '/api/public/why-preview'
     | '/api/public/why-report'
     | '/api/public/why-unlock'
+    | '/badge/claim/{$id}.svg'
     | '/content/drafts/$id'
     | '/dashboard/sites/$domain'
     | '/data/q2-2026/claims.json'
@@ -1811,6 +1832,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
+    | '/api/public/hooks/verify-claims'
     | '/api/public/inject/$token'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
@@ -1969,6 +1991,7 @@ export interface FileRouteTypes {
     | '/api/public/why-preview'
     | '/api/public/why-report'
     | '/api/public/why-unlock'
+    | '/badge/claim/{$id}.svg'
     | '/content/drafts/$id'
     | '/dashboard/sites/$domain'
     | '/data/q2-2026/claims.json'
@@ -1989,6 +2012,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
+    | '/api/public/hooks/verify-claims'
     | '/api/public/inject/$token'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
@@ -2150,6 +2174,7 @@ export interface FileRouteTypes {
     | '/api/public/why-preview'
     | '/api/public/why-report'
     | '/api/public/why-unlock'
+    | '/badge/claim/{$id}.svg'
     | '/content/drafts/$id'
     | '/dashboard/sites/$domain'
     | '/data/q2-2026/claims.json'
@@ -2170,6 +2195,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
+    | '/api/public/hooks/verify-claims'
     | '/api/public/inject/$token'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
@@ -2317,6 +2343,7 @@ export interface RootRouteChildren {
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
   ApiPublicHooksRunMonitoredSitesRoute: typeof ApiPublicHooksRunMonitoredSitesRoute
   ApiPublicHooksRunScheduledScansRoute: typeof ApiPublicHooksRunScheduledScansRoute
+  ApiPublicHooksVerifyClaimsRoute: typeof ApiPublicHooksVerifyClaimsRoute
   ApiPublicInjectTokenRoute: typeof ApiPublicInjectTokenRoute
   ApiPublicOauthTokenRoute: typeof ApiPublicOauthTokenRoute
   ApiPublicStatsOverviewRoute: typeof ApiPublicStatsOverviewRoute
@@ -3187,6 +3214,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContentDraftsIdRouteImport
       parentRoute: typeof ContentDraftsRoute
     }
+    '/badge/claim/{$id}.svg': {
+      id: '/badge/claim/{$id}.svg'
+      path: '/claim/{$id}.svg'
+      fullPath: '/badge/claim/{$id}.svg'
+      preLoaderRoute: typeof BadgeClaimChar123idChar125DotsvgRouteImport
+      parentRoute: typeof BadgeRoute
+    }
     '/api/public/why-unlock': {
       id: '/api/public/why-unlock'
       path: '/api/public/why-unlock'
@@ -3453,6 +3487,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicInjectTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/verify-claims': {
+      id: '/api/public/hooks/verify-claims'
+      path: '/api/public/hooks/verify-claims'
+      fullPath: '/api/public/hooks/verify-claims'
+      preLoaderRoute: typeof ApiPublicHooksVerifyClaimsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/run-scheduled-scans': {
       id: '/api/public/hooks/run-scheduled-scans'
       path: '/api/public/hooks/run-scheduled-scans'
@@ -3626,10 +3667,12 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface BadgeRouteChildren {
   BadgeChar123idChar125DotsvgRoute: typeof BadgeChar123idChar125DotsvgRoute
+  BadgeClaimChar123idChar125DotsvgRoute: typeof BadgeClaimChar123idChar125DotsvgRoute
 }
 
 const BadgeRouteChildren: BadgeRouteChildren = {
   BadgeChar123idChar125DotsvgRoute: BadgeChar123idChar125DotsvgRoute,
+  BadgeClaimChar123idChar125DotsvgRoute: BadgeClaimChar123idChar125DotsvgRoute,
 }
 
 const BadgeRouteWithChildren = BadgeRoute._addFileChildren(BadgeRouteChildren)
@@ -3988,6 +4031,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
   ApiPublicHooksRunMonitoredSitesRoute: ApiPublicHooksRunMonitoredSitesRoute,
   ApiPublicHooksRunScheduledScansRoute: ApiPublicHooksRunScheduledScansRoute,
+  ApiPublicHooksVerifyClaimsRoute: ApiPublicHooksVerifyClaimsRoute,
   ApiPublicInjectTokenRoute: ApiPublicInjectTokenRoute,
   ApiPublicOauthTokenRoute: ApiPublicOauthTokenRoute,
   ApiPublicStatsOverviewRoute: ApiPublicStatsOverviewRoute,
@@ -4030,13 +4074,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -64,6 +64,11 @@ import { autoFixSchemaTool } from "@/lib/mcp/tools/auto-fix/schema";
 import { autoFixLlmsTxtTool } from "@/lib/mcp/tools/auto-fix/llms-txt";
 import { autoFixRobotsTxtTool } from "@/lib/mcp/tools/auto-fix/robots-txt";
 import { listRegisteredMcpSitesTool } from "@/lib/mcp/tools/mcp-registry";
+import {
+  extractAndVerifyClaimsTool,
+  lintSiteContradictionsTool,
+  getSiteTrustScoreTool,
+} from "@/lib/mcp/tools/claim-verify";
 
 const mcp = createMcpServer({
   name: "grow-contact-mcp",
@@ -179,6 +184,10 @@ const mcp = createMcpServer({
     autoFixLlmsTxtTool,
     autoFixRobotsTxtTool,
     listRegisteredMcpSitesTool,
+    // v2.3 — Verifiability Layer (claims + contradictions + trust score)
+    extractAndVerifyClaimsTool,
+    lintSiteContradictionsTool,
+    getSiteTrustScoreTool,
   ],
 });
 

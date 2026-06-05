@@ -13,6 +13,7 @@ import { TechSpecs } from "@/components/TechSpecs";
 import { SmartContactForm } from "@/components/SmartContactForm";
 import { SocialProofStrip } from "@/components/SocialProofStrip";
 import { MiniChecker } from "@/components/MiniChecker";
+import { AgentViewPanel } from "@/components/AgentViewPanel";
 import { getFaqItemsFn, getPageContentFn } from "@/lib/site/content.functions";
 import { getOverviewStats } from "@/lib/check/stats.functions";
 import { ogImageMeta } from "@/lib/seo/og";
@@ -268,6 +269,7 @@ function Index() {
         <ProcessTimeline />
         <Services />
         <TechSpecs />
+        <AgentViewPanel />
 
         {/* FAQ */}
         <section className="border-t border-border">

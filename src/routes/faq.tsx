@@ -72,19 +72,25 @@ function FaqPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-24">
             <p className="font-mono text-accent text-xs mb-4 uppercase tracking-[0.2em]">// Questions</p>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter uppercase">FAQ</h1>
+            <p className="text-foreground mt-6 max-w-2xl text-base md:text-lg leading-relaxed">
+              Quick answers to what most people ask before kicking off a build: what "agent-native" means, how the 48-hour timeline really works, what's included at each price tier, who owns the code, and what happens after launch. Every answer here is the same answer we'd give you on a call.
+            </p>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-6">
+              <span className="text-accent">✓</span> FAQPage schema validated · <time dateTime="2026-06-06">updated 2026-06-06</time>
+            </p>
           </div>
         </section>
         <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
           <div className="space-y-8 sm:space-y-10">
             {items.map((f) => (
-              <div key={f.q}>
-                <p className="font-bold uppercase tracking-tighter text-base sm:text-lg">{f.q}</p>
+              <article key={f.q}>
+                <h2 className="font-bold uppercase tracking-tighter text-base sm:text-lg">{f.q}</h2>
                 <p className="text-muted-foreground text-sm mt-2 leading-relaxed">{f.a}</p>
-              </div>
+              </article>
             ))}
           </div>
           <div className="mt-16 border-t border-border pt-10 text-center">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-4">// Ready?</p>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-4">// Still have questions?</p>
             <Link to="/contact" className="inline-flex items-center gap-3 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors">
               Start a Brief →
             </Link>

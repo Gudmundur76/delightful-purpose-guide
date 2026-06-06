@@ -70,16 +70,16 @@ function ServicesPage() {
             <p className="font-mono text-accent text-xs mb-4 uppercase tracking-[0.2em]">// 03 Tiers</p>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter uppercase">Services</h1>
             <p className="text-foreground mt-6 max-w-2xl text-base md:text-lg leading-relaxed">
-              grow.contact ships agent-native marketing sites for AI startups, agent platforms, and developer tools — engineered so ChatGPT, Perplexity, Claude, and Google AI Overviews can cite your product. Three productized engagements: Agent-Native Website Build, Agent Readability Audit, Schema Optimization. Fixed price, fixed scope, 48-hour delivery.
+              Grow ships agent-native marketing sites for AI startups, agent platforms, and developer tools — engineered so ChatGPT, Perplexity, Claude, and Google AI Overviews can cite your product accurately. We offer three productized engagements: <strong>Agent-Native Website Build</strong>, <strong>Agent Readability Audit</strong>, and <strong>Schema Optimization</strong>. Fixed price, fixed scope, 48-hour delivery on the launch tier.
             </p>
             <p className="text-muted-foreground mt-4 max-w-2xl text-sm leading-relaxed">
-              Why this matters:{" "}
+              Why this matters right now:{" "}
               <a href="https://allbusinessrealm.com/index.php/2026/04/30/the-83-rule-why-ai-overviews-skip-the-top-10-and-where-small-sites-are-quietly-winning/" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">83% of AI Overview citations come from pages outside the organic top 10</a>,{" "}
-              <a href="https://grow.contact/check" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">73% of sites are silently excluded from AI citations</a> due to fixable technical issues, and{" "}
-              <a href="https://arxiv.org/abs/2311.09735" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">pages over 20,000 characters receive 4.3× more AI citations</a> than thin pages (Princeton GEO framework).
+              <a href="https://grow.contact/check" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">73% of sites are quietly excluded from AI citations</a> by fixable technical issues, and{" "}
+              <a href="https://arxiv.org/abs/2311.09735" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">pages over 20,000 characters receive 4.3× more AI citations</a> than thin pages (Princeton GEO framework). The good news: every one of these is fixable.
             </p>
             <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-6">
-              <time dateTime="2026-05-28">Last updated: May 2026</time>
+              <time dateTime="2026-06-06">Last updated: 2026-06-06</time> · refreshed monthly
             </p>
           </div>
         </section>

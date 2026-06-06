@@ -37,9 +37,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         const entries: SitemapEntry[] = [
           { path: "/", lastmod: today, changefreq: "weekly", priority: "1.0" },
           { path: "/standard", lastmod: "2026-05-22", changefreq: "monthly", priority: "0.9" },
-          { path: "/standard/v1", lastmod: "2026-05-22", changefreq: "yearly", priority: "0.9" },
           { path: "/standard.md", lastmod: "2026-05-22", changefreq: "monthly", priority: "0.6" },
-          { path: "/standard/v1.md", lastmod: "2026-05-22", changefreq: "yearly", priority: "0.6" },
 
           { path: "/work", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/services", lastmod: today, changefreq: "monthly", priority: "0.8" },
@@ -75,11 +73,10 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/citation-index", lastmod: today, changefreq: "weekly", priority: "0.7" },
           { path: "/mcp", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/research", lastmod: today, changefreq: "monthly", priority: "0.7" },
+          { path: "/for-agents", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/for-analysts", lastmod: today, changefreq: "monthly", priority: "0.7" },
           { path: "/why", lastmod: today, changefreq: "monthly", priority: "0.7" },
-          { path: "/guide/generative-engine-optimization", lastmod: today, changefreq: "monthly", priority: "0.9" },
-          { path: "/guide/aeo-vs-geo-vs-seo", lastmod: today, changefreq: "monthly", priority: "0.8" },
-          { path: "/guide/llms-txt", lastmod: today, changefreq: "monthly", priority: "0.8" },
+          { path: "/akn", lastmod: today, changefreq: "monthly", priority: "0.6" },
 
 
 

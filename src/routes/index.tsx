@@ -20,7 +20,7 @@ import { ogImageMeta } from "@/lib/seo/og";
 import { VerifiabilityBadge } from "@/components/VerifiabilityBadge";
 import { verifiableClaim, claimCitation } from "@/lib/seo/verifiable";
 
-const HOME_DATE_MODIFIED = "2026-05-29";
+const HOME_DATE_MODIFIED = "2026-06-06";
 
 const HOME_CLAIMS = [
   {
@@ -54,14 +54,14 @@ const HOME_CLAIMS = [
 
 
 const FAQS: { q: string; a: string }[] = [
-  { q: "What does \"agent-native\" actually mean?", a: "Every page ships with semantic HTML, JSON-LD (Organization, Product, FAQ, BreadcrumbList), an llms.txt at the root, OpenGraph + Twitter cards, and a clean sitemap. The result: ChatGPT, Perplexity, Claude, and Google AI Overviews can read, cite, and link to your product without guessing." },
-  { q: "Who is this actually for?", a: "AI/ML startups (model APIs, infra, eval tools), agent platforms (orchestration, browser agents, voice), and developer tools (SDKs, CLIs, MCP servers). If your buyer is a technical founder or platform engineer, you're in the right place." },
-  { q: "How is 48 hours possible?", a: "A battle-tested internal build system, a tight component library, and a strict no-revision-loop process. We design and code in the same environment — no Figma-to-dev handoff gap, no waiting on third parties." },
-  { q: "How much does it cost, and what's included?", a: "Fixed price per tier — no hourly surprises. Each build includes design, custom code, on-page SEO, responsive layouts, and deployment. Copy and stock imagery are on you; we can recommend writers if you need one." },
-  { q: "What do you need from me to hit the 48-hour window?", a: "Brand assets (logo, fonts if any), final copy, and any reference sites — handed over at kickoff. The clock starts when we have everything. Slow content is the #1 reason projects slip." },
-  { q: "What if I need changes?", a: "Every build includes one 4-hour revision block after delivery to polish the details and ensure perfection. Larger scope changes are quoted as a separate mini-engagement." },
-  { q: "Do I own the code?", a: "Yes. Full GitHub repository handover. The site is yours to host, modify, and extend — no lock-in, no proprietary CMS." },
-  { q: "Do you handle hosting and post-launch fixes?", a: "We deploy to your hosting of choice (Vercel, Netlify, Cloudflare) and fix any genuine bugs free for 14 days after launch. Ongoing maintenance is available as a monthly retainer if you want it." },
+  { q: "What does \"agent-native\" actually mean?", a: "Agent-native means the site is readable by AI engines, not just by browsers. Every page ships with semantic HTML, JSON-LD schema (Organization, Product, FAQPage, BreadcrumbList), an llms.txt at the root, OpenGraph cards, and a clean sitemap — so ChatGPT, Perplexity, Claude, and Google AI Overviews can cite you without guessing what your product does." },
+  { q: "Who is Grow for?", a: "We focus on AI and ML startups (model APIs, infrastructure, eval tools), agent platforms (orchestration, browser agents, voice), and developer tools (SDKs, CLIs, MCP servers). If your buyers are technical founders or platform engineers, you're in the right place — the site we ship will speak their language." },
+  { q: "How do you ship in 48 hours?", a: "We use a battle-tested internal build system, a tight component library that covers about 80% of agent-native page shapes, and a strict no-revision-loop process. Design and code happen in the same environment, so there's no Figma-to-dev handoff gap and no third-party waits. The clock starts when you hand over brand assets and final copy." },
+  { q: "How much does it cost, and what's included?", a: "Pricing is fixed per tier — no hourly surprises. Tier 01 Starter is $2,400 USD for a single-page launch site. Tier 02 Growth is $4,800 USD for up to five pages. Both include design, custom code, on-page SEO, structured data, llms.txt, responsive layouts, and a GitHub handover. Copy and stock imagery are on you; happy to recommend writers if you need one." },
+  { q: "What do you need from me to hit the 48-hour window?", a: "Brand assets (logo, fonts if any), final copy, and one or two reference sites, all handed over at kickoff. The clock starts the moment we have everything in hand. Slow content is the single biggest reason projects slip, so getting that ready in advance protects your timeline." },
+  { q: "What if I need changes after delivery?", a: "Every build includes one four-hour revision block after launch to polish details and catch anything we missed. Larger scope changes — a new page, a new feature — are quoted as a small follow-on engagement so the original budget stays predictable." },
+  { q: "Do I own the code?", a: "Yes, fully. You get the complete GitHub repository at handover, and the site is yours to host, modify, and extend however you like. No proprietary CMS, no platform lock-in, no licensing strings attached." },
+  { q: "Do you handle hosting and post-launch fixes?", a: "We deploy to whichever host you prefer (Vercel, Netlify, Cloudflare) and fix any genuine bugs free for 14 days after launch. If you'd like ongoing care — content updates, schema upgrades, re-scoring — that's available as a small monthly retainer." },
 ];
 
 type FaqItem = { q: string; a: string };
@@ -89,20 +89,20 @@ export const Route = createFileRoute("/")({
   head: () => {
     return {
     meta: [
-      { name: "description", content: "Agent-native marketing sites for AI/ML startups, agent platforms, and devtools. Structured data, llms.txt, MCP-ready docs — shipped in 48 hours, fixed price." },
-      { property: "og:title", content: "Grow — Agent-Native Websites for AI Startups & Devtools" },
+      { name: "description", content: "Grow builds agent-native marketing sites for AI startups, agent platforms, and developer tools — engineered to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Fixed price, live in 48 hours." },
+      { property: "og:title", content: "Grow — Agent-Native Websites for AI Startups & Developer Tools" },
       {
         property: "og:description",
         content:
-          "Marketing sites built for the agent era: structured data, llms.txt, MCP-ready docs. For AI/ML startups, agent platforms, and devtools. 48 hours, fixed price.",
+          "Marketing sites engineered for the AI era: structured data, llms.txt, MCP-ready docs. Built for AI startups, agent platforms, and developer tools. Fixed price, live in 48 hours.",
       },
-      { name: "twitter:title", content: "Grow — Agent-Native Websites for AI Startups & Devtools" },
-      { name: "twitter:description", content: "Marketing sites built for the agent era: structured data, llms.txt, MCP-ready docs. 48 hours, fixed price." },
+      { name: "twitter:title", content: "Grow — Agent-Native Websites for AI Startups & Developer Tools" },
+      { name: "twitter:description", content: "Marketing sites engineered to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Fixed price, 48-hour delivery." },
       { property: "og:url", content: "https://grow.contact/" },
       ...ogImageMeta({
-        title: "Agent-Native Websites for AI startups & devtools",
+        title: "Agent-Native Websites for AI Startups & Developer Tools",
         kicker: "Grow",
-        sub: "Custom-coded, LLM-readable, live in 48 hours — fixed price.",
+        sub: "Custom-coded, cited by AI engines, live in 48 hours — fixed price.",
       }),
     ],
 
@@ -217,9 +217,9 @@ function Index() {
                   {heroHeadlineParsed} <span className="italic text-accent">{heroHeadlineAgents}</span>
                 </h1>
                 <p className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground mb-8 max-w-xl">
-                  {"Built by "}<span className="text-foreground">Gudmundur Eyberg Kristjansson</span>{", systems architect, Reykjavík — author of the "}
+                  {"Built by "}<span className="text-foreground">Gudmundur Eyberg Kristjansson</span>{", systems architect in Reykjavík — author of the "}
                   <Link to="/standard" className="text-accent hover:underline">Agent-Native Web Standard</Link>
-                  {" (geo-standard@2026.07) and operator of the public "}
+                  {" (geo-standard@2026.07) and the team behind the public "}
                   <Link to="/check" className="text-accent hover:underline">/check</Link>
                   {" scanner. 2,400+ pages audited, 4,800+ fixes shipped."}
                 </p>
@@ -227,16 +227,16 @@ function Index() {
                   {heroSubheadline}
                 </p>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-10 max-w-xl">
-                  Why now:{" "}
+                  Why this matters right now:{" "}
                   <a href="https://allbusinessrealm.com/index.php/2026/04/30/the-83-rule-why-ai-overviews-skip-the-top-10-and-where-small-sites-are-quietly-winning/" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">
                     <VerifiabilityBadge id="home-stat-83" citation={claimCitation("home-stat-83")} dateModified={HOME_DATE_MODIFIED} showBadge={false}>83%</VerifiabilityBadge> of AI Overview citations come from pages outside the organic top 10
                   </a>,{" "}
                   <a href="https://grow.contact/check" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">
-                    <VerifiabilityBadge id="home-stat-73" citation={claimCitation("home-stat-73")} dateModified={HOME_DATE_MODIFIED} showBadge={false}>73%</VerifiabilityBadge> of sites are silently excluded from AI citations due to fixable technical issues
+                    <VerifiabilityBadge id="home-stat-73" citation={claimCitation("home-stat-73")} dateModified={HOME_DATE_MODIFIED} showBadge={false}>73%</VerifiabilityBadge> of sites are quietly excluded from AI citations by fixable technical issues
                   </a>, and{" "}
                   <a href="https://searchengineland.com/ai-traffic-up-seo-rewritten-459954" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">
-                    AI-referred sessions jumped <VerifiabilityBadge id="home-stat-527" citation={claimCitation("home-stat-527")} dateModified={HOME_DATE_MODIFIED} showBadge={false}>527%</VerifiabilityBadge> year-over-year in early 2025
-                  </a>.
+                    AI-referred sessions grew <VerifiabilityBadge id="home-stat-527" citation={claimCitation("home-stat-527")} dateModified={HOME_DATE_MODIFIED} showBadge={false}>527%</VerifiabilityBadge> year-over-year in early 2025
+                  </a>. The good news: every one of these gaps is fixable.
                 </p>
 
                 <div className="flex flex-wrap gap-4 items-center">
@@ -367,7 +367,7 @@ function Index() {
             <p className="font-mono text-accent text-xs mb-3 uppercase tracking-[0.2em]">// Go deeper</p>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase mb-3">The Full Stack</h2>
             <p className="text-muted-foreground text-sm md:text-base mb-10 max-w-2xl">
-              Citation factors, crawler behavior, the six-layer agent-native stack, and the scoring methodology — documented in full on dedicated pages.
+              Want to go deeper? Citation factors, crawler behavior, the six-layer agent-native stack, and the scoring methodology — each documented in full on its own page, so you can verify every claim we make.
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
               {[
@@ -398,7 +398,10 @@ function Index() {
           <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
             <div className="mb-10">
               <p className="font-mono text-accent text-xs mb-3 uppercase tracking-[0.2em]">// Start a brief</p>
-              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">Get in touch</h2>
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">Let's talk</h2>
+              <p className="text-muted-foreground text-sm md:text-base mt-4 max-w-xl">
+                Tell us a little about your site and what you're trying to ship. We'll reply within one business hour with a kickoff slot — usually the same day.
+              </p>
             </div>
             <SmartContactForm />
           </div>

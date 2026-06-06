@@ -330,14 +330,24 @@ export const scanUrl = createServerFn({ method: "POST" })
     }
 
     let hasContentSignal = false;
+    let hasGoogleExtended = false;
     try {
       const robotsRes = await fetchWithTimeout(`${origin}/robots.txt`, 4000);
       if (robotsRes.res.ok) {
         hasContentSignal = /^content-signal\s*:/im.test(robotsRes.text);
+        hasGoogleExtended = /^user-agent\s*:\s*Google-Extended\b/im.test(robotsRes.text);
       }
     } catch {
       // network error — leave false
     }
+
+    // Google AI snippet controls (per Google's June 2026 AI optimization guide).
+    // max-snippet / nosnippet on the robots meta tag tell Google how much text
+    // it may quote in AI Overviews. Absent = Google decides.
+    const robotsMetaMatch = html.match(/<meta\s+name=["']robots["']\s+content=["']([^"']+)["']/i);
+    const robotsMeta = robotsMetaMatch ? robotsMetaMatch[1] : "";
+    const hasMaxSnippet = /max-snippet\s*:\s*-?\d+/i.test(robotsMeta);
+    const hasNoSnippet = /\bnosnippet\b/i.test(robotsMeta);
 
     const protocolChecks = [
       { ok: hasLlmsLink || hasMcpLink || hasApiCatalogLink, pts: 25, label: "Link header" },
@@ -365,6 +375,14 @@ export const scanUrl = createServerFn({ method: "POST" })
       hasContentSignal
         ? "✓ Cloudflare Content-Signal declared in robots.txt"
         : "△ No Content-Signal in robots.txt (search/ai-train/ai-input)",
+      hasGoogleExtended
+        ? "✓ robots.txt names Google-Extended explicitly (Google AI training opt-in/out)"
+        : "△ No Google-Extended user-agent block in robots.txt — Google's AI default applies",
+      hasNoSnippet
+        ? "△ <meta robots> sets nosnippet — Google AI Overviews can't quote this page"
+        : hasMaxSnippet
+          ? `✓ <meta robots> sets max-snippet (per Google's June 2026 AI guide)`
+          : "△ No max-snippet / nosnippet meta — Google decides how much to quote in AI Overviews",
     ];
 
     // -------- Agent Auth (bonus, added in geo-standard@2026.07) --------

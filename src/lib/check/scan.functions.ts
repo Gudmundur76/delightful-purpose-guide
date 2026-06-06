@@ -375,6 +375,9 @@ export const scanUrl = createServerFn({ method: "POST" })
       hasContentSignal
         ? "✓ Cloudflare Content-Signal declared in robots.txt"
         : "△ No Content-Signal in robots.txt (search/ai-train/ai-input)",
+      hasGoogleExtended
+        ? "✓ robots.txt names Google-Extended explicitly (Google AI training opt-in/out)"
+        : "△ No Google-Extended user-agent block in robots.txt — Google's AI default applies",
     ];
 
     // -------- Agent Auth (bonus, added in geo-standard@2026.07) --------

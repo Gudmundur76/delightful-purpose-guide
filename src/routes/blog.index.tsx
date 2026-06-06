@@ -11,7 +11,7 @@ export const Route = createFileRoute("/blog/")({
       {
         name: "description",
         content:
-          "Field notes from the Grow studio: how structured data, llms.txt, and answer-first design earn citations from ChatGPT, Perplexity, Claude, and Google AI Overviews.",
+          "Field notes from the Grow studio on structured data, llms.txt, and answer-first design that earn citations from ChatGPT, Perplexity, Claude, and Google AI.",
       },
       { property: "og:title", content: "Journal — field notes on agent-native sites" },
       {

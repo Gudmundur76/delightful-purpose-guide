@@ -89,7 +89,7 @@ export const Route = createFileRoute("/")({
   head: () => {
     return {
     meta: [
-      { name: "description", content: "Grow builds agent-native marketing sites for AI startups, agent platforms, and developer tools — engineered to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Fixed price, live in 48 hours." },
+      { name: "description", content: "Agent-native marketing sites for AI startups and developer tools — engineered to be cited by ChatGPT, Perplexity, Claude, and Google AI. Fixed price, 48h." },
       { property: "og:title", content: "Grow — Agent-Native Websites for AI Startups & Developer Tools" },
       {
         property: "og:description",

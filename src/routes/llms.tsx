@@ -39,17 +39,17 @@ Grow builds bespoke marketing sites, launch pages, and devtool hubs for founders
 export const Route = createFileRoute("/llms")({
   head: () => ({
     meta: [
-      { title: "llms.txt — Grow" },
+      { title: "llms.txt — the file AI crawlers actually read | Grow" },
       {
         name: "description",
         content:
-          "Human and agent views of Grow's llms.txt — the AI-readable summary of our site, services, and content.",
+          "A plain-markdown summary at the root of every Grow site so AI crawlers can skip the JavaScript shell and read what matters. View ours in human or agent mode below.",
       },
-      { property: "og:title", content: "llms.txt — Grow" },
+      { property: "og:title", content: "llms.txt — the file AI crawlers actually read" },
       {
         property: "og:description",
         content:
-          "Human and agent views of Grow's llms.txt — the AI-readable summary of our site, services, and content.",
+          "A plain-markdown summary at the root of every Grow site so AI crawlers can read it without parsing JavaScript. Human and agent views.",
       },
       { property: "og:url", content: "https://grow.contact/llms" },
     ],
@@ -88,10 +88,10 @@ function LlmsPage() {
               // /llms.txt
             </h4>
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter uppercase">
-              The file agents read
+              The file agents read first
             </h1>
             <p className="text-muted-foreground text-sm mt-3 max-w-xl">
-              A flat markdown summary at the site root that lets LLM crawlers skip the JS shell and read what matters.
+              A flat markdown summary served at <code className="font-mono text-foreground">/llms.txt</code> so AI crawlers can read your site without rendering JavaScript. Every Grow build ships with one.
             </p>
           </div>
         </div>

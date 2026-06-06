@@ -5,9 +5,9 @@ import { InstallSnippets } from "@/components/playground/InstallSnippets";
 import { TOOLS } from "@/lib/playground/catalog";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const TITLE = "MCP Server Docs — grow-contact-mcp v2.0";
+const TITLE = "MCP Server — grow-contact-mcp v2.0 (docs & install)";
 const DESC =
-  "Production MCP server for grow.contact. 90+ agent-native tools over Streamable HTTP with OAuth + Bearer auth. Discoverable at /.well-known/mcp.json. Install in Claude, ChatGPT, n8n, or any MCP client in under 60 seconds.";
+  "Our public MCP server gives any agent client 90+ tools over Streamable HTTP with OAuth + Bearer auth. Discoverable at /.well-known/mcp.json. Install in Claude, ChatGPT, n8n, or any MCP-compatible client in about a minute.";
 const URL = "https://grow.contact/mcp";
 
 const ENDPOINTS = [
@@ -71,14 +71,15 @@ function McpDocsPage() {
             <h1 className="font-extrabold uppercase tracking-tighter text-4xl sm:text-6xl lg:text-7xl leading-[0.9] max-w-4xl">
               MCP server docs.
               <br />
-              <span className="text-muted-foreground">Production-ready.</span>
+              <span className="text-muted-foreground">Live and battle-tested.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-base sm:text-lg text-muted-foreground">
-              {TOOLS.length} tools. OAuth + Bearer auth. Discoverable via{" "}
+              {TOOLS.length} tools your agent can call directly — scoring sites, fetching scans, drafting leads, and more.
+              OAuth + Bearer auth, discoverable via{" "}
               <a href="/.well-known/mcp.json" className="text-accent hover:underline">/.well-known/mcp.json</a>.
-              Try them in the{" "}
+              Kick the tires in the{" "}
               <Link to="/playground" className="text-accent hover:underline">browser playground</Link>{" "}
-              before installing.
+              before you install.
             </p>
             <div className="mt-8 flex flex-wrap gap-3 font-mono text-[10px] uppercase tracking-widest">
               <a href="#install" className="px-3 py-1.5 border border-accent text-accent hover:bg-accent hover:text-background transition-colors">Install →</a>

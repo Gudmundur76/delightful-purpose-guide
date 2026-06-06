@@ -8,9 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const TITLE = "For Analysts — the structured dataset for AI company discovery";
+const TITLE = "For analysts — a structured dataset for AI company discovery | Grow";
 const DESC =
-  "390+ AI companies scored for citation readiness, authority, and verifiability. REST API used by Silobreaker, Visvo, and other intelligence platforms.";
+  "390+ AI companies scored on citation readiness, authority, and verifiability. A clean REST API used by intelligence platforms like Silobreaker, Visvo, and others, refreshed in real time.";
 
 export const Route = createFileRoute("/for-analysts")({
   head: () => ({
@@ -85,12 +85,13 @@ function ForAnalystsPage() {
             // for-analysts@2026.05
           </div>
           <h1 className="font-extrabold text-4xl md:text-5xl tracking-tighter mb-5">
-            The structured dataset for AI company discovery.
+            A structured dataset for AI company discovery.
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-            Intelligence platforms already index us. 390+ AI companies scored
-            for citation readiness, authority, and verifiability. Updated in
-            real time.
+            390+ AI companies scored on citation readiness, authority, and
+            verifiability — refreshed in real time. Several intelligence
+            platforms already index the feed; you can query the same one over
+            a simple REST API.
           </p>
 
           <div className="flex flex-wrap gap-2 mt-8">

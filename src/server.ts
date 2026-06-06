@@ -126,6 +126,12 @@ export default {
         const headers = new Headers(normalized.headers);
         // Advertise discovery surfaces (llms.txt, OpenAPI, MCP) on every page.
         if (!headers.has("link")) headers.set("link", buildLinkHeader());
+        // Cloudflare Content Signals — declare allowed uses for AI agents.
+        // Served at the worker level so it's present even when the zone rule
+        // isn't active (e.g. preview deployments, *.lovable.app).
+        if (!headers.has("content-signal")) {
+          headers.set("content-signal", "search=yes, ai-train=no, ai-input=yes");
+        }
         if (shouldOverrideCache) {
           headers.set(
             "cache-control",

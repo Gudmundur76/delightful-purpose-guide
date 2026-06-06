@@ -20,18 +20,18 @@ export const Route = createFileRoute("/akn")({
       {
         name: "description",
         content:
-          "Observer dashboard for the grow.contact AKN. Real-time fact graph, MCP terminal, and verifiable triples for autonomous agents.",
+          "An observer dashboard for the grow.contact AKN: a real-time fact graph, MCP terminal, and verifiable triples that autonomous agents can read in one fetch.",
       },
       { property: "og:title", content: "Agentic Knowledge Node — grow.contact" },
       {
         property: "og:description",
         content:
-          "Headless agentic protocol v4.0. RAG-optimized context, semantic triples, and an MCP server for OpenAI Operator, Perplexity Sonar, and Claude.",
+          "Headless agentic protocol v4.0 — RAG-optimized context, semantic triples, and an MCP interface for OpenAI Operator, Perplexity Sonar, and Claude.",
       },
       ...ogImageMeta({
         title: "Agentic Knowledge Node",
         kicker: "grow.contact",
-        sub: "Headless agentic protocol v4.0 — verifiable fact graph + MCP for autonomous agents.",
+        sub: "Headless agentic protocol v4.0 — a verifiable fact graph plus MCP for autonomous agents.",
       }),
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/akn" }],
@@ -88,9 +88,9 @@ function Hero({ generatedAt }: { generatedAt?: string }) {
           Agentic Knowledge Node
         </h1>
         <p className="text-muted-foreground max-w-2xl mb-6">
-          Web-as-a-verifiable-fact-graph. This node serves RAG-optimized context, semantic triples,
-          and an MCP interface to autonomous reasoning agents (OpenAI Operator, Perplexity Sonar
-          Pro, Claude Computer Use).
+          The web as a verifiable fact graph. This node serves RAG-optimized context, semantic triples,
+          and an MCP interface that autonomous reasoning agents (OpenAI Operator, Perplexity Sonar Pro,
+          Claude Computer Use) can use directly.
         </p>
         <div className="flex flex-wrap gap-3 font-mono text-xs">
           <Pill label="status" value="live" tone="ok" />

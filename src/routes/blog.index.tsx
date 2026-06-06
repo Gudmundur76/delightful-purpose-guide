@@ -7,23 +7,23 @@ export const Route = createFileRoute("/blog/")({
   component: BlogIndex,
   head: () => ({
     meta: [
-      { title: "Journal — Grow" },
+      { title: "Journal — field notes on agent-native sites | Grow" },
       {
         name: "description",
         content:
-          "Field notes on shipping agent-native websites: structured data, llms.txt, and design that gets cited by LLMs.",
+          "Field notes from the Grow studio: how structured data, llms.txt, and answer-first design earn citations from ChatGPT, Perplexity, Claude, and Google AI Overviews.",
       },
-      { property: "og:title", content: "Journal — Grow" },
+      { property: "og:title", content: "Journal — field notes on agent-native sites" },
       {
         property: "og:description",
         content:
-          "Field notes on shipping agent-native websites: structured data, llms.txt, and design that gets cited by LLMs.",
+          "Field notes on shipping agent-native websites — structured data, llms.txt, and design that gets cited by AI engines.",
       },
       { property: "og:url", content: "https://grow.contact/blog" },
       ...ogImageMeta({
-        title: "Journal — Grow",
+        title: "Journal — field notes on agent-native sites",
         kicker: "Grow",
-        sub: "Field notes on shipping agent-native websites: structured data, llms.txt, and design that gets cited by LLMs.",
+        sub: "Structured data, llms.txt, and design that gets cited by AI engines.",
       }),
     ],
     links: [

@@ -6,9 +6,9 @@ import { ArrowRight } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
 
 const URL = "https://grow.contact/glossary";
-const TITLE = "GEO Glossary — Agent-Native Web Terms";
+const TITLE = "GEO glossary — plain definitions for the agent-native web";
 const DESC =
-  "Definitions for the terms shaping generative engine optimization: llms.txt, MCP, OAI-SearchBot, JSON-LD, citability, and the rest of the agent-native web vocabulary.";
+  "Short, plain-English definitions for the terms shaping generative engine optimization: llms.txt, MCP, OAI-SearchBot, JSON-LD, citability, and the rest of the agent-native web vocabulary.";
 
 export const Route = createFileRoute("/glossary")({
   component: GlossaryIndex,
@@ -70,11 +70,10 @@ function GlossaryIndex() {
               GEO Glossary
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              {GLOSSARY.length} terms covering the agent-native web — llms.txt,
+              {GLOSSARY.length} short definitions covering the agent-native web — llms.txt,
               MCP, JSON-LD, the major crawlers, and the metrics that decide
-              whether AI engines cite a site. Each term is a citable canonical
-              answer with <code className="text-foreground">DefinedTerm</code>{" "}
-              JSON-LD.
+              whether AI engines cite a site. Each term is its own citable answer with{" "}
+              <code className="text-foreground">DefinedTerm</code> JSON-LD attached.
             </p>
           </div>
         </header>

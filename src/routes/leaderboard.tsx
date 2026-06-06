@@ -301,16 +301,16 @@ function LeaderboardPage() {
               // Citation Intelligence Index · live dataset · {allRows.length} companies tracked
             </p>
             <h1 className="text-4xl md:text-7xl font-extrabold tracking-tighter uppercase leading-[0.9]">
-              Who gets cited
+              Who actually gets
               <br />
-              by ChatGPT?
+              cited by ChatGPT?
             </h1>
             <p className="mt-8 max-w-2xl text-muted-foreground text-lg">
               The Citation Intelligence Index ranks AI companies by{" "}
               <strong className="text-foreground">Citation Probability</strong> — the live
-              odds a Perplexity, ChatGPT, Claude, or Google AI Overviews answer cites them.
-              Backed by the Canonical Citation Score (CCS) and a 30-day platform-by-platform
-              share-of-voice roll-up.
+              odds that a Perplexity, ChatGPT, Claude, or Google AI Overviews answer cites
+              them when someone asks. Backed by the Canonical Citation Score (CCS) and a
+              rolling 30-day, platform-by-platform share-of-voice.
             </p>
 
             <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border">

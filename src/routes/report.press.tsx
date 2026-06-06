@@ -10,10 +10,10 @@ export const Route = createFileRoute("/report/press")({
   loader: () => ({ stats: computeHeadlineStats() }),
   head: () => ({
     meta: [
-      { title: "Press Kit — State of the Agent-Readable Web | Grow" },
-      { name: "description", content: "Press kit for the grow.contact quarterly agent-readability report. Pull quotes, downloadable charts, logo pack, author bio, and direct media contact." },
-      { property: "og:title", content: "Press Kit — State of the Agent-Readable Web" },
-      { property: "og:description", content: "Pull quotes, charts, logo pack, and media contact for the grow.contact agent-readability research." },
+      { title: "Press kit — State of the Agent-Readable Web | Grow" },
+      { name: "description", content: "Press kit for our quarterly agent-readability report: pull quotes, downloadable charts, logo pack, author bio, and a direct media contact." },
+      { property: "og:title", content: "Press kit — State of the Agent-Readable Web" },
+      { property: "og:description", content: "Pull quotes, charts, logo pack, and a direct media contact for our agent-readability research." },
       { property: "og:url", content: PAGE_URL },
     ],
     links: [{ rel: "canonical", href: PAGE_URL }],
@@ -46,8 +46,8 @@ function PressPage() {
           <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">// Press Kit</p>
           <h1 className="text-4xl font-bold mb-4">Press kit</h1>
           <p className="text-lg text-muted-foreground">
-            Everything needed to cite the State of the Agent-Readable Web report.
-            All assets and figures are CC BY 4.0 — use freely with attribution
+            Everything you need to cite the State of the Agent-Readable Web report.
+            All assets and figures are CC BY 4.0 — use them freely with attribution
             to grow.contact.
           </p>
         </header>

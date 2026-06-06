@@ -5,17 +5,17 @@ export const Route = createFileRoute("/cli")({
   component: CliPage,
   head: () => ({
     meta: [
-      { title: "grow CLI — Agent-Readiness Scanner for Your Terminal" },
+      { title: "grow CLI — agent-readiness scoring for your terminal" },
       {
         name: "description",
         content:
-          "Score any URL against the Grow GEO Standard from your terminal. Zero-dep Node CLI, CI-friendly --fail-under flag, free with an API key. npx @grow-contact/cli check <url>.",
+          "Score any URL against the Grow GEO Standard from the command line. Zero-dep Node CLI, CI-friendly --fail-under flag, free with an API key. Try it: npx @grow-contact/cli check <url>.",
       },
-      { property: "og:title", content: "grow CLI — Agent-Readiness in your terminal" },
+      { property: "og:title", content: "grow CLI — agent-readiness in your terminal" },
       {
         property: "og:description",
         content:
-          "npx @grow-contact/cli check <url> — Lighthouse for AI agents. 5 signals, 0–100, CI-ready.",
+          "npx @grow-contact/cli check <url> — like Lighthouse, but for AI agents. Five signals, 0–100, CI-ready.",
       },
       { property: "og:url", content: "https://grow.contact/cli" },
       { property: "og:type", content: "website" },
@@ -73,10 +73,10 @@ function CliPage() {
           Agent-readiness in your terminal.
         </h1>
         <p className="text-lg text-muted-foreground">
-          A zero-dependency Node CLI that scores any URL against the Grow GEO Standard —
-          the same five signals as the public scanner at{" "}
-          <Link to="/check" className="underline">/check</Link>. Pipe it into CI, gate
-          deploys on agent readability, ship with confidence.
+          A zero-dependency Node CLI that scores any URL against the Grow GEO Standard — the same
+          five signals as the public scanner at{" "}
+          <Link to="/check" className="underline">/check</Link>. Drop it in CI, gate
+          deploys on agent readability, sleep better.
         </p>
       </header>
 
@@ -138,10 +138,9 @@ grow check https://example.com`}</Code>
       <section className="mb-12">
         <h2 className="mb-3 text-xl font-semibold">Why a CLI</h2>
         <ul className="list-inside list-disc space-y-2 text-muted-foreground">
-          <li>Same six signals as the public scanner — no second rubric to learn.</li>
           <li>Same five signals as the public scanner — no second rubric to learn.</li>
-          <li>MIT, zero deps, ~250 LOC. Audit it in a coffee break.</li>
-          <li>When the score is low, a 48-hour fix is one click away at <Link to="/pricing" className="underline">/pricing</Link>.</li>
+          <li>MIT, zero deps, ~250 LOC. You can audit the whole thing in a coffee break.</li>
+          <li>If your score is low, a 48-hour fix is one click away at <Link to="/pricing" className="underline">/pricing</Link>.</li>
         </ul>
       </section>
 

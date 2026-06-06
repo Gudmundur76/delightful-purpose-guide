@@ -6,9 +6,9 @@ import { ArrowRight, Clock } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
 
 const URL_ = "https://grow.contact/playbooks";
-const TITLE = "GEO Playbooks — Step-by-Step AI Citation Tactics";
+const TITLE = "GEO playbooks — tactical, step-by-step AI citation guides";
 const DESC =
-  "Tactical step-by-step playbooks for earning AI citations: robots.txt for ChatGPT, llms.txt in 10 minutes, Cloudflare WAF fixes, Perplexity listicle format, and more. Each ships HowTo JSON-LD.";
+  "Short, opinionated playbooks for earning AI citations: robots.txt for ChatGPT, llms.txt in ten minutes, Cloudflare WAF fixes, Perplexity listicle format, and more. Each one ships HowTo JSON-LD so engines can lift the steps verbatim.";
 
 export const Route = createFileRoute("/playbooks")({
   component: PlaybooksIndex,
@@ -71,8 +71,8 @@ function PlaybooksIndex() {
               GEO Playbooks
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              {PLAYBOOKS.length} tactical step-by-step guides for earning AI
-              citations. Each ships <code className="text-foreground">HowTo</code>{" "}
+              {PLAYBOOKS.length} short, opinionated guides for earning AI
+              citations. Each one ships <code className="text-foreground">HowTo</code>{" "}
               JSON-LD so ChatGPT, Perplexity, Claude, and Google AI Overviews
               can lift the steps verbatim.
             </p>

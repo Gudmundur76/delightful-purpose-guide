@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const TITLE = "Grow GEO Browser Extension — One-Click Agent Readability Score";
+const TITLE = "Grow GEO browser extension — one-click agent readability score";
 const DESC =
-  "See how AI agents read any website. Free Chrome/Edge/Brave extension. GEO + AEO score in your toolbar, top fixes, one click to the full report.";
+  "See how AI agents read any website you visit. Free Chrome / Edge / Brave extension that drops your GEO + AEO score into the toolbar, with the top three fixes and a link to the full report.";
 const PAGE_URL = "https://grow.contact/extension";
 
 export const Route = createFileRoute("/extension")({
@@ -67,11 +67,11 @@ function ExtensionPage() {
       <header className="mb-10">
         <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Browser extension · MV3 · Free</p>
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
-          One-click agent readability score, on every page you visit.
+          One-click agent readability, on every page you visit.
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl">
-          Install the Grow GEO extension to see how AI agents — ChatGPT, Claude, Perplexity, Gemini — read the site you're
-          looking at. Five sub-scores, top three fixes, one click to the full report.
+          Install the Grow GEO extension to see how AI agents — ChatGPT, Claude, Perplexity, Gemini —
+          read the site in front of you. Five sub-scores, the top three fixes, and a one-click jump to the full report.
         </p>
       </header>
 

@@ -23,8 +23,8 @@ export const Route = createFileRoute("/report/q2-2026")({
   head: ({ loaderData }) => {
     const s = loaderData?.stats;
     const description = s
-      ? `Quarterly report on AI-citation readiness across ${s.total} top AI companies. ${s.missing_llms_txt_pct}% are missing llms.txt; ${s.opaque_pct}% score below the threshold AI engines will cite. Open dataset, CC BY 4.0.`
-      : `Quarterly report on agent-readability across the AI industry. CC BY 4.0.`;
+      ? `Our quarterly look at AI-citation readiness across ${s.total} top AI companies: ${s.missing_llms_txt_pct}% ship no usable llms.txt, ${s.opaque_pct}% score below the bar AI engines will cite by name. Open dataset, CC BY 4.0.`
+      : `Our quarterly read on agent-readability across the AI industry. CC BY 4.0.`;
     return {
       meta: [
         { title: `${REPORT_TITLE} | Grow` },

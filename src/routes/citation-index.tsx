@@ -18,7 +18,7 @@ export const Route = createFileRoute("/citation-index")({
   head: () => {
     const monthLabel = new Date().toLocaleString("en-US", { month: "long", year: "numeric" });
     const title = `Citation Index — ${monthLabel} | grow.contact`;
-    const desc = `Monthly ranking of which AI companies get cited most by Perplexity, ChatGPT, Claude, and Google AI Overviews. ${monthLabel} report.`;
+    const desc = `Our monthly snapshot of which AI companies show up most often in Perplexity, ChatGPT, Claude, and Google AI Overviews answers. ${monthLabel} edition.`;
     return {
       meta: [
         { title },
@@ -85,12 +85,12 @@ function CitationIndexPage() {
             Citation Index — {monthLabel}
           </h1>
           <p className="mt-4 text-base text-muted-foreground max-w-3xl">
-            The authoritative monthly ranking of which AI companies get cited by Perplexity,
-            ChatGPT, Claude, and Google AI Overviews. Methodology:{" "}
+            A monthly snapshot of which AI companies show up most in Perplexity, ChatGPT,
+            Claude, and Google AI Overviews answers. Scored with{" "}
             <Link to="/leaderboard/methodology" className="text-accent underline">
               CCS v1.2
             </Link>
-            . Updates monthly on the 1st.
+            . Refreshed on the 1st of every month.
           </p>
         </header>
 

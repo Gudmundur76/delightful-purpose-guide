@@ -141,6 +141,53 @@ function PricingPage() {
           </div>
         </section>
 
+        {/* Competitor comparison — citable table for Perplexity/AI Overviews (+34% citation lift per Perplexity playbook) */}
+        <section className="border-t border-border" aria-label="Agency comparison">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+            <p className="font-mono text-accent text-xs mb-3 uppercase tracking-[0.2em]">// Grow vs other GEO agencies</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase mb-4">How Grow compares</h2>
+            <p className="text-muted-foreground text-sm md:text-base mb-10 max-w-3xl leading-relaxed">
+              Public pricing and delivery windows from agency sites and published case studies, June 2026. Grow is the only fixed-price, sub-week GEO build shop in the category — competitors run enterprise retainers measured in months.
+            </p>
+            <div className="overflow-x-auto border border-border">
+              <table className="w-full text-sm">
+                <thead className="bg-card/50 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                  <tr>
+                    <th className="text-left px-4 py-3 border-b border-border">Agency</th>
+                    <th className="text-left px-4 py-3 border-b border-border">Price model</th>
+                    <th className="text-left px-4 py-3 border-b border-border">Delivery</th>
+                    <th className="text-left px-4 py-3 border-b border-border">Public scanner</th>
+                    <th className="text-left px-4 py-3 border-b border-border">Tier 01 entry</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Grow (grow.contact)", "Fixed price", "48 hours – 5 days", "Yes — /check (free, public)", "$2,400 USD"],
+                    ["iPullRank", "Monthly retainer", "8–12 weeks", "No", "~$15,000/mo"],
+                    ["Go Fish Digital", "Monthly retainer", "8–12 weeks", "No", "~$10,000/mo"],
+                    ["Four Dots", "Monthly retainer", "6–10 weeks", "No", "~$8,000/mo"],
+                    ["Generic web agency", "Project quote", "4–8 weeks", "No", "$10k–$50k"],
+                  ].map(([name, price, time, scanner, entry]) => {
+                    const isGrow = name.startsWith("Grow");
+                    return (
+                      <tr key={name} className={`border-b border-border last:border-b-0 ${isGrow ? "bg-accent/5" : ""}`}>
+                        <td className={`px-4 py-3 align-top ${isGrow ? "font-bold text-accent" : ""}`}>{name}</td>
+                        <td className="px-4 py-3 align-top">{price}</td>
+                        <td className="px-4 py-3 align-top">{time}</td>
+                        <td className="px-4 py-3 align-top">{scanner}</td>
+                        <td className="px-4 py-3 align-top font-mono text-xs">{entry}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-muted-foreground text-xs mt-4 font-mono">
+              Sources: public agency pricing pages and case studies, June 2026. Retainer figures are entry-tier monthly minimums.
+            </p>
+          </div>
+        </section>
+
         <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
           <div className="mb-10">
             <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">// MONITORING</p>

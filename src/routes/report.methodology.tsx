@@ -8,10 +8,10 @@ export const Route = createFileRoute("/report/methodology")({
   component: MethodologyPage,
   head: () => ({
     meta: [
-      { title: "Report Methodology — How We Measure Agent-Readability | Grow" },
-      { name: "description", content: "Methodology for the State of the Agent-Readable Web report — scoring formula, signal weights, pass thresholds, scan cadence, dataset limitations, and changelog. CC BY 4.0." },
-      { property: "og:title", content: "Report Methodology — How We Measure Agent-Readability" },
-      { property: "og:description", content: "Scoring formula, signal weights, scan cadence, limitations, and changelog for the quarterly grow.contact agent-readability report." },
+      { title: "Report methodology — how we measure agent-readability | Grow" },
+      { name: "description", content: "How the State of the Agent-Readable Web report is built: scoring formula, signal weights, pass thresholds, scan cadence, dataset limitations, and changelog. CC BY 4.0." },
+      { property: "og:title", content: "Report methodology — how we measure agent-readability" },
+      { property: "og:description", content: "Scoring formula, signal weights, scan cadence, limitations, and changelog for our quarterly agent-readability report." },
       { property: "og:url", content: PAGE_URL },
     ],
     links: [{ rel: "canonical", href: PAGE_URL }],
@@ -61,9 +61,9 @@ function MethodologyPage() {
           </p>
           <h1 className="text-4xl font-bold mb-4">Methodology</h1>
           <p className="text-lg text-muted-foreground">
-            How the grow.contact agent-readability score is computed, what
-            "pass" means for each signal, how often the dataset is refreshed,
-            and where the measurement stops being precise.
+            How we compute our agent-readability score, what &ldquo;pass&rdquo; means for each
+            signal, how often we refresh the dataset, and where the measurement stops being
+            precise — laid out so anyone can reproduce it.
           </p>
         </header>
 

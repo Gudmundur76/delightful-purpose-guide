@@ -7,9 +7,9 @@ import { CheckCircle2, XCircle, AlertTriangle, Copy } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
 
 const URL_ = "https://grow.contact/tools/robots-checker";
-const TITLE = "robots.txt Checker for AI Crawlers — Free Tool";
+const TITLE = "robots.txt checker for AI crawlers — free, no signup";
 const DESC =
-  "Paste your robots.txt — get back which AI engines can cite you. Checks ChatGPT, Perplexity, Claude, Google AI Overviews, Bing Copilot, and Meta AI. No signup.";
+  "Paste your robots.txt and we&rsquo;ll tell you which AI engines can still cite you. Covers ChatGPT, Perplexity, Claude, Google AI Overviews, Bing Copilot, and Meta AI. No signup, no email required.";
 
 const SAMPLE = `User-agent: *\nAllow: /\n\nUser-agent: GPTBot\nDisallow: /\n\nSitemap: https://example.com/sitemap.xml\n`;
 

@@ -156,7 +156,7 @@ function VScorePage() {
               <span className="text-muted-foreground">/100</span>
             </h1>
             <p className="mt-6 max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-              Live composite of the five verifiability pillars. Tier:{" "}
+              A V-Score is a live composite of five verifiability pillars, computed from values in this repo. Today it reads{" "}
               <span
                 className={
                   tier.color === "emerald"
@@ -168,8 +168,7 @@ function VScorePage() {
               >
                 {tier.label}
               </span>
-              . Every input is computed from values in the repo, so the score is itself
-              source-synced — change a claim, the score changes.
+              . Because every input is source-synced, the moment you change a claim the score updates with it — no spreadsheets, no PR theatre.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 items-center">

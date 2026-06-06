@@ -9,10 +9,10 @@ import { SiteFooter } from "@/components/SiteFooter";
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "Shop — Grow" },
-      { name: "description", content: "Browse Grow services and packages. Secure checkout with PayPal." },
-      { property: "og:title", content: "Shop — Grow" },
-      { property: "og:description", content: "Services and packages available for purchase." },
+      { title: "Shop — services & packages | Grow" },
+      { name: "description", content: "Browse Grow services and packages, with secure PayPal checkout." },
+      { property: "og:title", content: "Shop — services & packages | Grow" },
+      { property: "og:description", content: "Services and packages you can buy directly, with secure checkout." },
       { property: "og:url", content: "https://grow.contact/products" },
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/products" }],

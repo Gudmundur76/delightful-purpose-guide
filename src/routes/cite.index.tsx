@@ -16,13 +16,13 @@ export const Route = createFileRoute("/cite/")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [
-      { title: "cite.grow — Who do AI search engines actually cite?" },
+      { title: "cite.grow — see who AI search engines actually cite" },
       {
         name: "description",
         content:
-          "Search a live index of citations from ChatGPT, Perplexity, Claude, and Google AI Overviews. Ranked by real frequency.",
+          "Search a live index of citations from ChatGPT, Perplexity, Claude, and Google AI Overviews — refreshed every 24 hours and ranked by real frequency.",
       },
-      { property: "og:title", content: "cite.grow — Who do AI search engines actually cite?" },
+      { property: "og:title", content: "cite.grow — see who AI search engines actually cite" },
       {
         property: "og:description",
         content:
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/cite/")({
       ...ogImageMeta({
         title: "cite.grow",
         kicker: "AI Citation Index",
-        sub: "Who do AI search engines actually cite?",
+        sub: "See who AI search engines actually cite — live, every 24 hours.",
       }),
     ],
   }),
@@ -108,11 +108,11 @@ function CiteIndex() {
             cite.grow · live index
           </p>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4">
-            Who do AI search engines actually cite?
+            See who AI search engines actually cite.
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Search real citations from ChatGPT, Perplexity, Claude, and Google AI Overviews —
-            ranked by frequency from the last 24 hours.
+            ranked by how often a domain shows up over the last 24 hours.
           </p>
         </header>
 

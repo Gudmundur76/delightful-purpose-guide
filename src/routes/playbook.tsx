@@ -7,16 +7,16 @@ const PLAYBOOK_UPDATED_AT = "2026-05-28";
 export const Route = createFileRoute("/playbook")({
   head: () => ({
     meta: [
-      { title: "The 12-Week Agent-Native SEO Playbook — Grow" },
+      { title: "The 12-week agent-native SEO playbook — Grow" },
       {
         name: "description",
         content:
-          "Our 12-week content calendar for AI startups: the exact keywords, post titles, and channel plays we use to earn LLM citations from ChatGPT, Perplexity, and Claude.",
+          "Our 12-week content calendar for AI startups: the exact keywords, post titles, and channels we use to earn citations from ChatGPT, Perplexity, Claude, and Google AI Overviews.",
       },
-      { property: "og:title", content: "The 12-Week Agent-Native SEO Playbook — Grow" },
+      { property: "og:title", content: "The 12-week agent-native SEO playbook — Grow" },
       {
         property: "og:description",
-        content: "12 weeks of keywords, post titles, and channels for earning LLM citations.",
+        content: "12 weeks of keywords, post titles, and channels for earning citations from AI engines.",
       },
       { property: "og:url", content: "https://grow.contact/playbook" },
       { property: "og:type", content: "article" },

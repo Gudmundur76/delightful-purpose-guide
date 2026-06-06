@@ -8,26 +8,26 @@ export const Route = createFileRoute("/for-agents")({
   component: ForAgentsPage,
   head: () => ({
     meta: [
-      { title: "For AI Agents — Verification Layer by Grow" },
+      { title: "For AI agents — a verification layer your users can trust | Grow" },
       {
         name: "description",
         content:
-          "Verify every agent claim. Increase user trust. The verification layer for the agent economy — MCP server, API, and badge integrations for AI platforms.",
+          "Help users trust the agents they delegate to. Grow's MCP server, REST API, and embeddable badge let any AI platform verify claims, sources, and citations in real time.",
       },
       {
         property: "og:title",
-        content: "For AI Agents — Verification Layer by Grow",
+        content: "For AI agents — a verification layer your users can trust",
       },
       {
         property: "og:description",
         content:
-          "Verify every agent claim. Increase user trust. MCP server, API, and badge integrations for AI platforms.",
+          "MCP server, REST API, and embeddable badge so AI platforms can verify claims, sources, and citations in real time.",
       },
       { property: "og:url", content: "https://grow.contact/for-agents" },
       ...ogImageMeta({
-        title: "For AI Agents — Verification Layer",
+        title: "For AI agents — a verification layer your users can trust",
         kicker: "Grow",
-        sub: "Verify every agent claim. Increase user trust.",
+        sub: "MCP, API, and badge integrations for AI platforms.",
       }),
     ],
     links: [{ rel: "canonical", href: "https://grow.contact/for-agents" }],
@@ -68,12 +68,12 @@ function ForAgentsPage() {
               // Agent Partnerships
             </p>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter uppercase max-w-4xl">
-              Verify Every Agent Claim. Increase User Trust.
+              Help your users trust the agents they delegate to.
             </h1>
             <p className="mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
-              The verification layer for the{" "}
-              <span className="text-foreground font-semibold">$5.83B agent economy</span>.
-              Help your users know which agents are truthful, citable, and safe to delegate to.
+              Grow is a verification layer for the{" "}
+              <span className="text-foreground font-semibold">$5.83B agent economy</span>:
+              an MCP server, a REST API, and a small embeddable badge that let your platform show, in real time, which agent answers are sourced, citable, and safe to act on.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <a
@@ -102,7 +102,7 @@ function ForAgentsPage() {
               // The Problem
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase max-w-3xl">
-              Users Don&apos;t Trust Agents Without Proof
+              Users don&apos;t trust agents that can&apos;t show their work
             </h2>
             <div className="mt-12 grid gap-8 md:grid-cols-3">
               <div className="border border-border p-6 md:p-8">

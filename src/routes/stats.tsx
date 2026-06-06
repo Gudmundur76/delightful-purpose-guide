@@ -188,14 +188,12 @@ function StatsPage() {
               The State of the Agent-Readable Web
             </h1>
             <p className="mt-6 max-w-3xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-              {s.missing_llms_txt_pct}% of the top {sample} AI companies are missing llms.txt.{" "}
-              {s.opaque_pct}% are effectively opaque to ChatGPT, Perplexity, and Claude. Only{" "}
-              {s.agent_native_pct}% clear the agent-native bar. These are the headline
-              numbers from the open{" "}
+              Here&rsquo;s the short version: {s.missing_llms_txt_pct}% of the top {sample} AI companies still ship no usable llms.txt, {s.opaque_pct}% are effectively opaque to ChatGPT, Perplexity, and Claude, and only{" "}
+              {s.agent_native_pct}% clear the bar where AI engines cite by name. Every number below comes from the open{" "}
               <Link to="/leaderboard" className="text-accent underline">
                 Agent Readability Leaderboard
               </Link>
-              . Every stat below has a stable anchor — cite freely under CC BY 4.0.
+              {" "}and has a stable anchor — quote freely under CC BY 4.0.
             </p>
             <div className="mt-8 flex flex-wrap gap-3 font-mono text-[10px] uppercase tracking-widest">
               <span className="border border-border px-3 py-1.5 text-muted-foreground">

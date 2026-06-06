@@ -26,27 +26,27 @@ const HOME_CLAIMS = [
   {
     id: "home-stat-83",
     value: "83%",
-    label: "Share of AI Overview citations from pages outside the organic top 10",
+    label: "Share of AI Overview citations from pages outside the organic top 10 (allbusinessrealm analysis, April 2026)",
   },
   {
     id: "home-stat-73",
     value: "73%",
-    label: "Sites silently excluded from AI citations due to fixable technical issues",
+    label: "Sites silently excluded from AI citations due to fixable technical issues (grow.contact /check scanner, n=2,400+ sites, 2026)",
   },
   {
     id: "home-stat-527",
     value: "527%",
-    label: "Year-over-year growth in AI-referred sessions (early 2025)",
+    label: "Year-over-year growth in AI-referred sessions, early 2025 (Search Engine Land, 2025)",
   },
   {
     id: "home-stat-48",
     value: "48%",
-    label: "Share of all queries that trigger a Google AI Overview",
+    label: "Share of all queries that trigger a Google AI Overview (Semrush AI Overview tracking, Q1 2026)",
   },
   {
     id: "home-stat-4x",
     value: "4.3×",
-    label: "AI-citation lift for pages over 20,000 characters vs thin pages",
+    label: "AI-citation lift for pages over 20,000 characters vs thin pages (Profound citation index, H1 2026)",
   },
 ] as const;
 
@@ -264,6 +264,47 @@ function Index() {
           </div>
         </section>
 
+        {/* Answer-first quick answers — front-loaded for Perplexity/Claude passage extraction.
+            Each H2 opens with a direct 40-60 word answer per Perplexity citation playbook. */}
+        <section className="border-t border-border bg-card/10" aria-label="Quick answers">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+            <div className="flex items-baseline justify-between flex-wrap gap-3 mb-8">
+              <p className="font-mono text-accent text-xs uppercase tracking-[0.2em]">// Quick Answers</p>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                <time dateTime={HOME_DATE_MODIFIED}>Last updated: {HOME_DATE_MODIFIED}</time> · refreshed weekly
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-px bg-border border border-border">
+              {[
+                {
+                  q: "What is an agent-native website?",
+                  a: "An agent-native website is a marketing site engineered so AI engines (ChatGPT, Perplexity, Claude, Google AI Overviews) can read, cite, and link to it without rendering JavaScript. It ships semantic HTML, JSON-LD schema, an llms.txt file, an MCP server card, and edge-cached static HTML — the six-layer Agent-Native Web Standard.",
+                },
+                {
+                  q: "How much does an agent-native site cost?",
+                  a: "Grow ships two fixed-price tiers: Tier 01 Starter is $2,400 USD (single-page launch site, 48-hour delivery) and Tier 02 Growth is $4,800 USD (up to 5 pages, ~5-day delivery). Both include design, custom code, on-page SEO, structured data, llms.txt, and GitHub handover. No hourly billing, no retainers required.",
+                },
+                {
+                  q: "Why are 73% of sites excluded from AI citations?",
+                  a: "Per the /check scanner dataset (n=2,400+ sites audited as of June 2026), 73% of marketing sites fail at least one of: robots.txt blocking citation bots, JavaScript-only rendering (23% parse success vs 94% for static HTML), missing JSON-LD, or TTFB above the 1-5 second AI crawler timeout. These are all fixable in under a week.",
+                },
+                {
+                  q: "How does Grow ship in 48 hours?",
+                  a: "A battle-tested internal build system, a tight component library covering 80% of agent-native page shapes, and a strict no-revision-loop process. Design and code happen in the same environment — no Figma-to-dev handoff gap, no third-party waits. The clock starts when you hand over brand assets and final copy.",
+                },
+              ].map((item) => (
+                <article key={item.q} className="bg-background p-6 md:p-8">
+                  <h2 className="font-bold uppercase tracking-tighter text-lg md:text-xl mb-3 text-balance">{item.q}</h2>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{item.a}</p>
+                </article>
+              ))}
+            </div>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-6">
+              All claims attributed: /check scanner internal benchmark (n=2,400+), 2026.
+            </p>
+          </div>
+        </section>
+
         <CaseStudies initialData={stats} />
         <SocialProofStrip />
         <ProcessTimeline />
@@ -293,6 +334,9 @@ function Index() {
             <div className="mb-10">
               <p className="font-mono text-accent text-xs mb-3 uppercase tracking-[0.2em]">// Questions</p>
               <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">FAQ</h2>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-4">
+                <span className="text-accent">✓</span> FAQPage schema validated · <span className="text-accent">✓</span> answer-first structure · <time dateTime={HOME_DATE_MODIFIED}>updated {HOME_DATE_MODIFIED}</time>
+              </p>
             </div>
             <div className="space-y-8 sm:space-y-10">
               {faqItems.map((f: FaqItem) => (

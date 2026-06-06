@@ -76,8 +76,9 @@ function VsLayout() {
               Grow vs <span className="text-accent">the alternatives</span>
             </h1>
             <p className="text-xl text-foreground/80 max-w-3xl">
-              We're not for everyone. Here's an honest look at where Grow wins, where it loses, and
-              which option you should actually pick for your project.
+              Grow isn&rsquo;t the right fit for every project — and that&rsquo;s fine.
+              Here&rsquo;s an honest look at where we win, where we lose, and which option
+              you should actually pick depending on what you&rsquo;re building.
             </p>
           </div>
         </section>

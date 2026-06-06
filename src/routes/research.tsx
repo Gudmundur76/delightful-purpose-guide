@@ -134,9 +134,10 @@ function ResearchHub() {
             Citation intelligence research
           </h1>
           <p className="mt-4 text-base text-muted-foreground max-w-2xl">
-            Everything we publish on agent-readability and AI citations: the
-            quarterly report, the live citation index, monthly data drops,
-            tactical playbooks, and the definitional glossary.
+            One place for everything we publish on agent-readability and AI
+            citations — the quarterly report, the live citation index, monthly
+            data drops, tactical playbooks, and the definitional glossary.
+            All open, all citable, all CC BY 4.0.
           </p>
         </header>
 

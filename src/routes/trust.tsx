@@ -159,10 +159,11 @@ function TrustPage() {
               The receipts behind grow.contact
             </h1>
             <p className="mt-6 max-w-3xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-              Founder-led. Fixed price. A public scoring methodology, an open
-              dataset, and a 100/100 agent-readability guarantee at delivery. If
-              you want to know who's actually behind the work, what we measure,
-              and what happens if we miss — this is the page.
+              Founder-led, fixed-price, with a public scoring methodology, an
+              open dataset, and a 100/100 agent-readability guarantee at
+              delivery. If you want to know who&rsquo;s actually doing the work,
+              what we measure, and what happens if we miss the bar — this is
+              the page that answers it.
             </p>
           </div>
         </section>

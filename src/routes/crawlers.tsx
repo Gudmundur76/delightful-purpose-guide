@@ -61,13 +61,13 @@ const PURPOSE_LABELS: Record<string, string> = {
 
 const PURPOSE_INTRO: Record<string, string> = {
   search:
-    "Allow these. They decide whether your site can appear in AI answer citations.",
+    "Allow these — they decide whether your site can show up in AI answer citations at all.",
   "user-fetch":
-    "Allow these. They fire when a user pastes your URL into an AI chat — blocking creates visible UX failures.",
+    "Allow these too. They fire the moment a user pastes your URL into an AI chat; blocking them creates visible failures for real visitors.",
   hybrid:
-    "Allow. These serve both live citations and tool-use fetches.",
+    "Allow. These serve both live citations and on-demand tool fetches, so blocking either side hurts you.",
   training:
-    "Block these only if you opt out of model training. Blocking does NOT affect citations from the same vendor.",
+    "Optional. Block only if you want to opt out of model training — it will not remove you from citations by the same vendor.",
 };
 
 const PURPOSE_ORDER: Array<keyof ReturnType<typeof getCrawlersByPurpose>> = [
@@ -93,21 +93,21 @@ function CrawlersIndex() {
               AI Crawler Reference
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mb-6">
-              The {CRAWLERS.length} crawlers that decide whether ChatGPT,
-              Perplexity, Claude, Google AI Overviews, and Microsoft Copilot
-              cite your site. User-agents, recommendations, and the one
-              critical distinction most sites get wrong: training bots are
-              not citation bots.
+              A plain-English guide to the {CRAWLERS.length} crawlers that
+              decide whether ChatGPT, Perplexity, Claude, Google AI Overviews,
+              and Microsoft Copilot can cite your site. User-agents, what each
+              one actually powers, and the distinction most teams miss: training
+              bots are not the same as citation bots.
             </p>
             <div className="border border-accent/40 bg-accent/5 p-4 text-sm flex gap-3">
               <AlertTriangle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
               <p className="text-muted-foreground">
                 <span className="text-foreground font-bold">
-                  Most-misconfigured bot:
+                  The most common mix-up:
                 </span>{" "}
-                GPTBot. Blocking it does <em>not</em> remove you from
-                ChatGPT citations — those come from OAI-SearchBot, a
-                separate user-agent.
+                blocking GPTBot does <em>not</em> remove you from ChatGPT
+                citations — those run through OAI-SearchBot, which is a
+                separate user-agent you almost certainly want to allow.
               </p>
             </div>
           </div>
@@ -162,9 +162,9 @@ function CrawlersIndex() {
               Check your robots.txt
             </h2>
             <p className="text-muted-foreground mb-6 max-w-2xl">
-              Run /check on any URL and we'll flag bots you're accidentally
-              blocking — the #1 reason sites are silently missing from AI
-              citations.
+              Run /check on any URL and we&rsquo;ll flag the bots you&rsquo;re
+              accidentally blocking. It&rsquo;s the most common reason sites
+              quietly disappear from AI citations — and the easiest one to fix.
             </p>
             <Link
               to="/check"

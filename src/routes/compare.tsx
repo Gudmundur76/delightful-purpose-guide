@@ -70,8 +70,9 @@ function CompareIndex() {
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
               Side-by-side <strong className="text-foreground">agent-readability</strong>{" "}
-              scores for the AI companies buyers actually compare. Drawn from
-              the 390-company leaderboard. CC BY 4.0 — cite freely.
+              scores for the AI companies buyers actually weigh against each
+              other. Pulled live from our 390-company leaderboard, open
+              methodology, CC BY 4.0 — cite freely.
             </p>
           </div>
         </header>

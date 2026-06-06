@@ -330,14 +330,24 @@ export const scanUrl = createServerFn({ method: "POST" })
     }
 
     let hasContentSignal = false;
+    let hasGoogleExtended = false;
     try {
       const robotsRes = await fetchWithTimeout(`${origin}/robots.txt`, 4000);
       if (robotsRes.res.ok) {
         hasContentSignal = /^content-signal\s*:/im.test(robotsRes.text);
+        hasGoogleExtended = /^user-agent\s*:\s*Google-Extended\b/im.test(robotsRes.text);
       }
     } catch {
       // network error — leave false
     }
+
+    // Google AI snippet controls (per Google's June 2026 AI optimization guide).
+    // max-snippet / nosnippet on the robots meta tag tell Google how much text
+    // it may quote in AI Overviews. Absent = Google decides.
+    const robotsMetaMatch = html.match(/<meta\s+name=["']robots["']\s+content=["']([^"']+)["']/i);
+    const robotsMeta = robotsMetaMatch ? robotsMetaMatch[1] : "";
+    const hasMaxSnippet = /max-snippet\s*:\s*-?\d+/i.test(robotsMeta);
+    const hasNoSnippet = /\bnosnippet\b/i.test(robotsMeta);
 
     const protocolChecks = [
       { ok: hasLlmsLink || hasMcpLink || hasApiCatalogLink, pts: 25, label: "Link header" },

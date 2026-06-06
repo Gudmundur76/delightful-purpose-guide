@@ -67,6 +67,12 @@ function WorkPage() {
           <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
             <p className="font-mono text-accent text-xs mb-4 uppercase tracking-[0.2em]">// Archive</p>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter uppercase">Work</h1>
+            <p className="text-foreground mt-6 max-w-2xl text-base md:text-lg leading-relaxed">
+              A look at what we've shipped recently — each build verified against the public /check scanner, with before-and-after scores so you can see exactly what changed. We focus on launch pages, marketing sites, and devtool hubs for AI startups, agent platforms, and developer tools.
+            </p>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-6">
+              <time dateTime="2026-06-06">Last updated: 2026-06-06</time> · new builds added at launch
+            </p>
           </div>
         </section>
 

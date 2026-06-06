@@ -134,7 +134,10 @@ function CheckPage() {
             How readable is your site to AI agents?
           </h1>
           <p className="text-muted-foreground max-w-2xl">
-            Paste any URL. We crawl it the way ChatGPT, Perplexity, and Claude do — then grade it on semantic structure, schemas, llms.txt, citability, and speed.
+            Paste any URL and we'll crawl it the way ChatGPT, Perplexity, and Claude do — then grade it across five signals: semantic structure, JSON-LD schemas, llms.txt, citability, and page speed. Free, takes about 30 seconds, no email required to see your score.
+          </p>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-4">
+            <time dateTime="2026-06-06">Scanner updated: 2026-06-06</time> · scoring model v.04/26
           </p>
         </div>
 

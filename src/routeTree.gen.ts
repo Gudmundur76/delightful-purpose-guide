@@ -34,6 +34,7 @@ import { Route as PlaygroundRouteImport } from './routes/playground'
 import { Route as PlaybooksRouteImport } from './routes/playbooks'
 import { Route as PlaybookRouteImport } from './routes/playbook'
 import { Route as OutreachRouteImport } from './routes/outreach'
+import { Route as OpenapiDotjsonRouteImport } from './routes/openapi[.]json'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
@@ -112,6 +113,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
 import { Route as AppBillingRouteImport } from './routes/app.billing'
 import { Route as AppApiKeysRouteImport } from './routes/app.api-keys'
+import { Route as ApiMcpRouteImport } from './routes/api/mcp'
 import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as AdminApiKeysRouteImport } from './routes/admin.api-keys'
@@ -314,6 +316,11 @@ const PlaybookRoute = PlaybookRouteImport.update({
 const OutreachRoute = OutreachRouteImport.update({
   id: '/outreach',
   path: '/outreach',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpenapiDotjsonRoute = OpenapiDotjsonRouteImport.update({
+  id: '/openapi.json',
+  path: '/openapi.json',
   getParentRoute: () => rootRouteImport,
 } as any)
 const McpRoute = McpRouteImport.update({
@@ -708,6 +715,11 @@ const AppApiKeysRoute = AppApiKeysRouteImport.update({
   id: '/api-keys',
   path: '/api-keys',
   getParentRoute: () => AppRoute,
+} as any)
+const ApiMcpRoute = ApiMcpRouteImport.update({
+  id: '/api/mcp',
+  path: '/api/mcp',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminReviewsRoute = AdminReviewsRouteImport.update({
   id: '/admin/reviews',
@@ -1165,6 +1177,7 @@ export interface FileRoutesByFullPath {
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/openapi.json': typeof OpenapiDotjsonRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
   '/playbooks': typeof PlaybooksRouteWithChildren
@@ -1199,6 +1212,7 @@ export interface FileRoutesByFullPath {
   '/admin/api-keys': typeof AdminApiKeysRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
+  '/api/mcp': typeof ApiMcpRoute
   '/app/api-keys': typeof AppApiKeysRoute
   '/app/billing': typeof AppBillingRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -1345,6 +1359,7 @@ export interface FileRoutesByTo {
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/openapi.json': typeof OpenapiDotjsonRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
   '/playbooks': typeof PlaybooksRouteWithChildren
@@ -1379,6 +1394,7 @@ export interface FileRoutesByTo {
   '/admin/api-keys': typeof AdminApiKeysRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
+  '/api/mcp': typeof ApiMcpRoute
   '/app/api-keys': typeof AppApiKeysRoute
   '/app/billing': typeof AppBillingRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -1529,6 +1545,7 @@ export interface FileRoutesById {
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/openapi.json': typeof OpenapiDotjsonRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
   '/playbooks': typeof PlaybooksRouteWithChildren
@@ -1563,6 +1580,7 @@ export interface FileRoutesById {
   '/admin/api-keys': typeof AdminApiKeysRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/reviews': typeof AdminReviewsRoute
+  '/api/mcp': typeof ApiMcpRoute
   '/app/api-keys': typeof AppApiKeysRoute
   '/app/billing': typeof AppBillingRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
@@ -1714,6 +1732,7 @@ export interface FileRouteTypes {
     | '/llms-full.txt'
     | '/login'
     | '/mcp'
+    | '/openapi.json'
     | '/outreach'
     | '/playbook'
     | '/playbooks'
@@ -1748,6 +1767,7 @@ export interface FileRouteTypes {
     | '/admin/api-keys'
     | '/admin/leads'
     | '/admin/reviews'
+    | '/api/mcp'
     | '/app/api-keys'
     | '/app/billing'
     | '/badge/{$id}.svg'
@@ -1894,6 +1914,7 @@ export interface FileRouteTypes {
     | '/llms-full.txt'
     | '/login'
     | '/mcp'
+    | '/openapi.json'
     | '/outreach'
     | '/playbook'
     | '/playbooks'
@@ -1928,6 +1949,7 @@ export interface FileRouteTypes {
     | '/admin/api-keys'
     | '/admin/leads'
     | '/admin/reviews'
+    | '/api/mcp'
     | '/app/api-keys'
     | '/app/billing'
     | '/badge/{$id}.svg'
@@ -2077,6 +2099,7 @@ export interface FileRouteTypes {
     | '/llms-full.txt'
     | '/login'
     | '/mcp'
+    | '/openapi.json'
     | '/outreach'
     | '/playbook'
     | '/playbooks'
@@ -2111,6 +2134,7 @@ export interface FileRouteTypes {
     | '/admin/api-keys'
     | '/admin/leads'
     | '/admin/reviews'
+    | '/api/mcp'
     | '/app/api-keys'
     | '/app/billing'
     | '/badge/{$id}.svg'
@@ -2261,6 +2285,7 @@ export interface RootRouteChildren {
   LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
   LoginRoute: typeof LoginRoute
   McpRoute: typeof McpRoute
+  OpenapiDotjsonRoute: typeof OpenapiDotjsonRoute
   OutreachRoute: typeof OutreachRoute
   PlaybookRoute: typeof PlaybookRoute
   PlaybooksRoute: typeof PlaybooksRouteWithChildren
@@ -2295,6 +2320,7 @@ export interface RootRouteChildren {
   AdminApiKeysRoute: typeof AdminApiKeysRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminReviewsRoute: typeof AdminReviewsRoute
+  ApiMcpRoute: typeof ApiMcpRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
   CiteDomainRoute: typeof CiteDomainRoute
@@ -2554,6 +2580,13 @@ declare module '@tanstack/react-router' {
       path: '/outreach'
       fullPath: '/outreach'
       preLoaderRoute: typeof OutreachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/openapi.json': {
+      id: '/openapi.json'
+      path: '/openapi.json'
+      fullPath: '/openapi.json'
+      preLoaderRoute: typeof OpenapiDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mcp': {
@@ -3101,6 +3134,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/app/api-keys'
       preLoaderRoute: typeof AppApiKeysRouteImport
       parentRoute: typeof AppRoute
+    }
+    '/api/mcp': {
+      id: '/api/mcp'
+      path: '/api/mcp'
+      fullPath: '/api/mcp'
+      preLoaderRoute: typeof ApiMcpRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/reviews': {
       id: '/admin/reviews'
@@ -3942,6 +3982,7 @@ const rootRouteChildren: RootRouteChildren = {
   LlmsFullDottxtRoute: LlmsFullDottxtRoute,
   LoginRoute: LoginRoute,
   McpRoute: McpRoute,
+  OpenapiDotjsonRoute: OpenapiDotjsonRoute,
   OutreachRoute: OutreachRoute,
   PlaybookRoute: PlaybookRoute,
   PlaybooksRoute: PlaybooksRouteWithChildren,
@@ -3979,6 +4020,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminApiKeysRoute: AdminApiKeysRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminReviewsRoute: AdminReviewsRoute,
+  ApiMcpRoute: ApiMcpRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogRssDotxmlRoute: BlogRssDotxmlRoute,
   CiteDomainRoute: CiteDomainRoute,

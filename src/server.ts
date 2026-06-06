@@ -72,10 +72,26 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
   return brandedErrorResponse();
 }
 
+const CACHEABLE_PATH_EXCLUDES = [
+  "/dashboard",
+  "/admin",
+  "/checkout",
+  "/content",
+  "/login",
+  "/api/",
+];
+
+function isCacheablePath(pathname: string): boolean {
+  return !CACHEABLE_PATH_EXCLUDES.some((p) => pathname.startsWith(p));
+}
+
+type ExecutionCtx = { waitUntil?: (p: Promise<unknown>) => void } | undefined;
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const url = new URL(request.url);
+      const execCtx = ctx as ExecutionCtx;
 
       // 1) /.well-known/* + /auth.md — answered before TanStack to avoid
       //    routing edge cases with leading-dot path segments.
@@ -100,49 +116,83 @@ export default {
         }
       }
 
+      // 3) Worker-level Cache API for HTML GETs. This bypasses any zone-level
+      //    cache rule and guarantees warm hits return in <50ms regardless of
+      //    what the origin's Cache-Control header says downstream.
+      const cacheEligible =
+        request.method === "GET" &&
+        isCacheablePath(url.pathname) &&
+        !request.headers.get("authorization") &&
+        !request.headers.get("cookie")?.includes("sb-");
+
+      const cache =
+        cacheEligible && typeof caches !== "undefined" && (caches as { default?: Cache }).default
+          ? (caches as unknown as { default: Cache }).default
+          : null;
+
+      const cacheKey = cache ? new Request(url.toString(), { method: "GET" }) : null;
+
+      if (cache && cacheKey) {
+        const hit = await cache.match(cacheKey);
+        if (hit) {
+          const h = new Headers(hit.headers);
+          h.set("x-cache", "HIT");
+          return new Response(hit.body, { status: hit.status, statusText: hit.statusText, headers: h });
+        }
+      }
+
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       const normalized = await normalizeCatastrophicSsrResponse(response);
 
-      // 3) Edge-cache the homepage HTML so repeat visits (and agent scanners)
-      //    get sub-100ms TTFB instead of paying SSR cost on every request.
-      //    Also attach the agent-protocol Link header on every HTML response.
       const ct = normalized.headers.get("content-type") ?? "";
       const isHtml = ct.includes("text/html");
-      // Edge-cache HTML on every public GET so AI crawlers and repeat
-      // visitors get sub-200ms TTFB instead of paying SSR on every hit.
-      const shouldOverrideCache =
-        request.method === "GET" &&
-        normalized.status === 200 &&
-        isHtml &&
-        !url.pathname.startsWith("/dashboard") &&
-        !url.pathname.startsWith("/admin") &&
-        !url.pathname.startsWith("/checkout") &&
-        !url.pathname.startsWith("/content") &&
-        !url.pathname.startsWith("/login") &&
-        !url.pathname.startsWith("/api/");
 
       if (isHtml) {
         const headers = new Headers(normalized.headers);
-        // Advertise discovery surfaces (llms.txt, OpenAPI, MCP) on every page.
         if (!headers.has("link")) headers.set("link", buildLinkHeader());
-        // Cloudflare Content Signals — declare allowed uses for AI agents.
-        // Served at the worker level so it's present even when the zone rule
-        // isn't active (e.g. preview deployments, *.lovable.app).
         if (!headers.has("content-signal")) {
           headers.set("content-signal", "search=yes, ai-train=no, ai-input=yes");
         }
-        if (shouldOverrideCache) {
+        if (cacheEligible && normalized.status === 200) {
+          // Force browser revalidation (so users see fresh content) but allow
+          // the worker cache + CF edge to serve warm copies for 5 minutes.
           headers.set(
             "cache-control",
             "public, max-age=0, s-maxage=300, stale-while-revalidate=600",
           );
+          headers.set("cdn-cache-control", "public, s-maxage=300, stale-while-revalidate=600");
+          headers.set(
+            "cloudflare-cdn-cache-control",
+            "public, s-maxage=300, stale-while-revalidate=600",
+          );
         }
-        return new Response(normalized.body, {
+
+        // Buffer the body so we can return it AND store a copy in the cache.
+        const buf = await normalized.arrayBuffer();
+        const out = new Response(buf, {
           status: normalized.status,
           statusText: normalized.statusText,
           headers,
         });
+
+        if (cache && cacheKey && cacheEligible && normalized.status === 200) {
+          const storeHeaders = new Headers(headers);
+          storeHeaders.delete("set-cookie");
+          storeHeaders.set("x-cache", "MISS-STORED");
+          const toStore = new Response(buf, {
+            status: 200,
+            statusText: normalized.statusText,
+            headers: storeHeaders,
+          });
+          if (execCtx?.waitUntil) {
+            execCtx.waitUntil(cache.put(cacheKey, toStore));
+          } else {
+            cache.put(cacheKey, toStore).catch(() => {});
+          }
+        }
+
+        return out;
       }
 
       return normalized;

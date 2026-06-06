@@ -378,6 +378,11 @@ export const scanUrl = createServerFn({ method: "POST" })
       hasGoogleExtended
         ? "✓ robots.txt names Google-Extended explicitly (Google AI training opt-in/out)"
         : "△ No Google-Extended user-agent block in robots.txt — Google's AI default applies",
+      hasNoSnippet
+        ? "△ <meta robots> sets nosnippet — Google AI Overviews can't quote this page"
+        : hasMaxSnippet
+          ? `✓ <meta robots> sets max-snippet (per Google's June 2026 AI guide)`
+          : "△ No max-snippet / nosnippet meta — Google decides how much to quote in AI Overviews",
     ];
 
     // -------- Agent Auth (bonus, added in geo-standard@2026.07) --------

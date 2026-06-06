@@ -91,10 +91,11 @@ function StandardIndex() {
             The Agent-Native Web Standard
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            A versioned, open specification defining how a website becomes
-            legible to AI search engines — ChatGPT, Perplexity, Claude,
-            Google AI Overviews. Five signals. Hard thresholds. The crawler
-            allow/block matrix that 73% of sites get wrong.
+            A short, open specification for making a website readable to AI
+            search engines like ChatGPT, Perplexity, Claude, and Google AI
+            Overviews. It covers five signals, the thresholds you need to clear,
+            and the crawler allow/block matrix most sites still get wrong.
+            Free to read, free to build against, CC BY 4.0.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
@@ -145,19 +146,19 @@ function StandardIndex() {
           </h2>
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
-              The Standard is a written contract. A site either passes every
-              MUST in the document, or it doesn&rsquo;t. We publish it openly,
-              version it like a software release, and license it CC BY 4.0 so
-              any agency, contractor, or in-house team can build to it
-              without paying us a cent.
+              The Standard is a written contract for agent-readable websites:
+              a site either passes every MUST in the document, or it doesn&rsquo;t.
+              We publish it openly, version it like a software release, and
+              license it CC BY 4.0 so any team, agency, or in-house engineer
+              can build to it without paying us anything.
             </p>
             <p>
-              We use it ourselves on every Grow build. The{" "}
+              We hold ourselves to it on every Grow build. The{" "}
               <Link to="/check" className="text-foreground underline">
                 /check scanner
               </Link>{" "}
-              enforces the scored portion; the rest is the human-readable
-              specification you&rsquo;re looking at.
+              enforces the scored portion automatically; the rest lives here
+              as the human-readable spec you&rsquo;re reading now.
             </p>
           </div>
         </section>
@@ -168,16 +169,15 @@ function StandardIndex() {
           </h2>
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
-              AI engines cite documents that other documents cite. The web is
-              full of opinions about &ldquo;GEO best practice&rdquo; — what it
-              lacks is a single, versioned, machine-citable specification
-              anyone can point to. RFCs work this way. The web platform works
-              this way. We built one for the agent-readable web.
+              AI engines tend to cite documents that other documents already
+              cite. The web has plenty of opinions about &ldquo;GEO best
+              practice,&rdquo; but no single, versioned, machine-citable
+              specification anyone can point at. RFCs work this way. The web
+              platform works this way. We wrote one for the agent-readable web.
             </p>
             <p>
-              If you implement against the Standard, link to the version you
-              built against. That&rsquo;s the only attribution the license
-              requires.
+              If you build against the Standard, link to the version you used.
+              That&rsquo;s the only attribution the license asks for.
             </p>
           </div>
         </section>

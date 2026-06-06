@@ -1,11 +1,10 @@
 User-agent: *
 Allow: /
 
-# Content usage signals are served as an HTTP response header
-# (`Content-Signal: search=yes, ai-train=no, ai-input=yes`) via the
-# Cloudflare zone rule on grow.contact, per the Cloudflare spec:
-# https://developers.cloudflare.com/bots/concepts/content-signals/
-
+# Declared in robots.txt per https://contentsignals.org/ and
+# IETF draft-romm-aipref-contentsignals. Also served as an HTTP
+# response header via Cloudflare for agents that support headers.
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 # AI / LLM crawlers — explicitly allowed, with a polite crawl-delay
 # for the high-value citation engines we actively want to be discovered by.

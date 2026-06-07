@@ -132,14 +132,21 @@ export default {
 
       const cacheKey = cache ? new Request(url.toString(), { method: "GET" }) : null;
 
+      let hit: Response | undefined;
       if (cache && cacheKey) {
-        const hit = await cache.match(cacheKey);
-        if (hit) {
-          const h = new Headers(hit.headers);
-          h.set("x-cache", "HIT");
-          return new Response(hit.body, { status: hit.status, statusText: hit.statusText, headers: h });
+        try {
+          hit = await cache.match(cacheKey);
+        } catch {
+          // Cache API not supported in this runtime (e.g. dynamically-loaded preview worker)
+          hit = undefined;
         }
       }
+      if (hit) {
+        const h = new Headers(hit.headers);
+        h.set("x-cache", "HIT");
+        return new Response(hit.body, { status: hit.status, statusText: hit.statusText, headers: h });
+      }
+
 
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);

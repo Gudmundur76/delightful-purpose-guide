@@ -192,11 +192,13 @@ export default {
             statusText: normalized.statusText,
             headers: storeHeaders,
           });
+          const putPromise = Promise.resolve()
+            .then(() => cache.put(cacheKey, toStore))
+            .catch(() => {});
           if (execCtx?.waitUntil) {
-            execCtx.waitUntil(cache.put(cacheKey, toStore));
-          } else {
-            cache.put(cacheKey, toStore).catch(() => {});
+            execCtx.waitUntil(putPromise);
           }
+
         }
 
         return out;

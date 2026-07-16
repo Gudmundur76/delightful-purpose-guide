@@ -35,7 +35,7 @@ import { Route as PlaybooksRouteImport } from './routes/playbooks'
 import { Route as PlaybookRouteImport } from './routes/playbook'
 import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as OpenapiDotjsonRouteImport } from './routes/openapi[.]json'
-import { Route as McpRouteImport } from './routes/mcp'
+import { Route as McpServerRouteImport } from './routes/mcp-server'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
 import { Route as LlmsRouteImport } from './routes/llms'
@@ -323,9 +323,9 @@ const OpenapiDotjsonRoute = OpenapiDotjsonRouteImport.update({
   path: '/openapi.json',
   getParentRoute: () => rootRouteImport,
 } as any)
-const McpRoute = McpRouteImport.update({
-  id: '/mcp',
-  path: '/mcp',
+const McpServerRoute = McpServerRouteImport.update({
+  id: '/mcp-server',
+  path: '/mcp-server',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -1176,7 +1176,7 @@ export interface FileRoutesByFullPath {
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
-  '/mcp': typeof McpRoute
+  '/mcp-server': typeof McpServerRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
@@ -1358,7 +1358,7 @@ export interface FileRoutesByTo {
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
-  '/mcp': typeof McpRoute
+  '/mcp-server': typeof McpServerRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
@@ -1544,7 +1544,7 @@ export interface FileRoutesById {
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
-  '/mcp': typeof McpRoute
+  '/mcp-server': typeof McpServerRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
   '/outreach': typeof OutreachRoute
   '/playbook': typeof PlaybookRoute
@@ -1731,7 +1731,7 @@ export interface FileRouteTypes {
     | '/llms'
     | '/llms-full.txt'
     | '/login'
-    | '/mcp'
+    | '/mcp-server'
     | '/openapi.json'
     | '/outreach'
     | '/playbook'
@@ -1913,7 +1913,7 @@ export interface FileRouteTypes {
     | '/llms'
     | '/llms-full.txt'
     | '/login'
-    | '/mcp'
+    | '/mcp-server'
     | '/openapi.json'
     | '/outreach'
     | '/playbook'
@@ -2098,7 +2098,7 @@ export interface FileRouteTypes {
     | '/llms'
     | '/llms-full.txt'
     | '/login'
-    | '/mcp'
+    | '/mcp-server'
     | '/openapi.json'
     | '/outreach'
     | '/playbook'
@@ -2284,7 +2284,7 @@ export interface RootRouteChildren {
   LlmsRoute: typeof LlmsRoute
   LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
   LoginRoute: typeof LoginRoute
-  McpRoute: typeof McpRoute
+  McpServerRoute: typeof McpServerRoute
   OpenapiDotjsonRoute: typeof OpenapiDotjsonRoute
   OutreachRoute: typeof OutreachRoute
   PlaybookRoute: typeof PlaybookRoute
@@ -2589,11 +2589,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OpenapiDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/mcp': {
-      id: '/mcp'
-      path: '/mcp'
-      fullPath: '/mcp'
-      preLoaderRoute: typeof McpRouteImport
+    '/mcp-server': {
+      id: '/mcp-server'
+      path: '/mcp-server'
+      fullPath: '/mcp-server'
+      preLoaderRoute: typeof McpServerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -3981,7 +3981,7 @@ const rootRouteChildren: RootRouteChildren = {
   LlmsRoute: LlmsRoute,
   LlmsFullDottxtRoute: LlmsFullDottxtRoute,
   LoginRoute: LoginRoute,
-  McpRoute: McpRoute,
+  McpServerRoute: McpServerRoute,
   OpenapiDotjsonRoute: OpenapiDotjsonRoute,
   OutreachRoute: OutreachRoute,
   PlaybookRoute: PlaybookRoute,

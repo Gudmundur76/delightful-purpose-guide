@@ -19,7 +19,7 @@ const ENDPOINTS = [
   { method: "POST", path: "/api/public/oauth/token", note: "Exchange credentials for an MCP_SECRET." },
 ];
 
-export const Route = createFileRoute("/mcp")({
+export const Route = createFileRoute("/mcp-server")({
   head: () => ({
     meta: [
       { title: TITLE },

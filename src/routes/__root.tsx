@@ -186,6 +186,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           description: "Agent-native marketing sites for AI/ML startups, agent platforms, and developer tools. 48 hours, fixed price.",
         }),
       },
+      // In-page discovery marker for DOM-based agents (Codex, Devin, Playwright
+      // bots). One of the 5 signals in the vendor-neutral Agent-Web Discovery
+      // Matrix — see /blog/agent-web-discovery-matrix and
+      // /.well-known/agent-card.json for the full set.
+      {
+        type: "application/agent+json",
+        children: JSON.stringify({
+          name: "grow.contact",
+          agentCard: "https://grow.contact/.well-known/agent-card.json",
+          mcp: "https://grow.contact/api/public/mcp",
+          mcpCard: "https://grow.contact/.well-known/mcp/server-card.json",
+          llms: "https://grow.contact/llms.txt",
+          standard: "https://grow.contact/standard.md",
+          openapi: "https://grow.contact/openapi.json",
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,

@@ -12,7 +12,7 @@
   "mcp": {
     "server": {
       "name": "grow-contact-mcp",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "title": "grow.contact MCP"
     },
     "tools": [
@@ -62,6 +62,79 @@
           },
           "required": [
             "url"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_geo_standard",
+        "title": "Get GEO Standard",
+        "description": "Return the canonical Grow GEO Standard (geo-standard@2026.07): thresholds, signal weights, robots.txt matrix, JSON-LD picker, and discovery signals. Use as build/audit contract for making a site cited by ChatGPT, Perplexity, Claude, Gemini.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "generate_llms_txt",
+        "title": "Generate llms.txt",
+        "description": "Generate a spec-compliant /llms.txt for any public site. Discovers the sitemap, groups public routes, and returns markdown ready to drop at the site root.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 2048,
+              "description": "Root URL of the site (with or without https://)"
+            }
+          },
+          "required": [
+            "url"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "check_ai_citation",
+        "title": "Check AI citation",
+        "description": "Ask Gemini 2.5 Flash a real buyer query and report whether the given domain is cited, plus the actual answer and citations. Use to measure real AI visibility for a URL.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "domain": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 253,
+              "description": "Domain to check (e.g. example.com)"
+            },
+            "query": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 280,
+              "description": "A real user query the domain should be cited for"
+            }
+          },
+          "required": [
+            "domain",
+            "query"
           ]
         },
         "outputSchema": null

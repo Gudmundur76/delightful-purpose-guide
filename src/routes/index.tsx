@@ -96,9 +96,13 @@ function TypewriterHeading() {
   const lightPart = text.slice(Math.min(n, DARK_LEN));
   return (
     <h1 className="ct-h1">
-      <span style={{ color: "#000" }}>{darkPart}</span>
-      <span style={{ color: "#fff" }}>{lightPart}</span>
-      {!done && <span className="ct-caret" />}
+      <span className="ct-h1-inner">
+        <span className="ct-h1-dark">{darkPart}</span>
+        <span className="ct-h1-light">{lightPart}</span>
+        {!done && <span className="ct-caret" />}
+      </span>
+      {/* invisible full text reserves space so layout doesn't jump */}
+      <span className="ct-h1-ghost" aria-hidden="true">{HEADLINE}</span>
     </h1>
   );
 }
@@ -296,59 +300,76 @@ const css = `
 
 .ct-main {
   flex: 1;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
-  padding: 40px 64px;
+  padding: 24px 64px 40px;
   max-width: 1920px;
   width: 100%;
   margin: 0 auto;
   gap: 40px;
+  position: relative;
+  z-index: 1;
 }
 .ct-left {
-  flex: 0 1 600px;
-  padding-top: 40px;
+  min-width: 0;
   animation: ctFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .ct-h1 {
+  position: relative;
   font-family: 'Urbanist', sans-serif;
-  font-size: 64px; font-weight: 600;
-  line-height: 64px; letter-spacing: -1.5px;
+  font-size: clamp(32px, 4.6vw, 64px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
   margin: 0 0 32px;
-  min-height: 320px;
+}
+.ct-h1-inner {
+  position: absolute; inset: 0;
+  display: block;
+}
+.ct-h1-ghost {
+  visibility: hidden;
+  display: block;
+}
+.ct-h1-dark { color: #0a0a0a; }
+.ct-h1-light {
+  background: linear-gradient(180deg, #ffffff 0%, #E6D6FF 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.25);
 }
 .ct-caret {
-  display: inline-block; width: 3px; height: 52px;
-  background: #A068FF; vertical-align: middle;
+  display: inline-block; width: 3px; height: 0.9em;
+  background: #A068FF; vertical-align: -0.12em;
   margin-left: 4px; animation: ctBlink 0.7s steps(2) infinite;
 }
 @keyframes ctBlink { 50% { opacity: 0; } }
 
-.ct-cta-row { display: flex; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+.ct-cta-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .ct-fade-in { opacity: 0; animation: ctFadeUp 0.6s ease-out 3.2s forwards; }
 .ct-fade-in-late { opacity: 0; animation: ctFadeUp 0.6s ease-out 3.6s forwards; }
 
 .ct-cursor-wrap {
-  display: flex; align-items: center; gap: 6px;
-  margin-left: 290px; margin-top: 40px;
+  display: inline-flex; align-items: center; gap: 6px;
 }
 .ct-cursor-badge {
-  background: #A068FF; color: #fff; font-size: 16px; font-weight: 500;
-  padding: 8px 16px; border-radius: 20px;
+  background: #A068FF; color: #fff; font-size: 14px; font-weight: 500;
+  padding: 6px 14px; border-radius: 20px;
 }
 
 .ct-right {
-  flex: 0 1 720px;
+  min-width: 0;
   display: flex; justify-content: center; align-items: center;
   animation: ctScaleIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 .ct-circles {
   position: relative;
-  width: 720px; height: 720px;
+  width: min(640px, 55vw); aspect-ratio: 1;
+  max-height: 70vh;
 }
 .ct-orbit {
   position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
   border-radius: 50%;
   background: linear-gradient(180deg, rgba(217, 161, 255, 0) 0%, rgba(217, 161, 255, 1) 43%, rgba(217, 161, 255, 0) 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -356,22 +377,21 @@ const css = `
   mask-composite: exclude;
   padding: 1px;
 }
-.ct-orbit-1 { width: 353px; height: 353px; animation: ctSpinL 30s linear infinite; }
-.ct-orbit-2 { width: 501px; height: 501px; animation: ctSpinR 40s linear infinite; }
-.ct-orbit-3 { width: 649px; height: 649px; animation: ctSpinR 50s linear infinite; }
-.ct-orbit-4 { width: 797px; height: 797px; animation: ctSpinL 60s linear infinite; }
-@keyframes ctSpinR { to { transform: translate(-50%, -50%) rotate(360deg); } }
-@keyframes ctSpinL { to { transform: translate(-50%, -50%) rotate(-360deg); } }
+.ct-orbit-1 { width: 44%; height: 44%; animation: ctSpinL 30s linear infinite; }
+.ct-orbit-2 { width: 63%; height: 63%; animation: ctSpinR 40s linear infinite; }
+.ct-orbit-3 { width: 82%; height: 82%; animation: ctSpinR 50s linear infinite; }
+.ct-orbit-4 { width: 100%; height: 100%; animation: ctSpinL 60s linear infinite; }
+@keyframes ctSpinR { from { transform: translate(-50%, -50%) rotate(0); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes ctSpinL { from { transform: translate(-50%, -50%) rotate(0); } to { transform: translate(-50%, -50%) rotate(-360deg); } }
 
 .ct-orbit-inner {
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   text-align: center; color: #fff;
-  animation: ctSpinR 30s linear infinite reverse;
   font-family: 'Urbanist', sans-serif;
 }
-.ct-count { font-size: 64px; font-weight: 500; line-height: 1; }
-.ct-count-label { font-size: 16px; font-weight: 600; margin-top: 8px; opacity: 0.9; }
+.ct-count { font-size: clamp(36px, 4.5vw, 64px); font-weight: 600; line-height: 1; }
+.ct-count-label { font-size: 14px; font-weight: 500; margin-top: 8px; opacity: 0.85; letter-spacing: 0.5px; }
 
 .ct-avatar {
   position: absolute; top: 50%; left: 50%;
@@ -386,17 +406,18 @@ const css = `
 }
 
 .ct-logos {
-  padding: 32px 0;
+  padding: 24px 0 32px;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
   animation: ctFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
+  position: relative; z-index: 1;
 }
 .ct-logos-track {
   display: flex; gap: 64px; width: max-content;
-  animation: ctTicker 20s linear infinite;
+  animation: ctTicker 30s linear infinite;
 }
-.ct-logo-item { width: 137px; height: 40px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.75; }
+.ct-logo-item { width: 137px; height: 40px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.75; flex-shrink: 0; }
 @keyframes ctTicker {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -406,32 +427,27 @@ const css = `
 @keyframes ctFadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes ctScaleIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
 
-@media (max-width: 1280px) { .ct-circles { transform: scale(0.85); } }
 @media (max-width: 1024px) {
-  .ct-main { flex-direction: column; padding: 24px; }
-  .ct-h1 { font-size: 48px; line-height: 52px; min-height: auto; }
-  .ct-circles { transform: scale(0.7); }
-  .ct-header { padding: 20px 24px; }
+  .ct-main {
+    grid-template-columns: 1fr;
+    padding: 16px 24px 32px;
+    gap: 8px;
+    text-align: left;
+  }
+  .ct-right { order: -1; }
+  .ct-circles { width: min(420px, 78vw); }
+  .ct-header { padding: 18px 24px; }
   .ct-nav { gap: 20px; }
 }
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .ct-nav { display: none; }
-  .ct-h1 { font-size: 36px; line-height: 40px; }
-  .ct-circles { transform: scale(0.5); }
-  .ct-cursor-wrap { margin-left: 100px; }
-}
-@media (max-width: 480px) {
-  .ct-h1 { font-size: 28px; line-height: 32px; }
-  .ct-circles { transform: scale(0.4); }
-  .ct-btn-sm { padding: 10px 18px; font-size: 13px; }
-  .ct-logo-item { width: 100px; height: 32px; }
-  .ct-header { padding: 14px 16px; gap: 8px; }
-  .ct-header-left { gap: 10px; }
-  .ct-header-right { gap: 12px; }
+  .ct-header { padding: 14px 18px; }
+  .ct-header-left { gap: 12px; }
   .ct-login { display: none; }
+  .ct-circles { width: min(340px, 82vw); }
+  .ct-logo-item { width: 100px; height: 32px; }
   .ct-brand { font-size: 18px; }
   .ct-brand-mark { width: 28px; height: 28px; font-size: 17px; border-radius: 8px; }
-  .ct-cursor-wrap { margin-left: 40px; margin-top: 24px; }
-  .ct-left { padding-top: 16px; }
+  .ct-cta-row { gap: 14px; }
 }
 `;

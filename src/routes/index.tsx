@@ -156,36 +156,38 @@ function CitationLanding() {
           </section>
 
           <section className="ct-right">
-            <div className="ct-circles">
-              {[1, 2, 3, 4].map((o) => (
-                <div key={o} className={`ct-orbit ct-orbit-${o}`}>
-                  {o === 1 && (
-                    <div className="ct-orbit-inner">
-                      <div className="ct-count">{count}k+</div>
-                      <div className="ct-count-label">Citations</div>
-                    </div>
-                  )}
-                </div>
-              ))}
-              {AVATARS.map((a, i) => {
-                const style: React.CSSProperties = {
-                  transform: `translate(-50%, -50%) rotate(${a.angle}deg) translate(${a.radius}px) rotate(${-a.angle}deg)`,
-                  width: a.size,
-                  height: a.size,
-                  borderRadius: a.radius_css,
-                  boxShadow: `0 0 30px ${a.glow}80, 0 0 60px ${a.glow}40`,
-                  animationDelay: `${a.delay}s`,
-                };
-                return (
-                  <img
-                    key={i}
-                    src={a.url}
-                    alt=""
-                    className="ct-avatar"
-                    style={style}
-                  />
-                );
-              })}
+            <div className="ct-right-wrap">
+              <div className="ct-circles">
+                {[1, 2, 3, 4].map((o) => (
+                  <div key={o} className={`ct-orbit ct-orbit-${o}`}>
+                    {o === 1 && (
+                      <div className="ct-orbit-inner">
+                        <div className="ct-count">{count}k+</div>
+                        <div className="ct-count-label">Citations</div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+                {AVATARS.map((a, i) => {
+                  const style: React.CSSProperties = {
+                    transform: `translate(-50%, -50%) rotate(${a.angle}deg) translate(${a.radius}px) rotate(${-a.angle}deg)`,
+                    width: a.size,
+                    height: a.size,
+                    borderRadius: a.radius_css,
+                    boxShadow: `0 0 30px ${a.glow}80, 0 0 60px ${a.glow}40`,
+                    animationDelay: `${a.delay}s`,
+                  };
+                  return (
+                    <img
+                      key={i}
+                      src={a.url}
+                      alt=""
+                      className="ct-avatar"
+                      style={style}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </section>
         </main>

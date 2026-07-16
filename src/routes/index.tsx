@@ -355,7 +355,7 @@ const css = `
 .ct-orbit {
   position: absolute; top: 50%; left: 50%;
   border-radius: 50%;
-  background: linear-gradient(180deg, rgba(217, 161, 255, 0) 0%, rgba(217, 161, 255, 1) 43%, rgba(217, 161, 255, 0) 100%);
+  background: linear-gradient(180deg, rgba(180, 180, 180, 0) 0%, rgba(180, 180, 180, 1) 43%, rgba(180, 180, 180, 0) 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;

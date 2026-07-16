@@ -20,7 +20,7 @@ export const Route = createFileRoute("/login")({
       { name: "description", content: "Sign in to your account." },
       { name: "robots", content: "noindex, nofollow" },
     ],
-    links: [{ rel: "canonical", href: "https://grow.contact/login" }],
+    links: [{ rel: "canonical", href: "https://citation.is/login" }],
   }),
 });
 

@@ -40,15 +40,15 @@ export const Route = createFileRoute("/api/public/v1/research/{$slug}.json")({
             title: `${ARCHIVE_LABEL} Agent-Readability Report`,
             slug: ARCHIVE_KEY,
             published_at: ARCHIVE_PUBLISHED,
-            author: "grow.contact research",
-            url: `https://grow.contact/report/${ARCHIVE_KEY}`,
+            author: "citation.is research",
+            url: `https://citation.is/report/${ARCHIVE_KEY}`,
             stats: [
               { stat: "Tracked companies", value: stats.total, source: "Agent-Readability Leaderboard" },
               { stat: "Missing llms.txt (%)", value: stats.missing_llms_txt_pct, source: "Agent-Readability Leaderboard" },
               { stat: "Opaque sites (%)", value: stats.opaque_pct, source: "Agent-Readability Leaderboard" },
               { stat: "Weak JSON-LD (%)", value: stats.weak_jsonld_pct, source: "Agent-Readability Leaderboard" },
             ],
-            methodology: "https://grow.contact/report/methodology",
+            methodology: "https://citation.is/report/methodology",
             license: "CC BY 4.0",
           });
         }
@@ -61,8 +61,8 @@ export const Route = createFileRoute("/api/public/v1/research/{$slug}.json")({
             title: drop.title,
             slug: drop.slug,
             published_at: drop.publishedAt,
-            author: "grow.contact research",
-            url: `https://grow.contact/data-drops/${drop.slug}`,
+            author: "citation.is research",
+            url: `https://citation.is/data-drops/${drop.slug}`,
             content: drop.body.map((paragraph, i) => ({
               order: i + 1,
               type: "paragraph",
@@ -78,7 +78,7 @@ export const Route = createFileRoute("/api/public/v1/research/{$slug}.json")({
                 ]
               : [{ stat: drop.headline, value: null, source: drop.cite.pull_quote }],
             citation: drop.cite,
-            methodology: "https://grow.contact/v-score",
+            methodology: "https://citation.is/v-score",
             license: "CC BY 4.0",
           });
         }
@@ -92,8 +92,8 @@ export const Route = createFileRoute("/api/public/v1/research/{$slug}.json")({
             slug: pb.slug,
             published_at: pb.publishedAt,
             updated_at: pb.updatedAt,
-            author: "grow.contact research",
-            url: `https://grow.contact/playbooks/${pb.slug}`,
+            author: "citation.is research",
+            url: `https://citation.is/playbooks/${pb.slug}`,
             intent: pb.intent,
             category: pb.category,
             difficulty: pb.difficulty,

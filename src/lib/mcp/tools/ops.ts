@@ -66,7 +66,7 @@ export const suppressEmailTool = defineTool({
 export const activityFeedTool = defineTool({
   name: "get_activity_feed",
   description:
-    "Combined recent activity across grow.contact: latest scans, leads, orders, reviews. Great for a daily ops summary.",
+    "Combined recent activity across citation.is: latest scans, leads, orders, reviews. Great for a daily ops summary.",
   parameters: z.object({
     limit_per_type: z.number().int().min(1).max(20).default(5),
   }),

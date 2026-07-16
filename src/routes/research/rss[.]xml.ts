@@ -7,7 +7,7 @@ import { PLAYBOOKS } from "@/lib/playbooks/data";
 import { GLOSSARY } from "@/lib/glossary/data";
 import { ARCHIVE_KEY, ARCHIVE_LABEL, ARCHIVE_PUBLISHED } from "@/lib/seo/archives/q2-2026";
 
-const BASE_URL = "https://grow.contact";
+const BASE_URL = "https://citation.is";
 const FEED_URL = `${BASE_URL}/research/rss.xml`;
 
 function escapeXml(s: string): string {

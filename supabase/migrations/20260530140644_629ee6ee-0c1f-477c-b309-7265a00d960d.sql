@@ -30,7 +30,7 @@ USING (has_role(auth.uid(), 'admin'::app_role));
 CREATE INDEX idx_api_key_requests_status ON public.api_key_requests(status, created_at DESC);
 
 
--- Platform crawl tracking (Silobreaker, Visvo, etc. crawling grow.contact)
+-- Platform crawl tracking (Silobreaker, Visvo, etc. crawling citation.is)
 CREATE TABLE public.platform_crawls (
   id bigserial PRIMARY KEY,
   referrer_domain text NOT NULL,

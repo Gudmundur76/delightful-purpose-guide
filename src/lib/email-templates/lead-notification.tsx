@@ -70,7 +70,7 @@ export const template = {
   subject: (data: Record<string, any>) =>
     `New brief from ${data.name ?? "unknown"} — ${data.company || "no company"}`,
   displayName: "Internal lead notification",
-  to: "hello@grow.contact",
+  to: "hello@citation.is",
   previewData: {
     name: "Jane Doe",
     email: "jane@example.com",

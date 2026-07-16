@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const URL = "https://grow.contact/guide/llms-txt";
+const URL = "https://citation.is/guide/llms-txt";
 const TITLE = "llms.txt: The Complete Spec + Examples (2026)";
 const DESCRIPTION =
   "llms.txt is the LLM-era robots.txt + sitemap.xml — a curated markdown map that AI agents load as context. Complete spec, file structure, working examples, and how to validate it.";
@@ -33,7 +33,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "How do I validate llms.txt?",
-    a: "Run the URL through the grow.contact /check scanner — it tests presence, content-type, route coverage against your sitemap, and markdown validity in one pass. The official spec lives at llmstxt.org.",
+    a: "Run the URL through the citation.is /check scanner — it tests presence, content-type, route coverage against your sitemap, and markdown validity in one pass. The official spec lives at llmstxt.org.",
   },
 ];
 
@@ -99,8 +99,8 @@ export const Route = createFileRoute("/guide/llms-txt")({
           datePublished: PUBLISHED,
           dateModified: UPDATED,
           inLanguage: "en",
-          author: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
-          publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
+          author: { "@type": "Organization", name: "Grow", url: "https://citation.is/" },
+          publisher: { "@type": "Organization", name: "Grow", url: "https://citation.is/" },
           mainEntityOfPage: URL,
         }),
       },
@@ -122,8 +122,8 @@ export const Route = createFileRoute("/guide/llms-txt")({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
-            { "@type": "ListItem", position: 2, name: "Guides", item: "https://grow.contact/guide" },
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://citation.is/" },
+            { "@type": "ListItem", position: 2, name: "Guides", item: "https://citation.is/guide" },
             { "@type": "ListItem", position: 3, name: "llms.txt", item: URL },
           ],
         }),
@@ -213,7 +213,7 @@ function LlmsTxtGuide() {
           <ul className="space-y-2">
             <li><Link to="/guide/generative-engine-optimization" className="text-accent hover:underline">→ The 2026 GEO guide</Link></li>
             <li><Link to="/guide/aeo-vs-geo-vs-seo" className="text-accent hover:underline">→ AEO vs GEO vs SEO</Link></li>
-            <li><Link to="/llms" className="text-accent hover:underline">→ See grow.contact's own llms.txt</Link></li>
+            <li><Link to="/llms" className="text-accent hover:underline">→ See citation.is's own llms.txt</Link></li>
             <li><Link to="/check" className="text-accent hover:underline">→ Validate your llms.txt with /check</Link></li>
           </ul>
         </section>

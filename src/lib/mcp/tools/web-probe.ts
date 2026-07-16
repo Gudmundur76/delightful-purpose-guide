@@ -13,7 +13,7 @@ export const fetchUrlTool = defineTool({
     try {
       const res = await fetch(url, {
         redirect: "follow",
-        headers: { "user-agent": "grow-contact-mcp/1.0 (+https://grow.contact)" },
+        headers: { "user-agent": "grow-contact-mcp/1.0 (+https://citation.is)" },
         signal: AbortSignal.timeout(8000),
       });
       const text = await res.text();

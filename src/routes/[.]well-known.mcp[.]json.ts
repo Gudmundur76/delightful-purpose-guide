@@ -1,4 +1,4 @@
-// MCP Server Card (SEP-1849) — agent-discovery metadata for the grow.contact MCP server.
+// MCP Server Card (SEP-1849) — agent-discovery metadata for the citation.is MCP server.
 // Served at both /.well-known/mcp.json and /.well-known/mcp/server-card.json
 // (the second route imports this body).
 import { createFileRoute } from "@tanstack/react-router";

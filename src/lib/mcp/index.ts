@@ -10,10 +10,10 @@ const projectRef = import.meta.env.VITE_SUPABASE_PROJECT_ID ?? "project-ref-unse
 
 export default defineMcp({
   name: "grow-contact-mcp",
-  title: "grow.contact MCP",
+  title: "citation.is MCP",
   version: "1.0.0",
   instructions:
-    "grow.contact's OAuth-protected MCP server. Use `ping` to verify connectivity and `scan_url` to run a live GEO readiness scan on any URL. More tools will be added as this server grows.",
+    "citation.is's OAuth-protected MCP server. Use `ping` to verify connectivity and `scan_url` to run a live GEO readiness scan on any URL. More tools will be added as this server grows.",
   auth: auth.oauth.issuer({
     issuer: `https://${projectRef}.supabase.co/auth/v1`,
     acceptedAudiences: "authenticated",

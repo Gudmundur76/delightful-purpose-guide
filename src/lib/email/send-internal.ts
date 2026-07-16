@@ -6,8 +6,8 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { TEMPLATES } from "@/lib/email-templates/registry";
 
 const SITE_NAME = "Grow";
-const SENDER_DOMAIN = "notify.grow.contact";
-const FROM_DOMAIN = "notify.grow.contact";
+const SENDER_DOMAIN = "notify.citation.is";
+const FROM_DOMAIN = "notify.citation.is";
 
 function generateToken(): string {
   const bytes = new Uint8Array(32);

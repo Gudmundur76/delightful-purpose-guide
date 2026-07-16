@@ -50,7 +50,7 @@ export const geoStandardTool = defineTool({
           "JS-disabled HTML still contains core content",
         ],
         stamping: "Embed 'geo-standard@<version>' in <meta name=\"generator\"> or footer.",
-        full_spec_url: "https://grow.contact/docs/geo-standard",
+        full_spec_url: "https://citation.is/docs/geo-standard",
       },
       null,
       2,

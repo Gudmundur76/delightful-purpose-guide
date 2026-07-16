@@ -32,7 +32,7 @@ export const checkAiCitationTool = defineTool({
   description:
     "Ask LLMs whether a host/brand is cited. If query is omitted, runs 3 auto-generated queries about the host. Returns per-query/per-model presence.",
   parameters: z.object({
-    host: z.string().min(3).max(255).describe("Domain or brand, e.g. grow.contact"),
+    host: z.string().min(3).max(255).describe("Domain or brand, e.g. citation.is"),
     query: z.string().min(3).max(500).optional().describe("Optional. If omitted, 3 default queries are run."),
     models: z
       .array(z.enum(["google/gemini-2.5-flash", "google/gemini-2.5-flash-lite", "openai/gpt-5"]))
@@ -47,7 +47,7 @@ export const checkAiCitationTool = defineTool({
       : [
           `${bare} what do they do`,
           `${bare} services and pricing`,
-          bare.includes("grow.contact") ? "best agent-native website agency" : `best alternatives to ${bare}`,
+          bare.includes("citation.is") ? "best agent-native website agency" : `best alternatives to ${bare}`,
         ];
     const needles = [host, bare, bare.split(".")[0]].map((n) => n.toLowerCase()).filter(Boolean);
 
@@ -83,9 +83,9 @@ export const checkAiCitationTool = defineTool({
               const hasNoKnowledge = noKnowledgePhrases.some((p) => lower.includes(p));
               const bareLower = bare.toLowerCase();
               const brandConfusion =
-                bareLower.includes("grow.contact") &&
+                bareLower.includes("citation.is") &&
                 lower.includes("grow.com") &&
-                !lower.includes("grow.contact");
+                !lower.includes("citation.is");
               let note: string | undefined;
               if (brandConfusion) note = "brand confusion: grow.com cited instead";
               else if (hasNoKnowledge) note = "model has no knowledge of site";

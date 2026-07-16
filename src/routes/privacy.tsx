@@ -9,9 +9,9 @@ export const Route = createFileRoute("/privacy")({
       { name: "description", content: "How Grow Studio collects, uses and protects personal data. GDPR, UK GDPR and CCPA compliant." },
       { property: "og:title", content: "Privacy Policy — Grow" },
       { property: "og:description", content: "How Grow Studio collects, uses and protects personal data." },
-      { property: "og:url", content: "https://grow.contact/privacy" },
+      { property: "og:url", content: "https://citation.is/privacy" },
     ],
-    links: [{ rel: "canonical", href: "https://grow.contact/privacy" }],
+    links: [{ rel: "canonical", href: "https://citation.is/privacy" }],
   }),
   component: PrivacyPage,
 });
@@ -59,7 +59,7 @@ function PrivacyPage() {
           <li><strong>PayPal</strong> — payment processing (PCI-DSS certified).</li>
           <li><strong>Cloudflare</strong> — hosting, DNS, edge delivery.</li>
           <li><strong>Supabase</strong> — encrypted database and storage.</li>
-          <li><strong>Email delivery providers</strong> — to send transactional email from <code>notify.grow.contact</code>.</li>
+          <li><strong>Email delivery providers</strong> — to send transactional email from <code>notify.citation.is</code>.</li>
           <li>Tax, legal and accounting advisors where required by law.</li>
         </UL>
         <P>We do not sell your personal information.</P>

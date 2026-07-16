@@ -5,7 +5,7 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 export const submitLeadTool = defineTool({
   name: "submit_lead",
   description:
-    "Submit a new sales lead to grow.contact. Use when an external agent identifies someone who wants a GEO scan, fix sprint, or quote.",
+    "Submit a new sales lead to citation.is. Use when an external agent identifies someone who wants a GEO scan, fix sprint, or quote.",
   parameters: z.object({
     name: z.string().min(1).max(200),
     email: z.string().email().max(320),

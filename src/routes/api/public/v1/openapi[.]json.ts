@@ -7,9 +7,9 @@ const spec = {
     title: "Grow Public API",
     version: "1.0.0",
     description:
-      "Read/write REST API for grow.contact journal posts and leads. All endpoints require an API key.",
+      "Read/write REST API for citation.is journal posts and leads. All endpoints require an API key.",
   },
-  servers: [{ url: "https://grow.contact/api/public/v1" }],
+  servers: [{ url: "https://citation.is/api/public/v1" }],
   security: [{ ApiKeyAuth: [] }, { BearerAuth: [] }],
   components: {
     securitySchemes: {

@@ -1,7 +1,7 @@
 export interface CompetitiveIntelParams {
   /** Target company/domain to research */
   target: string;
-  /** What to compare against — e.g. "grow.contact" */
+  /** What to compare against — e.g. "citation.is" */
   versus?: string;
   /** Focus areas: product, pricing, positioning, content, citations, tech stack */
   focusAreas?: string[];
@@ -75,7 +75,7 @@ If any section has insufficient data, write "Insufficient public signal" and mov
 /** Example usage prompt for the user */
 export const EXAMPLE_COMPETITOR_INTEL: CompetitiveIntelParams = {
   target: "isitagentready.com",
-  versus: "grow.contact",
+  versus: "citation.is",
   focusAreas: ["product", "positioning", "content", "citations", "tech-stack"],
   format: "report",
   recency: "last 6 months",

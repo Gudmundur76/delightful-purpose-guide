@@ -8,7 +8,7 @@ import { ogImageMeta } from "@/lib/seo/og";
 const TITLE = "MCP Server — grow-contact-mcp v2.0 (docs & install)";
 const DESC =
   "Our public MCP server gives any agent client 90+ tools over Streamable HTTP with OAuth + Bearer auth. Discoverable at /.well-known/mcp.json. Install in Claude, ChatGPT, n8n, or any MCP-compatible client in about a minute.";
-const URL = "https://grow.contact/mcp";
+const URL = "https://citation.is/mcp";
 
 const ENDPOINTS = [
   { method: "POST", path: "/api/public/mcp", note: "JSON-RPC over Streamable HTTP. Bearer auth." },
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/mcp-server")({
       { property: "og:type", content: "website" },
       ...ogImageMeta({
         title: "MCP Server Docs — v2.0",
-        kicker: "grow.contact",
+        kicker: "citation.is",
         sub: "90+ agent-native tools. OAuth + Bearer. Streamable HTTP.",
       }),
     ],
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/mcp-server")({
           headline: TITLE,
           description: DESC,
           url: URL,
-          author: { "@type": "Organization", name: "grow.contact" },
+          author: { "@type": "Organization", name: "citation.is" },
         }),
       },
     ],

@@ -17,7 +17,7 @@ export const Route = createFileRoute("/cli")({
         content:
           "npx @grow-contact/cli check <url> — like Lighthouse, but for AI agents. Five signals, 0–100, CI-ready.",
       },
-      { property: "og:url", content: "https://grow.contact/cli" },
+      { property: "og:url", content: "https://citation.is/cli" },
       { property: "og:type", content: "website" },
       ...ogImageMeta({
         title: "grow CLI — Agent-Readiness Scanner for Your Terminal",
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/cli")({
         sub: "Score any URL against the Grow GEO Standard from your terminal. Zero-dep Node CLI, CI-friendly --fail-under flag, free with an API key. npx @grow-contact/cli check <url>.",
       }),
     ],
-    links: [{ rel: "canonical", href: "https://grow.contact/cli" }],
+    links: [{ rel: "canonical", href: "https://citation.is/cli" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -38,15 +38,15 @@ export const Route = createFileRoute("/cli")({
           operatingSystem: "Linux, macOS, Windows",
           description:
             "Command-line scanner that scores any URL against the Grow GEO Standard (5 signals, 0–100) for AI agent readability.",
-          url: "https://grow.contact/cli",
+          url: "https://citation.is/cli",
           softwareVersion: "0.1.0",
           downloadUrl: "https://www.npmjs.com/package/@grow-contact/cli",
           license: "https://opensource.org/licenses/MIT",
           offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
           publisher: {
             "@type": "Organization",
-            name: "grow.contact",
-            url: "https://grow.contact",
+            name: "citation.is",
+            url: "https://citation.is",
           },
         }),
       },

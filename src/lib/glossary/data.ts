@@ -26,7 +26,7 @@ export const GLOSSARY: GlossaryTerm[] = [
       "How easily an AI agent or LLM crawler can fetch, parse, and cite a webpage's content.",
     long: `Agent-readability is a composite measure of how well a website cooperates with AI agents — search bots, chat-engine crawlers, and autonomous browsing agents. It folds together server reachability (does the bot get a 200, or a WAF challenge?), render mode (is the content in the initial HTML, or only after JavaScript runs?), semantic structure (landmarks, heading discipline, alt text), machine-readable metadata (JSON-LD, OpenGraph, llms.txt), and answer-density of the prose (front-loaded claims, named entities, numbers).
 
-A page can rank well in classical SEO and still be invisible to ChatGPT, Perplexity, or Google AI Overviews. The grow.contact /check scanner measures this on a 0–100 scale across six signals. Industry-wide, 73% of marketing sites score below 60 — most are silently excluded from AI citations because of one-line robots.txt mistakes or client-side rendering, not content quality.`,
+A page can rank well in classical SEO and still be invisible to ChatGPT, Perplexity, or Google AI Overviews. The citation.is /check scanner measures this on a 0–100 scale across six signals. Industry-wide, 73% of marketing sites score below 60 — most are silently excluded from AI citations because of one-line robots.txt mistakes or client-side rendering, not content quality.`,
     category: "Metrics",
     related: ["llms-txt", "citability", "geo"],
   },
@@ -106,7 +106,7 @@ Practical implications: ship one number that doesn't exist elsewhere on the inte
 
 "73% of websites are silently excluded from AI citations because of fixable technical issues" is citable: one claim, a number, an entity (websites), a mechanism (technical issues). "Many websites unfortunately struggle with various issues that can sometimes prevent them from being properly indexed by today's AI systems" carries the same idea but is not citable — no number, hedged, buried subject.
 
-The grow.contact /check scanner scores citability per page by measuring answer-first paragraphs, number/date density, named-entity coverage, and listicle structure. High-citability pages tend to score above 80; SEO-template marketing copy usually scores below 50.`,
+The citation.is /check scanner scores citability per page by measuring answer-first paragraphs, number/date density, named-entity coverage, and listicle structure. High-citability pages tend to score above 80; SEO-template marketing copy usually scores below 50.`,
     category: "Optimization",
     related: ["information-gain", "geo", "agent-readability"],
   },
@@ -119,7 +119,7 @@ The grow.contact /check scanner scores citability per page by measuring answer-f
 
 Concretely, agent-native sites publish: /.well-known/mcp.json (MCP server card), /.well-known/api-catalog (RFC 9727 API directory), llms.txt (curated brief), JSON-LD across every entity, and stable JSON endpoints for any data a human reader can see. They render fully server-side, serve sub-200ms TTFB, and treat HTML as one of several output formats rather than the only one.
 
-grow.contact builds in this category. As of 2026 the agent-native web is roughly 0.4% of indexed marketing sites — first-mover citation advantage is still wide open.`,
+citation.is builds in this category. As of 2026 the agent-native web is roughly 0.4% of indexed marketing sites — first-mover citation advantage is still wide open.`,
     category: "Optimization",
     related: ["mcp", "agent-readability", "well-known"],
   },
@@ -130,7 +130,7 @@ grow.contact builds in this category. As of 2026 the agent-native web is roughly
       "JSON-based structured data format used by schema.org to describe entities for search engines and LLMs.",
     long: `JSON-LD (JSON for Linking Data) is the W3C-recommended serialization for schema.org structured data. It's a <script type="application/ld+json"> block in a page's <head> describing the entities on the page — Organization, Product, FAQPage, Article, BreadcrumbList, and 800+ other types — in a graph format that search engines and LLMs can ingest without parsing prose.
 
-Why it matters for AI citations: LLMs use JSON-LD to verify the entities they extract from a page. A claim like "grow.contact charges $2,400 for a 48-hour build" is more likely to be cited if the page also ships Product JSON-LD with offers.price = "2400" and a matching name. The schema confirms the prose; the prose without the schema is treated as less reliable.
+Why it matters for AI citations: LLMs use JSON-LD to verify the entities they extract from a page. A claim like "citation.is charges $2,400 for a 48-hour build" is more likely to be cited if the page also ships Product JSON-LD with offers.price = "2400" and a matching name. The schema confirms the prose; the prose without the schema is treated as less reliable.
 
 Rule of thumb: every entity that appears in the visible content should appear in JSON-LD. Don't ship FAQ visual sections without FAQPage schema, don't ship product pages without Product schema, don't ship articles without Article schema. Validate with Google's Rich Results Test or schema.org validator before publishing.`,
     category: "Schema",
@@ -143,7 +143,7 @@ Rule of thumb: every entity that appears in the visible content should appear in
       "A collaborative vocabulary of structured-data types maintained by Google, Microsoft, Yahoo, and Yandex.",
     long: `schema.org is the canonical vocabulary used inside JSON-LD (and microdata, and RDFa) to describe what's on a page. Launched in 2011 by the major search engines, it now defines 800+ types — from Person, Organization, and Product to MedicalCondition and TouristAttraction — with thousands of properties.
 
-For LLM citations, schema.org acts as the shared ontology between content and machine. When you tag a page with Article + author (Person with sameAs links) + datePublished, you're telling every parser the same story in the same vocabulary. This is what lets Perplexity confidently cite "according to grow.contact, published May 2026" instead of vague paraphrase.
+For LLM citations, schema.org acts as the shared ontology between content and machine. When you tag a page with Article + author (Person with sameAs links) + datePublished, you're telling every parser the same story in the same vocabulary. This is what lets Perplexity confidently cite "according to citation.is, published May 2026" instead of vague paraphrase.
 
 Pick the most specific type that fits (TechArticle beats Article beats CreativeWork) and stack types when more than one applies (a page can be both Article and BreadcrumbList).`,
     category: "Schema",
@@ -253,7 +253,7 @@ Disallow: Google-Extended in robots.txt is the right move for sites that want to
       "An IETF-standard URL path (RFC 8615) for site-wide metadata files that agents and protocols discover automatically.",
     long: `The /.well-known/ path is the IETF-blessed location for site-level metadata files. Originally introduced for protocols like ACME (Let's Encrypt) and OAuth, it has become the discovery surface for agent-native infrastructure: /.well-known/mcp.json (MCP server card), /.well-known/api-catalog (RFC 9727 API directory), /.well-known/oauth-authorization-server, /.well-known/jwks.json, /.well-known/http-message-signatures-directory.
 
-Why it matters: an agent that lands on grow.contact and wants to know "what tools does this site expose?" doesn't crawl — it issues exactly one GET to /.well-known/mcp.json. Sites that ship these endpoints are first-class citizens in agent frameworks; sites that don't require fallback scraping and are deprioritized.`,
+Why it matters: an agent that lands on citation.is and wants to know "what tools does this site expose?" doesn't crawl — it issues exactly one GET to /.well-known/mcp.json. Sites that ship these endpoints are first-class citizens in agent frameworks; sites that don't require fallback scraping and are deprioritized.`,
     category: "Infrastructure",
     related: ["mcp", "agent-native"],
     sources: [

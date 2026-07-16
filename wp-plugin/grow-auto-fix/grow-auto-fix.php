@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: grow.contact Auto-Fix
- * Plugin URI: https://grow.contact
- * Description: Automatically improves your site's AI discoverability (ChatGPT, Perplexity, Claude citations) by injecting approved Schema.org JSON-LD, serving a virtual /llms.txt, and patching robots.txt — all pulled from your grow.contact dashboard.
+ * Plugin Name: citation.is Auto-Fix
+ * Plugin URI: https://citation.is
+ * Description: Automatically improves your site's AI discoverability (ChatGPT, Perplexity, Claude citations) by injecting approved Schema.org JSON-LD, serving a virtual /llms.txt, and patching robots.txt — all pulled from your citation.is dashboard.
  * Version: 1.0.0
- * Author: grow.contact
- * Author URI: https://grow.contact
+ * Author: citation.is
+ * Author URI: https://citation.is
  * License: GPL-2.0-or-later
  * Text Domain: grow-auto-fix
  */
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 }
 
 define('GROW_AUTOFIX_VERSION', '1.0.0');
-define('GROW_AUTOFIX_API_BASE', 'https://grow.contact/api/public/inject');
+define('GROW_AUTOFIX_API_BASE', 'https://citation.is/api/public/inject');
 define('GROW_AUTOFIX_TRANSIENT', 'grow_autofix_manifest');
 define('GROW_AUTOFIX_TTL', 6 * HOUR_IN_SECONDS);
 
@@ -39,8 +39,8 @@ add_action('admin_init', 'grow_autofix_register_settings');
 
 function grow_autofix_admin_menu() {
     add_options_page(
-        'grow.contact Auto-Fix',
-        'grow.contact',
+        'citation.is Auto-Fix',
+        'citation.is',
         'manage_options',
         'grow-auto-fix',
         'grow_autofix_render_settings_page'
@@ -57,8 +57,8 @@ function grow_autofix_render_settings_page() {
     $count   = is_array($cached) && isset($cached['interventions']) ? count($cached['interventions']) : 0;
     ?>
     <div class="wrap">
-        <h1>grow.contact Auto-Fix</h1>
-        <p>Paste the install token from your grow.contact dashboard. The plugin will pull approved Schema.org JSON-LD, llms.txt, and robots.txt updates every 6 hours.</p>
+        <h1>citation.is Auto-Fix</h1>
+        <p>Paste the install token from your citation.is dashboard. The plugin will pull approved Schema.org JSON-LD, llms.txt, and robots.txt updates every 6 hours.</p>
         <form method="post" action="options.php">
             <?php settings_fields('grow_autofix'); ?>
             <table class="form-table" role="presentation">
@@ -66,7 +66,7 @@ function grow_autofix_render_settings_page() {
                     <th scope="row"><label for="grow_autofix_token">Install token</label></th>
                     <td>
                         <input name="grow_autofix_token" id="grow_autofix_token" type="text" value="<?php echo esc_attr($token); ?>" class="regular-text" placeholder="00000000-0000-0000-0000-000000000000" />
-                        <p class="description">Found in your grow.contact dashboard under <em>Sites → your domain → Install</em>.</p>
+                        <p class="description">Found in your citation.is dashboard under <em>Sites → your domain → Install</em>.</p>
                     </td>
                 </tr>
                 <tr>
@@ -209,7 +209,7 @@ add_action('template_redirect', function () {
         $body = (string) ($rows[0]['payload']['content'] ?? '');
     }
     if ($body === '') {
-        $body = "# grow.contact: no approved llms.txt yet\n";
+        $body = "# citation.is: no approved llms.txt yet\n";
     }
     status_header(200);
     header('Content-Type: text/plain; charset=utf-8');
@@ -227,5 +227,5 @@ add_filter('robots_txt', function ($output, $public) {
     if (empty($rows)) return $output;
     $extra = (string) ($rows[0]['payload']['content'] ?? '');
     if ($extra === '') return $output;
-    return rtrim($output) . "\n\n# grow.contact auto-fix\n" . trim($extra) . "\n";
+    return rtrim($output) . "\n\n# citation.is auto-fix\n" . trim($extra) . "\n";
 }, 10, 2);

@@ -16,7 +16,7 @@ export const Route = createFileRoute("/api/public/v1/posts")({
           publishedAt: p.publishedAt,
           readingMinutes: p.readingMinutes,
           tags: p.tags,
-          url: `https://grow.contact/blog/${p.slug}`,
+          url: `https://citation.is/blog/${p.slug}`,
         }));
         return jsonResponse({ count: data.length, posts: data });
       },

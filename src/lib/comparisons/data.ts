@@ -266,7 +266,7 @@ export const COMPARISONS: Comparison[] = [
       { dimension: "Deliverable", grow: "Shipped semantic site + JSON-LD + llms.txt", competitor: "Audit report + checklist", growWins: true },
       { dimension: "Execution included", grow: "Yes — we build it", competitor: "No — your team executes", growWins: true },
       { dimension: "Time from start to fixed", grow: "48 hours – 5 days", competitor: "Weeks-to-quarters depending on your eng capacity", growWins: true },
-      { dimension: "Free /check scanner", grow: "Yes, unlimited at grow.contact/check", competitor: "Free tier exists, paid tiers for depth", growWins: true },
+      { dimension: "Free /check scanner", grow: "Yes, unlimited at citation.is/check", competitor: "Free tier exists, paid tiers for depth", growWins: true },
       { dimension: "Per-page deep audit", grow: "Not the product", competitor: "Core feature", growWins: false },
       { dimension: "Ongoing monitoring", grow: "Re-run /check any time", competitor: "Continuous in dashboard", growWins: false },
       { dimension: "Price", grow: "$2,400–$4,800 fixed, one-time", competitor: "Subscription", growWins: true },

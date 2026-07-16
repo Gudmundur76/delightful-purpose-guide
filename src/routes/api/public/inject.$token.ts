@@ -39,14 +39,14 @@ export const Route = createFileRoute("/api/public/inject/$token")({
       OPTIONS: async () => new Response(null, { status: 204, headers: CORS }),
       GET: async ({ params, request }) => {
         const parsed = parseToken(params.token);
-        if (!parsed) return resp("/* grow.contact: invalid token */", "application/javascript", 400);
+        if (!parsed) return resp("/* citation.is: invalid token */", "application/javascript", 400);
 
         const { data: site } = await supabaseAdmin
           .from("intervention_sites")
           .select("id")
           .eq("install_token", parsed.token)
           .maybeSingle();
-        if (!site) return resp("/* grow.contact: unknown site */", "application/javascript", 404);
+        if (!site) return resp("/* citation.is: unknown site */", "application/javascript", 404);
 
         const ua = request.headers.get("user-agent")?.slice(0, 500) ?? null;
         const ip = request.headers.get("cf-connecting-ip") ?? request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
@@ -57,7 +57,7 @@ export const Route = createFileRoute("/api/public/inject/$token")({
             .eq("site_id", site.id).eq("kind", "llms_txt").in("status", ["approved", "live"])
             .order("created_at", { ascending: false }).limit(1).maybeSingle();
           await supabaseAdmin.from("intervention_deliveries").insert({ site_id: site.id, intervention_id: row?.id ?? null, delivery_method: "llms_txt_proxy", user_agent: ua, ip });
-          if (!row) return resp("# grow.contact: no approved llms.txt yet\n", "text/plain; charset=utf-8", 404);
+          if (!row) return resp("# citation.is: no approved llms.txt yet\n", "text/plain; charset=utf-8", 404);
           const body = ((row.payload as { content?: string } | null)?.content) ?? "";
           await supabaseAdmin.from("interventions").update({ status: "live", went_live_at: new Date().toISOString() }).eq("id", row.id).eq("status", "approved");
           return resp(body, "text/plain; charset=utf-8");
@@ -87,7 +87,7 @@ export const Route = createFileRoute("/api/public/inject/$token")({
         await supabaseAdmin.from("intervention_deliveries").insert({ site_id: site.id, intervention_id: rows?.[0]?.id ?? null, delivery_method: "snippet", user_agent: ua, ip });
 
         const payload = JSON.stringify(blocks);
-        const js = `/* grow.contact auto-fix */
+        const js = `/* citation.is auto-fix */
 (function(){try{var blocks=${payload};for(var i=0;i<blocks.length;i++){var s=document.createElement('script');s.type='application/ld+json';s.setAttribute('data-grow-auto-fix','1');s.text=JSON.stringify(blocks[i]);document.head.appendChild(s);}}catch(e){}})();`;
         return resp(js, "application/javascript; charset=utf-8");
       },

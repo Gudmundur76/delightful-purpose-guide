@@ -1,4 +1,4 @@
-// Agent-protocol surfaces for grow.contact.
+// Agent-protocol surfaces for citation.is.
 //
 // Implements the four isitagentready.com Track-1 adaptations:
 //   1. /.well-known/mcp.json   — MCP server card
@@ -12,7 +12,7 @@
 import { createHash } from "node:crypto";
 import { serverCard } from "./agent-protocol/mcp-server-card";
 
-const SITE_ORIGIN = "https://grow.contact";
+const SITE_ORIGIN = "https://citation.is";
 const AUTH_MD_URL = `${SITE_ORIGIN}/auth.md`;
 const AGENT_REGISTRATION_URL = `${SITE_ORIGIN}/contact`;
 const AGENT_CREDENTIAL_TYPES = ["api_key", "access_token"];
@@ -24,7 +24,7 @@ const GROW_GEO_SCAN_SKILL = `# grow-geo-scan
 Score any URL against the Grow GEO Standard (6 signals, 0–100) — semantic HTML, JSON-LD, llms.txt, citability, speed, and protocol discovery.
 
 ## Endpoint
-POST https://grow.contact/api/public/v1/analyze
+POST https://citation.is/api/public/v1/analyze
 Header: x-api-key: <key>
 Body: { "url": "https://example.com" }
 
@@ -162,7 +162,7 @@ function agentSkillsIndex() {
   return {
     $schema: "https://agentskills.io/schemas/v0.2.0/index.json",
     version: "0.2.0",
-    publisher: { name: "grow.contact", url: SITE_ORIGIN },
+    publisher: { name: "citation.is", url: SITE_ORIGIN },
     skills: [
       {
         name: "grow-geo-scan",
@@ -177,7 +177,7 @@ function agentSkillsIndex() {
 }
 
 // RFC 9728 — OAuth 2.0 Protected Resource Metadata.
-// Advertise grow.contact as the authorization server so agents discover the
+// Advertise citation.is as the authorization server so agents discover the
 // matching RFC 8414 document with our agent_auth registration metadata.
 function agentAuthMetadata() {
   return {
@@ -209,7 +209,7 @@ function agentAuthMetadata() {
 export function oauthProtectedResourceMetadata() {
   return {
     resource: SITE_ORIGIN,
-    resource_name: "grow.contact",
+    resource_name: "citation.is",
     authorization_servers: [SITE_ORIGIN],
     bearer_methods_supported: ["header"],
     resource_documentation: AUTH_MD_URL,
@@ -246,7 +246,7 @@ export function oauthAuthorizationServerMetadata() {
 export function authMarkdown(): string {
   return `# auth.md
 
-Agent registration and authentication metadata for grow.contact.
+Agent registration and authentication metadata for citation.is.
 
 ## OAuth metadata
 
@@ -257,7 +257,7 @@ Agent registration and authentication metadata for grow.contact.
 
 ## Agent registration
 
-grow.contact supports anonymous agent registration by human request. Request an
+citation.is supports anonymous agent registration by human request. Request an
 API key for the public REST API or an MCP access token via ${AGENT_REGISTRATION_URL}.
 
 - Identity type: anonymous
@@ -297,11 +297,11 @@ API key for the public REST API or an MCP access token via ${AGENT_REGISTRATION_
 // Curated per-route summaries. Keep these short, factual, agent-friendly.
 // Unknown routes fall back to /llms.txt content so agents always get something.
 const MARKDOWN_TWINS: Record<string, () => string> = {
-  "/": () => `# grow.contact
+  "/": () => `# citation.is
 
 > Free, open infrastructure for AI search visibility. No paywall, no account, no upsell.
 
-grow.contact is an open scanner, an open standard, an open MCP server, and an
+citation.is is an open scanner, an open standard, an open MCP server, and an
 open WordPress plugin — all free forever. Point any of them at your site to
 make it citable by ChatGPT, Perplexity, Claude, and Google AI Overviews.
 
@@ -318,9 +318,9 @@ make it citable by ChatGPT, Perplexity, Claude, and Google AI Overviews.
 - Machine-readable via the [MCP endpoint](${SITE_ORIGIN}/api/public/mcp)
 
 ## Contact
-- Email: hello@grow.contact
+- Email: hello@citation.is
 `,
-  "/check": () => `# Agent Readability Check — grow.contact
+  "/check": () => `# Agent Readability Check — citation.is
 
 > Free URL scanner. Scores any site across 6 signals.
 
@@ -344,7 +344,7 @@ export function buildMarkdownTwin(pathname: string): { body: string } | null {
     return null;
   }
   return {
-    body: `# grow.contact — ${key}
+    body: `# citation.is — ${key}
 
 > No curated markdown twin for this route yet. See the full site summary at
 > [/llms.txt](${SITE_ORIGIN}/llms.txt) or fetch the HTML version of this URL.

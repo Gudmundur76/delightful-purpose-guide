@@ -29,7 +29,7 @@ npx @grow-contact/cli ...
 
 ## Setup
 
-Get a free API key at https://grow.contact/api-docs, then:
+Get a free API key at https://citation.is/api-docs, then:
 
 ```bash
 export GROW_API_KEY=...
@@ -56,11 +56,11 @@ Fail the build when a deploy regresses below 90:
 
 ## Why
 
-- **Built on the public Grow GEO Standard** (`geo-standard@2026.06`) — same 6 signals as the public scanner at https://grow.contact/check.
+- **Built on the public Grow GEO Standard** (`geo-standard@2026.06`) — same 6 signals as the public scanner at https://citation.is/check.
 - **No telemetry, no lock-in.** MIT, zero deps, ~250 LOC.
 - **CI-native.** Use `--fail-under` to gate deploys on agent readiness.
 
-Need a 48-hour fix when the score is low? https://grow.contact/pricing.
+Need a 48-hour fix when the score is low? https://citation.is/pricing.
 
 ## License
 

@@ -1,11 +1,11 @@
 ---
 name: geo-site-delivery
-description: Final delivery checklist for shipping a grow.contact agent-native site from Lovable preview to the client's real domain. Use when a build is complete and ready to hand over — covers pre-delivery QA, domain substitution, deploy + DNS, post-deploy verification, and client handover.
+description: Final delivery checklist for shipping a citation.is agent-native site from Lovable preview to the client's real domain. Use when a build is complete and ready to hand over — covers pre-delivery QA, domain substitution, deploy + DNS, post-deploy verification, and client handover.
 ---
 
 # GEO Site Delivery
 
-Use this skill when a grow.contact build is finished on a Lovable subdomain and needs to ship to the client's real domain. Walk the five phases in order — do not skip ahead. Every phase has a hard pass/fail gate; if a gate fails, stop and fix before moving on.
+Use this skill when a citation.is build is finished on a Lovable subdomain and needs to ship to the client's real domain. Walk the five phases in order — do not skip ahead. Every phase has a hard pass/fail gate; if a gate fails, stop and fix before moving on.
 
 ## 1. Pre-delivery checklist
 
@@ -26,7 +26,7 @@ Files to check (use `rg "lovable\.app|<project-slug>|\[CLIENT-DOMAIN\]"` to find
 - `src/routes/sitemap[.]xml.ts` — `BASE_URL` constant
 - `src/routes/blog/rss[.]xml.ts` (and any other RSS) — feed `<link>` + item URLs
 - `src/routes/index.tsx` + every leaf route — JSON-LD `url`, `@id`, `image` fields; canonical / `og:url` in `head()`
-- `src/routes/index.tsx` (footer) — **grow.contact Agent Readability badge** (see below); swap `[CLIENT-DOMAIN]` placeholder for the real host
+- `src/routes/index.tsx` (footer) — **citation.is Agent Readability badge** (see below); swap `[CLIENT-DOMAIN]` placeholder for the real host
 - `src/routes/__root.tsx` — any sitewide `og:url`, JSON-LD Organization `url`
 - Any hardcoded `https://...lovable.app` in components, email templates, MCP tools, server functions
 
@@ -34,20 +34,20 @@ Run a final `rg -i "lovable\.app|\[CLIENT-DOMAIN\]"` — should return zero hits
 
 ### Agent Readability badge (ships with every build)
 
-Every site ships with the grow.contact badge wired into the footer from day one, using `[CLIENT-DOMAIN]` as a placeholder during the build. This phase finalises the URL once the real domain is confirmed — the badge then links back to grow.contact's live scan of the client site.
+Every site ships with the citation.is badge wired into the footer from day one, using `[CLIENT-DOMAIN]` as a placeholder during the build. This phase finalises the URL once the real domain is confirmed — the badge then links back to citation.is's live scan of the client site.
 
 Expected markup in the site footer (`src/routes/index.tsx` and/or the shared footer component):
 
 ```tsx
 <a
-  href="https://grow.contact/badge/[CLIENT-DOMAIN]"
+  href="https://citation.is/badge/[CLIENT-DOMAIN]"
   target="_blank"
   rel="noopener noreferrer"
-  aria-label="Agent readability badge — certified by grow.contact"
+  aria-label="Agent readability badge — certified by citation.is"
 >
   <img
-    src="https://grow.contact/badge/[CLIENT-DOMAIN].svg"
-    alt="Agent-Ready — certified by grow.contact"
+    src="https://citation.is/badge/[CLIENT-DOMAIN].svg"
+    alt="Agent-Ready — certified by citation.is"
     width="240"
     height="72"
     loading="lazy"
@@ -57,7 +57,7 @@ Expected markup in the site footer (`src/routes/index.tsx` and/or the shared foo
 
 At delivery, replace **both** `[CLIENT-DOMAIN]` tokens with the real domain — host only, no `https://`, no trailing slash (e.g. `acme.com`). After substitution, verify:
 
-- `curl -I https://grow.contact/badge/<domain>.svg` → `200` with `content-type: image/svg+xml`. If it 404s, the scan hasn't been recorded yet — run `/check?url=<domain>&auto=true` once, then re-curl.
+- `curl -I https://citation.is/badge/<domain>.svg` → `200` with `content-type: image/svg+xml`. If it 404s, the scan hasn't been recorded yet — run `/check?url=<domain>&auto=true` once, then re-curl.
 - The badge renders in the deployed footer and links to a verify page that shows 100/100.
 
 ## 3. Deploy + DNS

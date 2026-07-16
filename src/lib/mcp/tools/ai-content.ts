@@ -52,7 +52,7 @@ export const aiCompleteTool = defineTool({
 export const draftBlogPostTool = defineTool({
   name: "draft_blog_post",
   description:
-    "Generate a long-form blog post draft (markdown-ish, ~700-1200 words) on a topic, tuned for grow.contact's GEO/AI-readability voice. Returns title, description, tags, body — paste-ready for src/lib/blog/posts.ts.",
+    "Generate a long-form blog post draft (markdown-ish, ~700-1200 words) on a topic, tuned for citation.is's GEO/AI-readability voice. Returns title, description, tags, body — paste-ready for src/lib/blog/posts.ts.",
   parameters: z.object({
     topic: z.string().min(3).max(300),
     target_keywords: z.array(z.string().max(80)).max(8).default([]),
@@ -61,7 +61,7 @@ export const draftBlogPostTool = defineTool({
     const key = process.env.LOVABLE_API_KEY;
     if (!key) return JSON.stringify({ ok: false, error: "LOVABLE_API_KEY not configured" });
     const system =
-      "You write for grow.contact, a GEO (Generative Engine Optimization) consultancy. Voice: direct, technical, opinionated, no marketing fluff. Output STRICT JSON only — no markdown fence, no preface — with keys: title (string, <=70 chars), description (string, <=160 chars), tags (string[] of 3-5 lowercase short phrases), body (string, 700-1200 words, plain text with '## ' headings and '- ' lists, escape newlines as \\n).";
+      "You write for citation.is, a GEO (Generative Engine Optimization) consultancy. Voice: direct, technical, opinionated, no marketing fluff. Output STRICT JSON only — no markdown fence, no preface — with keys: title (string, <=70 chars), description (string, <=160 chars), tags (string[] of 3-5 lowercase short phrases), body (string, 700-1200 words, plain text with '## ' headings and '- ' lists, escape newlines as \\n).";
     const user = `Topic: ${topic}\nTarget keywords: ${target_keywords.join(", ") || "(none)"}\nReturn JSON only.`;
     try {
       const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {

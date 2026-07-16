@@ -52,7 +52,7 @@ const SCHEMA_CODE = `{
 }`;
 
 const AGENT_CODE = `# llms.txt
-# https://grow.contact/llms.txt
+# https://citation.is/llms.txt
 # parsed in 18ms · 1.2 KB
 
 > Grow ships agent-native marketing sites for AI/ML
@@ -69,7 +69,7 @@ const AGENT_CODE = `# llms.txt
 - /api/readiness  →  {"status":"agent-ready","score":100}
 
 ## Contact
-hello@grow.contact`;
+hello@citation.is`;
 
 const PERF_KEYS: { key: keyof OverviewStats["metrics"]; label: string }[] = [
   { key: "semantic", label: "Semantic" },

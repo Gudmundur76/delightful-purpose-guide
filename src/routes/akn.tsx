@@ -16,13 +16,13 @@ type Snapshot = { generated_at: string; triples: Triple[] };
 export const Route = createFileRoute("/akn")({
   head: () => ({
     meta: [
-      { title: "Agentic Knowledge Node — grow.contact" },
+      { title: "Agentic Knowledge Node — citation.is" },
       {
         name: "description",
         content:
-          "An observer dashboard for the grow.contact AKN: a real-time fact graph, MCP terminal, and verifiable triples that autonomous agents can read in one fetch.",
+          "An observer dashboard for the citation.is AKN: a real-time fact graph, MCP terminal, and verifiable triples that autonomous agents can read in one fetch.",
       },
-      { property: "og:title", content: "Agentic Knowledge Node — grow.contact" },
+      { property: "og:title", content: "Agentic Knowledge Node — citation.is" },
       {
         property: "og:description",
         content:
@@ -30,11 +30,11 @@ export const Route = createFileRoute("/akn")({
       },
       ...ogImageMeta({
         title: "Agentic Knowledge Node",
-        kicker: "grow.contact",
+        kicker: "citation.is",
         sub: "Headless agentic protocol v4.0 — a verifiable fact graph plus MCP for autonomous agents.",
       }),
     ],
-    links: [{ rel: "canonical", href: "https://grow.contact/akn" }],
+    links: [{ rel: "canonical", href: "https://citation.is/akn" }],
   }),
   component: AknPage,
 });

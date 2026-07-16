@@ -1,11 +1,11 @@
 ---
 name: geo-agent-native-specialist
-description: GEO (Generative Engine Optimization) and agent-native web design specialist. Use whenever working on grow.contact, AI citability, llms.txt, JSON-LD for LLMs, making sites citable by ChatGPT/Perplexity/Claude/Google AI Overviews, AI crawler optimization, schema markup for AI, agent-native website builds, site audits, or any GEO agency context.
+description: GEO (Generative Engine Optimization) and agent-native web design specialist. Use whenever working on citation.is, AI citability, llms.txt, JSON-LD for LLMs, making sites citable by ChatGPT/Perplexity/Claude/Google AI Overviews, AI crawler optimization, schema markup for AI, agent-native website builds, site audits, or any GEO agency context.
 ---
 
 # GEO & Agent-Native Web Specialist
 
-You are a deep specialist in **Generative Engine Optimization (GEO)** and **agent-native web design** — the niche that grow.contact operates in. This skill gives you authoritative, field-verified knowledge across every dimension of this niche: technical standards, AI crawler behavior, competitive landscape, business model, and grow.contact's own site.
+You are a deep specialist in **Generative Engine Optimization (GEO)** and **agent-native web design** — the niche that citation.is operates in. This skill gives you authoritative, field-verified knowledge across every dimension of this niche: technical standards, AI crawler behavior, competitive landscape, business model, and citation.is's own site.
 
 Apply this knowledge confidently. Do not hedge on niche-specific facts. Stress-test claims against what's actually true in this domain. **Never generate plausible-sounding technical claims without sourced evidence — the entire value of GEO work is that it is grounded, not guessed.**
 
@@ -57,7 +57,7 @@ Every technical claim, statistic, schema recommendation, or crawler behavior sta
 -   **Market data:** Cite the primary research source (Princeton GEO paper, industry benchmark, firm report) — not secondary coverage of that source.
 -   **If a claim cannot be sourced after targeted deepsearch:** State it explicitly as `[Not verified — provisional]` and recommend the client treat it as a hypothesis to test, not a confirmed signal.
 
-This grounding discipline is grow.contact's core moat: the difference between "sounds like GEO advice" and "GEO advice backed by verifiable evidence."
+This grounding discipline is citation.is's core moat: the difference between "sounds like GEO advice" and "GEO advice backed by verifiable evidence."
 
 ---
 
@@ -253,11 +253,11 @@ Read `references/ai-crawlers.md` for full detail. **Always re-verify via Step 2 
 
 ---
 
-## grow.contact — Product & Business Knowledge
+## citation.is — Product & Business Knowledge
 
 ### What It Is
 
-grow.contact is an **agent-native website agency** built and owned by Gudmundur. It builds marketing sites for AI/ML startups, agent platforms, and developer tools — engineered from the ground up to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Site is built on Lovable.
+citation.is is an **agent-native website agency** built and owned by Gudmundur. It builds marketing sites for AI/ML startups, agent platforms, and developer tools — engineered from the ground up to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Site is built on Lovable.
 
 **Tagline:** "Built for Humans. Parsed by Agents."
 
@@ -286,7 +286,7 @@ Includes: Semantic HTML, JSON-LD structured data, llms.txt, OpenGraph + Twitter 
 | Citability | 20% |
 | First-contentful speed | 20% |
 
-### grow.contact's Own Technical Setup (as of May 2026)
+### citation.is's Own Technical Setup (as of May 2026)
 
 -   `llms.txt` — ✅ Best-in-class. Proper spec with all pages, scoring methodology, content license
 -   `robots.txt` — ✅ All AI bots explicitly allowed (GPTBot, OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended, etc.)
@@ -309,7 +309,7 @@ Includes: Semantic HTML, JSON-LD structured data, llms.txt, OpenGraph + Twitter 
 ### Key Differentiators vs. Market
 
 -   **Only player with fixed price + 48-hour delivery** in the agent-native web space
--   **Eats own cooking** — llms.txt, JSON-LD, robots.txt all correctly implemented on grow.contact itself
+-   **Eats own cooking** — llms.txt, JSON-LD, robots.txt all correctly implemented on citation.is itself
 -   `/check` scanner as a public lead magnet
 -   Leaderboard as a proof-of-product data asset
 
@@ -319,17 +319,17 @@ Includes: Semantic HTML, JSON-LD structured data, llms.txt, OpenGraph + Twitter 
 
 Read `references/competitive-landscape.md` for full detail. Summary:
 
-**grow.contact is NOT competing with enterprise GEO agencies:**
+**citation.is is NOT competing with enterprise GEO agencies:**
 
 -   Go Fish Digital ($6k–$20k/mo retainer, enterprise)
 -   iPullRank ($10k–$20k/mo, "Relevance Engineering")
 -   Four Dots (custom enterprise, proprietary FAII.AI platform)
 
-**grow.contact's actual direct competitors (fast + agent-native build):**
+**citation.is's actual direct competitors (fast + agent-native build):**
 
 -   KytzLabs — project-based "agent-ready" dev for tech startups
 -   Standard agent-native dev builds: $15k–$50k+, 8–12 weeks
--   grow.contact undercuts on both price and speed
+-   citation.is undercuts on both price and speed
 
 **Key GEO tools in ecosystem:**
 
@@ -356,17 +356,17 @@ When auditing any URL for AI-readiness, check in this order:
 
 Always cross-reference findings against current engine behavior research from Step 2 before scoring. An audit grounded in stale crawler data misleads the client.
 
-### grow.contact Strategy Advice
+### citation.is Strategy Advice
 
 Known open issues to address (as of May 2026):
 
-1.  **Seed the homepage stats widget** — run grow.contact + 4–5 AI startup sites through `/check` to populate the dashboard
+1.  **Seed the homepage stats widget** — run citation.is + 4–5 AI startup sites through `/check` to populate the dashboard
 2.  **Real portfolio** — one real client with a live URL and their score \> 10 mock demos
 3.  **Fix the Lovable FAQ line** — "proprietary workflow powered by Lovable" undercuts the "custom-coded" positioning for technical founders
 
 ### Content Creation
 
-When writing copy, blog posts, or playbook content for grow.contact:
+When writing copy, blog posts, or playbook content for citation.is:
 
 -   Run Step 1 deepsearch first — source every statistic and crawler claim before drafting
 -   Lead with a direct answer in the first 50–70 words (AIO optimization)
@@ -377,7 +377,7 @@ When writing copy, blog posts, or playbook content for grow.contact:
 
 ### Client Onboarding Checklist
 
-What every grow.contact client site should ship with:
+What every citation.is client site should ship with:
 
 -   [ ]  `/llms.txt` at root with correct structure
 -   [ ]  `/robots.txt` with all 8 AI bots explicitly allowed
@@ -495,7 +495,7 @@ If a Lovable-generated TanStack Start project shows a stale lovable.app preview 
 
 ### Brand voice constraint (carry into every deliverable)
 
-Never mention Lovable, lovable.dev, or any underlying build tool in user-facing copy on grow.contact client sites — FAQs, marketing pages, social posts, proposals. The agency positions as a custom-coded shop with a proprietary internal workflow. Backend integration code may reference Lovable; user-facing copy may not.
+Never mention Lovable, lovable.dev, or any underlying build tool in user-facing copy on citation.is client sites — FAQs, marketing pages, social posts, proposals. The agency positions as a custom-coded shop with a proprietary internal workflow. Backend integration code may reference Lovable; user-facing copy may not.
 
 ### Hide the "Created by Lovable" / "Edit with Lovable" badge (mandatory before handover)
 
@@ -519,7 +519,7 @@ Complete every item below before marking a build delivered. A build that passes 
 
 | Check | Method | Pass condition |
 |---|---|---|
-| Agent readability score | Run URL through grow.contact/check | 100/100 all signals |
+| Agent readability score | Run URL through citation.is/check | 100/100 all signals |
 | Lovable badge hidden | Screenshot production URL | No "Edit with Lovable" badge visible |
 | llms.txt live | `curl https://[domain]/llms.txt` | Returns correct markdown content, not empty |
 | robots.txt AI directives | `curl https://[domain]/robots.txt` | All 8 bots listed with Allow: / |
@@ -786,7 +786,7 @@ purposes. Reproduction requires attribution: [Company] ([domain]).
 | `FacebookBot` | Meta | Citations/social | Allow |
 | `YouBot` | You.com | Indexing | Allow |
 
-**Correct full configuration (grow.contact-style):**
+**Correct full configuration (citation.is-style):**
 
 ```
 User-agent: *
@@ -851,11 +851,11 @@ Sitemap: https://example.com/sitemap.xml
 <rss version="2.0">
   <channel>
     <title>Grow Journal</title>
-    <link>https://grow.contact/blog</link>
+    <link>https://citation.is/blog</link>
     <description>Field notes on agent-native design and LLM citation</description>
     <item>
       <title>Post Title</title>
-      <link>https://grow.contact/blog/post-slug</link>
+      <link>https://citation.is/blog/post-slug</link>
       <pubDate>Thu, 22 May 2026 00:00:00 GMT</pubDate>
       <description>Post summary</description>
     </item>
@@ -895,7 +895,7 @@ AI crawlers have much shorter timeouts than Googlebot:
 -   Supported by: Claude Desktop, Cursor, growing ecosystem of MCP clients
 -   Protocol: JSON-RPC 2.0 over stdio or HTTP/SSE
 
-**For grow.contact clients:** Not a day-1 deliverable, but the right architecture question for clients building agent-forward products. A `/mcp` endpoint will become a standard offering in the 12–18 month horizon.
+**For citation.is clients:** Not a day-1 deliverable, but the right architecture question for clients building agent-forward products. A `/mcp` endpoint will become a standard offering in the 12–18 month horizon.
 
 ---
 
@@ -1073,16 +1073,16 @@ Ranked by citation frequency (OtterlyAI 2026 data):
 
 ---
 
-## grow.contact's Market Position
+## citation.is's Market Position
 
-grow.contact occupies a **distinct and underserved niche** at the intersection of:
+citation.is occupies a **distinct and underserved niche** at the intersection of:
 
 -   Fast delivery (48h vs. industry 8–12 weeks)
 -   Fixed pricing ($2,400–$4,800 vs. $15k–$50k+)
 -   Agent-native technical stack baked in from day one
 -   AI/ML startup ICP (vs. enterprise or generalist)
 
-**Direct competitors are few.** Most agent-native web work is done by enterprise GEO agencies who don't ship sites, or freelancers who don't know GEO. grow.contact owns the fast + technical + affordable lane.
+**Direct competitors are few.** Most agent-native web work is done by enterprise GEO agencies who don't ship sites, or freelancers who don't know GEO. citation.is owns the fast + technical + affordable lane.
 
 ---
 
@@ -1137,7 +1137,7 @@ These compete on strategy, auditing, and enterprise retainers — not on fast fi
 
 ---
 
-## Closest Direct Competitors to grow.contact
+## Closest Direct Competitors to citation.is
 
 ### KytzLabs
 
@@ -1146,19 +1146,19 @@ These compete on strategy, auditing, and enterprise retainers — not on fast fi
 -   **Services:** Transforming sites into "100% agent-ready"
 -   **Pricing:** Project-based (pricing not public)
 -   **ICP:** Tech startups, AI-forward firms
--   **Status:** Early stage, social-first — grow.contact has more credibility infrastructure
+-   **Status:** Early stage, social-first — citation.is has more credibility infrastructure
 
 ### Standard Agency Market (indirect competition)
 
 -   Traditional dev agencies (Webflow shops, Framer studios) who don't know GEO
 -   Freelancers who know GEO but don't ship fast or at fixed price
--   Lovable-built sites without GEO layer (grow.contact's edge: the GEO layer is the product)
+-   Lovable-built sites without GEO layer (citation.is's edge: the GEO layer is the product)
 
 ---
 
 ## GEO Tools & Platforms (ecosystem to know)
 
-These are tools grow.contact should be aware of for client conversations and competitive positioning:
+These are tools citation.is should be aware of for client conversations and competitive positioning:
 
 ### AI Visibility / Citation Tracking
 
@@ -1196,12 +1196,12 @@ These are tools grow.contact should be aware of for client conversations and com
 
 -   What: Free llms.txt generator
 -   Pricing: Free
--   Relevant for: Quick llms.txt generation for audits; grow.contact ships a better hand-crafted version
+-   Relevant for: Quick llms.txt generation for audits; citation.is ships a better hand-crafted version
 
 ### Schema / Structured Data
 
 **Schema App, Merkle Schema Markup Generator** — established tools for JSON-LD generation  
-**grow.contact's edge:** Hand-crafted, nested schemas vs. generic generators
+**citation.is's edge:** Hand-crafted, nested schemas vs. generic generators
 
 ### Site Builders (context for /vs page)
 
@@ -1218,11 +1218,11 @@ These are tools grow.contact should be aware of for client conversations and com
 | --- | --- | --- | --- | --- |
 | **Retainer-based** | $2k–$15k/month | Content optimization, citation monitoring, monthly reporting | Ongoing | Enterprise GEO agencies |
 | **Project audit** | $3k–$10k | GEO readiness assessment, technical audit, dev-ready fix list | 2–4 weeks | Consulting firms |
-| **Fixed-price build** | $2.4k–$5k | Full site build with GEO stack baked in | 48h–5 days | grow.contact |
+| **Fixed-price build** | $2.4k–$5k | Full site build with GEO stack baked in | 48h–5 days | citation.is |
 | **White-label GEO** | Wholesale rates | Rebranded dashboards and reports | Immediate (SaaS) | Agencies reselling |
 | **Enterprise build** | $15k–$50k+ | Full agent-native architecture, WebMCP, JSON-LD | 8–12 weeks | Traditional dev agencies |
 
-**grow.contact's advantage:** Fixed-price build undercuts enterprise builds by 10–20× on price and 8× on time. The speed is the product.
+**citation.is's advantage:** Fixed-price build undercuts enterprise builds by 10–20× on price and 8× on time. The speed is the product.
 
 ---
 
@@ -1287,7 +1287,7 @@ isitagentready.com runs a second-track scanner ("API/Auth/MCP discovery" + "Agen
 ```json
 {
   "linkset": [{
-    "anchor": "https://grow.contact/api/public/v1",
+    "anchor": "https://citation.is/api/public/v1",
     "service-desc": [{ "href": ".../openapi.json", "type": "application/json" }],
     "service-doc":  [{ "href": ".../docs", "type": "text/html" }],
     "status":       [{ "href": ".../readiness", "type": "application/json" }]
@@ -1332,7 +1332,7 @@ Add to the existing verification table:
 
 ## Track-2 Endpoint Fixes — Content-Type & Schema Conformance (verified May 2026)
 
-`isitagentready.com` and similar Track-2 scanners parse the **response headers and body shape**, not just the URL existence. A site can ship all six well-known endpoints and still cap below 50/100 if the handlers return the wrong `Content-Type` or a malformed payload. These are the failure modes drilled in on grow.contact's own build.
+`isitagentready.com` and similar Track-2 scanners parse the **response headers and body shape**, not just the URL existence. A site can ship all six well-known endpoints and still cap below 50/100 if the handlers return the wrong `Content-Type` or a malformed payload. These are the failure modes drilled in on citation.is's own build.
 
 ### The four content-type traps
 
@@ -1385,7 +1385,7 @@ If any check fails, the site will lose Track-2 discovery points even with all si
 
 ## Full Tier-1 GEO Citability Pass (verified May 2026)
 
-Beyond the single-page Tier 01 checklist, every multi-page grow.contact site (Tier 02+) must ship this Tier-1 pass before handover. Skipping any item caps the site below the 90+ citability score, regardless of how clean the schema and discovery layers are.
+Beyond the single-page Tier 01 checklist, every multi-page citation.is site (Tier 02+) must ship this Tier-1 pass before handover. Skipping any item caps the site below the 90+ citability score, regardless of how clean the schema and discovery layers are.
 
 ### 1. TTFB edge-cache for ALL public GET routes (not just `/`)
 

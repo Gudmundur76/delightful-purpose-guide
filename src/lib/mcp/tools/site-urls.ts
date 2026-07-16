@@ -1,12 +1,12 @@
 import { defineTool } from "mcp-tanstack-start";
 import { z } from "zod";
 
-const ORIGIN = "https://grow.contact";
+const ORIGIN = "https://citation.is";
 
 export const siteUrlsTool = defineTool({
   name: "get_site_urls",
   description:
-    "Return canonical URLs for grow.contact surfaces: badge SVG, public widget, verify page, leaderboard JSON, OpenAPI spec, llms.txt, sitemap, RSS — for any given host or scan id.",
+    "Return canonical URLs for citation.is surfaces: badge SVG, public widget, verify page, leaderboard JSON, OpenAPI spec, llms.txt, sitemap, RSS — for any given host or scan id.",
   parameters: z.object({
     host: z.string().min(3).max(255).optional(),
     scan_id: z.string().uuid().optional(),

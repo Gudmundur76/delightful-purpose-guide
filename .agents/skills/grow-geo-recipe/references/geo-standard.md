@@ -1,7 +1,7 @@
 # The Grow GEO Standard
 
 **Version:** 1.1 — 2026-07-01
-**Owner:** Grow (grow.contact)
+**Owner:** Grow (citation.is)
 **Status:** Acceptance criteria for every Tier 01 / Tier 02 delivery.
 
 This document is the engineering contract. A site is not "done" until it passes
@@ -240,8 +240,8 @@ Before marking a site shipped:
 - [ ] §9 perf budget met on mobile (Lighthouse run on throttled 4G)
 - [ ] §10 root files all present and 200
 - [ ] `/check` scanner run against the live URL → score ≥ 90
-- [ ] "Built by Grow in 48h" badge visible and links to grow.contact
-- [ ] Case study entry added to grow.contact `/work`
+- [ ] "Built by Grow in 48h" badge visible and links to citation.is
+- [ ] Case study entry added to citation.is `/work`
 
 ---
 

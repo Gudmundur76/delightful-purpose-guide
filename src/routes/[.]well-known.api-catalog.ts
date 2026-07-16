@@ -2,7 +2,7 @@
 // Lets AI agents discover the public API's OpenAPI spec, docs and health endpoint.
 import { createFileRoute } from "@tanstack/react-router";
 
-const BASE = "https://grow.contact";
+const BASE = "https://citation.is";
 
 const linkset = {
   linkset: [

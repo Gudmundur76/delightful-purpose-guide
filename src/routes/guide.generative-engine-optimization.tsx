@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ArrowRight, Check } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const URL = "https://grow.contact/guide/generative-engine-optimization";
+const URL = "https://citation.is/guide/generative-engine-optimization";
 const TITLE = "GEO vs SEO: What Is Generative Engine Optimization? (2026 Guide)";
 const DESCRIPTION =
   "What is generative engine optimization (GEO)? How GEO differs from SEO and AEO, why 83% of AI citations come from outside the organic top 10, and the technical checklist to get cited by ChatGPT, Perplexity, Claude, and Google AI Overviews.";
@@ -118,8 +118,8 @@ export const Route = createFileRoute("/guide/generative-engine-optimization")({
           datePublished: PUBLISHED,
           dateModified: UPDATED,
           inLanguage: "en",
-          author: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
-          publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
+          author: { "@type": "Organization", name: "Grow", url: "https://citation.is/" },
+          publisher: { "@type": "Organization", name: "Grow", url: "https://citation.is/" },
           mainEntityOfPage: URL,
           about: [
             { "@type": "Thing", name: "Generative Engine Optimization" },
@@ -148,8 +148,8 @@ export const Route = createFileRoute("/guide/generative-engine-optimization")({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
-            { "@type": "ListItem", position: 2, name: "Guides", item: "https://grow.contact/guide" },
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://citation.is/" },
+            { "@type": "ListItem", position: 2, name: "Guides", item: "https://citation.is/guide" },
             { "@type": "ListItem", position: 3, name: "Generative Engine Optimization", item: URL },
           ],
         }),

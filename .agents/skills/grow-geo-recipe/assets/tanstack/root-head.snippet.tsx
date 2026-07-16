@@ -23,8 +23,8 @@ head: () => ({
         "@context": "https://schema.org",
         "@type": "Organization",
         name: "Brand",
-        url: "https://grow.contact",
-        logo: "https://grow.contact/logo.png",
+        url: "https://citation.is",
+        logo: "https://citation.is/logo.png",
         sameAs: [
           // "https://twitter.com/brand",
           // "https://linkedin.com/company/brand",

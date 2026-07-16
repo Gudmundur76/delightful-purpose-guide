@@ -74,7 +74,7 @@ async function fetchWithTimeout(url: string, ms: number): Promise<{ res: Respons
       signal: ctrl.signal,
       redirect: "follow",
       headers: {
-        "User-Agent": "GrowAgentReadabilityBot/1.0 (+https://grow.contact/check)",
+        "User-Agent": "GrowAgentReadabilityBot/1.0 (+https://citation.is/check)",
         Accept: "text/html,application/xhtml+xml",
       },
     });
@@ -341,7 +341,7 @@ export const scanUrl = createServerFn({ method: "POST" })
         method: "GET",
         redirect: "follow",
         headers: {
-          "User-Agent": "GrowAgentReadabilityBot/1.0 (+https://grow.contact/check)",
+          "User-Agent": "GrowAgentReadabilityBot/1.0 (+https://citation.is/check)",
           Accept: "text/markdown",
         },
       });

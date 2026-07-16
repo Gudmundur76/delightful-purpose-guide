@@ -1,5 +1,5 @@
 // Live embeddable Agent Readability badge.
-// Usage: <img src="https://grow.contact/api/public/widget/badge.svg?url=acme.ai">
+// Usage: <img src="https://citation.is/api/public/widget/badge.svg?url=acme.ai">
 //
 // Looks up the most recent scan for the host. If none exists, runs a fresh
 // scan inline (so first-paint never returns a blank). Cached for 1h.
@@ -36,7 +36,7 @@ function badgeSvg(score: number, host: string): string {
       <stop offset="100%" stop-color="#18181b"/>
     </linearGradient>
   </defs>
-  <a href="https://grow.contact/check?u=${encodeURIComponent(host)}" target="_blank">
+  <a href="https://citation.is/check?u=${encodeURIComponent(host)}" target="_blank">
     <rect width="240" height="72" rx="8" fill="url(#bg)" stroke="#27272a"/>
     <g transform="translate(36,36)">
       <circle r="24" fill="none" stroke="#27272a" stroke-width="4"/>
@@ -46,7 +46,7 @@ function badgeSvg(score: number, host: string): string {
     <g transform="translate(74,26)">
       <text fill="${color}" font-size="9" font-weight="600" letter-spacing="1.5" font-family="ui-monospace,monospace">${tag}</text>
       <text y="14" fill="#fafafa" font-size="13" font-weight="600" font-family="ui-sans-serif,system-ui,sans-serif">Agent-Native</text>
-      <text y="30" fill="#71717a" font-size="9" font-family="ui-monospace,monospace">grow.contact · ${safeHost}</text>
+      <text y="30" fill="#71717a" font-size="9" font-family="ui-monospace,monospace">citation.is · ${safeHost}</text>
     </g>
   </a>
 </svg>`;

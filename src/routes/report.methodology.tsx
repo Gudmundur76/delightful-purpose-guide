@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
-const PAGE_URL = "https://grow.contact/report/methodology";
+const PAGE_URL = "https://citation.is/report/methodology";
 
 export const Route = createFileRoute("/report/methodology")({
   component: MethodologyPage,
@@ -23,8 +23,8 @@ export const Route = createFileRoute("/report/methodology")({
           "@type": "TechArticle",
           headline: "Methodology — State of the Agent-Readable Web",
           url: PAGE_URL,
-          author: { "@type": "Organization", name: "grow.contact" },
-          publisher: { "@type": "Organization", name: "grow.contact", url: "https://grow.contact" },
+          author: { "@type": "Organization", name: "citation.is" },
+          publisher: { "@type": "Organization", name: "citation.is", url: "https://citation.is" },
           inLanguage: "en",
           license: "https://creativecommons.org/licenses/by/4.0/",
         }),
@@ -109,7 +109,7 @@ function MethodologyPage() {
         </Section>
 
         <Section id="license" title="License & attribution">
-          <p>Report text, headline statistics, and the underlying dataset are licensed CC BY 4.0. Attribution: "grow.contact, State of the Agent-Readable Web (CC BY 4.0)" with a link back to the report URL.</p>
+          <p>Report text, headline statistics, and the underlying dataset are licensed CC BY 4.0. Attribution: "citation.is, State of the Agent-Readable Web (CC BY 4.0)" with a link back to the report URL.</p>
           <p>Dataset endpoint: <a href="/api/public/leaderboard.json" className="text-accent hover:underline">/api/public/leaderboard.json</a></p>
         </Section>
 
@@ -123,7 +123,7 @@ function MethodologyPage() {
 
         <footer className="pt-8 border-t border-border text-sm text-muted-foreground">
           <p>
-            Questions or corrections: <a href="mailto:hello@grow.contact" className="text-accent hover:underline">hello@grow.contact</a>.
+            Questions or corrections: <a href="mailto:hello@citation.is" className="text-accent hover:underline">hello@citation.is</a>.
             Press kit and downloadable charts: <Link to="/report/press" className="text-accent hover:underline">/report/press</Link>.
           </p>
         </footer>

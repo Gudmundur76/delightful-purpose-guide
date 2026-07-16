@@ -71,7 +71,7 @@ export default function HomePage() {
       <footer className="border-t border-slate-200">
         <div className="max-w-5xl mx-auto px-6 py-8 text-sm text-slate-500 flex justify-between">
           <span>© {new Date().getFullYear()} {f.name}</span>
-          <span>Powered by <a href="https://grow.contact" className="underline">grow.contact</a></span>
+          <span>Powered by <a href="https://citation.is" className="underline">citation.is</a></span>
         </div>
       </footer>
     </main>

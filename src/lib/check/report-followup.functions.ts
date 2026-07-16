@@ -36,7 +36,7 @@ export const sendReportFollowup = createServerFn({ method: "POST" })
 
     // Lock url/score to a real scan we performed server-side. This stops
     // attackers from using this endpoint as an open relay that embeds
-    // arbitrary URLs in grow.contact-branded emails.
+    // arbitrary URLs in citation.is-branded emails.
     const host = normalizeHost(data.url);
     if (!host) {
       return { ok: false, error: "invalid_url" as const };

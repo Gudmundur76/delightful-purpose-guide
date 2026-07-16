@@ -48,16 +48,16 @@ export const Route = createFileRoute("/api/public/leaderboard.json")({
           total_citations_30d: r.total_citations,
           citations_24h: r.citations_24h,
           volatility: r.volatility,
-          verify_url: `https://grow.contact/verify/${r.domain}`,
-          badge_url: `https://grow.contact/badge/${r.domain}.svg`,
+          verify_url: `https://citation.is/verify/${r.domain}`,
+          badge_url: `https://citation.is/badge/${r.domain}.svg`,
         }));
 
         const body = {
           generated_at,
           standard: "ccs@2026.05",
           model: "Citation Corpus Score",
-          attribution: "grow.contact Citation Intelligence Index (CC BY 4.0)",
-          methodology_url: "https://grow.contact/leaderboard/methodology",
+          attribution: "citation.is Citation Intelligence Index (CC BY 4.0)",
+          methodology_url: "https://citation.is/leaderboard/methodology",
           methodology: {
             scale: "0-100",
             pillars: {

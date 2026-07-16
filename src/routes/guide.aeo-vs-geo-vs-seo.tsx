@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const URL = "https://grow.contact/guide/aeo-vs-geo-vs-seo";
+const URL = "https://citation.is/guide/aeo-vs-geo-vs-seo";
 const TITLE = "AEO vs GEO vs SEO: What's the Difference? (2026)";
 const DESCRIPTION =
   "AEO vs GEO vs SEO compared in plain English: what each acronym means, what it optimizes for, which crawlers matter, and the one technical checklist that covers all three.";
@@ -68,8 +68,8 @@ export const Route = createFileRoute("/guide/aeo-vs-geo-vs-seo")({
           datePublished: PUBLISHED,
           dateModified: UPDATED,
           inLanguage: "en",
-          author: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
-          publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
+          author: { "@type": "Organization", name: "Grow", url: "https://citation.is/" },
+          publisher: { "@type": "Organization", name: "Grow", url: "https://citation.is/" },
           mainEntityOfPage: URL,
         }),
       },
@@ -91,8 +91,8 @@ export const Route = createFileRoute("/guide/aeo-vs-geo-vs-seo")({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
-            { "@type": "ListItem", position: 2, name: "Guides", item: "https://grow.contact/guide" },
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://citation.is/" },
+            { "@type": "ListItem", position: 2, name: "Guides", item: "https://citation.is/guide" },
             { "@type": "ListItem", position: 3, name: "AEO vs GEO vs SEO", item: URL },
           ],
         }),

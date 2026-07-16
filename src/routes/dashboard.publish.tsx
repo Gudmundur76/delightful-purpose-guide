@@ -133,7 +133,7 @@ function LlmsTxtCard() {
         <input
           value={domain}
           onChange={(e) => setDomain(e.target.value)}
-          placeholder="domain (e.g. grow.contact)"
+          placeholder="domain (e.g. citation.is)"
           className="bg-background border border-border px-3 py-2 font-mono text-sm focus:outline-none focus:border-accent"
         />
       </div>

@@ -301,7 +301,7 @@ function ReportPage() {
 
         {/* Print footer */}
         <footer className="hidden print:block mt-12 pt-6 border-t border-border text-[10px] font-mono text-muted-foreground">
-          grow.contact · Agent Readability Report · {today} · Prepared for {e || "—"}
+          citation.is · Agent Readability Report · {today} · Prepared for {e || "—"}
         </footer>
       </main>
 

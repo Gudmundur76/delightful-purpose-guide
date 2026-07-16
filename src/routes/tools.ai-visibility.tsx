@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { checkAiVisibility } from "@/lib/tools/ai-visibility.functions";
+import { checkAiVisibility, type EngineResult } from "@/lib/tools/ai-visibility.functions";
 import { CheckCircle2, Loader2, XCircle } from "lucide-react";
 
 const URL_ = "https://grow.contact/tools/ai-visibility";
@@ -121,7 +121,7 @@ function AiVisibility() {
                 </div>
               </div>
 
-              {data.results.map((r) => (
+              {data.results.map((r: EngineResult) => (
                 <div key={r.engine} className="rounded-md border border-border bg-card p-4">
                   <div className="flex items-center justify-between">
                     <h3 className="font-medium">{r.engine}</h3>
@@ -155,7 +155,7 @@ function AiVisibility() {
                             Sources returned
                           </p>
                           <ul className="mt-1 space-y-1">
-                            {r.citations.slice(0, 8).map((c) => (
+                            {r.citations.slice(0, 8).map((c: string) => (
                               <li key={c} className="text-xs break-all">
                                 <a
                                   href={c}

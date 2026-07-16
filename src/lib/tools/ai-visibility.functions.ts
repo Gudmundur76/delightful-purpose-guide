@@ -6,7 +6,7 @@ const InputSchema = z.object({
   query: z.string().min(3).max(280),
 });
 
-type EngineResult = {
+export type EngineResult = {
   engine: string;
   cited: boolean;
   mentions: number;

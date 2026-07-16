@@ -181,15 +181,6 @@ function CitationLanding() {
           </section>
         </main>
 
-        <div className="ct-logos">
-          <div className="ct-logos-track">
-            {Array.from({ length: 4 }).flatMap((_, r) =>
-              LOGOS.map((l, i) => (
-                <img key={`${r}-${i}`} src={l} alt="" className="ct-logo-item" />
-              )),
-            )}
-          </div>
-        </div>
       </div>
     </>
   );

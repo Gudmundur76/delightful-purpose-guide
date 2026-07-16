@@ -49,7 +49,7 @@ const LOGOS = [
 ];
 
 const HEADLINE = "Unlock AI Citations You Thought Were Out of Reach — Now Just One Click Away!";
-const DARK_LEN = 46; // "Unlock AI Citations You Thought Were Out of Reach"[..46]
+const DARK_LEN = 52; // through the em dash + space
 
 function useCountUp(target: number, duration = 2000, delay = 1200) {
   const [value, setValue] = useState(0);

@@ -221,11 +221,11 @@ const css = `
 .ct-brand-mark {
   display: inline-grid; place-items: center;
   width: 32px; height: 32px; border-radius: 10px;
-  background: #000; color: #A068FF; font-size: 20px; line-height: 1;
-  box-shadow: 0 0 0 2px rgba(160,104,255,0.35);
+  background: #000; color: #9e9e9e; font-size: 20px; line-height: 1;
+  box-shadow: 0 0 0 2px rgba(158,158,158,0.35);
 }
 .ct-brand { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: 22px; color: #000; letter-spacing: -0.5px; }
-.ct-brand-dot { color: #A068FF; }
+.ct-brand-dot { color: #9e9e9e; }
 .ct-nav { display: flex; gap: 32px; }
 .ct-nav a, .ct-login {
   color: #000; font-size: 15px; font-weight: 400; text-decoration: none;

@@ -6,17 +6,17 @@ const CONTENT = `# Agent-Readability Leaderboard
 
 ## Pages
 
-- [Leaderboard](https://grow.contact/leaderboard) — Filterable by category and failing signal
-- [Methodology](https://grow.contact/leaderboard/methodology) — Scoring weights, pass thresholds, refresh cadence
-- [State of the Agent-Readable Web](https://grow.contact/stats) — Permanent citable-stats page
+- [Leaderboard](https://citation.is/leaderboard) — Filterable by category and failing signal
+- [Methodology](https://citation.is/leaderboard/methodology) — Scoring weights, pass thresholds, refresh cadence
+- [State of the Agent-Readable Web](https://citation.is/stats) — Permanent citable-stats page
 
 ## Data endpoints
 
-- [Live JSON](https://grow.contact/api/public/leaderboard.json) — Full current dataset, CORS-open
-- [Live leaderboard.json](https://grow.contact/data/leaderboard.json) — Same data, /data/ namespace
-- [Live stats.json](https://grow.contact/data/stats.json) — Headline statistics, computed from current dataset
-- [Live claims.json](https://grow.contact/data/claims.json) — Every quotable claim with verifiableClaim JSON-LD
-- [Q2 2026 archive](https://grow.contact/data/q2-2026/) — Frozen snapshot for citations that must not drift
+- [Live JSON](https://citation.is/api/public/leaderboard.json) — Full current dataset, CORS-open
+- [Live leaderboard.json](https://citation.is/data/leaderboard.json) — Same data, /data/ namespace
+- [Live stats.json](https://citation.is/data/stats.json) — Headline statistics, computed from current dataset
+- [Live claims.json](https://citation.is/data/claims.json) — Every quotable claim with verifiableClaim JSON-LD
+- [Q2 2026 archive](https://citation.is/data/q2-2026/) — Frozen snapshot for citations that must not drift
 
 ## Quotable headline stats (Q2 2026)
 
@@ -30,13 +30,13 @@ Each stat above has a stable anchor on /stats and a verifiableClaim entry in /da
 
 ## Research
 
-- [Q2 2026 Report](https://grow.contact/report/q2-2026) — Quarterly flagship
-- [Data Drops](https://grow.contact/data-drops) — Monthly single-stat findings between reports
-- [Press Kit](https://grow.contact/report/press) — Pull quotes, headline stats, media contact
+- [Q2 2026 Report](https://citation.is/report/q2-2026) — Quarterly flagship
+- [Data Drops](https://citation.is/data-drops) — Monthly single-stat findings between reports
+- [Press Kit](https://citation.is/report/press) — Pull quotes, headline stats, media contact
 
 ## Licensing
 
-Dataset: CC BY 4.0. Cite as: "grow.contact Agent-Readability Leaderboard, accessed YYYY-MM-DD, https://grow.contact/leaderboard".
+Dataset: CC BY 4.0. Cite as: "citation.is Agent-Readability Leaderboard, accessed YYYY-MM-DD, https://citation.is/leaderboard".
 `;
 
 export const Route = createFileRoute("/leaderboard/llms.txt")({

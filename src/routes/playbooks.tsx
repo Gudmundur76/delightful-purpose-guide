@@ -5,7 +5,7 @@ import { PLAYBOOKS } from "@/lib/playbooks/data";
 import { ArrowRight, Clock } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const URL_ = "https://grow.contact/playbooks";
+const URL_ = "https://citation.is/playbooks";
 const TITLE = "GEO playbooks — tactical, step-by-step AI citation guides";
 const DESC =
   "Short, opinionated playbooks for earning AI citations: robots.txt for ChatGPT, llms.txt in ten minutes, Cloudflare WAF fixes, Perplexity listicle format, and more. Each one ships HowTo JSON-LD so engines can lift the steps verbatim.";
@@ -42,7 +42,7 @@ export const Route = createFileRoute("/playbooks")({
           itemListElement: PLAYBOOKS.map((p, i) => ({
             "@type": "ListItem",
             position: i + 1,
-            url: `https://grow.contact/playbooks/${p.slug}`,
+            url: `https://citation.is/playbooks/${p.slug}`,
             name: p.title,
           })),
         }),

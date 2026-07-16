@@ -53,4 +53,4 @@ export const STANDARD_LICENSE = {
   url: "https://creativecommons.org/licenses/by/4.0/",
 };
 
-export const STANDARD_CANONICAL_URL = "https://grow.contact/standard";
+export const STANDARD_CANONICAL_URL = "https://citation.is/standard";

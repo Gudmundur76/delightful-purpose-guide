@@ -1,4 +1,4 @@
-// WebMCP — exposes grow.contact's key actions to in-browser AI agents.
+// WebMCP — exposes citation.is's key actions to in-browser AI agents.
 // https://webmachinelearning.github.io/webmcp/
 // https://developer.chrome.com/blog/webmcp-epp
 //
@@ -23,7 +23,7 @@ const tools: WebMcpTool[] = [
   {
     name: "analyze_url_readiness",
     description:
-      "Run grow.contact's GEO/AEO agent-readiness analyzer on any public URL. Returns a score and a list of findings (missing llms.txt, schema gaps, MCP discoverability, etc.).",
+      "Run citation.is's GEO/AEO agent-readiness analyzer on any public URL. Returns a score and a list of findings (missing llms.txt, schema gaps, MCP discoverability, etc.).",
     inputSchema: {
       type: "object",
       properties: {
@@ -47,7 +47,7 @@ const tools: WebMcpTool[] = [
   {
     name: "open_standard",
     description:
-      "Open the Agent-Native Web Standard — the free, open specification behind grow.contact's scoring.",
+      "Open the Agent-Native Web Standard — the free, open specification behind citation.is's scoring.",
     inputSchema: { type: "object", properties: {} },
     execute: async () => {
       window.location.href = "/standard";
@@ -57,7 +57,7 @@ const tools: WebMcpTool[] = [
   {
     name: "open_scanner",
     description:
-      "Open the free grow.contact scanner to score any URL against the Agent-Native Web Standard.",
+      "Open the free citation.is scanner to score any URL against the Agent-Native Web Standard.",
     inputSchema: {
       type: "object",
       properties: {

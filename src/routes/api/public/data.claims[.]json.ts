@@ -16,9 +16,9 @@ export const Route = createFileRoute("/api/public/data/claims.json")({
           date_modified: CLAIMS_DATE_MODIFIED,
           standard: "agent-verifiable-standard@2.1",
           license: "https://creativecommons.org/licenses/by/4.0/",
-          attribution: "grow.contact verifiable-claims registry (CC BY 4.0)",
-          docs: "https://grow.contact/data",
-          archive_q2_2026: "https://grow.contact/data/q2-2026/claims.json",
+          attribution: "citation.is verifiable-claims registry (CC BY 4.0)",
+          docs: "https://citation.is/data",
+          archive_q2_2026: "https://citation.is/data/q2-2026/claims.json",
           trust_handshake: {
             repository: GITHUB_REPO_URL,
             build_ref: BUILD_REF,

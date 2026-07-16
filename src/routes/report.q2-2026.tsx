@@ -9,8 +9,8 @@ import { CitationSnippet } from "@/components/CitationSnippet";
 import { InformationGainIndicator } from "@/components/InformationGainIndicator";
 import { verifiableClaim, claimCitation, DATA_URLS } from "@/lib/seo/verifiable";
 
-const PAGE_URL = "https://grow.contact/report/q2-2026";
-const PDF_URL = "https://grow.contact/report/q2-2026.pdf";
+const PAGE_URL = "https://citation.is/report/q2-2026";
+const PDF_URL = "https://citation.is/report/q2-2026.pdf";
 const PUBLISHED = "2026-05-28";
 const REPORT_TITLE = "State of the Agent-Readable Web — Q2 2026";
 const AUTHOR = AUTHORS.find((a) => a.slug === DEFAULT_AUTHOR_SLUG)!;
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/report/q2-2026")({
         { property: "og:url", content: PAGE_URL },
         { property: "og:type", content: "article" },
         { property: "article:published_time", content: PUBLISHED },
-        { property: "article:author", content: "grow.contact" },
+        { property: "article:author", content: "citation.is" },
       ],
       links: [{ rel: "canonical", href: PAGE_URL }],
       scripts: s
@@ -51,8 +51,8 @@ export const Route = createFileRoute("/report/q2-2026")({
                 inLanguage: "en",
                 url: PAGE_URL,
                 author: personJsonLd(AUTHOR),
-                publisher: { "@type": "Organization", name: "grow.contact", url: "https://grow.contact" },
-                isBasedOn: "https://grow.contact/leaderboard",
+                publisher: { "@type": "Organization", name: "citation.is", url: "https://citation.is" },
+                isBasedOn: "https://citation.is/leaderboard",
                 license: "https://creativecommons.org/licenses/by/4.0/",
                 about: "Agent-readability and AI citation rates across the AI industry",
                 abstract: description,
@@ -84,9 +84,9 @@ export const Route = createFileRoute("/report/q2-2026")({
                 "@type": "Dataset",
                 name: "Agent Readability Leaderboard",
                 description: `Dataset underlying ${REPORT_TITLE} — ${s.total} AI companies scored across five signals.`,
-                url: "https://grow.contact/leaderboard",
+                url: "https://citation.is/leaderboard",
                 license: "https://creativecommons.org/licenses/by/4.0/",
-                creator: { "@type": "Organization", name: "grow.contact" },
+                creator: { "@type": "Organization", name: "citation.is" },
                 distribution: [
                   {
                     "@type": "DataDownload",
@@ -179,10 +179,10 @@ function ReportPage() {
         <CitationSnippet
           className="mb-12"
           citation={{
-            authors: [AUTHOR.name, "grow.contact"],
+            authors: [AUTHOR.name, "citation.is"],
             year: 2026,
             title: REPORT_TITLE,
-            publisher: "grow.contact",
+            publisher: "citation.is",
             url: PAGE_URL,
             accessed: PUBLISHED,
             key: "grow-q2-2026",
@@ -290,15 +290,15 @@ function ReportPage() {
             <div>
               <p className="text-muted-foreground mb-1">APA</p>
               <p className="select-all bg-card border border-border p-3">
-                grow.contact (2026). State of the Agent-Readable Web — Q2 2026. Retrieved from {PAGE_URL}
+                citation.is (2026). State of the Agent-Readable Web — Q2 2026. Retrieved from {PAGE_URL}
               </p>
             </div>
             <div>
               <p className="text-muted-foreground mb-1">BibTeX</p>
               <pre className="select-all bg-card border border-border p-3 overflow-x-auto whitespace-pre-wrap">{`@techreport{grow_aiweb_q2_2026,
-  author      = {{grow.contact}},
+  author      = {{citation.is}},
   title       = {State of the Agent-Readable Web --- Q2 2026},
-  institution = {grow.contact},
+  institution = {citation.is},
   year        = {2026},
   month       = {May},
   url         = {${PAGE_URL}},
@@ -308,7 +308,7 @@ function ReportPage() {
             <div>
               <p className="text-muted-foreground mb-1">Pull quote</p>
               <p className="select-all bg-card border border-border p-3 not-italic">
-                "{stats.missing_llms_txt_pct}% of {stats.total} top AI companies ship no usable llms.txt — and {stats.opaque_pct}% score below the threshold AI engines will cite by name." — grow.contact, Q2 2026 report
+                "{stats.missing_llms_txt_pct}% of {stats.total} top AI companies ship no usable llms.txt — and {stats.opaque_pct}% score below the threshold AI engines will cite by name." — citation.is, Q2 2026 report
               </p>
             </div>
           </div>

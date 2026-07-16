@@ -1,6 +1,6 @@
 // RFC 9728 — OAuth 2.0 Protected Resource Metadata (PRM)
 // Advertises the authorization server, scopes, and bearer-token usage for
-// grow.contact's protected resources (public REST API + MCP endpoint).
+// citation.is's protected resources (public REST API + MCP endpoint).
 import { createFileRoute } from "@tanstack/react-router";
 import { buildLinkHeader, oauthProtectedResourceMetadata } from "../lib/agent-protocol";
 

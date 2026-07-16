@@ -1,7 +1,7 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
 
-// Runs grow.contact's GEO scanner against a URL. Read-only; safe to call
+// Runs citation.is's GEO scanner against a URL. Read-only; safe to call
 // unauthenticated flows won't reach this — /mcp requires OAuth.
 export default defineTool({
   name: "scan_url",

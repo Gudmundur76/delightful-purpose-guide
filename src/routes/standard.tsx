@@ -10,7 +10,7 @@ import {
 import { CitationSnippet } from "@/components/CitationSnippet";
 import { InformationGainIndicator } from "@/components/InformationGainIndicator";
 
-const PAGE_URL = "https://grow.contact/standard";
+const PAGE_URL = "https://citation.is/standard";
 
 export const Route = createFileRoute("/standard")({
   component: StandardIndex,
@@ -58,12 +58,12 @@ export const Route = createFileRoute("/standard")({
             hasPart: STANDARD_VERSIONS.map((v) => ({
               "@type": "TechArticle",
               name: `The Agent-Native Web Standard, ${v.label}`,
-              url: `https://grow.contact/standard/${v.slug}`,
+              url: `https://citation.is/standard/${v.slug}`,
               version: v.buildId,
               datePublished: v.publishedAt,
             })),
-            author: { "@type": "Organization", name: "grow.contact", url: "https://grow.contact" },
-            publisher: { "@type": "Organization", name: "grow.contact", url: "https://grow.contact" },
+            author: { "@type": "Organization", name: "citation.is", url: "https://citation.is" },
+            publisher: { "@type": "Organization", name: "citation.is", url: "https://citation.is" },
           }),
         },
       ],
@@ -130,10 +130,10 @@ function StandardIndex() {
         <CitationSnippet
           className="mb-12"
           citation={{
-            authors: ["grow.contact"],
+            authors: ["citation.is"],
             year: new Date(current.publishedAt).getFullYear(),
             title: `The Agent-Native Web Standard, ${current.label}`,
-            publisher: "grow.contact",
+            publisher: "citation.is",
             url: `${PAGE_URL}/${current.slug}`,
             accessed: current.publishedAt,
             key: `grow-standard-${current.slug}`,
@@ -251,8 +251,8 @@ function StandardIndex() {
               source.
             </p>
             <p className="font-mono text-xs bg-card border border-border p-4 text-foreground">
-              grow.contact (2026). The Agent-Native Web Standard, {current.label}.{" "}
-              {current.buildId}. https://grow.contact/standard/{current.slug}
+              citation.is (2026). The Agent-Native Web Standard, {current.label}.{" "}
+              {current.buildId}. https://citation.is/standard/{current.slug}
             </p>
           </div>
         </section>

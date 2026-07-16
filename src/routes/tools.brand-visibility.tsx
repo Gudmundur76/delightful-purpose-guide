@@ -8,7 +8,7 @@ import { ogImageMeta } from "@/lib/seo/og";
 import { auditBrandVisibility, type BrandVisibilityReport } from "@/lib/tools/brand-visibility.functions";
 import { Loader2, Search, CheckCircle2, XCircle } from "lucide-react";
 
-const URL_ = "https://grow.contact/tools/brand-visibility";
+const URL_ = "https://citation.is/tools/brand-visibility";
 const TITLE = "Brand visibility in AI answers — free audit across ChatGPT, Gemini & Perplexity";
 const DESC =
   "Enter a domain. We derive the buyer questions AI assistants get in your category, run them across Gemini and GPT, and tell you your visibility %, average rank, and who's beating you. Free, no signup.";
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/tools/brand-visibility")({
       { name: "twitter:description", content: DESC },
       ...ogImageMeta({
         title: "Are you cited by ChatGPT & Gemini?",
-        kicker: "grow.contact / tools",
+        kicker: "citation.is / tools",
         sub: "Free domain-only visibility audit. 8 real buyer prompts × 2 engines.",
       }),
     ],

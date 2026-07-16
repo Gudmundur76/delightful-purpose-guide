@@ -9,9 +9,9 @@ export const Route = createFileRoute("/cookies")({
       { name: "description", content: "How Grow Studio uses cookies and similar technologies." },
       { property: "og:title", content: "Cookie Policy — Grow" },
       { property: "og:description", content: "How Grow Studio uses cookies and similar technologies." },
-      { property: "og:url", content: "https://grow.contact/cookies" },
+      { property: "og:url", content: "https://citation.is/cookies" },
     ],
-    links: [{ rel: "canonical", href: "https://grow.contact/cookies" }],
+    links: [{ rel: "canonical", href: "https://citation.is/cookies" }],
   }),
   component: CookiesPage,
 });

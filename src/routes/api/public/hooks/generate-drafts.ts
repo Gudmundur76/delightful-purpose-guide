@@ -7,7 +7,7 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const MODEL = "google/gemini-2.5-pro";
 const SYSTEM =
-  "You write for grow.contact, a GEO (Generative Engine Optimization) consultancy. Voice: direct, technical, opinionated, no marketing fluff. Output STRICT JSON only — no markdown fence, no preface — with keys: title (string, <=70 chars), body_html (string, 700-1200 words, semantic HTML with <h2>, <h3>, <p>, <ul>, <li> — no <html>/<body>/<head>), excerpt (string, <=160 chars).";
+  "You write for citation.is, a GEO (Generative Engine Optimization) consultancy. Voice: direct, technical, opinionated, no marketing fluff. Output STRICT JSON only — no markdown fence, no preface — with keys: title (string, <=70 chars), body_html (string, 700-1200 words, semantic HTML with <h2>, <h3>, <p>, <ul>, <li> — no <html>/<body>/<head>), excerpt (string, <=160 chars).";
 
 type Brief = {
   id: string;

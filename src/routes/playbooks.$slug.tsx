@@ -14,7 +14,7 @@ export const Route = createFileRoute("/playbooks/$slug")({
   head: ({ loaderData }) => {
     const p = loaderData?.playbook;
     if (!p) return { meta: [{ title: "Playbook — Grow" }] };
-    const url = `https://grow.contact/playbooks/${p.slug}`;
+    const url = `https://citation.is/playbooks/${p.slug}`;
     const title = `${p.title} — GEO Playbook`;
     return {
       meta: [
@@ -80,8 +80,8 @@ export const Route = createFileRoute("/playbooks/$slug")({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
-              { "@type": "ListItem", position: 2, name: "Playbooks", item: "https://grow.contact/playbooks" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://citation.is/" },
+              { "@type": "ListItem", position: 2, name: "Playbooks", item: "https://citation.is/playbooks" },
               { "@type": "ListItem", position: 3, name: p.title, item: url },
             ],
           }),

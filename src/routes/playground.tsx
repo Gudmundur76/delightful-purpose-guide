@@ -8,10 +8,10 @@ import { InstallSnippets } from "@/components/playground/InstallSnippets";
 import { TOOLS } from "@/lib/playground/catalog";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const TITLE = "AEO Tool & LLM SEO Checker — grow.contact Playground";
+const TITLE = "AEO Tool & LLM SEO Checker — citation.is Playground";
 const DESC =
   "Free AEO tool and LLM SEO checker: scan any URL for ChatGPT, Perplexity, Claude, and Google AI Overviews readiness. Run 90+ MCP tools in the browser — validate JSON-LD, llms.txt, semantic HTML, and edge caching.";
-const URL = "https://grow.contact/playground";
+const URL = "https://citation.is/playground";
 
 export const Route = createFileRoute("/playground")({
   head: () => ({
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/playground")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
-          name: "grow.contact MCP Playground",
+          name: "citation.is MCP Playground",
           applicationCategory: "DeveloperApplication",
           operatingSystem: "Web",
           description: DESC,

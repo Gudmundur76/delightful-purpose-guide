@@ -13,7 +13,7 @@ export const Route = createFileRoute("/api/public/v1/posts/$slug")({
         if (!post) return jsonResponse({ error: "Post not found" }, 404);
         return jsonResponse({
           ...post,
-          url: `https://grow.contact/blog/${post.slug}`,
+          url: `https://citation.is/blog/${post.slug}`,
         });
       },
     },

@@ -15,9 +15,9 @@ export const Route = createFileRoute("/api/public/data/stats.json")({
           date_modified: new Date().toISOString().slice(0, 10),
           standard: "geo-standard@2026.07",
           license: "https://creativecommons.org/licenses/by/4.0/",
-          attribution: "grow.contact Agent Readability Leaderboard (CC BY 4.0)",
-          methodology_url: "https://grow.contact/leaderboard/methodology",
-          archive_q2_2026: "https://grow.contact/data/q2-2026/stats.json",
+          attribution: "citation.is Agent Readability Leaderboard (CC BY 4.0)",
+          methodology_url: "https://citation.is/leaderboard/methodology",
+          archive_q2_2026: "https://citation.is/data/q2-2026/stats.json",
           sample_size: LEADERBOARD.length,
           stats,
         };

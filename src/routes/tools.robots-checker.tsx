@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 import { CheckCircle2, XCircle, AlertTriangle, Copy } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const URL_ = "https://grow.contact/tools/robots-checker";
+const URL_ = "https://citation.is/tools/robots-checker";
 const TITLE = "robots.txt checker for AI crawlers — free, no signup";
 const DESC =
   "Paste your robots.txt and we&rsquo;ll tell you which AI engines can still cite you. Covers ChatGPT, Perplexity, Claude, Google AI Overviews, Bing Copilot, and Meta AI. No signup, no email required.";

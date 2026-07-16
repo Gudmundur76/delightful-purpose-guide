@@ -34,7 +34,7 @@ const DATASETS = [
       "source_url": "https://www.brightedge.com/resources/research-reports/ai-overviews",
       "date_observed": "2025-12-01",
       "unit": "PERCENT",
-      "page_anchors": ["https://grow.contact/#home-stat-83"]
+      "page_anchors": ["https://citation.is/#home-stat-83"]
     }
   ]
 }`,
@@ -86,8 +86,8 @@ const DATASETS = [
       "category": "models",
       "score": 94,
       "signals": { "semantic": 24, "json_ld": 19, "llms_txt": 15, "citability": 18, "speed": 18 },
-      "verify_url": "https://grow.contact/verify/anthropic.com",
-      "badge_url": "https://grow.contact/badge/anthropic.com.svg"
+      "verify_url": "https://citation.is/verify/anthropic.com",
+      "badge_url": "https://citation.is/badge/anthropic.com.svg"
     }
   ]
 }`,
@@ -97,13 +97,13 @@ const DATASETS = [
 export const Route = createFileRoute("/data/")({
   head: () => ({
     meta: [
-      { title: "Public data API — grow.contact Verifiability Layer" },
+      { title: "Public data API — citation.is Verifiability Layer" },
       {
         name: "description",
         content:
-          "Open JSON endpoints and JSON Schemas for the grow.contact verifiable claims, headline stats, and Agent Readability Leaderboard. CC BY 4.0.",
+          "Open JSON endpoints and JSON Schemas for the citation.is verifiable claims, headline stats, and Agent Readability Leaderboard. CC BY 4.0.",
       },
-      { property: "og:title", content: "Public data API — grow.contact Verifiability Layer" },
+      { property: "og:title", content: "Public data API — citation.is Verifiability Layer" },
       {
         property: "og:description",
         content:
@@ -115,7 +115,7 @@ export const Route = createFileRoute("/data/")({
         sub: "Open JSON endpoints + schemas, CC BY 4.0",
       }),
     ],
-    links: [{ rel: "canonical", href: "https://grow.contact/data" }],
+    links: [{ rel: "canonical", href: "https://citation.is/data" }],
   }),
 
   component: DataDocsPage,
@@ -134,7 +134,7 @@ function DataDocsPage() {
             Public data API
           </h1>
           <p className="mt-4 max-w-3xl text-lg text-muted-foreground">
-            Three open JSON endpoints back every visible statistic on grow.contact. Each
+            Three open JSON endpoints back every visible statistic on citation.is. Each
             response carries an inline <code className="font-mono text-sm">$schema</code> URL
             and validates against a published JSON Schema (Draft 2020-12). All datasets are
             released under{" "}
@@ -177,16 +177,16 @@ function DataDocsPage() {
           </p>
           <pre className="mt-4 overflow-x-auto rounded-lg border border-border bg-muted/40 p-4 text-sm">
             <code>{`# Live verifiable claims
-curl https://grow.contact/api/public/data/claims.json
+curl https://citation.is/api/public/data/claims.json
 
 # Headline stats (re-derived per request)
-curl https://grow.contact/api/public/data/stats.json
+curl https://citation.is/api/public/data/stats.json
 
 # Leaderboard, filtered + paginated
-curl 'https://grow.contact/api/public/data/leaderboard.json?category=models&limit=25'
+curl 'https://citation.is/api/public/data/leaderboard.json?category=models&limit=25'
 
 # Validate against schema
-curl https://grow.contact/api/public/data/schemas/claims.schema.json | jq .`}</code>
+curl https://citation.is/api/public/data/schemas/claims.schema.json | jq .`}</code>
           </pre>
         </section>
 
@@ -263,7 +263,7 @@ curl https://grow.contact/api/public/data/schemas/claims.schema.json | jq .`}</c
             <li>
               <strong className="text-foreground">Attribution.</strong> When citing,
               include the source URL and{" "}
-              <code>“grow.contact Agent Readability — CC BY 4.0”</code>.
+              <code>“citation.is Agent Readability — CC BY 4.0”</code>.
             </li>
           </ul>
         </section>

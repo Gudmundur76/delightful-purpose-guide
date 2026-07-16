@@ -13,7 +13,7 @@ export const Route = createFileRoute("/api/public/v1/context")({
           return Response.json(
             {
               "@context": {
-                akn: "https://grow.contact/standard#",
+                akn: "https://citation.is/standard#",
                 schema: "https://schema.org/",
                 rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
               },

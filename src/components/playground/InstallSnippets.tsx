@@ -4,7 +4,7 @@ import { Check, Copy } from "lucide-react";
 const TABS = ["Claude Desktop", "ChatGPT", "cURL", "n8n", "mcp.json"] as const;
 type Tab = (typeof TABS)[number];
 
-const ENDPOINT = "https://grow.contact/api/public/mcp";
+const ENDPOINT = "https://citation.is/api/public/mcp";
 
 const SNIPPETS: Record<Tab, { lang: string; code: string }> = {
   "Claude Desktop": {
@@ -23,7 +23,7 @@ const SNIPPETS: Record<Tab, { lang: string; code: string }> = {
   ChatGPT: {
     lang: "text",
     code: `In a Custom GPT → Actions → Import OpenAPI:
-${"https://grow.contact/api/public/v1/openapi.json"}
+${"https://citation.is/api/public/v1/openapi.json"}
 
 For the MCP endpoint (Custom Connector beta):
 URL:    ${ENDPOINT}
@@ -60,11 +60,11 @@ Or HTTP Request node:
   "mcp.json": {
     lang: "json",
     code: `// Discovery — no auth required
-GET https://grow.contact/.well-known/mcp.json
-GET https://grow.contact/.well-known/mcp/server-card.json
+GET https://citation.is/.well-known/mcp.json
+GET https://citation.is/.well-known/mcp/server-card.json
 
 // OAuth (gets you an MCP_SECRET)
-POST https://grow.contact/api/public/oauth/token`,
+POST https://citation.is/api/public/oauth/token`,
   },
 };
 

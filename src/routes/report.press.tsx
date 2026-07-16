@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { computeHeadlineStats } from "@/lib/leaderboard/stats";
 
-const PAGE_URL = "https://grow.contact/report/press";
+const PAGE_URL = "https://citation.is/report/press";
 
 export const Route = createFileRoute("/report/press")({
   component: PressPage,
@@ -48,7 +48,7 @@ function PressPage() {
           <p className="text-lg text-muted-foreground">
             Everything you need to cite the State of the Agent-Readable Web report.
             All assets and figures are CC BY 4.0 — use them freely with attribution
-            to grow.contact.
+            to citation.is.
           </p>
         </header>
 
@@ -56,7 +56,7 @@ function PressPage() {
           <h2 className="text-2xl font-bold mb-4">Media contact</h2>
           <div className="border border-border bg-card p-5 font-mono text-sm space-y-2">
             <p><span className="text-muted-foreground">Author:</span> Gudmundur Eyberg Kristjansson</p>
-            <p><span className="text-muted-foreground">Email:</span> <a href="mailto:hello@grow.contact" className="text-accent hover:underline">hello@grow.contact</a></p>
+            <p><span className="text-muted-foreground">Email:</span> <a href="mailto:hello@citation.is" className="text-accent hover:underline">hello@citation.is</a></p>
             <p><span className="text-muted-foreground">Response time:</span> within 24 hours, weekdays</p>
             <p><span className="text-muted-foreground">Topics:</span> GEO, agent-native web, AI citation rates, llms.txt, AI crawlers</p>
           </div>
@@ -71,7 +71,7 @@ function PressPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-xs text-muted-foreground">Attribution: grow.contact, State of the Agent-Readable Web Q2 2026 (CC BY 4.0).</p>
+          <p className="mt-3 text-xs text-muted-foreground">Attribution: citation.is, State of the Agent-Readable Web Q2 2026 (CC BY 4.0).</p>
         </section>
 
         <section className="mb-10">
@@ -92,8 +92,8 @@ function PressPage() {
         <section className="mb-10">
           <h2 className="text-2xl font-bold mb-4">Author bio</h2>
           <div className="space-y-3 text-base leading-relaxed text-muted-foreground">
-            <p><strong className="text-foreground">Short (50 words):</strong> Gudmundur Eyberg Kristjansson is the founder of grow.contact, an agent-native web agency that builds fixed-price, 48-hour marketing sites engineered for AI citation. The quarterly State of the Agent-Readable Web report is the firm's primary research output, drawing on an open dataset of {stats.total} AI companies.</p>
-            <p><strong className="text-foreground">Long (120 words):</strong> Gudmundur Eyberg Kristjansson runs grow.contact, the GEO and agent-native web agency that built and maintains the open Agent Readability Leaderboard — currently scoring {stats.total} AI-industry companies across five signals (Semantic HTML, JSON-LD, llms.txt, Citability, Page Speed). The firm publishes a quarterly report and monthly data drops on AI-citation readiness, all under CC BY 4.0. Prior work covers fixed-price launch builds for AI startups (Tier 01 $2,400 / 48h, Tier 02 $4,800 / 5d), the free <code>/check</code> scanner, and an open-source CLI for CI-integrated agent-readability scoring. Based in Iceland; clients across the US and EU.</p>
+            <p><strong className="text-foreground">Short (50 words):</strong> Gudmundur Eyberg Kristjansson is the founder of citation.is, an agent-native web agency that builds fixed-price, 48-hour marketing sites engineered for AI citation. The quarterly State of the Agent-Readable Web report is the firm's primary research output, drawing on an open dataset of {stats.total} AI companies.</p>
+            <p><strong className="text-foreground">Long (120 words):</strong> Gudmundur Eyberg Kristjansson runs citation.is, the GEO and agent-native web agency that built and maintains the open Agent Readability Leaderboard — currently scoring {stats.total} AI-industry companies across five signals (Semantic HTML, JSON-LD, llms.txt, Citability, Page Speed). The firm publishes a quarterly report and monthly data drops on AI-citation readiness, all under CC BY 4.0. Prior work covers fixed-price launch builds for AI startups (Tier 01 $2,400 / 48h, Tier 02 $4,800 / 5d), the free <code>/check</code> scanner, and an open-source CLI for CI-integrated agent-readability scoring. Based in Iceland; clients across the US and EU.</p>
           </div>
         </section>
 
@@ -136,7 +136,7 @@ function PressPage() {
 
         <footer className="pt-8 border-t border-border text-sm text-muted-foreground">
           <p>
-            Press inquiries: <a href="mailto:hello@grow.contact" className="text-accent hover:underline">hello@grow.contact</a>.
+            Press inquiries: <a href="mailto:hello@citation.is" className="text-accent hover:underline">hello@citation.is</a>.
             All figures sourced from the open dataset, CC BY 4.0.
           </p>
         </footer>

@@ -21,7 +21,7 @@ export const AUTHORS: Author[] = [
   {
     slug: "grow-research",
     name: "Grow Research",
-    role: "Research desk, grow.contact",
+    role: "Research desk, citation.is",
     shortBio:
       "The data desk behind the Agent Readability Leaderboard. We scan top AI companies on five GEO signals and publish the dataset under CC BY 4.0.",
     bio:
@@ -35,11 +35,11 @@ export const AUTHORS: Author[] = [
       "ChatGPT, Perplexity, Claude search indexing",
     ],
     sameAs: [
-      "https://grow.contact",
-      "https://grow.contact/report/q2-2026",
-      "https://grow.contact/leaderboard",
+      "https://citation.is",
+      "https://citation.is/report/q2-2026",
+      "https://citation.is/leaderboard",
     ],
-    email: "research@grow.contact",
+    email: "research@citation.is",
   },
 ];
 
@@ -57,13 +57,13 @@ export function personJsonLd(author: Author) {
     jobTitle: author.role,
     description: author.shortBio,
     email: `mailto:${author.email}`,
-    url: `https://grow.contact/about/author/${author.slug}`,
+    url: `https://citation.is/about/author/${author.slug}`,
     knowsAbout: author.knowsAbout,
     sameAs: author.sameAs,
     worksFor: {
       "@type": "Organization",
-      name: "grow.contact",
-      url: "https://grow.contact",
+      name: "citation.is",
+      url: "https://citation.is",
     },
   };
 }

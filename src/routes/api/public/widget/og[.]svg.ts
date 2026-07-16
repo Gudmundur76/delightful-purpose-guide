@@ -82,7 +82,7 @@ function renderSvg(title: string, kicker: string, sub: string): string {
   <!-- Footer -->
   <line x1="${padX}" y1="${H - 72}" x2="${W - padX}" y2="${H - 72}" stroke="#27272a" stroke-width="1"/>
   <text x="${padX}" y="${H - 36}" font-family="ui-sans-serif,system-ui,sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5" fill="#fafafa">GROW_</text>
-  <text x="${padX + 100}" y="${H - 36}" font-family="ui-monospace,monospace" font-size="18" fill="#71717a">agent-native websites · grow.contact</text>
+  <text x="${padX + 100}" y="${H - 36}" font-family="ui-monospace,monospace" font-size="18" fill="#71717a">agent-native websites · citation.is</text>
   <text x="${W - padX}" y="${H - 36}" font-family="ui-monospace,monospace" font-size="18" fill="#10b981" text-anchor="end">● Lighthouse 98/100</text>
 </svg>`;
 }

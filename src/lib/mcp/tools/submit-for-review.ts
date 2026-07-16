@@ -5,7 +5,7 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 export const submitForReviewTool = defineTool({
   name: "submit_for_review",
   description:
-    "Submit a preview URL for human review. Use after building or updating something autonomously — a human will approve/reject in the grow.contact /admin/reviews queue before anything goes live.",
+    "Submit a preview URL for human review. Use after building or updating something autonomously — a human will approve/reject in the citation.is /admin/reviews queue before anything goes live.",
   parameters: z.object({
     project_id: z
       .string()
@@ -41,7 +41,7 @@ export const submitForReviewTool = defineTool({
       ok: true,
       review: data,
       message:
-        "Submitted. A human will review at https://grow.contact/admin/reviews.",
+        "Submitted. A human will review at https://citation.is/admin/reviews.",
     });
   },
 });

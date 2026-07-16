@@ -76,13 +76,13 @@ export const Route = createFileRoute("/verify/$id")({
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
-        { property: "og:url", content: `https://grow.contact/verify/${params.id}` },
+        { property: "og:url", content: `https://citation.is/verify/${params.id}` },
         { property: "og:type", content: "article" },
         ...(intel?.company.logo_url
           ? [{ property: "og:image", content: intel.company.logo_url }]
           : []),
       ],
-      links: [{ rel: "canonical", href: `https://grow.contact/verify/${params.id}` }],
+      links: [{ rel: "canonical", href: `https://citation.is/verify/${params.id}` }],
       scripts: faqJsonLd
         ? [
             {
@@ -166,7 +166,7 @@ function IntelligenceView({ intel }: { intel: CompanyIntelligence }) {
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-6 py-12">
         <nav className="flex items-center gap-2 text-xs text-muted-foreground">
-          <Link to="/" className="hover:text-foreground">grow.contact</Link>
+          <Link to="/" className="hover:text-foreground">citation.is</Link>
           <span>/</span>
           <Link to="/leaderboard" className="hover:text-foreground">leaderboard</Link>
           <span>/</span>
@@ -185,7 +185,7 @@ function IntelligenceView({ intel }: { intel: CompanyIntelligence }) {
             <p className="mt-2 font-mono text-sm text-muted-foreground">{company.domain}</p>
 
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
-              {company.name} is tracked by grow.contact's Citation Intelligence Platform for
+              {company.name} is tracked by citation.is's Citation Intelligence Platform for
               presence across Perplexity, ChatGPT, Claude, and Google AI Overviews. Scores update
               monthly from automated citation probes and content analysis.
             </p>
@@ -413,7 +413,7 @@ function IntelligenceView({ intel }: { intel: CompanyIntelligence }) {
         </section>
 
         <footer className="mt-16 border-t border-border pt-6 text-xs text-muted-foreground">
-          Citation Intelligence powered by grow.contact · data updated {new Date().toISOString().slice(0, 10)}
+          Citation Intelligence powered by citation.is · data updated {new Date().toISOString().slice(0, 10)}
         </footer>
       </div>
     </div>
@@ -564,8 +564,8 @@ function ScanRecordView({ record }: { record: ScanRecord }) {
   const [copied, setCopied] = useState(false);
   const id = record.host;
 
-  const verifyUrl = `https://grow.contact/verify/${id}`;
-  const badgeImg = `https://grow.contact/badge/${id}.svg`;
+  const verifyUrl = `https://citation.is/verify/${id}`;
+  const badgeImg = `https://citation.is/badge/${id}.svg`;
   const embedSnippet = `<a href="${verifyUrl}" target="_blank" rel="noopener">
   <img src="${badgeImg}" alt="Agent Readability Score — ${record.host}" width="240" height="72" />
 </a>`;
@@ -583,7 +583,7 @@ function ScanRecordView({ record }: { record: ScanRecord }) {
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-5xl px-6 py-16">
         <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">
-          ← grow.contact
+          ← citation.is
         </Link>
 
         <div className="mt-8 flex flex-col gap-6 rounded-2xl border border-border bg-card p-8 sm:flex-row sm:items-center sm:justify-between">

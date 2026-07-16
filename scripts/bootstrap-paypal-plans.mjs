@@ -61,7 +61,7 @@ const product = await pp(t, "/v1/catalogs/products", {
   description: "Grow agent-native monitoring & scanning subscription",
   type: "SERVICE",
   category: "SOFTWARE",
-  home_url: "https://grow.contact/check",
+  home_url: "https://citation.is/check",
 });
 console.log(`[paypal] product=${product.id}`);
 

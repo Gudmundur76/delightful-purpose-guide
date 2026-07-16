@@ -91,7 +91,7 @@ export async function fetchTextSafe(url: string, timeoutMs = 8000): Promise<{ ok
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
-    const res = await fetch(url, { signal: ctrl.signal, headers: { "User-Agent": "grow.contact-auto-fix/1.0" } });
+    const res = await fetch(url, { signal: ctrl.signal, headers: { "User-Agent": "citation.is-auto-fix/1.0" } });
     const body = await res.text();
     return { ok: res.ok, status: res.status, body: body.slice(0, 200_000) };
   } catch {

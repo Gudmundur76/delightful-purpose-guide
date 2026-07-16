@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
 import { ArrowRight, Bot, Cloud, Compass, FileCode2, Gauge, Plug, ScrollText, ShieldCheck, Sparkles, Target } from "lucide-react";
 
-const URL_ = "https://grow.contact/tools";
+const URL_ = "https://citation.is/tools";
 const TITLE = "Free AI SEO & GEO tools — llms.txt, schema, AI visibility";
 const DESC =
   "A free toolkit for getting cited by AI. Generate spec-compliant llms.txt, build JSON-LD schema, check how ChatGPT and Gemini see your site, and scan for crawler access — no signup, no upsell.";
@@ -84,7 +84,7 @@ const TOOLS: Tool[] = [
   {
     href: "/mcp-server",
     title: "MCP server",
-    blurb: "Connect grow.contact to ChatGPT, Claude, or Cursor as an authenticated MCP server. Run scans and lookups from your assistant.",
+    blurb: "Connect citation.is to ChatGPT, Claude, or Cursor as an authenticated MCP server. Run scans and lookups from your assistant.",
     Icon: Bot,
     status: "core",
   },
@@ -111,7 +111,7 @@ export const Route = createFileRoute("/tools/")({
       { name: "twitter:description", content: DESC },
       ...ogImageMeta({
         title: "Free tools for getting cited by AI",
-        kicker: "grow.contact / tools",
+        kicker: "citation.is / tools",
         sub: "AI-readiness scanner, llms.txt generator, JSON-LD builder, live AI visibility check, robots.txt checker, MCP server. All free.",
       }),
     ],
@@ -122,13 +122,13 @@ export const Route = createFileRoute("/tools/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ItemList",
-          name: "Free AI SEO & GEO tools by grow.contact",
+          name: "Free AI SEO & GEO tools by citation.is",
           url: URL_,
           numberOfItems: TOOLS.length,
           itemListElement: TOOLS.map((t, i) => ({
             "@type": "ListItem",
             position: i + 1,
-            url: `https://grow.contact${t.href}`,
+            url: `https://citation.is${t.href}`,
             name: t.title,
           })),
         }),

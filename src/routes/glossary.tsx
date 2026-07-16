@@ -5,7 +5,7 @@ import { GLOSSARY, getGlossaryByCategory } from "@/lib/glossary/data";
 import { ArrowRight } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const URL = "https://grow.contact/glossary";
+const URL = "https://citation.is/glossary";
 const TITLE = "GEO glossary — plain definitions for the agent-native web";
 const DESC =
   "Short, plain-English definitions for the terms shaping generative engine optimization: llms.txt, MCP, OAI-SearchBot, JSON-LD, citability, and the rest of the agent-native web vocabulary.";
@@ -41,10 +41,10 @@ export const Route = createFileRoute("/glossary")({
           url: URL,
           hasDefinedTerm: GLOSSARY.map((t) => ({
             "@type": "DefinedTerm",
-            "@id": `https://grow.contact/glossary/${t.slug}`,
+            "@id": `https://citation.is/glossary/${t.slug}`,
             name: t.term,
             description: t.short,
-            url: `https://grow.contact/glossary/${t.slug}`,
+            url: `https://citation.is/glossary/${t.slug}`,
             termCode: t.slug,
           })),
         }),

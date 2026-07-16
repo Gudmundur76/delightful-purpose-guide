@@ -14,6 +14,6 @@ export default defineConfig({
     server: { entry: "server" },
   },
   // Emit MCP server routes from src/lib/mcp/index.ts. metadataPath avoids the
-  // pre-existing /.well-known/oauth-protected-resource route (grow.contact API).
+  // pre-existing /.well-known/oauth-protected-resource route (citation.is API).
   plugins: [mcpPlugin({ metadataPath: "/mcp-protected-resource" })],
 });

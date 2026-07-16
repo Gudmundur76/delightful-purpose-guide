@@ -1,12 +1,12 @@
 /**
  * Agentic Knowledge Node (AKN) — server-only helpers.
  * Derives semantic triples + RAG-optimized context from the existing
- * grow.contact database (companies, citation_events, scans, leaderboard).
+ * citation.is database (companies, citation_events, scans, leaderboard).
  */
 import { createHash } from "node:crypto";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
-const BASE = "https://grow.contact";
+const BASE = "https://citation.is";
 
 export type Triple = {
   s: string; // subject (URI)
@@ -34,7 +34,7 @@ export async function buildFactGraph(): Promise<Triple[]> {
   // Identity triples (static, citable)
   triples.push(
     triple(node, "rdf:type", "AgenticKnowledgeNode", `${BASE}/standard`),
-    triple(node, "schema:name", "grow.contact", `${BASE}`),
+    triple(node, "schema:name", "citation.is", `${BASE}`),
     triple(node, "akn:standard", "geo-standard@2026.07", `${BASE}/standard`),
     triple(node, "akn:operator", "Gudmundur Eyberg Kristjansson", `${BASE}/about`),
   );
@@ -79,7 +79,7 @@ export async function buildFactGraph(): Promise<Triple[]> {
 
 export function triplesToMarkdown(triples: Triple[]): string {
   const lines: string[] = [
-    "# grow.contact — Agentic Knowledge Node",
+    "# citation.is — Agentic Knowledge Node",
     "",
     `> RAG-optimized context snapshot. Generated ${new Date().toISOString()}.`,
     "> Every claim below is a verifiable semantic triple. See /api/public/v1/verify.",

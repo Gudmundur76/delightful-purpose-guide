@@ -29,7 +29,7 @@ function diffBots(current: string): { missing: string[]; blocked: string[] } {
 function buildRecommended(current: string): string {
   const block = [
     "",
-    "# grow.contact: AI search & citation crawlers",
+    "# citation.is: AI search & citation crawlers",
     ...REQUIRED_ALLOW.flatMap((b) => [`User-agent: ${b}`, "Allow: /", ""]),
   ].join("\n");
   return current.trim() + "\n" + block;

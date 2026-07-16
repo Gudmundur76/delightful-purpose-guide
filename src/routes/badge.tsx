@@ -20,14 +20,14 @@ export const Route = createFileRoute("/badge")({
         property: "og:description",
         content: "Free embeddable badge that proves your site is built for the agent era.",
       },
-      { property: "og:url", content: "https://grow.contact/badge" },
+      { property: "og:url", content: "https://citation.is/badge" },
       ...ogImageMeta({
         title: "Agent-Native Badge — Show Your Score | Grow",
         kicker: "Grow",
         sub: "Embed your Agent Readability Score on your site. A live SVG badge that updates as your site improves. Free for any domain.",
       }),
     ],
-    links: [{ rel: "canonical", href: "https://grow.contact/badge" }],
+    links: [{ rel: "canonical", href: "https://citation.is/badge" }],
   }),
 });
 
@@ -46,15 +46,15 @@ function BadgePage() {
   const [copied, setCopied] = useState<string | null>(null);
 
   const id = useMemo(() => slugify(domain) || "your-domain.com", [domain]);
-  const badgeUrl = `https://grow.contact/badge/${id}.svg`;
-  const linkUrl = `https://grow.contact/verify/${id}`;
+  const badgeUrl = `https://citation.is/badge/${id}.svg`;
+  const linkUrl = `https://citation.is/verify/${id}`;
 
   const snippets = {
     html: `<a href="${linkUrl}" target="_blank" rel="noopener">
   <img src="${badgeUrl}" alt="Agent Readability Score — ${id}" width="240" height="72" />
 </a>`,
     markdown: `[![Agent Readability Score](${badgeUrl})](${linkUrl})`,
-    script: `<script src="https://grow.contact/api/public/widget/embed.js" async></script>
+    script: `<script src="https://citation.is/api/public/widget/embed.js" async></script>
 <div data-grow-badge="${id}"></div>`,
     react: `<a href="${linkUrl}" target="_blank" rel="noopener noreferrer">
   <img
@@ -200,7 +200,7 @@ function BadgePage() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid md:grid-cols-3 gap-10">
             <Bullet
               title="Compounding social proof"
-              body="Every site embedding the badge links back to grow.contact with descriptive alt text — the SEO version of a customer logo wall."
+              body="Every site embedding the badge links back to citation.is with descriptive alt text — the SEO version of a customer logo wall."
             />
             <Bullet
               title="Live, not static"

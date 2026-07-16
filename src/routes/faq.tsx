@@ -28,14 +28,14 @@ export const Route = createFileRoute("/faq")({
       { name: "description", content: "Answers to common questions about agent-native sites, pricing, timelines, and ownership." },
       { property: "og:title", content: "FAQ — Grow" },
       { property: "og:description", content: "What 'agent-native' means, how 48h works, pricing, ownership, and more." },
-      { property: "og:url", content: "https://grow.contact/faq" },
+      { property: "og:url", content: "https://citation.is/faq" },
       ...ogImageMeta({
         title: "FAQ — Grow",
         kicker: "Grow",
         sub: "Answers to common questions about agent-native sites, pricing, timelines, and ownership.",
       }),
     ],
-    links: [{ rel: "canonical", href: "https://grow.contact/faq" }],
+    links: [{ rel: "canonical", href: "https://citation.is/faq" }],
     // FAQPage JSON-LD is rendered inside the component from the same data
     // source the UI uses, so visible Q&A and structured data cannot drift.
   }),

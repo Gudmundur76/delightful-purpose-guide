@@ -12,7 +12,7 @@ import { STAT_MICROPOSTS } from "@/lib/stats/microposts";
 
 
 
-const BASE_URL = "https://grow.contact";
+const BASE_URL = "https://citation.is";
 
 interface SitemapEntry {
   path: string;

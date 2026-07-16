@@ -23,7 +23,7 @@ function svg(score: number | null, domain: string) {
   <g transform="translate(74,26)">
     <text fill="${color}" font-size="9" font-weight="600" letter-spacing="1.5" font-family="ui-monospace,monospace">${label}</text>
     <text y="14" fill="#fafafa" font-size="13" font-weight="600" font-family="ui-sans-serif,system-ui,sans-serif">Agent-Native</text>
-    <text y="30" fill="#71717a" font-size="9" font-family="ui-monospace,monospace">grow.contact · ${domain}</text>
+    <text y="30" fill="#71717a" font-size="9" font-family="ui-monospace,monospace">citation.is · ${domain}</text>
   </g>
 </svg>`;
 }

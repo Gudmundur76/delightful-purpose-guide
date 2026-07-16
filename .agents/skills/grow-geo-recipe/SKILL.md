@@ -1,6 +1,6 @@
 ---
 name: grow-geo-recipe
-description: Paste-in recipe to score 90+/100 on the grow.contact /check agent-readability scanner. Use when the user asks to "make this agent-readable", "GEO setup", "score 100 on /check", "AI-readable", "add llms.txt", or sets up a new project from the grow.contact playbook. Covers semantic HTML, JSON-LD, llms.txt, robots.txt matrix, per-route head/meta, sitemap, and the edge-cache speed fix.
+description: Paste-in recipe to score 90+/100 on the citation.is /check agent-readability scanner. Use when the user asks to "make this agent-readable", "GEO setup", "score 100 on /check", "AI-readable", "add llms.txt", or sets up a new project from the citation.is playbook. Covers semantic HTML, JSON-LD, llms.txt, robots.txt matrix, per-route head/meta, sitemap, and the edge-cache speed fix.
 ---
 
 # Grow GEO Recipe
@@ -11,7 +11,7 @@ The full spec is in `references/geo-standard.md` — it's the contract. This ski
 
 ## When to use
 
-- New project that needs to pass the grow.contact `/check` scanner
+- New project that needs to pass the citation.is `/check` scanner
 - User says "make this agent-readable" / "GEO setup" / "AI-readable"
 - Migrating an existing site to the Grow standard
 - Auditing a site that's stuck at 70–90/100

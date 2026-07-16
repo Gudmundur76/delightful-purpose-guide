@@ -39,7 +39,7 @@ export const Route = createFileRoute("/api/public/v1/specs")({
             starter: { timeline: "48 hours", price_usd: 2400 },
             growth: { timeline: "5 days", price_usd: 6800 },
           },
-          contact: { email: "hello@grow.contact", url: "https://grow.contact/contact" },
+          contact: { email: "hello@citation.is", url: "https://citation.is/contact" },
         }),
     },
   },

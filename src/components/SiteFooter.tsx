@@ -68,7 +68,7 @@ export function SiteFooter() {
           </button>
         </div>
         <div className="mt-6 pt-6 border-t border-border flex flex-col md:flex-row gap-4 md:items-center md:justify-between font-mono text-[10px] text-muted-foreground uppercase">
-          <span>&copy; 2026 grow.contact — free & open infrastructure</span>
+          <span>&copy; 2026 citation.is — free & open infrastructure</span>
           <div className="flex flex-wrap gap-2 items-center">
             <SourceSyncIndicator />
           </div>

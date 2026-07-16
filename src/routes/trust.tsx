@@ -9,19 +9,19 @@ import { ogImageMeta } from "@/lib/seo/og";
 // who runs the studio, the guarantee, the receipts, the security stance,
 // the methodology, and where the published numbers come from.
 
-const PAGE_URL = "https://grow.contact/trust";
+const PAGE_URL = "https://citation.is/trust";
 
 export const Route = createFileRoute("/trust")({
   component: TrustPage,
   head: () => ({
     meta: [
-      { title: "Trust & Guarantees — Who's behind grow.contact | Grow" },
+      { title: "Trust & Guarantees — Who's behind citation.is | Grow" },
       {
         name: "description",
         content:
-          "The people, guarantees, methodology, and receipts behind grow.contact. 100/100 agent-readability guarantee or your money back. Public scoring methodology. Founder-led.",
+          "The people, guarantees, methodology, and receipts behind citation.is. 100/100 agent-readability guarantee or your money back. Public scoring methodology. Founder-led.",
       },
-      { property: "og:title", content: "Trust & Guarantees — grow.contact" },
+      { property: "og:title", content: "Trust & Guarantees — citation.is" },
       {
         property: "og:description",
         content:
@@ -29,9 +29,9 @@ export const Route = createFileRoute("/trust")({
       },
       { property: "og:url", content: PAGE_URL },
       ...ogImageMeta({
-        title: "Trust & Guarantees — Who's behind grow.contact | Grow",
+        title: "Trust & Guarantees — Who's behind citation.is | Grow",
         kicker: "Grow",
-        sub: "The people, guarantees, methodology, and receipts behind grow.contact. 100/100 agent-readability guarantee or your money back. Public scoring methodology. Founder-led.",
+        sub: "The people, guarantees, methodology, and receipts behind citation.is. 100/100 agent-readability guarantee or your money back. Public scoring methodology. Founder-led.",
       }),
     ],
     links: [{ rel: "canonical", href: PAGE_URL }],
@@ -46,9 +46,9 @@ export const Route = createFileRoute("/trust")({
           mainEntity: {
             "@type": "Organization",
             name: "Grow",
-            alternateName: "grow.contact",
-            url: "https://grow.contact",
-            email: "hello@grow.contact",
+            alternateName: "citation.is",
+            url: "https://citation.is",
+            email: "hello@citation.is",
             founder: {
               "@type": "Person",
               name: "Gudmundur Eyberg Kristjansson",
@@ -91,7 +91,7 @@ export const Route = createFileRoute("/trust")({
               name: "What is the 100/100 guarantee?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Every site grow.contact ships passes the public /check scanner at 100/100 across Semantic HTML, JSON-LD, llms.txt, Citability, and Speed at delivery. If it doesn't, the work is free.",
+                text: "Every site citation.is ships passes the public /check scanner at 100/100 across Semantic HTML, JSON-LD, llms.txt, Citability, and Speed at delivery. If it doesn't, the work is free.",
               },
             },
             {
@@ -104,7 +104,7 @@ export const Route = createFileRoute("/trust")({
             },
             {
               "@type": "Question",
-              name: "Who runs grow.contact?",
+              name: "Who runs citation.is?",
               acceptedAnswer: {
                 "@type": "Answer",
                 text: "Grow is a founder-led studio operated by Gudmundur Eyberg Kristjansson. Every build is hands-on, not white-labelled to contractors.",
@@ -153,10 +153,10 @@ function TrustPage() {
         <section className="border-b border-border">
           <div className="max-w-7xl mx-auto px-6 py-20">
             <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">
-              // grow.contact / trust
+              // citation.is / trust
             </p>
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tighter uppercase max-w-4xl">
-              The receipts behind grow.contact
+              The receipts behind citation.is
             </h1>
             <p className="mt-6 max-w-3xl text-base sm:text-lg text-muted-foreground leading-relaxed">
               Founder-led, fixed-price, with a public scoring methodology, an
@@ -211,8 +211,8 @@ function TrustPage() {
                 </p>
                 <p>
                   Email goes to{" "}
-                  <a href="mailto:hello@grow.contact" className="text-accent underline">
-                    hello@grow.contact
+                  <a href="mailto:hello@citation.is" className="text-accent underline">
+                    hello@citation.is
                   </a>{" "}
                   and is read by the person who'll build the site.
                 </p>
@@ -253,8 +253,8 @@ function TrustPage() {
                 </p>
                 <p>
                   Right to be forgotten:{" "}
-                  <a href="mailto:privacy@grow.contact" className="text-accent underline">
-                    privacy@grow.contact
+                  <a href="mailto:privacy@citation.is" className="text-accent underline">
+                    privacy@citation.is
                   </a>
                   .
                 </p>
@@ -284,12 +284,12 @@ function TrustPage() {
                 <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">
                   // Live
                 </p>
-                <p className="font-bold uppercase tracking-tighter mb-1">/check on grow.contact</p>
+                <p className="font-bold uppercase tracking-tighter mb-1">/check on citation.is</p>
                 <p className="text-sm text-muted-foreground mb-3">
                   Run the scanner on us right now. Same six signals, no special-casing.
                 </p>
                 <Link to="/check" className="text-accent underline text-sm">
-                  Scan grow.contact ↗
+                  Scan citation.is ↗
                 </Link>
               </div>
               <div className="bg-card p-6">
@@ -301,7 +301,7 @@ function TrustPage() {
                   Google's own Lighthouse audit on our homepage. Public report, no edits possible.
                 </p>
                 <a
-                  href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fgrow.contact"
+                  href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fcitation.is"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-accent underline text-sm"

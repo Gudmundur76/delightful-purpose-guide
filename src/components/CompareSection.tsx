@@ -81,7 +81,7 @@ export function CompareSection() {
           </h2>
           <p className="text-muted-foreground max-w-2xl">
             Paste your URL. We run a real scan and compare it against the live average across every
-            site scanned on grow.contact.
+            site scanned on citation.is.
           </p>
         </div>
 
@@ -122,7 +122,7 @@ export function CompareSection() {
             empty={!yours}
           />
           <CompareColumn
-            label="Live grow.contact Average"
+            label="Live citation.is Average"
             sub={
               stats && stats.totalScans > 0
                 ? `${stats.totalScans} scans · ${stats.uniqueHosts} sites`

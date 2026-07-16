@@ -14,9 +14,9 @@ export const Route = createFileRoute("/unsubscribe")({
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Unsubscribe — Grow" },
       { property: "og:description", content: "Unsubscribe from Grow emails." },
-      { property: "og:url", content: "https://grow.contact/unsubscribe" },
+      { property: "og:url", content: "https://citation.is/unsubscribe" },
     ],
-    links: [{ rel: "canonical", href: "https://grow.contact/unsubscribe" }],
+    links: [{ rel: "canonical", href: "https://citation.is/unsubscribe" }],
   }),
 });
 

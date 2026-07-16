@@ -35,7 +35,7 @@ const COPY: Record<string, { headline: string; sub: string; bullets?: string[]; 
 export const copyTool = defineTool({
   name: "get_copy",
   description:
-    "Returns approved marketing copy for a section of grow.contact. Use to keep messaging consistent across pages and agent-generated sites. Valid sections: hero, pricing, check, about, cta.",
+    "Returns approved marketing copy for a section of citation.is. Use to keep messaging consistent across pages and agent-generated sites. Valid sections: hero, pricing, check, about, cta.",
   parameters: z.object({
     section: z
       .enum(["hero", "pricing", "check", "about", "cta"])

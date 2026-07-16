@@ -5,7 +5,7 @@ import { getMicropost, STAT_MICROPOSTS } from "@/lib/stats/microposts";
 import { ogImageMeta } from "@/lib/seo/og";
 import { ArrowRight } from "lucide-react";
 
-const BASE = "https://grow.contact";
+const BASE = "https://citation.is";
 
 export const Route = createFileRoute("/stats/$slug")({
   component: MicropostPage,
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/stats/$slug")({
         { name: "twitter:description", content: p.metaDescription },
         ...ogImageMeta({
           title: p.headline,
-          kicker: "grow.contact / stats",
+          kicker: "citation.is / stats",
           sub: p.quotable,
         }),
       ],
@@ -187,7 +187,7 @@ function MicropostPage() {
           <header className="border-b border-border">
             <div className="max-w-4xl mx-auto px-6 py-16 sm:py-20">
               <div className="font-mono text-[10px] uppercase tracking-widest text-accent mb-6">
-                grow.contact / stats /{" "}
+                citation.is / stats /{" "}
                 <time dateTime={post.publishedAt}>{post.publishedAt}</time>
               </div>
               <div className="mb-8 flex flex-wrap items-baseline gap-6">
@@ -209,7 +209,7 @@ function MicropostPage() {
                   License: CC BY 4.0
                 </span>
                 <span className="border border-border px-3 py-1.5 text-muted-foreground">
-                  Attribution: grow.contact
+                  Attribution: citation.is
                 </span>
                 {post.tags.map((t) => (
                   <span
@@ -252,7 +252,7 @@ function MicropostPage() {
                 Cite this
               </div>
               <pre className="whitespace-pre-wrap rounded border border-border bg-muted/30 p-4 text-xs leading-relaxed">
-{`grow.contact (${post.publishedAt.slice(0, 4)}). ${post.headline}. State of the Agent-Readable Web. ${BASE}/stats/${post.slug} (accessed ${post.publishedAt}).`}
+{`citation.is (${post.publishedAt.slice(0, 4)}). ${post.headline}. State of the Agent-Readable Web. ${BASE}/stats/${post.slug} (accessed ${post.publishedAt}).`}
               </pre>
             </div>
           </section>

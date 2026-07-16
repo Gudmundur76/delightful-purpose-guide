@@ -83,7 +83,7 @@ export const initiateConnection = createServerFn({ method: "POST" })
     }
 
     // SDK shape: composio.connectedAccounts.initiate(userId, authConfigId, { ... })
-    const callbackUrl = "https://grow.contact/integrations";
+    const callbackUrl = "https://citation.is/integrations";
     const initiation = (await (composio as unknown as {
       connectedAccounts: {
         initiate: (

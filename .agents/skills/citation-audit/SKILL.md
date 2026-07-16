@@ -6,7 +6,7 @@ description: Audit external links and citations on a page or article for broken 
 # Skill: Citation Audit
 
 ## Description
-This skill performs periodic audits of content citations and external links on grow.contact to ensure accuracy, authority, and adherence to E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) principles. It checks for broken links, assesses source credibility, and recommends updates to maintain content quality and SEO.
+This skill performs periodic audits of content citations and external links on citation.is to ensure accuracy, authority, and adherence to E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) principles. It checks for broken links, assesses source credibility, and recommends updates to maintain content quality and SEO.
 
 ## Purpose
 To maintain the integrity and trustworthiness of content by ensuring all citations are valid, external links are healthy, and the overall content reflects high E-E-A-T standards.

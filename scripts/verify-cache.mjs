@@ -2,12 +2,12 @@
 // Verify Cache-Control headers + Cloudflare edge cache status on marketing routes.
 //
 // Usage:
-//   node scripts/verify-cache.mjs                 # defaults to https://grow.contact
+//   node scripts/verify-cache.mjs                 # defaults to https://citation.is
 //   node scripts/verify-cache.mjs https://staging.example.com
 //
 // Exits non-zero if any route fails its expectations.
 
-const BASE = (process.argv[2] || "https://grow.contact").replace(/\/+$/, "");
+const BASE = (process.argv[2] || "https://citation.is").replace(/\/+$/, "");
 
 const ROUTES = [
   "/",

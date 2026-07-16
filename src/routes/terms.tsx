@@ -9,9 +9,9 @@ export const Route = createFileRoute("/terms")({
       { name: "description", content: "Terms governing use of Grow Studio's website and build services." },
       { property: "og:title", content: "Terms of Service — Grow" },
       { property: "og:description", content: "Terms governing use of Grow Studio's website and build services." },
-      { property: "og:url", content: "https://grow.contact/terms" },
+      { property: "og:url", content: "https://citation.is/terms" },
     ],
-    links: [{ rel: "canonical", href: "https://grow.contact/terms" }],
+    links: [{ rel: "canonical", href: "https://citation.is/terms" }],
   }),
   component: TermsPage,
 });
@@ -63,7 +63,7 @@ function TermsPage() {
       <section>
         <H2>5. Refunds & cancellations</H2>
         <P>
-          grow.contact is a free, open-source service — nothing is sold and no payment is taken, so there is nothing to refund.
+          citation.is is a free, open-source service — nothing is sold and no payment is taken, so there is nothing to refund.
           You can stop using the tools, delete your account, and remove any embed at any time with no obligation.
         </P>
       </section>

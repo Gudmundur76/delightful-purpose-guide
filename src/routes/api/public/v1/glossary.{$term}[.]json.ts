@@ -34,14 +34,14 @@ export const Route = createFileRoute("/api/public/v1/glossary/{$term}.json")({
 
         if (!entry) return json({ error: "Glossary term not found", term: termSlug }, 404);
 
-        const url = `https://grow.contact/glossary/${entry.slug}`;
+        const url = `https://citation.is/glossary/${entry.slug}`;
         const related = (entry.related ?? [])
           .map((slug) => GLOSSARY.find((g) => g.slug === slug))
           .filter(Boolean)
           .map((g) => ({
             slug: g!.slug,
             term: g!.term,
-            url: `https://grow.contact/glossary/${g!.slug}`,
+            url: `https://citation.is/glossary/${g!.slug}`,
           }));
 
         return json({
@@ -63,8 +63,8 @@ export const Route = createFileRoute("/api/public/v1/glossary/{$term}.json")({
             url,
             inDefinedTermSet: {
               "@type": "DefinedTermSet",
-              name: "grow.contact GEO Glossary",
-              url: "https://grow.contact/glossary",
+              name: "citation.is GEO Glossary",
+              url: "https://citation.is/glossary",
             },
           },
         });

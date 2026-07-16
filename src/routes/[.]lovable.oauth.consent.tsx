@@ -85,13 +85,13 @@ function Consent() {
     <main className="min-h-screen flex items-center justify-center px-6 py-16">
       <div className="w-full max-w-md">
         <h1 className="font-extrabold tracking-tighter text-3xl sm:text-4xl uppercase mb-6">
-          Connect {clientName} to your grow.contact account
+          Connect {clientName} to your citation.is account
         </h1>
         <p className="text-sm text-muted-foreground mb-2">
           {clientName} will be able to call this app's MCP tools while you are signed in.
         </p>
         <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-8">
-          This does not bypass grow.contact's permissions or backend policies.
+          This does not bypass citation.is's permissions or backend policies.
         </p>
 
         {error && (

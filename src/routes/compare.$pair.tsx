@@ -31,10 +31,10 @@ export const Route = createFileRoute("/compare/$pair")({
     const b = loaderData?.b;
     if (!a || !b) return { meta: [{ title: "Compare — Grow" }] };
     const slug = `${a.domain.replace(/\./g, "-")}-vs-${b.domain.replace(/\./g, "-")}`;
-    const url = `https://grow.contact/compare/${slug}`;
+    const url = `https://citation.is/compare/${slug}`;
     const title = `${a.name} vs ${b.name} — Agent Readability`;
     const winner = a.score >= b.score ? a : b;
-    const desc = `${a.name} scores ${a.score}/100, ${b.name} scores ${b.score}/100 on the grow.contact agent-readability index. ${winner.name} leads on AI citation surface.`;
+    const desc = `${a.name} scores ${a.score}/100, ${b.name} scores ${b.score}/100 on the citation.is agent-readability index. ${winner.name} leads on AI citation surface.`;
     return {
       meta: [
         { title },
@@ -97,7 +97,7 @@ export const Route = createFileRoute("/compare/$pair")({
                 name: `Which is more agent-readable: ${a.name} or ${b.name}?`,
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: `${winner.name} scores ${winner.score}/100 on the grow.contact six-signal agent-readability index, ahead of ${(winner === a ? b : a).name} at ${(winner === a ? b : a).score}/100. The index covers semantic HTML, JSON-LD, llms.txt, citability, page speed, and protocol discovery.`,
+                  text: `${winner.name} scores ${winner.score}/100 on the citation.is six-signal agent-readability index, ahead of ${(winner === a ? b : a).name} at ${(winner === a ? b : a).score}/100. The index covers semantic HTML, JSON-LD, llms.txt, citability, page speed, and protocol discovery.`,
                 },
               },
               {
@@ -117,8 +117,8 @@ export const Route = createFileRoute("/compare/$pair")({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
-              { "@type": "ListItem", position: 2, name: "Compare", item: "https://grow.contact/compare" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://citation.is/" },
+              { "@type": "ListItem", position: 2, name: "Compare", item: "https://citation.is/compare" },
               { "@type": "ListItem", position: 3, name: `${a.name} vs ${b.name}`, item: url },
             ],
           }),
@@ -313,7 +313,7 @@ function ComparePage() {
               </tbody>
             </table>
             <div className="bg-muted/20 px-4 py-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground flex flex-wrap gap-3 justify-between">
-              <span>Deep-link: grow.contact/compare/{a.domain.replace(/\./g, "-")}-vs-{b.domain.replace(/\./g, "-")}</span>
+              <span>Deep-link: citation.is/compare/{a.domain.replace(/\./g, "-")}-vs-{b.domain.replace(/\./g, "-")}</span>
               <button
                 type="button"
                 onClick={() => {

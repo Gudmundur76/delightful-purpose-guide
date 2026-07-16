@@ -24,7 +24,7 @@ export const Route = createFileRoute("/about/author/$slug")({
   head: ({ loaderData }) => {
     const a = loaderData?.author;
     if (!a) return { meta: [{ title: "Author not found" }] };
-    const url = `https://grow.contact/about/author/${a.slug}`;
+    const url = `https://citation.is/about/author/${a.slug}`;
     return {
       meta: [
         { title: `${a.name} — ${a.role} | Grow` },

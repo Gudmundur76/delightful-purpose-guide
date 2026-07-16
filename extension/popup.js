@@ -1,4 +1,4 @@
-const API = "https://grow.contact/api/public/v1/analyze";
+const API = "https://citation.is/api/public/v1/analyze";
 
 function tone(n) {
   if (n >= 85) return "good";
@@ -43,8 +43,8 @@ function renderResult(url, r) {
     Speed: r.speed ?? r.scores?.speed,
   };
   const fixes = (r.fixes || r.recommendations || []).slice(0, 3);
-  const reportUrl = `https://grow.contact/check?url=${encodeURIComponent(url)}&auto=true`;
-  const leaderboardUrl = `https://grow.contact/leaderboard?submit=${encodeURIComponent(new URL(url).hostname)}`;
+  const reportUrl = `https://citation.is/check?url=${encodeURIComponent(url)}&auto=true`;
+  const leaderboardUrl = `https://citation.is/leaderboard?submit=${encodeURIComponent(new URL(url).hostname)}`;
 
   render(`
     <div class="score-wrap">

@@ -1,4 +1,5 @@
-import { createFileRoute, useServerFn } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";

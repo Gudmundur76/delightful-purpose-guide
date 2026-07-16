@@ -362,9 +362,8 @@ export const COMPARISONS: Comparison[] = [
     faqs: [
       {
         q: "Is the GEO Standard trying to replace Neil Patel's 7-Layer Stack?",
-        o: "",
         a: "No. They're different artefacts. Neil's stack is a strategy taxonomy — useful for stakeholder alignment and agency conversations. The GEO Standard is an engineering contract — versioned, testable, and licensed for anyone to adopt. Most serious teams end up using both: the stack for the deck, the standard for the build.",
-      } as unknown as { q: string; a: string },
+      },
       {
         q: "What's the biggest gap in the 7-Layer Stack that the GEO Standard closes?",
         a: "Protocol discovery. The GEO Standard treats MCP server cards, /.well-known/oauth-protected-resource, agents.json, markdown negotiation, and the Content-Signal header as a first-class signal — the frontier where citation gives way to direct agent tool use. The 7-Layer Stack doesn't name any of them yet.",

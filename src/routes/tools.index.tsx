@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
-import { ArrowRight, Bot, Cloud, Compass, FileCode2, Gauge, Plug, ScrollText, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Bot, Cloud, Compass, FileCode2, Gauge, Plug, ScrollText, ShieldCheck, Sparkles, Target } from "lucide-react";
 
 const URL_ = "https://grow.contact/tools";
 const TITLE = "Free AI SEO & GEO tools — llms.txt, schema, AI visibility";
@@ -18,6 +18,13 @@ type Tool = {
 };
 
 const TOOLS: Tool[] = [
+  {
+    href: "/tools/brand-visibility",
+    title: "Brand visibility audit",
+    blurb: "Enter just a domain. We derive 8 real buyer prompts for your category, run them across Gemini and GPT, and score your visibility %, avg rank, and the domains beating you. No signup.",
+    Icon: Target,
+    status: "new",
+  },
   {
     href: "/tools/perplexity-answer-engine",
     title: "Perplexity Answer Engine",

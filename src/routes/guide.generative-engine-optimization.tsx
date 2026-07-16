@@ -590,9 +590,9 @@ function GeoGuidePage() {
             <div className="grid sm:grid-cols-2 gap-4 mt-6">
               {[
                 { to: "/check", title: "Score your site against the standard", body: "Free /check scanner. The same five pillars graded out of 100." },
-                { to: "/playbook", title: "The 12-week agent-native playbook", body: "Week-by-week content calendar for earning LLM citations." },
+                { to: "/playbooks", title: "The 12-week agent-native playbook", body: "Week-by-week content calendar for earning LLM citations." },
                 { to: "/vs", title: "Grow vs the alternatives", body: "Side-by-side comparisons against Webflow, Framer, Profound, Rankscale, and DIY." },
-                { to: "/pricing", title: "Fixed-price builds", body: "$2,400 / 48h and $4,800 / 5d. Delivered against geo-standard@2026.05." },
+                { to: "/standard", title: "Read the standard", body: "The full Agent-Native Web Standard, free and open under CC-BY." },
               ].map((r) => (
                 <Link
                   key={r.to}
@@ -613,23 +613,23 @@ function GeoGuidePage() {
         <section className="border-t border-border bg-muted/10">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center">
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tighter uppercase mb-6">
-              Want this shipped, not just understood?
+              Ready to score your site?
             </h2>
             <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
-              We build sites against this exact standard. 48-hour delivery from $2,400. 100/100 on
-              /check or we fix it.
+              The scanner is free, open, and runs in under 30 seconds. No account, no card, no upsell — just a score and a fix list.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm">
-                Start a brief <ArrowRight className="w-4 h-4" />
+              <Link to="/check" className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm">
+                Run free scan <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link to="/check" className="inline-flex items-center gap-2 border border-border hover:border-accent hover:text-accent transition-colors font-bold px-6 py-4 uppercase tracking-tighter text-sm">
-                Score your site first
+              <Link to="/standard" className="inline-flex items-center gap-2 border border-border hover:border-accent hover:text-accent transition-colors font-bold px-6 py-4 uppercase tracking-tighter text-sm">
+                Read the standard
               </Link>
             </div>
           </div>
         </section>
       </main>
+
 
       <SiteFooter />
     </div>

@@ -227,7 +227,7 @@ function TrustPage() {
                 </p>
                 <p>
                   No hourly billing, no surprise change orders. Full breakdown at{" "}
-                  <Link to="/pricing" className="text-accent underline">
+                  <Link to="/standard" className="text-accent underline">
                     /pricing
                   </Link>
                   .
@@ -264,7 +264,7 @@ function TrustPage() {
                 <p>
                   If a site doesn't clear the 100/100 bar at delivery and we can't
                   resolve it in 7 days, the project is refunded in full. Policy at{" "}
-                  <Link to="/refund" className="text-accent underline">
+                  <Link to="/terms" className="text-accent underline">
                     /refund
                   </Link>
                   .
@@ -385,7 +385,7 @@ function TrustPage() {
                 Run a free scan →
               </Link>
               <Link
-                to="/contact"
+                to="/check"
                 className="border border-border px-5 py-3 font-bold uppercase tracking-tighter hover:border-accent"
               >
                 Start a brief →

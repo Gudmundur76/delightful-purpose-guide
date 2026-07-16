@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WorkRouteImport } from './routes/work'
 import { Route as WhyRouteImport } from './routes/why'
 import { Route as VsRouteImport } from './routes/vs'
 import { Route as VScoreRouteImport } from './routes/v-score'
@@ -22,18 +21,11 @@ import { Route as StandardDotmdRouteImport } from './routes/standard[.]md'
 import { Route as StandardRouteImport } from './routes/standard'
 import { Route as SopRouteImport } from './routes/sop'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ServicesRouteImport } from './routes/services'
 import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as ResearchRouteImport } from './routes/research'
-import { Route as RefundRouteImport } from './routes/refund'
-import { Route as ProductsRouteImport } from './routes/products'
-import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PlaygroundRouteImport } from './routes/playground'
 import { Route as PlaybooksRouteImport } from './routes/playbooks'
-import { Route as PlaybookRouteImport } from './routes/playbook'
-import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as OpenapiDotjsonRouteImport } from './routes/openapi[.]json'
 import { Route as McpServerRouteImport } from './routes/mcp-server'
 import { Route as McpProtectedResourceRouteImport } from './routes/mcp-protected-resource'
@@ -53,11 +45,9 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CrawlersRouteImport } from './routes/crawlers'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContentRouteImport } from './routes/content'
-import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as CliRouteImport } from './routes/cli'
 import { Route as CitationIndexRouteImport } from './routes/citation-index'
-import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckRouteImport } from './routes/check'
 import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as AuthDotmdRouteImport } from './routes/auth[.]md'
@@ -108,12 +98,10 @@ import { Route as ContentCalendarRouteImport } from './routes/content.calendar'
 import { Route as ContentBriefsRouteImport } from './routes/content.briefs'
 import { Route as ComparePairRouteImport } from './routes/compare.$pair'
 import { Route as CiteDomainRouteImport } from './routes/cite.$domain'
-import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as CheckReportRouteImport } from './routes/check.report'
 import { Route as BlogRssDotxmlRouteImport } from './routes/blog/rss[.]xml'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as BadgeChar123idChar125DotsvgRouteImport } from './routes/badge.{$id}[.]svg'
-import { Route as AppBillingRouteImport } from './routes/app.billing'
 import { Route as AppApiKeysRouteImport } from './routes/app.api-keys'
 import { Route as ApiMcpRouteImport } from './routes/api/mcp'
 import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
@@ -179,7 +167,6 @@ import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/ap
 import { Route as ApiPublicHooksRunMonitoredSitesRouteImport } from './routes/api/public/hooks/run-monitored-sites'
 import { Route as ApiPublicHooksRescanLeaderboardRouteImport } from './routes/api/public/hooks/rescan-leaderboard'
 import { Route as ApiPublicHooksRefreshScoresRouteImport } from './routes/api/public/hooks/refresh-scores'
-import { Route as ApiPublicHooksPaypalSubscriptionRouteImport } from './routes/api/public/hooks/paypal-subscription'
 import { Route as ApiPublicHooksGenerateDraftsRouteImport } from './routes/api/public/hooks/generate-drafts'
 import { Route as ApiPublicHooksCitationVolatilityRollupRouteImport } from './routes/api/public/hooks/citation-volatility-rollup'
 import { Route as ApiPublicHooksCitationImportRouteImport } from './routes/api/public/hooks/citation-import'
@@ -198,11 +185,6 @@ import { Route as ApiPublicDataSchemasStatsDotschemaDotjsonRouteImport } from '.
 import { Route as ApiPublicDataSchemasLeaderboardDotschemaDotjsonRouteImport } from './routes/api/public/data.schemas.leaderboard[.]schema[.]json'
 import { Route as ApiPublicDataSchemasClaimsDotschemaDotjsonRouteImport } from './routes/api/public/data.schemas.claims[.]schema[.]json'
 
-const WorkRoute = WorkRouteImport.update({
-  id: '/work',
-  path: '/work',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const WhyRoute = WhyRouteImport.update({
   id: '/why',
   path: '/why',
@@ -263,11 +245,6 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const RssDotxmlRoute = RssDotxmlRouteImport.update({
   id: '/rss.xml',
   path: '/rss.xml',
@@ -278,29 +255,9 @@ const ResearchRoute = ResearchRouteImport.update({
   path: '/research',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RefundRoute = RefundRouteImport.update({
-  id: '/refund',
-  path: '/refund',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProductsRoute = ProductsRouteImport.update({
-  id: '/products',
-  path: '/products',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProcessRoute = ProcessRouteImport.update({
-  id: '/process',
-  path: '/process',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PricingRoute = PricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlaygroundRoute = PlaygroundRouteImport.update({
@@ -311,16 +268,6 @@ const PlaygroundRoute = PlaygroundRouteImport.update({
 const PlaybooksRoute = PlaybooksRouteImport.update({
   id: '/playbooks',
   path: '/playbooks',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlaybookRoute = PlaybookRouteImport.update({
-  id: '/playbook',
-  path: '/playbook',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OutreachRoute = OutreachRouteImport.update({
-  id: '/outreach',
-  path: '/outreach',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OpenapiDotjsonRoute = OpenapiDotjsonRouteImport.update({
@@ -418,11 +365,6 @@ const ContentRoute = ContentRouteImport.update({
   path: '/content',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CompareRoute = CompareRouteImport.update({
   id: '/compare',
   path: '/compare',
@@ -436,11 +378,6 @@ const CliRoute = CliRouteImport.update({
 const CitationIndexRoute = CitationIndexRouteImport.update({
   id: '/citation-index',
   path: '/citation-index',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CheckoutRoute = CheckoutRouteImport.update({
-  id: '/checkout',
-  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckRoute = CheckRouteImport.update({
@@ -695,11 +632,6 @@ const CiteDomainRoute = CiteDomainRouteImport.update({
   path: '/cite/$domain',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
-  id: '/success',
-  path: '/success',
-  getParentRoute: () => CheckoutRoute,
-} as any)
 const CheckReportRoute = CheckReportRouteImport.update({
   id: '/report',
   path: '/report',
@@ -721,11 +653,6 @@ const BadgeChar123idChar125DotsvgRoute =
     path: '/{$id}.svg',
     getParentRoute: () => BadgeRoute,
   } as any)
-const AppBillingRoute = AppBillingRouteImport.update({
-  id: '/billing',
-  path: '/billing',
-  getParentRoute: () => AppRoute,
-} as any)
 const AppApiKeysRoute = AppApiKeysRouteImport.update({
   id: '/api-keys',
   path: '/api-keys',
@@ -1074,12 +1001,6 @@ const ApiPublicHooksRefreshScoresRoute =
     path: '/api/public/hooks/refresh-scores',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicHooksPaypalSubscriptionRoute =
-  ApiPublicHooksPaypalSubscriptionRouteImport.update({
-    id: '/api/public/hooks/paypal-subscription',
-    path: '/api/public/hooks/paypal-subscription',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ApiPublicHooksGenerateDraftsRoute =
   ApiPublicHooksGenerateDraftsRouteImport.update({
     id: '/api/public/hooks/generate-drafts',
@@ -1188,11 +1109,9 @@ export interface FileRoutesByFullPath {
   '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
-  '/checkout': typeof CheckoutRouteWithChildren
   '/citation-index': typeof CitationIndexRoute
   '/cli': typeof CliRoute
   '/compare': typeof CompareRouteWithChildren
-  '/contact': typeof ContactRoute
   '/content': typeof ContentRouteWithChildren
   '/cookies': typeof CookiesRoute
   '/crawlers': typeof CrawlersRouteWithChildren
@@ -1212,18 +1131,11 @@ export interface FileRoutesByFullPath {
   '/mcp-protected-resource': typeof McpProtectedResourceRoute
   '/mcp-server': typeof McpServerRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
-  '/outreach': typeof OutreachRoute
-  '/playbook': typeof PlaybookRoute
   '/playbooks': typeof PlaybooksRouteWithChildren
   '/playground': typeof PlaygroundRoute
-  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
-  '/process': typeof ProcessRoute
-  '/products': typeof ProductsRoute
-  '/refund': typeof RefundRoute
   '/research': typeof ResearchRouteWithChildren
   '/rss.xml': typeof RssDotxmlRoute
-  '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sop': typeof SopRoute
   '/standard': typeof StandardRouteWithChildren
@@ -1236,7 +1148,6 @@ export interface FileRoutesByFullPath {
   '/v-score': typeof VScoreRoute
   '/vs': typeof VsRouteWithChildren
   '/why': typeof WhyRouteWithChildren
-  '/work': typeof WorkRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
@@ -1249,12 +1160,10 @@ export interface FileRoutesByFullPath {
   '/admin/reviews': typeof AdminReviewsRoute
   '/api/mcp': typeof ApiMcpRoute
   '/app/api-keys': typeof AppApiKeysRoute
-  '/app/billing': typeof AppBillingRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
-  '/checkout/success': typeof CheckoutSuccessRoute
   '/cite/$domain': typeof CiteDomainRoute
   '/compare/$pair': typeof ComparePairRoute
   '/content/briefs': typeof ContentBriefsRoute
@@ -1329,7 +1238,6 @@ export interface FileRoutesByFullPath {
   '/api/public/hooks/citation-import': typeof ApiPublicHooksCitationImportRoute
   '/api/public/hooks/citation-volatility-rollup': typeof ApiPublicHooksCitationVolatilityRollupRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
-  '/api/public/hooks/paypal-subscription': typeof ApiPublicHooksPaypalSubscriptionRoute
   '/api/public/hooks/refresh-scores': typeof ApiPublicHooksRefreshScoresRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
@@ -1377,11 +1285,9 @@ export interface FileRoutesByTo {
   '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
-  '/checkout': typeof CheckoutRouteWithChildren
   '/citation-index': typeof CitationIndexRoute
   '/cli': typeof CliRoute
   '/compare': typeof CompareRouteWithChildren
-  '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/crawlers': typeof CrawlersRouteWithChildren
   '/data-drops': typeof DataDropsRouteWithChildren
@@ -1399,18 +1305,11 @@ export interface FileRoutesByTo {
   '/mcp-protected-resource': typeof McpProtectedResourceRoute
   '/mcp-server': typeof McpServerRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
-  '/outreach': typeof OutreachRoute
-  '/playbook': typeof PlaybookRoute
   '/playbooks': typeof PlaybooksRouteWithChildren
   '/playground': typeof PlaygroundRoute
-  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
-  '/process': typeof ProcessRoute
-  '/products': typeof ProductsRoute
-  '/refund': typeof RefundRoute
   '/research': typeof ResearchRouteWithChildren
   '/rss.xml': typeof RssDotxmlRoute
-  '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sop': typeof SopRoute
   '/standard': typeof StandardRouteWithChildren
@@ -1423,7 +1322,6 @@ export interface FileRoutesByTo {
   '/v-score': typeof VScoreRoute
   '/vs': typeof VsRouteWithChildren
   '/why': typeof WhyRouteWithChildren
-  '/work': typeof WorkRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
@@ -1436,12 +1334,10 @@ export interface FileRoutesByTo {
   '/admin/reviews': typeof AdminReviewsRoute
   '/api/mcp': typeof ApiMcpRoute
   '/app/api-keys': typeof AppApiKeysRoute
-  '/app/billing': typeof AppBillingRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
-  '/checkout/success': typeof CheckoutSuccessRoute
   '/cite/$domain': typeof CiteDomainRoute
   '/compare/$pair': typeof ComparePairRoute
   '/content/briefs': typeof ContentBriefsRoute
@@ -1516,7 +1412,6 @@ export interface FileRoutesByTo {
   '/api/public/hooks/citation-import': typeof ApiPublicHooksCitationImportRoute
   '/api/public/hooks/citation-volatility-rollup': typeof ApiPublicHooksCitationVolatilityRollupRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
-  '/api/public/hooks/paypal-subscription': typeof ApiPublicHooksPaypalSubscriptionRoute
   '/api/public/hooks/refresh-scores': typeof ApiPublicHooksRefreshScoresRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
@@ -1566,11 +1461,9 @@ export interface FileRoutesById {
   '/auth.md': typeof AuthDotmdRoute
   '/badge': typeof BadgeRouteWithChildren
   '/check': typeof CheckRouteWithChildren
-  '/checkout': typeof CheckoutRouteWithChildren
   '/citation-index': typeof CitationIndexRoute
   '/cli': typeof CliRoute
   '/compare': typeof CompareRouteWithChildren
-  '/contact': typeof ContactRoute
   '/content': typeof ContentRouteWithChildren
   '/cookies': typeof CookiesRoute
   '/crawlers': typeof CrawlersRouteWithChildren
@@ -1590,18 +1483,11 @@ export interface FileRoutesById {
   '/mcp-protected-resource': typeof McpProtectedResourceRoute
   '/mcp-server': typeof McpServerRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
-  '/outreach': typeof OutreachRoute
-  '/playbook': typeof PlaybookRoute
   '/playbooks': typeof PlaybooksRouteWithChildren
   '/playground': typeof PlaygroundRoute
-  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
-  '/process': typeof ProcessRoute
-  '/products': typeof ProductsRoute
-  '/refund': typeof RefundRoute
   '/research': typeof ResearchRouteWithChildren
   '/rss.xml': typeof RssDotxmlRoute
-  '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sop': typeof SopRoute
   '/standard': typeof StandardRouteWithChildren
@@ -1614,7 +1500,6 @@ export interface FileRoutesById {
   '/v-score': typeof VScoreRoute
   '/vs': typeof VsRouteWithChildren
   '/why': typeof WhyRouteWithChildren
-  '/work': typeof WorkRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
@@ -1627,12 +1512,10 @@ export interface FileRoutesById {
   '/admin/reviews': typeof AdminReviewsRoute
   '/api/mcp': typeof ApiMcpRoute
   '/app/api-keys': typeof AppApiKeysRoute
-  '/app/billing': typeof AppBillingRoute
   '/badge/{$id}.svg': typeof BadgeChar123idChar125DotsvgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/check/report': typeof CheckReportRoute
-  '/checkout/success': typeof CheckoutSuccessRoute
   '/cite/$domain': typeof CiteDomainRoute
   '/compare/$pair': typeof ComparePairRoute
   '/content/briefs': typeof ContentBriefsRoute
@@ -1707,7 +1590,6 @@ export interface FileRoutesById {
   '/api/public/hooks/citation-import': typeof ApiPublicHooksCitationImportRoute
   '/api/public/hooks/citation-volatility-rollup': typeof ApiPublicHooksCitationVolatilityRollupRoute
   '/api/public/hooks/generate-drafts': typeof ApiPublicHooksGenerateDraftsRoute
-  '/api/public/hooks/paypal-subscription': typeof ApiPublicHooksPaypalSubscriptionRoute
   '/api/public/hooks/refresh-scores': typeof ApiPublicHooksRefreshScoresRoute
   '/api/public/hooks/rescan-leaderboard': typeof ApiPublicHooksRescanLeaderboardRoute
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
@@ -1758,11 +1640,9 @@ export interface FileRouteTypes {
     | '/auth.md'
     | '/badge'
     | '/check'
-    | '/checkout'
     | '/citation-index'
     | '/cli'
     | '/compare'
-    | '/contact'
     | '/content'
     | '/cookies'
     | '/crawlers'
@@ -1782,18 +1662,11 @@ export interface FileRouteTypes {
     | '/mcp-protected-resource'
     | '/mcp-server'
     | '/openapi.json'
-    | '/outreach'
-    | '/playbook'
     | '/playbooks'
     | '/playground'
-    | '/pricing'
     | '/privacy'
-    | '/process'
-    | '/products'
-    | '/refund'
     | '/research'
     | '/rss.xml'
-    | '/services'
     | '/sitemap.xml'
     | '/sop'
     | '/standard'
@@ -1806,7 +1679,6 @@ export interface FileRouteTypes {
     | '/v-score'
     | '/vs'
     | '/why'
-    | '/work'
     | '/.mcp/list-tools'
     | '/.well-known/api-catalog'
     | '/.well-known/http-message-signatures-directory'
@@ -1819,12 +1691,10 @@ export interface FileRouteTypes {
     | '/admin/reviews'
     | '/api/mcp'
     | '/app/api-keys'
-    | '/app/billing'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/check/report'
-    | '/checkout/success'
     | '/cite/$domain'
     | '/compare/$pair'
     | '/content/briefs'
@@ -1899,7 +1769,6 @@ export interface FileRouteTypes {
     | '/api/public/hooks/citation-import'
     | '/api/public/hooks/citation-volatility-rollup'
     | '/api/public/hooks/generate-drafts'
-    | '/api/public/hooks/paypal-subscription'
     | '/api/public/hooks/refresh-scores'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-monitored-sites'
@@ -1947,11 +1816,9 @@ export interface FileRouteTypes {
     | '/auth.md'
     | '/badge'
     | '/check'
-    | '/checkout'
     | '/citation-index'
     | '/cli'
     | '/compare'
-    | '/contact'
     | '/cookies'
     | '/crawlers'
     | '/data-drops'
@@ -1969,18 +1836,11 @@ export interface FileRouteTypes {
     | '/mcp-protected-resource'
     | '/mcp-server'
     | '/openapi.json'
-    | '/outreach'
-    | '/playbook'
     | '/playbooks'
     | '/playground'
-    | '/pricing'
     | '/privacy'
-    | '/process'
-    | '/products'
-    | '/refund'
     | '/research'
     | '/rss.xml'
-    | '/services'
     | '/sitemap.xml'
     | '/sop'
     | '/standard'
@@ -1993,7 +1853,6 @@ export interface FileRouteTypes {
     | '/v-score'
     | '/vs'
     | '/why'
-    | '/work'
     | '/.mcp/list-tools'
     | '/.well-known/api-catalog'
     | '/.well-known/http-message-signatures-directory'
@@ -2006,12 +1865,10 @@ export interface FileRouteTypes {
     | '/admin/reviews'
     | '/api/mcp'
     | '/app/api-keys'
-    | '/app/billing'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/check/report'
-    | '/checkout/success'
     | '/cite/$domain'
     | '/compare/$pair'
     | '/content/briefs'
@@ -2086,7 +1943,6 @@ export interface FileRouteTypes {
     | '/api/public/hooks/citation-import'
     | '/api/public/hooks/citation-volatility-rollup'
     | '/api/public/hooks/generate-drafts'
-    | '/api/public/hooks/paypal-subscription'
     | '/api/public/hooks/refresh-scores'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-monitored-sites'
@@ -2135,11 +1991,9 @@ export interface FileRouteTypes {
     | '/auth.md'
     | '/badge'
     | '/check'
-    | '/checkout'
     | '/citation-index'
     | '/cli'
     | '/compare'
-    | '/contact'
     | '/content'
     | '/cookies'
     | '/crawlers'
@@ -2159,18 +2013,11 @@ export interface FileRouteTypes {
     | '/mcp-protected-resource'
     | '/mcp-server'
     | '/openapi.json'
-    | '/outreach'
-    | '/playbook'
     | '/playbooks'
     | '/playground'
-    | '/pricing'
     | '/privacy'
-    | '/process'
-    | '/products'
-    | '/refund'
     | '/research'
     | '/rss.xml'
-    | '/services'
     | '/sitemap.xml'
     | '/sop'
     | '/standard'
@@ -2183,7 +2030,6 @@ export interface FileRouteTypes {
     | '/v-score'
     | '/vs'
     | '/why'
-    | '/work'
     | '/.mcp/list-tools'
     | '/.well-known/api-catalog'
     | '/.well-known/http-message-signatures-directory'
@@ -2196,12 +2042,10 @@ export interface FileRouteTypes {
     | '/admin/reviews'
     | '/api/mcp'
     | '/app/api-keys'
-    | '/app/billing'
     | '/badge/{$id}.svg'
     | '/blog/$slug'
     | '/blog/rss.xml'
     | '/check/report'
-    | '/checkout/success'
     | '/cite/$domain'
     | '/compare/$pair'
     | '/content/briefs'
@@ -2276,7 +2120,6 @@ export interface FileRouteTypes {
     | '/api/public/hooks/citation-import'
     | '/api/public/hooks/citation-volatility-rollup'
     | '/api/public/hooks/generate-drafts'
-    | '/api/public/hooks/paypal-subscription'
     | '/api/public/hooks/refresh-scores'
     | '/api/public/hooks/rescan-leaderboard'
     | '/api/public/hooks/run-monitored-sites'
@@ -2326,11 +2169,9 @@ export interface RootRouteChildren {
   AuthDotmdRoute: typeof AuthDotmdRoute
   BadgeRoute: typeof BadgeRouteWithChildren
   CheckRoute: typeof CheckRouteWithChildren
-  CheckoutRoute: typeof CheckoutRouteWithChildren
   CitationIndexRoute: typeof CitationIndexRoute
   CliRoute: typeof CliRoute
   CompareRoute: typeof CompareRouteWithChildren
-  ContactRoute: typeof ContactRoute
   ContentRoute: typeof ContentRouteWithChildren
   CookiesRoute: typeof CookiesRoute
   CrawlersRoute: typeof CrawlersRouteWithChildren
@@ -2350,18 +2191,11 @@ export interface RootRouteChildren {
   McpProtectedResourceRoute: typeof McpProtectedResourceRoute
   McpServerRoute: typeof McpServerRoute
   OpenapiDotjsonRoute: typeof OpenapiDotjsonRoute
-  OutreachRoute: typeof OutreachRoute
-  PlaybookRoute: typeof PlaybookRoute
   PlaybooksRoute: typeof PlaybooksRouteWithChildren
   PlaygroundRoute: typeof PlaygroundRoute
-  PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
-  ProcessRoute: typeof ProcessRoute
-  ProductsRoute: typeof ProductsRoute
-  RefundRoute: typeof RefundRoute
   ResearchRoute: typeof ResearchRouteWithChildren
   RssDotxmlRoute: typeof RssDotxmlRoute
-  ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SopRoute: typeof SopRoute
   StandardRoute: typeof StandardRouteWithChildren
@@ -2374,7 +2208,6 @@ export interface RootRouteChildren {
   VScoreRoute: typeof VScoreRoute
   VsRoute: typeof VsRouteWithChildren
   WhyRoute: typeof WhyRouteWithChildren
-  WorkRoute: typeof WorkRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   DotwellKnownApiCatalogRoute: typeof DotwellKnownApiCatalogRoute
   DotwellKnownHttpMessageSignaturesDirectoryRoute: typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
@@ -2431,7 +2264,6 @@ export interface RootRouteChildren {
   ApiPublicHooksCitationImportRoute: typeof ApiPublicHooksCitationImportRoute
   ApiPublicHooksCitationVolatilityRollupRoute: typeof ApiPublicHooksCitationVolatilityRollupRoute
   ApiPublicHooksGenerateDraftsRoute: typeof ApiPublicHooksGenerateDraftsRoute
-  ApiPublicHooksPaypalSubscriptionRoute: typeof ApiPublicHooksPaypalSubscriptionRoute
   ApiPublicHooksRefreshScoresRoute: typeof ApiPublicHooksRefreshScoresRoute
   ApiPublicHooksRescanLeaderboardRoute: typeof ApiPublicHooksRescanLeaderboardRoute
   ApiPublicHooksRunMonitoredSitesRoute: typeof ApiPublicHooksRunMonitoredSitesRoute
@@ -2474,13 +2306,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/work': {
-      id: '/work'
-      path: '/work'
-      fullPath: '/work'
-      preLoaderRoute: typeof WorkRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/why': {
       id: '/why'
       path: '/why'
@@ -2565,13 +2390,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/rss.xml': {
       id: '/rss.xml'
       path: '/rss.xml'
@@ -2586,39 +2404,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResearchRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/refund': {
-      id: '/refund'
-      path: '/refund'
-      fullPath: '/refund'
-      preLoaderRoute: typeof RefundRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/products': {
-      id: '/products'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof ProductsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/process': {
-      id: '/process'
-      path: '/process'
-      fullPath: '/process'
-      preLoaderRoute: typeof ProcessRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/playground': {
@@ -2633,20 +2423,6 @@ declare module '@tanstack/react-router' {
       path: '/playbooks'
       fullPath: '/playbooks'
       preLoaderRoute: typeof PlaybooksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/playbook': {
-      id: '/playbook'
-      path: '/playbook'
-      fullPath: '/playbook'
-      preLoaderRoute: typeof PlaybookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/outreach': {
-      id: '/outreach'
-      path: '/outreach'
-      fullPath: '/outreach'
-      preLoaderRoute: typeof OutreachRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/openapi.json': {
@@ -2782,13 +2558,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContentRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/compare': {
       id: '/compare'
       path: '/compare'
@@ -2808,13 +2577,6 @@ declare module '@tanstack/react-router' {
       path: '/citation-index'
       fullPath: '/citation-index'
       preLoaderRoute: typeof CitationIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/checkout': {
-      id: '/checkout'
-      path: '/checkout'
-      fullPath: '/checkout'
-      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/check': {
@@ -3167,13 +2929,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CiteDomainRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/checkout/success': {
-      id: '/checkout/success'
-      path: '/success'
-      fullPath: '/checkout/success'
-      preLoaderRoute: typeof CheckoutSuccessRouteImport
-      parentRoute: typeof CheckoutRoute
-    }
     '/check/report': {
       id: '/check/report'
       path: '/report'
@@ -3201,13 +2956,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/badge/{$id}.svg'
       preLoaderRoute: typeof BadgeChar123idChar125DotsvgRouteImport
       parentRoute: typeof BadgeRoute
-    }
-    '/app/billing': {
-      id: '/app/billing'
-      path: '/billing'
-      fullPath: '/app/billing'
-      preLoaderRoute: typeof AppBillingRouteImport
-      parentRoute: typeof AppRoute
     }
     '/app/api-keys': {
       id: '/app/api-keys'
@@ -3664,13 +3412,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksRefreshScoresRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/hooks/paypal-subscription': {
-      id: '/api/public/hooks/paypal-subscription'
-      path: '/api/public/hooks/paypal-subscription'
-      fullPath: '/api/public/hooks/paypal-subscription'
-      preLoaderRoute: typeof ApiPublicHooksPaypalSubscriptionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/public/hooks/generate-drafts': {
       id: '/api/public/hooks/generate-drafts'
       path: '/api/public/hooks/generate-drafts'
@@ -3795,13 +3536,11 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppApiKeysRoute: typeof AppApiKeysRoute
-  AppBillingRoute: typeof AppBillingRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppApiKeysRoute: AppApiKeysRoute,
-  AppBillingRoute: AppBillingRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
@@ -3828,18 +3567,6 @@ const CheckRouteChildren: CheckRouteChildren = {
 }
 
 const CheckRouteWithChildren = CheckRoute._addFileChildren(CheckRouteChildren)
-
-interface CheckoutRouteChildren {
-  CheckoutSuccessRoute: typeof CheckoutSuccessRoute
-}
-
-const CheckoutRouteChildren: CheckoutRouteChildren = {
-  CheckoutSuccessRoute: CheckoutSuccessRoute,
-}
-
-const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
-  CheckoutRouteChildren,
-)
 
 interface CompareRouteChildren {
   ComparePairRoute: typeof ComparePairRoute
@@ -4063,11 +3790,9 @@ const rootRouteChildren: RootRouteChildren = {
   AuthDotmdRoute: AuthDotmdRoute,
   BadgeRoute: BadgeRouteWithChildren,
   CheckRoute: CheckRouteWithChildren,
-  CheckoutRoute: CheckoutRouteWithChildren,
   CitationIndexRoute: CitationIndexRoute,
   CliRoute: CliRoute,
   CompareRoute: CompareRouteWithChildren,
-  ContactRoute: ContactRoute,
   ContentRoute: ContentRouteWithChildren,
   CookiesRoute: CookiesRoute,
   CrawlersRoute: CrawlersRouteWithChildren,
@@ -4087,18 +3812,11 @@ const rootRouteChildren: RootRouteChildren = {
   McpProtectedResourceRoute: McpProtectedResourceRoute,
   McpServerRoute: McpServerRoute,
   OpenapiDotjsonRoute: OpenapiDotjsonRoute,
-  OutreachRoute: OutreachRoute,
-  PlaybookRoute: PlaybookRoute,
   PlaybooksRoute: PlaybooksRouteWithChildren,
   PlaygroundRoute: PlaygroundRoute,
-  PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
-  ProcessRoute: ProcessRoute,
-  ProductsRoute: ProductsRoute,
-  RefundRoute: RefundRoute,
   ResearchRoute: ResearchRouteWithChildren,
   RssDotxmlRoute: RssDotxmlRoute,
-  ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SopRoute: SopRoute,
   StandardRoute: StandardRouteWithChildren,
@@ -4111,7 +3829,6 @@ const rootRouteChildren: RootRouteChildren = {
   VScoreRoute: VScoreRoute,
   VsRoute: VsRouteWithChildren,
   WhyRoute: WhyRouteWithChildren,
-  WorkRoute: WorkRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   DotwellKnownApiCatalogRoute: DotwellKnownApiCatalogRoute,
   DotwellKnownHttpMessageSignaturesDirectoryRoute:
@@ -4175,7 +3892,6 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicHooksCitationVolatilityRollupRoute:
     ApiPublicHooksCitationVolatilityRollupRoute,
   ApiPublicHooksGenerateDraftsRoute: ApiPublicHooksGenerateDraftsRoute,
-  ApiPublicHooksPaypalSubscriptionRoute: ApiPublicHooksPaypalSubscriptionRoute,
   ApiPublicHooksRefreshScoresRoute: ApiPublicHooksRefreshScoresRoute,
   ApiPublicHooksRescanLeaderboardRoute: ApiPublicHooksRescanLeaderboardRoute,
   ApiPublicHooksRunMonitoredSitesRoute: ApiPublicHooksRunMonitoredSitesRoute,

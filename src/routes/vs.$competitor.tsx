@@ -116,7 +116,7 @@ function VsPage() {
             <p className="text-base text-muted-foreground max-w-3xl">{c.oneLiner}</p>
 
             <div className="mt-10 flex flex-wrap gap-3">
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-5 py-3 uppercase tracking-tighter text-xs">
+              <Link to="/check" className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-5 py-3 uppercase tracking-tighter text-xs">
                 Start a brief <ArrowRight className="w-4 h-4" />
               </Link>
               <Link to="/check" className="inline-flex items-center gap-2 border border-border hover:border-accent hover:text-accent transition-colors font-bold px-5 py-3 uppercase tracking-tighter text-xs">
@@ -281,10 +281,10 @@ function VsPage() {
               48-hour delivery. Fixed price. Built semantic-first.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm">
+              <Link to="/check" className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm">
                 Start a brief <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link to="/pricing" className="inline-flex items-center gap-2 border border-border hover:border-accent hover:text-accent transition-colors font-bold px-6 py-4 uppercase tracking-tighter text-sm">
+              <Link to="/standard" className="inline-flex items-center gap-2 border border-border hover:border-accent hover:text-accent transition-colors font-bold px-6 py-4 uppercase tracking-tighter text-sm">
                 See pricing
               </Link>
             </div>

@@ -25,17 +25,16 @@ const errorMiddleware = createMiddleware().server(async ({ next }) => {
 // loads instant while origin revalidates in the background.
 const CACHEABLE_PATHS = new Set<string>([
   "/",
-  "/services",
-  "/pricing",
-  "/work",
-  "/playbook",
-  "/contact",
-  "/about",
+  "/standard",
+  "/playbooks",
   "/leaderboard",
   "/badge",
   "/check",
   "/blog",
+  "/mcp-server",
+  "/faq",
 ]);
+
 
 const CACHE_HEADER =
   "public, max-age=0, s-maxage=300, stale-while-revalidate=86400";

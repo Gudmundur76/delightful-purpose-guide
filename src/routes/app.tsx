@@ -20,9 +20,9 @@ export const Route = createFileRoute("/app")({
 
 const TABS = [
   { to: "/app", label: "SITES", exact: true },
-  { to: "/app/billing", label: "BILLING", exact: false },
   { to: "/app/api-keys", label: "API KEYS", exact: false },
 ];
+
 
 function AppLayout() {
   const location = useLocation();

@@ -75,11 +75,12 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 const CACHEABLE_PATH_EXCLUDES = [
   "/dashboard",
   "/admin",
-  "/checkout",
+  "/app",
   "/content",
   "/login",
   "/api/",
 ];
+
 
 function isCacheablePath(pathname: string): boolean {
   return !CACHEABLE_PATH_EXCLUDES.some((p) => pathname.startsWith(p));

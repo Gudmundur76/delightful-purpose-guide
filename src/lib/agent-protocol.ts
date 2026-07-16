@@ -299,55 +299,37 @@ API key for the public REST API or an MCP access token via ${AGENT_REGISTRATION_
 const MARKDOWN_TWINS: Record<string, () => string> = {
   "/": () => `# grow.contact
 
-> Agent-native website agency. Fixed-price, 48-hour delivery. Scored, not promised.
+> Free, open infrastructure for AI search visibility. No paywall, no account, no upsell.
 
-We design and ship marketing sites engineered to be cited by ChatGPT,
-Perplexity, Claude, and Google AI Overviews from day one.
+grow.contact is an open scanner, an open standard, an open MCP server, and an
+open WordPress plugin — all free forever. Point any of them at your site to
+make it citable by ChatGPT, Perplexity, Claude, and Google AI Overviews.
 
-## Services
-- **Launch Page** — $2,400 — single agent-readable page, 48 hours
-- **Marketing Site** — $4,800 — up to 5 pages, 5 days
+## Tools (all free)
+- **Scanner** — score any URL against the Agent-Native Web Standard: [${SITE_ORIGIN}/check](${SITE_ORIGIN}/check)
+- **Playground** — try every tool live in the browser: [${SITE_ORIGIN}/playground](${SITE_ORIGIN}/playground)
+- **MCP server** — connect Claude/ChatGPT/Cursor: [${SITE_ORIGIN}/mcp-server](${SITE_ORIGIN}/mcp-server)
+- **Browser extension** — inline scores as you browse: [${SITE_ORIGIN}/extension](${SITE_ORIGIN}/extension)
+- **CLI** — fail builds below your threshold: [${SITE_ORIGIN}/cli](${SITE_ORIGIN}/cli)
 
 ## Proof
-- Free public scanner at [${SITE_ORIGIN}/check](${SITE_ORIGIN}/check)
-- Live leaderboard of AI company sites at [${SITE_ORIGIN}/leaderboard](${SITE_ORIGIN}/leaderboard)
-- GEO Standard documented and machine-readable via the [MCP endpoint](${SITE_ORIGIN}/api/public/mcp)
+- Live leaderboard of audited sites: [${SITE_ORIGIN}/leaderboard](${SITE_ORIGIN}/leaderboard)
+- The Standard (CC-BY, forkable): [${SITE_ORIGIN}/standard](${SITE_ORIGIN}/standard)
+- Machine-readable via the [MCP endpoint](${SITE_ORIGIN}/api/public/mcp)
 
 ## Contact
 - Email: hello@grow.contact
-- Brief intake: ${SITE_ORIGIN}/contact
-`,
-  "/pricing": () => `# Pricing — grow.contact
-
-> Fixed price. Written delivery date. No retainers, no scope creep.
-
-| Tier | Price (USD) | Delivery | Pages |
-|---|---|---|---|
-| Launch Page | $2,400 | 48 hours | 1 |
-| Marketing Site | $4,800 | 5 days | up to 5 |
-
-Both tiers ship with semantic HTML, JSON-LD, llms.txt, robots.txt
-configured for AI crawlers, sitemap, and an MCP-readable site card.
-
-Start a brief: ${SITE_ORIGIN}/contact
 `,
   "/check": () => `# Agent Readability Check — grow.contact
 
 > Free URL scanner. Scores any site across 6 signals.
 
-Signals: Semantic HTML · JSON-LD · llms.txt · Citability · Speed · Protocol Discovery (new).
+Signals: Semantic HTML · JSON-LD · llms.txt · Citability · Speed · Protocol Discovery.
 
 No signup required. Run it at [${SITE_ORIGIN}/check](${SITE_ORIGIN}/check).
 `,
-  "/services": () => `# Services — grow.contact
-
-- Agent-Native Website Build — fixed-price marketing site, AI-citable from day one
-- Agent Readability Audit — graded /check report with a written fix plan
-- Schema Optimization — JSON-LD, llms.txt, MCP, OpenAPI for existing sites
-
-Pricing at ${SITE_ORIGIN}/pricing.
-`,
 };
+
 
 export function buildMarkdownTwin(pathname: string): { body: string } | null {
   // Strip trailing slash for matching.

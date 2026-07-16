@@ -385,7 +385,7 @@ function ForAgentsPage() {
                   <ArrowRight className="w-4 h-4" />
                 </a>
                 <Link
-                  to="/contact"
+                  to="/check"
                   className="inline-flex items-center gap-2 border border-border font-bold px-6 py-3 uppercase tracking-tighter text-sm hover:border-accent hover:text-accent transition-colors"
                 >
                   Contact Sales
@@ -436,7 +436,7 @@ function ForAgentsPage() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    to="/contact"
+                    to="/check"
                     className="text-sm text-muted-foreground hover:text-accent transition-colors"
                   >
                     Contact

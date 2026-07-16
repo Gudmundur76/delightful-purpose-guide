@@ -91,7 +91,7 @@ function FaqPage() {
           </div>
           <div className="mt-16 border-t border-border pt-10 text-center">
             <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-4">// Still have questions?</p>
-            <Link to="/contact" className="inline-flex items-center gap-3 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors">
+            <Link to="/check" className="inline-flex items-center gap-3 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors">
               Start a Brief →
             </Link>
           </div>

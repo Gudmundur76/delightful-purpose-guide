@@ -428,27 +428,40 @@ const css = `
 @keyframes ctFadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes ctScaleIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
 
+.ct-right-wrap {
+  position: relative;
+  width: calc(797px * var(--ct-scale, 0.75));
+  height: calc(797px * var(--ct-scale, 0.75));
+  display: grid; place-items: center;
+  margin: 0 auto;
+}
+
+@media (min-width: 1600px) { .ct-app { --ct-scale: 0.9; } }
+@media (max-width: 1280px) { .ct-app { --ct-scale: 0.62; } }
 @media (max-width: 1024px) {
+  .ct-app { --ct-scale: 0.5; }
   .ct-main {
     grid-template-columns: 1fr;
-    padding: 16px 24px 32px;
+    padding: 8px 24px 24px;
     gap: 8px;
     text-align: left;
   }
   .ct-right { order: -1; }
-  .ct-circles { width: min(420px, 78vw); }
   .ct-header { padding: 18px 24px; }
   .ct-nav { gap: 20px; }
 }
 @media (max-width: 640px) {
+  .ct-app { --ct-scale: 0.38; }
   .ct-nav { display: none; }
   .ct-header { padding: 14px 18px; }
   .ct-header-left { gap: 12px; }
   .ct-login { display: none; }
-  .ct-circles { width: min(340px, 82vw); }
   .ct-logo-item { width: 100px; height: 32px; }
   .ct-brand { font-size: 18px; }
   .ct-brand-mark { width: 28px; height: 28px; font-size: 17px; border-radius: 8px; }
   .ct-cta-row { gap: 14px; }
+}
+@media (max-width: 400px) {
+  .ct-app { --ct-scale: 0.32; }
 }
 `;

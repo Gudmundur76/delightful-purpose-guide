@@ -25,8 +25,8 @@ export const Route = createFileRoute("/")({
 const BG_URL =
   "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260624_111401_56af5012-2263-45d3-849a-8688084d7c2a.png&w=1280&q=85";
 
-const LOGO_URL =
-  "https://polo-pecan-73837341.figma.site/_assets/v11/17ae538989a509947a8de3892c644664895e69b1.png";
+const LOGO_URL = "";
+
 
 const AVATARS = [
   { url: "https://polo-pecan-73837341.figma.site/_assets/v11/aa51718fb3af3637e6d666b6543fc27a175fada6.png", orbit: 1, angle: 270, radius: 177, size: 58, radius_css: 20, glow: "#A068FF", delay: 0.6 },

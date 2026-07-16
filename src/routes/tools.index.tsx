@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
-import { ArrowRight, Bot, FileCode2, Gauge, ScrollText, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Bot, Compass, FileCode2, Gauge, ScrollText, ShieldCheck, Sparkles } from "lucide-react";
 
 const URL_ = "https://grow.contact/tools";
 const TITLE = "Free AI SEO & GEO tools — llms.txt, schema, AI visibility";
@@ -18,6 +18,13 @@ type Tool = {
 };
 
 const TOOLS: Tool[] = [
+  {
+    href: "/tools/geo-explorer",
+    title: "GEO Explorer",
+    blurb: "The Ubersuggest of getting cited by AI. Domain snapshot, prompt ideas, live AI SERP, and answer-first content brief — all in one page.",
+    Icon: Compass,
+    status: "new",
+  },
   {
     href: "/check",
     title: "AI-readiness scanner",

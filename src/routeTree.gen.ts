@@ -68,6 +68,7 @@ import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as ToolsSchemaGeneratorRouteImport } from './routes/tools.schema-generator'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
 import { Route as ToolsLlmsTxtGeneratorRouteImport } from './routes/tools.llms-txt-generator'
+import { Route as ToolsGeoExplorerRouteImport } from './routes/tools.geo-explorer'
 import { Route as ToolsAiVisibilityRouteImport } from './routes/tools.ai-visibility'
 import { Route as StatsSlugRouteImport } from './routes/stats.$slug'
 import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
@@ -484,6 +485,11 @@ const ToolsRobotsCheckerRoute = ToolsRobotsCheckerRouteImport.update({
 const ToolsLlmsTxtGeneratorRoute = ToolsLlmsTxtGeneratorRouteImport.update({
   id: '/tools/llms-txt-generator',
   path: '/tools/llms-txt-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsGeoExplorerRoute = ToolsGeoExplorerRouteImport.update({
+  id: '/tools/geo-explorer',
+  path: '/tools/geo-explorer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsAiVisibilityRoute = ToolsAiVisibilityRouteImport.update({
@@ -1237,6 +1243,7 @@ export interface FileRoutesByFullPath {
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/stats/$slug': typeof StatsSlugRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
+  '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
@@ -1417,6 +1424,7 @@ export interface FileRoutesByTo {
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/stats/$slug': typeof StatsSlugRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
+  '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
@@ -1601,6 +1609,7 @@ export interface FileRoutesById {
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/stats/$slug': typeof StatsSlugRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
+  '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
@@ -1786,6 +1795,7 @@ export interface FileRouteTypes {
     | '/standard/{$version}.md'
     | '/stats/$slug'
     | '/tools/ai-visibility'
+    | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
     | '/tools/robots-checker'
     | '/tools/schema-generator'
@@ -1966,6 +1976,7 @@ export interface FileRouteTypes {
     | '/standard/{$version}.md'
     | '/stats/$slug'
     | '/tools/ai-visibility'
+    | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
     | '/tools/robots-checker'
     | '/tools/schema-generator'
@@ -2149,6 +2160,7 @@ export interface FileRouteTypes {
     | '/standard/{$version}.md'
     | '/stats/$slug'
     | '/tools/ai-visibility'
+    | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
     | '/tools/robots-checker'
     | '/tools/schema-generator'
@@ -2307,6 +2319,7 @@ export interface RootRouteChildren {
   ReportQ22026Route: typeof ReportQ22026Route
   ReportQ22026DotpdfRoute: typeof ReportQ22026DotpdfRoute
   ToolsAiVisibilityRoute: typeof ToolsAiVisibilityRoute
+  ToolsGeoExplorerRoute: typeof ToolsGeoExplorerRoute
   ToolsLlmsTxtGeneratorRoute: typeof ToolsLlmsTxtGeneratorRoute
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
   ToolsSchemaGeneratorRoute: typeof ToolsSchemaGeneratorRoute
@@ -2795,6 +2808,13 @@ declare module '@tanstack/react-router' {
       path: '/tools/llms-txt-generator'
       fullPath: '/tools/llms-txt-generator'
       preLoaderRoute: typeof ToolsLlmsTxtGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/geo-explorer': {
+      id: '/tools/geo-explorer'
+      path: '/tools/geo-explorer'
+      fullPath: '/tools/geo-explorer'
+      preLoaderRoute: typeof ToolsGeoExplorerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/ai-visibility': {
@@ -3989,6 +4009,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReportQ22026Route: ReportQ22026Route,
   ReportQ22026DotpdfRoute: ReportQ22026DotpdfRoute,
   ToolsAiVisibilityRoute: ToolsAiVisibilityRoute,
+  ToolsGeoExplorerRoute: ToolsGeoExplorerRoute,
   ToolsLlmsTxtGeneratorRoute: ToolsLlmsTxtGeneratorRoute,
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
   ToolsSchemaGeneratorRoute: ToolsSchemaGeneratorRoute,

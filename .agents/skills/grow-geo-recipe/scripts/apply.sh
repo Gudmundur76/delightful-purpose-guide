@@ -68,7 +68,7 @@ esac
 
 echo
 echo "Next steps:"
-echo "  1. Edit public/robots.txt and public/llms.txt → replace citation.is with the project domain"
+echo "  1. Edit public/robots.txt and public/llms.txt → replace grow.contact with the project domain"
 echo "  2. Replace placeholder URLs in copied templates"
 echo "  3. Add per-route head() to every leaf route (TanStack) or static <meta> per page"
 echo "  4. Audit semantic HTML: 1x <h1>, landmarks present, alt text on all <img>"

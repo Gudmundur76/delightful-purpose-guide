@@ -1,6 +1,6 @@
 # Competitor Adaptations
 
-Source of truth for what citation.is should learn, adapt, or steal from the
+Source of truth for what grow.contact should learn, adapt, or steal from the
 competitive landscape. Pair with `docs/geo-standard.md` (the engineering
 contract) and the `geo-specialist` skill (market context).
 
@@ -99,7 +99,7 @@ while scanning, and creates indexable surface area for every standard.
 
 **How we stack up:**
 
-| Category | Their checks | citation.is today | Gap |
+| Category | Their checks | grow.contact today | Gap |
 |---|---|---|---|
 | Discoverability | robots.txt, sitemap, Link headers, DNS-AID | robots ✓, sitemap ✓ | `Link: <…>; rel="llms"` header; DNS-AID is observational only |
 | Content Accessibility | Markdown content negotiation (`Accept: text/markdown` → `.md`) | ✗ | Route-scoped `.md` twin via SSR middleware |
@@ -126,7 +126,7 @@ while scanning, and creates indexable surface area for every standard.
 Add a sixth signal block (*Protocol Discovery*) to
 `docs/geo-standard.md` and to the `/check` scoring (MCP card,
 OAuth/`auth.md`, markdown negotiation, Link header, Content
-Signals). This keeps citation.is as the credible standard rather
+Signals). This keeps grow.contact as the credible standard rather
 than a subset of isitagentready's framing. Update
 `lib/check/scan.functions.ts` + `geo-standard.md` + the `/check`
 report UI in the same PR.
@@ -134,7 +134,7 @@ report UI in the same PR.
 **Track 3 — x402 / ACP for Tier checkout (separate, bigger):**
 Add an x402 `402 Payment Required` response on
 `/api/public/v1/checkout` alongside existing PayPal v6. Makes
-citation.is the first literally agent-payable agency. Strong
+grow.contact the first literally agent-payable agency. Strong
 journal + leaderboard narrative.
 
 **Don't copy:**

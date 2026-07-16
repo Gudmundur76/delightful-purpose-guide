@@ -152,7 +152,7 @@ function generateTopFixes(t: number, a: number, c: number, i: number): string[] 
 async function fetchHtml(domain: string): Promise<string> {
   try {
     const res = await fetch(`https://${domain}`, {
-      headers: { "User-Agent": "citation.is-mcp/1.0 (+https://citation.is)" },
+      headers: { "User-Agent": "grow.contact-mcp/1.0 (+https://grow.contact)" },
     });
     if (!res.ok) return "";
     return await res.text();

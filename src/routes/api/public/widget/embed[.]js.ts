@@ -1,6 +1,6 @@
 // Drop-in JS loader for the Grow Agent Readability badge.
 // Usage on client site:
-//   <script src="https://citation.is/api/public/widget/embed.js" async></script>
+//   <script src="https://grow.contact/api/public/widget/embed.js" async></script>
 //   <div data-grow-badge="acme.ai"></div>
 //
 // The script finds all [data-grow-badge] elements and injects an <img>
@@ -8,7 +8,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 const JS = `(function(){
-  var ORIGIN = "https://citation.is";
+  var ORIGIN = "https://grow.contact";
   function mount(el){
     if (el.dataset.growMounted) return;
     var host = (el.getAttribute("data-grow-badge") || location.hostname).trim();

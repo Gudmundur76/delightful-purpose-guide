@@ -1,9 +1,9 @@
 // Embeddable SVG chart widgets — one per data drop. Hotlinkable from
-// any blog or report; the "Source: citation.is" footer is baked in,
+// any blog or report; the "Source: grow.contact" footer is baked in,
 // so every embed is an attributed backlink. Backlinks compound the
 // citation graph passively.
 //
-// Usage:  <img src="https://citation.is/api/public/widget/chart/llms-txt-adoption-may-2026.svg">
+// Usage:  <img src="https://grow.contact/api/public/widget/chart/llms-txt-adoption-may-2026.svg">
 
 import { createFileRoute } from "@tanstack/react-router";
 import { getDataDrop } from "@/lib/data-drops/data";
@@ -113,7 +113,7 @@ function renderSvg(slug: string, title: string, spec: ChartSpec, publishedAt: st
     `;
   } else {
     chartBody = `
-      <text x="${chartX + chartW / 2}" y="${H / 2}" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" fill="#71717a" text-anchor="middle">Live data at citation.is</text>
+      <text x="${chartX + chartW / 2}" y="${H / 2}" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" fill="#71717a" text-anchor="middle">Live data at grow.contact</text>
     `;
   }
 
@@ -148,8 +148,8 @@ function renderSvg(slug: string, title: string, spec: ChartSpec, publishedAt: st
   ${chartBody}
 
   <line x1="${padX}" y1="${H - 36}" x2="${W - padX}" y2="${H - 36}" stroke="#27272a" stroke-width="1"/>
-  <text x="${padX}" y="${H - 16}" font-family="ui-monospace,monospace" font-size="10" fill="#71717a">Source: citation.is/data-drops/${escapeXml(slug)}  ·  CC BY 4.0</text>
-  <text x="${W - padX}" y="${H - 16}" font-family="ui-monospace,monospace" font-size="10" fill="#71717a" text-anchor="end">citation.is/report/methodology</text>
+  <text x="${padX}" y="${H - 16}" font-family="ui-monospace,monospace" font-size="10" fill="#71717a">Source: grow.contact/data-drops/${escapeXml(slug)}  ·  CC BY 4.0</text>
+  <text x="${W - padX}" y="${H - 16}" font-family="ui-monospace,monospace" font-size="10" fill="#71717a" text-anchor="end">grow.contact/report/methodology</text>
 </svg>`;
 }
 

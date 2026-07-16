@@ -62,7 +62,7 @@ export const template = {
     return `${heat} scan lead — ${data.email ?? "unknown"} (${s}/100)`;
   },
   displayName: "Scan lead notification (internal)",
-  to: "hello@citation.is",
+  to: "hello@grow.contact",
   previewData: {
     email: "jordan@acme.ai",
     url: "https://acme.ai",

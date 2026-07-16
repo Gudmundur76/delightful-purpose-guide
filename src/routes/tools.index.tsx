@@ -2,9 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
-import { ArrowRight, Bot, Cloud, Compass, FileCode2, Gauge, Plug, ScrollText, ShieldCheck, Sparkles, Target } from "lucide-react";
+import { ArrowRight, Bot, Cloud, Compass, FileCode2, Gauge, Plug, ScrollText, ShieldCheck, Sparkles } from "lucide-react";
 
-const URL_ = "https://citation.is/tools";
+const URL_ = "https://grow.contact/tools";
 const TITLE = "Free AI SEO & GEO tools — llms.txt, schema, AI visibility";
 const DESC =
   "A free toolkit for getting cited by AI. Generate spec-compliant llms.txt, build JSON-LD schema, check how ChatGPT and Gemini see your site, and scan for crawler access — no signup, no upsell.";
@@ -18,13 +18,6 @@ type Tool = {
 };
 
 const TOOLS: Tool[] = [
-  {
-    href: "/tools/brand-visibility",
-    title: "Brand visibility audit",
-    blurb: "Enter just a domain. We derive 8 real buyer prompts for your category, run them across Gemini and GPT, and score your visibility %, avg rank, and the domains beating you. No signup.",
-    Icon: Target,
-    status: "new",
-  },
   {
     href: "/tools/perplexity-answer-engine",
     title: "Perplexity Answer Engine",
@@ -84,7 +77,7 @@ const TOOLS: Tool[] = [
   {
     href: "/mcp-server",
     title: "MCP server",
-    blurb: "Connect citation.is to ChatGPT, Claude, or Cursor as an authenticated MCP server. Run scans and lookups from your assistant.",
+    blurb: "Connect grow.contact to ChatGPT, Claude, or Cursor as an authenticated MCP server. Run scans and lookups from your assistant.",
     Icon: Bot,
     status: "core",
   },
@@ -111,7 +104,7 @@ export const Route = createFileRoute("/tools/")({
       { name: "twitter:description", content: DESC },
       ...ogImageMeta({
         title: "Free tools for getting cited by AI",
-        kicker: "citation.is / tools",
+        kicker: "grow.contact / tools",
         sub: "AI-readiness scanner, llms.txt generator, JSON-LD builder, live AI visibility check, robots.txt checker, MCP server. All free.",
       }),
     ],
@@ -122,13 +115,13 @@ export const Route = createFileRoute("/tools/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ItemList",
-          name: "Free AI SEO & GEO tools by citation.is",
+          name: "Free AI SEO & GEO tools by grow.contact",
           url: URL_,
           numberOfItems: TOOLS.length,
           itemListElement: TOOLS.map((t, i) => ({
             "@type": "ListItem",
             position: i + 1,
-            url: `https://citation.is${t.href}`,
+            url: `https://grow.contact${t.href}`,
             name: t.title,
           })),
         }),

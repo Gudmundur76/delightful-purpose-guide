@@ -49,7 +49,7 @@ export const Route = createFileRoute("/blog/$slug")({
       return { meta: [{ title: "Post not found — Grow" }] };
     }
     const { post } = loaderData;
-    const url = `https://citation.is/blog/${post.slug}`;
+    const url = `https://grow.contact/blog/${post.slug}`;
     const updatedAt = post.updatedAt ?? POSTS_REVIEWED_AT;
     return {
       meta: [
@@ -82,8 +82,8 @@ export const Route = createFileRoute("/blog/$slug")({
             description: post.description,
             datePublished: post.publishedAt,
             dateModified: updatedAt,
-            author: { "@type": "Person", name: "Grow Editorial", url: "https://citation.is/" },
-            publisher: { "@type": "Organization", name: "Grow", url: "https://citation.is/" },
+            author: { "@type": "Person", name: "Grow Editorial", url: "https://grow.contact/" },
+            publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
             mainEntityOfPage: url,
           }),
         },

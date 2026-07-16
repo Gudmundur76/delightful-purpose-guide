@@ -6,17 +6,17 @@ both buttons are correctly hidden by the SDK's eligibility check.
 
 ## Apple Pay
 
-1. **Register `citation.is` in PayPal**
+1. **Register `grow.contact` in PayPal**
    - Sandbox: <https://www.sandbox.paypal.com/businessmanage/applePay>
    - Live: <https://www.paypal.com/businessmanage/applePay>
-   - Click "Add a new domain" → `citation.is` (and `www.citation.is`).
+   - Click "Add a new domain" → `grow.contact` (and `www.grow.contact`).
 
 2. **Download the domain-association file** PayPal gives you.
 
 3. **Place it in the repo** at
    `public/.well-known/apple-developer-merchantid-domain-association`
    (no file extension). It must be reachable at
-   `https://citation.is/.well-known/apple-developer-merchantid-domain-association`.
+   `https://grow.contact/.well-known/apple-developer-merchantid-domain-association`.
 
 4. Click **Verify** in the PayPal dashboard. Once verified, the Apple Pay
    button appears automatically on Safari (macOS/iOS) for users with a card

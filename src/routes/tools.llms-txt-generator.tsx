@@ -8,7 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { generateLlmsTxt } from "@/lib/tools/llms-generator.functions";
 import { Copy, Download, Loader2 } from "lucide-react";
 
-const URL_ = "https://citation.is/tools/llms-txt-generator";
+const URL_ = "https://grow.contact/tools/llms-txt-generator";
 const TITLE = "Free llms.txt generator — spec-compliant, from any sitemap";
 const DESC =
   "Paste any domain. We read your sitemap and return a clean, spec-compliant llms.txt grouped by section. Free, no signup, no email — copy or download and paste at the root of your site.";
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/tools/llms-txt-generator")({
       { name: "twitter:description", content: DESC },
       ...ogImageMeta({
         title: "Free llms.txt generator",
-        kicker: "citation.is / tools",
+        kicker: "grow.contact / tools",
         sub: "Point us at a domain. Get a spec-compliant llms.txt grouped by section, ready to paste at the root.",
       }),
     ],

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// @grow-contact/cli — thin client over https://citation.is/api/public/v1/*
+// @grow-contact/cli — thin client over https://grow.contact/api/public/v1/*
 // No deps. Works on Node >=18 (uses global fetch).
 
-const API_BASE = process.env.GROW_API_BASE || "https://citation.is";
+const API_BASE = process.env.GROW_API_BASE || "https://grow.contact";
 const API_KEY = process.env.GROW_API_KEY || "";
 
 const c = {
@@ -28,7 +28,7 @@ function gradeColor(score) {
 }
 
 function help() {
-  console.log(`${paint(c.bold, "grow")} — agent-readiness scanner (https://citation.is)
+  console.log(`${paint(c.bold, "grow")} — agent-readiness scanner (https://grow.contact)
 
 ${paint(c.bold, "USAGE")}
   grow check <url> [--json] [--fail-under <score>]

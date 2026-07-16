@@ -7,7 +7,7 @@ const geoScanSkill = `# grow-geo-scan
 Score any URL against the Grow GEO Standard (6 signals, 0–100) — semantic HTML, JSON-LD, llms.txt, citability, speed, and protocol discovery.
 
 ## Endpoint
-POST https://citation.is/api/public/v1/analyze
+POST https://grow.contact/api/public/v1/analyze
 Header: x-api-key: <key>
 Body: { "url": "https://example.com" }
 
@@ -21,14 +21,14 @@ const sha = (s: string) =>
 const index = {
   $schema: "https://agentskills.io/schemas/v0.2.0/index.json",
   version: "0.2.0",
-  publisher: { name: "citation.is", url: "https://citation.is" },
+  publisher: { name: "grow.contact", url: "https://grow.contact" },
   skills: [
     {
       name: "grow-geo-scan",
       type: "remote",
       description:
         "Score any URL against the Grow GEO Standard (6 signals, 0–100) for AI-agent readability.",
-      url: "https://citation.is/.well-known/agent-skills/grow-geo-scan.md",
+      url: "https://grow.contact/.well-known/agent-skills/grow-geo-scan.md",
       sha256: sha(geoScanSkill),
     },
   ],

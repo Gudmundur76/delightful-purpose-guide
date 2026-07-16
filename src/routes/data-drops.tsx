@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { getAllDataDrops } from "@/lib/data-drops/data";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const PAGE_URL = "https://citation.is/data-drops";
+const PAGE_URL = "https://grow.contact/data-drops";
 
 export const Route = createFileRoute("/data-drops")({
   component: DataDropsIndex,
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/data-drops")({
             name: "Data Drops",
             url: PAGE_URL,
             description: "Monthly single-stat findings on agent-readability across the AI industry.",
-            isPartOf: { "@type": "WebSite", url: "https://citation.is" },
+            isPartOf: { "@type": "WebSite", url: "https://grow.contact" },
           }),
         },
       ],

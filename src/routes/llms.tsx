@@ -32,8 +32,8 @@ Grow builds bespoke marketing sites, launch pages, and devtool hubs for founders
 
 ## Contact
 
-- Email: hello@citation.is
-- Brief intake: https://citation.is/#cta
+- Email: hello@grow.contact
+- Brief intake: https://grow.contact/#cta
 `;
 
 export const Route = createFileRoute("/llms")({
@@ -51,9 +51,9 @@ export const Route = createFileRoute("/llms")({
         content:
           "A plain-markdown summary at the root of every Grow site so AI crawlers can read it without parsing JavaScript. Human and agent views.",
       },
-      { property: "og:url", content: "https://citation.is/llms" },
+      { property: "og:url", content: "https://grow.contact/llms" },
     ],
-    links: [{ rel: "canonical", href: "https://citation.is/llms" }],
+    links: [{ rel: "canonical", href: "https://grow.contact/llms" }],
   }),
   component: LlmsPage,
 });
@@ -208,9 +208,9 @@ function HumanView() {
       <Block title="Contact">
         <p className="text-sm text-muted-foreground">
           Email{" "}
-          <span className="text-accent select-all">hello@citation.is</span>{" "}
+          <span className="text-accent select-all">hello@grow.contact</span>{" "}
           or start a brief at{" "}
-          <a href="/#cta" className="text-accent hover:underline">citation.is/#cta</a>.
+          <a href="/#cta" className="text-accent hover:underline">grow.contact/#cta</a>.
         </p>
       </Block>
     </div>

@@ -5,7 +5,7 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 export const generateBadgeEmbedTool = defineTool({
   name: "generate_badge_embed",
   description:
-    "Return paste-ready embed snippets (HTML, Markdown, React) for the citation.is 'Agent-Ready' badge for a given host or scan id. Pulls latest score if not specified.",
+    "Return paste-ready embed snippets (HTML, Markdown, React) for the grow.contact 'Agent-Ready' badge for a given host or scan id. Pulls latest score if not specified.",
   parameters: z.object({
     host: z.string().min(3).max(255).optional(),
     scan_id: z.string().uuid().optional(),
@@ -38,8 +38,8 @@ export const generateBadgeEmbedTool = defineTool({
       return JSON.stringify({ ok: false, error: "Provide host or scan_id" });
     }
     if (!id) return JSON.stringify({ ok: false, error: "No scan found for host" });
-    const badgeUrl = `https://citation.is/badge/${id}.svg`;
-    const linkUrl = `https://citation.is/verify/${id}`;
+    const badgeUrl = `https://grow.contact/badge/${id}.svg`;
+    const linkUrl = `https://grow.contact/verify/${id}`;
     return JSON.stringify(
       {
         ok: true,
@@ -87,7 +87,7 @@ export const submitToLeaderboardTool = defineTool({
 export const wordpressPluginConfigTool = defineTool({
   name: "create_wordpress_plugin_config",
   description:
-    "Generate the config snippet for the citation.is / Hermes WordPress plugin to install on a client site. Returns wp-config-style PHP and a JSON variant.",
+    "Generate the config snippet for the grow.contact / Hermes WordPress plugin to install on a client site. Returns wp-config-style PHP and a JSON variant.",
   parameters: z.object({
     host: z.string().min(3).max(255),
     api_key: z.string().min(8).max(200).describe("Public API key for the client"),
@@ -101,7 +101,7 @@ export const wordpressPluginConfigTool = defineTool({
       grow_contact: {
         host: clean,
         api_key,
-        endpoint: "https://citation.is/api/public/v1",
+        endpoint: "https://grow.contact/api/public/v1",
         features,
         version: "1.0",
       },
@@ -110,7 +110,7 @@ export const wordpressPluginConfigTool = defineTool({
 // Add to wp-config.php (above the "stop editing" line)
 define('GROW_CONTACT_HOST', '${clean}');
 define('GROW_CONTACT_API_KEY', '${api_key}');
-define('GROW_CONTACT_ENDPOINT', 'https://citation.is/api/public/v1');
+define('GROW_CONTACT_ENDPOINT', 'https://grow.contact/api/public/v1');
 define('GROW_CONTACT_FEATURES', '${features.join(",")}');
 `;
     return JSON.stringify({ ok: true, host: clean, json_config: json, php_config: php, install: "Upload the Hermes plugin .zip, activate, then paste the PHP block into wp-config.php." }, null, 2);

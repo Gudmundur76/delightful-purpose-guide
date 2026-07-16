@@ -1,4 +1,4 @@
-// Endpoint hit by citation.is auto-fix tools after an intervention is approved.
+// Endpoint hit by grow.contact auto-fix tools after an intervention is approved.
 // Validates a shared secret, pulls the latest manifest from the install_token,
 // and triggers a rebuild via the configured webhook (Vercel deploy hook, etc.).
 //
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
   if (!token) return new Response("missing GROW_INSTALL_TOKEN", { status: 500 });
 
   // Sanity-check the manifest is reachable.
-  const manifest = await fetch(`https://citation.is/api/public/inject/${token}.json`).catch(() => null);
+  const manifest = await fetch(`https://grow.contact/api/public/inject/${token}.json`).catch(() => null);
   if (!manifest || !manifest.ok) return new Response("manifest unreachable", { status: 502 });
 
   // Kick the deploy webhook (Vercel/Netlify/Cloudflare).

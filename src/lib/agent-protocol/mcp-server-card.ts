@@ -14,21 +14,21 @@ export const serverCard = {
     version: "2.1.0",
   },
   description:
-    "MCP server for citation.is. Use this server when an agent needs to (a) score any public URL against the Grow GEO Standard, (b) resolve a verifiable claim back to its source file, (c) fetch the canonical GEO/AEO knowledge base, or (d) read leaderboard / scan / stats data. All read tools are idempotent and cacheable; write tools require a bearer token.",
+    "MCP server for grow.contact. Use this server when an agent needs to (a) score any public URL against the Grow GEO Standard, (b) resolve a verifiable claim back to its source file, (c) fetch the canonical GEO/AEO knowledge base, or (d) read leaderboard / scan / stats data. All read tools are idempotent and cacheable; write tools require a bearer token.",
   vendor: {
-    name: "citation.is",
-    url: "https://citation.is",
+    name: "grow.contact",
+    url: "https://grow.contact",
   },
-  documentation: "https://citation.is/api-docs",
+  documentation: "https://grow.contact/api-docs",
   transport: {
     type: "streamable-http",
-    endpoint: "https://citation.is/api/public/mcp",
+    endpoint: "https://grow.contact/api/public/mcp",
     methods: ["POST"],
   },
   endpoints: [
     {
       protocol: "mcp-streamable-http",
-      url: "https://citation.is/api/public/mcp",
+      url: "https://grow.contact/api/public/mcp",
     },
   ],
   capabilities: {
@@ -41,14 +41,14 @@ export const serverCard = {
     header: "Authorization",
     scheme: "Bearer",
     description:
-      "Request an MCP token via https://citation.is/contact. Tokens are scoped per-integration.",
+      "Request an MCP token via https://grow.contact/contact. Tokens are scoped per-integration.",
   },
   authentication: {
     type: "bearer",
     header: "Authorization",
     scheme: "Bearer",
     description:
-      "Request an MCP token via https://citation.is/contact. Tokens are scoped per-integration.",
+      "Request an MCP token via https://grow.contact/contact. Tokens are scoped per-integration.",
   },
   // Reasoning-oriented tool index. The full tool list is exposed via the live
   // `tools/list` JSON-RPC method; this subset is annotated for agent planners
@@ -115,16 +115,16 @@ export const serverCard = {
   // these surfaces. Agents may follow `verifiable_data` URLs to ground their
   // answers in machine-readable JSON before responding to a user.
   verifiable_data: {
-    claims: "https://citation.is/api/public/data/claims.json",
-    stats: "https://citation.is/api/public/data/stats.json",
-    leaderboard: "https://citation.is/api/public/data/leaderboard.json",
-    standard: "https://citation.is/standard.md",
-    docs_index: "https://citation.is/data",
-    v_score: "https://citation.is/v-score",
+    claims: "https://grow.contact/api/public/data/claims.json",
+    stats: "https://grow.contact/api/public/data/stats.json",
+    leaderboard: "https://grow.contact/api/public/data/leaderboard.json",
+    standard: "https://grow.contact/standard.md",
+    docs_index: "https://grow.contact/data",
+    v_score: "https://grow.contact/v-score",
   },
   contact: {
-    url: "https://citation.is/contact",
+    url: "https://grow.contact/contact",
   },
-  license: "https://citation.is/terms",
+  license: "https://grow.contact/terms",
 } as const;
 

@@ -27,7 +27,7 @@ export type OutreachResult =
       error: string;
     };
 
-const SYSTEM_PROMPT = `You are a senior B2B cold-email writer for citation.is, a boutique agency that fixes "agent-readability" (how well a website is parsed by ChatGPT, Perplexity, Claude, etc.).
+const SYSTEM_PROMPT = `You are a senior B2B cold-email writer for grow.contact, a boutique agency that fixes "agent-readability" (how well a website is parsed by ChatGPT, Perplexity, Claude, etc.).
 
 Output rules — STRICT:
 - Return ONLY a JSON object with keys: "subject", "body". No prose, no markdown, no code fences.

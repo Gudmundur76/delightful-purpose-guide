@@ -23,14 +23,14 @@ export const Route = createFileRoute("/for-agents")({
         content:
           "MCP server, REST API, and embeddable badge so AI platforms can verify claims, sources, and citations in real time.",
       },
-      { property: "og:url", content: "https://citation.is/for-agents" },
+      { property: "og:url", content: "https://grow.contact/for-agents" },
       ...ogImageMeta({
         title: "For AI agents — a verification layer your users can trust",
         kicker: "Grow",
         sub: "MCP, API, and badge integrations for AI platforms.",
       }),
     ],
-    links: [{ rel: "canonical", href: "https://citation.is/for-agents" }],
+    links: [{ rel: "canonical", href: "https://grow.contact/for-agents" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -41,7 +41,7 @@ export const Route = createFileRoute("/for-agents")({
           description:
             "Verification layer for AI agent platforms. MCP server, API, and badge integrations.",
           brand: { "@type": "Brand", name: "Grow" },
-          url: "https://citation.is/for-agents",
+          url: "https://grow.contact/for-agents",
           offers: {
             "@type": "Offer",
             price: "0",
@@ -164,7 +164,7 @@ function ForAgentsPage() {
                     Score Claims for Verifiability
                   </h3>
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                    citation.is scores every claim an agent makes against source quality, citation
+                    grow.contact scores every claim an agent makes against source quality, citation
                     depth, and factual grounding. Low-scoring claims are flagged before they reach
                     users.
                   </p>
@@ -179,7 +179,7 @@ function ForAgentsPage() {
                     Verified Badge for Truth Scores &gt;75
                   </h3>
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                    Agents with truth scores above 75 earn a &quot;Verified by citation.is&quot;
+                    Agents with truth scores above 75 earn a &quot;Verified by grow.contact&quot;
                     badge. Users see it on agent profiles, search results, and marketplace listings.
                   </p>
                 </div>
@@ -294,7 +294,7 @@ function ForAgentsPage() {
                 </div>
                 <h3 className="text-xl font-extrabold tracking-tight uppercase">Badge</h3>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed flex-1">
-                  Embed a &quot;Verified by citation.is&quot; badge on every agent profile. SVG,
+                  Embed a &quot;Verified by grow.contact&quot; badge on every agent profile. SVG,
                   dark-mode aware, and auto-updating. One line of HTML. No JavaScript required.
                 </p>
                 <ul className="mt-6 space-y-2">

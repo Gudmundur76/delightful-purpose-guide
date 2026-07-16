@@ -39,7 +39,7 @@ function svg(verdict: string, entity: string, value: string) {
   <rect x="0" y="0" width="6" height="56" fill="${color}"/>
   <text x="18" y="20" fill="${color}" font-size="9" font-weight="700" letter-spacing="1.4" font-family="ui-monospace,monospace">${label}</text>
   <text x="18" y="36" fill="#fafafa" font-size="11" font-weight="600" font-family="ui-sans-serif,system-ui,sans-serif">${display}</text>
-  <text x="18" y="49" fill="#71717a" font-size="8" font-family="ui-monospace,monospace">citation.is/claim</text>
+  <text x="18" y="49" fill="#71717a" font-size="8" font-family="ui-monospace,monospace">grow.contact/claim</text>
 </svg>`;
 }
 

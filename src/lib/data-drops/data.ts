@@ -42,8 +42,8 @@ export const DATA_DROPS: DataDrop[] = [
       `Verify any of the ${filterByFailure("llmsTxt").length} failing rows live at /check?u=<domain>. Dataset license: CC BY 4.0.`,
     ],
     cite: {
-      apa: `citation.is (2026, May 12). llms.txt adoption stalls at ${100 - stats.missing_llms_txt_pct}% across top AI companies. https://citation.is/data-drops/llms-txt-adoption-may-2026`,
-      bibtex: `@misc{grow_llmstxt_2026,\n  author = {{citation.is}},\n  title = {llms.txt adoption stalls at ${100 - stats.missing_llms_txt_pct}\\% across top AI companies},\n  year = {2026},\n  month = {May},\n  url = {https://citation.is/data-drops/llms-txt-adoption-may-2026}\n}`,
+      apa: `grow.contact (2026, May 12). llms.txt adoption stalls at ${100 - stats.missing_llms_txt_pct}% across top AI companies. https://grow.contact/data-drops/llms-txt-adoption-may-2026`,
+      bibtex: `@misc{grow_llmstxt_2026,\n  author = {{grow.contact}},\n  title = {llms.txt adoption stalls at ${100 - stats.missing_llms_txt_pct}\\% across top AI companies},\n  year = {2026},\n  month = {May},\n  url = {https://grow.contact/data-drops/llms-txt-adoption-may-2026}\n}`,
       pull_quote: `${stats.missing_llms_txt_pct}% of the top ${stats.total} AI companies still ship no usable llms.txt.`,
     },
     compute: () => ({
@@ -64,8 +64,8 @@ export const DATA_DROPS: DataDrop[] = [
       `Methodology: 5-signal score (Semantic HTML, JSON-LD, llms.txt, Citability, Page Speed). Pass threshold per signal at ~75% of max. Full breakdown at /report/methodology.`,
     ],
     cite: {
-      apa: `citation.is (2026, May 19). ${stats.opaque_pct}% of AI companies are effectively invisible to ChatGPT, Perplexity, and Claude. https://citation.is/data-drops/opaque-ai-companies-may-2026`,
-      bibtex: `@misc{grow_opaque_2026,\n  author = {{citation.is}},\n  title = {${stats.opaque_pct}\\% of AI companies are effectively invisible to AI engines},\n  year = {2026},\n  month = {May},\n  url = {https://citation.is/data-drops/opaque-ai-companies-may-2026}\n}`,
+      apa: `grow.contact (2026, May 19). ${stats.opaque_pct}% of AI companies are effectively invisible to ChatGPT, Perplexity, and Claude. https://grow.contact/data-drops/opaque-ai-companies-may-2026`,
+      bibtex: `@misc{grow_opaque_2026,\n  author = {{grow.contact}},\n  title = {${stats.opaque_pct}\\% of AI companies are effectively invisible to AI engines},\n  year = {2026},\n  month = {May},\n  url = {https://grow.contact/data-drops/opaque-ai-companies-may-2026}\n}`,
       pull_quote: `${stats.opaque_pct}% of the AI industry's own marketing sites score below the threshold ChatGPT and Perplexity will cite.`,
     },
     compute: () => ({
@@ -86,8 +86,8 @@ export const DATA_DROPS: DataDrop[] = [
       `Category breakdown: ${stats.category_averages.map((c) => `${c.label} ${c.avg}/100 (${c.count} sites)`).join(" · ")}.`,
     ],
     cite: {
-      apa: `citation.is (2026, May 26). The agent-readability gap inside AI. https://citation.is/data-drops/category-gap-may-2026`,
-      bibtex: `@misc{grow_categorygap_2026,\n  author = {{citation.is}},\n  title = {The agent-readability gap inside AI},\n  year = {2026},\n  month = {May},\n  url = {https://citation.is/data-drops/category-gap-may-2026}\n}`,
+      apa: `grow.contact (2026, May 26). The agent-readability gap inside AI. https://grow.contact/data-drops/category-gap-may-2026`,
+      bibtex: `@misc{grow_categorygap_2026,\n  author = {{grow.contact}},\n  title = {The agent-readability gap inside AI},\n  year = {2026},\n  month = {May},\n  url = {https://grow.contact/data-drops/category-gap-may-2026}\n}`,
       pull_quote: `${[...stats.category_averages].sort((a, b) => b.avg - a.avg)[0].label} leads agent-readability at ${[...stats.category_averages].sort((a, b) => b.avg - a.avg)[0].avg}/100; ${[...stats.category_averages].sort((a, b) => a.avg - b.avg)[0].label} trails at ${[...stats.category_averages].sort((a, b) => a.avg - b.avg)[0].avg}/100.`,
     },
     compute: () => ({
@@ -107,8 +107,8 @@ export const DATA_DROPS: DataDrop[] = [
       `Lowest-hanging fix: Organization at root, FAQPage on the pricing page, Product on each tier. Three blocks, one hour, double-digit citation rate lift inside a quarter.`,
     ],
     cite: {
-      apa: `citation.is (2026, May 5). ${stats.weak_jsonld_pct}% of AI companies ship insufficient JSON-LD for reliable citation. https://citation.is/data-drops/weak-jsonld-may-2026`,
-      bibtex: `@misc{grow_jsonld_2026,\n  author = {{citation.is}},\n  title = {${stats.weak_jsonld_pct}\\% of AI companies ship insufficient JSON-LD},\n  year = {2026},\n  month = {May},\n  url = {https://citation.is/data-drops/weak-jsonld-may-2026}\n}`,
+      apa: `grow.contact (2026, May 5). ${stats.weak_jsonld_pct}% of AI companies ship insufficient JSON-LD for reliable citation. https://grow.contact/data-drops/weak-jsonld-may-2026`,
+      bibtex: `@misc{grow_jsonld_2026,\n  author = {{grow.contact}},\n  title = {${stats.weak_jsonld_pct}\\% of AI companies ship insufficient JSON-LD},\n  year = {2026},\n  month = {May},\n  url = {https://grow.contact/data-drops/weak-jsonld-may-2026}\n}`,
       pull_quote: `${stats.weak_jsonld_pct}% of AI companies ship JSON-LD too thin for reliable AI citation.`,
     },
     compute: () => ({
@@ -129,8 +129,8 @@ export const DATA_DROPS: DataDrop[] = [
       `Re-score any row live at /check?u=<domain>. Full dataset: /api/public/leaderboard.json (CC BY 4.0).`,
     ],
     cite: {
-      apa: `citation.is (2026, April 28). Only ${stats.agent_native_pct}% of AI companies clear the agent-native bar. https://citation.is/data-drops/agent-native-bar-may-2026`,
-      bibtex: `@misc{grow_agentnative_2026,\n  author = {{citation.is}},\n  title = {Only ${stats.agent_native_pct}\\% of AI companies clear the agent-native bar},\n  year = {2026},\n  month = {April},\n  url = {https://citation.is/data-drops/agent-native-bar-may-2026}\n}`,
+      apa: `grow.contact (2026, April 28). Only ${stats.agent_native_pct}% of AI companies clear the agent-native bar. https://grow.contact/data-drops/agent-native-bar-may-2026`,
+      bibtex: `@misc{grow_agentnative_2026,\n  author = {{grow.contact}},\n  title = {Only ${stats.agent_native_pct}\\% of AI companies clear the agent-native bar},\n  year = {2026},\n  month = {April},\n  url = {https://grow.contact/data-drops/agent-native-bar-may-2026}\n}`,
       pull_quote: `Only ${stats.agent_native_pct}% of AI companies clear the 85/100 bar above which AI engines reliably cite by name.`,
     },
     compute: () => ({

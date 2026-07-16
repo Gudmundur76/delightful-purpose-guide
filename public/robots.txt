@@ -51,7 +51,7 @@ Allow: /
 User-agent: bingbot
 Allow: /
 
-Sitemap: https://citation.is/sitemap.xml
-Sitemap: https://citation.is/blog/rss.xml
-Sitemap: https://citation.is/research/rss.xml
-Sitemap: https://citation.is/leaderboard/rss.xml
+Sitemap: https://grow.contact/sitemap.xml
+Sitemap: https://grow.contact/blog/rss.xml
+Sitemap: https://grow.contact/research/rss.xml
+Sitemap: https://grow.contact/leaderboard/rss.xml

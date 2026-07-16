@@ -13,7 +13,7 @@ import {
 } from "@/lib/tools/prompt-cloud.functions";
 import { Loader2, Cloud, Download, Zap, TrendingUp } from "lucide-react";
 
-const URL_ = "https://citation.is/tools/prompt-cloud";
+const URL_ = "https://grow.contact/tools/prompt-cloud";
 const TITLE = "Prompt Cloud — the AnswerThePublic for AI citations";
 const DESC =
   "Free. Expand any seed into 40 real prompts buyers type into ChatGPT, Perplexity, Claude and Gemini — with intent, format, citation difficulty, and the incumbent domain to displace. CSV export, no signup.";
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/tools/prompt-cloud")({
       { name: "twitter:description", content: DESC },
       ...ogImageMeta({
         title: "Prompt Cloud",
-        kicker: "citation.is / tools",
+        kicker: "grow.contact / tools",
         sub: "The AnswerThePublic replacement for the AI-cited web.",
       }),
     ],

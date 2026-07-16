@@ -163,7 +163,7 @@ function ForAnalystsPage() {
             Sample request
           </h2>
           <pre className="bg-card/60 border border-border p-4 font-mono text-xs overflow-x-auto">
-{`curl https://citation.is/api/public/v1/companies/anthropic.com \\
+{`curl https://grow.contact/api/public/v1/companies/anthropic.com \\
   -H "Authorization: Bearer YOUR_API_KEY"
 
 {

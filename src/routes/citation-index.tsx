@@ -17,7 +17,7 @@ export const Route = createFileRoute("/citation-index")({
   component: CitationIndexPage,
   head: () => {
     const monthLabel = new Date().toLocaleString("en-US", { month: "long", year: "numeric" });
-    const title = `Citation Index — ${monthLabel} | citation.is`;
+    const title = `Citation Index — ${monthLabel} | grow.contact`;
     const desc = `Our monthly snapshot of which AI companies show up most often in Perplexity, ChatGPT, Claude, and Google AI Overviews answers. ${monthLabel} edition.`;
     return {
       meta: [
@@ -30,8 +30,8 @@ export const Route = createFileRoute("/citation-index")({
         ...ogImageMeta({ title, kicker: "Citation Index", sub: desc }),
       ],
       links: [
-        { rel: "canonical", href: "https://citation.is/citation-index" },
-        { rel: "alternate", type: "application/rss+xml", title: "Citation Index", href: "https://citation.is/rss.xml" },
+        { rel: "canonical", href: "https://grow.contact/citation-index" },
+        { rel: "alternate", type: "application/rss+xml", title: "Citation Index", href: "https://grow.contact/rss.xml" },
       ],
     };
   },
@@ -209,7 +209,7 @@ function CitationIndexPage() {
         </section>
 
         <p className="text-xs text-muted-foreground font-mono">
-          Generated {new Date(data.generated_at).toISOString()} · citation.is Citation Intelligence Platform
+          Generated {new Date(data.generated_at).toISOString()} · grow.contact Citation Intelligence Platform
         </p>
       </main>
       <SiteFooter />

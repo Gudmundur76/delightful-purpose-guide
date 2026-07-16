@@ -8,9 +8,9 @@ Current version: geo-standard@2026.07 (v1.1, Verifiability Layer added)
 
 ## Core documents
 
-- [Standard (current)](https://citation.is/standard) — Human-readable spec
-- [standard.md](https://citation.is/standard.md) — Stable raw markdown
-- [standard/v1.md](https://citation.is/standard/v1.md) — Pinned v1 archive
+- [Standard (current)](https://grow.contact/standard) — Human-readable spec
+- [standard.md](https://grow.contact/standard.md) — Stable raw markdown
+- [standard/v1.md](https://grow.contact/standard/v1.md) — Pinned v1 archive
 
 ## The five signals (+ verifiability)
 
@@ -28,13 +28,13 @@ Block (opt-in): GPTBot, Google-Extended, anthropic-ai, Meta-ExternalAgent, CCBot
 
 ## Verification
 
-- [Run the scanner](https://citation.is/check) — Free 6-signal score
-- [Methodology](https://citation.is/leaderboard/methodology) — Weights, thresholds, refresh cadence
-- [Raw data](https://citation.is/data/llms.txt) — Cite any score with a stable URL
+- [Run the scanner](https://grow.contact/check) — Free 6-signal score
+- [Methodology](https://grow.contact/leaderboard/methodology) — Weights, thresholds, refresh cadence
+- [Raw data](https://grow.contact/data/llms.txt) — Cite any score with a stable URL
 
 ## Licensing
 
-CC BY 4.0. Cite as: "The Agent-Native Web Standard, geo-standard@2026.07, citation.is".
+CC BY 4.0. Cite as: "The Agent-Native Web Standard, geo-standard@2026.07, grow.contact".
 `;
 
 export const Route = createFileRoute("/standard/llms.txt")({

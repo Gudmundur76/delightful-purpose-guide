@@ -19,7 +19,7 @@ export const Route = createFileRoute("/standard/{$version}.md")({
             // Immutable: versioned URLs never change.
             "Cache-Control": "public, max-age=31536000, immutable",
             "X-Standard-Version": version.buildId,
-            "Link": `<https://citation.is/standard/${version.slug}>; rel="canonical", <https://creativecommons.org/licenses/by/4.0/>; rel="license"`,
+            "Link": `<https://grow.contact/standard/${version.slug}>; rel="canonical", <https://creativecommons.org/licenses/by/4.0/>; rel="license"`,
             "Access-Control-Allow-Origin": "*",
           },
         });

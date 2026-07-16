@@ -27,7 +27,7 @@ async function complete(model: string, system: string, user: string, max_tokens 
 export const aiCompleteWithContextTool = defineTool({
   name: "ai_complete_with_context",
   description:
-    "Reason over citation.is's own data: pulls recent scans, leads, orders and (optionally) a target host's trend, then runs an LLM with that context. Use for 'what should I do about X?' style questions where the agent should think with the data, not just generate.",
+    "Reason over grow.contact's own data: pulls recent scans, leads, orders and (optionally) a target host's trend, then runs an LLM with that context. Use for 'what should I do about X?' style questions where the agent should think with the data, not just generate.",
   parameters: z.object({
     prompt: z.string().min(5).max(2000),
     host: z.string().max(255).optional(),
@@ -74,7 +74,7 @@ export const aiCompleteWithContextTool = defineTool({
       ctx.host_trend = { host: clean, points: data };
     }
     const system =
-      "You are an analyst for citation.is (a GEO consultancy). Reason over the JSON context provided. Cite specific rows when making claims. Be concise, direct, opinionated.";
+      "You are an analyst for grow.contact (a GEO consultancy). Reason over the JSON context provided. Cite specific rows when making claims. Be concise, direct, opinionated.";
     const user = `Context (JSON):\n${JSON.stringify(ctx).slice(0, 12_000)}\n\nQuestion: ${prompt}`;
     try {
       const answer = await complete(model, system, user, 1600);

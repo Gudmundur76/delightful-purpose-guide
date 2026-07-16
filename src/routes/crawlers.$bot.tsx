@@ -14,7 +14,7 @@ export const Route = createFileRoute("/crawlers/$bot")({
   head: ({ loaderData }) => {
     const c = loaderData?.crawler;
     if (!c) return { meta: [{ title: "Crawler — Grow" }] };
-    const url = `https://citation.is/crawlers/${c.slug}`;
+    const url = `https://grow.contact/crawlers/${c.slug}`;
     const title = `${c.name} — What It Is, What It Powers, How to Configure`;
     return {
       meta: [
@@ -45,8 +45,8 @@ export const Route = createFileRoute("/crawlers/$bot")({
             url,
             about: c.name,
             keywords: [c.name, c.operator, c.robotsToken, "AI crawler", "robots.txt"].join(", "),
-            author: { "@type": "Organization", name: "Grow", url: "https://citation.is/" },
-            publisher: { "@type": "Organization", name: "Grow", url: "https://citation.is/" },
+            author: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
+            publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
           }),
         },
         {
@@ -55,8 +55,8 @@ export const Route = createFileRoute("/crawlers/$bot")({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://citation.is/" },
-              { "@type": "ListItem", position: 2, name: "Crawlers", item: "https://citation.is/crawlers" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
+              { "@type": "ListItem", position: 2, name: "Crawlers", item: "https://grow.contact/crawlers" },
               { "@type": "ListItem", position: 3, name: c.name, item: url },
             ],
           }),

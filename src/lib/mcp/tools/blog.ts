@@ -5,7 +5,7 @@ import { POSTS } from "@/lib/blog/posts";
 export const listBlogPostsTool = defineTool({
   name: "list_blog_posts",
   description:
-    "List all blog posts on citation.is with slug, title, description, publishedAt, tags. Optional tag filter and text search.",
+    "List all blog posts on grow.contact with slug, title, description, publishedAt, tags. Optional tag filter and text search.",
   parameters: z.object({
     tag: z.string().max(60).optional(),
     search: z.string().max(200).optional().describe("Case-insensitive match against title + description"),
@@ -31,7 +31,7 @@ export const listBlogPostsTool = defineTool({
         count: posts.length,
         posts: posts.map(({ body: _b, ...meta }) => ({
           ...meta,
-          url: `https://citation.is/blog/${meta.slug}`,
+          url: `https://grow.contact/blog/${meta.slug}`,
         })),
       },
       null,
@@ -43,7 +43,7 @@ export const listBlogPostsTool = defineTool({
 export const getBlogPostTool = defineTool({
   name: "get_blog_post",
   description:
-    "Get a full blog post by slug, including body. Use to quote or summarize citation.is content.",
+    "Get a full blog post by slug, including body. Use to quote or summarize grow.contact content.",
   parameters: z.object({
     slug: z.string().min(1).max(200),
   }),
@@ -51,7 +51,7 @@ export const getBlogPostTool = defineTool({
     const post = POSTS.find((p) => p.slug === slug);
     if (!post) return JSON.stringify({ ok: false, error: "not_found" });
     return JSON.stringify(
-      { ok: true, post: { ...post, url: `https://citation.is/blog/${slug}` } },
+      { ok: true, post: { ...post, url: `https://grow.contact/blog/${slug}` } },
       null,
       2,
     );

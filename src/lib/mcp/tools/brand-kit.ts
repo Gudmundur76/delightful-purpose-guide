@@ -4,12 +4,12 @@ import { z } from "zod";
 export const brandKitTool = defineTool({
   name: "get_brand_kit",
   description:
-    "Returns citation.is brand kit: colors (OKLCH), typography, tone of voice, logo URLs. Use this as build-time context so generated UIs match the brand.",
+    "Returns grow.contact brand kit: colors (OKLCH), typography, tone of voice, logo URLs. Use this as build-time context so generated UIs match the brand.",
   parameters: z.object({}),
   execute: async () => {
     return JSON.stringify(
       {
-        name: "citation.is",
+        name: "grow.contact",
         colors: {
           background: "oklch(0.145 0 0)",
           foreground: "oklch(0.984 0.003 247.86)",
@@ -51,14 +51,14 @@ export const brandKitTool = defineTool({
           ],
         },
         logo: {
-          wordmark: "citation.is",
-          mark_style: "monospace wordmark with trailing underscore: citation.is_",
+          wordmark: "grow.contact",
+          mark_style: "monospace wordmark with trailing underscore: grow.contact_",
         },
         urls: {
-          home: "https://citation.is",
-          pricing: "https://citation.is/pricing",
-          check: "https://citation.is/check",
-          api_docs: "https://citation.is/api-docs",
+          home: "https://grow.contact",
+          pricing: "https://grow.contact/pricing",
+          check: "https://grow.contact/check",
+          api_docs: "https://grow.contact/api-docs",
         },
       },
       null,

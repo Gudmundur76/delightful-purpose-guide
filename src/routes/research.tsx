@@ -1,4 +1,4 @@
-// Research hub — single index of every citable artifact citation.is
+// Research hub — single index of every citable artifact grow.contact
 // publishes: the quarterly report, monthly citation index, data drops,
 // playbooks, and the glossary. Designed to be the page a journalist or
 // AI engine lands on when looking for "GEO research".
@@ -12,13 +12,13 @@ export const Route = createFileRoute("/research")({
   component: ResearchHub,
   head: () => ({
     meta: [
-      { title: "Research — Citation Intelligence | citation.is" },
+      { title: "Research — Citation Intelligence | grow.contact" },
       {
         name: "description",
         content:
           "Quarterly report, monthly citation index, data drops, playbooks, and glossary — every citable artifact on agent-readability and AI citations in one place.",
       },
-      { property: "og:title", content: "Research — citation.is" },
+      { property: "og:title", content: "Research — grow.contact" },
       {
         property: "og:description",
         content:
@@ -26,32 +26,32 @@ export const Route = createFileRoute("/research")({
       },
       { property: "og:type", content: "website" },
       ...ogImageMeta({
-        title: "Research — Citation Intelligence | citation.is",
+        title: "Research — Citation Intelligence | grow.contact",
         kicker: "Research",
         sub: "Quarterly report, citation index, playbooks, data drops, glossary.",
       }),
     ],
-    links: [{ rel: "canonical", href: "https://citation.is/research" }],
+    links: [{ rel: "canonical", href: "https://grow.contact/research" }],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          name: "citation.is Research",
+          name: "grow.contact Research",
           description:
             "Index of reports, data drops, playbooks, and definitions on agent-readability and AI citations.",
-          url: "https://citation.is/research",
+          url: "https://grow.contact/research",
           hasPart: [
             {
               "@type": "Report",
               name: "Q2 2026 Agent-Readability Report",
-              url: "https://citation.is/report/q2-2026",
+              url: "https://grow.contact/report/q2-2026",
             },
             {
               "@type": "Dataset",
               name: "Citation Index",
-              url: "https://citation.is/citation-index",
+              url: "https://grow.contact/citation-index",
             },
           ],
         }),

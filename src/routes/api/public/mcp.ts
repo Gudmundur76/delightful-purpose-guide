@@ -74,7 +74,7 @@ const mcp = createMcpServer({
   name: "grow-contact-mcp",
   version: "2.0.0",
   instructions:
-    "Tools for building with and operating citation.is. NEW in 2.0: site content editing (update_page_content, update_hero, get_page_content), FAQ admin (list_faq_items, update_faq_item), blog admin (list_blog_drafts, update_blog_post, publish_blog_post, delete_blog_post), pricing display (update_pricing_display), CRM edits (update_client, delete_lead, delete_scan), revenue_stats with per-product/per-month breakdown, get_dashboard_stats with windowed defaults, check_ai_citation auto-queries when query omitted, content edit audit log (list_content_edits, revert_content_edit). 1.9: scheduled scans. Plus brand/content/blog/AI/GEO/scans/CRM/orders/email/reviews tooling.",
+    "Tools for building with and operating grow.contact. NEW in 2.0: site content editing (update_page_content, update_hero, get_page_content), FAQ admin (list_faq_items, update_faq_item), blog admin (list_blog_drafts, update_blog_post, publish_blog_post, delete_blog_post), pricing display (update_pricing_display), CRM edits (update_client, delete_lead, delete_scan), revenue_stats with per-product/per-month breakdown, get_dashboard_stats with windowed defaults, check_ai_citation auto-queries when query omitted, content edit audit log (list_content_edits, revert_content_edit). 1.9: scheduled scans. Plus brand/content/blog/AI/GEO/scans/CRM/orders/email/reviews tooling.",
   tools: [
     pingTool,
     healthCheckTool,

@@ -23,14 +23,14 @@ export const Route = createFileRoute("/vs")({
           content:
             "Side-by-side comparisons of Grow against the major web design tools, AI visibility platforms, and agencies.",
         },
-        { property: "og:url", content: "https://citation.is/vs" },
+        { property: "og:url", content: "https://grow.contact/vs" },
       ...ogImageMeta({
         title: "Grow vs Webflow, Framer, Wix, Profound, Rankscale & Agencies",
         kicker: "Grow",
         sub: "Honest comparisons of Grow against Webflow, Framer, Wix Studio, traditional agencies, Profound, Rankscale, and DIY GEO. Where each wins and which to pick.",
       }),
     ],
-      links: [{ rel: "canonical", href: "https://citation.is/vs" }],
+      links: [{ rel: "canonical", href: "https://grow.contact/vs" }],
       scripts: [
         {
           type: "application/ld+json",
@@ -40,12 +40,12 @@ export const Route = createFileRoute("/vs")({
             name: "Grow vs the alternatives",
             description:
               "Side-by-side comparisons of Grow against web builders, AI visibility platforms, GEO audit tools, agencies, and DIY.",
-            url: "https://citation.is/vs",
+            url: "https://grow.contact/vs",
             numberOfItems: all.length,
             itemListElement: all.map((c, i) => ({
               "@type": "ListItem",
               position: i + 1,
-              url: `https://citation.is/vs/${c.slug}`,
+              url: `https://grow.contact/vs/${c.slug}`,
               name: `Grow vs ${c.competitor}`,
             })),
           }),

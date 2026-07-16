@@ -102,7 +102,7 @@ export const autoFixSchemaTool = defineTool({
       site_id: site.id,
       preview,
       jsonld,
-      install_snippet: `<script src="https://citation.is/api/public/inject/${site.install_token}.js" defer></script>`,
+      install_snippet: `<script src="https://grow.contact/api/public/inject/${site.install_token}.js" defer></script>`,
       next: "Approve at /dashboard/interventions to go live.",
     }, null, 2);
   },

@@ -5,7 +5,7 @@ const body = `# grow-geo-scan
 Score any URL against the Grow GEO Standard (6 signals, 0–100) — semantic HTML, JSON-LD, llms.txt, citability, speed, and protocol discovery.
 
 ## Endpoint
-POST https://citation.is/api/public/v1/analyze
+POST https://grow.contact/api/public/v1/analyze
 Header: x-api-key: <key>
 Body: { "url": "https://example.com" }
 

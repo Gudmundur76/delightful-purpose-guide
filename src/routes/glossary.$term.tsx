@@ -14,7 +14,7 @@ export const Route = createFileRoute("/glossary/$term")({
   head: ({ loaderData, params }) => {
     const t = loaderData?.term;
     if (!t) return { meta: [{ title: "Glossary — Grow" }] };
-    const url = `https://citation.is/glossary/${t.slug}`;
+    const url = `https://grow.contact/glossary/${t.slug}`;
     const title = `${t.term} — GEO Glossary`;
     return {
       meta: [
@@ -46,9 +46,9 @@ export const Route = createFileRoute("/glossary/$term")({
             termCode: t.slug,
             inDefinedTermSet: {
               "@type": "DefinedTermSet",
-              "@id": "https://citation.is/glossary",
+              "@id": "https://grow.contact/glossary",
               name: "GEO and Agent-Native Web Glossary",
-              url: "https://citation.is/glossary",
+              url: "https://grow.contact/glossary",
             },
           }),
         },
@@ -58,8 +58,8 @@ export const Route = createFileRoute("/glossary/$term")({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://citation.is/" },
-              { "@type": "ListItem", position: 2, name: "Glossary", item: "https://citation.is/glossary" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://grow.contact/" },
+              { "@type": "ListItem", position: 2, name: "Glossary", item: "https://grow.contact/glossary" },
               { "@type": "ListItem", position: 3, name: t.term, item: url },
             ],
           }),

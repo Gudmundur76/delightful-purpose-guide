@@ -4,7 +4,7 @@ import { z } from "zod";
 export const publishLlmsTxtTool = defineTool({
   name: "publish_llms_txt",
   description:
-    "Validate a /llms.txt payload and return a ready-to-deploy bundle (raw content + recommended path + HTTP headers + verification probe URL). citation.is does not have FTP/SSH into client sites — this prepares the artifact for the client (or their CI) to drop in. Pair with check_llms_txt to verify post-deploy.",
+    "Validate a /llms.txt payload and return a ready-to-deploy bundle (raw content + recommended path + HTTP headers + verification probe URL). grow.contact does not have FTP/SSH into client sites — this prepares the artifact for the client (or their CI) to drop in. Pair with check_llms_txt to verify post-deploy.",
   parameters: z.object({
     host: z.string().min(3).max(255),
     content: z.string().min(10).max(50_000),

@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <link rel="canonical" href={url} />
-        <meta name="generator" content="citation.is/agent-native-template@2026.05" />
+        <meta name="generator" content="grow.contact/agent-native-template@2026.05" />
         {schemas.map((s, i) => (
           <script
             key={i}

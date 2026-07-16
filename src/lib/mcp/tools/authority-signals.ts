@@ -76,7 +76,7 @@ export function calculateAuthorityScore(opts: {
   return Math.round(score * 100) / 100;
 }
 
-const UA = { "User-Agent": "citation.is-mcp/1.0" };
+const UA = { "User-Agent": "grow.contact-mcp/1.0" };
 
 async function safeFetch(url: string, init?: RequestInit): Promise<Response | null> {
   try {

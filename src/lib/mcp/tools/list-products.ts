@@ -5,7 +5,7 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 export const listProductsTool = defineTool({
   name: "list_products",
   description:
-    "List active citation.is products with slug, name, price (cents + currency), description, image. Use when generating pricing pages or quoting customers.",
+    "List active grow.contact products with slug, name, price (cents + currency), description, image. Use when generating pricing pages or quoting customers.",
   parameters: z.object({}),
   execute: async () => {
     const { data, error } = await supabaseAdmin

@@ -4,7 +4,7 @@ import { ogImageMeta } from "@/lib/seo/og";
 const TITLE = "Grow GEO browser extension — one-click agent readability score";
 const DESC =
   "See how AI agents read any website you visit. Free Chrome / Edge / Brave extension that drops your GEO + AEO score into the toolbar, with the top three fixes and a link to the full report.";
-const PAGE_URL = "https://citation.is/extension";
+const PAGE_URL = "https://grow.contact/extension";
 
 export const Route = createFileRoute("/extension")({
   head: () => ({
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/extension")({
           description: DESC,
           url: PAGE_URL,
           offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-          publisher: { "@type": "Organization", name: "Grow", url: "https://citation.is" },
+          publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact" },
         }),
       },
     ],

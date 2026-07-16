@@ -5,7 +5,7 @@ import { getFeaturedPairsWithEntries } from "@/lib/compare/data";
 import { ArrowRight } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const URL_ = "https://citation.is/compare";
+const URL_ = "https://grow.contact/compare";
 const TITLE = "Agent-Readability Head-to-Heads — Compare AI Companies";
 const DESC =
   "Side-by-side agent-readability comparisons of the AI companies you actually compare: Anthropic vs OpenAI, Perplexity vs ChatGPT, Vercel vs Modal, Pinecone vs Weaviate, and more.";
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/compare")({
             itemListElement: pairs.map((p, i) => ({
               "@type": "ListItem",
               position: i + 1,
-              url: `https://citation.is/compare/${p.slug}`,
+              url: `https://grow.contact/compare/${p.slug}`,
               name: `${p.a.name} vs ${p.b.name}`,
             })),
           }),

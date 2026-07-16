@@ -1,5 +1,5 @@
 // RFC 7517 — JSON Web Key Set
-// citation.is uses opaque bearer tokens (not JWTs) for the MCP endpoint, so the
+// grow.contact uses opaque bearer tokens (not JWTs) for the MCP endpoint, so the
 // key set is intentionally empty. Published so OAuth discovery (RFC 8414) resolves.
 import { createFileRoute } from "@tanstack/react-router";
 

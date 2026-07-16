@@ -12,13 +12,13 @@ export const Route = createFileRoute("/example")({
       { name: "description", content: "150-char-ish description that answers the page's implicit question. Numbers and entities." },
       { property: "og:title", content: "Page title — Brand" },
       { property: "og:description", content: "Same as meta description, or a sharper share-optimized variant." },
-      { property: "og:url", content: "https://citation.is/example" },
+      { property: "og:url", content: "https://grow.contact/example" },
       { property: "og:type", content: "website" }, // "article" / "product" on leaves
       // og:image ONLY at leaves and ONLY when a meaningful image exists:
-      // { property: "og:image", content: "https://citation.is/og/example.jpg" },
+      // { property: "og:image", content: "https://grow.contact/og/example.jpg" },
     ],
     links: [
-      { rel: "canonical", href: "https://citation.is/example" },
+      { rel: "canonical", href: "https://grow.contact/example" },
     ],
     scripts: [
       // Pick the schema.org type matching the page content. Examples:
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/example")({
           "@context": "https://schema.org",
           "@type": "WebPage",
           name: "Page title — Brand",
-          url: "https://citation.is/example",
+          url: "https://grow.contact/example",
         }),
       },
     ],

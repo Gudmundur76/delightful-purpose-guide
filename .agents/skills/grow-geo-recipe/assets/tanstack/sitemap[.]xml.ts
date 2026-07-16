@@ -4,7 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
 // TODO: replace with the project's canonical domain
-const BASE_URL = "https://citation.is";
+const BASE_URL = "https://grow.contact";
 
 interface SitemapEntry {
   path: string;

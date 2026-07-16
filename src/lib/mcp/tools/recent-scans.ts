@@ -7,7 +7,7 @@ export const recentScansTool = defineTool({
   description:
     "List the most recent GEO scans across all hosts (or filter by host). Returns id, url, host, overall + 5 sub-scores, scanned_at.",
   parameters: z.object({
-    host: z.string().max(255).optional().describe("Optional host filter, e.g. 'citation.is'"),
+    host: z.string().max(255).optional().describe("Optional host filter, e.g. 'grow.contact'"),
     limit: z.number().int().min(1).max(50).default(10),
   }),
   execute: async ({ host, limit }) => {

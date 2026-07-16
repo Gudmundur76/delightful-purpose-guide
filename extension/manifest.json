@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "One-click GEO score for any site. See how AI agents read the page you're on.",
   "permissions": ["activeTab", "storage"],
-  "host_permissions": ["https://citation.is/*"],
+  "host_permissions": ["https://grow.contact/*"],
   "action": {
     "default_popup": "popup.html",
     "default_title": "Grow GEO Score",

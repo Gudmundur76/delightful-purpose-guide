@@ -67,7 +67,7 @@ export const PLAYBOOKS: Playbook[] = [
       "Returning a 200 with HTML when bots request /robots.txt — must be text/plain.",
     ],
     verify:
-      "Run citation.is/check on your domain. Crawler discovery should pass with all six citation bots green.",
+      "Run grow.contact/check on your domain. Crawler discovery should pass with all six citation bots green.",
     related: ["fix-cloudflare-blocking-ai-crawlers", "llms-txt-in-10-minutes", "perplexity-listicle-format"],
   },
   {
@@ -245,7 +245,7 @@ export const PLAYBOOKS: Playbook[] = [
       "Page Rules cache that strips Set-Cookie for bots — fine; AI bots ignore cookies anyway.",
     ],
     verify:
-      "Run citation.is/check on the domain. Crawler discovery should pass. Cross-check with Cloudflare Analytics — block rate for citation bots should be 0.",
+      "Run grow.contact/check on the domain. Crawler discovery should pass. Cross-check with Cloudflare Analytics — block rate for citation bots should be 0.",
     related: ["robots-txt-for-chatgpt-citations", "edge-cache-html-for-ai-crawlers", "llms-txt-in-10-minutes"],
   },
   {
@@ -289,7 +289,7 @@ export const PLAYBOOKS: Playbook[] = [
       "Heavy hero images on the critical path — even with cached HTML, a 2MB hero blocks LCP for the crawler's snapshot.",
     ],
     verify:
-      "WebPageTest from Dulles, VA: TTFB <200ms, Speed Index <2s. citation.is/check Speed signal at 100/100.",
+      "WebPageTest from Dulles, VA: TTFB <200ms, Speed Index <2s. grow.contact/check Speed signal at 100/100.",
     related: ["fix-cloudflare-blocking-ai-crawlers", "answer-first-content", "robots-txt-for-chatgpt-citations"],
   },
   {

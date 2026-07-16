@@ -7,8 +7,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { computeHeadlineStats } from "@/lib/leaderboard/stats";
 
-const PAGE_URL = "https://citation.is/report/q2-2026";
-const PDF_URL = "https://citation.is/report/q2-2026.pdf";
+const PAGE_URL = "https://grow.contact/report/q2-2026";
+const PDF_URL = "https://grow.contact/report/q2-2026.pdf";
 const PUBLISHED = "2026-05-28";
 const TITLE = "State of the Agent-Readable Web";
 const SUBTITLE = "Q2 2026 — Quarterly Report";
@@ -17,11 +17,11 @@ async function buildPdf(): Promise<Uint8Array> {
   const stats = computeHeadlineStats();
   const doc = await PDFDocument.create();
   doc.setTitle(`${TITLE} — ${SUBTITLE}`);
-  doc.setAuthor("Grow Research, citation.is");
+  doc.setAuthor("Grow Research, grow.contact");
   doc.setSubject("Agent-readability and AI citation rates across the AI industry");
   doc.setKeywords(["GEO", "agent-readability", "llms.txt", "JSON-LD", "AI citation", "Perplexity", "ChatGPT"]);
-  doc.setProducer("citation.is/research");
-  doc.setCreator("citation.is/research");
+  doc.setProducer("grow.contact/research");
+  doc.setCreator("grow.contact/research");
 
   const helv = await doc.embedFont(StandardFonts.Helvetica);
   const helvBold = await doc.embedFont(StandardFonts.HelveticaBold);
@@ -41,7 +41,7 @@ async function buildPdf(): Promise<Uint8Array> {
     page = doc.addPage([A4.w, A4.h]);
     y = A4.h - margin;
     // Page header
-    page.drawText("citation.is / research", {
+    page.drawText("grow.contact / research", {
       x: margin,
       y: A4.h - margin + 20,
       size: 8,
@@ -111,7 +111,7 @@ async function buildPdf(): Promise<Uint8Array> {
   y -= 28;
   writeRule();
   writeWrapped(
-    `Dataset: ${stats.total} top AI companies, scored continuously on five GEO signals — Semantic HTML, JSON-LD, llms.txt, Citability, Page Speed. Open data, reproducible. This report summarises the headline findings; the underlying dataset ships as JSON at citation.is/api/public/leaderboard.json.`,
+    `Dataset: ${stats.total} top AI companies, scored continuously on five GEO signals — Semantic HTML, JSON-LD, llms.txt, Citability, Page Speed. Open data, reproducible. This report summarises the headline findings; the underlying dataset ships as JSON at grow.contact/api/public/leaderboard.json.`,
     { size: 11, gap: 10 },
   );
 
@@ -171,7 +171,7 @@ async function buildPdf(): Promise<Uint8Array> {
   writeRule();
   writeLine("APA", { font: mono, size: 9, color: muted, gap: 2 });
   writeWrapped(
-    `Grow Research. (2026). ${TITLE} — ${SUBTITLE}. citation.is. ${PDF_URL}`,
+    `Grow Research. (2026). ${TITLE} — ${SUBTITLE}. grow.contact. ${PDF_URL}`,
     { size: 10, gap: 10 },
   );
   writeLine("BibTeX", { font: mono, size: 9, color: muted, gap: 2 });
@@ -179,7 +179,7 @@ async function buildPdf(): Promise<Uint8Array> {
     `@techreport{grow_${PUBLISHED.replace(/-/g, "")},`,
     `  author      = {{Grow Research}},`,
     `  title       = {${TITLE} -- ${SUBTITLE}},`,
-    `  institution = {citation.is},`,
+    `  institution = {grow.contact},`,
     `  year        = {2026},`,
     `  url         = {${PDF_URL}},`,
     `  note        = {Dataset: CC BY 4.0}`,
@@ -190,12 +190,12 @@ async function buildPdf(): Promise<Uint8Array> {
   writeLine("Permalink", { font: mono, size: 9, color: muted, gap: 2 });
   writeLine(PDF_URL, { font: mono, size: 10, gap: 8 });
   writeLine("Dataset (CC BY 4.0)", { font: mono, size: 9, color: muted, gap: 2 });
-  writeLine("https://citation.is/api/public/leaderboard.json", { font: mono, size: 10, gap: 10 });
+  writeLine("https://grow.contact/api/public/leaderboard.json", { font: mono, size: 10, gap: 10 });
   writeRule();
   writeLine("METHODOLOGY", { font: helvBold, size: 12, gap: 4 });
   writeRule();
   writeWrapped(
-    "Five signals are scored independently: Semantic HTML (25), JSON-LD (20), llms.txt (15), Citability (20), Page Speed (20). A site \"passes\" a signal at ~75% of its max. Full methodology and versioned changelog at citation.is/report/methodology.",
+    "Five signals are scored independently: Semantic HTML (25), JSON-LD (20), llms.txt (15), Citability (20), Page Speed (20). A site \"passes\" a signal at ~75% of its max. Full methodology and versioned changelog at grow.contact/report/methodology.",
     { size: 10, gap: 8 },
   );
 

@@ -1,4 +1,4 @@
-// /auth.md — describes how AI agents authenticate to the citation.is public API.
+// /auth.md — describes how AI agents authenticate to the grow.contact public API.
 // Required by the agent-readiness "auth.md" check; must include an `# auth.md` heading.
 import { createFileRoute } from "@tanstack/react-router";
 import { authMarkdown, buildLinkHeader } from "../lib/agent-protocol";

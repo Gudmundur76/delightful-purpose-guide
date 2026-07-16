@@ -17,7 +17,7 @@ export const Route = createFileRoute("/vs/$competitor")({
     if (!c) {
       return { meta: [{ title: "Comparison — Grow" }] };
     }
-    const url = `https://citation.is/vs/${c.slug}`;
+    const url = `https://grow.contact/vs/${c.slug}`;
     const title = `Grow vs ${c.competitor} — AI Startup Sites`;
     const description = c.oneLiner;
     return {
@@ -58,8 +58,8 @@ export const Route = createFileRoute("/vs/$competitor")({
             headline: title,
             description,
             url,
-            author: { "@type": "Organization", name: "Grow", url: "https://citation.is/" },
-            publisher: { "@type": "Organization", name: "Grow", url: "https://citation.is/" },
+            author: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
+            publisher: { "@type": "Organization", name: "Grow", url: "https://grow.contact/" },
           }),
         },
       ],

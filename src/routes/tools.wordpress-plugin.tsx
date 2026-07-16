@@ -4,19 +4,19 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
 import { Download, Github, Sparkles, Bot } from "lucide-react";
 
-const URL_ = "https://citation.is/tools/wordpress-plugin";
-const TITLE = "Free WordPress plugins for AI citations — citation.is";
+const URL_ = "https://grow.contact/tools/wordpress-plugin";
+const TITLE = "Free WordPress plugins for AI citations — grow.contact";
 const DESC =
   "Two free, open-source WordPress plugins. grow-auto-fix injects JSON-LD, /llms.txt and AI robots.txt directives. grow-mcp turns your WordPress site into a Model Context Protocol server for ChatGPT, Claude, and Perplexity.";
 
 const PLUGINS = [
   {
     slug: "grow-auto-fix",
-    name: "citation.is Auto-Fix",
+    name: "grow.contact Auto-Fix",
     version: "1.0.0",
     Icon: Sparkles,
     blurb:
-      "Injects approved Schema.org JSON-LD, serves a virtual /llms.txt, and patches robots.txt with AI crawler directives — pulled every 6 hours from your citation.is dashboard.",
+      "Injects approved Schema.org JSON-LD, serves a virtual /llms.txt, and patches robots.txt with AI crawler directives — pulled every 6 hours from your grow.contact dashboard.",
     features: [
       "FAQ / Product / Organization JSON-LD auto-injected into <head>",
       "Virtual /llms.txt served at your site root",
@@ -26,7 +26,7 @@ const PLUGINS = [
   },
   {
     slug: "grow-mcp",
-    name: "citation.is MCP Server",
+    name: "grow.contact MCP Server",
     version: "1.0.0",
     Icon: Bot,
     blurb:
@@ -55,7 +55,7 @@ export const Route = createFileRoute("/tools/wordpress-plugin")({
       { name: "twitter:description", content: DESC },
       ...ogImageMeta({
         title: "Free WordPress plugins for AI citations",
-        kicker: "citation.is / tools",
+        kicker: "grow.contact / tools",
         sub: "grow-auto-fix + grow-mcp. Open source. No signup.",
       }),
     ],
@@ -66,12 +66,12 @@ export const Route = createFileRoute("/tools/wordpress-plugin")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
-          name: "citation.is WordPress plugins",
+          name: "grow.contact WordPress plugins",
           applicationCategory: "WordPressPlugin",
           operatingSystem: "WordPress 5.8+",
           offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
           url: URL_,
-          downloadUrl: "https://citation.is/api/public/wordpress-plugin/bundle.zip",
+          downloadUrl: "https://grow.contact/api/public/wordpress-plugin/bundle.zip",
         }),
       },
     ],
@@ -154,12 +154,12 @@ function WordpressPluginPage() {
             <li>In WordPress admin, go to <strong>Plugins → Add New → Upload Plugin</strong>.</li>
             <li>Choose the zip, click <strong>Install Now</strong>, then <strong>Activate</strong>.</li>
             <li>
-              For <code>grow-auto-fix</code>: open <strong>Settings → citation.is</strong> and paste your
+              For <code>grow-auto-fix</code>: open <strong>Settings → grow.contact</strong> and paste your
               install token (get one free by scanning your site at <a className="text-primary underline" href="/check">/check</a>).
               Works without a token too — it just won't pull remote fixes.
             </li>
             <li>
-              For <code>grow-mcp</code>: open <strong>Settings → citation.is MCP</strong>, generate a bearer token,
+              For <code>grow-mcp</code>: open <strong>Settings → grow.contact MCP</strong>, generate a bearer token,
               and point any MCP client at <code>/wp-json/grow-mcp/v1/mcp</code>.
             </li>
           </ol>
@@ -168,7 +168,7 @@ function WordpressPluginPage() {
           <p className="mt-3 text-sm text-muted-foreground">
             Both plugins are released under GPL-2.0-or-later, the same license as WordPress itself. Full source
             for each plugin lives at <code>wp-plugin/grow-auto-fix/</code> and <code>wp-plugin/grow-mcp/</code>
-            in the citation.is repository — fork it, audit it, ship your own build.
+            in the grow.contact repository — fork it, audit it, ship your own build.
           </p>
         </section>
       </main>

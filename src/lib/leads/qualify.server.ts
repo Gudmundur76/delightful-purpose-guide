@@ -22,7 +22,7 @@ export interface QualificationResult {
   reply_body: string;
 }
 
-const SYSTEM_PROMPT = `You are the qualification engine for citation.is, a boutique studio that ships agent-native websites for AI startups in 48 hours (Starter, $2,400) or 5 days (Growth, $6,800). Enterprise engagements ($15k+) go to a custom quote.
+const SYSTEM_PROMPT = `You are the qualification engine for grow.contact, a boutique studio that ships agent-native websites for AI startups in 48 hours (Starter, $2,400) or 5 days (Growth, $6,800). Enterprise engagements ($15k+) go to a custom quote.
 
 You receive raw contact-form leads and produce two outputs in a single tool call:
 1. A qualification grade (score 0-100, tier cold/warm/hot, brief reasoning).

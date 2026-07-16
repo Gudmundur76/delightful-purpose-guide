@@ -3,7 +3,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LEADERBOARD, CATEGORY_LABELS } from "@/lib/leaderboard/entries";
 
-const BASE_URL = "https://citation.is";
+const BASE_URL = "https://grow.contact";
 const FEED_URL = `${BASE_URL}/leaderboard/rss.xml`;
 
 function escapeXml(s: string): string {

@@ -13,7 +13,7 @@ import {
 import type { TemplateEntry } from "./registry";
 
 const SITE_NAME = "Grow";
-const BASE = "https://citation.is";
+const BASE = "https://grow.contact";
 
 interface Props {
   url?: string;

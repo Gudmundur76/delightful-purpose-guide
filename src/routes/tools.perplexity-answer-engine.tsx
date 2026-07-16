@@ -8,7 +8,7 @@ import { ogImageMeta } from "@/lib/seo/og";
 import { runPerplexityEngine } from "@/lib/tools/perplexity-engine.functions";
 import { Loader2, Sparkles, Trophy, AlertTriangle, ExternalLink, Copy } from "lucide-react";
 
-const URL_ = "https://citation.is/tools/perplexity-answer-engine";
+const URL_ = "https://grow.contact/tools/perplexity-answer-engine";
 const TITLE = "Free Perplexity Answer Engine — write the answer Perplexity picks";
 const DESC =
   "Type any question. We simulate what Perplexity would answer today, then engineer the citation-ready answer block (lead, stats, FAQ, JSON-LD) that Perplexity would pick over the incumbent — with a self-scored Perplexity Pick Score.";
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/tools/perplexity-answer-engine")({
       { name: "twitter:description", content: DESC },
       ...ogImageMeta({
         title: "Write the answer Perplexity picks",
-        kicker: "citation.is / tools",
+        kicker: "grow.contact / tools",
         sub: "Simulates Perplexity's current answer, then engineers a citation-ready block designed to displace the incumbent.",
       }),
     ],

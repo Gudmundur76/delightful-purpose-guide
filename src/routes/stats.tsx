@@ -15,9 +15,9 @@ import { StatCard, type StatCardProps } from "@/components/StatCard";
 // Every stat has a stable anchor (#missing-llms-txt, #weak-jsonld, …) so
 // journalists, bloggers, and LLMs can deep-link to a single figure with
 // attribution. This is the citation magnet: one number → one anchor → one
-// citation back to citation.is.
+// citation back to grow.contact.
 
-const PAGE_URL = "https://citation.is/stats";
+const PAGE_URL = "https://grow.contact/stats";
 const TODAY = new Date().toISOString().slice(0, 10);
 
 type StatId =
@@ -122,8 +122,8 @@ export const Route = createFileRoute("/stats")({
                   "Headline statistics over the Agent Readability Leaderboard — quotable figures on AI-citation readiness across the top AI companies.",
                 url: PAGE_URL,
                 license: "https://creativecommons.org/licenses/by/4.0/",
-                creator: { "@type": "Organization", name: "Grow", url: "https://citation.is" },
-                isBasedOn: "https://citation.is/leaderboard",
+                creator: { "@type": "Organization", name: "Grow", url: "https://grow.contact" },
+                isBasedOn: "https://grow.contact/leaderboard",
                 distribution: [
                   {
                     "@type": "DataDownload",
@@ -173,7 +173,7 @@ function StatsPage() {
           <div className="max-w-7xl mx-auto px-6 py-20">
             <div className="mb-4 flex flex-wrap items-center gap-3">
               <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
-                // citation.is / stats
+                // grow.contact / stats
               </p>
               <LiveSignal timestamp={TODAY} />
               <InformationGainIndicator
@@ -226,10 +226,10 @@ function StatsPage() {
             <CitationSnippet
               className="mb-8 max-w-2xl"
               citation={{
-                authors: ["citation.is"],
+                authors: ["grow.contact"],
                 year: 2026,
                 title: "State of the Agent-Readable Web — live headline stats",
-                publisher: "citation.is",
+                publisher: "grow.contact",
                 url: PAGE_URL,
                 accessed: TODAY,
                 key: "grow-stats-live",
@@ -357,8 +357,8 @@ function StatsPage() {
                   — scoring weights & refresh cadence
                 </li>
                 <li>
-                  <a href="mailto:hello@citation.is" className="text-accent underline">
-                    hello@citation.is
+                  <a href="mailto:hello@grow.contact" className="text-accent underline">
+                    hello@grow.contact
                   </a>{" "}
                   — quote, comment, or custom cut
                 </li>

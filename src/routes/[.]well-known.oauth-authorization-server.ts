@@ -1,5 +1,5 @@
 // RFC 8414 — OAuth 2.0 Authorization Server Metadata
-// Discovery document so AI agents can programmatically authenticate to citation.is APIs.
+// Discovery document so AI agents can programmatically authenticate to grow.contact APIs.
 import { createFileRoute } from "@tanstack/react-router";
 import { buildLinkHeader, oauthAuthorizationServerMetadata } from "../lib/agent-protocol";
 

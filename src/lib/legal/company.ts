@@ -7,10 +7,10 @@ export const COMPANY = {
   address: "[Registered office address — please update]",
   // TODO: replace with company / VAT registration number if applicable
   registration: "[Company registration number — please update]",
-  contactEmail: "hello@citation.is",
-  privacyEmail: "privacy@citation.is",
-  dpoEmail: "privacy@citation.is",
-  website: "https://citation.is",
+  contactEmail: "hello@grow.contact",
+  privacyEmail: "privacy@grow.contact",
+  dpoEmail: "privacy@grow.contact",
+  website: "https://grow.contact",
   lastUpdated: "May 21, 2026",
   jurisdictionNote:
     "These policies are written to cover the EU/UK (GDPR) and California (CCPA/CPRA), and to set out reasonable defaults for visitors elsewhere.",

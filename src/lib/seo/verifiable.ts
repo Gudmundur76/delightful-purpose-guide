@@ -7,7 +7,7 @@
 //     id: "stat-83",
 //     value: "83%",
 //     label: "Share of AI citations from outside the organic top 10",
-//     citation: "https://citation.is/api/public/data/claims.json#stat-83",
+//     citation: "https://grow.contact/api/public/data/claims.json#stat-83",
 //     dateModified: "2026-07-15",
 //   });
 //
@@ -16,8 +16,8 @@
 
 import { sourceSameAs } from "@/lib/seo/trust-handshake";
 
-const DATA_BASE = "https://citation.is/api/public/data";
-const ARCHIVE_BASE = "https://citation.is/data";
+const DATA_BASE = "https://grow.contact/api/public/data";
+const ARCHIVE_BASE = "https://grow.contact/data";
 
 
 export type VerifiableClaimInput = {
@@ -103,7 +103,7 @@ export function datasetSchema(input: DatasetInput) {
     url: input.url,
     dateModified: input.dateModified,
     ...(input.datePublished ? { datePublished: input.datePublished } : {}),
-    creator: { "@type": "Organization", name: "Grow", url: "https://citation.is" },
+    creator: { "@type": "Organization", name: "Grow", url: "https://grow.contact" },
     license: input.license ?? "https://creativecommons.org/licenses/by/4.0/",
     keywords: input.keywords,
     distribution: input.distribution.map((d) => ({

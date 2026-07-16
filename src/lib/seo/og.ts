@@ -8,7 +8,7 @@ export function ogImageUrl(opts: { title: string; kicker?: string; sub?: string 
   params.set("title", opts.title);
   if (opts.kicker) params.set("kicker", opts.kicker);
   if (opts.sub) params.set("sub", opts.sub);
-  return `https://citation.is/api/public/widget/og.svg?${params.toString()}`;
+  return `https://grow.contact/api/public/widget/og.svg?${params.toString()}`;
 }
 
 export function ogImageMeta(opts: {

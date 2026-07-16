@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: citation.is MCP Server
- * Plugin URI: https://citation.is
+ * Plugin Name: grow.contact MCP Server
+ * Plugin URI: https://grow.contact
  * Description: Turns this WordPress site into a Model Context Protocol (MCP) server so AI agents (ChatGPT, Claude, Perplexity) can query posts, pages, FAQs, products, and submit leads via JSON-RPC over HTTP.
  * Version: 1.0.0
- * Author: citation.is
- * Author URI: https://citation.is
+ * Author: grow.contact
+ * Author URI: https://grow.contact
  * License: GPL-2.0-or-later
  * Text Domain: grow-mcp
  * Requires at least: 5.8
@@ -16,13 +16,13 @@ if (!defined('ABSPATH')) exit;
 
 define('GROW_MCP_VERSION', '1.0.0');
 define('GROW_MCP_NAMESPACE', 'grow-mcp/v1');
-define('GROW_MCP_REGISTRY_URL', 'https://citation.is/api/public/mcp-register');
+define('GROW_MCP_REGISTRY_URL', 'https://grow.contact/api/public/mcp-register');
 
 // -----------------------------------------------------------------------------
 // Settings page
 // -----------------------------------------------------------------------------
 add_action('admin_menu', function () {
-    add_options_page('citation.is MCP', 'citation.is MCP', 'manage_options', 'grow-mcp', 'grow_mcp_settings_page');
+    add_options_page('grow.contact MCP', 'grow.contact MCP', 'manage_options', 'grow-mcp', 'grow_mcp_settings_page');
 });
 
 add_action('admin_init', function () {
@@ -32,7 +32,7 @@ add_action('admin_init', function () {
     register_setting('grow_mcp', 'grow_mcp_enable_lead_submit', ['type' => 'boolean', 'default' => true]);
 });
 
-// Auto-register the MCP endpoint with citation.is whenever settings are saved
+// Auto-register the MCP endpoint with grow.contact whenever settings are saved
 // (and on plugin activation if an install token is already present).
 function grow_mcp_register_with_platform() {
     $install_token = get_option('grow_mcp_install_token', '');
@@ -64,7 +64,7 @@ function grow_mcp_settings_page() {
     $discovery_url = home_url('/.well-known/mcp.json');
     ?>
     <div class="wrap">
-        <h1>citation.is MCP Server</h1>
+        <h1>grow.contact MCP Server</h1>
         <p>Exposes this site as a Model Context Protocol server so AI agents can query posts, pages, FAQs, products, and submit leads.</p>
 
         <h2>Endpoints</h2>
@@ -98,10 +98,10 @@ function grow_mcp_settings_page() {
                     </td>
                 </tr>
                 <tr>
-                    <th><label for="grow_mcp_install_token">citation.is install token</label></th>
+                    <th><label for="grow_mcp_install_token">grow.contact install token</label></th>
                     <td>
                         <input name="grow_mcp_install_token" id="grow_mcp_install_token" type="text" class="regular-text code" value="<?php echo esc_attr(get_option('grow_mcp_install_token', '')); ?>" />
-                        <p class="description">UUID from your citation.is dashboard. Used to register this site's MCP endpoint with the platform so it appears in the agent-readable directory.</p>
+                        <p class="description">UUID from your grow.contact dashboard. Used to register this site's MCP endpoint with the platform so it appears in the agent-readable directory.</p>
                     </td>
                 </tr>
             </table>
@@ -176,7 +176,7 @@ function grow_mcp_build_server_card() {
         '$schema'     => 'https://modelcontextprotocol.io/schemas/2025-06-18/server-card.json',
         'name'        => sanitize_title($site) . '-mcp',
         'serverInfo'  => ['name' => $site . ' MCP', 'version' => GROW_MCP_VERSION],
-        'description' => 'WordPress MCP server for ' . $site . '. Exposes posts, pages, FAQs, products, and lead submission as MCP tools. Powered by citation.is.',
+        'description' => 'WordPress MCP server for ' . $site . '. Exposes posts, pages, FAQs, products, and lead submission as MCP tools. Powered by grow.contact.',
         'transport'   => [
             'type'     => 'streamable-http',
             'endpoint' => rest_url(GROW_MCP_NAMESPACE . '/mcp'),
@@ -188,7 +188,7 @@ function grow_mcp_build_server_card() {
             'scheme' => 'Bearer',
         ],
         'capabilities' => ['tools' => true, 'resources' => false, 'prompts' => false],
-        'vendor'      => ['name' => 'citation.is', 'url' => 'https://citation.is'],
+        'vendor'      => ['name' => 'grow.contact', 'url' => 'https://grow.contact'],
     ];
 }
 

@@ -24,14 +24,14 @@ export const Route = createFileRoute("/check")({
       { name: "description", content: "Score any URL for how readable, citeable, and parseable it is to LLM crawlers. Free tool." },
       { property: "og:title", content: "Agent Readability Checker — Grow" },
       { property: "og:description", content: "Score any URL for LLM readability. Free." },
-      { property: "og:url", content: "https://citation.is/check" },
+      { property: "og:url", content: "https://grow.contact/check" },
       ...ogImageMeta({
         title: "Agent Readability Checker — Grow",
         kicker: "Grow",
         sub: "Score any URL for how readable, citeable, and parseable it is to LLM crawlers. Free tool.",
       }),
     ],
-    links: [{ rel: "canonical", href: "https://citation.is/check" }],
+    links: [{ rel: "canonical", href: "https://grow.contact/check" }],
   }),
   component: CheckPage,
 });

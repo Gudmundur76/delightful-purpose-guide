@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { getAllPosts } from "@/lib/blog/posts";
 
-const BASE_URL = "https://citation.is";
+const BASE_URL = "https://grow.contact";
 const FEED_URL = `${BASE_URL}/rss.xml`;
 
 function escapeXml(s: string): string {
@@ -51,10 +51,10 @@ export const Route = createFileRoute("/rss.xml")({
         const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>citation.is — Journal</title>
+    <title>grow.contact — Journal</title>
     <link>${BASE_URL}/blog</link>
     <atom:link href="${FEED_URL}" rel="self" type="application/rss+xml" />
-    <description>GEO guides, agent-native web patterns, and AI citation research from citation.is.</description>
+    <description>GEO guides, agent-native web patterns, and AI citation research from grow.contact.</description>
     <language>en-us</language>
     <lastBuildDate>${lastBuild}</lastBuildDate>
 ${items}

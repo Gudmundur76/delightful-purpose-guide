@@ -53,7 +53,7 @@ function NotFoundComponent() {
 
         {/* Terminal body */}
         <pre className="p-6 font-mono text-[13px] leading-relaxed overflow-x-auto whitespace-pre-wrap">
-<span className="text-muted-foreground">user@grow:~$ </span><span className="text-foreground">curl https://citation.is{path}</span>
+<span className="text-muted-foreground">user@grow:~$ </span><span className="text-foreground">curl https://grow.contact{path}</span>
 {"\n"}<span className="text-red-400">curl: (22) The requested URL returned error: 404 Not Found</span>
 {"\n"}
 {"\n"}<span className="text-muted-foreground">user@grow:~$ </span><span className="text-foreground">echo $?</span>
@@ -142,15 +142,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "google-site-verification", content: "HbTX1qSEq9ZU_E2EVtzo_mw84F9k2TnNr6uPAatkNYQ" },
-      { title: "citation.is — Free, open infrastructure for AI search visibility" },
+      { title: "grow.contact — Free, open infrastructure for AI search visibility" },
       { name: "description", content: "Free scanner, standard, MCP server, and WordPress plugin for making your site cited by ChatGPT, Perplexity, Claude, and Google AI. No paywall. No account required." },
-      { name: "author", content: "citation.is" },
-      { property: "og:title", content: "citation.is — Free, open infrastructure for AI search visibility" },
+      { name: "author", content: "grow.contact" },
+      { property: "og:title", content: "grow.contact — Free, open infrastructure for AI search visibility" },
       { property: "og:description", content: "Free scanner, standard, MCP server, and WordPress plugin. Get cited by ChatGPT, Perplexity, Claude, and Google AI. No paywall." },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "citation.is" },
+      { property: "og:site_name", content: "grow.contact" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "citation.is — Free, open infrastructure for AI search" },
+      { name: "twitter:title", content: "grow.contact — Free, open infrastructure for AI search" },
       { name: "twitter:description", content: "Free scanner, standard, MCP server, WordPress plugin. Get cited by ChatGPT, Perplexity, Claude, Google AI." },
 
 
@@ -165,13 +165,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Urbanist:wght@600;700&family=Fira+Code:wght@400;500;600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Fira+Code:wght@400;500;600&display=swap",
       },
       {
         rel: "alternate",
         type: "application/rss+xml",
-        title: "citation.is — Journal",
-        href: "https://citation.is/rss.xml",
+        title: "grow.contact — Journal",
+        href: "https://grow.contact/rss.xml",
       },
     ],
 
@@ -182,7 +182,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "Grow",
-          url: "https://citation.is",
+          url: "https://grow.contact",
           description: "Agent-native marketing sites for AI/ML startups, agent platforms, and developer tools. 48 hours, fixed price.",
         }),
       },
@@ -193,13 +193,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         type: "application/agent+json",
         children: JSON.stringify({
-          name: "citation.is",
-          agentCard: "https://citation.is/.well-known/agent-card.json",
-          mcp: "https://citation.is/api/public/mcp",
-          mcpCard: "https://citation.is/.well-known/mcp/server-card.json",
-          llms: "https://citation.is/llms.txt",
-          standard: "https://citation.is/standard.md",
-          openapi: "https://citation.is/openapi.json",
+          name: "grow.contact",
+          agentCard: "https://grow.contact/.well-known/agent-card.json",
+          mcp: "https://grow.contact/api/public/mcp",
+          mcpCard: "https://grow.contact/.well-known/mcp/server-card.json",
+          llms: "https://grow.contact/llms.txt",
+          standard: "https://grow.contact/standard.md",
+          openapi: "https://grow.contact/openapi.json",
         }),
       },
     ],

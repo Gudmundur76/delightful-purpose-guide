@@ -17,7 +17,7 @@ export function StatCard({
   label,
   blurb,
   cite,
-  pageUrl = "https://citation.is/stats",
+  pageUrl = "https://grow.contact/stats",
   dateModified,
 }: StatCardProps) {
   const citation = claimCitation(id);

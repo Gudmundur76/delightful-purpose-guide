@@ -5,7 +5,7 @@ import { CRAWLERS, getCrawlersByPurpose } from "@/lib/crawlers/data";
 import { ArrowRight, Check, X, AlertTriangle } from "lucide-react";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const URL = "https://citation.is/crawlers";
+const URL = "https://grow.contact/crawlers";
 const TITLE = "AI Crawler Reference — OAI-SearchBot, PerplexityBot, ClaudeBot & More";
 const DESC =
   "Per-bot reference for every major AI crawler: user-agents, what they power, robots.txt recommendations, and whether blocking them affects AI citations.";
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/crawlers")({
           itemListElement: CRAWLERS.map((c, i) => ({
             "@type": "ListItem",
             position: i + 1,
-            url: `https://citation.is/crawlers/${c.slug}`,
+            url: `https://grow.contact/crawlers/${c.slug}`,
             name: c.name,
           })),
         }),

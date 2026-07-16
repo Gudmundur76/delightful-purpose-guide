@@ -8,7 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { checkAiVisibility, type EngineResult } from "@/lib/tools/ai-visibility.functions";
 import { CheckCircle2, Loader2, XCircle } from "lucide-react";
 
-const URL_ = "https://citation.is/tools/ai-visibility";
+const URL_ = "https://grow.contact/tools/ai-visibility";
 const TITLE = "Free AI visibility checker — does ChatGPT and Gemini cite you?";
 const DESC =
   "Ask a real buyer question. We query Gemini (web-grounded) and GPT and tell you whether your domain shows up in the answer or gets cited. Free, live, per-engine, no signup.";
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/tools/ai-visibility")({
       { name: "twitter:description", content: DESC },
       ...ogImageMeta({
         title: "Does ChatGPT and Gemini cite you?",
-        kicker: "citation.is / tools",
+        kicker: "grow.contact / tools",
         sub: "Free live AI visibility check. Ask a real buyer question — see which engines mention your domain in the answer.",
       }),
     ],

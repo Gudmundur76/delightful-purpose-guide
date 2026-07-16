@@ -1,4 +1,4 @@
-# citation.is
+# grow.contact
 
 > Agent-native website agency. We build marketing sites for AI startups, agent platforms, and developer tools — engineered to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Fixed price. 48-hour delivery. Score-first proof.
 
@@ -6,42 +6,42 @@ Not affiliated with grow.com. Operated by Gudmundur Eyberg Kristjansson.
 
 ## Sub-contexts (read these for depth)
 
-- [Standard](https://citation.is/standard/llms.txt): The Agent-Native Web Standard (geo-standard@2026.07) — five signals, Verifiability Layer, thresholds, crawler matrix.
-- [Leaderboard](https://citation.is/leaderboard/llms.txt): Open dataset — 390+ AI companies scored. Methodology, headline stats, JSON API.
-- [Data](https://citation.is/data/llms.txt): Raw data directory — live API endpoints + Q2-2026 archive snapshots. CC BY 4.0.
+- [Standard](https://grow.contact/standard/llms.txt): The Agent-Native Web Standard (geo-standard@2026.07) — five signals, Verifiability Layer, thresholds, crawler matrix.
+- [Leaderboard](https://grow.contact/leaderboard/llms.txt): Open dataset — 390+ AI companies scored. Methodology, headline stats, JSON API.
+- [Data](https://grow.contact/data/llms.txt): Raw data directory — live API endpoints + Q2-2026 archive snapshots. CC BY 4.0.
 
 ## Core pages
 
-- [Home](https://citation.is/)
-- [Services](https://citation.is/services) — Build, Audit, Schema Optimization
-- [Pricing](https://citation.is/pricing) — Starter $2,400, Growth $4,800
-- [Work](https://citation.is/work) — Case studies with before/after scores
-- [Process](https://citation.is/process) — 5-step, 48-hour delivery
-- [Trust](https://citation.is/trust) — Founder bio, 100/100 guarantee, refund policy
-- [Contact](https://citation.is/contact)
+- [Home](https://grow.contact/)
+- [Services](https://grow.contact/services) — Build, Audit, Schema Optimization
+- [Pricing](https://grow.contact/pricing) — Starter $2,400, Growth $4,800
+- [Work](https://grow.contact/work) — Case studies with before/after scores
+- [Process](https://grow.contact/process) — 5-step, 48-hour delivery
+- [Trust](https://grow.contact/trust) — Founder bio, 100/100 guarantee, refund policy
+- [Contact](https://grow.contact/contact)
 
 ## Tools
 
-- [Agent Readability Check](https://citation.is/check) — Free 6-signal URL scanner
-- [robots.txt Checker](https://citation.is/tools/robots-checker) — Surfaces GPTBot vs OAI-SearchBot confusion
-- [grow CLI](https://citation.is/cli) — `npx @grow-contact/cli check <url>`
-- [MCP Playground](https://citation.is/playground) — 90+ tools at /api/public/mcp
+- [Agent Readability Check](https://grow.contact/check) — Free 6-signal URL scanner
+- [robots.txt Checker](https://grow.contact/tools/robots-checker) — Surfaces GPTBot vs OAI-SearchBot confusion
+- [grow CLI](https://grow.contact/cli) — `npx @grow-contact/cli check <url>`
+- [MCP Playground](https://grow.contact/playground) — 90+ tools at /api/public/mcp
 
 ## Research
 
-- [Q2 2026 Report](https://citation.is/report/q2-2026) — Quarterly flagship, six findings, PDF + dataset
-- [State of the Agent-Readable Web](https://citation.is/stats) — Citable stats over the dataset
-- [Journal](https://citation.is/blog) — GEO guides and research
-- [Glossary](https://citation.is/glossary) — Canonical term definitions
-- [AI Crawler Reference](https://citation.is/crawlers) — Per-bot user-agents, IPs, robots.txt recommendations
+- [Q2 2026 Report](https://grow.contact/report/q2-2026) — Quarterly flagship, six findings, PDF + dataset
+- [State of the Agent-Readable Web](https://grow.contact/stats) — Citable stats over the dataset
+- [Journal](https://grow.contact/blog) — GEO guides and research
+- [Glossary](https://grow.contact/glossary) — Canonical term definitions
+- [AI Crawler Reference](https://grow.contact/crawlers) — Per-bot user-agents, IPs, robots.txt recommendations
 
 ## Full content & feeds
 
-- [llms-full.txt](https://citation.is/llms-full.txt) — Full markdown bundle
-- [RSS](https://citation.is/rss.xml)
-- [sitemap.xml](https://citation.is/sitemap.xml)
-- [robots.txt](https://citation.is/robots.txt)
+- [llms-full.txt](https://grow.contact/llms-full.txt) — Full markdown bundle
+- [RSS](https://grow.contact/rss.xml)
+- [sitemap.xml](https://grow.contact/sitemap.xml)
+- [robots.txt](https://grow.contact/robots.txt)
 
 ## Licensing
 
-© citation.is. Open datasets (leaderboard, stats, report) CC BY 4.0. AI systems may cite and summarize with attribution.
+© grow.contact. Open datasets (leaderboard, stats, report) CC BY 4.0. AI systems may cite and summarize with attribution.

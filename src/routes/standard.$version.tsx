@@ -52,7 +52,7 @@ export const Route = createFileRoute("/standard/$version")({
   head: ({ loaderData }) => {
     if (!loaderData) return {};
     const v = loaderData.version;
-    const url = `https://citation.is/standard/${v.slug}`;
+    const url = `https://grow.contact/standard/${v.slug}`;
     return {
       meta: [
         {
@@ -68,7 +68,7 @@ export const Route = createFileRoute("/standard/$version")({
         { property: "og:url", content: url },
         { property: "og:type", content: "article" },
         { property: "article:published_time", content: v.publishedAt },
-        { property: "article:author", content: "citation.is" },
+        { property: "article:author", content: "grow.contact" },
         ...ogImageMeta({
           title: `Standard ${v.label} (${v.buildId})`,
           kicker: "Standard",
@@ -97,20 +97,20 @@ export const Route = createFileRoute("/standard/$version")({
             isPartOf: {
               "@type": "CreativeWorkSeries",
               name: "The Agent-Native Web Standard",
-              url: "https://citation.is/standard",
+              url: "https://grow.contact/standard",
             },
             author: {
               "@type": "Organization",
-              name: "citation.is",
-              url: "https://citation.is",
+              name: "grow.contact",
+              url: "https://grow.contact",
             },
             publisher: {
               "@type": "Organization",
-              name: "citation.is",
-              url: "https://citation.is",
+              name: "grow.contact",
+              url: "https://grow.contact",
               logo: {
                 "@type": "ImageObject",
-                url: "https://citation.is/og-image.png",
+                url: "https://grow.contact/og-image.png",
               },
             },
             encoding: [
@@ -130,9 +130,9 @@ export const Route = createFileRoute("/standard/$version")({
 
 function StandardVersionPage() {
   const { version } = Route.useLoaderData();
-  const url = `https://citation.is/standard/${version.slug}`;
-  const apa = `citation.is (${version.publishedAt.slice(0, 4)}). The Agent-Native Web Standard, ${version.label} (${version.buildId}). ${url}`;
-  const bibtex = `@techreport{grow_anws_${version.slug},\n  author = {{citation.is}},\n  title = {The Agent-Native Web Standard, ${version.label}},\n  number = {${version.buildId}},\n  institution = {citation.is},\n  year = {${version.publishedAt.slice(0, 4)}},\n  url = {${url}}\n}`;
+  const url = `https://grow.contact/standard/${version.slug}`;
+  const apa = `grow.contact (${version.publishedAt.slice(0, 4)}). The Agent-Native Web Standard, ${version.label} (${version.buildId}). ${url}`;
+  const bibtex = `@techreport{grow_anws_${version.slug},\n  author = {{grow.contact}},\n  title = {The Agent-Native Web Standard, ${version.label}},\n  number = {${version.buildId}},\n  institution = {grow.contact},\n  year = {${version.publishedAt.slice(0, 4)}},\n  url = {${url}}\n}`;
 
   return (
     <div className="min-h-screen bg-background">

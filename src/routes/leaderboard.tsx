@@ -77,7 +77,7 @@ export const Route = createFileRoute("/leaderboard")({
   component: LeaderboardPage,
   head: () => ({
     meta: [
-      { title: "Citation Intelligence Index — Who Gets Cited By AI | citation.is" },
+      { title: "Citation Intelligence Index — Who Gets Cited By AI | grow.contact" },
       {
         name: "description",
         content:
@@ -89,14 +89,14 @@ export const Route = createFileRoute("/leaderboard")({
         content:
           "The Crunchbase of the AI citation economy. Sortable index of AI companies by Citation Probability, CCS, and platform-by-platform share of voice.",
       },
-      { property: "og:url", content: "https://citation.is/leaderboard" },
+      { property: "og:url", content: "https://grow.contact/leaderboard" },
       ...ogImageMeta({
         title: "Citation Intelligence Index — Who Gets Cited By AI",
-        kicker: "citation.is",
+        kicker: "grow.contact",
         sub: "Live ranking of AI companies by Citation Probability across Perplexity, ChatGPT, Claude, and Google AI Overviews.",
       }),
     ],
-    links: [{ rel: "canonical", href: "https://citation.is/leaderboard" }],
+    links: [{ rel: "canonical", href: "https://grow.contact/leaderboard" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -106,14 +106,14 @@ export const Route = createFileRoute("/leaderboard")({
           name: "Citation Intelligence Index",
           description:
             "Live benchmark of AI companies scored on Citation Probability and how often they appear in ChatGPT, Perplexity, Claude, and Google AI Overviews.",
-          url: "https://citation.is/leaderboard",
+          url: "https://grow.contact/leaderboard",
           license: "https://creativecommons.org/licenses/by/4.0/",
-          creator: { "@type": "Organization", name: "citation.is", url: "https://citation.is" },
+          creator: { "@type": "Organization", name: "grow.contact", url: "https://grow.contact" },
           distribution: [
             {
               "@type": "DataDownload",
               encodingFormat: "application/json",
-              contentUrl: "https://citation.is/api/public/leaderboard.json",
+              contentUrl: "https://grow.contact/api/public/leaderboard.json",
             },
           ],
           variableMeasured: [
@@ -359,11 +359,11 @@ function LeaderboardPage() {
             <CitationSnippet
               className="max-w-2xl"
               citation={{
-                authors: ["citation.is"],
+                authors: ["grow.contact"],
                 year: 2026,
                 title: `Citation Intelligence Index (${allRows.length} AI companies)`,
-                publisher: "citation.is",
-                url: "https://citation.is/leaderboard",
+                publisher: "grow.contact",
+                url: "https://grow.contact/leaderboard",
                 accessed: new Date().toISOString().slice(0, 10),
                 key: "grow-citation-index",
               }}

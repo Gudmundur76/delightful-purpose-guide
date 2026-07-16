@@ -5,7 +5,7 @@ import { ogImageMeta } from "@/lib/seo/og";
 import { useMemo, useState } from "react";
 import { Copy } from "lucide-react";
 
-const URL_ = "https://citation.is/tools/schema-generator";
+const URL_ = "https://grow.contact/tools/schema-generator";
 const TITLE = "Free JSON-LD schema generator — Organization, FAQ, Article";
 const DESC =
   "Build the JSON-LD blocks AI engines and Google actually read. Organization, FAQPage, and Article schemas from a form. Copy-paste into your <head>. Free, no signup.";
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/tools/schema-generator")({
       { name: "twitter:description", content: DESC },
       ...ogImageMeta({
         title: "Free JSON-LD schema generator",
-        kicker: "citation.is / tools",
+        kicker: "grow.contact / tools",
         sub: "Organization, FAQPage, and Article schemas from a form. Copy-paste and ship.",
       }),
     ],

@@ -224,7 +224,7 @@ function IntelligencePlatforms() {
             // intelligence-platforms@24h
           </div>
           <h2 className="font-bold text-xl tracking-tight">
-            Who's crawling citation.is
+            Who's crawling grow.contact
           </h2>
         </div>
         <button
@@ -454,7 +454,7 @@ function saveHistory(items: HistoryItem[]) {
 }
 
 function CitationPage() {
-  const [host, setHost] = useState("citation.is");
+  const [host, setHost] = useState("grow.contact");
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);

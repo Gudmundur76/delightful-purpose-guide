@@ -1,4 +1,4 @@
-=== citation.is MCP Server ===
+=== grow.contact MCP Server ===
 Contributors: growcontact
 Tags: mcp, ai, agents, chatgpt, claude, perplexity, json-rpc, geo
 Requires at least: 5.8
@@ -29,7 +29,7 @@ Endpoints:
 
 1. Upload the plugin to `/wp-content/plugins/grow-mcp/` or install via WP admin
 2. Activate
-3. Go to **Settings → citation.is MCP**
+3. Go to **Settings → grow.contact MCP**
 4. Generate a bearer token (any strong random string) and paste it in
 5. Optionally enable anonymous read access for public content
 6. Test with the curl snippet on the settings page

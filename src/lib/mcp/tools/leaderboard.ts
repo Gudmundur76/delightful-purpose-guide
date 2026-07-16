@@ -5,7 +5,7 @@ import { LEADERBOARD, CATEGORY_LABELS, type LeaderboardCategory, type Leaderboar
 export const leaderboardTool = defineTool({
   name: "get_leaderboard",
   description:
-    "Get the citation.is Agent Readability leaderboard. AI companies across infra / models / agents / devtools with GEO scores.",
+    "Get the grow.contact Agent Readability leaderboard. AI companies across infra / models / agents / devtools with GEO scores.",
   parameters: z.object({
     category: z.enum(["infra", "models", "agents", "devtools"]).optional(),
     limit: z.number().int().min(1).max(100).default(25),

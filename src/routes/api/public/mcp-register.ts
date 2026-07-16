@@ -1,6 +1,6 @@
 // POST /api/public/mcp-register
 // Called by the grow-mcp WordPress plugin to register a site's MCP endpoint
-// with the citation.is platform. Auth: install_token (UUID) matches a row in
+// with the grow.contact platform. Auth: install_token (UUID) matches a row in
 // intervention_sites. No PII returned.
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";

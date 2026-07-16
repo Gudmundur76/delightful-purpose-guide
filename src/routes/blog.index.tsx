@@ -19,7 +19,7 @@ export const Route = createFileRoute("/blog/")({
         content:
           "Field notes on shipping agent-native websites — structured data, llms.txt, and design that gets cited by AI engines.",
       },
-      { property: "og:url", content: "https://citation.is/blog" },
+      { property: "og:url", content: "https://grow.contact/blog" },
       ...ogImageMeta({
         title: "Journal — field notes on agent-native sites",
         kicker: "Grow",
@@ -27,12 +27,12 @@ export const Route = createFileRoute("/blog/")({
       }),
     ],
     links: [
-      { rel: "canonical", href: "https://citation.is/blog" },
+      { rel: "canonical", href: "https://grow.contact/blog" },
       {
         rel: "alternate",
         type: "application/rss+xml",
         title: "Grow — Journal",
-        href: "https://citation.is/blog/rss.xml",
+        href: "https://grow.contact/blog/rss.xml",
       },
     ],
     scripts: [
@@ -42,13 +42,13 @@ export const Route = createFileRoute("/blog/")({
           "@context": "https://schema.org",
           "@type": "Blog",
           name: "Grow — Journal",
-          url: "https://citation.is/blog",
+          url: "https://grow.contact/blog",
           description:
             "Field notes on shipping agent-native websites: structured data, llms.txt, and design that gets cited by LLMs.",
           blogPost: getAllPosts().map((p) => ({
             "@type": "BlogPosting",
             headline: p.title,
-            url: `https://citation.is/blog/${p.slug}`,
+            url: `https://grow.contact/blog/${p.slug}`,
             datePublished: p.publishedAt,
           })),
         }),

@@ -44,7 +44,7 @@ function CopyBox({ label, value }: { label: string; value: string }) {
 }
 
 function BadgePage() {
-  const [host, setHost] = useState("citation.is");
+  const [host, setHost] = useState("grow.contact");
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [data, setData] = useState<BadgeResponse | null>(null);

@@ -15,7 +15,7 @@ export const Route = createFileRoute("/standard.md")({
             "Content-Type": "text/markdown; charset=utf-8",
             "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
             "X-Standard-Version": current.buildId,
-            "Link": `<https://citation.is/standard/${current.slug}>; rel="canonical", <https://creativecommons.org/licenses/by/4.0/>; rel="license"`,
+            "Link": `<https://grow.contact/standard/${current.slug}>; rel="canonical", <https://creativecommons.org/licenses/by/4.0/>; rel="license"`,
             "Access-Control-Allow-Origin": "*",
           },
         });

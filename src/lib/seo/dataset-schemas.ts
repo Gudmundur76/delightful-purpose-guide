@@ -8,7 +8,7 @@
 //   /api/public/data/schemas/stats.schema.json
 //   /api/public/data/schemas/leaderboard.schema.json
 
-export const SCHEMA_BASE = "https://citation.is/api/public/data/schemas";
+export const SCHEMA_BASE = "https://grow.contact/api/public/data/schemas";
 
 export const CLAIMS_SCHEMA_URL = `${SCHEMA_BASE}/claims.schema.json`;
 export const STATS_SCHEMA_URL = `${SCHEMA_BASE}/stats.schema.json`;
@@ -31,9 +31,9 @@ const COMMON_META = {
 export const CLAIMS_SCHEMA = {
   $schema: "https://json-schema.org/draft/2020-12/schema",
   $id: CLAIMS_SCHEMA_URL,
-  title: "citation.is verifiable claims registry",
+  title: "grow.contact verifiable claims registry",
   description:
-    "Machine-readable registry of every visible statistic on citation.is. Each claim has a stable id matching an in-page anchor (e.g. #home-stat-83) and resolves to a source URL.",
+    "Machine-readable registry of every visible statistic on grow.contact. Each claim has a stable id matching an in-page anchor (e.g. #home-stat-83) and resolves to a source URL.",
   type: "object",
   required: ["standard", "license", "claims"],
   properties: {
@@ -77,7 +77,7 @@ export const CLAIMS_SCHEMA = {
 export const STATS_SCHEMA = {
   $schema: "https://json-schema.org/draft/2020-12/schema",
   $id: STATS_SCHEMA_URL,
-  title: "citation.is Agent Readability — headline stats",
+  title: "grow.contact Agent Readability — headline stats",
   description:
     "Pre-computed citable statistics derived from the Agent Readability Leaderboard. Percentages are integers 0–100.",
   type: "object",
@@ -152,7 +152,7 @@ export const STATS_SCHEMA = {
 export const LEADERBOARD_SCHEMA = {
   $schema: "https://json-schema.org/draft/2020-12/schema",
   $id: LEADERBOARD_SCHEMA_URL,
-  title: "citation.is Agent Readability Leaderboard",
+  title: "grow.contact Agent Readability Leaderboard",
   description:
     "Ranked list of AI companies scored on the geo-standard signals: semantic HTML, JSON-LD, llms.txt, citability, and first-byte speed.",
   type: "object",

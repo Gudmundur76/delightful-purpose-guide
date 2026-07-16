@@ -24,7 +24,7 @@ export const Route = createFileRoute("/data-drops/$slug")({
   head: ({ loaderData }) => {
     const d = loaderData?.drop;
     if (!d) return { meta: [{ title: "Data drop not found" }] };
-    const url = `https://citation.is/data-drops/${d.slug}`;
+    const url = `https://grow.contact/data-drops/${d.slug}`;
     return {
       meta: [
         { title: `${d.title} | Grow Data Drops` },
@@ -33,9 +33,9 @@ export const Route = createFileRoute("/data-drops/$slug")({
         { property: "og:description", content: d.headline },
         { property: "og:url", content: url },
         { property: "og:type", content: "article" },
-        { property: "og:image", content: `https://citation.is/api/public/widget/chart/${d.slug}.svg` },
+        { property: "og:image", content: `https://grow.contact/api/public/widget/chart/${d.slug}.svg` },
         { property: "twitter:card", content: "summary_large_image" },
-        { property: "twitter:image", content: `https://citation.is/api/public/widget/chart/${d.slug}.svg` },
+        { property: "twitter:image", content: `https://grow.contact/api/public/widget/chart/${d.slug}.svg` },
         { property: "article:published_time", content: d.publishedAt },
         { property: "article:author", content: AUTHOR.name },
       ],
@@ -51,11 +51,11 @@ export const Route = createFileRoute("/data-drops/$slug")({
             dateModified: d.publishedAt,
             url,
             inLanguage: "en",
-            image: `https://citation.is/api/public/widget/chart/${d.slug}.svg`,
+            image: `https://grow.contact/api/public/widget/chart/${d.slug}.svg`,
             author: personJsonLd(AUTHOR),
-            publisher: { "@type": "Organization", name: "citation.is", url: "https://citation.is" },
+            publisher: { "@type": "Organization", name: "grow.contact", url: "https://grow.contact" },
             description: d.headline,
-            isBasedOn: "https://citation.is/leaderboard",
+            isBasedOn: "https://grow.contact/leaderboard",
             license: "https://creativecommons.org/licenses/by/4.0/",
           }),
         },
@@ -140,11 +140,11 @@ function DataDropPage() {
             </div>
             <div>
               <p className="text-muted-foreground mb-1">Pull quote</p>
-              <p className="select-all bg-background border border-border p-3 not-italic">"{drop.cite.pull_quote}" — {AUTHOR.name}, citation.is</p>
+              <p className="select-all bg-background border border-border p-3 not-italic">"{drop.cite.pull_quote}" — {AUTHOR.name}, grow.contact</p>
             </div>
             <div>
               <p className="text-muted-foreground mb-1">Embed the chart (HTML)</p>
-              <pre className="select-all bg-background border border-border p-3 overflow-x-auto whitespace-pre-wrap">{`<a href="https://citation.is/data-drops/${drop.slug}"><img src="https://citation.is/api/public/widget/chart/${drop.slug}.svg" alt="${drop.title.replace(/"/g, "'")}" width="720" height="360" /></a>`}</pre>
+              <pre className="select-all bg-background border border-border p-3 overflow-x-auto whitespace-pre-wrap">{`<a href="https://grow.contact/data-drops/${drop.slug}"><img src="https://grow.contact/api/public/widget/chart/${drop.slug}.svg" alt="${drop.title.replace(/"/g, "'")}" width="720" height="360" /></a>`}</pre>
             </div>
           </div>
         </section>

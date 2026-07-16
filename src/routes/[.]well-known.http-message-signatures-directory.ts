@@ -3,7 +3,7 @@
 // https://developers.cloudflare.com/bots/reference/bot-verification/web-bot-auth/
 //
 // Published as a JWKS so receiving sites can verify signed requests originating
-// from citation.is. The directory is intentionally empty today — citation.is
+// from grow.contact. The directory is intentionally empty today — grow.contact
 // does not currently sign outbound bot requests. Keys (Ed25519, kty:OKP) will
 // be appended here when outbound signing is enabled.
 import { createFileRoute } from "@tanstack/react-router";

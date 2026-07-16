@@ -18,9 +18,9 @@ export const Route = createFileRoute("/status")({
         property: "og:description",
         content: "Live system status for Grow infrastructure.",
       },
-      { property: "og:url", content: "https://citation.is/status" },
+      { property: "og:url", content: "https://grow.contact/status" },
     ],
-    links: [{ rel: "canonical", href: "https://citation.is/status" }],
+    links: [{ rel: "canonical", href: "https://grow.contact/status" }],
   }),
 });
 

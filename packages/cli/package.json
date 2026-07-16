@@ -12,16 +12,16 @@
     "cli",
     "lighthouse-for-ai"
   ],
-  "homepage": "https://citation.is/cli",
+  "homepage": "https://grow.contact/cli",
   "repository": {
     "type": "git",
     "url": "https://github.com/grow-contact/cli"
   },
   "bugs": {
-    "url": "https://citation.is/contact"
+    "url": "https://grow.contact/contact"
   },
   "license": "MIT",
-  "author": "citation.is",
+  "author": "grow.contact",
   "type": "module",
   "bin": {
     "grow": "./src/index.mjs"

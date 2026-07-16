@@ -18,7 +18,7 @@ export const Route = createFileRoute("/integrations")({
       { name: "description", content: "Connect client tools via Composio." },
       { name: "robots", content: "noindex, nofollow" },
     ],
-    links: [{ rel: "canonical", href: "https://citation.is/integrations" }],
+    links: [{ rel: "canonical", href: "https://grow.contact/integrations" }],
   }),
 });
 

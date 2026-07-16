@@ -30,7 +30,7 @@ import {
 } from "@/lib/seo/trust-handshake";
 import { ogImageMeta } from "@/lib/seo/og";
 
-const PAGE_URL = "https://citation.is/v-score";
+const PAGE_URL = "https://grow.contact/v-score";
 const TODAY = new Date().toISOString().slice(0, 10);
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -81,8 +81,8 @@ export const Route = createFileRoute("/v-score")({
   head: ({ loaderData }) => {
     const v = loaderData?.vscore;
     const description = v
-      ? `V-Score ${v.score}/100 — live verifiability dashboard for citation.is. ${v.withSources}/${v.totalClaims} claims carry source-file handshakes to ${GITHUB_REPO}. Agent-Verifiable Standard v2.1.`
-      : "Live verifiability dashboard for citation.is. Agent-Verifiable Standard v2.1.";
+      ? `V-Score ${v.score}/100 — live verifiability dashboard for grow.contact. ${v.withSources}/${v.totalClaims} claims carry source-file handshakes to ${GITHUB_REPO}. Agent-Verifiable Standard v2.1.`
+      : "Live verifiability dashboard for grow.contact. Agent-Verifiable Standard v2.1.";
     return {
       meta: [
         { title: "V-Score — Live Verifiability Dashboard | Grow" },
@@ -102,7 +102,7 @@ export const Route = createFileRoute("/v-score")({
               type: "application/ld+json",
               children: JSON.stringify(
                 datasetSchema({
-                  name: "citation.is V-Score",
+                  name: "grow.contact V-Score",
                   description:
                     "Live composite score (0–100) summarising the site's verifiability posture across five pillars: claims-linked, source-handshake, schemas-valid, discovery-reachable, information-gain.",
                   url: PAGE_URL,
@@ -144,7 +144,7 @@ function VScorePage() {
         <section aria-labelledby="vscore-heading" className="border-b border-border">
           <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
             <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">
-              // citation.is / v-score · agent-verifiable standard v2.1
+              // grow.contact / v-score · agent-verifiable standard v2.1
             </p>
             <h1
               id="vscore-heading"
@@ -190,10 +190,10 @@ function VScorePage() {
             <CitationSnippet
               className="mt-8 max-w-2xl"
               citation={{
-                authors: ["citation.is"],
+                authors: ["grow.contact"],
                 year: 2026,
-                title: `citation.is V-Score (${score}/100, ${tier.label})`,
-                publisher: "citation.is",
+                title: `grow.contact V-Score (${score}/100, ${tier.label})`,
+                publisher: "grow.contact",
                 url: PAGE_URL,
                 accessed: TODAY,
                 key: "grow-vscore",

@@ -1,6 +1,6 @@
 # The Grow GEO Standard
 **Version:** 1.1 — 2026-07-15 (`geo-standard@2026.07`)
-**Owner:** Grow (citation.is)
+**Owner:** Grow (grow.contact)
 **Status:** Acceptance criteria for every Tier 01 / Tier 02 delivery.
 **Status:** Acceptance criteria for every Tier 01 / Tier 02 delivery.
 
@@ -226,8 +226,8 @@ Before marking a site shipped:
 - [ ] §9 perf budget met on mobile (Lighthouse run on throttled 4G)
 - [ ] §10 root files all present and 200
 - [ ] `/check` scanner run against the live URL → score ≥ 90
-- [ ] "Built by Grow in 48h" badge visible and links to citation.is
-- [ ] Case study entry added to citation.is `/work`
+- [ ] "Built by Grow in 48h" badge visible and links to grow.contact
+- [ ] Case study entry added to grow.contact `/work`
 
 ---
 
@@ -279,7 +279,7 @@ Every factual claim in visible UI MUST have:
 1. An `id` attribute on the claim element (e.g. `<span id="stat-83">83%</span>`).
 2. A matching `verifiableClaim` object in JSON-LD with a `citation`
    property pointing to the raw JSON dataset, fragment-addressed:
-   `https://citation.is/api/public/data/claims.json#stat-83`.
+   `https://grow.contact/api/public/data/claims.json#stat-83`.
 3. A `dateModified` on that claim object.
 
 Why: lets Perplexity move from "cite" to "verify," which is now a top-tier

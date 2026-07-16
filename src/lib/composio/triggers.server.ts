@@ -38,7 +38,7 @@ export async function onLowScoreScan(args: {
       body:
         `Hi,\n\nWe ran an AI-readiness scan on ${args.url} and the overall score is ${args.overall}/100.\n` +
         `Anything under 70 means major AI assistants are likely skipping your content.\n\n` +
-        `Reply if you'd like the full breakdown and a remediation plan.\n\n— citation.is`,
+        `Reply if you'd like the full breakdown and a remediation plan.\n\n— grow.contact`,
     });
   });
 }
@@ -100,9 +100,9 @@ export async function onPostPublished(args: {
   await safe("post-published", async () => {
     const connections = await listActiveConnectionsForToolkit("linkedin");
     if (connections.length === 0) return;
-    const url = `https://citation.is/blog/${args.slug}`;
+    const url = `https://grow.contact/blog/${args.slug}`;
     const commentary =
-      `New on the citation.is blog: ${args.title}\n\n` +
+      `New on the grow.contact blog: ${args.title}\n\n` +
       `${args.excerpt ?? ""}\n\n${url}`.trim();
     await Promise.all(
       connections.map((conn) =>

@@ -17,14 +17,14 @@ export const Route = createFileRoute("/api-docs")({
         content:
           "Grow Public API v1 documentation. Endpoints for posts, leads, and scores.",
       },
-      { property: "og:url", content: "https://citation.is/api-docs" },
+      { property: "og:url", content: "https://grow.contact/api-docs" },
       ...ogImageMeta({
         title: "API Documentation — Grow",
         kicker: "Grow",
         sub: "Grow Public API v1 documentation. Endpoints for posts, leads, and scores. Authenticate with X-API-Key.",
       }),
     ],
-    links: [{ rel: "canonical", href: "https://citation.is/api-docs" }],
+    links: [{ rel: "canonical", href: "https://grow.contact/api-docs" }],
   }),
 });
 
@@ -41,7 +41,7 @@ const ENDPOINTS: Endpoint[] = [
     method: "GET",
     path: "/api/public/v1/posts",
     description: "List all journal posts.",
-    exampleRequest: `curl -X GET "https://citation.is/api/public/v1/posts" \\
+    exampleRequest: `curl -X GET "https://grow.contact/api/public/v1/posts" \\
   -H "X-API-Key: your_api_key_here"`,
     exampleResponse: `{
   "posts": [
@@ -58,7 +58,7 @@ const ENDPOINTS: Endpoint[] = [
     method: "GET",
     path: "/api/public/v1/posts/{slug}",
     description: "Fetch a single post by slug.",
-    exampleRequest: `curl -X GET "https://citation.is/api/public/v1/posts/agent-native-design" \\
+    exampleRequest: `curl -X GET "https://grow.contact/api/public/v1/posts/agent-native-design" \\
   -H "X-API-Key: your_api_key_here"`,
     exampleResponse: `{
   "slug": "agent-native-design",
@@ -71,7 +71,7 @@ const ENDPOINTS: Endpoint[] = [
     method: "GET",
     path: "/api/public/v1/leads",
     description: "List recent leads (most recent first). Optional query: ?limit=50",
-    exampleRequest: `curl -X GET "https://citation.is/api/public/v1/leads?limit=10" \\
+    exampleRequest: `curl -X GET "https://grow.contact/api/public/v1/leads?limit=10" \\
   -H "X-API-Key: your_api_key_here"`,
     exampleResponse: `{
   "leads": [
@@ -90,7 +90,7 @@ const ENDPOINTS: Endpoint[] = [
     method: "POST",
     path: "/api/public/v1/leads",
     description: "Create a lead. Body: { name, email, budget_tier, message }",
-    exampleRequest: `curl -X POST "https://citation.is/api/public/v1/leads" \\
+    exampleRequest: `curl -X POST "https://grow.contact/api/public/v1/leads" \\
   -H "Content-Type: application/json" \\
   -H "X-API-Key: your_api_key_here" \\
   -d '{
@@ -171,7 +171,7 @@ function ApiDocsPage() {
           </ul>
           <p className="text-xs text-muted-foreground">
             No key? Contact{" "}
-            <span className="text-accent select-all">hello@citation.is</span>{" "}
+            <span className="text-accent select-all">hello@grow.contact</span>{" "}
             to request access.
           </p>
         </section>

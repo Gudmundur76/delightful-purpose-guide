@@ -55,7 +55,7 @@ export const autoFixLlmsTxtTool = defineTool({
       site_id: site.id,
       preview,
       content,
-      install_url: `https://citation.is/api/public/inject/${site.install_token}.llms.txt`,
+      install_url: `https://grow.contact/api/public/inject/${site.install_token}.llms.txt`,
       install_method: "Proxy your /llms.txt to the install_url, or have the WP plugin serve it virtually.",
     }, null, 2);
   },

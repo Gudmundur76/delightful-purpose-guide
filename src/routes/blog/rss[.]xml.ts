@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { getAllPosts } from "@/lib/blog/posts";
 
-const BASE_URL = "https://citation.is";
+const BASE_URL = "https://grow.contact";
 const FEED_URL = `${BASE_URL}/blog/rss.xml`;
 
 function escapeXml(s: string): string {

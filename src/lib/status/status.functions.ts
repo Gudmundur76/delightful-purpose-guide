@@ -26,7 +26,7 @@ export interface StatusPayload {
 }
 
 const TARGETS: { name: string; path: string }[] = [
-  { name: "Website (citation.is)", path: "/" },
+  { name: "Website (grow.contact)", path: "/" },
   { name: "Blog & Journal", path: "/blog" },
   { name: "Score Check (/check)", path: "/check" },
   { name: "Leaderboard", path: "/leaderboard" },
@@ -73,7 +73,7 @@ export const getSystemStatus = createServerFn({ method: "GET" }).handler(
   async (): Promise<StatusPayload> => {
     const origin =
       process.env.SITE_ORIGIN ||
-      "https://citation.is";
+      "https://grow.contact";
 
     const components = await Promise.all(
       TARGETS.map((t) => probe(origin, t.name, t.path)),

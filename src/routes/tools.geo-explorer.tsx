@@ -24,7 +24,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 
-const URL_ = "https://citation.is/tools/geo-explorer";
+const URL_ = "https://grow.contact/tools/geo-explorer";
 const TITLE = "GEO Explorer — free Ubersuggest-for-GEO in one page";
 const DESC =
   "Free GEO research tool. Score any domain's AI citation share, discover the prompts buyers ask AI, see the AI SERP live, and generate answer-first content briefs. No signup.";
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/tools/geo-explorer")({
       { name: "twitter:description", content: DESC },
       ...ogImageMeta({
         title: "GEO Explorer — free Ubersuggest for AI citations",
-        kicker: "citation.is / tools",
+        kicker: "grow.contact / tools",
         sub: "Domain snapshot, prompt ideas, live AI SERP, content brief. All free.",
       }),
     ],
@@ -62,8 +62,8 @@ export const Route = createFileRoute("/tools/geo-explorer")({
           offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
           publisher: {
             "@type": "Organization",
-            name: "citation.is",
-            url: "https://citation.is",
+            name: "grow.contact",
+            url: "https://grow.contact",
           },
         }),
       },

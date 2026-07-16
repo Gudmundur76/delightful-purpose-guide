@@ -365,8 +365,9 @@ const css = `
 }
 .ct-circles {
   position: relative;
-  width: min(640px, 55vw); aspect-ratio: 1;
-  max-height: 70vh;
+  width: 797px; height: 797px;
+  transform-origin: center center;
+  transform: scale(var(--ct-scale, 0.75));
 }
 .ct-orbit {
   position: absolute; top: 50%; left: 50%;
@@ -377,10 +378,10 @@ const css = `
   mask-composite: exclude;
   padding: 1px;
 }
-.ct-orbit-1 { width: 44%; height: 44%; animation: ctSpinL 30s linear infinite; }
-.ct-orbit-2 { width: 63%; height: 63%; animation: ctSpinR 40s linear infinite; }
-.ct-orbit-3 { width: 82%; height: 82%; animation: ctSpinR 50s linear infinite; }
-.ct-orbit-4 { width: 100%; height: 100%; animation: ctSpinL 60s linear infinite; }
+.ct-orbit-1 { width: 353px; height: 353px; animation: ctSpinL 30s linear infinite; }
+.ct-orbit-2 { width: 501px; height: 501px; animation: ctSpinR 40s linear infinite; }
+.ct-orbit-3 { width: 649px; height: 649px; animation: ctSpinR 50s linear infinite; }
+.ct-orbit-4 { width: 797px; height: 797px; animation: ctSpinL 60s linear infinite; }
 @keyframes ctSpinR { from { transform: translate(-50%, -50%) rotate(0); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 @keyframes ctSpinL { from { transform: translate(-50%, -50%) rotate(0); } to { transform: translate(-50%, -50%) rotate(-360deg); } }
 

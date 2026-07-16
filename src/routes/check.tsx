@@ -491,16 +491,17 @@ function ThreePaths({ url, score }: { url: string; score: number }) {
     {
       icon: Wrench,
       tag: "WordPress",
-      title: "Plugin Pro",
-      price: "$19/mo",
-      desc: "Auto-apply schema, llms.txt, and semantic fixes to your WordPress site.",
+      title: "Plugin (Free)",
+      price: "Free",
+      desc: "Install the open plugin — auto-fix schema, llms.txt, and semantic issues on every save.",
       cta: "Get plugin",
-      to: "/products",
+      to: "/extension",
       show: isWordPress,
     },
   ].filter((p) => p.show);
 
   if (paths.length === 0) return null;
+
 
   return (
     <div className="space-y-4">

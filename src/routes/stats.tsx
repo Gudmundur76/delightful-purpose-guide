@@ -324,7 +324,7 @@ function StatsPage() {
                   Run a free scan →
                 </Link>
                 <Link
-                  to="/contact"
+                  to="/check"
                   className="border border-border px-5 py-3 font-bold uppercase tracking-tighter hover:border-accent"
                 >
                   Talk to the team

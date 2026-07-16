@@ -4,15 +4,11 @@ import { Menu, X } from "lucide-react";
 
 const NAV = [
   { to: "/", label: "Home", exact: true },
-  { to: "/services", label: "Services", exact: false },
-  { to: "/process", label: "Process", exact: false },
-  { to: "/work", label: "Work", exact: false },
-  { to: "/pricing", label: "Pricing", exact: false },
+  { to: "/check", label: "Scanner", exact: false },
+  { to: "/standard", label: "Standard", exact: false },
+  { to: "/mcp-server", label: "MCP", exact: false },
   { to: "/playground", label: "Playground", exact: false },
-  { to: "/extension", label: "Extension", exact: false },
-
   { to: "/leaderboard", label: "Leaderboard", exact: false },
-  { to: "/for-agents", label: "For Agents", exact: false },
   { to: "/research", label: "Research", exact: false },
   { to: "/blog", label: "Journal", exact: false },
 ] as const;
@@ -50,7 +46,7 @@ export function SiteHeader() {
           <span className="font-extrabold tracking-tighter text-xl uppercase">GROW_</span>
           <span className="hidden sm:inline-flex font-mono text-[10px] font-medium px-2 py-1 border border-accent/40 bg-accent/10 text-accent tracking-tight rounded-sm items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            Score: 100
+            Free & open
           </span>
         </Link>
 
@@ -70,16 +66,10 @@ export function SiteHeader() {
           </div>
           <div className="hidden sm:flex items-center gap-3">
             <Link
-              to="/login"
-              className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors px-3 py-2"
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/contact"
+              to="/check"
               className="inline-flex bg-foreground text-background text-xs font-bold px-4 py-2 uppercase tracking-tighter hover:bg-accent hover:text-accent-foreground transition-all"
             >
-              Start Brief
+              Run Free Scan
             </Link>
           </div>
           <button
@@ -111,18 +101,11 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              to="/login"
-              onClick={() => setOpen(false)}
-              className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors"
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/contact"
+              to="/check"
               onClick={() => setOpen(false)}
               className="mt-2 inline-flex items-center justify-center bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm"
             >
-              Start Brief →
+              Run Free Scan →
             </Link>
           </div>
         </div>

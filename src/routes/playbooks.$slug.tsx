@@ -219,7 +219,7 @@ function PlaybookPage() {
               </p>
             </div>
             <Link
-              to="/contact"
+              to="/check"
               className="inline-flex items-center gap-2 bg-foreground text-background font-bold px-6 py-3 uppercase tracking-tighter text-sm shrink-0"
             >
               Start a brief <ArrowRight className="w-4 h-4" />

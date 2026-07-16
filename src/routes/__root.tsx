@@ -10,10 +10,11 @@ import {
 import { useEffect, useState } from "react";
 
 import appCss from "../styles.css?url";
-import { CartProvider } from "@/lib/cart/CartContext";
 import { supabase } from "@/integrations/supabase/client";
 import { CookieConsent } from "@/components/CookieConsent";
 import { WebMcpProvider } from "@/components/WebMcpProvider";
+
+
 
 
 function NotFoundComponent() {
@@ -141,16 +142,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "google-site-verification", content: "HbTX1qSEq9ZU_E2EVtzo_mw84F9k2TnNr6uPAatkNYQ" },
-      { title: "Grow — Agent-Native Websites for AI Startups" },
-      { name: "description", content: "Agent-native marketing sites for AI/ML startups, agent platforms, and devtools. Custom-coded, LLM-readable, live in 48 hours — fixed price." },
-      { name: "author", content: "Grow" },
-      { property: "og:title", content: "Grow — Agent-Native Websites for AI Startups" },
-      { property: "og:description", content: "Marketing sites for AI/ML startups, agent platforms, and devtools. Structured for humans, parseable by LLMs. 48 hours, fixed price." },
+      { title: "grow.contact — Free, open infrastructure for AI search visibility" },
+      { name: "description", content: "Free scanner, standard, MCP server, and WordPress plugin for making your site cited by ChatGPT, Perplexity, Claude, and Google AI. No paywall. No account required." },
+      { name: "author", content: "grow.contact" },
+      { property: "og:title", content: "grow.contact — Free, open infrastructure for AI search visibility" },
+      { property: "og:description", content: "Free scanner, standard, MCP server, and WordPress plugin. Get cited by ChatGPT, Perplexity, Claude, and Google AI. No paywall." },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "Grow" },
+      { property: "og:site_name", content: "grow.contact" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Grow — Agent-Native Websites" },
-      { name: "twitter:description", content: "Sites built for AI/ML startups, agent platforms, and devtools. 48 hours, fixed price." },
+      { name: "twitter:title", content: "grow.contact — Free, open infrastructure for AI search" },
+      { name: "twitter:description", content: "Free scanner, standard, MCP server, WordPress plugin. Get cited by ChatGPT, Perplexity, Claude, Google AI." },
+
 
     ],
     links: [
@@ -222,11 +224,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <Outlet />
-        <CookieConsent />
-        <WebMcpProvider />
-      </CartProvider>
+      <Outlet />
+      <CookieConsent />
+      <WebMcpProvider />
     </QueryClientProvider>
   );
+
 }

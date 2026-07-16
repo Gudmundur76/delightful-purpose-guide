@@ -576,7 +576,7 @@ function LeaderboardPage() {
                 <span className="font-mono text-xs">→</span>
               </Link>
               <Link
-                to="/services"
+                to="/check"
                 className="inline-flex items-center gap-2 border border-border px-6 py-3 font-bold uppercase tracking-tighter hover:border-accent hover:text-accent transition-colors"
               >
                 Rebuild agent-native

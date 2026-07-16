@@ -140,7 +140,7 @@ grow check https://example.com`}</Code>
         <ul className="list-inside list-disc space-y-2 text-muted-foreground">
           <li>Same five signals as the public scanner — no second rubric to learn.</li>
           <li>MIT, zero deps, ~250 LOC. You can audit the whole thing in a coffee break.</li>
-          <li>If your score is low, a 48-hour fix is one click away at <Link to="/pricing" className="underline">/pricing</Link>.</li>
+          <li>Free & open — the CLI, the scanner, and the standard behind it are all published at <Link to="/standard" className="underline">/standard</Link>.</li>
         </ul>
       </section>
 

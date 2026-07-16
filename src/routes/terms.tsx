@@ -63,11 +63,11 @@ function TermsPage() {
       <section>
         <H2>5. Refunds & cancellations</H2>
         <P>
-          See our <a className="underline" href="/refund">Refund Policy</a>. EU/UK consumers have a statutory 14-day right
-          of withdrawal which begins on the day of purchase; by asking us to start the build immediately, you acknowledge
-          this right may be lost once delivery begins.
+          grow.contact is a free, open-source service — nothing is sold and no payment is taken, so there is nothing to refund.
+          You can stop using the tools, delete your account, and remove any embed at any time with no obligation.
         </P>
       </section>
+
 
       <section>
         <H2>6. Warranty</H2>

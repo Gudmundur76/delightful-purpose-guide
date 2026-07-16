@@ -225,7 +225,7 @@ function BadgePage() {
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link
-                to="/contact"
+                to="/check"
                 className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm"
               >
                 Start a brief <ArrowRight className="w-4 h-4" />

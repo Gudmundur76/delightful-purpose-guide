@@ -45,45 +45,43 @@ const tools: WebMcpTool[] = [
     },
   },
   {
-    name: "get_pricing",
+    name: "open_standard",
     description:
-      "Get grow.contact's current service tiers and pricing for GEO/AEO consulting and audits.",
+      "Open the Agent-Native Web Standard — the free, open specification behind grow.contact's scoring.",
     inputSchema: { type: "object", properties: {} },
     execute: async () => {
-      window.location.href = "/pricing";
-      return { navigated_to: "/pricing" };
+      window.location.href = "/standard";
+      return { navigated_to: "/standard" };
     },
   },
   {
-    name: "open_contact",
+    name: "open_scanner",
     description:
-      "Open the grow.contact contact form to request an engagement, API key, or MCP token.",
+      "Open the free grow.contact scanner to score any URL against the Agent-Native Web Standard.",
     inputSchema: {
       type: "object",
       properties: {
-        message: {
-          type: "string",
-          description: "Optional message to prefill in the contact form.",
-        },
+        url: { type: "string", description: "Optional URL to pre-fill in the scanner." },
       },
     },
-    execute: async ({ message }) => {
-      const qs = message ? `?msg=${encodeURIComponent(String(message))}` : "";
-      window.location.href = `/contact${qs}`;
-      return { navigated_to: "/contact" };
+    execute: async ({ url }) => {
+      const qs = url ? `?url=${encodeURIComponent(String(url))}` : "";
+      window.location.href = `/check${qs}`;
+      return { navigated_to: "/check" };
     },
   },
   {
-    name: "list_services",
+    name: "open_leaderboard",
     description:
-      "List grow.contact's services (audits, implementation, advisory) with short descriptions.",
+      "Open the live leaderboard of audited sites scored against the Agent-Native Web Standard.",
     inputSchema: { type: "object", properties: {} },
     execute: async () => {
-      window.location.href = "/services";
-      return { navigated_to: "/services" };
+      window.location.href = "/leaderboard";
+      return { navigated_to: "/leaderboard" };
     },
   },
 ];
+
 
 export function WebMcpProvider() {
   useEffect(() => {

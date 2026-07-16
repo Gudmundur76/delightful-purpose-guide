@@ -423,9 +423,15 @@ const css = `
 @media (max-width: 480px) {
   .ct-h1 { font-size: 28px; line-height: 32px; }
   .ct-circles { transform: scale(0.4); }
-  .ct-btn-sm { padding: 10px 20px; font-size: 14px; }
+  .ct-btn-sm { padding: 10px 18px; font-size: 13px; }
   .ct-logo-item { width: 100px; height: 32px; }
-  .ct-header { padding: 16px; }
-  .ct-header-left { gap: 12px; }
+  .ct-header { padding: 14px 16px; gap: 8px; }
+  .ct-header-left { gap: 10px; }
+  .ct-header-right { gap: 12px; }
+  .ct-login { display: none; }
+  .ct-brand { font-size: 18px; }
+  .ct-brand-mark { width: 28px; height: 28px; font-size: 17px; border-radius: 8px; }
+  .ct-cursor-wrap { margin-left: 40px; margin-top: 24px; }
+  .ct-left { padding-top: 16px; }
 }
 `;

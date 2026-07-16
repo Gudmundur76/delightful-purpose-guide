@@ -139,6 +139,79 @@ export const STAT_MICROPOSTS: StatMicropost[] = [
       { label: "GEO Standard", url: "https://grow.contact/standard" },
     ],
   },
+  {
+    slug: "schema-barely-moves-ai-citations",
+    headline: "Schema barely moved AI citations in a 1,885-page test",
+    metaTitle: "Schema barely moves AI citations (1,885 pages tested)",
+    metaDescription:
+      "Ahrefs added JSON-LD to 1,885 pages and measured citation change: +2.2% on ChatGPT, +2.4% on Google AI Mode, −4.6% on AI Overviews. Schema's citation lift is roughly zero.",
+    publishedAt: "2026-07-17",
+    tags: ["schema", "json-ld", "citation myths", "geo"],
+    value: "±2%",
+    subject: "Diff-in-diff citation change from adding JSON-LD to 1,885 pages",
+    quotable:
+      "In a controlled 1,885-page test, adding JSON-LD produced +2.2% citations on ChatGPT, +2.4% on Google AI Mode, and −4.6% on AI Overviews — all statistically indistinguishable from zero.",
+    body: `**Bottom line:** the "add schema to earn AI citations" playbook is unsupported by the strongest controlled test yet published. Ahrefs added JSON-LD to 1,885 pages in May 2026 and measured citation change against a matched control cohort. ChatGPT moved +2.2%, Google AI Mode +2.4%, and AI Overviews **−4.6%**. None of those are statistically different from zero.\n\n## The frequently-cited counter-stat\n\nMost GEO/AEO advice cites the "53% of AI-cited pages have schema" figure. That's a correlation, not a causal claim. Pages with schema also tend to be maintained by teams that ship freshness, structured content, author attribution, and clear headings — the schema is a proxy for a healthier page overall, not the citation driver.\n\n## What LLMs actually read\n\nA companion searchVIU 2025 test observed live fetches from ChatGPT, Claude, Perplexity, Gemini, and Google AI Mode. All five parsed **only the rendered HTML**. JSON-LD in the page head was ignored at inference time. Schema still helps discoverability inside Google's classic index — but once an engine is looking at your page, it reads the visible text.\n\n## What this means for the /check score\n\nJSON-LD stays in the [GEO Standard](/standard) because it's a durable machine-readability signal for classic crawlers, sitelinks, and rich results, and it survives when the page is quoted out of context. It should not be sold as an AI-citation growth lever. Fresh, front-loaded, well-structured visible HTML is.\n\n## Rank order the levers correctly\n\nBased on public 2025-2026 controlled tests (Ahrefs, Ziptie, AirOps, searchVIU):\n\n- **Answer-first structure** — 44% of LLM citations pull from the first 30% of the page ([Ziptie](https://ziptie.dev/)).\n- **Freshness** — AI assistants cite pages ~25% newer than SERPs cite on average ([Ahrefs](https://ahrefs.com/blog/do-ai-assistants-prefer-to-cite-fresh-content/)).\n- **Format fit** — listicles win commercial queries, articles win informational ([AirOps](https://www.airops.com/blog/page-types-earn-ai-citations)).\n- **Schema** — near-zero direct citation lift on already-crawled pages ([Ahrefs](https://ahrefs.com/blog/schema-ai-citations/)).\n\n## Methodology (Ahrefs)\n\n- Sample: 1,885 pages, matched control cohort of comparable pages without schema changes.\n- Design: diff-in-diff on citation counts, 8-week observation window.\n- Engines: ChatGPT (via Bing), Google AI Mode, Google AI Overviews.\n- Read the full study for confidence intervals and cohort selection.`,
+    sources: [
+      { label: "Ahrefs — Schema and AI Citations study (May 2026)", url: "https://ahrefs.com/blog/schema-ai-citations/" },
+      { label: "searchVIU — Schema markup and AI in 2025", url: "https://www.searchviu.com/en/schema-markup-ai/" },
+    ],
+  },
+  {
+    slug: "first-30-percent-earns-44-percent-of-citations",
+    headline: "44% of AI citations come from the first 30% of the page",
+    metaTitle: "44% of AI citations pull from the first 30% of the page",
+    metaDescription:
+      "Ziptie analysed how LLMs split cited passages across pages. 44.2% of citations pull from the first 30% of body text. Front-loading the answer is the single strongest on-page lever.",
+    publishedAt: "2026-07-17",
+    tags: ["answer-first", "content structure", "geo"],
+    value: "44.2%",
+    subject: "Share of LLM citations pulled from the first 30% of page text",
+    quotable:
+      "44.2% of LLM citations pull from the first 30% of body text — front-loading the answer is the strongest on-page citation lever.",
+    body: `**Bottom line:** LLMs disproportionately quote the top of the page. In a 2026 study by Ziptie, **44.2%** of citations across ChatGPT, Perplexity, Claude, and Google AI Overviews came from the first 30% of body text. An independent 100-page UK replication (AI Boost, May 2026) landed at **47.3%** — same shape.\n\n## Why the top of the page wins\n\nAI extractors work paragraph-by-paragraph. Every paragraph is scored for relevance to the query. Early paragraphs get scored more often because extraction budgets are finite and models truncate. When two paragraphs on the same page cover the same claim, the earlier one is the citation. This is why "answer-first" isn't just readability advice — it's citation economics.\n\n## The 40-60 word rule\n\nGoogle's own [AI optimization guide](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide) recommends a 40-60 word answer paragraph immediately after each question-shaped H2. That length is a sweet spot: long enough to make a complete claim, short enough that the model quotes the whole thing verbatim rather than paraphrasing.\n\n## What to change today\n\n1. On every leaf page, restructure the intro: the first 50-70 words must answer the page's implicit question.\n2. Under every H2, put a 40-60 word answer paragraph before any preamble or context.\n3. Kill "welcome to our blog" / "in this article we will discuss" openers. They occupy prime citation real estate with zero payload.\n4. Move brand context, definitions, and background to the second half. It still helps for depth signals, but stops crowding out citations.\n\n## Methodology\n\n- Ziptie (April 2026): cross-engine citation split analysis, engines including ChatGPT, Perplexity, Claude, and Google AI Overviews.\n- AI Boost (May 2026): 100-page UK panel replication of the first-30% rule.\n- Result triangulates on 44-47% of citations landing in the first 30% of body text.`,
+    sources: [
+      { label: "Ziptie — How AI splits your content across multiple answers", url: "https://ziptie.dev/" },
+      { label: "Google — AI optimization guide", url: "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" },
+    ],
+  },
+  {
+    slug: "short-content-cites-just-as-well",
+    headline: "53% of AI-cited pages are under 1,000 words",
+    metaTitle: "53% of AI-cited pages are under 1,000 words",
+    metaDescription:
+      "Ahrefs studied 174,048 pages in Google AI Overviews. Word count showed near-zero correlation with citation (Spearman r = 0.04). 53.4% of cited pages are under 1,000 words. Kill the mega-guide myth.",
+    publishedAt: "2026-07-17",
+    tags: ["word count", "content length", "citation myths"],
+    value: "53%",
+    subject: "Share of AI-cited pages under 1,000 words",
+    quotable:
+      "53.4% of pages cited by Google AI Overviews are under 1,000 words, with near-zero correlation between length and citation likelihood (Spearman r = 0.04).",
+    body: `**Bottom line:** the "publish a 10,000-word ultimate guide to win AI citations" advice is unsupported. Ahrefs studied 174,048 pages surfaced in Google AI Overviews in December 2025 and found **near-zero correlation** between word count and citation likelihood (Spearman r = 0.04). **53.4%** of cited pages are under 1,000 words.\n\n## Why length doesn't matter\n\nExtractors don't reward length — they reward answer density. A 400-word page that answers a query completely and cleanly outperforms a 4,000-word page where the answer is buried under three sections of preamble. What matters is:\n\n- Answer within the first 100 words of the section a query maps to.\n- One idea per paragraph, factually complete.\n- Numbered lists, tables, or bolded claims that survive extraction.\n\n## The mega-guide trap\n\nMega-guides were an SEO tactic aimed at dwell time and internal-linking hubs. Neither signal transfers to AI citation. Worse, long pages:\n\n- Bury the answer past the first-30% window (see [our citation-position stat](/stats/first-30-percent-earns-44-percent-of-citations)).\n- Dilute the entity graph — the model can't decide which of your seven H2 sections is the primary claim.\n- Cost more to write and re-freshen quarterly, which hurts your freshness signal.\n\n## What to do instead\n\n1. Split the mega-guide into 6-12 short, answer-first pages, each targeting one query.\n2. Cross-link them with a hub page. The hub earns the internal-link authority; the leaves earn the citations.\n3. Set an editorial floor at ~350 words (enough for a proper answer + evidence) and a soft ceiling at ~1,200 (long enough for depth, short enough to stay fresh).\n\n## Methodology (Ahrefs)\n\n- Sample: 174,048 pages cited in Google AI Overviews.\n- Metric: Spearman rank correlation between word count and citation frequency.\n- Result: r = 0.04 (statistically indistinguishable from zero). 53.4% of cited pages under 1,000 words. Read the full study for the distribution and outlier analysis.`,
+    sources: [
+      { label: "Ahrefs — Short vs. long content in AI Overviews", url: "https://ahrefs.com/blog/short-vs-long-content-in-ai-overviews/" },
+      { label: "grow.contact — First-30% rule", url: "https://grow.contact/stats/first-30-percent-earns-44-percent-of-citations" },
+    ],
+  },
+  {
+    slug: "wikipedia-reddit-brand-per-engine",
+    headline: "Wikipedia, Reddit, and brand sites split AI citations by engine",
+    metaTitle: "Wikipedia 48% of ChatGPT, Reddit 24% of Perplexity, brands 70% of Claude",
+    metaDescription:
+      "Per-engine citation source share: Wikipedia = 47.9% of ChatGPT, Reddit = 24% of Perplexity, brand-owned domains = 70% of Claude. Each engine has a different citation graph — optimise per engine.",
+    publishedAt: "2026-07-17",
+    tags: ["per-engine", "wikipedia", "reddit", "brand sites", "citation sources"],
+    value: "48 / 24 / 70",
+    unit: "% by engine",
+    subject: "Wikipedia's share of ChatGPT vs Reddit's share of Perplexity vs brand sites' share of Claude",
+    quotable:
+      "ChatGPT pulls 47.9% of citations from Wikipedia; Perplexity pulls 24% from Reddit; Claude pulls 70% from brand-owned domains. Each engine has a different citation graph.",
+    body: `**Bottom line:** there is no single AI citation graph. Each major engine leans on a different source class. The Q1 2026 aggregation (PikaSEO, compiling Bluefish, Tinuiti, Ahrefs 78.6M-search dataset, and SE Ranking 1.3M citations) puts the per-engine skew starkly:\n\n- **ChatGPT** — 47.9% of citations trace to Wikipedia. Owning your Wikipedia entity page matters more here than anywhere else.\n- **Perplexity** — 24% of citations come from Reddit; 21% from YouTube. UGC is a first-class citation channel.\n- **Claude** — 70% of citations go to brand-owned domains. Cleaner, more curated, more corporate.\n- **Google AI Overviews** — 21% of citations from Reddit, but a more balanced mix overall; 37.9% of cited URLs also rank in the traditional top 10 (down from 76% in July 2025).\n\n## What this changes about strategy\n\n1. **If your audience uses ChatGPT more:** invest in your Wikipedia entity (notable citations from third-party press, structured infobox, wikidata Q-number). This is a 6-12 month project, not a quarter.\n2. **If your audience uses Perplexity more:** show up on Reddit. Answer questions in relevant subreddits under a consistent brand-linked handle. Reddit's own AI-training deal with Google means Reddit content is heavily weighted in Perplexity's live index.\n3. **If your audience uses Claude more:** invest in your own site's depth, freshness, and structure. Claude cites brand sites — this is the engine where GEO Standard compliance on your own domain pays the highest dividend.\n4. **If you serve Google AI Overviews:** the classic SERP still matters more here than anywhere else, but the coupling is weakening fast (76% → 37.9% overlap in eight months).\n\n## The single-strategy fallacy\n\nA "one GEO strategy" pitch — usually "do content marketing better" — hides these engine-specific dynamics. If you're not per-engine, you're guessing.\n\n## Methodology\n\n- PikaSEO compilation (March 2026) of four underlying studies: Bluefish, Tinuiti Q1 2026, Ahrefs 78.6M-search dataset, SE Ranking 1.3M citations.\n- Each number is the citation-source share attributed to that domain class per engine.\n- License: use with attribution. Read the source studies for confidence intervals and sampling frames.`,
+    sources: [
+      { label: "PikaSEO — AI citation sources by platform", url: "https://pikaseo.com/articles/ai-citation-sources-by-platform" },
+      { label: "Ahrefs — Only 12% of AI-cited URLs rank in Google's top 10", url: "https://ahrefs.com/blog/ai-search-overlap/" },
+    ],
+  },
 ];
 
 export function getMicropost(slug: string): StatMicropost | undefined {

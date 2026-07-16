@@ -3,7 +3,16 @@ import { useEffect, useState } from "react";
 import { lovable } from "@/integrations/lovable";
 import { supabase } from "@/integrations/supabase/client";
 
+// Preserve where the user was heading (e.g. /.lovable/oauth/consent?...) so
+// OAuth consent works. Validate as a same-origin relative path.
+function safeNext(raw: unknown): string {
+  if (typeof raw !== "string" || raw.length === 0) return "/";
+  if (!raw.startsWith("/") || raw.startsWith("//")) return "/";
+  return raw;
+}
+
 export const Route = createFileRoute("/login")({
+  validateSearch: (s: Record<string, unknown>) => ({ next: safeNext(s.next) }),
   component: LoginPage,
   head: () => ({
     meta: [
@@ -17,20 +26,25 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
   const navigate = useNavigate();
+  const { next } = Route.useSearch();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/" });
+      if (data.session) window.location.href = next;
     });
-  }, [navigate]);
+  }, [next]);
 
   const handleGoogle = async () => {
     setError(null);
     setLoading(true);
+    // redirect_uri must be a full same-origin URL; append `next` so we can
+    // return the user to the original destination after Supabase hydrates
+    // the session.
+    const returnUrl = `${window.location.origin}${next}`;
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
+      redirect_uri: returnUrl,
     });
     if (result.error) {
       setError(result.error.message ?? "Sign-in failed. Please try again.");
@@ -38,7 +52,8 @@ function LoginPage() {
       return;
     }
     if (result.redirected) return;
-    navigate({ to: "/" });
+    window.location.href = next;
+    void navigate;
   };
 
   return (

@@ -36,6 +36,8 @@ import { Route as PlaybookRouteImport } from './routes/playbook'
 import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as OpenapiDotjsonRouteImport } from './routes/openapi[.]json'
 import { Route as McpServerRouteImport } from './routes/mcp-server'
+import { Route as McpProtectedResourceRouteImport } from './routes/mcp-protected-resource'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
 import { Route as LlmsRouteImport } from './routes/llms'
@@ -123,6 +125,7 @@ import { Route as DotwellKnownMcpDotjsonRouteImport } from './routes/[.]well-kno
 import { Route as DotwellKnownJwksDotjsonRouteImport } from './routes/[.]well-known.jwks[.]json'
 import { Route as DotwellKnownHttpMessageSignaturesDirectoryRouteImport } from './routes/[.]well-known.http-message-signatures-directory'
 import { Route as DotwellKnownApiCatalogRouteImport } from './routes/[.]well-known.api-catalog'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as HistoryHostDiffRouteImport } from './routes/history.$host.diff'
 import { Route as DataQ22026StatsDotjsonRouteImport } from './routes/data.q2-2026.stats[.]json'
@@ -144,6 +147,8 @@ import { Route as AboutAuthorSlugRouteImport } from './routes/about.author.$slug
 import { Route as DotwellKnownMcpServerCardDotjsonRouteImport } from './routes/[.]well-known.mcp.server-card[.]json'
 import { Route as DotwellKnownAgentSkillsIndexDotjsonRouteImport } from './routes/[.]well-known.agent-skills.index[.]json'
 import { Route as DotwellKnownAgentSkillsGrowGeoScanDotmdRouteImport } from './routes/[.]well-known.agent-skills.grow-geo-scan[.]md'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as ApiPublicV1IndexRouteImport } from './routes/api/public/v1/index'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -326,6 +331,16 @@ const OpenapiDotjsonRoute = OpenapiDotjsonRouteImport.update({
 const McpServerRoute = McpServerRouteImport.update({
   id: '/mcp-server',
   path: '/mcp-server',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpProtectedResourceRoute = McpProtectedResourceRouteImport.update({
+  id: '/mcp-protected-resource',
+  path: '/mcp-protected-resource',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -769,6 +784,12 @@ const DotwellKnownApiCatalogRoute = DotwellKnownApiCatalogRouteImport.update({
   path: '/.well-known/api-catalog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
@@ -880,6 +901,17 @@ const DotwellKnownAgentSkillsGrowGeoScanDotmdRoute =
     path: '/.well-known/agent-skills/grow-geo-scan.md',
     getParentRoute: () => rootRouteImport,
   } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicV1IndexRoute = ApiPublicV1IndexRouteImport.update({
   id: '/api/public/v1/',
   path: '/api/public/v1/',
@@ -1176,6 +1208,8 @@ export interface FileRoutesByFullPath {
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
+  '/mcp': typeof McpRoute
+  '/mcp-protected-resource': typeof McpProtectedResourceRoute
   '/mcp-server': typeof McpServerRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
   '/outreach': typeof OutreachRoute
@@ -1203,6 +1237,7 @@ export interface FileRoutesByFullPath {
   '/vs': typeof VsRouteWithChildren
   '/why': typeof WhyRouteWithChildren
   '/work': typeof WorkRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
   '/.well-known/jwks.json': typeof DotwellKnownJwksDotjsonRoute
@@ -1263,6 +1298,8 @@ export interface FileRoutesByFullPath {
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/data/': typeof DataIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -1358,6 +1395,8 @@ export interface FileRoutesByTo {
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
+  '/mcp': typeof McpRoute
+  '/mcp-protected-resource': typeof McpProtectedResourceRoute
   '/mcp-server': typeof McpServerRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
   '/outreach': typeof OutreachRoute
@@ -1385,6 +1424,7 @@ export interface FileRoutesByTo {
   '/vs': typeof VsRouteWithChildren
   '/why': typeof WhyRouteWithChildren
   '/work': typeof WorkRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
   '/.well-known/jwks.json': typeof DotwellKnownJwksDotjsonRoute
@@ -1445,6 +1485,8 @@ export interface FileRoutesByTo {
   '/content': typeof ContentIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/data': typeof DataIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -1544,6 +1586,8 @@ export interface FileRoutesById {
   '/llms': typeof LlmsRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/login': typeof LoginRoute
+  '/mcp': typeof McpRoute
+  '/mcp-protected-resource': typeof McpProtectedResourceRoute
   '/mcp-server': typeof McpServerRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
   '/outreach': typeof OutreachRoute
@@ -1571,6 +1615,7 @@ export interface FileRoutesById {
   '/vs': typeof VsRouteWithChildren
   '/why': typeof WhyRouteWithChildren
   '/work': typeof WorkRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
   '/.well-known/jwks.json': typeof DotwellKnownJwksDotjsonRoute
@@ -1631,6 +1676,8 @@ export interface FileRoutesById {
   '/content/': typeof ContentIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/data/': typeof DataIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/.well-known/agent-skills/grow-geo-scan.md': typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   '/.well-known/agent-skills/index.json': typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -1731,6 +1778,8 @@ export interface FileRouteTypes {
     | '/llms'
     | '/llms-full.txt'
     | '/login'
+    | '/mcp'
+    | '/mcp-protected-resource'
     | '/mcp-server'
     | '/openapi.json'
     | '/outreach'
@@ -1758,6 +1807,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/why'
     | '/work'
+    | '/.mcp/list-tools'
     | '/.well-known/api-catalog'
     | '/.well-known/http-message-signatures-directory'
     | '/.well-known/jwks.json'
@@ -1818,6 +1868,8 @@ export interface FileRouteTypes {
     | '/content/'
     | '/dashboard/'
     | '/data/'
+    | '/.lovable/oauth/consent'
+    | '/.mcp/invoke-tool/$tool'
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
@@ -1913,6 +1965,8 @@ export interface FileRouteTypes {
     | '/llms'
     | '/llms-full.txt'
     | '/login'
+    | '/mcp'
+    | '/mcp-protected-resource'
     | '/mcp-server'
     | '/openapi.json'
     | '/outreach'
@@ -1940,6 +1994,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/why'
     | '/work'
+    | '/.mcp/list-tools'
     | '/.well-known/api-catalog'
     | '/.well-known/http-message-signatures-directory'
     | '/.well-known/jwks.json'
@@ -2000,6 +2055,8 @@ export interface FileRouteTypes {
     | '/content'
     | '/dashboard'
     | '/data'
+    | '/.lovable/oauth/consent'
+    | '/.mcp/invoke-tool/$tool'
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
@@ -2098,6 +2155,8 @@ export interface FileRouteTypes {
     | '/llms'
     | '/llms-full.txt'
     | '/login'
+    | '/mcp'
+    | '/mcp-protected-resource'
     | '/mcp-server'
     | '/openapi.json'
     | '/outreach'
@@ -2125,6 +2184,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/why'
     | '/work'
+    | '/.mcp/list-tools'
     | '/.well-known/api-catalog'
     | '/.well-known/http-message-signatures-directory'
     | '/.well-known/jwks.json'
@@ -2185,6 +2245,8 @@ export interface FileRouteTypes {
     | '/content/'
     | '/dashboard/'
     | '/data/'
+    | '/.lovable/oauth/consent'
+    | '/.mcp/invoke-tool/$tool'
     | '/.well-known/agent-skills/grow-geo-scan.md'
     | '/.well-known/agent-skills/index.json'
     | '/.well-known/mcp/server-card.json'
@@ -2284,6 +2346,8 @@ export interface RootRouteChildren {
   LlmsRoute: typeof LlmsRoute
   LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
   LoginRoute: typeof LoginRoute
+  McpRoute: typeof McpRoute
+  McpProtectedResourceRoute: typeof McpProtectedResourceRoute
   McpServerRoute: typeof McpServerRoute
   OpenapiDotjsonRoute: typeof OpenapiDotjsonRoute
   OutreachRoute: typeof OutreachRoute
@@ -2311,6 +2375,7 @@ export interface RootRouteChildren {
   VsRoute: typeof VsRouteWithChildren
   WhyRoute: typeof WhyRouteWithChildren
   WorkRoute: typeof WorkRoute
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   DotwellKnownApiCatalogRoute: typeof DotwellKnownApiCatalogRoute
   DotwellKnownHttpMessageSignaturesDirectoryRoute: typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
   DotwellKnownJwksDotjsonRoute: typeof DotwellKnownJwksDotjsonRoute
@@ -2339,6 +2404,8 @@ export interface RootRouteChildren {
   BlogIndexRoute: typeof BlogIndexRoute
   CiteIndexRoute: typeof CiteIndexRoute
   DataIndexRoute: typeof DataIndexRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRoute
   DotwellKnownAgentSkillsIndexDotjsonRoute: typeof DotwellKnownAgentSkillsIndexDotjsonRoute
   DotwellKnownMcpServerCardDotjsonRoute: typeof DotwellKnownMcpServerCardDotjsonRoute
@@ -2594,6 +2661,20 @@ declare module '@tanstack/react-router' {
       path: '/mcp-server'
       fullPath: '/mcp-server'
       preLoaderRoute: typeof McpServerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp-protected-resource': {
+      id: '/mcp-protected-resource'
+      path: '/mcp-protected-resource'
+      fullPath: '/mcp-protected-resource'
+      preLoaderRoute: typeof McpProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -3205,6 +3286,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotwellKnownApiCatalogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/suppression': {
       id: '/lovable/email/suppression'
       path: '/lovable/email/suppression'
@@ -3350,6 +3438,20 @@ declare module '@tanstack/react-router' {
       path: '/.well-known/agent-skills/grow-geo-scan.md'
       fullPath: '/.well-known/agent-skills/grow-geo-scan.md'
       preLoaderRoute: typeof DotwellKnownAgentSkillsGrowGeoScanDotmdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/v1/': {
@@ -3981,6 +4083,8 @@ const rootRouteChildren: RootRouteChildren = {
   LlmsRoute: LlmsRoute,
   LlmsFullDottxtRoute: LlmsFullDottxtRoute,
   LoginRoute: LoginRoute,
+  McpRoute: McpRoute,
+  McpProtectedResourceRoute: McpProtectedResourceRoute,
   McpServerRoute: McpServerRoute,
   OpenapiDotjsonRoute: OpenapiDotjsonRoute,
   OutreachRoute: OutreachRoute,
@@ -4008,6 +4112,7 @@ const rootRouteChildren: RootRouteChildren = {
   VsRoute: VsRouteWithChildren,
   WhyRoute: WhyRouteWithChildren,
   WorkRoute: WorkRoute,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   DotwellKnownApiCatalogRoute: DotwellKnownApiCatalogRoute,
   DotwellKnownHttpMessageSignaturesDirectoryRoute:
     DotwellKnownHttpMessageSignaturesDirectoryRoute,
@@ -4040,6 +4145,8 @@ const rootRouteChildren: RootRouteChildren = {
   BlogIndexRoute: BlogIndexRoute,
   CiteIndexRoute: CiteIndexRoute,
   DataIndexRoute: DataIndexRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   DotwellKnownAgentSkillsGrowGeoScanDotmdRoute:
     DotwellKnownAgentSkillsGrowGeoScanDotmdRoute,
   DotwellKnownAgentSkillsIndexDotjsonRoute:

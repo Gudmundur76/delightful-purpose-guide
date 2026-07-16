@@ -1,395 +1,422 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { useServerFn } from "@tanstack/react-start";
-import { useQuery } from "@tanstack/react-query";
-import { ReadabilityScore } from "@/components/ReadabilityScore";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
-import { CompareSection } from "@/components/CompareSection";
-import { TechSpecs } from "@/components/TechSpecs";
-import { SocialProofStrip } from "@/components/SocialProofStrip";
-import { MiniChecker } from "@/components/MiniChecker";
-import { AgentViewPanel } from "@/components/AgentViewPanel";
-import { getFaqItemsFn, getPageContentFn } from "@/lib/site/content.functions";
-import { getOverviewStats } from "@/lib/check/stats.functions";
-import { ogImageMeta } from "@/lib/seo/og";
-import { VerifiabilityBadge } from "@/components/VerifiabilityBadge";
-import { verifiableClaim, claimCitation } from "@/lib/seo/verifiable";
-
-const HOME_DATE_MODIFIED = "2026-07-16";
-
-const HOME_CLAIMS = [
-  {
-    id: "home-stat-83",
-    value: "83%",
-    label: "Share of AI Overview citations from pages outside the organic top 10 (allbusinessrealm analysis, April 2026)",
-  },
-  {
-    id: "home-stat-73",
-    value: "73%",
-    label: "Sites silently excluded from AI citations due to fixable technical issues (grow.contact /check scanner, n=2,400+ sites, 2026)",
-  },
-  {
-    id: "home-stat-527",
-    value: "527%",
-    label: "Year-over-year growth in AI-referred sessions, early 2025 (Search Engine Land, 2025)",
-  },
-  {
-    id: "home-stat-48",
-    value: "48%",
-    label: "Share of all queries that trigger a Google AI Overview (Semrush AI Overview tracking, Q1 2026)",
-  },
-] as const;
-
-const DEFAULT_FAQS: { q: string; a: string }[] = [
-  { q: "Is grow.contact really free?", a: "Yes — the scanner, the standard, the playbooks, the leaderboard, the MCP server, the WordPress plugin, the browser extension, the CLI, and every data drop are free forever. No paywall, no trial, no upsell. Bring an account only if you want your scans saved to a dashboard." },
-  { q: "What does grow.contact actually do?", a: "grow.contact is open infrastructure for AI search visibility. Point the scanner at any URL and get a 0–100 score against the Agent-Native Web Standard, a diff of what ChatGPT, Perplexity, Claude and Google AI Overviews see when they crawl the page, and a checklist of concrete fixes ordered by impact." },
-  { q: "What is the Agent-Native Web Standard?", a: "A six-layer open specification for making a website legible to AI engines: semantic HTML, JSON-LD schema, llms.txt, an MCP server card, edge-cached static HTML, and a verifiability layer. Published under CC-BY, versioned like software, forkable on GitHub." },
-  { q: "How is the scanner different from PageSpeed or Lighthouse?", a: "Lighthouse checks whether a browser can render your page. grow.contact checks whether an agent can cite it — robots.txt permissions for AI crawlers, JSON-LD validity, llms.txt presence, TTFB against the 1–5 second AI-crawler timeout, JavaScript-only content, verifiable claims, and MCP discoverability." },
-  { q: "Can I self-host or fork it?", a: "Yes. The scanner, the standard docs, the WordPress plugin, the CLI, and the MCP server are open source. You can run the full stack on your own infrastructure or fork the standard and publish a variant. Attribution appreciated, not required." },
-  { q: "How do I plug this into my site?", a: "Three paths, pick one: install the WordPress plugin for auto-fixes on save, run the CLI in CI to fail builds that drop below your threshold, or connect the MCP server to Claude/ChatGPT/Cursor and let the agent audit and fix pages itself." },
-  { q: "Do you collect my data?", a: "The scanner fetches the URL you submit and stores the score plus a summary. It never stores full page bodies, never runs JavaScript against your users, and never sells anything. The database schema and retention policy are public." },
-  { q: "Who maintains it?", a: "Started and maintained by Gudmundur Eyberg Kristjansson in Reykjavík, with pull requests and issue reports welcome from anyone who audits, cites, or ships against the standard." },
-];
-
-type FaqItem = { q: string; a: string };
-type FaqRow = { question: string; answer: string };
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/")({
-  component: Index,
-
-  loader: async ({ context }) => {
-    const [faqData, homeContent] = await Promise.all([
-      context.queryClient.ensureQueryData({
-        queryKey: ["faq-items"],
-        queryFn: () => getFaqItemsFn(),
-      }),
-      context.queryClient.ensureQueryData({
-        queryKey: ["site-content", "home"],
-        queryFn: () => getPageContentFn({ data: "home" }),
-      }),
-    ]);
-    return { faqData, homeContent };
-  },
-
   head: () => ({
     meta: [
-      { name: "description", content: "Free, open infrastructure for AI search visibility. Scan any URL against the Agent-Native Web Standard, connect the MCP server, run the WordPress plugin — no paywall, no account required." },
-      { property: "og:title", content: "grow.contact — Free, open infrastructure for AI search visibility" },
+      { title: "Citation — Get cited by ChatGPT, Perplexity, Claude & Google AI" },
+      {
+        name: "description",
+        content:
+          "Citation is the free platform that makes your site cited by AI engines. Scan, standardize, and get discovered — one click away.",
+      },
+      { property: "og:title", content: "Citation — Get cited by AI engines" },
       {
         property: "og:description",
         content:
-          "Open scanner, open standard, open MCP server, open WordPress plugin. Make your site cited by ChatGPT, Perplexity, Claude and Google AI. Free forever.",
+          "Free platform to make your site cited by ChatGPT, Perplexity, Claude and Google AI.",
       },
-      { name: "twitter:title", content: "grow.contact — Free, open infrastructure for AI search visibility" },
-      { name: "twitter:description", content: "Free scanner, free standard, free MCP server, free WordPress plugin. Get cited by ChatGPT, Perplexity, Claude and Google AI." },
-      { property: "og:url", content: "https://grow.contact/" },
-      ...ogImageMeta({
-        title: "Free infrastructure for AI search visibility",
-        kicker: "grow.contact",
-        sub: "Open scanner · Open standard · Open MCP server · Open WordPress plugin.",
-      }),
-    ],
-
-    links: [
-      { rel: "canonical", href: "https://grow.contact/" },
-    ],
-
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "WebSite",
-              name: "grow.contact",
-              url: "https://grow.contact/",
-              description: "Free, open infrastructure for AI search visibility.",
-            },
-            {
-              "@type": "SoftwareApplication",
-              name: "grow.contact scanner",
-              applicationCategory: "DeveloperApplication",
-              operatingSystem: "Any",
-              url: "https://grow.contact/check",
-              offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              description: "Free scanner that scores any URL against the Agent-Native Web Standard.",
-            },
-            {
-              "@type": "WebPage",
-              "@id": "https://grow.contact/#webpage",
-              url: "https://grow.contact/",
-              name: "grow.contact — free open infrastructure for AI search visibility",
-              dateModified: HOME_DATE_MODIFIED,
-              mentions: HOME_CLAIMS.map((c) =>
-                verifiableClaim({
-                  id: c.id,
-                  value: c.value,
-                  label: c.label,
-                  citation: claimCitation(c.id),
-                  dateModified: HOME_DATE_MODIFIED,
-                  unitCode: c.value.endsWith("%") ? "P1" : undefined,
-                }),
-              ),
-            },
-          ],
-        }),
-      },
+      { property: "og:type", content: "website" },
     ],
   }),
+  component: CitationLanding,
 });
 
-function Index() {
-  const loaderData = Route.useLoaderData();
+const BG_URL =
+  "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260624_111401_56af5012-2263-45d3-849a-8688084d7c2a.png&w=1280&q=85";
 
+const LOGO_URL =
+  "https://polo-pecan-73837341.figma.site/_assets/v11/17ae538989a509947a8de3892c644664895e69b1.png";
+
+const AVATARS = [
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/aa51718fb3af3637e6d666b6543fc27a175fada6.png", orbit: 1, angle: 270, radius: 177, size: 58, radius_css: 20, glow: "#A068FF", delay: 0.6 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/ca755f7f93c1126fb8bdbf99ab364a33aa9ab272.png", orbit: 2, angle: 60, radius: 251, size: 58, radius_css: 999, glow: "#FFD166", delay: 0.9 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/dc01064c7093dcc32674876ee3cf5e41c4a485c6.png", orbit: 2, angle: 180, radius: 251, size: 78, radius_css: 999, glow: "#FF6B9D", delay: 1.1 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/d5470a58b02388336141575048720f19a50de832.png", orbit: 2, angle: 300, radius: 251, size: 58, radius_css: 20, glow: "#5B8CFF", delay: 1.3 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/018736aa5d0275c4ce56cfebaf2ae3007d81ca1e.png", orbit: 3, angle: 130, radius: 325, size: 88, radius_css: 999, glow: "#FF6B9D", delay: 1.5 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/c76d8a0b99676de31c014344bfaf75bad090758d.png", orbit: 4, angle: 30, radius: 399, size: 58, radius_css: 999, glow: "#A068FF", delay: 1.7 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/7b1b5f039de7b54cc9913e96c1923c3b15a157fa.png", orbit: 4, angle: 95, radius: 399, size: 88, radius_css: 24, glow: "#FF9F55", delay: 1.9 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/9ae171d8895199349755c43fbff00e122221a027.png", orbit: 4, angle: 220, radius: 399, size: 88, radius_css: 24, glow: "#FF6B9D", delay: 2.1 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/926c9eb7b4bc1df846fa0e39f0b0dc3fefd80671.png", orbit: 4, angle: 320, radius: 399, size: 58, radius_css: 999, glow: "#A068FF", delay: 2.3 },
+];
+
+const LOGOS = [
+  "https://polo-pecan-73837341.figma.site/_assets/v11/1e7b0e6fcc016cd28aec5c68990118b8c54c35a5.svg",
+  "https://polo-pecan-73837341.figma.site/_assets/v11/3eac03c183db2ae080d910159211c14843398b61.svg",
+  "https://polo-pecan-73837341.figma.site/_assets/v11/17705a4c0023a0e5a99154dfb10582adbbf4260b.svg",
+  "https://polo-pecan-73837341.figma.site/_assets/v11/0e5f442b09dc5c248e3e60d40a65505fb1887228.svg",
+  "https://polo-pecan-73837341.figma.site/_assets/v11/63f99030ceb459e3c9ab9e429cfa2353491d3816.svg",
+];
+
+const HEADLINE = "Unlock AI Citations You Thought Were Out of Reach — Now Just One Click Away!";
+const DARK_LEN = 46; // "Unlock AI Citations You Thought Were Out of Reach"[..46]
+
+function useCountUp(target: number, duration = 2000, delay = 1200) {
+  const [value, setValue] = useState(0);
   useEffect(() => {
-    console.log(
-      "%c⚡ grow.contact — free & open. No paywall, no upsell.",
-      "color:#22d3ee;font-family:monospace;font-weight:bold;font-size:13px",
-    );
-    console.log(
-      "%c  > curl https://grow.contact/api/public/scan?url=YOUR_SITE",
-      "color:#64748b;font-family:monospace;font-size:11px",
-    );
+    let raf = 0;
+    const t = setTimeout(() => {
+      const start = performance.now();
+      const tick = (now: number) => {
+        const p = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        setValue(Math.round(target * eased));
+        if (p < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+    }, delay);
+    return () => {
+      clearTimeout(t);
+      cancelAnimationFrame(raf);
+    };
+  }, [target, duration, delay]);
+  return value;
+}
+
+function TypewriterHeading() {
+  const [n, setN] = useState(0);
+  const done = n >= HEADLINE.length;
+  useEffect(() => {
+    const start = setTimeout(() => {
+      const iv = setInterval(() => {
+        setN((v) => {
+          if (v >= HEADLINE.length) {
+            clearInterval(iv);
+            return v;
+          }
+          return v + 1;
+        });
+      }, 35);
+      return () => clearInterval(iv);
+    }, 400);
+    return () => clearTimeout(start);
   }, []);
-
-  const fetchFaq = useServerFn(getFaqItemsFn);
-  const fetchStats = useServerFn(getOverviewStats);
-  const { data: faqData } = useQuery({ queryKey: ["faq-items"], queryFn: () => fetchFaq(), initialData: loaderData.faqData });
-  const { data: stats = null } = useQuery({
-    queryKey: ["overview-stats", 7],
-    queryFn: () => fetchStats({ data: { days: 7 } }),
-  });
-
-  const faqItems = (faqData && faqData.length > 0)
-    ? faqData.map((d: FaqRow) => ({ q: d.question, a: d.answer }))
-    : DEFAULT_FAQS;
-
+  const text = HEADLINE.slice(0, n);
+  const darkPart = text.slice(0, Math.min(n, DARK_LEN));
+  const lightPart = text.slice(Math.min(n, DARK_LEN));
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <SiteHeader />
-
-      <main>
-        {/* Hero */}
-        <section className="relative border-b border-border overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-            <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-              <div className="lg:col-span-7 animate-in">
-                <p className="font-mono text-accent text-xs mb-6 uppercase tracking-[0.2em]">
-                  // Free & open infrastructure
-                </p>
-                <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-balance leading-[0.95] mb-6">
-                  Make your site <span className="text-muted-foreground">citable</span>
-                  <br />
-                  by <span className="italic text-accent">AI engines.</span>
-                </h1>
-                <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6 max-w-xl">
-                  grow.contact is open infrastructure for AI search visibility.
-                  Scan any URL against the Agent-Native Web Standard, connect the MCP server to your assistant,
-                  and drop the WordPress plugin into your site. No paywall. No account required. No upsell.
-                </p>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-10 max-w-xl">
-                  Why it matters:{" "}
-                  <a href="https://allbusinessrealm.com/index.php/2026/04/30/the-83-rule-why-ai-overviews-skip-the-top-10-and-where-small-sites-are-quietly-winning/" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">
-                    <VerifiabilityBadge id="home-stat-83" citation={claimCitation("home-stat-83")} dateModified={HOME_DATE_MODIFIED} showBadge={false}>83%</VerifiabilityBadge> of AI Overview citations come from pages outside the organic top 10
-                  </a>,{" "}
-                  <Link to="/check" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">
-                    <VerifiabilityBadge id="home-stat-73" citation={claimCitation("home-stat-73")} dateModified={HOME_DATE_MODIFIED} showBadge={false}>73%</VerifiabilityBadge> of sites are quietly excluded by fixable technical issues
-                  </Link>, and{" "}
-                  <a href="https://searchengineland.com/ai-traffic-up-seo-rewritten-459954" rel="noopener" className="text-muted-foreground underline underline-offset-2 decoration-muted-foreground/30 hover:text-accent hover:decoration-accent transition-colors">
-                    AI-referred sessions grew <VerifiabilityBadge id="home-stat-527" citation={claimCitation("home-stat-527")} dateModified={HOME_DATE_MODIFIED} showBadge={false}>527%</VerifiabilityBadge> YoY in early 2025
-                  </a>.
-                </p>
-
-                <div className="flex flex-wrap gap-4 items-center">
-                  <Link
-                    to="/check"
-                    className="group inline-flex items-center gap-3 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors"
-                  >
-                    Run Free Scan
-                    <span className="font-mono text-[10px] opacity-70 group-hover:translate-x-1 transition-transform">→</span>
-                  </Link>
-                  <Link
-                    to="/standard"
-                    className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors px-2"
-                  >
-                    Read the Standard →
-                  </Link>
-                  <Link
-                    to="/mcp-server"
-                    className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors px-2"
-                  >
-                    Connect via MCP →
-                  </Link>
-                </div>
-                <MiniChecker />
-              </div>
-              <div className="lg:col-span-5 animate-in [animation-delay:150ms]">
-                <ReadabilityScore initialData={stats} />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* What you get — free tools grid */}
-        <section className="border-t border-border" aria-label="Free tools">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-            <p className="font-mono text-accent text-xs mb-3 uppercase tracking-[0.2em]">// What you get, free</p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase mb-3">Everything, no paywall</h2>
-            <p className="text-muted-foreground text-sm md:text-base mb-10 max-w-2xl">
-              Every tool below runs against the same Agent-Native Web Standard. Pick the surface that fits your workflow — the scanner in a browser, the CLI in CI, the plugin on WordPress, or the MCP server inside your AI assistant.
-            </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
-              {[
-                { to: "/check", kicker: "Tool", title: "Free Scanner", body: "Point it at any URL. Get a 0–100 score, a diff of what agents see, and a prioritised fix list in under 30 seconds." },
-                { to: "/playground", kicker: "Tool", title: "Playground", body: "Try every MCP tool live in the browser. No install, no key — just prompts and results." },
-                { to: "/mcp-server", kicker: "Protocol", title: "MCP Server", body: "Connect Claude, ChatGPT, Cursor, or Codex. Let the agent scan pages and apply fixes itself." },
-                { to: "/extension", kicker: "Tool", title: "Browser Extension", body: "See any page's agent-readability score inline as you browse. Free for Chrome and Firefox." },
-                { to: "/cli", kicker: "Tool", title: "CLI", body: "Fail builds that drop below your threshold. Install with one command, no config required." },
-                { to: "/tools/robots-checker", kicker: "Tool", title: "robots.txt Checker", body: "Verify that AI citation bots (GPTBot, PerplexityBot, ClaudeBot, Google-Extended) can actually reach you." },
-                { to: "/standard", kicker: "Standard", title: "Agent-Native Web Standard", body: "The six-layer open spec. Read it, cite it, fork it — published under CC-BY, versioned like software." },
-                { to: "/playbooks", kicker: "Docs", title: "Playbooks", body: "Step-by-step guides for shipping structured data, llms.txt, MCP servers, and verifiable claims." },
-                { to: "/leaderboard", kicker: "Data", title: "Leaderboard", body: "Live scores for 2,400+ audited sites across AI, devtools, and agent platforms. Free to browse and query." },
-              ].map((c) => (
-                <Link key={c.to} to={c.to} className="bg-background p-6 md:p-8 group hover:bg-card/40 transition-colors">
-                  <p className="font-mono text-accent text-[11px] uppercase tracking-widest mb-3">// {c.kicker}</p>
-                  <p className="font-bold uppercase tracking-tighter text-lg mb-2 group-hover:text-accent transition-colors">{c.title}</p>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{c.body}</p>
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-4 inline-block group-hover:text-accent transition-colors">Open →</span>
-                </Link>
-              ))}
-            </div>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-6">
-              <time dateTime={HOME_DATE_MODIFIED}>Last updated: {HOME_DATE_MODIFIED}</time> · every tool free forever, no card required
-            </p>
-          </div>
-        </section>
-
-        {/* Answer-first quick answers */}
-        <section className="border-t border-border bg-card/10" aria-label="Quick answers">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
-            <div className="flex items-baseline justify-between flex-wrap gap-3 mb-8">
-              <p className="font-mono text-accent text-xs uppercase tracking-[0.2em]">// Quick Answers</p>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                <time dateTime={HOME_DATE_MODIFIED}>Last updated: {HOME_DATE_MODIFIED}</time> · refreshed weekly
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-px bg-border border border-border">
-              {[
-                {
-                  q: "What is an agent-native website?",
-                  a: "An agent-native website is a site engineered so AI engines (ChatGPT, Perplexity, Claude, Google AI Overviews) can read, cite, and link to it without rendering JavaScript. It ships semantic HTML, JSON-LD schema, an llms.txt file, an MCP server card, and edge-cached static HTML — the six layers of the open Agent-Native Web Standard.",
-                },
-                {
-                  q: "Do I need to pay anything to use grow.contact?",
-                  a: "No. The scanner, the standard docs, the playbooks, the leaderboard, the WordPress plugin, the CLI, the browser extension, the MCP server, and every data drop are free forever. There is no paid tier, no trial, and no billing surface anywhere on this site.",
-                },
-                {
-                  q: "Why are 73% of sites excluded from AI citations?",
-                  a: "Per the /check scanner dataset (n=2,400+ sites audited as of June 2026), 73% of sites fail at least one of: robots.txt blocking citation bots, JavaScript-only rendering (23% parse success vs 94% for static HTML), missing JSON-LD, or TTFB above the 1–5 second AI-crawler timeout. Each is a small, mechanical fix.",
-                },
-                {
-                  q: "Can I connect this to Claude, ChatGPT, or Cursor?",
-                  a: "Yes. grow.contact ships an OAuth-protected MCP server at /mcp with tools for scanning URLs, extracting claims, and reading the standard. Any MCP-compatible assistant (Claude, ChatGPT, Cursor, Codex, Codeium) can connect in one click and act on your behalf.",
-                },
-              ].map((item) => (
-                <article key={item.q} className="bg-background p-6 md:p-8">
-                  <h2 className="font-bold uppercase tracking-tighter text-lg md:text-xl mb-3 text-balance">{item.q}</h2>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.a}</p>
-                </article>
-              ))}
-            </div>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-6">
-              All stats attributed: /check scanner internal benchmark (n=2,400+), 2026.
-            </p>
-          </div>
-        </section>
-
-        <SocialProofStrip />
-        <TechSpecs />
-        <AgentViewPanel />
-        <CompareSection />
-
-        {/* FAQ */}
-        <section className="border-t border-border">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "FAQPage",
-                  mainEntity: faqItems.map((f: FaqItem) => ({
-                    "@type": "Question",
-                    name: f.q,
-                    acceptedAnswer: { "@type": "Answer", text: f.a },
-                  })),
-                }),
-              }}
-            />
-            <div className="mb-10">
-              <p className="font-mono text-accent text-xs mb-3 uppercase tracking-[0.2em]">// Questions</p>
-              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase">FAQ</h2>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-4">
-                <span className="text-accent">✓</span> FAQPage schema validated · <span className="text-accent">✓</span> answer-first structure · <time dateTime={HOME_DATE_MODIFIED}>updated {HOME_DATE_MODIFIED}</time>
-              </p>
-            </div>
-            <div className="space-y-8 sm:space-y-10">
-              {faqItems.map((f: FaqItem) => (
-                <article key={f.q}>
-                  <p className="font-bold uppercase tracking-tighter text-base sm:text-lg">{f.q}</p>
-                  <p className="text-muted-foreground text-sm mt-2 leading-relaxed">{f.a}</p>
-                </article>
-              ))}
-            </div>
-            <div className="mt-10 flex flex-col items-center gap-4">
-              <Link
-                to="/check"
-                className="group inline-flex items-center gap-3 bg-accent text-accent-foreground font-bold px-6 py-4 uppercase tracking-tighter text-sm hover:bg-foreground hover:text-background transition-colors"
-              >
-                Scan Your Site (Free)
-                <span className="font-mono text-[10px] opacity-70 group-hover:translate-x-1 transition-transform">→</span>
-              </Link>
-              <Link to="/faq" className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">
-                See all FAQ →
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Deep dives */}
-        <section className="border-t border-border bg-card/20" aria-label="Deep dives">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-            <p className="font-mono text-accent text-xs mb-3 uppercase tracking-[0.2em]">// Go deeper</p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter uppercase mb-3">The Full Stack</h2>
-            <p className="text-muted-foreground text-sm md:text-base mb-10 max-w-2xl">
-              Every claim on this site is documented on its own page — the standard, the crawler matrix, the scoring methodology, the citation research. Read, cite, and fork whatever you need.
-            </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
-              {[
-                { to: "/standard", kicker: "Standard", title: "Agent-Native Web Standard", body: "The six-layer open spec. CC-BY, versioned, forkable." },
-                { to: "/crawlers", kicker: "Matrix", title: "8 AI Systems, 8 Crawlers", body: "How ChatGPT, Perplexity, Claude, Gemini, Copilot and others crawl and cite." },
-                { to: "/guide/generative-engine-optimization", kicker: "Guide", title: "GEO vs SEO", body: "What generative engine optimization is, and what moves AI citations." },
-                { to: "/guide/aeo-vs-geo-vs-seo", kicker: "Guide", title: "AEO vs GEO vs SEO", body: "Side-by-side comparison of the three optimisation frameworks." },
-                { to: "/guide/llms-txt", kicker: "Guide", title: "llms.txt Spec", body: "The complete specification with examples and validation rules." },
-                { to: "/v-score", kicker: "Method", title: "How the Score Works", body: "Five weighted signals — semantic HTML, JSON-LD, llms.txt, citability, speed." },
-                { to: "/leaderboard", kicker: "Data", title: "Live Leaderboard", body: "Scores for 2,400+ audited sites across AI, devtools, and agent platforms." },
-                { to: "/research", kicker: "Research", title: "Reports & Data Drops", body: "Quarterly report, monthly citation index, playbooks, glossary — every artifact in one hub." },
-                { to: "/blog", kicker: "Journal", body: "Field notes on AI search visibility, updates to the standard, and post-mortems.", title: "Journal" },
-              ].map((c) => (
-                <Link key={c.to} to={c.to} className="bg-background p-6 md:p-8 group hover:bg-card/40 transition-colors">
-                  <p className="font-mono text-accent text-[11px] uppercase tracking-widest mb-3">// {c.kicker}</p>
-                  <p className="font-bold uppercase tracking-tighter text-lg mb-2 group-hover:text-accent transition-colors">{c.title}</p>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{c.body}</p>
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mt-4 inline-block group-hover:text-accent transition-colors">Read →</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      </main>
-      <SiteFooter />
-    </div>
+    <h1 className="ct-h1">
+      <span style={{ color: "#000" }}>{darkPart}</span>
+      <span style={{ color: "#fff" }}>{lightPart}</span>
+      {!done && <span className="ct-caret" />}
+    </h1>
   );
 }
+
+function CitationLanding() {
+  const count = useCountUp(20, 2000, 1200);
+  return (
+    <>
+      <style>{css}</style>
+      <div className="ct-app" style={{ backgroundImage: `url(${BG_URL})` }}>
+        <header className="ct-header">
+          <div className="ct-header-left">
+            <img src={LOGO_URL} alt="Citation" className="ct-logo" />
+            <span className="ct-brand">citation</span>
+            <nav className="ct-nav">
+              <a href="#team">Your Team</a>
+              <a href="#solutions">Solutions</a>
+              <a href="#blog">Blog</a>
+              <a href="#pricing">Pricing</a>
+            </nav>
+          </div>
+          <div className="ct-header-right">
+            <a href="#login" className="ct-login">Log In</a>
+            <div className="btn-border-wrap">
+              <a href="#join" className="ct-btn ct-btn-sm">Join Now</a>
+            </div>
+          </div>
+        </header>
+
+        <main className="ct-main">
+          <section className="ct-left">
+            <TypewriterHeading />
+            <div className="ct-cta-row">
+              <div className="btn-border-wrap ct-fade-in">
+                <a href="#start" className="ct-btn ct-btn-lg">
+                  Start Project
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              </div>
+              <div className="ct-cursor-wrap ct-fade-in-late">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#A068FF" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 2l16 8-7 2-2 7-7-17z" />
+                </svg>
+                <span className="ct-cursor-badge">David</span>
+              </div>
+            </div>
+          </section>
+
+          <section className="ct-right">
+            <div className="ct-circles">
+              {[1, 2, 3, 4].map((o) => (
+                <div key={o} className={`ct-orbit ct-orbit-${o}`}>
+                  {o === 1 && (
+                    <div className="ct-orbit-inner">
+                      <div className="ct-count">{count}k+</div>
+                      <div className="ct-count-label">Citations</div>
+                    </div>
+                  )}
+                </div>
+              ))}
+              {AVATARS.map((a, i) => {
+                const style: React.CSSProperties = {
+                  transform: `translate(-50%, -50%) rotate(${a.angle}deg) translate(${a.radius}px) rotate(${-a.angle}deg)`,
+                  width: a.size,
+                  height: a.size,
+                  borderRadius: a.radius_css,
+                  boxShadow: `0 0 30px ${a.glow}80, 0 0 60px ${a.glow}40`,
+                  animationDelay: `${a.delay}s`,
+                };
+                return (
+                  <img
+                    key={i}
+                    src={a.url}
+                    alt=""
+                    className="ct-avatar"
+                    style={style}
+                  />
+                );
+              })}
+            </div>
+          </section>
+        </main>
+
+        <div className="ct-logos">
+          <div className="ct-logos-track">
+            {Array.from({ length: 4 }).flatMap((_, r) =>
+              LOGOS.map((l, i) => (
+                <img key={`${r}-${i}`} src={l} alt="" className="ct-logo-item" />
+              )),
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+const css = `
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.ct-app {
+  min-height: 100vh;
+  background-color: #0a0a0a;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.ct-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 64px;
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+  animation: ctFadeDown 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.ct-header-left { display: flex; align-items: center; gap: 40px; }
+.ct-logo { height: 32px; width: auto; }
+.ct-brand { font-family: 'Urbanist'; font-weight: 700; font-size: 22px; color: #000; letter-spacing: -0.5px; }
+.ct-nav { display: flex; gap: 32px; }
+.ct-nav a, .ct-login {
+  color: #000; font-size: 15px; font-weight: 400; text-decoration: none;
+  position: relative; padding: 4px 0;
+}
+.ct-login { color: #fff; font-weight: 500; }
+.ct-nav a::after, .ct-login::after {
+  content: ''; position: absolute; left: 0; bottom: 0; height: 1.5px; width: 100%;
+  background: currentColor; transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.ct-nav a:hover::after, .ct-login:hover::after { transform: scaleX(1); }
+.ct-header-right { display: flex; align-items: center; gap: 24px; }
+
+.btn-border-wrap {
+  position: relative;
+  border-radius: 50px;
+  padding: 0;
+  display: inline-block;
+}
+.btn-border-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50px;
+  padding: 3px;
+  background: conic-gradient(from var(--border-angle), #A068FF, #070319, #A068FF, #070319, #A068FF);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: ctSpin 3s linear infinite;
+  pointer-events: none;
+}
+@keyframes ctSpin { to { --border-angle: 360deg; } }
+
+.ct-btn {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #000; color: #fff;
+  border-radius: 50px; text-decoration: none;
+  font-weight: 500; overflow: hidden;
+  isolation: isolate;
+}
+.ct-btn-sm { padding: 12px 26px; font-size: 15px; }
+.ct-btn-lg { padding: 14px 28px; font-size: 16px; background: #060218; }
+.ct-btn > * { position: relative; z-index: 2; }
+.ct-btn::after {
+  content: ''; position: absolute; inset: 0; background: #A068FF;
+  transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+}
+.ct-btn-lg::after { transform: translateX(100%); }
+.ct-btn:hover::after { transform: translateX(0); }
+
+.ct-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 64px;
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+  gap: 40px;
+}
+.ct-left {
+  flex: 0 1 600px;
+  padding-top: 40px;
+  animation: ctFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.ct-h1 {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 64px; font-weight: 600;
+  line-height: 64px; letter-spacing: -1.5px;
+  margin: 0 0 32px;
+  min-height: 320px;
+}
+.ct-caret {
+  display: inline-block; width: 3px; height: 52px;
+  background: #A068FF; vertical-align: middle;
+  margin-left: 4px; animation: ctBlink 0.7s steps(2) infinite;
+}
+@keyframes ctBlink { 50% { opacity: 0; } }
+
+.ct-cta-row { display: flex; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+.ct-fade-in { opacity: 0; animation: ctFadeUp 0.6s ease-out 3.2s forwards; }
+.ct-fade-in-late { opacity: 0; animation: ctFadeUp 0.6s ease-out 3.6s forwards; }
+
+.ct-cursor-wrap {
+  display: flex; align-items: center; gap: 6px;
+  margin-left: 290px; margin-top: 40px;
+}
+.ct-cursor-badge {
+  background: #A068FF; color: #fff; font-size: 16px; font-weight: 500;
+  padding: 8px 16px; border-radius: 20px;
+}
+
+.ct-right {
+  flex: 0 1 720px;
+  display: flex; justify-content: center; align-items: center;
+  animation: ctScaleIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+.ct-circles {
+  position: relative;
+  width: 720px; height: 720px;
+}
+.ct-orbit {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(217, 161, 255, 0) 0%, rgba(217, 161, 255, 1) 43%, rgba(217, 161, 255, 0) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+}
+.ct-orbit-1 { width: 353px; height: 353px; animation: ctSpinL 30s linear infinite; }
+.ct-orbit-2 { width: 501px; height: 501px; animation: ctSpinR 40s linear infinite; }
+.ct-orbit-3 { width: 649px; height: 649px; animation: ctSpinR 50s linear infinite; }
+.ct-orbit-4 { width: 797px; height: 797px; animation: ctSpinL 60s linear infinite; }
+@keyframes ctSpinR { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes ctSpinL { to { transform: translate(-50%, -50%) rotate(-360deg); } }
+
+.ct-orbit-inner {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; color: #fff;
+  animation: ctSpinR 30s linear infinite reverse;
+  font-family: 'Urbanist', sans-serif;
+}
+.ct-count { font-size: 64px; font-weight: 500; line-height: 1; }
+.ct-count-label { font-size: 16px; font-weight: 600; margin-top: 8px; opacity: 0.9; }
+
+.ct-avatar {
+  position: absolute; top: 50%; left: 50%;
+  object-fit: cover;
+  opacity: 0;
+  animation: ctAvatarIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  background: #1a1a1a;
+}
+@keyframes ctAvatarIn {
+  from { opacity: 0; filter: blur(8px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+.ct-logos {
+  padding: 32px 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  animation: ctFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
+}
+.ct-logos-track {
+  display: flex; gap: 64px; width: max-content;
+  animation: ctTicker 20s linear infinite;
+}
+.ct-logo-item { width: 137px; height: 40px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.75; }
+@keyframes ctTicker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes ctFadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ctFadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ctScaleIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+
+@media (max-width: 1280px) { .ct-circles { transform: scale(0.85); } }
+@media (max-width: 1024px) {
+  .ct-main { flex-direction: column; padding: 24px; }
+  .ct-h1 { font-size: 48px; line-height: 52px; min-height: auto; }
+  .ct-circles { transform: scale(0.7); }
+  .ct-header { padding: 20px 24px; }
+  .ct-nav { gap: 20px; }
+}
+@media (max-width: 768px) {
+  .ct-nav { display: none; }
+  .ct-h1 { font-size: 36px; line-height: 40px; }
+  .ct-circles { transform: scale(0.5); }
+  .ct-cursor-wrap { margin-left: 100px; }
+}
+@media (max-width: 480px) {
+  .ct-h1 { font-size: 28px; line-height: 32px; }
+  .ct-circles { transform: scale(0.4); }
+  .ct-btn-sm { padding: 10px 20px; font-size: 14px; }
+  .ct-logo-item { width: 100px; height: 32px; }
+  .ct-header { padding: 16px; }
+  .ct-header-left { gap: 12px; }
+}
+`;

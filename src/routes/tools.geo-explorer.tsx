@@ -561,13 +561,7 @@ function BriefView({ data, prompt }: { data: ContentBrief; prompt: string }) {
           </div>
         </div>
       )}
-
-      {(_ = ExplorerResult, null)}
     </div>
   );
 }
 
-// Silence unused-type lint for re-exported ExplorerResult (used only by mutation type inference).
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-let _: unknown;
-type _NoOp = ExplorerResult;

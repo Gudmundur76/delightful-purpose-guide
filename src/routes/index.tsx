@@ -111,8 +111,10 @@ function CitationLanding() {
       <div className="ct-app" style={{ backgroundImage: `url(${BG_URL})` }}>
         <header className="ct-header">
           <div className="ct-header-left">
-            <img src={LOGO_URL} alt="Citation" className="ct-logo" />
-            <span className="ct-brand">citation</span>
+            <a href="/" className="ct-brand-link">
+              <span className="ct-brand-mark">◎</span>
+              <span className="ct-brand">citation<span className="ct-brand-dot">.is</span></span>
+            </a>
             <nav className="ct-nav">
               <a href="#team">Your Team</a>
               <a href="#solutions">Solutions</a>

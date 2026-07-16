@@ -283,12 +283,15 @@ export const scanUrl = createServerFn({ method: "POST" })
 
     log.push(`→ first byte ${firstByteMs}ms · full HTML ${main.totalMs}ms · payload ${fmtKb(main.bytes)}`);
 
-    // -------- Protocol Discovery (new in geo-standard@2026.06) --------
-    // Four agent-native surfaces:
-    //   1. Link header with rel="llms" on the root HTML response
-    //   2. /.well-known/mcp.json (MCP server card)
-    //   3. Markdown content negotiation (Accept: text/markdown → text/markdown response)
-    //   4. Cloudflare Content-Signal directive in robots.txt
+    // -------- Protocol Discovery (geo-standard@2026.06, matrix @2026.07) --------
+    // The Agent-Web Discovery Matrix — 5 signals, one per agent architecture:
+    //   1. /.well-known/agent-card.json  → API-calling agents (MCP/A2A)
+    //   2. /.well-known/mcp.json (or /.well-known/mcp/server-card.json) → MCP clients
+    //   3. /llms.txt                     → text agents (Claude, ChatGPT, Gemini chat)
+    //   4. <script type="application/agent+json"> in HTML → DOM agents
+    //   5. Visible "AI-ready" badge / marker            → CUA / screenshot agents
+    // Plus network-layer plumbing kept from 2026.06: Link headers, markdown
+    // content negotiation, and Cloudflare Content-Signal in robots.txt.
     log.push(`$ probe --protocol-discovery`);
     const origin = new URL(finalUrl).origin;
     const linkHeader = main.res.headers.get("link") ?? "";
@@ -296,20 +299,41 @@ export const scanUrl = createServerFn({ method: "POST" })
     const hasMcpLink = /\brel\s*=\s*"?mcp"?/i.test(linkHeader);
     const hasApiCatalogLink = /\brel\s*=\s*"?api-catalog"?/i.test(linkHeader);
 
-    let hasMcpCard = false;
-    try {
-      const mcpRes = await fetchWithTimeout(`${origin}/.well-known/mcp.json`, 4000);
-      if (mcpRes.res.ok && /json/i.test(mcpRes.res.headers.get("content-type") ?? "")) {
-        try {
-          JSON.parse(mcpRes.text);
-          hasMcpCard = true;
-        } catch {
-          // invalid JSON
-        }
+    async function probeJson(path: string): Promise<boolean> {
+      try {
+        const r = await fetchWithTimeout(`${origin}${path}`, 4000);
+        if (!r.res.ok) return false;
+        if (!/json/i.test(r.res.headers.get("content-type") ?? "")) return false;
+        JSON.parse(r.text);
+        return true;
+      } catch {
+        return false;
       }
-    } catch {
-      // network error — leave false
     }
+
+    const [hasMcpCard, hasAgentCard] = await Promise.all([
+      probeJson("/.well-known/mcp.json"),
+      probeJson("/.well-known/agent-card.json"),
+    ]);
+
+    // Signal 3: /llms.txt — already scored in the llms metric, but re-probed
+    // here so the matrix is self-contained for the protocol details section.
+    let hasLlmsTxt = false;
+    try {
+      const r = await fetchWithTimeout(`${origin}/llms.txt`, 4000);
+      hasLlmsTxt = r.res.ok && r.text.trim().length > 16;
+    } catch { /* leave false */ }
+
+    // Signal 4: in-page marker for DOM agents.
+    const hasInPageMarker = /<script[^>]+type=["']application\/agent\+json["']/i.test(html);
+
+    // Signal 5: visible AI-ready badge. Match a rendered indicator agents can
+    // see in a screenshot — <img>/<a> tag pointing at a well-known badge path,
+    // or a data-attribute marker on any element.
+    const hasVisibleBadge =
+      /(?:<a[^>]+href|<img[^>]+src)=["'][^"']*\/badge(?:\/|["'])/i.test(html) ||
+      /data-agent-ready\s*=/i.test(html) ||
+      /aria-label=["'][^"']*agent[- ]ready[^"']*["']/i.test(html);
 
     let supportsMarkdownNegotiation = false;
     try {
@@ -349,26 +373,49 @@ export const scanUrl = createServerFn({ method: "POST" })
     const hasMaxSnippet = /max-snippet\s*:\s*-?\d+/i.test(robotsMeta);
     const hasNoSnippet = /\bnosnippet\b/i.test(robotsMeta);
 
-    const protocolChecks = [
-      { ok: hasLlmsLink || hasMcpLink || hasApiCatalogLink, pts: 25, label: "Link header" },
-      { ok: hasMcpCard, pts: 25, label: "/.well-known/mcp.json" },
-      { ok: supportsMarkdownNegotiation, pts: 25, label: "Markdown negotiation" },
-      { ok: hasContentSignal, pts: 25, label: "Content-Signal in robots.txt" },
+    // Weighted score: the 5-signal matrix carries 75pts (15 each), network
+    // plumbing (link header + markdown + content-signal) carries 25pts.
+    const matrixSignals = [
+      { ok: hasAgentCard, pts: 15, label: "agent-card.json (API agents)" },
+      { ok: hasMcpCard, pts: 15, label: "mcp.json (MCP clients)" },
+      { ok: hasLlmsTxt, pts: 15, label: "llms.txt (text agents)" },
+      { ok: hasInPageMarker, pts: 15, label: "in-page marker (DOM agents)" },
+      { ok: hasVisibleBadge, pts: 15, label: "visible badge (CUA agents)" },
     ];
+    const plumbingSignals = [
+      { ok: hasLlmsLink || hasMcpLink || hasApiCatalogLink, pts: 10, label: "Link header" },
+      { ok: supportsMarkdownNegotiation, pts: 8, label: "Markdown negotiation" },
+      { ok: hasContentSignal, pts: 7, label: "Content-Signal in robots.txt" },
+    ];
+    const protocolChecks = [...matrixSignals, ...plumbingSignals];
     const protocolScore = clamp(
       protocolChecks.reduce((s, c) => s + (c.ok ? c.pts : 0), 0),
     );
+    const matrixHits = matrixSignals.filter((s) => s.ok).length;
     log.push(
-      `→ link=${hasLlmsLink || hasMcpLink ? "yes" : "no"} · mcp.json=${hasMcpCard ? "yes" : "no"} · md=${supportsMarkdownNegotiation ? "yes" : "no"} · content-signal=${hasContentSignal ? "yes" : "no"}`,
+      `→ matrix ${matrixHits}/5 · agent-card=${hasAgentCard ? "yes" : "no"} · mcp=${hasMcpCard ? "yes" : "no"} · llms=${hasLlmsTxt ? "yes" : "no"} · in-page=${hasInPageMarker ? "yes" : "no"} · badge=${hasVisibleBadge ? "yes" : "no"}`,
     );
 
     const protocolDetails: string[] = [
+      `${matrixHits === 5 ? "✓" : matrixHits >= 3 ? "△" : "✗"} Discovery matrix: ${matrixHits}/5 signals present (one per agent architecture)`,
+      hasAgentCard
+        ? "✓ /.well-known/agent-card.json — served to API-calling agents (MCP/A2A clients)"
+        : "✗ /.well-known/agent-card.json missing — API-calling agents (MCP/A2A) can't discover skills",
+      hasMcpCard
+        ? "✓ /.well-known/mcp.json — MCP clients can auto-configure"
+        : "✗ /.well-known/mcp.json missing — publish an MCP server card",
+      hasLlmsTxt
+        ? "✓ /llms.txt — text agents (Claude, ChatGPT, Gemini chat) have a canonical index"
+        : "✗ /llms.txt missing — text-based agents have no site summary",
+      hasInPageMarker
+        ? "✓ In-page <script type=\"application/agent+json\"> — DOM agents (Codex, Playwright) discover endpoints without leaving the page"
+        : "✗ No in-page agent+json marker — DOM agents miss the on-page discovery hint",
+      hasVisibleBadge
+        ? "✓ Visible AI-ready badge — CUA / screenshot agents (Operator, Claude CUA) get a pixel-level cue"
+        : "△ No visible AI-ready badge — CUA agents brute-force the UI with no hint",
       hasLlmsLink || hasMcpLink || hasApiCatalogLink
         ? `✓ Link header advertises agent surfaces (${[hasLlmsLink && "llms", hasMcpLink && "mcp", hasApiCatalogLink && "api-catalog"].filter(Boolean).join(", ")})`
-        : "✗ No Link header with rel=\"llms\" / \"mcp\" / \"api-catalog\"",
-      hasMcpCard
-        ? "✓ /.well-known/mcp.json present and valid JSON"
-        : "✗ /.well-known/mcp.json missing — publish an MCP server card",
+        : "△ No Link header with rel=\"llms\" / \"mcp\" / \"api-catalog\"",
       supportsMarkdownNegotiation
         ? "✓ Serves text/markdown on Accept: text/markdown"
         : "△ No markdown content negotiation — agents can't request a .md twin",

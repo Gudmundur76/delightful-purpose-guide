@@ -72,6 +72,7 @@ import { Route as ToolsPromptCloudRouteImport } from './routes/tools.prompt-clou
 import { Route as ToolsPerplexityAnswerEngineRouteImport } from './routes/tools.perplexity-answer-engine'
 import { Route as ToolsLlmsTxtGeneratorRouteImport } from './routes/tools.llms-txt-generator'
 import { Route as ToolsGeoExplorerRouteImport } from './routes/tools.geo-explorer'
+import { Route as ToolsBrandVisibilityRouteImport } from './routes/tools.brand-visibility'
 import { Route as ToolsAiVisibilityRouteImport } from './routes/tools.ai-visibility'
 import { Route as StatsSlugRouteImport } from './routes/stats.$slug'
 import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
@@ -510,6 +511,11 @@ const ToolsLlmsTxtGeneratorRoute = ToolsLlmsTxtGeneratorRouteImport.update({
 const ToolsGeoExplorerRoute = ToolsGeoExplorerRouteImport.update({
   id: '/tools/geo-explorer',
   path: '/tools/geo-explorer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsBrandVisibilityRoute = ToolsBrandVisibilityRouteImport.update({
+  id: '/tools/brand-visibility',
+  path: '/tools/brand-visibility',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsAiVisibilityRoute = ToolsAiVisibilityRouteImport.update({
@@ -1269,6 +1275,7 @@ export interface FileRoutesByFullPath {
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/stats/$slug': typeof StatsSlugRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
+  '/tools/brand-visibility': typeof ToolsBrandVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
   '/tools/perplexity-answer-engine': typeof ToolsPerplexityAnswerEngineRoute
@@ -1454,6 +1461,7 @@ export interface FileRoutesByTo {
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/stats/$slug': typeof StatsSlugRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
+  '/tools/brand-visibility': typeof ToolsBrandVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
   '/tools/perplexity-answer-engine': typeof ToolsPerplexityAnswerEngineRoute
@@ -1643,6 +1651,7 @@ export interface FileRoutesById {
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/stats/$slug': typeof StatsSlugRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
+  '/tools/brand-visibility': typeof ToolsBrandVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
   '/tools/perplexity-answer-engine': typeof ToolsPerplexityAnswerEngineRoute
@@ -1833,6 +1842,7 @@ export interface FileRouteTypes {
     | '/standard/{$version}.md'
     | '/stats/$slug'
     | '/tools/ai-visibility'
+    | '/tools/brand-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
     | '/tools/perplexity-answer-engine'
@@ -2018,6 +2028,7 @@ export interface FileRouteTypes {
     | '/standard/{$version}.md'
     | '/stats/$slug'
     | '/tools/ai-visibility'
+    | '/tools/brand-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
     | '/tools/perplexity-answer-engine'
@@ -2206,6 +2217,7 @@ export interface FileRouteTypes {
     | '/standard/{$version}.md'
     | '/stats/$slug'
     | '/tools/ai-visibility'
+    | '/tools/brand-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
     | '/tools/perplexity-answer-engine'
@@ -2369,6 +2381,7 @@ export interface RootRouteChildren {
   ReportQ22026Route: typeof ReportQ22026Route
   ReportQ22026DotpdfRoute: typeof ReportQ22026DotpdfRoute
   ToolsAiVisibilityRoute: typeof ToolsAiVisibilityRoute
+  ToolsBrandVisibilityRoute: typeof ToolsBrandVisibilityRoute
   ToolsGeoExplorerRoute: typeof ToolsGeoExplorerRoute
   ToolsLlmsTxtGeneratorRoute: typeof ToolsLlmsTxtGeneratorRoute
   ToolsPerplexityAnswerEngineRoute: typeof ToolsPerplexityAnswerEngineRoute
@@ -2890,6 +2903,13 @@ declare module '@tanstack/react-router' {
       path: '/tools/geo-explorer'
       fullPath: '/tools/geo-explorer'
       preLoaderRoute: typeof ToolsGeoExplorerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/brand-visibility': {
+      id: '/tools/brand-visibility'
+      path: '/tools/brand-visibility'
+      fullPath: '/tools/brand-visibility'
+      preLoaderRoute: typeof ToolsBrandVisibilityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/ai-visibility': {
@@ -4091,6 +4111,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReportQ22026Route: ReportQ22026Route,
   ReportQ22026DotpdfRoute: ReportQ22026DotpdfRoute,
   ToolsAiVisibilityRoute: ToolsAiVisibilityRoute,
+  ToolsBrandVisibilityRoute: ToolsBrandVisibilityRoute,
   ToolsGeoExplorerRoute: ToolsGeoExplorerRoute,
   ToolsLlmsTxtGeneratorRoute: ToolsLlmsTxtGeneratorRoute,
   ToolsPerplexityAnswerEngineRoute: ToolsPerplexityAnswerEngineRoute,

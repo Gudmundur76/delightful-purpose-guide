@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
-import { ArrowRight, Bot, Cloud, Compass, FileCode2, Gauge, Plug, ScrollText, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Bot, Cloud, Compass, FileCode2, Gauge, Plug, ScrollText, ShieldCheck, Sparkles, Target } from "lucide-react";
 
 const URL_ = "https://grow.contact/tools";
 const TITLE = "Free AI SEO & GEO tools — llms.txt, schema, AI visibility";

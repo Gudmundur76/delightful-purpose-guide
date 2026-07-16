@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { ogImageMeta } from "@/lib/seo/og";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -17,6 +18,11 @@ export const Route = createFileRoute("/")({
           "Free platform to make your site cited by ChatGPT, Perplexity, Claude and Google AI.",
       },
       { property: "og:type", content: "website" },
+      ...ogImageMeta({
+        title: "Citation — Get cited by ChatGPT, Perplexity, Claude & Google AI",
+        description: "Free platform to make your site cited by AI engines. Scan, standardize, and get discovered.",
+        kicker: "AI Citation Platform",
+      }),
     ],
   }),
   component: CitationLanding,

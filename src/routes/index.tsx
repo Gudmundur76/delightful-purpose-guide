@@ -252,7 +252,7 @@ const css = `
   inset: -3px;
   border-radius: 50px;
   padding: 3px;
-  background: conic-gradient(from var(--border-angle), #A068FF, #070319, #A068FF, #070319, #A068FF);
+  background: conic-gradient(from var(--border-angle), #9e9e9e, #070319, #9e9e9e, #070319, #9e9e9e);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -273,7 +273,7 @@ const css = `
 .ct-btn-lg { padding: 14px 28px; font-size: 16px; background: #060218; }
 .ct-btn > * { position: relative; z-index: 2; }
 .ct-btn::after {
-  content: ''; position: absolute; inset: 0; background: #A068FF;
+  content: ''; position: absolute; inset: 0; background: #9e9e9e;
   transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 1;
 }

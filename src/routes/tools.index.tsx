@@ -19,6 +19,13 @@ type Tool = {
 
 const TOOLS: Tool[] = [
   {
+    href: "/tools/brand-visibility",
+    title: "Brand visibility audit",
+    blurb: "Enter just a domain. We derive 8 real buyer prompts for your category, run them across Gemini and GPT, and score your visibility %, avg rank, and the domains beating you. No signup.",
+    Icon: Target,
+    status: "new",
+  },
+  {
     href: "/tools/perplexity-answer-engine",
     title: "Perplexity Answer Engine",
     blurb: "Type any question. We simulate what Perplexity answers today, then engineer the citation-ready answer block (lead, stats, FAQ, JSON-LD) that Perplexity would pick over the incumbent — with a Pick Score.",

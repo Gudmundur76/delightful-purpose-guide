@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "sdk_version": "0.22.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://uyvxsrkikipyrmgcuiph.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "grow-contact-mcp",
+      "version": "1.0.0",
+      "title": "grow.contact MCP"
+    },
+    "tools": [
+      {
+        "name": "ping",
+        "title": "Ping",
+        "description": "Echo text back. Use to verify MCP connectivity and authentication.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Text to echo back."
+            }
+          },
+          "required": [
+            "text"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "scan_url",
+        "title": "Scan URL",
+        "description": "Run a live GEO (Generative Engine Optimization) scan on any URL. Returns overall score plus metrics for semantic, jsonld, llms, citability, and speed.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 2048,
+              "description": "URL to scan (with or without https://)"
+            }
+          },
+          "required": [
+            "url"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

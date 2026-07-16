@@ -68,6 +68,7 @@ import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as ToolsSchemaGeneratorRouteImport } from './routes/tools.schema-generator'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
 import { Route as ToolsPromptCloudRouteImport } from './routes/tools.prompt-cloud'
+import { Route as ToolsPerplexityAnswerEngineRouteImport } from './routes/tools.perplexity-answer-engine'
 import { Route as ToolsLlmsTxtGeneratorRouteImport } from './routes/tools.llms-txt-generator'
 import { Route as ToolsGeoExplorerRouteImport } from './routes/tools.geo-explorer'
 import { Route as ToolsAiVisibilityRouteImport } from './routes/tools.ai-visibility'
@@ -488,6 +489,12 @@ const ToolsPromptCloudRoute = ToolsPromptCloudRouteImport.update({
   path: '/tools/prompt-cloud',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsPerplexityAnswerEngineRoute =
+  ToolsPerplexityAnswerEngineRouteImport.update({
+    id: '/tools/perplexity-answer-engine',
+    path: '/tools/perplexity-answer-engine',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ToolsLlmsTxtGeneratorRoute = ToolsLlmsTxtGeneratorRouteImport.update({
   id: '/tools/llms-txt-generator',
   path: '/tools/llms-txt-generator',
@@ -1251,6 +1258,7 @@ export interface FileRoutesByFullPath {
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
+  '/tools/perplexity-answer-engine': typeof ToolsPerplexityAnswerEngineRoute
   '/tools/prompt-cloud': typeof ToolsPromptCloudRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
@@ -1433,6 +1441,7 @@ export interface FileRoutesByTo {
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
+  '/tools/perplexity-answer-engine': typeof ToolsPerplexityAnswerEngineRoute
   '/tools/prompt-cloud': typeof ToolsPromptCloudRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
@@ -1619,6 +1628,7 @@ export interface FileRoutesById {
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
+  '/tools/perplexity-answer-engine': typeof ToolsPerplexityAnswerEngineRoute
   '/tools/prompt-cloud': typeof ToolsPromptCloudRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
@@ -1806,6 +1816,7 @@ export interface FileRouteTypes {
     | '/tools/ai-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
+    | '/tools/perplexity-answer-engine'
     | '/tools/prompt-cloud'
     | '/tools/robots-checker'
     | '/tools/schema-generator'
@@ -1988,6 +1999,7 @@ export interface FileRouteTypes {
     | '/tools/ai-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
+    | '/tools/perplexity-answer-engine'
     | '/tools/prompt-cloud'
     | '/tools/robots-checker'
     | '/tools/schema-generator'
@@ -2173,6 +2185,7 @@ export interface FileRouteTypes {
     | '/tools/ai-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
+    | '/tools/perplexity-answer-engine'
     | '/tools/prompt-cloud'
     | '/tools/robots-checker'
     | '/tools/schema-generator'
@@ -2333,6 +2346,7 @@ export interface RootRouteChildren {
   ToolsAiVisibilityRoute: typeof ToolsAiVisibilityRoute
   ToolsGeoExplorerRoute: typeof ToolsGeoExplorerRoute
   ToolsLlmsTxtGeneratorRoute: typeof ToolsLlmsTxtGeneratorRoute
+  ToolsPerplexityAnswerEngineRoute: typeof ToolsPerplexityAnswerEngineRoute
   ToolsPromptCloudRoute: typeof ToolsPromptCloudRoute
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
   ToolsSchemaGeneratorRoute: typeof ToolsSchemaGeneratorRoute
@@ -2821,6 +2835,13 @@ declare module '@tanstack/react-router' {
       path: '/tools/prompt-cloud'
       fullPath: '/tools/prompt-cloud'
       preLoaderRoute: typeof ToolsPromptCloudRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/perplexity-answer-engine': {
+      id: '/tools/perplexity-answer-engine'
+      path: '/tools/perplexity-answer-engine'
+      fullPath: '/tools/perplexity-answer-engine'
+      preLoaderRoute: typeof ToolsPerplexityAnswerEngineRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/llms-txt-generator': {
@@ -4031,6 +4052,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsAiVisibilityRoute: ToolsAiVisibilityRoute,
   ToolsGeoExplorerRoute: ToolsGeoExplorerRoute,
   ToolsLlmsTxtGeneratorRoute: ToolsLlmsTxtGeneratorRoute,
+  ToolsPerplexityAnswerEngineRoute: ToolsPerplexityAnswerEngineRoute,
   ToolsPromptCloudRoute: ToolsPromptCloudRoute,
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
   ToolsSchemaGeneratorRoute: ToolsSchemaGeneratorRoute,

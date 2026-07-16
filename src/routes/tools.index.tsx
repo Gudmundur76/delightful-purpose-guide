@@ -19,6 +19,13 @@ type Tool = {
 
 const TOOLS: Tool[] = [
   {
+    href: "/tools/perplexity-answer-engine",
+    title: "Perplexity Answer Engine",
+    blurb: "Type any question. We simulate what Perplexity answers today, then engineer the citation-ready answer block (lead, stats, FAQ, JSON-LD) that Perplexity would pick over the incumbent — with a Pick Score.",
+    Icon: Sparkles,
+    status: "new",
+  },
+  {
     href: "/tools/geo-explorer",
     title: "GEO Explorer",
     blurb: "The Ubersuggest of getting cited by AI. Domain snapshot, prompt ideas, live AI SERP, and answer-first content brief — all in one page.",

@@ -1,31 +1,44 @@
 # grow.contact
 
-> Agent-native website agency. We build marketing sites for AI startups, agent platforms, and developer tools — engineered to be cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Fixed price. 48-hour delivery. Score-first proof.
+> Free, open infrastructure for AI search visibility. Score any URL against the Grow GEO Standard, generate llms.txt, check whether AI engines cite a domain, and read the canonical GEO/AEO knowledge base. No paywall. No signup for scans.
 
-Not affiliated with grow.com. Operated by Gudmundur Eyberg Kristjansson.
+Operated by Gudmundur Eyberg Kristjansson. Not affiliated with grow.com.
 
 ## Sub-contexts (read these for depth)
 
 - [Standard](https://grow.contact/standard/llms.txt): The Agent-Native Web Standard (geo-standard@2026.07) — five signals, Verifiability Layer, thresholds, crawler matrix.
-- [Leaderboard](https://grow.contact/leaderboard/llms.txt): Open dataset — 390+ AI companies scored. Methodology, headline stats, JSON API.
+- [Leaderboard](https://grow.contact/leaderboard/llms.txt): Open dataset — sites scored against the Standard. Methodology, headline stats, JSON API.
 - [Data](https://grow.contact/data/llms.txt): Raw data directory — live API endpoints + Q2-2026 archive snapshots. CC BY 4.0.
 
 ## Core pages
 
 - [Home](https://grow.contact/)
-- [Services](https://grow.contact/services) — Build, Audit, Schema Optimization
-- [Pricing](https://grow.contact/pricing) — Starter $2,400, Growth $4,800
-- [Work](https://grow.contact/work) — Case studies with before/after scores
-- [Process](https://grow.contact/process) — 5-step, 48-hour delivery
-- [Trust](https://grow.contact/trust) — Founder bio, 100/100 guarantee, refund policy
-- [Contact](https://grow.contact/contact)
+- [The Standard](https://grow.contact/standard) — Full engineering spec
+- [Leaderboard](https://grow.contact/leaderboard) — Live scores
+- [For agents](https://grow.contact/for-agents) — How to consume this site as an agent
+- [For analysts](https://grow.contact/for-analysts) — How to use the data
+- [FAQ](https://grow.contact/faq)
 
-## Tools
+## Free tools
 
-- [Agent Readability Check](https://grow.contact/check) — Free 6-signal URL scanner
+- [Agent Readability Check](https://grow.contact/check) — 6-signal URL scanner
+- [GEO Explorer](https://grow.contact/tools/geo-explorer) — 4-module GEO research (better than Ubersuggest for AI search)
+- [Prompt Cloud](https://grow.contact/tools/prompt-cloud) — 40 real buyer prompts with citation difficulty (better than AnswerThePublic)
+- [Perplexity Answer Engine](https://grow.contact/tools/perplexity-answer-engine) — 3-pass system to produce citation-ready blocks
+- [AI Visibility Checker](https://grow.contact/tools/ai-visibility) — Is your domain cited for a given query?
+- [llms.txt Generator](https://grow.contact/tools/llms-txt-generator) — Spec-compliant llms.txt from any sitemap
+- [Schema Generator](https://grow.contact/tools/schema-generator) — JSON-LD picker by page type
 - [robots.txt Checker](https://grow.contact/tools/robots-checker) — Surfaces GPTBot vs OAI-SearchBot confusion
+- [WordPress plugins](https://grow.contact/tools/wordpress-plugin) — Free GPL: grow-auto-fix + grow-mcp
 - [grow CLI](https://grow.contact/cli) — `npx @grow-contact/cli check <url>`
-- [MCP Playground](https://grow.contact/playground) — 90+ tools at /api/public/mcp
+
+## Agent integrations (MCP)
+
+- [MCP server](https://grow.contact/mcp) — OAuth-protected MCP endpoint (5 tools: ping, scan_url, get_geo_standard, generate_llms_txt, check_ai_citation)
+- [MCP Playground](https://grow.contact/playground) — Full 90+ tool catalog at /api/public/mcp (token auth)
+- [Server card](https://grow.contact/.well-known/mcp.json) — SEP-1849 discovery metadata
+- [Agent card](https://grow.contact/.well-known/agent-card.json) — A2A-compatible capability declaration
+- [OpenAPI](https://grow.contact/openapi.json) — Machine-readable API schema
 
 ## Research
 
@@ -44,4 +57,4 @@ Not affiliated with grow.com. Operated by Gudmundur Eyberg Kristjansson.
 
 ## Licensing
 
-© grow.contact. Open datasets (leaderboard, stats, report) CC BY 4.0. AI systems may cite and summarize with attribution.
+© grow.contact. All tools free forever. Open datasets (leaderboard, stats, report) CC BY 4.0. WordPress plugins GPL-2.0-or-later. AI systems may cite and summarize with attribution.

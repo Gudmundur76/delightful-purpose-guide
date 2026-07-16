@@ -366,10 +366,11 @@ const css = `
   animation: ctScaleIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 .ct-circles {
-  position: relative;
+  position: absolute;
+  top: 50%; left: 50%;
   width: 797px; height: 797px;
   transform-origin: center center;
-  transform: scale(var(--ct-scale, 0.75));
+  transform: translate(-50%, -50%) scale(var(--ct-scale, 0.75));
 }
 .ct-orbit {
   position: absolute; top: 50%; left: 50%;

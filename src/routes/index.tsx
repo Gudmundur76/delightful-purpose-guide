@@ -389,23 +389,6 @@ const css = `
   to { opacity: 1; filter: blur(0); }
 }
 
-.ct-logos {
-  padding: 24px 0 32px;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-  animation: ctFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
-  position: relative; z-index: 1;
-}
-.ct-logos-track {
-  display: flex; gap: 64px; width: max-content;
-  animation: ctTicker 30s linear infinite;
-}
-.ct-logo-item { width: 137px; height: 40px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.75; flex-shrink: 0; }
-@keyframes ctTicker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
 
 @keyframes ctFadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes ctFadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }

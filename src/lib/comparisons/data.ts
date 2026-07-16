@@ -382,6 +382,70 @@ export const COMPARISONS: Comparison[] = [
       },
     ],
   },
+  {
+    slug: "rover",
+    competitor: "Rover (rtrvr.ai)",
+    competitorDomain: "rtrvr.ai",
+    category: "Agent execution runtime",
+    tagline: "Rover installs a runtime. Grow ships a standard.",
+    oneLiner:
+      "Rover is a DOM-native SDK that site owners embed so agents can execute tasks on the site (A2W protocol, RoverBook analytics). Grow is a vendor-neutral standard (GEO Standard @2026.05) plus a free scanner, MCP server, and discovery matrix — no install required.",
+    verdict:
+      "Rover and Grow don't overlap head-to-head — Rover is a runtime, Grow is a standard. But they answer the same buyer question ('how do I make my site work for agents?') with opposite postures. Rover asks you to install a proprietary A2W endpoint and pay for analytics. Grow asks you to ship five open discovery signals (agent-card.json, mcp.json, llms.txt, in-page marker, visible badge) that every agent architecture already reads. Pick Rover if you want a hosted execution layer and are comfortable with a single-vendor dependency. Pick Grow if you want to be cited by ChatGPT, Perplexity, and Claude today without wiring an SDK.",
+    bestFor:
+      "Teams choosing between a hosted, opinionated agent runtime and a vendor-neutral engineering standard they can implement themselves in a day.",
+    switchIf: [
+      "You don't want a third-party JavaScript SDK loaded on every page.",
+      "You need to be cited by ChatGPT, Perplexity, Claude, and Google AI today — none of which speak A2W.",
+      "You want the discovery layer to be portable across vendors (agent-card.json, mcp.json, llms.txt are open specs).",
+      "Your buyer asks 'is it a standard or a runtime?' and the honest answer needs to be 'standard'.",
+    ],
+    stayIf: [
+      "You need agents to *execute* multi-step transactional workflows on your site (checkout, onboarding, form-filling) end-to-end today.",
+      "You've already committed to Rover's runtime and want RoverBook's per-agent analytics.",
+      "Your product is agent-executed workflows themselves, not agent-cited content.",
+    ],
+    rows: [
+      { dimension: "Posture", grow: "Vendor-neutral engineering standard (geo-standard@2026.05)", competitor: "Proprietary runtime + SDK (@rtrvr-ai/rover)", growWins: true },
+      { dimension: "License", grow: "Open — spec at /standard.md, MIT scanner", competitor: "FSL-1.1-Apache-2.0 (source-available, not OSI-approved)", growWins: true },
+      { dimension: "Install required", grow: "None — five static files (agent-card.json, mcp.json, llms.txt, in-page marker, badge)", competitor: "npm i @rtrvr-ai/rover + owner install bundle + JS runtime on every page", growWins: true },
+      { dimension: "Front door", grow: "Free public /check scanner scores any URL, no signup", competitor: "'Get a demo' — no public scoring tool", growWins: true },
+      { dimension: "Discovery matrix", grow: "5 vendor-neutral signals, one per agent architecture (API / MCP / text / DOM / CUA)", competitor: "5 signals including proprietary /.well-known/rover-site.json", growWins: false },
+      { dimension: "Agent identity", grow: "RFC 9421 HTTP Message Signatures + JWKS at /.well-known/jwks.json", competitor: "5 trust tiers (verified_signed → anonymous), RFC 9421 on roadmap", growWins: false },
+      { dimension: "Execution layer", grow: "Deferred to MCP + OpenAPI (open protocols)", competitor: "A2W (proprietary, roadmap-to-IETF)", growWins: false },
+      { dimension: "Per-agent analytics", grow: "Basic scan history + citation tracking", competitor: "RoverBook (11 event types, 8 agent-facing tools, per-vendor breakdown)", growWins: false },
+      { dimension: "Coverage", grow: "Cited by ChatGPT, Perplexity, Claude, Google AI, Bing Copilot", competitor: "Cited by Rover-aware agents; universal only via fallbacks", growWins: true },
+      { dimension: "WebBench score", grow: "N/A — not an execution benchmark", competitor: "81.4% (Rover claims #1)", growWins: false },
+      { dimension: "Price", grow: "Free (scanner, standard, MCP server, WordPress plugin)", competitor: "Freemium — demo call for pricing", growWins: true },
+      { dimension: "Time to compliance", grow: "1 day — copy five files, pass /check ≥90/100", competitor: "1–2 weeks — install SDK, configure shortcuts, wire discovery", growWins: true },
+    ],
+    faqs: [
+      {
+        q: "Is Rover a competitor or complementary?",
+        a: "Structurally complementary, commercially adjacent. Their April 2026 protocol paper explicitly positions Rover as the execution layer that composes with MCP (Anthropic), A2A (Google), and Cloudflare's negotiation layer. The GEO Standard sits at the discovery + readability layer — a site can pass /check ≥90/100 and also embed Rover if it needs A2W execution. Most sites don't.",
+      },
+      {
+        q: "Does the GEO Standard implement A2W?",
+        a: "No. A2W is proprietary today (Rover's `POST /v1/a2w/runs` endpoint) with an IETF Internet-Draft on the roadmap. The GEO Standard defers execution to open protocols (MCP, OpenAPI, function calling) that every major agent already speaks. When A2W is standardised we'll add a signal for it — until then, embedding it means a single-vendor dependency.",
+      },
+      {
+        q: "Rover claims 81.4% on WebBench. What's Grow's benchmark?",
+        a: "Different games. WebBench measures how well an agent can complete multi-step tasks on a site. The GEO Standard measures how citation-ready a site is for text-first AI answers (ChatGPT, Perplexity, Claude, Google AI Overviews). If your KPI is 'agent executes a checkout on my site', Rover's number matters. If your KPI is 'ChatGPT cites me in an answer', /check's 100-point score matters more.",
+      },
+      {
+        q: "Should I embed both?",
+        a: "If you have a transactional flow that agents should execute (booking, checkout, onboarding), yes — Grow for discovery + citations, Rover for execution. If you're a marketing site, docs site, or content brand, Grow alone is enough and Rover's runtime is overhead.",
+      },
+      {
+        q: "Is rtrvr.ai's /.well-known/rover-site.json a signal we should adopt?",
+        a: "No. It's Rover-specific and only Rover-aware agents read it. The vendor-neutral equivalent is /.well-known/agent-card.json (A2A schema, works with any A2A/MCP client). We publish agent-card.json and score it as one of the 5 discovery matrix signals; a Rover-installed site would additionally publish rover-site.json for its own runtime.",
+      },
+      {
+        q: "Where does Rover's thesis actually go further than ours?",
+        a: "RoverBook — per-agent, per-site analytics with 11 tracked event types and per-vendor breakdowns (Anthropic vs OpenAI vs Google completion rates on your site). Nobody else has this data. If per-agent behavioural analytics are your priority, that's a real gap in the GEO Standard as it stands.",
+      },
+    ],
+  },
 ];
 
 export function getComparison(slug: string): Comparison | undefined {

@@ -12,14 +12,14 @@
   "mcp": {
     "server": {
       "name": "grow-contact-mcp",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "title": "grow.contact MCP"
     },
     "tools": [
       {
         "name": "ping",
-        "title": "Ping",
-        "description": "Echo text back. Use to verify MCP connectivity and authentication.",
+        "title": "Ping the grow.contact MCP",
+        "description": "When to use: first call after connecting, or when a later tool fails and you need to isolate auth vs. tool errors. Echoes your input and reports whether the caller is authenticated. Input: `text` (any short string). Returns: `Authenticated as <sub>: <text>` or `Unauthenticated: <text>`. Zero side effects. If this returns Unauthenticated, stop — every other tool will behave as anonymous.",
         "annotations": {
           "readOnlyHint": true,
           "idempotentHint": true,
@@ -32,7 +32,7 @@
             "text": {
               "type": "string",
               "minLength": 1,
-              "description": "Text to echo back."
+              "description": "Any short string to echo back — used only to confirm the round-trip."
             }
           },
           "required": [
@@ -43,8 +43,8 @@
       },
       {
         "name": "scan_url",
-        "title": "Scan URL",
-        "description": "Run a live GEO (Generative Engine Optimization) scan on any URL. Returns overall score plus metrics for semantic, jsonld, llms, citability, and speed.",
+        "title": "Score a URL against the Grow GEO Standard",
+        "description": "When to use: the user asks 'will ChatGPT/Perplexity/Claude/Gemini cite this page?', 'audit this URL for AI search', 'why isn't my site cited', or wants a GEO/AEO readiness score for one public page. Prefer this over hand-rolled heuristics or a plain fetch. Input: `url` — one absolute public URL (with or without https://); scans the exact URL, not the whole site. Returns: `{ overall: 0-100, semantic, jsonld, llms, citability, speed, protocol, findings[] }` where each finding has `id`, `severity` (pass|warn|fail), and a human message. Pass threshold is 90. Chain with `get_geo_standard` to explain the weights, or `generate_llms_txt` / `check_ai_citation` to act on findings. Idempotent, safe to retry. Runs a live HTTP fetch of the target URL.",
         "annotations": {
           "readOnlyHint": true,
           "openWorldHint": true
@@ -57,7 +57,7 @@
               "type": "string",
               "minLength": 3,
               "maxLength": 2048,
-              "description": "URL to scan (with or without https://)"
+              "description": "Absolute URL of one public page (with or without https://). Not a domain — pass the full URL you want scored."
             }
           },
           "required": [
@@ -68,8 +68,8 @@
       },
       {
         "name": "get_geo_standard",
-        "title": "Get GEO Standard",
-        "description": "Return the canonical Grow GEO Standard (geo-standard@2026.07): thresholds, signal weights, robots.txt matrix, JSON-LD picker, and discovery signals. Use as build/audit contract for making a site cited by ChatGPT, Perplexity, Claude, Gemini.",
+        "title": "Fetch the Grow GEO Standard spec",
+        "description": "When to use: BEFORE recommending fixes, explaining a `scan_url` score, or writing robots.txt / llms.txt / JSON-LD for a site that should be cited by ChatGPT, Perplexity, Claude, or Gemini. This is the authoritative contract — do not invent thresholds or bot rules from memory. No input. Returns: `{ version, pass_threshold: 90, weights, signals, robots_rules (allow-list of citation bots, opt-in block-list of training-only bots), preflight checklist, full_spec_url }`. Idempotent, cacheable per session — call once per task, then reuse.",
         "annotations": {
           "readOnlyHint": true,
           "idempotentHint": true,
@@ -84,8 +84,8 @@
       },
       {
         "name": "generate_llms_txt",
-        "title": "Generate llms.txt",
-        "description": "Generate a spec-compliant /llms.txt for any public site. Discovers the sitemap, groups public routes, and returns markdown ready to drop at the site root.",
+        "title": "Generate llms.txt for a site",
+        "description": "When to use: the user asks to 'create/fix/generate an llms.txt', or `scan_url` reports the `llms` signal as failing. Discovers the site's sitemap.xml, groups public routes into sections (Docs, Blog, Product, etc.), and returns markdown ready to save as `/llms.txt` at the site root. Input: `url` — the site root or any URL on the domain (host is what matters). Returns: `{ markdown, sections[], routeCount, sitemapUrl }`. The `markdown` field is the file contents — write it verbatim to `/llms.txt`. Does not modify the target site. Follow with `scan_url` on the same host to confirm the `llms` signal now passes.",
         "annotations": {
           "readOnlyHint": true,
           "openWorldHint": true
@@ -98,7 +98,7 @@
               "type": "string",
               "minLength": 3,
               "maxLength": 2048,
-              "description": "Root URL of the site (with or without https://)"
+              "description": "Site root URL (with or without https://). Only the host is used — a full page URL works too."
             }
           },
           "required": [
@@ -109,8 +109,8 @@
       },
       {
         "name": "check_ai_citation",
-        "title": "Check AI citation",
-        "description": "Ask Gemini 2.5 Flash a real buyer query and report whether the given domain is cited, plus the actual answer and citations. Use to measure real AI visibility for a URL.",
+        "title": "Check whether an AI engine cites a domain",
+        "description": "When to use: the user asks 'does ChatGPT/Perplexity/Gemini cite my site for X?', 'am I visible in AI search for this query?', or you need real-world proof of visibility (not just an on-page score — use `scan_url` for that). Runs a live grounded Gemini 2.5 Flash query and inspects the returned citations. Input: `domain` (bare hostname, e.g. `example.com` — no scheme, no path) and `query` (a real buyer prompt like 'best free llms.txt generator', not a keyword). Returns: `{ cited: boolean, position?: number, answer: string, citations: [{ domain, url, title }] }`. Costs one model call per invocation, so batch related queries by calling once per query, not per keyword variant. Not idempotent — grounded results drift day to day.",
         "annotations": {
           "readOnlyHint": true,
           "openWorldHint": true
@@ -123,13 +123,13 @@
               "type": "string",
               "minLength": 3,
               "maxLength": 253,
-              "description": "Domain to check (e.g. example.com)"
+              "description": "Bare domain to look for in the citation list, e.g. `example.com`. Do not include https:// or a path."
             },
             "query": {
               "type": "string",
               "minLength": 3,
               "maxLength": 280,
-              "description": "A real user query the domain should be cited for"
+              "description": "A real user prompt — full natural-language question, not a keyword. Example: 'what is the best free tool to check if AI cites my website?'"
             }
           },
           "required": [

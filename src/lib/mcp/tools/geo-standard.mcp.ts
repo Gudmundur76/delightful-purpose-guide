@@ -4,9 +4,9 @@ import { z } from "zod";
 // Canonical Grow GEO Standard — build-time spec for agent-cited websites.
 export default defineTool({
   name: "get_geo_standard",
-  title: "Get GEO Standard",
+  title: "Fetch the Grow GEO Standard spec",
   description:
-    "Return the canonical Grow GEO Standard (geo-standard@2026.07): thresholds, signal weights, robots.txt matrix, JSON-LD picker, and discovery signals. Use as build/audit contract for making a site cited by ChatGPT, Perplexity, Claude, Gemini.",
+    "When to use: BEFORE recommending fixes, explaining a `scan_url` score, or writing robots.txt / llms.txt / JSON-LD for a site that should be cited by ChatGPT, Perplexity, Claude, or Gemini. This is the authoritative contract — do not invent thresholds or bot rules from memory. No input. Returns: `{ version, pass_threshold: 90, weights, signals, robots_rules (allow-list of citation bots, opt-in block-list of training-only bots), preflight checklist, full_spec_url }`. Idempotent, cacheable per session — call once per task, then reuse.",
   inputSchema: {},
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: () => {

@@ -576,7 +576,7 @@ export const scanUrl = createServerFn({ method: "POST" })
         label: "Protocol Discovery",
         score: protocolScore,
         status: statusFor(protocolScore),
-        summary: "MCP card, Link header, markdown negotiation, and Content Signals make a site agent-native, not just AI-friendly.",
+        summary: "The Agent-Web Discovery Matrix — 5 signals, one per architecture (API, MCP, text, DOM, CUA) — plus Link header, markdown negotiation, and Content-Signal plumbing.",
         details: protocolDetails,
       },
       {

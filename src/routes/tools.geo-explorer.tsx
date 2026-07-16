@@ -122,7 +122,11 @@ function GeoExplorer() {
   const [category, setCategory] = useState("");
 
   const runFn = useServerFn(runGeoExplorer);
-  type ExplorerInput = Parameters<typeof runGeoExplorer>[0]["data"];
+  type ExplorerInput =
+    | { mode: "domain"; domain: string; category?: string }
+    | { mode: "prompts"; seed: string }
+    | { mode: "serp"; prompt: string }
+    | { mode: "brief"; prompt: string; domain?: string };
   const mut = useMutation({
     mutationFn: (input: ExplorerInput) => runFn({ data: input }),
   });

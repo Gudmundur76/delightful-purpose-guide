@@ -136,7 +136,7 @@ function CitationLanding() {
                 </a>
               </div>
               <div className="ct-cursor-wrap ct-fade-in-late">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="#A068FF" xmlns="http://www.w3.org/2000/svg">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#9e9e9e" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 2l16 8-7 2-2 7-7-17z" />
                 </svg>
                 <span className="ct-cursor-badge">David</span>
@@ -336,7 +336,7 @@ const css = `
   display: inline-flex; align-items: center; gap: 6px;
 }
 .ct-cursor-badge {
-  background: #A068FF; color: #fff; font-size: 14px; font-weight: 500;
+  background: #9e9e9e; color: #fff; font-size: 14px; font-weight: 500;
   padding: 6px 14px; border-radius: 20px;
 }
 

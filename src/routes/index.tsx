@@ -316,14 +316,14 @@ const css = `
 }
 .ct-h1-dark { color: #0a0a0a; }
 .ct-h1-light {
-  background: linear-gradient(180deg, #ffffff 0%, #E6D6FF 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #d0d0d0 100%);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
   text-shadow: 0 2px 24px rgba(0,0,0,0.25);
 }
 .ct-caret {
   display: inline-block; width: 3px; height: 0.9em;
-  background: #A068FF; vertical-align: -0.12em;
+  background: #9e9e9e; vertical-align: -0.12em;
   margin-left: 4px; animation: ctBlink 0.7s steps(2) infinite;
 }
 @keyframes ctBlink { 50% { opacity: 0; } }

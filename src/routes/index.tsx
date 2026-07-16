@@ -422,7 +422,7 @@ const css = `
   .ct-header { padding: 14px 18px; }
   .ct-header-left { gap: 12px; }
   .ct-login { display: none; }
-  .ct-logo-item { width: 100px; height: 32px; }
+  
   .ct-brand { font-size: 18px; }
   .ct-brand-mark { width: 28px; height: 28px; font-size: 17px; border-radius: 8px; }
   .ct-cta-row { gap: 14px; }

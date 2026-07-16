@@ -118,6 +118,7 @@ import { Route as DotwellKnownMcpDotjsonRouteImport } from './routes/[.]well-kno
 import { Route as DotwellKnownJwksDotjsonRouteImport } from './routes/[.]well-known.jwks[.]json'
 import { Route as DotwellKnownHttpMessageSignaturesDirectoryRouteImport } from './routes/[.]well-known.http-message-signatures-directory'
 import { Route as DotwellKnownApiCatalogRouteImport } from './routes/[.]well-known.api-catalog'
+import { Route as DotwellKnownAgentCardDotjsonRouteImport } from './routes/[.]well-known.agent-card[.]json'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as HistoryHostDiffRouteImport } from './routes/history.$host.diff'
@@ -741,6 +742,12 @@ const DotwellKnownApiCatalogRoute = DotwellKnownApiCatalogRouteImport.update({
   path: '/.well-known/api-catalog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DotwellKnownAgentCardDotjsonRoute =
+  DotwellKnownAgentCardDotjsonRouteImport.update({
+    id: '/.well-known/agent-card.json',
+    path: '/.well-known/agent-card.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const Char91DotmcpChar93ListToolsRoute =
   Char91DotmcpChar93ListToolsRouteImport.update({
     id: '/.mcp/list-tools',
@@ -1179,6 +1186,7 @@ export interface FileRoutesByFullPath {
   '/vs': typeof VsRouteWithChildren
   '/why': typeof WhyRouteWithChildren
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/agent-card.json': typeof DotwellKnownAgentCardDotjsonRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
   '/.well-known/jwks.json': typeof DotwellKnownJwksDotjsonRoute
@@ -1358,6 +1366,7 @@ export interface FileRoutesByTo {
   '/vs': typeof VsRouteWithChildren
   '/why': typeof WhyRouteWithChildren
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/agent-card.json': typeof DotwellKnownAgentCardDotjsonRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
   '/.well-known/jwks.json': typeof DotwellKnownJwksDotjsonRoute
@@ -1541,6 +1550,7 @@ export interface FileRoutesById {
   '/vs': typeof VsRouteWithChildren
   '/why': typeof WhyRouteWithChildren
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/agent-card.json': typeof DotwellKnownAgentCardDotjsonRoute
   '/.well-known/api-catalog': typeof DotwellKnownApiCatalogRoute
   '/.well-known/http-message-signatures-directory': typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
   '/.well-known/jwks.json': typeof DotwellKnownJwksDotjsonRoute
@@ -1725,6 +1735,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/why'
     | '/.mcp/list-tools'
+    | '/.well-known/agent-card.json'
     | '/.well-known/api-catalog'
     | '/.well-known/http-message-signatures-directory'
     | '/.well-known/jwks.json'
@@ -1904,6 +1915,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/why'
     | '/.mcp/list-tools'
+    | '/.well-known/agent-card.json'
     | '/.well-known/api-catalog'
     | '/.well-known/http-message-signatures-directory'
     | '/.well-known/jwks.json'
@@ -2086,6 +2098,7 @@ export interface FileRouteTypes {
     | '/vs'
     | '/why'
     | '/.mcp/list-tools'
+    | '/.well-known/agent-card.json'
     | '/.well-known/api-catalog'
     | '/.well-known/http-message-signatures-directory'
     | '/.well-known/jwks.json'
@@ -2269,6 +2282,7 @@ export interface RootRouteChildren {
   VsRoute: typeof VsRouteWithChildren
   WhyRoute: typeof WhyRouteWithChildren
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  DotwellKnownAgentCardDotjsonRoute: typeof DotwellKnownAgentCardDotjsonRoute
   DotwellKnownApiCatalogRoute: typeof DotwellKnownApiCatalogRoute
   DotwellKnownHttpMessageSignaturesDirectoryRoute: typeof DotwellKnownHttpMessageSignaturesDirectoryRoute
   DotwellKnownJwksDotjsonRoute: typeof DotwellKnownJwksDotjsonRoute
@@ -3133,6 +3147,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotwellKnownApiCatalogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/agent-card.json': {
+      id: '/.well-known/agent-card.json'
+      path: '/.well-known/agent-card.json'
+      fullPath: '/.well-known/agent-card.json'
+      preLoaderRoute: typeof DotwellKnownAgentCardDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.mcp/list-tools': {
       id: '/.mcp/list-tools'
       path: '/.mcp/list-tools'
@@ -3939,6 +3960,7 @@ const rootRouteChildren: RootRouteChildren = {
   VsRoute: VsRouteWithChildren,
   WhyRoute: WhyRouteWithChildren,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  DotwellKnownAgentCardDotjsonRoute: DotwellKnownAgentCardDotjsonRoute,
   DotwellKnownApiCatalogRoute: DotwellKnownApiCatalogRoute,
   DotwellKnownHttpMessageSignaturesDirectoryRoute:
     DotwellKnownHttpMessageSignaturesDirectoryRoute,

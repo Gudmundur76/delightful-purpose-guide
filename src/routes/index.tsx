@@ -25,27 +25,16 @@ export const Route = createFileRoute("/")({
 const BG_URL =
   "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260624_111401_56af5012-2263-45d3-849a-8688084d7c2a.png&w=1280&q=85";
 
-const LOGO_URL = "";
-
-
 const AVATARS = [
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/aa51718fb3af3637e6d666b6543fc27a175fada6.png", orbit: 1, angle: 270, radius: 177, size: 58, radius_css: 20, glow: "#A068FF", delay: 0.6 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/ca755f7f93c1126fb8bdbf99ab364a33aa9ab272.png", orbit: 2, angle: 60, radius: 251, size: 58, radius_css: 999, glow: "#FFD166", delay: 0.9 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/dc01064c7093dcc32674876ee3cf5e41c4a485c6.png", orbit: 2, angle: 180, radius: 251, size: 78, radius_css: 999, glow: "#FF6B9D", delay: 1.1 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/d5470a58b02388336141575048720f19a50de832.png", orbit: 2, angle: 300, radius: 251, size: 58, radius_css: 20, glow: "#5B8CFF", delay: 1.3 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/018736aa5d0275c4ce56cfebaf2ae3007d81ca1e.png", orbit: 3, angle: 130, radius: 325, size: 88, radius_css: 999, glow: "#FF6B9D", delay: 1.5 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/c76d8a0b99676de31c014344bfaf75bad090758d.png", orbit: 4, angle: 30, radius: 399, size: 58, radius_css: 999, glow: "#A068FF", delay: 1.7 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/7b1b5f039de7b54cc9913e96c1923c3b15a157fa.png", orbit: 4, angle: 95, radius: 399, size: 88, radius_css: 24, glow: "#FF9F55", delay: 1.9 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/9ae171d8895199349755c43fbff00e122221a027.png", orbit: 4, angle: 220, radius: 399, size: 88, radius_css: 24, glow: "#FF6B9D", delay: 2.1 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/926c9eb7b4bc1df846fa0e39f0b0dc3fefd80671.png", orbit: 4, angle: 320, radius: 399, size: 58, radius_css: 999, glow: "#A068FF", delay: 2.3 },
-];
-
-const LOGOS = [
-  "https://polo-pecan-73837341.figma.site/_assets/v11/1e7b0e6fcc016cd28aec5c68990118b8c54c35a5.svg",
-  "https://polo-pecan-73837341.figma.site/_assets/v11/3eac03c183db2ae080d910159211c14843398b61.svg",
-  "https://polo-pecan-73837341.figma.site/_assets/v11/17705a4c0023a0e5a99154dfb10582adbbf4260b.svg",
-  "https://polo-pecan-73837341.figma.site/_assets/v11/0e5f442b09dc5c248e3e60d40a65505fb1887228.svg",
-  "https://polo-pecan-73837341.figma.site/_assets/v11/63f99030ceb459e3c9ab9e429cfa2353491d3816.svg",
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/aa51718fb3af3637e6d666b6543fc27a175fada6.png", orbit: 1, angle: 270, radius: 177, size: 58, radius_css: 20, glow: "#9e9e9e", delay: 0.6 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/ca755f7f93c1126fb8bdbf99ab364a33aa9ab272.png", orbit: 2, angle: 60, radius: 251, size: 58, radius_css: 999, glow: "#b0b0b0", delay: 0.9 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/dc01064c7093dcc32674876ee3cf5e41c4a485c6.png", orbit: 2, angle: 180, radius: 251, size: 78, radius_css: 999, glow: "#888888", delay: 1.1 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/d5470a58b02388336141575048720f19a50de832.png", orbit: 2, angle: 300, radius: 251, size: 58, radius_css: 20, glow: "#a0a0a0", delay: 1.3 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/018736aa5d0275c4ce56cfebaf2ae3007d81ca1e.png", orbit: 3, angle: 130, radius: 325, size: 88, radius_css: 999, glow: "#888888", delay: 1.5 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/c76d8a0b99676de31c014344bfaf75bad090758d.png", orbit: 4, angle: 30, radius: 399, size: 58, radius_css: 999, glow: "#9e9e9e", delay: 1.7 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/7b1b5f039de7b54cc9913e96c1923c3b15a157fa.png", orbit: 4, angle: 95, radius: 399, size: 88, radius_css: 24, glow: "#b0b0b0", delay: 1.9 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/9ae171d8895199349755c43fbff00e122221a027.png", orbit: 4, angle: 220, radius: 399, size: 88, radius_css: 24, glow: "#888888", delay: 2.1 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/926c9eb7b4bc1df846fa0e39f0b0dc3fefd80671.png", orbit: 4, angle: 320, radius: 399, size: 58, radius_css: 999, glow: "#9e9e9e", delay: 2.3 },
 ];
 
 const HEADLINE = "Unlock AI Citations You Thought Were Out of Reach — Now Just One Click Away!";

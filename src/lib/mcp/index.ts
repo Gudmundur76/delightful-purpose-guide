@@ -1,6 +1,9 @@
 import { auth, defineMcp } from "@lovable.dev/mcp-js";
 import pingTool from "./tools/ping.mcp";
 import scanUrlTool from "./tools/scan-url.mcp";
+import geoStandardTool from "./tools/geo-standard.mcp";
+import generateLlmsTxtTool from "./tools/generate-llms-txt.mcp";
+import checkAiCitationTool from "./tools/check-ai-citation.mcp";
 
 // The OAuth issuer MUST be the direct Supabase host, not the .lovable.cloud
 // proxy — mcp-js verifies against the issuer's OpenID discovery document.

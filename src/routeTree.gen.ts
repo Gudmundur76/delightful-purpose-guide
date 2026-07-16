@@ -67,6 +67,7 @@ import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
 import { Route as ToolsSchemaGeneratorRouteImport } from './routes/tools.schema-generator'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
+import { Route as ToolsPromptCloudRouteImport } from './routes/tools.prompt-cloud'
 import { Route as ToolsLlmsTxtGeneratorRouteImport } from './routes/tools.llms-txt-generator'
 import { Route as ToolsGeoExplorerRouteImport } from './routes/tools.geo-explorer'
 import { Route as ToolsAiVisibilityRouteImport } from './routes/tools.ai-visibility'
@@ -480,6 +481,11 @@ const ToolsSchemaGeneratorRoute = ToolsSchemaGeneratorRouteImport.update({
 const ToolsRobotsCheckerRoute = ToolsRobotsCheckerRouteImport.update({
   id: '/tools/robots-checker',
   path: '/tools/robots-checker',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsPromptCloudRoute = ToolsPromptCloudRouteImport.update({
+  id: '/tools/prompt-cloud',
+  path: '/tools/prompt-cloud',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsLlmsTxtGeneratorRoute = ToolsLlmsTxtGeneratorRouteImport.update({
@@ -1245,6 +1251,7 @@ export interface FileRoutesByFullPath {
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
+  '/tools/prompt-cloud': typeof ToolsPromptCloudRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
   '/verify/$id': typeof VerifyIdRoute
@@ -1426,6 +1433,7 @@ export interface FileRoutesByTo {
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
+  '/tools/prompt-cloud': typeof ToolsPromptCloudRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
   '/verify/$id': typeof VerifyIdRoute
@@ -1611,6 +1619,7 @@ export interface FileRoutesById {
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
+  '/tools/prompt-cloud': typeof ToolsPromptCloudRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
   '/verify/$id': typeof VerifyIdRoute
@@ -1797,6 +1806,7 @@ export interface FileRouteTypes {
     | '/tools/ai-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
+    | '/tools/prompt-cloud'
     | '/tools/robots-checker'
     | '/tools/schema-generator'
     | '/verify/$id'
@@ -1978,6 +1988,7 @@ export interface FileRouteTypes {
     | '/tools/ai-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
+    | '/tools/prompt-cloud'
     | '/tools/robots-checker'
     | '/tools/schema-generator'
     | '/verify/$id'
@@ -2162,6 +2173,7 @@ export interface FileRouteTypes {
     | '/tools/ai-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
+    | '/tools/prompt-cloud'
     | '/tools/robots-checker'
     | '/tools/schema-generator'
     | '/verify/$id'
@@ -2321,6 +2333,7 @@ export interface RootRouteChildren {
   ToolsAiVisibilityRoute: typeof ToolsAiVisibilityRoute
   ToolsGeoExplorerRoute: typeof ToolsGeoExplorerRoute
   ToolsLlmsTxtGeneratorRoute: typeof ToolsLlmsTxtGeneratorRoute
+  ToolsPromptCloudRoute: typeof ToolsPromptCloudRoute
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
   ToolsSchemaGeneratorRoute: typeof ToolsSchemaGeneratorRoute
   VerifyIdRoute: typeof VerifyIdRoute
@@ -2801,6 +2814,13 @@ declare module '@tanstack/react-router' {
       path: '/tools/robots-checker'
       fullPath: '/tools/robots-checker'
       preLoaderRoute: typeof ToolsRobotsCheckerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/prompt-cloud': {
+      id: '/tools/prompt-cloud'
+      path: '/tools/prompt-cloud'
+      fullPath: '/tools/prompt-cloud'
+      preLoaderRoute: typeof ToolsPromptCloudRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/llms-txt-generator': {
@@ -4011,6 +4031,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsAiVisibilityRoute: ToolsAiVisibilityRoute,
   ToolsGeoExplorerRoute: ToolsGeoExplorerRoute,
   ToolsLlmsTxtGeneratorRoute: ToolsLlmsTxtGeneratorRoute,
+  ToolsPromptCloudRoute: ToolsPromptCloudRoute,
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
   ToolsSchemaGeneratorRoute: ToolsSchemaGeneratorRoute,
   VerifyIdRoute: VerifyIdRoute,

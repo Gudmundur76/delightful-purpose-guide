@@ -7,7 +7,6 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
 import {
   runGeoExplorer,
-  type ExplorerResult,
   type PromptIdea,
   type SerpCitation,
   type DomainSnapshot,

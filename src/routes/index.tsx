@@ -25,8 +25,8 @@ export const Route = createFileRoute("/")({
 const BG_URL =
   "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260624_111401_56af5012-2263-45d3-849a-8688084d7c2a.png&w=1280&q=85";
 
-const LOGO_URL =
-  "https://polo-pecan-73837341.figma.site/_assets/v11/17ae538989a509947a8de3892c644664895e69b1.png";
+const LOGO_URL = "";
+
 
 const AVATARS = [
   { url: "https://polo-pecan-73837341.figma.site/_assets/v11/aa51718fb3af3637e6d666b6543fc27a175fada6.png", orbit: 1, angle: 270, radius: 177, size: 58, radius_css: 20, glow: "#A068FF", delay: 0.6 },
@@ -49,7 +49,7 @@ const LOGOS = [
 ];
 
 const HEADLINE = "Unlock AI Citations You Thought Were Out of Reach — Now Just One Click Away!";
-const DARK_LEN = 46; // "Unlock AI Citations You Thought Were Out of Reach"[..46]
+const DARK_LEN = 52; // through the em dash + space
 
 function useCountUp(target: number, duration = 2000, delay = 1200) {
   const [value, setValue] = useState(0);
@@ -111,8 +111,10 @@ function CitationLanding() {
       <div className="ct-app" style={{ backgroundImage: `url(${BG_URL})` }}>
         <header className="ct-header">
           <div className="ct-header-left">
-            <img src={LOGO_URL} alt="Citation" className="ct-logo" />
-            <span className="ct-brand">citation</span>
+            <a href="/" className="ct-brand-link">
+              <span className="ct-brand-mark">◎</span>
+              <span className="ct-brand">citation<span className="ct-brand-dot">.is</span></span>
+            </a>
             <nav className="ct-nav">
               <a href="#team">Your Team</a>
               <a href="#solutions">Solutions</a>
@@ -228,9 +230,16 @@ const css = `
   margin: 0 auto;
   animation: ctFadeDown 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-.ct-header-left { display: flex; align-items: center; gap: 40px; }
-.ct-logo { height: 32px; width: auto; }
-.ct-brand { font-family: 'Urbanist'; font-weight: 700; font-size: 22px; color: #000; letter-spacing: -0.5px; }
+.ct-header-left { display: flex; align-items: center; gap: 40px; min-width: 0; }
+.ct-brand-link { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #000; }
+.ct-brand-mark {
+  display: inline-grid; place-items: center;
+  width: 32px; height: 32px; border-radius: 10px;
+  background: #000; color: #A068FF; font-size: 20px; line-height: 1;
+  box-shadow: 0 0 0 2px rgba(160,104,255,0.35);
+}
+.ct-brand { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: 22px; color: #000; letter-spacing: -0.5px; }
+.ct-brand-dot { color: #A068FF; }
 .ct-nav { display: flex; gap: 32px; }
 .ct-nav a, .ct-login {
   color: #000; font-size: 15px; font-weight: 400; text-decoration: none;
@@ -414,9 +423,15 @@ const css = `
 @media (max-width: 480px) {
   .ct-h1 { font-size: 28px; line-height: 32px; }
   .ct-circles { transform: scale(0.4); }
-  .ct-btn-sm { padding: 10px 20px; font-size: 14px; }
+  .ct-btn-sm { padding: 10px 18px; font-size: 13px; }
   .ct-logo-item { width: 100px; height: 32px; }
-  .ct-header { padding: 16px; }
-  .ct-header-left { gap: 12px; }
+  .ct-header { padding: 14px 16px; gap: 8px; }
+  .ct-header-left { gap: 10px; }
+  .ct-header-right { gap: 12px; }
+  .ct-login { display: none; }
+  .ct-brand { font-size: 18px; }
+  .ct-brand-mark { width: 28px; height: 28px; font-size: 17px; border-radius: 8px; }
+  .ct-cursor-wrap { margin-left: 40px; margin-top: 24px; }
+  .ct-left { padding-top: 16px; }
 }
 `;

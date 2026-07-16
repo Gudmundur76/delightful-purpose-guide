@@ -122,8 +122,9 @@ function GeoExplorer() {
   const [category, setCategory] = useState("");
 
   const runFn = useServerFn(runGeoExplorer);
+  type ExplorerInput = Parameters<typeof runGeoExplorer>[0]["data"];
   const mut = useMutation({
-    mutationFn: (input: Parameters<typeof runFn>[0]["data"]) => runFn({ data: input }),
+    mutationFn: (input: ExplorerInput) => runFn({ data: input }),
   });
 
   const submit = (e: React.FormEvent) => {

@@ -69,6 +69,7 @@ import { Route as ToolsSchemaGeneratorRouteImport } from './routes/tools.schema-
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
 import { Route as ToolsLlmsTxtGeneratorRouteImport } from './routes/tools.llms-txt-generator'
 import { Route as ToolsAiVisibilityRouteImport } from './routes/tools.ai-visibility'
+import { Route as StatsSlugRouteImport } from './routes/stats.$slug'
 import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
 import { Route as StandardLlmsDottxtRouteImport } from './routes/standard.llms[.]txt'
 import { Route as StandardVersionRouteImport } from './routes/standard.$version'
@@ -488,6 +489,11 @@ const ToolsAiVisibilityRoute = ToolsAiVisibilityRouteImport.update({
   id: '/tools/ai-visibility',
   path: '/tools/ai-visibility',
   getParentRoute: () => rootRouteImport,
+} as any)
+const StatsSlugRoute = StatsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => StatsRoute,
 } as any)
 const StandardChar123versionChar125DotmdRoute =
   StandardChar123versionChar125DotmdRouteImport.update({
@@ -1164,7 +1170,7 @@ export interface FileRoutesByFullPath {
   '/sop': typeof SopRoute
   '/standard': typeof StandardRouteWithChildren
   '/standard.md': typeof StandardDotmdRoute
-  '/stats': typeof StatsRoute
+  '/stats': typeof StatsRouteWithChildren
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
   '/trust': typeof TrustRoute
@@ -1221,6 +1227,7 @@ export interface FileRoutesByFullPath {
   '/standard/$version': typeof StandardVersionRoute
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
+  '/stats/$slug': typeof StatsSlugRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
@@ -1342,7 +1349,7 @@ export interface FileRoutesByTo {
   '/sop': typeof SopRoute
   '/standard': typeof StandardRouteWithChildren
   '/standard.md': typeof StandardDotmdRoute
-  '/stats': typeof StatsRoute
+  '/stats': typeof StatsRouteWithChildren
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
   '/trust': typeof TrustRoute
@@ -1399,6 +1406,7 @@ export interface FileRoutesByTo {
   '/standard/$version': typeof StandardVersionRoute
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
+  '/stats/$slug': typeof StatsSlugRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
@@ -1524,7 +1532,7 @@ export interface FileRoutesById {
   '/sop': typeof SopRoute
   '/standard': typeof StandardRouteWithChildren
   '/standard.md': typeof StandardDotmdRoute
-  '/stats': typeof StatsRoute
+  '/stats': typeof StatsRouteWithChildren
   '/status': typeof StatusRoute
   '/terms': typeof TermsRoute
   '/trust': typeof TrustRoute
@@ -1581,6 +1589,7 @@ export interface FileRoutesById {
   '/standard/$version': typeof StandardVersionRoute
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
+  '/stats/$slug': typeof StatsSlugRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
@@ -1764,6 +1773,7 @@ export interface FileRouteTypes {
     | '/standard/$version'
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
+    | '/stats/$slug'
     | '/tools/ai-visibility'
     | '/tools/llms-txt-generator'
     | '/tools/robots-checker'
@@ -1942,6 +1952,7 @@ export interface FileRouteTypes {
     | '/standard/$version'
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
+    | '/stats/$slug'
     | '/tools/ai-visibility'
     | '/tools/llms-txt-generator'
     | '/tools/robots-checker'
@@ -2123,6 +2134,7 @@ export interface FileRouteTypes {
     | '/standard/$version'
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
+    | '/stats/$slug'
     | '/tools/ai-visibility'
     | '/tools/llms-txt-generator'
     | '/tools/robots-checker'
@@ -2248,7 +2260,7 @@ export interface RootRouteChildren {
   SopRoute: typeof SopRoute
   StandardRoute: typeof StandardRouteWithChildren
   StandardDotmdRoute: typeof StandardDotmdRoute
-  StatsRoute: typeof StatsRoute
+  StatsRoute: typeof StatsRouteWithChildren
   StatusRoute: typeof StatusRoute
   TermsRoute: typeof TermsRoute
   TrustRoute: typeof TrustRoute
@@ -2777,6 +2789,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/tools/ai-visibility'
       preLoaderRoute: typeof ToolsAiVisibilityRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/stats/$slug': {
+      id: '/stats/$slug'
+      path: '/$slug'
+      fullPath: '/stats/$slug'
+      preLoaderRoute: typeof StatsSlugRouteImport
+      parentRoute: typeof StatsRoute
     }
     '/standard/{$version}.md': {
       id: '/standard/{$version}.md'
@@ -3819,6 +3838,16 @@ const StandardRouteWithChildren = StandardRoute._addFileChildren(
   StandardRouteChildren,
 )
 
+interface StatsRouteChildren {
+  StatsSlugRoute: typeof StatsSlugRoute
+}
+
+const StatsRouteChildren: StatsRouteChildren = {
+  StatsSlugRoute: StatsSlugRoute,
+}
+
+const StatsRouteWithChildren = StatsRoute._addFileChildren(StatsRouteChildren)
+
 interface VsRouteChildren {
   VsCompetitorRoute: typeof VsCompetitorRoute
 }
@@ -3901,7 +3930,7 @@ const rootRouteChildren: RootRouteChildren = {
   SopRoute: SopRoute,
   StandardRoute: StandardRouteWithChildren,
   StandardDotmdRoute: StandardDotmdRoute,
-  StatsRoute: StatsRoute,
+  StatsRoute: StatsRouteWithChildren,
   StatusRoute: StatusRoute,
   TermsRoute: TermsRoute,
   TrustRoute: TrustRoute,

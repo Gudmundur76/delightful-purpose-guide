@@ -25,27 +25,16 @@ export const Route = createFileRoute("/")({
 const BG_URL =
   "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260624_111401_56af5012-2263-45d3-849a-8688084d7c2a.png&w=1280&q=85";
 
-const LOGO_URL = "";
-
-
 const AVATARS = [
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/aa51718fb3af3637e6d666b6543fc27a175fada6.png", orbit: 1, angle: 270, radius: 177, size: 58, radius_css: 20, glow: "#A068FF", delay: 0.6 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/ca755f7f93c1126fb8bdbf99ab364a33aa9ab272.png", orbit: 2, angle: 60, radius: 251, size: 58, radius_css: 999, glow: "#FFD166", delay: 0.9 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/dc01064c7093dcc32674876ee3cf5e41c4a485c6.png", orbit: 2, angle: 180, radius: 251, size: 78, radius_css: 999, glow: "#FF6B9D", delay: 1.1 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/d5470a58b02388336141575048720f19a50de832.png", orbit: 2, angle: 300, radius: 251, size: 58, radius_css: 20, glow: "#5B8CFF", delay: 1.3 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/018736aa5d0275c4ce56cfebaf2ae3007d81ca1e.png", orbit: 3, angle: 130, radius: 325, size: 88, radius_css: 999, glow: "#FF6B9D", delay: 1.5 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/c76d8a0b99676de31c014344bfaf75bad090758d.png", orbit: 4, angle: 30, radius: 399, size: 58, radius_css: 999, glow: "#A068FF", delay: 1.7 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/7b1b5f039de7b54cc9913e96c1923c3b15a157fa.png", orbit: 4, angle: 95, radius: 399, size: 88, radius_css: 24, glow: "#FF9F55", delay: 1.9 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/9ae171d8895199349755c43fbff00e122221a027.png", orbit: 4, angle: 220, radius: 399, size: 88, radius_css: 24, glow: "#FF6B9D", delay: 2.1 },
-  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/926c9eb7b4bc1df846fa0e39f0b0dc3fefd80671.png", orbit: 4, angle: 320, radius: 399, size: 58, radius_css: 999, glow: "#A068FF", delay: 2.3 },
-];
-
-const LOGOS = [
-  "https://polo-pecan-73837341.figma.site/_assets/v11/1e7b0e6fcc016cd28aec5c68990118b8c54c35a5.svg",
-  "https://polo-pecan-73837341.figma.site/_assets/v11/3eac03c183db2ae080d910159211c14843398b61.svg",
-  "https://polo-pecan-73837341.figma.site/_assets/v11/17705a4c0023a0e5a99154dfb10582adbbf4260b.svg",
-  "https://polo-pecan-73837341.figma.site/_assets/v11/0e5f442b09dc5c248e3e60d40a65505fb1887228.svg",
-  "https://polo-pecan-73837341.figma.site/_assets/v11/63f99030ceb459e3c9ab9e429cfa2353491d3816.svg",
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/aa51718fb3af3637e6d666b6543fc27a175fada6.png", orbit: 1, angle: 270, radius: 177, size: 58, radius_css: 20, glow: "#9e9e9e", delay: 0.6 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/ca755f7f93c1126fb8bdbf99ab364a33aa9ab272.png", orbit: 2, angle: 60, radius: 251, size: 58, radius_css: 999, glow: "#b0b0b0", delay: 0.9 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/dc01064c7093dcc32674876ee3cf5e41c4a485c6.png", orbit: 2, angle: 180, radius: 251, size: 78, radius_css: 999, glow: "#888888", delay: 1.1 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/d5470a58b02388336141575048720f19a50de832.png", orbit: 2, angle: 300, radius: 251, size: 58, radius_css: 20, glow: "#a0a0a0", delay: 1.3 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/018736aa5d0275c4ce56cfebaf2ae3007d81ca1e.png", orbit: 3, angle: 130, radius: 325, size: 88, radius_css: 999, glow: "#888888", delay: 1.5 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/c76d8a0b99676de31c014344bfaf75bad090758d.png", orbit: 4, angle: 30, radius: 399, size: 58, radius_css: 999, glow: "#9e9e9e", delay: 1.7 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/7b1b5f039de7b54cc9913e96c1923c3b15a157fa.png", orbit: 4, angle: 95, radius: 399, size: 88, radius_css: 24, glow: "#b0b0b0", delay: 1.9 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/9ae171d8895199349755c43fbff00e122221a027.png", orbit: 4, angle: 220, radius: 399, size: 88, radius_css: 24, glow: "#888888", delay: 2.1 },
+  { url: "https://polo-pecan-73837341.figma.site/_assets/v11/926c9eb7b4bc1df846fa0e39f0b0dc3fefd80671.png", orbit: 4, angle: 320, radius: 399, size: 58, radius_css: 999, glow: "#9e9e9e", delay: 2.3 },
 ];
 
 const HEADLINE = "Unlock AI Citations You Thought Were Out of Reach — Now Just One Click Away!";
@@ -147,7 +136,7 @@ function CitationLanding() {
                 </a>
               </div>
               <div className="ct-cursor-wrap ct-fade-in-late">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="#A068FF" xmlns="http://www.w3.org/2000/svg">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#9e9e9e" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 2l16 8-7 2-2 7-7-17z" />
                 </svg>
                 <span className="ct-cursor-badge">David</span>
@@ -192,15 +181,6 @@ function CitationLanding() {
           </section>
         </main>
 
-        <div className="ct-logos">
-          <div className="ct-logos-track">
-            {Array.from({ length: 4 }).flatMap((_, r) =>
-              LOGOS.map((l, i) => (
-                <img key={`${r}-${i}`} src={l} alt="" className="ct-logo-item" />
-              )),
-            )}
-          </div>
-        </div>
       </div>
     </>
   );
@@ -241,11 +221,11 @@ const css = `
 .ct-brand-mark {
   display: inline-grid; place-items: center;
   width: 32px; height: 32px; border-radius: 10px;
-  background: #000; color: #A068FF; font-size: 20px; line-height: 1;
-  box-shadow: 0 0 0 2px rgba(160,104,255,0.35);
+  background: #000; color: #9e9e9e; font-size: 20px; line-height: 1;
+  box-shadow: 0 0 0 2px rgba(158,158,158,0.35);
 }
 .ct-brand { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: 22px; color: #000; letter-spacing: -0.5px; }
-.ct-brand-dot { color: #A068FF; }
+.ct-brand-dot { color: #9e9e9e; }
 .ct-nav { display: flex; gap: 32px; }
 .ct-nav a, .ct-login {
   color: #000; font-size: 15px; font-weight: 400; text-decoration: none;
@@ -272,7 +252,7 @@ const css = `
   inset: -3px;
   border-radius: 50px;
   padding: 3px;
-  background: conic-gradient(from var(--border-angle), #A068FF, #070319, #A068FF, #070319, #A068FF);
+  background: conic-gradient(from var(--border-angle), #9e9e9e, #070319, #9e9e9e, #070319, #9e9e9e);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -293,7 +273,7 @@ const css = `
 .ct-btn-lg { padding: 14px 28px; font-size: 16px; background: #060218; }
 .ct-btn > * { position: relative; z-index: 2; }
 .ct-btn::after {
-  content: ''; position: absolute; inset: 0; background: #A068FF;
+  content: ''; position: absolute; inset: 0; background: #9e9e9e;
   transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 1;
 }
@@ -336,14 +316,14 @@ const css = `
 }
 .ct-h1-dark { color: #0a0a0a; }
 .ct-h1-light {
-  background: linear-gradient(180deg, #ffffff 0%, #E6D6FF 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #d0d0d0 100%);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
   text-shadow: 0 2px 24px rgba(0,0,0,0.25);
 }
 .ct-caret {
   display: inline-block; width: 3px; height: 0.9em;
-  background: #A068FF; vertical-align: -0.12em;
+  background: #9e9e9e; vertical-align: -0.12em;
   margin-left: 4px; animation: ctBlink 0.7s steps(2) infinite;
 }
 @keyframes ctBlink { 50% { opacity: 0; } }
@@ -356,7 +336,7 @@ const css = `
   display: inline-flex; align-items: center; gap: 6px;
 }
 .ct-cursor-badge {
-  background: #A068FF; color: #fff; font-size: 14px; font-weight: 500;
+  background: #9e9e9e; color: #fff; font-size: 14px; font-weight: 500;
   padding: 6px 14px; border-radius: 20px;
 }
 
@@ -375,7 +355,7 @@ const css = `
 .ct-orbit {
   position: absolute; top: 50%; left: 50%;
   border-radius: 50%;
-  background: linear-gradient(180deg, rgba(217, 161, 255, 0) 0%, rgba(217, 161, 255, 1) 43%, rgba(217, 161, 255, 0) 100%);
+  background: linear-gradient(180deg, rgba(180, 180, 180, 0) 0%, rgba(180, 180, 180, 1) 43%, rgba(180, 180, 180, 0) 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -409,23 +389,6 @@ const css = `
   to { opacity: 1; filter: blur(0); }
 }
 
-.ct-logos {
-  padding: 24px 0 32px;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-  animation: ctFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
-  position: relative; z-index: 1;
-}
-.ct-logos-track {
-  display: flex; gap: 64px; width: max-content;
-  animation: ctTicker 30s linear infinite;
-}
-.ct-logo-item { width: 137px; height: 40px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.75; flex-shrink: 0; }
-@keyframes ctTicker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
 
 @keyframes ctFadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes ctFadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
@@ -459,7 +422,7 @@ const css = `
   .ct-header { padding: 14px 18px; }
   .ct-header-left { gap: 12px; }
   .ct-login { display: none; }
-  .ct-logo-item { width: 100px; height: 32px; }
+  
   .ct-brand { font-size: 18px; }
   .ct-brand-mark { width: 28px; height: 28px; font-size: 17px; border-radius: 8px; }
   .ct-cta-row { gap: 14px; }

@@ -65,6 +65,7 @@ import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as WhyDomainRouteImport } from './routes/why.$domain'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
+import { Route as ToolsWordpressPluginRouteImport } from './routes/tools.wordpress-plugin'
 import { Route as ToolsSchemaGeneratorRouteImport } from './routes/tools.schema-generator'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
 import { Route as ToolsPromptCloudRouteImport } from './routes/tools.prompt-cloud'
@@ -153,6 +154,7 @@ import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/e
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as ApiPublicWpPluginTokenRouteImport } from './routes/api/public/wp-plugin.$token'
+import { Route as ApiPublicWordpressPluginNameRouteImport } from './routes/api/public/wordpress-plugin.$name'
 import { Route as ApiPublicWidgetOgDotsvgRouteImport } from './routes/api/public/widget/og[.]svg'
 import { Route as ApiPublicWidgetEmbedDotjsRouteImport } from './routes/api/public/widget/embed[.]js'
 import { Route as ApiPublicWidgetBadgeDotsvgRouteImport } from './routes/api/public/widget/badge[.]svg'
@@ -472,6 +474,11 @@ const VsCompetitorRoute = VsCompetitorRouteImport.update({
 const VerifyIdRoute = VerifyIdRouteImport.update({
   id: '/verify/$id',
   path: '/verify/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsWordpressPluginRoute = ToolsWordpressPluginRouteImport.update({
+  id: '/tools/wordpress-plugin',
+  path: '/tools/wordpress-plugin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsSchemaGeneratorRoute = ToolsSchemaGeneratorRouteImport.update({
@@ -933,6 +940,12 @@ const ApiPublicWpPluginTokenRoute = ApiPublicWpPluginTokenRouteImport.update({
   path: '/api/public/wp-plugin/$token',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicWordpressPluginNameRoute =
+  ApiPublicWordpressPluginNameRouteImport.update({
+    id: '/api/public/wordpress-plugin/$name',
+    path: '/api/public/wordpress-plugin/$name',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicWidgetOgDotsvgRoute = ApiPublicWidgetOgDotsvgRouteImport.update({
   id: '/api/public/widget/og.svg',
   path: '/api/public/widget/og.svg',
@@ -1262,6 +1275,7 @@ export interface FileRoutesByFullPath {
   '/tools/prompt-cloud': typeof ToolsPromptCloudRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
+  '/tools/wordpress-plugin': typeof ToolsWordpressPluginRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/why/$domain': typeof WhyDomainRoute
@@ -1326,6 +1340,7 @@ export interface FileRoutesByFullPath {
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
+  '/api/public/wordpress-plugin/$name': typeof ApiPublicWordpressPluginNameRoute
   '/api/public/wp-plugin/$token': typeof ApiPublicWpPluginTokenRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -1445,6 +1460,7 @@ export interface FileRoutesByTo {
   '/tools/prompt-cloud': typeof ToolsPromptCloudRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
+  '/tools/wordpress-plugin': typeof ToolsWordpressPluginRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/why/$domain': typeof WhyDomainRoute
@@ -1509,6 +1525,7 @@ export interface FileRoutesByTo {
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
+  '/api/public/wordpress-plugin/$name': typeof ApiPublicWordpressPluginNameRoute
   '/api/public/wp-plugin/$token': typeof ApiPublicWpPluginTokenRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -1632,6 +1649,7 @@ export interface FileRoutesById {
   '/tools/prompt-cloud': typeof ToolsPromptCloudRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
   '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
+  '/tools/wordpress-plugin': typeof ToolsWordpressPluginRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/why/$domain': typeof WhyDomainRoute
@@ -1696,6 +1714,7 @@ export interface FileRoutesById {
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
+  '/api/public/wordpress-plugin/$name': typeof ApiPublicWordpressPluginNameRoute
   '/api/public/wp-plugin/$token': typeof ApiPublicWpPluginTokenRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -1820,6 +1839,7 @@ export interface FileRouteTypes {
     | '/tools/prompt-cloud'
     | '/tools/robots-checker'
     | '/tools/schema-generator'
+    | '/tools/wordpress-plugin'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/why/$domain'
@@ -1884,6 +1904,7 @@ export interface FileRouteTypes {
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
+    | '/api/public/wordpress-plugin/$name'
     | '/api/public/wp-plugin/$token'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -2003,6 +2024,7 @@ export interface FileRouteTypes {
     | '/tools/prompt-cloud'
     | '/tools/robots-checker'
     | '/tools/schema-generator'
+    | '/tools/wordpress-plugin'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/why/$domain'
@@ -2067,6 +2089,7 @@ export interface FileRouteTypes {
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
+    | '/api/public/wordpress-plugin/$name'
     | '/api/public/wp-plugin/$token'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -2189,6 +2212,7 @@ export interface FileRouteTypes {
     | '/tools/prompt-cloud'
     | '/tools/robots-checker'
     | '/tools/schema-generator'
+    | '/tools/wordpress-plugin'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/why/$domain'
@@ -2253,6 +2277,7 @@ export interface FileRouteTypes {
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
+    | '/api/public/wordpress-plugin/$name'
     | '/api/public/wp-plugin/$token'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -2350,6 +2375,7 @@ export interface RootRouteChildren {
   ToolsPromptCloudRoute: typeof ToolsPromptCloudRoute
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
   ToolsSchemaGeneratorRoute: typeof ToolsSchemaGeneratorRoute
+  ToolsWordpressPluginRoute: typeof ToolsWordpressPluginRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
   CiteIndexRoute: typeof CiteIndexRoute
@@ -2405,6 +2431,7 @@ export interface RootRouteChildren {
   ApiPublicWidgetBadgeDotsvgRoute: typeof ApiPublicWidgetBadgeDotsvgRoute
   ApiPublicWidgetEmbedDotjsRoute: typeof ApiPublicWidgetEmbedDotjsRoute
   ApiPublicWidgetOgDotsvgRoute: typeof ApiPublicWidgetOgDotsvgRoute
+  ApiPublicWordpressPluginNameRoute: typeof ApiPublicWordpressPluginNameRoute
   ApiPublicWpPluginTokenRoute: typeof ApiPublicWpPluginTokenRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -2814,6 +2841,13 @@ declare module '@tanstack/react-router' {
       path: '/verify/$id'
       fullPath: '/verify/$id'
       preLoaderRoute: typeof VerifyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/wordpress-plugin': {
+      id: '/tools/wordpress-plugin'
+      path: '/tools/wordpress-plugin'
+      fullPath: '/tools/wordpress-plugin'
+      preLoaderRoute: typeof ToolsWordpressPluginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/schema-generator': {
@@ -3430,6 +3464,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/wp-plugin/$token'
       fullPath: '/api/public/wp-plugin/$token'
       preLoaderRoute: typeof ApiPublicWpPluginTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/wordpress-plugin/$name': {
+      id: '/api/public/wordpress-plugin/$name'
+      path: '/api/public/wordpress-plugin/$name'
+      fullPath: '/api/public/wordpress-plugin/$name'
+      preLoaderRoute: typeof ApiPublicWordpressPluginNameRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/widget/og.svg': {
@@ -4056,6 +4097,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsPromptCloudRoute: ToolsPromptCloudRoute,
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
   ToolsSchemaGeneratorRoute: ToolsSchemaGeneratorRoute,
+  ToolsWordpressPluginRoute: ToolsWordpressPluginRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
   CiteIndexRoute: CiteIndexRoute,
@@ -4114,6 +4156,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicWidgetBadgeDotsvgRoute: ApiPublicWidgetBadgeDotsvgRoute,
   ApiPublicWidgetEmbedDotjsRoute: ApiPublicWidgetEmbedDotjsRoute,
   ApiPublicWidgetOgDotsvgRoute: ApiPublicWidgetOgDotsvgRoute,
+  ApiPublicWordpressPluginNameRoute: ApiPublicWordpressPluginNameRoute,
   ApiPublicWpPluginTokenRoute: ApiPublicWpPluginTokenRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,

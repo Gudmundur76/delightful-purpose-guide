@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
-import { ArrowRight, Bot, Cloud, Compass, FileCode2, Gauge, ScrollText, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Bot, Cloud, Compass, FileCode2, Gauge, Plug, ScrollText, ShieldCheck, Sparkles } from "lucide-react";
 
 const URL_ = "https://grow.contact/tools";
 const TITLE = "Free AI SEO & GEO tools — llms.txt, schema, AI visibility";
@@ -80,6 +80,13 @@ const TOOLS: Tool[] = [
     blurb: "Connect grow.contact to ChatGPT, Claude, or Cursor as an authenticated MCP server. Run scans and lookups from your assistant.",
     Icon: Bot,
     status: "core",
+  },
+  {
+    href: "/tools/wordpress-plugin",
+    title: "WordPress plugins",
+    blurb: "Two free, GPL-licensed plugins: grow-auto-fix (JSON-LD + llms.txt + robots.txt) and grow-mcp (turns your site into an MCP server for ChatGPT, Claude, Perplexity). Download the zip, no signup.",
+    Icon: Plug,
+    status: "new",
   },
 ];
 

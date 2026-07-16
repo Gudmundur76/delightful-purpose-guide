@@ -154,7 +154,7 @@ import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/e
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as ApiPublicWpPluginTokenRouteImport } from './routes/api/public/wp-plugin.$token'
-import { Route as ApiPublicWordpressPluginNameDotzipRouteImport } from './routes/api/public/wordpress-plugin.$name[.]zip'
+import { Route as ApiPublicWordpressPluginNameRouteImport } from './routes/api/public/wordpress-plugin.$name'
 import { Route as ApiPublicWidgetOgDotsvgRouteImport } from './routes/api/public/widget/og[.]svg'
 import { Route as ApiPublicWidgetEmbedDotjsRouteImport } from './routes/api/public/widget/embed[.]js'
 import { Route as ApiPublicWidgetBadgeDotsvgRouteImport } from './routes/api/public/widget/badge[.]svg'
@@ -940,10 +940,10 @@ const ApiPublicWpPluginTokenRoute = ApiPublicWpPluginTokenRouteImport.update({
   path: '/api/public/wp-plugin/$token',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicWordpressPluginNameDotzipRoute =
-  ApiPublicWordpressPluginNameDotzipRouteImport.update({
-    id: '/api/public/wordpress-plugin/$name.zip',
-    path: '/api/public/wordpress-plugin/$name.zip',
+const ApiPublicWordpressPluginNameRoute =
+  ApiPublicWordpressPluginNameRouteImport.update({
+    id: '/api/public/wordpress-plugin/$name',
+    path: '/api/public/wordpress-plugin/$name',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicWidgetOgDotsvgRoute = ApiPublicWidgetOgDotsvgRouteImport.update({
@@ -1340,7 +1340,7 @@ export interface FileRoutesByFullPath {
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
-  '/api/public/wordpress-plugin/$name.zip': typeof ApiPublicWordpressPluginNameDotzipRoute
+  '/api/public/wordpress-plugin/$name': typeof ApiPublicWordpressPluginNameRoute
   '/api/public/wp-plugin/$token': typeof ApiPublicWpPluginTokenRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -1525,7 +1525,7 @@ export interface FileRoutesByTo {
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
-  '/api/public/wordpress-plugin/$name.zip': typeof ApiPublicWordpressPluginNameDotzipRoute
+  '/api/public/wordpress-plugin/$name': typeof ApiPublicWordpressPluginNameRoute
   '/api/public/wp-plugin/$token': typeof ApiPublicWpPluginTokenRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -1714,7 +1714,7 @@ export interface FileRoutesById {
   '/api/public/widget/badge.svg': typeof ApiPublicWidgetBadgeDotsvgRoute
   '/api/public/widget/embed.js': typeof ApiPublicWidgetEmbedDotjsRoute
   '/api/public/widget/og.svg': typeof ApiPublicWidgetOgDotsvgRoute
-  '/api/public/wordpress-plugin/$name.zip': typeof ApiPublicWordpressPluginNameDotzipRoute
+  '/api/public/wordpress-plugin/$name': typeof ApiPublicWordpressPluginNameRoute
   '/api/public/wp-plugin/$token': typeof ApiPublicWpPluginTokenRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -1904,7 +1904,7 @@ export interface FileRouteTypes {
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
-    | '/api/public/wordpress-plugin/$name.zip'
+    | '/api/public/wordpress-plugin/$name'
     | '/api/public/wp-plugin/$token'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -2089,7 +2089,7 @@ export interface FileRouteTypes {
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
-    | '/api/public/wordpress-plugin/$name.zip'
+    | '/api/public/wordpress-plugin/$name'
     | '/api/public/wp-plugin/$token'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -2277,7 +2277,7 @@ export interface FileRouteTypes {
     | '/api/public/widget/badge.svg'
     | '/api/public/widget/embed.js'
     | '/api/public/widget/og.svg'
-    | '/api/public/wordpress-plugin/$name.zip'
+    | '/api/public/wordpress-plugin/$name'
     | '/api/public/wp-plugin/$token'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -2431,7 +2431,7 @@ export interface RootRouteChildren {
   ApiPublicWidgetBadgeDotsvgRoute: typeof ApiPublicWidgetBadgeDotsvgRoute
   ApiPublicWidgetEmbedDotjsRoute: typeof ApiPublicWidgetEmbedDotjsRoute
   ApiPublicWidgetOgDotsvgRoute: typeof ApiPublicWidgetOgDotsvgRoute
-  ApiPublicWordpressPluginNameDotzipRoute: typeof ApiPublicWordpressPluginNameDotzipRoute
+  ApiPublicWordpressPluginNameRoute: typeof ApiPublicWordpressPluginNameRoute
   ApiPublicWpPluginTokenRoute: typeof ApiPublicWpPluginTokenRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -3466,11 +3466,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWpPluginTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/wordpress-plugin/$name.zip': {
-      id: '/api/public/wordpress-plugin/$name.zip'
-      path: '/api/public/wordpress-plugin/$name.zip'
-      fullPath: '/api/public/wordpress-plugin/$name.zip'
-      preLoaderRoute: typeof ApiPublicWordpressPluginNameDotzipRouteImport
+    '/api/public/wordpress-plugin/$name': {
+      id: '/api/public/wordpress-plugin/$name'
+      path: '/api/public/wordpress-plugin/$name'
+      fullPath: '/api/public/wordpress-plugin/$name'
+      preLoaderRoute: typeof ApiPublicWordpressPluginNameRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/widget/og.svg': {
@@ -4156,8 +4156,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicWidgetBadgeDotsvgRoute: ApiPublicWidgetBadgeDotsvgRoute,
   ApiPublicWidgetEmbedDotjsRoute: ApiPublicWidgetEmbedDotjsRoute,
   ApiPublicWidgetOgDotsvgRoute: ApiPublicWidgetOgDotsvgRoute,
-  ApiPublicWordpressPluginNameDotzipRoute:
-    ApiPublicWordpressPluginNameDotzipRoute,
+  ApiPublicWordpressPluginNameRoute: ApiPublicWordpressPluginNameRoute,
   ApiPublicWpPluginTokenRoute: ApiPublicWpPluginTokenRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,

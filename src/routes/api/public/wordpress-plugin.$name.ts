@@ -8,7 +8,7 @@ import autoFixReadme from "../../../../wp-plugin/grow-auto-fix/readme.txt?raw";
 import mcpPhp from "../../../../wp-plugin/grow-mcp/grow-mcp.php?raw";
 import mcpReadme from "../../../../wp-plugin/grow-mcp/readme.txt?raw";
 
-export const Route = createFileRoute("/api/public/wordpress-plugin/$name.zip")({
+export const Route = createFileRoute("/api/public/wordpress-plugin/$name")({
   server: {
     handlers: {
       GET: async ({ params }) => {

@@ -8,6 +8,7 @@ import { PLAYBOOKS } from "@/lib/playbooks/data";
 import { getFeaturedPairsWithEntries } from "@/lib/compare/data";
 import { getAllDataDrops } from "@/lib/data-drops/data";
 import { LEADERBOARD } from "@/lib/leaderboard/entries";
+import { STAT_MICROPOSTS } from "@/lib/stats/microposts";
 
 
 
@@ -144,6 +145,12 @@ export const Route = createFileRoute("/sitemap.xml")({
             lastmod: p.publishedAt,
             changefreq: "monthly",
             priority: "0.7",
+          })),
+          ...STAT_MICROPOSTS.map<SitemapEntry>((m) => ({
+            path: `/stats/${m.slug}`,
+            lastmod: m.updatedAt ?? m.publishedAt,
+            changefreq: "monthly",
+            priority: "0.8",
           })),
           ...LEADERBOARD.map<SitemapEntry>((e) => ({
             path: `/verify/${e.domain}`,

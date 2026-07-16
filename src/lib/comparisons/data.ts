@@ -324,6 +324,64 @@ export const COMPARISONS: Comparison[] = [
       },
     ],
   },
+  {
+    slug: "neil-patel-7-layer-stack",
+    competitor: "Neil Patel's 7-Layer AI Visibility Stack",
+    competitorDomain: "neilpatel.com",
+    category: "GEO framework",
+    tagline:
+      "Neil Patel's stack describes the problem. The GEO Standard specifies the fix.",
+    oneLiner:
+      "The 7-Layer AI Visibility Stack is a useful taxonomy for what to think about. The GEO Standard is a testable engineering contract with pass thresholds, JSON-LD shapes, and a public scanner that scores you on it.",
+    verdict:
+      "Both frameworks agree on the substance: technical crawlability, structured data, answer-first content, and measurement. The 7-Layer Stack is agency-facing — it names layers so a strategist can talk about them. The GEO Standard is engineer-facing — every rule is testable at /check, versioned in git, and licensed CC BY 4.0. Pick the framework by who you need to convince: a stakeholder (Neil's stack) or a build team (GEO Standard).",
+    bestFor:
+      "Teams that want a versioned, open engineering standard they can measure against — not a slide deck.",
+    switchIf: [
+      "You need a testable spec with pass/fail thresholds, not a taxonomy.",
+      "You want your framework score on a public scanner your CEO can run.",
+      "You care about protocol discovery (MCP, agents.json, OAuth, markdown negotiation) — layer the 7-layer stack doesn't name.",
+      "Your build team keeps asking 'what does this actually mean in code?'",
+    ],
+    stayIf: [
+      "You already work with NP Digital on retainer and want a shared vocabulary with your consultant.",
+      "You need agency delivery more than a framework — Neil's team ships the work; the GEO Standard is DIY.",
+    ],
+    rows: [
+      { dimension: "Format", grow: "Open, versioned engineering spec (geo-standard@2026.05) — Markdown in git, CC BY 4.0", competitor: "Blog post + agency framework", growWins: true },
+      { dimension: "Testable thresholds", grow: "Per-signal pass/fail with numeric targets", competitor: "Descriptive layers, no scoring rubric", growWins: true },
+      { dimension: "Public scanner", grow: "/check scores any URL against the spec in ~10s", competitor: "Available inside NP Digital engagements", growWins: true },
+      { dimension: "Number of layers / signals", grow: "6 signals: Semantic HTML, JSON-LD, llms.txt, Citability, Speed, Protocol Discovery", competitor: "7 layers: Technical SEO → Content → Structured Data → Authority → Distribution → Analytics → Measurement", growWins: false },
+      { dimension: "Protocol discovery (MCP, OAuth, agents.json)", grow: "First-class signal", competitor: "Not addressed", growWins: true },
+      { dimension: "Crawler matrix (search vs training bots)", grow: "Explicit §4 matrix, updated per engine", competitor: "General guidance", growWins: true },
+      { dimension: "Grounded in original data", grow: "Backed by the 390-row Agent Readability Leaderboard", competitor: "Backed by NP Digital's 22-company cohort", growWins: false },
+      { dimension: "Authority signals coverage", grow: "Covered under Citability, less depth than Neil's Authority layer", competitor: "Explicit Authority layer with PR / digital-PR playbook", growWins: false },
+      { dimension: "Vendor lock-in", grow: "Zero — spec is CC BY 4.0, tools are free and open", competitor: "Framework is free; deep application typically routes through NP Digital services", growWins: true },
+      { dimension: "Update cadence", grow: "Versioned, changelog in git", competitor: "Blog updates, no version pin", growWins: true },
+    ],
+    faqs: [
+      {
+        q: "Is the GEO Standard trying to replace Neil Patel's 7-Layer Stack?",
+        a: "No. They're different artefacts. Neil's stack is a strategy taxonomy — useful for stakeholder alignment and agency conversations. The GEO Standard is an engineering contract — versioned, testable, and licensed for anyone to adopt. Most serious teams end up using both: the stack for the deck, the standard for the build.",
+      },
+      {
+        q: "What's the biggest gap in the 7-Layer Stack that the GEO Standard closes?",
+        a: "Protocol discovery. The GEO Standard treats MCP server cards, /.well-known/oauth-protected-resource, agents.json, markdown negotiation, and the Content-Signal header as a first-class signal — the frontier where citation gives way to direct agent tool use. The 7-Layer Stack doesn't name any of them yet.",
+      },
+      {
+        q: "What does the 7-Layer Stack do better than the GEO Standard?",
+        a: "Authority. Neil's Authority layer folds in digital PR, brand mentions, and third-party citations with concrete playbooks. The GEO Standard treats those under Citability but with less depth. If you need an outbound authority-building programme, borrow that layer from Neil's stack and layer it on top of GEO Standard compliance.",
+      },
+      {
+        q: "Can I be compliant with both?",
+        a: "Yes, and you should. Ship the GEO Standard as your engineering baseline (pass /check with ≥90/100), then use Neil's 7-layer taxonomy as the strategy framing when you present results upward.",
+      },
+      {
+        q: "Where do the two frameworks actually disagree?",
+        a: "On measurement. Neil's stack leans on prompt-volume analysis for prioritisation; the GEO Standard argues (with data at /stats/citation-probability-beats-prompt-volume) that citation probability beats prompt volume 4:1 as a strategy signal. Read both positions and pick the one your data supports.",
+      },
+    ],
+  },
 ];
 
 export function getComparison(slug: string): Comparison | undefined {

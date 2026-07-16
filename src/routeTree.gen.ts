@@ -65,7 +65,10 @@ import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as WhyDomainRouteImport } from './routes/why.$domain'
 import { Route as VsCompetitorRouteImport } from './routes/vs.$competitor'
 import { Route as VerifyIdRouteImport } from './routes/verify.$id'
+import { Route as ToolsSchemaGeneratorRouteImport } from './routes/tools.schema-generator'
 import { Route as ToolsRobotsCheckerRouteImport } from './routes/tools.robots-checker'
+import { Route as ToolsLlmsTxtGeneratorRouteImport } from './routes/tools.llms-txt-generator'
+import { Route as ToolsAiVisibilityRouteImport } from './routes/tools.ai-visibility'
 import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
 import { Route as StandardLlmsDottxtRouteImport } from './routes/standard.llms[.]txt'
 import { Route as StandardVersionRouteImport } from './routes/standard.$version'
@@ -466,9 +469,24 @@ const VerifyIdRoute = VerifyIdRouteImport.update({
   path: '/verify/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsSchemaGeneratorRoute = ToolsSchemaGeneratorRouteImport.update({
+  id: '/tools/schema-generator',
+  path: '/tools/schema-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ToolsRobotsCheckerRoute = ToolsRobotsCheckerRouteImport.update({
   id: '/tools/robots-checker',
   path: '/tools/robots-checker',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsLlmsTxtGeneratorRoute = ToolsLlmsTxtGeneratorRouteImport.update({
+  id: '/tools/llms-txt-generator',
+  path: '/tools/llms-txt-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsAiVisibilityRoute = ToolsAiVisibilityRouteImport.update({
+  id: '/tools/ai-visibility',
+  path: '/tools/ai-visibility',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StandardChar123versionChar125DotmdRoute =
@@ -1203,7 +1221,10 @@ export interface FileRoutesByFullPath {
   '/standard/$version': typeof StandardVersionRoute
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
+  '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
+  '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
+  '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/why/$domain': typeof WhyDomainRoute
@@ -1378,7 +1399,10 @@ export interface FileRoutesByTo {
   '/standard/$version': typeof StandardVersionRoute
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
+  '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
+  '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
+  '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/why/$domain': typeof WhyDomainRoute
@@ -1557,7 +1581,10 @@ export interface FileRoutesById {
   '/standard/$version': typeof StandardVersionRoute
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
+  '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
+  '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
   '/tools/robots-checker': typeof ToolsRobotsCheckerRoute
+  '/tools/schema-generator': typeof ToolsSchemaGeneratorRoute
   '/verify/$id': typeof VerifyIdRoute
   '/vs/$competitor': typeof VsCompetitorRoute
   '/why/$domain': typeof WhyDomainRoute
@@ -1737,7 +1764,10 @@ export interface FileRouteTypes {
     | '/standard/$version'
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
+    | '/tools/ai-visibility'
+    | '/tools/llms-txt-generator'
     | '/tools/robots-checker'
+    | '/tools/schema-generator'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/why/$domain'
@@ -1912,7 +1942,10 @@ export interface FileRouteTypes {
     | '/standard/$version'
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
+    | '/tools/ai-visibility'
+    | '/tools/llms-txt-generator'
     | '/tools/robots-checker'
+    | '/tools/schema-generator'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/why/$domain'
@@ -2090,7 +2123,10 @@ export interface FileRouteTypes {
     | '/standard/$version'
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
+    | '/tools/ai-visibility'
+    | '/tools/llms-txt-generator'
     | '/tools/robots-checker'
+    | '/tools/schema-generator'
     | '/verify/$id'
     | '/vs/$competitor'
     | '/why/$domain'
@@ -2244,7 +2280,10 @@ export interface RootRouteChildren {
   ReportPressRoute: typeof ReportPressRoute
   ReportQ22026Route: typeof ReportQ22026Route
   ReportQ22026DotpdfRoute: typeof ReportQ22026DotpdfRoute
+  ToolsAiVisibilityRoute: typeof ToolsAiVisibilityRoute
+  ToolsLlmsTxtGeneratorRoute: typeof ToolsLlmsTxtGeneratorRoute
   ToolsRobotsCheckerRoute: typeof ToolsRobotsCheckerRoute
+  ToolsSchemaGeneratorRoute: typeof ToolsSchemaGeneratorRoute
   VerifyIdRoute: typeof VerifyIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
   CiteIndexRoute: typeof CiteIndexRoute
@@ -2711,11 +2750,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/schema-generator': {
+      id: '/tools/schema-generator'
+      path: '/tools/schema-generator'
+      fullPath: '/tools/schema-generator'
+      preLoaderRoute: typeof ToolsSchemaGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tools/robots-checker': {
       id: '/tools/robots-checker'
       path: '/tools/robots-checker'
       fullPath: '/tools/robots-checker'
       preLoaderRoute: typeof ToolsRobotsCheckerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/llms-txt-generator': {
+      id: '/tools/llms-txt-generator'
+      path: '/tools/llms-txt-generator'
+      fullPath: '/tools/llms-txt-generator'
+      preLoaderRoute: typeof ToolsLlmsTxtGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/ai-visibility': {
+      id: '/tools/ai-visibility'
+      path: '/tools/ai-visibility'
+      fullPath: '/tools/ai-visibility'
+      preLoaderRoute: typeof ToolsAiVisibilityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/standard/{$version}.md': {
@@ -3877,7 +3937,10 @@ const rootRouteChildren: RootRouteChildren = {
   ReportPressRoute: ReportPressRoute,
   ReportQ22026Route: ReportQ22026Route,
   ReportQ22026DotpdfRoute: ReportQ22026DotpdfRoute,
+  ToolsAiVisibilityRoute: ToolsAiVisibilityRoute,
+  ToolsLlmsTxtGeneratorRoute: ToolsLlmsTxtGeneratorRoute,
   ToolsRobotsCheckerRoute: ToolsRobotsCheckerRoute,
+  ToolsSchemaGeneratorRoute: ToolsSchemaGeneratorRoute,
   VerifyIdRoute: VerifyIdRoute,
   BlogIndexRoute: BlogIndexRoute,
   CiteIndexRoute: CiteIndexRoute,

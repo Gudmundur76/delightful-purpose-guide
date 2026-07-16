@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 const NAV = [
   { to: "/", label: "Home", exact: true },
   { to: "/check", label: "Scanner", exact: false },
+  { to: "/tools", label: "Tools", exact: false },
   { to: "/standard", label: "Standard", exact: false },
   { to: "/mcp-server", label: "MCP", exact: false },
   { to: "/playground", label: "Playground", exact: false },

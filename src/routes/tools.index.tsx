@@ -19,6 +19,13 @@ type Tool = {
 
 const TOOLS: Tool[] = [
   {
+    href: "/tools/geo-explorer",
+    title: "GEO Explorer",
+    blurb: "The Ubersuggest of getting cited by AI. Domain snapshot, prompt ideas, live AI SERP, and answer-first content brief — all in one page.",
+    Icon: Compass,
+    status: "new",
+  },
+  {
     href: "/check",
     title: "AI-readiness scanner",
     blurb: "Score any URL on the five signals AI engines actually read — crawler access, structure, schema, freshness, and protocol discovery.",

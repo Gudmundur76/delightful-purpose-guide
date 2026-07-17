@@ -12,7 +12,7 @@
   "mcp": {
     "server": {
       "name": "grow-contact-mcp",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "title": "grow.contact MCP"
     },
     "tools": [
@@ -135,6 +135,169 @@
           "required": [
             "domain",
             "query"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "auto_fix_schema",
+        "title": "Draft FAQPage JSON-LD for a page",
+        "description": "When to use: `scan_url` reports the `jsonld` signal failing, or the user asks to 'add schema/FAQ markup' to a specific page. Crawls the page, extracts 3-8 real Q/A pairs via Gemini, and drafts a FAQPage JSON-LD block as a pending intervention scoped to the signed-in user. Input: `domain` (bare host, required), `page_url` (absolute URL, optional — defaults to the domain root). Returns: `{ intervention_id, preview, jsonld, install_snippet, next }`. The draft is NOT live — the user must call `approve_intervention` or click Approve in /dashboard/interventions. Idempotent per (site, kind): older drafts of the same kind are auto-superseded. Requires OAuth (401 otherwise).",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "domain": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 253,
+              "description": "Bare domain you own or manage, e.g. `example.com`. No scheme, no path."
+            },
+            "page_url": {
+              "description": "Optional absolute URL of the page to extract FAQ pairs from. Defaults to `https://{domain}/`.",
+              "type": "string",
+              "maxLength": 2048,
+              "format": "uri"
+            }
+          },
+          "required": [
+            "domain"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "auto_fix_llms_txt",
+        "title": "Draft llms.txt for a site",
+        "description": "When to use: `scan_url` reports the `llms` signal failing on a site the user owns, and they want a persisted, approvable fix (not just a preview — use `generate_llms_txt` for that). Discovers up to 20 public URLs via sitemap.xml (or homepage links as fallback), builds a spec-compliant llms.txt body, and drafts it as a pending intervention scoped to the signed-in user. Input: `domain` (bare host), optional `site_name` (defaults to the domain). Returns: `{ intervention_id, preview, content, install_url, install_method }`. Approve with `approve_intervention` — until then `install_url` returns nothing. Older llms_txt drafts on the same site are superseded.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "domain": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 253,
+              "description": "Bare domain you own or manage, e.g. `example.com`."
+            },
+            "site_name": {
+              "description": "Optional display name for the site header. Defaults to the domain.",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            }
+          },
+          "required": [
+            "domain"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "auto_fix_robots_txt",
+        "title": "Draft a robots.txt fix",
+        "description": "When to use: `scan_url` reports search/citation bots blocked, the user says 'am I blocking ChatGPT/Perplexity?', or you need to confirm the site's robots.txt matches the Grow Standard §4 matrix (Googlebot, OAI-SearchBot, PerplexityBot, ClaudeBot, bingbot, FacebookBot must be allowed). Fetches the site's live robots.txt, diffs it, and if anything is missing or blocked drafts a fix as a pending intervention scoped to the signed-in user. Input: `domain` (bare host). Returns: either `{ ok: true, no_fix_needed: true, current }` when nothing needs to change, or `{ intervention_id, preview, missing[], blocked[], current, recommended, install_method }`. robots.txt cannot be injected client-side — the recommended block must be pasted server-side or delivered via the WP plugin after approval.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "domain": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 253,
+              "description": "Bare domain you own or manage, e.g. `example.com`."
+            }
+          },
+          "required": [
+            "domain"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_pending_interventions",
+        "title": "List your pending intervention drafts",
+        "description": "When to use: user asks 'what fixes are ready?', 'show pending changes', or before calling `approve_intervention` so the agent knows which IDs exist. Returns only the signed-in user's drafts (status = 'drafted'), never other users'. No input. Returns: `{ count, items: [{ id, site_id, domain, kind, preview_text, created_at }] }`. Safe to poll — read-only.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "approve_intervention",
+        "title": "Approve a drafted intervention",
+        "description": "When to use: user says 'approve fix X', 'ship it', or after they've reviewed a draft returned by `list_pending_interventions` / `auto_fix_*`. Flips the intervention from `drafted` to `approved` and sets `went_live_at`. Only the intervention's owner can approve. Input: `intervention_id` (uuid). Returns: `{ ok, id, kind, status, went_live_at, install_hint }`. After approval, the snippet at `/api/public/inject/{token}.js` (or the WP plugin) begins serving the payload. This is a WRITE — requires OAuth and ownership. Not idempotent past the first call.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "intervention_id": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "description": "UUID of a drafted intervention you own (returned by list_pending_interventions or any auto_fix_* tool)."
+            }
+          },
+          "required": [
+            "intervention_id"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "reject_intervention",
+        "title": "Reject a drafted intervention",
+        "description": "When to use: user says 'reject fix X', 'discard', or the draft is wrong. Flips a `drafted` intervention to `rejected` with an optional reason. Only the owner can reject. Input: `intervention_id` (uuid), `reason` (optional string ≤ 500 chars, stored on the row and in audit log). Returns: `{ ok, id, status, rejection_reason }`. WRITE — requires OAuth and ownership.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "intervention_id": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "description": "UUID of a drafted intervention you own."
+            },
+            "reason": {
+              "description": "Optional short reason, shown in the audit log.",
+              "type": "string",
+              "maxLength": 500
+            }
+          },
+          "required": [
+            "intervention_id"
           ]
         },
         "outputSchema": null

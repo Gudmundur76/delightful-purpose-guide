@@ -18,8 +18,9 @@ async function loadOwnedIntervention(userId: string, interventionId: string) {
 }
 
 function unauth() {
-  return { content: [{ type: "text", text: "Unauthenticated — sign in to manage interventions." }], isError: true as const };
+  return { content: [{ type: "text" as const, text: "Unauthenticated — sign in to manage interventions." }], isError: true as const };
 }
+
 
 export const listPendingInterventionsTool = defineTool({
   name: "list_pending_interventions",

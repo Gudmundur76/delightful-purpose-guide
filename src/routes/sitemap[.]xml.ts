@@ -68,6 +68,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/mcp-protected-resource", changefreq: "monthly", priority: "0.3" },
           { path: "/openapi.json", changefreq: "monthly", priority: "0.4" },
           { path: "/.well-known/agent-card.json", changefreq: "monthly", priority: "0.3" },
+          { path: "/guide/perplexity-seo", lastmod: "2026-07-25", changefreq: "monthly", priority: "0.7" },
           { path: "/research", lastmod: today, changefreq: "monthly", priority: "0.7" },
           { path: "/for-agents", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/for-analysts", lastmod: today, changefreq: "monthly", priority: "0.7" },

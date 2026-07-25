@@ -124,6 +124,7 @@ function BadgePage() {
                   value={domain}
                   onChange={(e) => setDomain(e.target.value)}
                   placeholder="your-site.com"
+                  aria-label="Your domain"
                   className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
                 />
               </div>

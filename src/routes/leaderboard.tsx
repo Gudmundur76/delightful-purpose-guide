@@ -77,7 +77,7 @@ export const Route = createFileRoute("/leaderboard")({
   component: LeaderboardPage,
   head: () => ({
     meta: [
-      { title: "Citation Intelligence Index — Who Gets Cited By AI | grow.contact" },
+      { title: "Citation Intelligence Index — Cited By AI | grow.contact" },
       {
         name: "description",
         content:
@@ -412,6 +412,7 @@ function LeaderboardPage() {
             <div className="flex flex-wrap items-center gap-3">
               <input
                 type="search"
+                aria-label="Search company or domain"
                 placeholder="Search company or domain…"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}

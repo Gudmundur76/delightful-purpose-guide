@@ -87,6 +87,7 @@ import { Route as LeaderboardRssDotxmlRouteImport } from './routes/leaderboard/r
 import { Route as LeaderboardMethodologyRouteImport } from './routes/leaderboard.methodology'
 import { Route as LeaderboardLlmsDottxtRouteImport } from './routes/leaderboard.llms[.]txt'
 import { Route as HistoryHostRouteImport } from './routes/history.$host'
+import { Route as GuidePerplexitySeoRouteImport } from './routes/guide.perplexity-seo'
 import { Route as GuideLlmsTxtRouteImport } from './routes/guide.llms-txt'
 import { Route as GuideGenerativeEngineOptimizationRouteImport } from './routes/guide.generative-engine-optimization'
 import { Route as GuideAeoVsGeoVsSeoRouteImport } from './routes/guide.aeo-vs-geo-vs-seo'
@@ -587,6 +588,11 @@ const LeaderboardLlmsDottxtRoute = LeaderboardLlmsDottxtRouteImport.update({
 const HistoryHostRoute = HistoryHostRouteImport.update({
   id: '/history/$host',
   path: '/history/$host',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidePerplexitySeoRoute = GuidePerplexitySeoRouteImport.update({
+  id: '/guide/perplexity-seo',
+  path: '/guide/perplexity-seo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuideLlmsTxtRoute = GuideLlmsTxtRouteImport.update({
@@ -1260,6 +1266,7 @@ export interface FileRoutesByFullPath {
   '/guide/aeo-vs-geo-vs-seo': typeof GuideAeoVsGeoVsSeoRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/guide/llms-txt': typeof GuideLlmsTxtRoute
+  '/guide/perplexity-seo': typeof GuidePerplexitySeoRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
@@ -1446,6 +1453,7 @@ export interface FileRoutesByTo {
   '/guide/aeo-vs-geo-vs-seo': typeof GuideAeoVsGeoVsSeoRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/guide/llms-txt': typeof GuideLlmsTxtRoute
+  '/guide/perplexity-seo': typeof GuidePerplexitySeoRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
@@ -1636,6 +1644,7 @@ export interface FileRoutesById {
   '/guide/aeo-vs-geo-vs-seo': typeof GuideAeoVsGeoVsSeoRoute
   '/guide/generative-engine-optimization': typeof GuideGenerativeEngineOptimizationRoute
   '/guide/llms-txt': typeof GuideLlmsTxtRoute
+  '/guide/perplexity-seo': typeof GuidePerplexitySeoRoute
   '/history/$host': typeof HistoryHostRouteWithChildren
   '/leaderboard/llms.txt': typeof LeaderboardLlmsDottxtRoute
   '/leaderboard/methodology': typeof LeaderboardMethodologyRoute
@@ -1827,6 +1836,7 @@ export interface FileRouteTypes {
     | '/guide/aeo-vs-geo-vs-seo'
     | '/guide/generative-engine-optimization'
     | '/guide/llms-txt'
+    | '/guide/perplexity-seo'
     | '/history/$host'
     | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
@@ -2013,6 +2023,7 @@ export interface FileRouteTypes {
     | '/guide/aeo-vs-geo-vs-seo'
     | '/guide/generative-engine-optimization'
     | '/guide/llms-txt'
+    | '/guide/perplexity-seo'
     | '/history/$host'
     | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
@@ -2202,6 +2213,7 @@ export interface FileRouteTypes {
     | '/guide/aeo-vs-geo-vs-seo'
     | '/guide/generative-engine-optimization'
     | '/guide/llms-txt'
+    | '/guide/perplexity-seo'
     | '/history/$host'
     | '/leaderboard/llms.txt'
     | '/leaderboard/methodology'
@@ -2375,6 +2387,7 @@ export interface RootRouteChildren {
   GuideAeoVsGeoVsSeoRoute: typeof GuideAeoVsGeoVsSeoRoute
   GuideGenerativeEngineOptimizationRoute: typeof GuideGenerativeEngineOptimizationRoute
   GuideLlmsTxtRoute: typeof GuideLlmsTxtRoute
+  GuidePerplexitySeoRoute: typeof GuidePerplexitySeoRoute
   HistoryHostRoute: typeof HistoryHostRouteWithChildren
   ReportMethodologyRoute: typeof ReportMethodologyRoute
   ReportPressRoute: typeof ReportPressRoute
@@ -3008,6 +3021,13 @@ declare module '@tanstack/react-router' {
       path: '/history/$host'
       fullPath: '/history/$host'
       preLoaderRoute: typeof HistoryHostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guide/perplexity-seo': {
+      id: '/guide/perplexity-seo'
+      path: '/guide/perplexity-seo'
+      fullPath: '/guide/perplexity-seo'
+      preLoaderRoute: typeof GuidePerplexitySeoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guide/llms-txt': {
@@ -4105,6 +4125,7 @@ const rootRouteChildren: RootRouteChildren = {
   GuideGenerativeEngineOptimizationRoute:
     GuideGenerativeEngineOptimizationRoute,
   GuideLlmsTxtRoute: GuideLlmsTxtRoute,
+  GuidePerplexitySeoRoute: GuidePerplexitySeoRoute,
   HistoryHostRoute: HistoryHostRouteWithChildren,
   ReportMethodologyRoute: ReportMethodologyRoute,
   ReportPressRoute: ReportPressRoute,

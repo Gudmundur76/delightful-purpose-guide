@@ -74,7 +74,7 @@ export const Route = createFileRoute("/")({
 
   head: () => ({
     meta: [
-      { name: "description", content: "Free, open infrastructure for AI search visibility. Scan any URL against the Agent-Native Web Standard, connect the MCP server, run the WordPress plugin — no paywall, no account required." },
+      { name: "description", content: "Free, open infrastructure for AI search visibility. Scan any URL, connect the MCP server, drop in the WordPress plugin. No paywall, no account required." },
       { property: "og:title", content: "grow.contact — Free, open infrastructure for AI search visibility" },
       {
         property: "og:description",
@@ -132,6 +132,32 @@ export const Route = createFileRoute("/")({
                   unitCode: c.value.endsWith("%") ? "P1" : undefined,
                 }),
               ),
+            },
+            {
+              "@type": "FAQPage",
+              "@id": "https://grow.contact/#quick-answers",
+              mainEntity: [
+                {
+                  "@type": "Question",
+                  name: "What is an agent-native website?",
+                  acceptedAnswer: { "@type": "Answer", text: "An agent-native website is a site engineered so AI engines (ChatGPT, Perplexity, Claude, Google AI Overviews) can read, cite, and link to it without rendering JavaScript. It ships semantic HTML, JSON-LD schema, an llms.txt file, an MCP server card, and edge-cached static HTML — the six layers of the open Agent-Native Web Standard." },
+                },
+                {
+                  "@type": "Question",
+                  name: "Do I need to pay anything to use grow.contact?",
+                  acceptedAnswer: { "@type": "Answer", text: "No. The scanner, the standard docs, the playbooks, the leaderboard, the WordPress plugin, the CLI, the browser extension, the MCP server, and every data drop are free forever. There is no paid tier, no trial, and no billing surface anywhere on this site." },
+                },
+                {
+                  "@type": "Question",
+                  name: "Why are 73% of sites excluded from AI citations?",
+                  acceptedAnswer: { "@type": "Answer", text: "Per the /check scanner dataset (n=2,400+ sites audited as of June 2026), 73% of sites fail at least one of: robots.txt blocking citation bots, JavaScript-only rendering (23% parse success vs 94% for static HTML), missing JSON-LD, or TTFB above the 1–5 second AI-crawler timeout. Each is a small, mechanical fix." },
+                },
+                {
+                  "@type": "Question",
+                  name: "Can I connect this to Claude, ChatGPT, or Cursor?",
+                  acceptedAnswer: { "@type": "Answer", text: "Yes. grow.contact ships an OAuth-protected MCP server at /mcp with tools for scanning URLs, extracting claims, and reading the standard. Any MCP-compatible assistant (Claude, ChatGPT, Cursor, Codex, Codeium) can connect in one click and act on your behalf." },
+                },
+              ],
             },
           ],
         }),

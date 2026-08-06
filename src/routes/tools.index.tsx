@@ -82,6 +82,13 @@ const TOOLS: Tool[] = [
     status: "core",
   },
   {
+    href: "/tools/ai-attribution",
+    title: "AI traffic attribution",
+    blurb: "One 1 KB script tag labels every visit from ChatGPT, Perplexity, Claude, Gemini, Copilot and 7 more engines, then pushes the event into GA4, Plausible or PostHog. No cookies, MIT.",
+    Icon: Radar,
+    status: "new",
+  },
+  {
     href: "/tools/wordpress-plugin",
     title: "WordPress plugins",
     blurb: "Two free, GPL-licensed plugins: grow-auto-fix (JSON-LD + llms.txt + robots.txt) and grow-mcp (turns your site into an MCP server for ChatGPT, Claude, Perplexity). Download the zip, no signup.",

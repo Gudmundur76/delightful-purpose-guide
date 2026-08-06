@@ -61,3 +61,29 @@ export async function submitToIndexNow(urls: string[]): Promise<IndexNowResult> 
 
   return { submitted: urlList, status: res.status, ok: res.status === 200 || res.status === 202, message };
 }
+
+/**
+ * Fire-and-forget ping used by publish/update flows.
+ * Accepts paths ("/blog/x") or absolute URLs, never throws.
+ */
+export async function pingIndexNow(pathsOrUrls: string[]): Promise<IndexNowResult | null> {
+  try {
+    const urls = pathsOrUrls.map((p) => (p.startsWith("http") ? p : `https://${INDEXNOW_HOST}${p.startsWith("/") ? p : `/${p}`}`));
+    const result = await submitToIndexNow(urls);
+    if (!result.ok) console.error("IndexNow ping failed", result.status, result.message);
+    return result;
+  } catch (e) {
+    console.error("IndexNow ping error", e);
+    return null;
+  }
+}
+
+/** Read our own sitemap.xml and return every <loc> on this host. */
+export async function sitemapUrls(origin = `https://${INDEXNOW_HOST}`): Promise<string[]> {
+  const res = await fetch(`${origin}/sitemap.xml`, { headers: { accept: "application/xml" } });
+  if (!res.ok) return [];
+  const xml = await res.text();
+  return Array.from(xml.matchAll(/<loc>([^<]+)<\/loc>/g))
+    .map((m) => (m[1] ?? "").trim())
+    .filter(Boolean);
+}

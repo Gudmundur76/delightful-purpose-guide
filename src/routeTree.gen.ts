@@ -179,6 +179,7 @@ import { Route as ApiPublicV1AnalyzeRouteImport } from './routes/api/public/v1/a
 import { Route as ApiPublicStatsOverviewRouteImport } from './routes/api/public/stats/overview'
 import { Route as ApiPublicOauthTokenRouteImport } from './routes/api/public/oauth/token'
 import { Route as ApiPublicInjectTokenRouteImport } from './routes/api/public/inject.$token'
+import { Route as ApiPublicIndexnowResubmitRouteImport } from './routes/api/public/indexnow.resubmit'
 import { Route as ApiPublicHooksVerifyClaimsRouteImport } from './routes/api/public/hooks/verify-claims'
 import { Route as ApiPublicHooksRunScheduledScansRouteImport } from './routes/api/public/hooks/run-scheduled-scans'
 import { Route as ApiPublicHooksRunMonitoredSitesRouteImport } from './routes/api/public/hooks/run-monitored-sites'
@@ -1077,6 +1078,12 @@ const ApiPublicInjectTokenRoute = ApiPublicInjectTokenRouteImport.update({
   path: '/api/public/inject/$token',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicIndexnowResubmitRoute =
+  ApiPublicIndexnowResubmitRouteImport.update({
+    id: '/resubmit',
+    path: '/resubmit',
+    getParentRoute: () => ApiPublicIndexnowRoute,
+  } as any)
 const ApiPublicHooksVerifyClaimsRoute =
   ApiPublicHooksVerifyClaimsRouteImport.update({
     id: '/api/public/hooks/verify-claims',
@@ -1333,7 +1340,7 @@ export interface FileRoutesByFullPath {
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/ai-attribution.js': typeof ApiPublicAiAttributionDotjsRoute
-  '/api/public/indexnow': typeof ApiPublicIndexnowRoute
+  '/api/public/indexnow': typeof ApiPublicIndexnowRouteWithChildren
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1365,6 +1372,7 @@ export interface FileRoutesByFullPath {
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/hooks/verify-claims': typeof ApiPublicHooksVerifyClaimsRoute
+  '/api/public/indexnow/resubmit': typeof ApiPublicIndexnowResubmitRoute
   '/api/public/inject/$token': typeof ApiPublicInjectTokenRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
@@ -1524,7 +1532,7 @@ export interface FileRoutesByTo {
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/ai-attribution.js': typeof ApiPublicAiAttributionDotjsRoute
-  '/api/public/indexnow': typeof ApiPublicIndexnowRoute
+  '/api/public/indexnow': typeof ApiPublicIndexnowRouteWithChildren
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1556,6 +1564,7 @@ export interface FileRoutesByTo {
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/hooks/verify-claims': typeof ApiPublicHooksVerifyClaimsRoute
+  '/api/public/indexnow/resubmit': typeof ApiPublicIndexnowResubmitRoute
   '/api/public/inject/$token': typeof ApiPublicInjectTokenRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
@@ -1719,7 +1728,7 @@ export interface FileRoutesById {
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/ai-attribution.js': typeof ApiPublicAiAttributionDotjsRoute
-  '/api/public/indexnow': typeof ApiPublicIndexnowRoute
+  '/api/public/indexnow': typeof ApiPublicIndexnowRouteWithChildren
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1751,6 +1760,7 @@ export interface FileRoutesById {
   '/api/public/hooks/run-monitored-sites': typeof ApiPublicHooksRunMonitoredSitesRoute
   '/api/public/hooks/run-scheduled-scans': typeof ApiPublicHooksRunScheduledScansRoute
   '/api/public/hooks/verify-claims': typeof ApiPublicHooksVerifyClaimsRoute
+  '/api/public/indexnow/resubmit': typeof ApiPublicIndexnowResubmitRoute
   '/api/public/inject/$token': typeof ApiPublicInjectTokenRoute
   '/api/public/oauth/token': typeof ApiPublicOauthTokenRoute
   '/api/public/stats/overview': typeof ApiPublicStatsOverviewRoute
@@ -1947,6 +1957,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/hooks/verify-claims'
+    | '/api/public/indexnow/resubmit'
     | '/api/public/inject/$token'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
@@ -2138,6 +2149,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/hooks/verify-claims'
+    | '/api/public/indexnow/resubmit'
     | '/api/public/inject/$token'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
@@ -2332,6 +2344,7 @@ export interface FileRouteTypes {
     | '/api/public/hooks/run-monitored-sites'
     | '/api/public/hooks/run-scheduled-scans'
     | '/api/public/hooks/verify-claims'
+    | '/api/public/indexnow/resubmit'
     | '/api/public/inject/$token'
     | '/api/public/oauth/token'
     | '/api/public/stats/overview'
@@ -2464,7 +2477,7 @@ export interface RootRouteChildren {
   AboutAuthorSlugRoute: typeof AboutAuthorSlugRoute
   ApiPublicAgentActionRoute: typeof ApiPublicAgentActionRoute
   ApiPublicAiAttributionDotjsRoute: typeof ApiPublicAiAttributionDotjsRoute
-  ApiPublicIndexnowRoute: typeof ApiPublicIndexnowRoute
+  ApiPublicIndexnowRoute: typeof ApiPublicIndexnowRouteWithChildren
   ApiPublicLeaderboardDotjsonRoute: typeof ApiPublicLeaderboardDotjsonRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicMcpRoute: typeof ApiPublicMcpRoute
@@ -3720,6 +3733,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicInjectTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/indexnow/resubmit': {
+      id: '/api/public/indexnow/resubmit'
+      path: '/resubmit'
+      fullPath: '/api/public/indexnow/resubmit'
+      preLoaderRoute: typeof ApiPublicIndexnowResubmitRouteImport
+      parentRoute: typeof ApiPublicIndexnowRoute
+    }
     '/api/public/hooks/verify-claims': {
       id: '/api/public/hooks/verify-claims'
       path: '/api/public/hooks/verify-claims'
@@ -4124,6 +4144,17 @@ const HistoryHostRouteWithChildren = HistoryHostRoute._addFileChildren(
   HistoryHostRouteChildren,
 )
 
+interface ApiPublicIndexnowRouteChildren {
+  ApiPublicIndexnowResubmitRoute: typeof ApiPublicIndexnowResubmitRoute
+}
+
+const ApiPublicIndexnowRouteChildren: ApiPublicIndexnowRouteChildren = {
+  ApiPublicIndexnowResubmitRoute: ApiPublicIndexnowResubmitRoute,
+}
+
+const ApiPublicIndexnowRouteWithChildren =
+  ApiPublicIndexnowRoute._addFileChildren(ApiPublicIndexnowRouteChildren)
+
 interface ApiPublicV1PostsRouteChildren {
   ApiPublicV1PostsSlugRoute: typeof ApiPublicV1PostsSlugRoute
 }
@@ -4236,7 +4267,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutAuthorSlugRoute: AboutAuthorSlugRoute,
   ApiPublicAgentActionRoute: ApiPublicAgentActionRoute,
   ApiPublicAiAttributionDotjsRoute: ApiPublicAiAttributionDotjsRoute,
-  ApiPublicIndexnowRoute: ApiPublicIndexnowRoute,
+  ApiPublicIndexnowRoute: ApiPublicIndexnowRouteWithChildren,
   ApiPublicLeaderboardDotjsonRoute: ApiPublicLeaderboardDotjsonRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicMcpRoute: ApiPublicMcpRoute,

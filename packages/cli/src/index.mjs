@@ -31,12 +31,14 @@ function help() {
   console.log(`${paint(c.bold, "grow")} — agent-readiness scanner (https://grow.contact)
 
 ${paint(c.bold, "USAGE")}
+  grow mcp [--client <claude|cursor|windsurf|vscode|all>] [--dry-run]
   grow check <url> [--json] [--fail-under <score>]
   grow badge <url> [--out <path>]
   grow --help
   grow --version
 
 ${paint(c.bold, "COMMANDS")}
+  mcp      Connect grow.contact's MCP server to your agent client (one command).
   check    Score a URL against the Grow GEO Standard (6 signals, 0–100).
   badge    Download the SVG badge for a URL you've scanned.
 
@@ -44,6 +46,9 @@ ${paint(c.bold, "OPTIONS")}
   --json             Emit raw JSON (machine-readable).
   --fail-under <n>   Exit with code 1 if the score is below <n>. CI-friendly.
   --out <path>       Output file for the badge (default: ./grow-badge.svg).
+  --client <id>      Which agent client to configure (default: all detected).
+  --url <url>        Override the MCP server URL (default: ${API_BASE}/mcp).
+  --dry-run          Show what would be written, change nothing.
 
 ${paint(c.bold, "ENV")}
   GROW_API_KEY       Required for 'check'. Get one at ${API_BASE}/api-docs.
@@ -51,6 +56,7 @@ ${paint(c.bold, "ENV")}
   NO_COLOR           Disable ANSI colors.
 
 ${paint(c.bold, "EXAMPLES")}
+  npx @grow-contact/cli mcp
   grow check https://example.com
   grow check https://example.com --fail-under 90
   grow badge https://example.com --out badge.svg
@@ -58,7 +64,7 @@ ${paint(c.bold, "EXAMPLES")}
 }
 
 function version() {
-  console.log("0.1.0");
+  console.log("0.2.0");
 }
 
 async function cmdCheck(args) {
@@ -82,7 +88,7 @@ async function cmdCheck(args) {
       headers: {
         "content-type": "application/json",
         "x-api-key": API_KEY,
-        "user-agent": "grow-cli/0.1.0",
+        "user-agent": "grow-cli/0.2.0",
       },
       body: JSON.stringify({ url }),
     });
@@ -158,7 +164,7 @@ async function cmdBadge(args) {
   }
   const out = args.flags.out || "./grow-badge.svg";
   const badgeUrl = `${API_BASE}/badge/${host}.svg`;
-  const res = await fetch(badgeUrl, { headers: { "user-agent": "grow-cli/0.1.0" } });
+  const res = await fetch(badgeUrl, { headers: { "user-agent": "grow-cli/0.2.0" } });
   if (!res.ok) {
     console.error(paint(c.red, `error ${res.status}: could not fetch badge`));
     process.exit(3);
@@ -293,6 +299,8 @@ if (cmd === "--version" || cmd === "-v") {
 }
 if (cmd === "check") {
   cmdCheck(args);
+} else if (cmd === "mcp") {
+  cmdMcp(args);
 } else if (cmd === "badge") {
   cmdBadge(args);
 } else {

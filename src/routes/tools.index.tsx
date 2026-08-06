@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ogImageMeta } from "@/lib/seo/og";
+import { TOOLS_CATALOG } from "@/lib/tools-catalog";
 import { ArrowRight, Bot, Cloud, Compass, FileCode2, Gauge, Plug, Radar, ScrollText, ShieldCheck, Sparkles } from "lucide-react";
 
 const URL_ = "https://grow.contact/tools";

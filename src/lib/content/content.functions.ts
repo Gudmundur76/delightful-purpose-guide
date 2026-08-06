@@ -231,6 +231,11 @@ export const setDraftStatusFn = createServerFn({ method: "POST" })
       } catch (e) {
         console.error("composio onPostPublished failed", e);
       }
+
+      // IndexNow: tell Bing/Yandex/Seznam/Naver about the new page immediately.
+      const slug = await resolveSlug(supabase, data.id);
+      const { pingIndexNow } = await import("@/lib/seo/indexnow");
+      await pingIndexNow([`/blog/${slug}`, "/blog", "/", "/sitemap.xml"]);
     }
     return { ok: true };
   });

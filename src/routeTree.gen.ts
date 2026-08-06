@@ -142,6 +142,7 @@ import { Route as ApiPublicMcpRegisterRouteImport } from './routes/api/public/mc
 import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicLeaderboardDotjsonRouteImport } from './routes/api/public/leaderboard[.]json'
+import { Route as ApiPublicAiAttributionDotjsRouteImport } from './routes/api/public/ai-attribution[.]js'
 import { Route as ApiPublicAgentActionRouteImport } from './routes/api/public/agent-action'
 import { Route as AboutAuthorSlugRouteImport } from './routes/about.author.$slug'
 import { Route as DotwellKnownMcpServerCardDotjsonRouteImport } from './routes/[.]well-known.mcp.server-card[.]json'
@@ -875,6 +876,12 @@ const ApiPublicLeaderboardDotjsonRoute =
     path: '/api/public/leaderboard.json',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicAiAttributionDotjsRoute =
+  ApiPublicAiAttributionDotjsRouteImport.update({
+    id: '/api/public/ai-attribution.js',
+    path: '/api/public/ai-attribution.js',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicAgentActionRoute = ApiPublicAgentActionRouteImport.update({
   id: '/api/public/agent-action',
   path: '/api/public/agent-action',
@@ -1306,6 +1313,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
+  '/api/public/ai-attribution.js': typeof ApiPublicAiAttributionDotjsRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1493,6 +1501,7 @@ export interface FileRoutesByTo {
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
+  '/api/public/ai-attribution.js': typeof ApiPublicAiAttributionDotjsRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1684,6 +1693,7 @@ export interface FileRoutesById {
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
+  '/api/public/ai-attribution.js': typeof ApiPublicAiAttributionDotjsRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1876,6 +1886,7 @@ export interface FileRouteTypes {
     | '/.well-known/mcp/server-card.json'
     | '/about/author/$slug'
     | '/api/public/agent-action'
+    | '/api/public/ai-attribution.js'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -2063,6 +2074,7 @@ export interface FileRouteTypes {
     | '/.well-known/mcp/server-card.json'
     | '/about/author/$slug'
     | '/api/public/agent-action'
+    | '/api/public/ai-attribution.js'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -2253,6 +2265,7 @@ export interface FileRouteTypes {
     | '/.well-known/mcp/server-card.json'
     | '/about/author/$slug'
     | '/api/public/agent-action'
+    | '/api/public/ai-attribution.js'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -2413,6 +2426,7 @@ export interface RootRouteChildren {
   DotwellKnownMcpServerCardDotjsonRoute: typeof DotwellKnownMcpServerCardDotjsonRoute
   AboutAuthorSlugRoute: typeof AboutAuthorSlugRoute
   ApiPublicAgentActionRoute: typeof ApiPublicAgentActionRoute
+  ApiPublicAiAttributionDotjsRoute: typeof ApiPublicAiAttributionDotjsRoute
   ApiPublicLeaderboardDotjsonRoute: typeof ApiPublicLeaderboardDotjsonRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicMcpRoute: typeof ApiPublicMcpRoute
@@ -3408,6 +3422,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicLeaderboardDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/ai-attribution.js': {
+      id: '/api/public/ai-attribution.js'
+      path: '/api/public/ai-attribution.js'
+      fullPath: '/api/public/ai-attribution.js'
+      preLoaderRoute: typeof ApiPublicAiAttributionDotjsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/agent-action': {
       id: '/api/public/agent-action'
       path: '/api/public/agent-action'
@@ -4153,6 +4174,7 @@ const rootRouteChildren: RootRouteChildren = {
   DotwellKnownMcpServerCardDotjsonRoute: DotwellKnownMcpServerCardDotjsonRoute,
   AboutAuthorSlugRoute: AboutAuthorSlugRoute,
   ApiPublicAgentActionRoute: ApiPublicAgentActionRoute,
+  ApiPublicAiAttributionDotjsRoute: ApiPublicAiAttributionDotjsRoute,
   ApiPublicLeaderboardDotjsonRoute: ApiPublicLeaderboardDotjsonRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicMcpRoute: ApiPublicMcpRoute,

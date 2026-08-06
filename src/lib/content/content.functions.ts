@@ -152,8 +152,40 @@ export const updateDraftFn = createServerFn({ method: "POST" })
     if (Object.keys(patch).length === 0) return { ok: true };
     const { error } = await supabase.from("content_drafts").update(patch as never).eq("id", id);
     if (error) throw new Error(error.message);
+
+    // If this draft is already live, tell IndexNow the page changed.
+    const { data: row } = await supabase
+      .from("content_drafts")
+      .select("status")
+      .eq("id", id)
+      .maybeSingle();
+    if ((row as { status?: string } | null)?.status === "published") {
+      const slug = await resolveSlug(supabase, id);
+      const { pingIndexNow } = await import("@/lib/seo/indexnow");
+      await pingIndexNow([`/blog/${slug}`, "/blog", "/sitemap.xml"]);
+    }
     return { ok: true };
   });
+
+/** Resolve the public slug for a draft (falls back to the draft id). */
+async function resolveSlug(
+  supabase: { from: (t: string) => never },
+  draftId: string,
+): Promise<string> {
+  const client = supabase as unknown as {
+    from: (t: string) => {
+      select: (c: string) => {
+        eq: (k: string, v: string) => { maybeSingle: () => Promise<{ data: Record<string, string> | null }> };
+      };
+    };
+  };
+  const { data: draft } = await client.from("content_drafts").select("brief_id").eq("id", draftId).maybeSingle();
+  const briefId = draft?.["brief_id"];
+  if (!briefId) return draftId;
+  const { data: brief } = await client.from("content_briefs").select("site").eq("id", briefId).maybeSingle();
+  return brief?.["site"] ?? draftId;
+}
+
 
 export const setDraftStatusFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])

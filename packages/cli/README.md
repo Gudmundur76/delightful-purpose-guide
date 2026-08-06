@@ -19,6 +19,16 @@ npx @grow-contact/cli check https://example.com
       ↳ Add: Link: </llms.txt>; rel="llms"
 ```
 
+## Connect your agent (MCP)
+
+```bash
+npx @grow-contact/cli mcp
+```
+
+Writes the `grow-contact` MCP server into Claude Desktop, Cursor, Windsurf and VS Code
+configs, then your client opens a browser once for OAuth approval.
+Flags: `--client <claude|cursor|windsurf|vscode|all>`, `--url <url>`, `--dry-run`.
+
 ## Install
 
 ```bash

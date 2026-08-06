@@ -1,6 +1,6 @@
 {
   "name": "@grow-contact/cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Scan any site against the Grow GEO Standard — agent-readiness score in your terminal.",
   "keywords": [
     "geo",

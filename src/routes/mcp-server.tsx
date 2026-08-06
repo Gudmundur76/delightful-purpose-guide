@@ -94,8 +94,21 @@ function McpDocsPage() {
         <section id="install" className="border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
             <h2 className="font-extrabold uppercase tracking-tighter text-3xl sm:text-4xl mb-2">Install</h2>
+            <div className="mb-8 border border-accent/40 bg-accent/5 p-6">
+              <div className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">
+                Fastest path · ~2 min
+              </div>
+              <h3 className="font-bold text-lg mb-2">One command</h3>
+              <pre className="font-mono text-xs sm:text-sm bg-muted/40 p-4 overflow-x-auto">npx @grow-contact/cli mcp</pre>
+              <p className="mt-3 text-sm text-muted-foreground">
+                Detects Claude Desktop, Cursor, Windsurf and VS Code, writes the server entry into each
+                config, and hands off to your browser once for OAuth approval. Add{" "}
+                <code className="font-mono text-foreground">--dry-run</code> to preview, or{" "}
+                <code className="font-mono text-foreground">--client cursor</code> to target one.
+              </p>
+            </div>
             <p className="text-muted-foreground mb-8 max-w-2xl">
-              Pick your client. Replace <code className="font-mono text-foreground">YOUR_MCP_SECRET</code> with a token from{" "}
+              Prefer to do it by hand? Pick your client. Replace <code className="font-mono text-foreground">YOUR_MCP_SECRET</code> with a token from{" "}
               <a href="#auth" className="text-accent hover:underline">OAuth</a>.
             </p>
             <InstallSnippets />

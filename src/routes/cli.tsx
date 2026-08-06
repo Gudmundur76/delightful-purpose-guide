@@ -39,7 +39,7 @@ export const Route = createFileRoute("/cli")({
           description:
             "Command-line scanner that scores any URL against the Grow GEO Standard (5 signals, 0–100) for AI agent readability.",
           url: "https://grow.contact/cli",
-          softwareVersion: "0.1.0",
+          softwareVersion: "0.2.0",
           downloadUrl: "https://www.npmjs.com/package/@grow-contact/cli",
           license: "https://opensource.org/licenses/MIT",
           offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -67,7 +67,7 @@ function CliPage() {
     <main className="mx-auto max-w-3xl px-6 py-16">
       <header className="mb-12">
         <p className="mb-3 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-          @grow-contact/cli · v0.1.0 · MIT
+          @grow-contact/cli · v0.2.0 · MIT
         </p>
         <h1 className="mb-4 text-4xl font-semibold tracking-tight">
           Agent-readiness in your terminal.
@@ -83,6 +83,17 @@ function CliPage() {
       <section className="mb-12">
         <h2 className="mb-3 text-xl font-semibold">Run it now</h2>
         <Code>{`npx @grow-contact/cli check https://example.com`}</Code>
+      </section>
+
+      <section className="mb-12">
+        <h2 className="mb-3 text-xl font-semibold">Connect your agent in one command</h2>
+        <p className="mb-3 text-muted-foreground">
+          Wires our MCP server into Claude Desktop, Cursor, Windsurf and VS Code, then opens the browser
+          once for OAuth approval.
+        </p>
+        <Code>{`npx @grow-contact/cli mcp
+# preview only:      npx @grow-contact/cli mcp --dry-run
+# one client only:   npx @grow-contact/cli mcp --client cursor`}</Code>
       </section>
 
       <section className="mb-12">
@@ -124,6 +135,12 @@ grow check https://example.com`}</Code>
             <p className="font-mono text-sm">grow check &lt;url&gt; [--json] [--fail-under &lt;n&gt;]</p>
             <p className="text-sm text-muted-foreground">
               Score a URL. <code>--json</code> for machine output, <code>--fail-under</code> for CI gates.
+            </p>
+          </div>
+          <div>
+            <p className="font-mono text-sm">grow mcp [--client &lt;id&gt;] [--dry-run] [--url &lt;url&gt;]</p>
+            <p className="text-sm text-muted-foreground">
+              Install the grow.contact MCP server into your agent clients.
             </p>
           </div>
           <div>

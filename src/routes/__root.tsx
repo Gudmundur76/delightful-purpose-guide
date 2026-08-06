@@ -176,6 +176,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
 
     scripts: [
+      // Dogfood: our own AI-referral attribution script (free tool, no cookies).
+      { src: "/api/public/ai-attribution.js", async: true },
       {
         type: "application/ld+json",
         children: JSON.stringify({

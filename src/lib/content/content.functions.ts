@@ -169,7 +169,7 @@ export const updateDraftFn = createServerFn({ method: "POST" })
 
 /** Resolve the public slug for a draft (falls back to the draft id). */
 async function resolveSlug(
-  supabase: { from: (t: string) => never },
+  supabase: unknown,
   draftId: string,
 ): Promise<string> {
   const client = supabase as unknown as {

@@ -144,6 +144,7 @@ import { Route as ApiPublicMcpRegisterRouteImport } from './routes/api/public/mc
 import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicLeaderboardDotjsonRouteImport } from './routes/api/public/leaderboard[.]json'
+import { Route as ApiPublicIndexnowRouteImport } from './routes/api/public/indexnow'
 import { Route as ApiPublicAiAttributionDotjsRouteImport } from './routes/api/public/ai-attribution[.]js'
 import { Route as ApiPublicAgentActionRouteImport } from './routes/api/public/agent-action'
 import { Route as AboutAuthorSlugRouteImport } from './routes/about.author.$slug'
@@ -888,6 +889,11 @@ const ApiPublicLeaderboardDotjsonRoute =
     path: '/api/public/leaderboard.json',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicIndexnowRoute = ApiPublicIndexnowRouteImport.update({
+  id: '/api/public/indexnow',
+  path: '/api/public/indexnow',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicAiAttributionDotjsRoute =
   ApiPublicAiAttributionDotjsRouteImport.update({
     id: '/api/public/ai-attribution.js',
@@ -1327,6 +1333,7 @@ export interface FileRoutesByFullPath {
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/ai-attribution.js': typeof ApiPublicAiAttributionDotjsRoute
+  '/api/public/indexnow': typeof ApiPublicIndexnowRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1517,6 +1524,7 @@ export interface FileRoutesByTo {
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/ai-attribution.js': typeof ApiPublicAiAttributionDotjsRoute
+  '/api/public/indexnow': typeof ApiPublicIndexnowRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1711,6 +1719,7 @@ export interface FileRoutesById {
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
   '/api/public/ai-attribution.js': typeof ApiPublicAiAttributionDotjsRoute
+  '/api/public/indexnow': typeof ApiPublicIndexnowRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1906,6 +1915,7 @@ export interface FileRouteTypes {
     | '/about/author/$slug'
     | '/api/public/agent-action'
     | '/api/public/ai-attribution.js'
+    | '/api/public/indexnow'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -2096,6 +2106,7 @@ export interface FileRouteTypes {
     | '/about/author/$slug'
     | '/api/public/agent-action'
     | '/api/public/ai-attribution.js'
+    | '/api/public/indexnow'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -2289,6 +2300,7 @@ export interface FileRouteTypes {
     | '/about/author/$slug'
     | '/api/public/agent-action'
     | '/api/public/ai-attribution.js'
+    | '/api/public/indexnow'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -2452,6 +2464,7 @@ export interface RootRouteChildren {
   AboutAuthorSlugRoute: typeof AboutAuthorSlugRoute
   ApiPublicAgentActionRoute: typeof ApiPublicAgentActionRoute
   ApiPublicAiAttributionDotjsRoute: typeof ApiPublicAiAttributionDotjsRoute
+  ApiPublicIndexnowRoute: typeof ApiPublicIndexnowRoute
   ApiPublicLeaderboardDotjsonRoute: typeof ApiPublicLeaderboardDotjsonRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicMcpRoute: typeof ApiPublicMcpRoute
@@ -3462,6 +3475,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicLeaderboardDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/indexnow': {
+      id: '/api/public/indexnow'
+      path: '/api/public/indexnow'
+      fullPath: '/api/public/indexnow'
+      preLoaderRoute: typeof ApiPublicIndexnowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/ai-attribution.js': {
       id: '/api/public/ai-attribution.js'
       path: '/api/public/ai-attribution.js'
@@ -4216,6 +4236,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutAuthorSlugRoute: AboutAuthorSlugRoute,
   ApiPublicAgentActionRoute: ApiPublicAgentActionRoute,
   ApiPublicAiAttributionDotjsRoute: ApiPublicAiAttributionDotjsRoute,
+  ApiPublicIndexnowRoute: ApiPublicIndexnowRoute,
   ApiPublicLeaderboardDotjsonRoute: ApiPublicLeaderboardDotjsonRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicMcpRoute: ApiPublicMcpRoute,

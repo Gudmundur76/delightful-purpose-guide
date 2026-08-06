@@ -40,6 +40,7 @@ Operated by Gudmundur Eyberg Kristjansson. Not affiliated with grow.com.
 - [Server card](https://grow.contact/.well-known/mcp.json) — SEP-1849 discovery metadata
 - [Agent card](https://grow.contact/.well-known/agent-card.json) — A2A-compatible capability declaration
 - [OpenAPI](https://grow.contact/openapi.json) — Machine-readable API schema
+- [Tool catalog](https://grow.contact/api/public/tools.json) — Every free tool as JSON: input, output, matching MCP tool, direct API endpoint
 
 ## Research
 

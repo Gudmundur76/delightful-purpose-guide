@@ -18,7 +18,7 @@ export const Route = createFileRoute("/admin/reviews")({
   }),
   beforeLoad: async () => {
     const { data: { session } } = await supabase.auth.getSession();
-    if (!session) throw redirect({ to: "/login" });
+    if (!session) throw redirect({ to: "/login", search: { redirect: window.location.pathname } as never });
   },
   component: AdminReviewsPage,
 });

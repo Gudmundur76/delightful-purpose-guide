@@ -30,6 +30,7 @@ Operated by Gudmundur Eyberg Kristjansson. Not affiliated with grow.com.
 - [Schema Generator](https://grow.contact/tools/schema-generator) — JSON-LD picker by page type
 - [robots.txt Checker](https://grow.contact/tools/robots-checker) — Surfaces GPTBot vs OAI-SearchBot confusion
 - [WordPress plugins](https://grow.contact/tools/wordpress-plugin) — Free GPL: grow-auto-fix + grow-mcp
+- [AI Traffic Attribution](https://grow.contact/tools/ai-attribution) — 1 KB script labelling visits from 12 AI engines; source at /api/public/ai-attribution.js
 - [grow CLI](https://grow.contact/cli) — `npx @grow-contact/cli check <url>`
 
 ## Agent integrations (MCP)

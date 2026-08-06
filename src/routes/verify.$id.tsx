@@ -142,9 +142,11 @@ function NotFoundView() {
 }
 
 function VerifyPage() {
-  const data = Route.useLoaderData();
+  const data = Route.useLoaderData() as unknown as
+    | { intelligence?: CompanyIntelligence | null; record?: unknown }
+    | undefined;
   const intelligence = data?.intelligence;
-  const record = data?.record;
+  const record = data?.record as Parameters<typeof ScanRecordView>[0]["record"] | undefined;
   if (intelligence) return <IntelligenceView intel={intelligence} />;
   if (record) return <ScanRecordView record={record} />;
   return <NotFoundView />;

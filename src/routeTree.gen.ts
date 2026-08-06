@@ -73,6 +73,7 @@ import { Route as ToolsPerplexityAnswerEngineRouteImport } from './routes/tools.
 import { Route as ToolsLlmsTxtGeneratorRouteImport } from './routes/tools.llms-txt-generator'
 import { Route as ToolsGeoExplorerRouteImport } from './routes/tools.geo-explorer'
 import { Route as ToolsAiVisibilityRouteImport } from './routes/tools.ai-visibility'
+import { Route as ToolsAiAttributionRouteImport } from './routes/tools.ai-attribution'
 import { Route as StatsSlugRouteImport } from './routes/stats.$slug'
 import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
 import { Route as StandardLlmsDottxtRouteImport } from './routes/standard.llms[.]txt'
@@ -142,6 +143,7 @@ import { Route as ApiPublicMcpRegisterRouteImport } from './routes/api/public/mc
 import { Route as ApiPublicMcpRouteImport } from './routes/api/public/mcp'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicLeaderboardDotjsonRouteImport } from './routes/api/public/leaderboard[.]json'
+import { Route as ApiPublicAiAttributionDotjsRouteImport } from './routes/api/public/ai-attribution[.]js'
 import { Route as ApiPublicAgentActionRouteImport } from './routes/api/public/agent-action'
 import { Route as AboutAuthorSlugRouteImport } from './routes/about.author.$slug'
 import { Route as DotwellKnownMcpServerCardDotjsonRouteImport } from './routes/[.]well-known.mcp.server-card[.]json'
@@ -519,6 +521,11 @@ const ToolsAiVisibilityRoute = ToolsAiVisibilityRouteImport.update({
   path: '/tools/ai-visibility',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsAiAttributionRoute = ToolsAiAttributionRouteImport.update({
+  id: '/tools/ai-attribution',
+  path: '/tools/ai-attribution',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StatsSlugRoute = StatsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -873,6 +880,12 @@ const ApiPublicLeaderboardDotjsonRoute =
   ApiPublicLeaderboardDotjsonRouteImport.update({
     id: '/api/public/leaderboard.json',
     path: '/api/public/leaderboard.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicAiAttributionDotjsRoute =
+  ApiPublicAiAttributionDotjsRouteImport.update({
+    id: '/api/public/ai-attribution.js',
+    path: '/api/public/ai-attribution.js',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicAgentActionRoute = ApiPublicAgentActionRouteImport.update({
@@ -1281,6 +1294,7 @@ export interface FileRoutesByFullPath {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/stats/$slug': typeof StatsSlugRoute
+  '/tools/ai-attribution': typeof ToolsAiAttributionRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
@@ -1306,6 +1320,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
+  '/api/public/ai-attribution.js': typeof ApiPublicAiAttributionDotjsRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1468,6 +1483,7 @@ export interface FileRoutesByTo {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/stats/$slug': typeof StatsSlugRoute
+  '/tools/ai-attribution': typeof ToolsAiAttributionRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
@@ -1493,6 +1509,7 @@ export interface FileRoutesByTo {
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
+  '/api/public/ai-attribution.js': typeof ApiPublicAiAttributionDotjsRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1659,6 +1676,7 @@ export interface FileRoutesById {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/stats/$slug': typeof StatsSlugRoute
+  '/tools/ai-attribution': typeof ToolsAiAttributionRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
@@ -1684,6 +1702,7 @@ export interface FileRoutesById {
   '/.well-known/mcp/server-card.json': typeof DotwellKnownMcpServerCardDotjsonRoute
   '/about/author/$slug': typeof AboutAuthorSlugRoute
   '/api/public/agent-action': typeof ApiPublicAgentActionRoute
+  '/api/public/ai-attribution.js': typeof ApiPublicAiAttributionDotjsRoute
   '/api/public/leaderboard.json': typeof ApiPublicLeaderboardDotjsonRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/api/public/mcp': typeof ApiPublicMcpRoute
@@ -1851,6 +1870,7 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/stats/$slug'
+    | '/tools/ai-attribution'
     | '/tools/ai-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
@@ -1876,6 +1896,7 @@ export interface FileRouteTypes {
     | '/.well-known/mcp/server-card.json'
     | '/about/author/$slug'
     | '/api/public/agent-action'
+    | '/api/public/ai-attribution.js'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -2038,6 +2059,7 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/stats/$slug'
+    | '/tools/ai-attribution'
     | '/tools/ai-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
@@ -2063,6 +2085,7 @@ export interface FileRouteTypes {
     | '/.well-known/mcp/server-card.json'
     | '/about/author/$slug'
     | '/api/public/agent-action'
+    | '/api/public/ai-attribution.js'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -2228,6 +2251,7 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/stats/$slug'
+    | '/tools/ai-attribution'
     | '/tools/ai-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
@@ -2253,6 +2277,7 @@ export interface FileRouteTypes {
     | '/.well-known/mcp/server-card.json'
     | '/about/author/$slug'
     | '/api/public/agent-action'
+    | '/api/public/ai-attribution.js'
     | '/api/public/leaderboard.json'
     | '/api/public/leads'
     | '/api/public/mcp'
@@ -2393,6 +2418,7 @@ export interface RootRouteChildren {
   ReportPressRoute: typeof ReportPressRoute
   ReportQ22026Route: typeof ReportQ22026Route
   ReportQ22026DotpdfRoute: typeof ReportQ22026DotpdfRoute
+  ToolsAiAttributionRoute: typeof ToolsAiAttributionRoute
   ToolsAiVisibilityRoute: typeof ToolsAiVisibilityRoute
   ToolsGeoExplorerRoute: typeof ToolsGeoExplorerRoute
   ToolsLlmsTxtGeneratorRoute: typeof ToolsLlmsTxtGeneratorRoute
@@ -2413,6 +2439,7 @@ export interface RootRouteChildren {
   DotwellKnownMcpServerCardDotjsonRoute: typeof DotwellKnownMcpServerCardDotjsonRoute
   AboutAuthorSlugRoute: typeof AboutAuthorSlugRoute
   ApiPublicAgentActionRoute: typeof ApiPublicAgentActionRoute
+  ApiPublicAiAttributionDotjsRoute: typeof ApiPublicAiAttributionDotjsRoute
   ApiPublicLeaderboardDotjsonRoute: typeof ApiPublicLeaderboardDotjsonRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicMcpRoute: typeof ApiPublicMcpRoute
@@ -2925,6 +2952,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsAiVisibilityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/ai-attribution': {
+      id: '/tools/ai-attribution'
+      path: '/tools/ai-attribution'
+      fullPath: '/tools/ai-attribution'
+      preLoaderRoute: typeof ToolsAiAttributionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/stats/$slug': {
       id: '/stats/$slug'
       path: '/$slug'
@@ -3406,6 +3440,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/leaderboard.json'
       fullPath: '/api/public/leaderboard.json'
       preLoaderRoute: typeof ApiPublicLeaderboardDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/ai-attribution.js': {
+      id: '/api/public/ai-attribution.js'
+      path: '/api/public/ai-attribution.js'
+      fullPath: '/api/public/ai-attribution.js'
+      preLoaderRoute: typeof ApiPublicAiAttributionDotjsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/agent-action': {
@@ -4131,6 +4172,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReportPressRoute: ReportPressRoute,
   ReportQ22026Route: ReportQ22026Route,
   ReportQ22026DotpdfRoute: ReportQ22026DotpdfRoute,
+  ToolsAiAttributionRoute: ToolsAiAttributionRoute,
   ToolsAiVisibilityRoute: ToolsAiVisibilityRoute,
   ToolsGeoExplorerRoute: ToolsGeoExplorerRoute,
   ToolsLlmsTxtGeneratorRoute: ToolsLlmsTxtGeneratorRoute,
@@ -4153,6 +4195,7 @@ const rootRouteChildren: RootRouteChildren = {
   DotwellKnownMcpServerCardDotjsonRoute: DotwellKnownMcpServerCardDotjsonRoute,
   AboutAuthorSlugRoute: AboutAuthorSlugRoute,
   ApiPublicAgentActionRoute: ApiPublicAgentActionRoute,
+  ApiPublicAiAttributionDotjsRoute: ApiPublicAiAttributionDotjsRoute,
   ApiPublicLeaderboardDotjsonRoute: ApiPublicLeaderboardDotjsonRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicMcpRoute: ApiPublicMcpRoute,

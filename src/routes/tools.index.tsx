@@ -9,93 +9,22 @@ const TITLE = "Free AI SEO & GEO tools — llms.txt, schema, AI visibility";
 const DESC =
   "A free toolkit for getting cited by AI. Generate spec-compliant llms.txt, build JSON-LD schema, check how ChatGPT and Gemini see your site, and scan for crawler access — no signup, no upsell.";
 
-type Tool = {
-  href: string;
-  title: string;
-  blurb: string;
-  Icon: typeof Bot;
-  status?: "new" | "core";
+const ICONS: Record<string, typeof Bot> = {
+  "perplexity-answer-engine": Sparkles,
+  "geo-explorer": Compass,
+  "prompt-cloud": Cloud,
+  check: Gauge,
+  "ai-visibility": Sparkles,
+  "llms-txt-generator": ScrollText,
+  "schema-generator": FileCode2,
+  "robots-checker": ShieldCheck,
+  "mcp-server": Bot,
+  "ai-attribution": Radar,
+  "wordpress-plugin": Plug,
 };
 
-const TOOLS: Tool[] = [
-  {
-    href: "/tools/perplexity-answer-engine",
-    title: "Perplexity Answer Engine",
-    blurb: "Type any question. We simulate what Perplexity answers today, then engineer the citation-ready answer block (lead, stats, FAQ, JSON-LD) that Perplexity would pick over the incumbent — with a Pick Score.",
-    Icon: Sparkles,
-    status: "new",
-  },
-  {
-    href: "/tools/geo-explorer",
-    title: "GEO Explorer",
-    blurb: "The Ubersuggest of getting cited by AI. Domain snapshot, prompt ideas, live AI SERP, and answer-first content brief — all in one page.",
-    Icon: Compass,
-    status: "new",
-  },
-  {
-    href: "/tools/prompt-cloud",
-    title: "Prompt Cloud",
-    blurb: "The AnswerThePublic replacement for AI. Expand any seed into 40 real ChatGPT/Perplexity/Claude/Gemini prompts with intent, difficulty, and the incumbent to displace.",
-    Icon: Cloud,
-    status: "new",
-  },
-  {
-    href: "/check",
-    title: "AI-readiness scanner",
-    blurb: "Score any URL on the five signals AI engines actually read — crawler access, structure, schema, freshness, and protocol discovery.",
-    Icon: Gauge,
-    status: "core",
-  },
-  {
-    href: "/tools/ai-visibility",
-    title: "AI visibility checker",
-    blurb: "Ask a real question to Gemini and GPT — see whether your domain shows up in the answer or gets cited. Live, per-engine.",
-    Icon: Sparkles,
-    status: "new",
-  },
-  {
-    href: "/tools/llms-txt-generator",
-    title: "llms.txt generator",
-    blurb: "Point us at a domain. We crawl your sitemap and return a spec-compliant llms.txt, grouped by section, ready to paste at the root.",
-    Icon: ScrollText,
-    status: "new",
-  },
-  {
-    href: "/tools/schema-generator",
-    title: "JSON-LD schema generator",
-    blurb: "Build Organization, FAQ, and Article schema in a form. Copy the JSON-LD, drop it in your <head>, done.",
-    Icon: FileCode2,
-    status: "new",
-  },
-  {
-    href: "/tools/robots-checker",
-    title: "robots.txt checker for AI",
-    blurb: "Paste your robots.txt. See which of the 15+ AI crawlers (OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended…) you're allowing or blocking.",
-    Icon: ShieldCheck,
-    status: "core",
-  },
-  {
-    href: "/mcp-server",
-    title: "MCP server",
-    blurb: "Connect grow.contact to ChatGPT, Claude, or Cursor as an authenticated MCP server. Run scans and lookups from your assistant.",
-    Icon: Bot,
-    status: "core",
-  },
-  {
-    href: "/tools/ai-attribution",
-    title: "AI traffic attribution",
-    blurb: "One 1 KB script tag labels every visit from ChatGPT, Perplexity, Claude, Gemini, Copilot and 7 more engines, then pushes the event into GA4, Plausible or PostHog. No cookies, MIT.",
-    Icon: Radar,
-    status: "new",
-  },
-  {
-    href: "/tools/wordpress-plugin",
-    title: "WordPress plugins",
-    blurb: "Two free, GPL-licensed plugins: grow-auto-fix (JSON-LD + llms.txt + robots.txt) and grow-mcp (turns your site into an MCP server for ChatGPT, Claude, Perplexity). Download the zip, no signup.",
-    Icon: Plug,
-    status: "new",
-  },
-];
+const TOOLS = TOOLS_CATALOG.map((t) => ({ ...t, Icon: ICONS[t.id] ?? Bot }));
+
 
 export const Route = createFileRoute("/tools/")({
   component: ToolsHub,

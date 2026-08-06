@@ -73,6 +73,7 @@ import { Route as ToolsPerplexityAnswerEngineRouteImport } from './routes/tools.
 import { Route as ToolsLlmsTxtGeneratorRouteImport } from './routes/tools.llms-txt-generator'
 import { Route as ToolsGeoExplorerRouteImport } from './routes/tools.geo-explorer'
 import { Route as ToolsAiVisibilityRouteImport } from './routes/tools.ai-visibility'
+import { Route as ToolsAiAttributionRouteImport } from './routes/tools.ai-attribution'
 import { Route as StatsSlugRouteImport } from './routes/stats.$slug'
 import { Route as StandardChar123versionChar125DotmdRouteImport } from './routes/standard.{$version}[.]md'
 import { Route as StandardLlmsDottxtRouteImport } from './routes/standard.llms[.]txt'
@@ -518,6 +519,11 @@ const ToolsGeoExplorerRoute = ToolsGeoExplorerRouteImport.update({
 const ToolsAiVisibilityRoute = ToolsAiVisibilityRouteImport.update({
   id: '/tools/ai-visibility',
   path: '/tools/ai-visibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsAiAttributionRoute = ToolsAiAttributionRouteImport.update({
+  id: '/tools/ai-attribution',
+  path: '/tools/ai-attribution',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StatsSlugRoute = StatsSlugRouteImport.update({
@@ -1288,6 +1294,7 @@ export interface FileRoutesByFullPath {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/stats/$slug': typeof StatsSlugRoute
+  '/tools/ai-attribution': typeof ToolsAiAttributionRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
@@ -1476,6 +1483,7 @@ export interface FileRoutesByTo {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/stats/$slug': typeof StatsSlugRoute
+  '/tools/ai-attribution': typeof ToolsAiAttributionRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
@@ -1668,6 +1676,7 @@ export interface FileRoutesById {
   '/standard/llms.txt': typeof StandardLlmsDottxtRoute
   '/standard/{$version}.md': typeof StandardChar123versionChar125DotmdRoute
   '/stats/$slug': typeof StatsSlugRoute
+  '/tools/ai-attribution': typeof ToolsAiAttributionRoute
   '/tools/ai-visibility': typeof ToolsAiVisibilityRoute
   '/tools/geo-explorer': typeof ToolsGeoExplorerRoute
   '/tools/llms-txt-generator': typeof ToolsLlmsTxtGeneratorRoute
@@ -1861,6 +1870,7 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/stats/$slug'
+    | '/tools/ai-attribution'
     | '/tools/ai-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
@@ -2049,6 +2059,7 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/stats/$slug'
+    | '/tools/ai-attribution'
     | '/tools/ai-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
@@ -2240,6 +2251,7 @@ export interface FileRouteTypes {
     | '/standard/llms.txt'
     | '/standard/{$version}.md'
     | '/stats/$slug'
+    | '/tools/ai-attribution'
     | '/tools/ai-visibility'
     | '/tools/geo-explorer'
     | '/tools/llms-txt-generator'
@@ -2406,6 +2418,7 @@ export interface RootRouteChildren {
   ReportPressRoute: typeof ReportPressRoute
   ReportQ22026Route: typeof ReportQ22026Route
   ReportQ22026DotpdfRoute: typeof ReportQ22026DotpdfRoute
+  ToolsAiAttributionRoute: typeof ToolsAiAttributionRoute
   ToolsAiVisibilityRoute: typeof ToolsAiVisibilityRoute
   ToolsGeoExplorerRoute: typeof ToolsGeoExplorerRoute
   ToolsLlmsTxtGeneratorRoute: typeof ToolsLlmsTxtGeneratorRoute
@@ -2937,6 +2950,13 @@ declare module '@tanstack/react-router' {
       path: '/tools/ai-visibility'
       fullPath: '/tools/ai-visibility'
       preLoaderRoute: typeof ToolsAiVisibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/ai-attribution': {
+      id: '/tools/ai-attribution'
+      path: '/tools/ai-attribution'
+      fullPath: '/tools/ai-attribution'
+      preLoaderRoute: typeof ToolsAiAttributionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/stats/$slug': {
@@ -4152,6 +4172,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReportPressRoute: ReportPressRoute,
   ReportQ22026Route: ReportQ22026Route,
   ReportQ22026DotpdfRoute: ReportQ22026DotpdfRoute,
+  ToolsAiAttributionRoute: ToolsAiAttributionRoute,
   ToolsAiVisibilityRoute: ToolsAiVisibilityRoute,
   ToolsGeoExplorerRoute: ToolsGeoExplorerRoute,
   ToolsLlmsTxtGeneratorRoute: ToolsLlmsTxtGeneratorRoute,

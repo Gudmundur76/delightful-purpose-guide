@@ -37,6 +37,10 @@ const card = {
       protocol: "openapi",
       url: "https://grow.contact/openapi.json",
     },
+    {
+      protocol: "tool-catalog",
+      url: "https://grow.contact/api/public/tools.json",
+    },
   ],
   // High-level skills (A2A "skills" convention). Agents pick by skill,
   // then invoke via the endpoint that fits their transport.

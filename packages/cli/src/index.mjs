@@ -170,6 +170,95 @@ async function cmdBadge(args) {
   console.log(paint(c.gray, `  source: ${badgeUrl}`));
 }
 
+const SERVER_KEY = "grow-contact";
+
+function clientTargets() {
+  const os = process.platform;
+  const home = process.env.HOME || process.env.USERPROFILE || ".";
+  const join = (...p) => p.join("/");
+  const claude =
+    os === "darwin"
+      ? join(home, "Library/Application Support/Claude/claude_desktop_config.json")
+      : os === "win32"
+        ? join(process.env.APPDATA || join(home, "AppData/Roaming"), "Claude/claude_desktop_config.json")
+        : join(home, ".config/Claude/claude_desktop_config.json");
+  return [
+    { id: "claude", label: "Claude Desktop", path: claude },
+    { id: "cursor", label: "Cursor", path: join(home, ".cursor/mcp.json") },
+    { id: "windsurf", label: "Windsurf", path: join(home, ".codeium/windsurf/mcp_config.json") },
+    { id: "vscode", label: "VS Code (MCP)", path: join(home, ".vscode/mcp.json") },
+  ];
+}
+
+async function cmdMcp(args) {
+  const { readFile, writeFile, mkdir } = await import("node:fs/promises");
+  const { dirname } = await import("node:path");
+
+  const serverUrl = args.flags.url || `${API_BASE}/mcp`;
+  const only = typeof args.flags.client === "string" ? args.flags.client : "all";
+  const dryRun = Boolean(args.flags["dry-run"]);
+  const entry = { command: "npx", args: ["-y", "mcp-remote", serverUrl] };
+
+  const targets = clientTargets().filter((t) => only === "all" || only === t.id);
+  if (!targets.length) {
+    console.error(paint(c.red, `error: unknown --client '${only}' (claude|cursor|windsurf|vscode|all)`));
+    process.exit(2);
+  }
+
+  console.log("");
+  console.log(paint(c.bold, `  grow.contact MCP  ·  ${serverUrl}`));
+  console.log("");
+
+  let wrote = 0;
+  for (const t of targets) {
+    let config = {};
+    let existed = false;
+    try {
+      config = JSON.parse(await readFile(t.path, "utf8"));
+      existed = true;
+    } catch {
+      config = {};
+    }
+    // Cursor/Claude/Windsurf use `mcpServers`; VS Code uses `servers`.
+    const key = t.id === "vscode" ? "servers" : "mcpServers";
+    if (!existed && only === "all" && t.id !== "claude" && t.id !== "cursor") {
+      console.log(paint(c.gray, `  ○ ${t.label.padEnd(16)} skipped (not installed)`));
+      continue;
+    }
+    config[key] = { ...(config[key] || {}), [SERVER_KEY]: entry };
+
+    if (dryRun) {
+      console.log(paint(c.yellow, `  ▸ ${t.label.padEnd(16)} would write ${t.path}`));
+      continue;
+    }
+    try {
+      await mkdir(dirname(t.path), { recursive: true });
+      await writeFile(t.path, `${JSON.stringify(config, null, 2)}\n`, "utf8");
+      wrote++;
+      console.log(paint(c.green, `  ✓ ${t.label.padEnd(16)} ${existed ? "updated" : "created"} ${t.path}`));
+    } catch (err) {
+      console.log(paint(c.red, `  ✗ ${t.label.padEnd(16)} ${err.message}`));
+    }
+  }
+
+  console.log("");
+  if (dryRun) {
+    console.log(paint(c.gray, "  dry run — nothing written."));
+  } else if (wrote) {
+    console.log("  Next: restart your client. It will open a browser once to approve access.");
+    console.log(paint(c.gray, "  Then ask your agent: “scan grow.contact with the grow tools”."));
+  } else {
+    console.log(paint(c.yellow, "  Nothing written. Add this to your client config manually:"));
+    console.log("");
+    console.log(
+      paint(c.gray, JSON.stringify({ mcpServers: { [SERVER_KEY]: entry } }, null, 2)),
+    );
+  }
+  console.log("");
+  console.log(paint(c.gray, `  Tool catalog & auth docs: ${API_BASE}/mcp-server`));
+  console.log("");
+}
+
 function parseArgs(argv) {
   const positional = [];
   const flags = {};

@@ -139,7 +139,7 @@ function renderReport(d) {
   }
   console.log("");
   console.log(paint(c.gray, `  Full report: ${API_BASE}/check/report?url=${encodeURIComponent(d.url)}`));
-  console.log(paint(c.gray, `  Need a fix in 48h? ${API_BASE}/pricing`));
+  console.log(paint(c.gray, `  Connect your agent: npx @grow-contact/cli mcp`));
   console.log("");
 }
 

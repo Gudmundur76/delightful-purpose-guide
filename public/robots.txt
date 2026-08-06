@@ -55,3 +55,6 @@ Sitemap: https://grow.contact/sitemap.xml
 Sitemap: https://grow.contact/blog/rss.xml
 Sitemap: https://grow.contact/research/rss.xml
 Sitemap: https://grow.contact/leaderboard/rss.xml
+
+# IndexNow key (instant submission to Bing, Yandex, Seznam, Naver)
+# https://grow.contact/850307b6fd9b7ece026f0a493448256d.txt

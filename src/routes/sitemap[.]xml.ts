@@ -91,6 +91,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/tools/llms-txt-generator", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/tools/schema-generator", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/tools/ai-visibility", lastmod: today, changefreq: "monthly", priority: "0.8" },
+          { path: "/tools/ai-attribution", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/report/q2-2026", lastmod: today, changefreq: "monthly", priority: "0.9" },
           { path: "/report/q2-2026.pdf", lastmod: today, changefreq: "monthly", priority: "0.8" },
           { path: "/report/methodology", lastmod: today, changefreq: "monthly", priority: "0.7" },

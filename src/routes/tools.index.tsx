@@ -82,9 +82,17 @@ function ToolsHub() {
               Every tool here runs in your browser or on our servers. No signup, no email wall, no
               upsell. If a competitor charges for it, we probably ship it here for free.
             </p>
-            <time className="mt-4 block text-xs text-muted-foreground" dateTime="2026-07-16">
-              Updated July 16, 2026
+            <time className="mt-4 block text-xs text-muted-foreground" dateTime="2026-08-06">
+              Updated August 6, 2026
             </time>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Agents: this catalog is machine-readable at{" "}
+              <a className="text-primary underline" href="/api/public/tools.json">
+                /api/public/tools.json
+              </a>
+              .
+            </p>
+
           </div>
         </section>
 

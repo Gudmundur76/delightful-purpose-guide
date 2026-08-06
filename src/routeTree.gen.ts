@@ -137,6 +137,7 @@ import { Route as BadgeClaimChar123idChar125DotsvgRouteImport } from './routes/b
 import { Route as ApiPublicWhyUnlockRouteImport } from './routes/api/public/why-unlock'
 import { Route as ApiPublicWhyReportRouteImport } from './routes/api/public/why-report'
 import { Route as ApiPublicWhyPreviewRouteImport } from './routes/api/public/why-preview'
+import { Route as ApiPublicToolsDotjsonRouteImport } from './routes/api/public/tools[.]json'
 import { Route as ApiPublicRescanRouteImport } from './routes/api/public/rescan'
 import { Route as ApiPublicPingRouteImport } from './routes/api/public/ping'
 import { Route as ApiPublicMcpRegisterRouteImport } from './routes/api/public/mcp-register'
@@ -851,6 +852,11 @@ const ApiPublicWhyPreviewRoute = ApiPublicWhyPreviewRouteImport.update({
   path: '/api/public/why-preview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicToolsDotjsonRoute = ApiPublicToolsDotjsonRouteImport.update({
+  id: '/api/public/tools.json',
+  path: '/api/public/tools.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicRescanRoute = ApiPublicRescanRouteImport.update({
   id: '/api/public/rescan',
   path: '/api/public/rescan',
@@ -1327,6 +1333,7 @@ export interface FileRoutesByFullPath {
   '/api/public/mcp-register': typeof ApiPublicMcpRegisterRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/api/public/rescan': typeof ApiPublicRescanRoute
+  '/api/public/tools.json': typeof ApiPublicToolsDotjsonRoute
   '/api/public/why-preview': typeof ApiPublicWhyPreviewRoute
   '/api/public/why-report': typeof ApiPublicWhyReportRoute
   '/api/public/why-unlock': typeof ApiPublicWhyUnlockRoute
@@ -1516,6 +1523,7 @@ export interface FileRoutesByTo {
   '/api/public/mcp-register': typeof ApiPublicMcpRegisterRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/api/public/rescan': typeof ApiPublicRescanRoute
+  '/api/public/tools.json': typeof ApiPublicToolsDotjsonRoute
   '/api/public/why-preview': typeof ApiPublicWhyPreviewRoute
   '/api/public/why-report': typeof ApiPublicWhyReportRoute
   '/api/public/why-unlock': typeof ApiPublicWhyUnlockRoute
@@ -1709,6 +1717,7 @@ export interface FileRoutesById {
   '/api/public/mcp-register': typeof ApiPublicMcpRegisterRoute
   '/api/public/ping': typeof ApiPublicPingRoute
   '/api/public/rescan': typeof ApiPublicRescanRoute
+  '/api/public/tools.json': typeof ApiPublicToolsDotjsonRoute
   '/api/public/why-preview': typeof ApiPublicWhyPreviewRoute
   '/api/public/why-report': typeof ApiPublicWhyReportRoute
   '/api/public/why-unlock': typeof ApiPublicWhyUnlockRoute
@@ -1903,6 +1912,7 @@ export interface FileRouteTypes {
     | '/api/public/mcp-register'
     | '/api/public/ping'
     | '/api/public/rescan'
+    | '/api/public/tools.json'
     | '/api/public/why-preview'
     | '/api/public/why-report'
     | '/api/public/why-unlock'
@@ -2092,6 +2102,7 @@ export interface FileRouteTypes {
     | '/api/public/mcp-register'
     | '/api/public/ping'
     | '/api/public/rescan'
+    | '/api/public/tools.json'
     | '/api/public/why-preview'
     | '/api/public/why-report'
     | '/api/public/why-unlock'
@@ -2284,6 +2295,7 @@ export interface FileRouteTypes {
     | '/api/public/mcp-register'
     | '/api/public/ping'
     | '/api/public/rescan'
+    | '/api/public/tools.json'
     | '/api/public/why-preview'
     | '/api/public/why-report'
     | '/api/public/why-unlock'
@@ -2446,6 +2458,7 @@ export interface RootRouteChildren {
   ApiPublicMcpRegisterRoute: typeof ApiPublicMcpRegisterRoute
   ApiPublicPingRoute: typeof ApiPublicPingRoute
   ApiPublicRescanRoute: typeof ApiPublicRescanRoute
+  ApiPublicToolsDotjsonRoute: typeof ApiPublicToolsDotjsonRoute
   ApiPublicWhyPreviewRoute: typeof ApiPublicWhyPreviewRoute
   ApiPublicWhyReportRoute: typeof ApiPublicWhyReportRoute
   ApiPublicWhyUnlockRoute: typeof ApiPublicWhyUnlockRoute
@@ -3400,6 +3413,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicWhyPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/tools.json': {
+      id: '/api/public/tools.json'
+      path: '/api/public/tools.json'
+      fullPath: '/api/public/tools.json'
+      preLoaderRoute: typeof ApiPublicToolsDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/rescan': {
       id: '/api/public/rescan'
       path: '/api/public/rescan'
@@ -4202,6 +4222,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicMcpRegisterRoute: ApiPublicMcpRegisterRoute,
   ApiPublicPingRoute: ApiPublicPingRoute,
   ApiPublicRescanRoute: ApiPublicRescanRoute,
+  ApiPublicToolsDotjsonRoute: ApiPublicToolsDotjsonRoute,
   ApiPublicWhyPreviewRoute: ApiPublicWhyPreviewRoute,
   ApiPublicWhyReportRoute: ApiPublicWhyReportRoute,
   ApiPublicWhyUnlockRoute: ApiPublicWhyUnlockRoute,
